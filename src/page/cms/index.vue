@@ -13,7 +13,6 @@
   }
 
   /* banner */
-
   .appTabscenter {
     border-radius: .2rem .2rem 0 0;
     overflow: hidden;
