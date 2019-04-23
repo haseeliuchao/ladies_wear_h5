@@ -67,14 +67,14 @@
 <!-- category -->
 <template>
   <div>
-    <search-bar :Status="true">
+    <!-- <search-bar :Status="true">
       <div class="scanCode" slot="left-icon">
         <i class="searchIcon searchQrcodeIcon"></i>
       </div>
       <div class="searchMsg" slot="right-icon">
         <i class="searchIcon searchMsgIcon"></i>
       </div>
-    </search-bar>
+    </search-bar> -->
     <div style="height: 1.255rem;"></div>
     <div class="categoryBody">
       <!-- 分类列表 -->

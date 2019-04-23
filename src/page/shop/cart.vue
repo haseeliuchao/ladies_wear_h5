@@ -165,7 +165,6 @@
                     top: calc(100%/2 - 8px);
                     font-size: 14px;
                     color: #999; // width: 50%;
-                    // height: 1px;
                   }
                 }
                 .num-inp {
@@ -236,14 +235,15 @@
 
 <template>
   <div>
-    <search-bar :Status="true">
+    <!-- :Status="true" -->
+    <!-- <search-bar >
       <div class="scanCode" style="min-width: 2rem;" slot="left-icon"></div>
       <div slot="title-icon" class="cart-title">购物车</div>
       <div class="edit" slot="right-icon">
         <span class="edit-title">编辑</span>
         <i class="searchIcon searchMsgIcon"></i>
       </div>
-    </search-bar>
+    </search-bar> -->
 
     <!-- 购物车列表 -->
     <div class="Section">
@@ -282,7 +282,7 @@
                   </div>
                   <div class="right">
                     <div class="cut" @click="editProductNum({item:item,increment:-1})"></div>
-                    <input type="text" v-model="item.counter" class="num-inp" @change="editProductNum({item:item,counter:item.counter})"></input>
+                    <input type="text" v-model="item.counter" class="num-inp" @change="editProductNum({item:item,counter:item.counter})">
                     <div class="add" @click="editProductNum({item:item,increment:1})"></div>
                   </div>
                 </div>
