@@ -215,7 +215,7 @@
           border-radius: 6px;
         }
         span{
-          padding: 5px 10px;
+          padding: 5px 8px;
           font-size: 12px;
           color: #999999;
           border:1px solid #999999;
@@ -560,38 +560,42 @@
         wrap);
       
         span {
-          color: #333;
+          color: #666;
           font-size: $smsub;
           margin-top: 2px;
         }
         i {
           display: block;
-          width: 23px;
-          height: 23px;
+          width: 22px;
+          height: 22px;
+          margin-bottom: 2px;
         }
       }
       .goods-part {
         i {
-          background: url('~jd/images/store.png') no-repeat;
-          background-size: 90%;
-          background-position: 2px 2px;
+          background: url('~jd/images/gohome.png') no-repeat;
+          background-size: 98%;
+          
         }
       }
-      .like-icon {
-        i {
-          background: url('~jd/images/cart_sprits_all.png') no-repeat;
-          background-position: -50px 0;
-          background-size: 100px 100px;
-          &.active {
-            background-size: -50px -21px;
-          }
-        }
-      }
+     
       .shopping-cart {
+        position: relative;
+        em{
+          position: absolute;
+          background: #fff;
+          font-size: 12px;
+          padding: 0px 3px;
+          border-radius: 16px;
+          border: 1px solid #ff2741;
+          color: #ff2741;
+          right: 10px;
+          top: -3px;
+        }
         i {
-          background: url('~jd/images/cart_sprits_all.png') no-repeat;
-          background-position: 0 -21px;
-          background-size: 100px 100px;
+          background: url('~jd/images/goucart.png') no-repeat center 1px;
+          
+          background-size: 98%;
         }
       }
     }
@@ -1145,7 +1149,7 @@
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
       <div class="left">
-        <div class="goods-part">
+        <div class="goods-part" @click="$router.push('/index')">
           <i></i>
           <span>首页</span>
         </div>
@@ -1154,6 +1158,7 @@
           <span>关注</span>
         </div> -->
         <div class="shopping-cart" @click="$router.push('/cart')">
+          <em>4</em>
           <i></i>
           <span>购物车</span>
         </div>
