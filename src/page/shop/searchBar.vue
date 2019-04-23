@@ -27,31 +27,69 @@
       color: #333 !important;
     }
   }
-
-  .searchRusult {
-    position: fixed;
-    top: 0;
-    width: 10rem;
+  .searchRusultall{
+   position: fixed;
+   top: 0;
+   transition: .6s;
+   background: #fff;
+   width: 10rem;
+   
     max-width: 10rem;
+<<<<<<< HEAD
     min-height:1.2rem;
     margin: 0 auto;
+=======
+     margin: 0 auto;
+>>>>>>> 4ca03f9cca7c5bf76302e6b792dd7e61bcc463d1
     z-index: 10000;
-    transition: .6s;
+    .homesearch-hot{
+      height: 1rem;
+      padding-bottom: 10px;
+      @include flexbox(space-between, center, row, nowrap);
+      p{
+        padding-left: .4rem;
+        color: #666;
+       @include flexbox(space-between, center, row, nowrap);
+      }
+      ul{
+        @include flexbox(start, center, row, nowrap);
+        flex: 7;
+        li{padding: 5px 10px;
+    background: #f2f2f2;
+    border-radius: 10rem;
+    margin-right: 10px;
+    color: #666
+    }
+      }
+    }
+  }
+  .searchRusult {
+    
+   
+    
+   
+    
     @include flexbox(space-between, center, row, nowrap);
+<<<<<<< HEAD
     // min-height: 40px;
+=======
+    min-height: 50px;
+>>>>>>> 4ca03f9cca7c5bf76302e6b792dd7e61bcc463d1
     padding: .1rem .1rem;
-    background: transparent;
+    
     .searchIcon {
       display: block;
-      background: url('~jd/images/searchIcon.png') no-repeat;
-      background-size: 600% 100%;
+      background: url('~jd/images/camera_sach.png') no-repeat;
+      background-size: 100% 100%;
     }
     .searchInput {
       width: 100%;
       .search-box {
         background: #fff;
-        height: .8rem;
-        border-radius: .8rem;
+        height: .86rem;
+        border-radius: .86rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         @include flexbox(flex-start,
         center,
         row,
@@ -61,7 +99,9 @@
           height: .45rem;
           width: .45rem;
           margin-right: .3rem;
-          background-position: -0.46rem 0;
+          background: url('~jd/images/sarchicon.png') no-repeat;
+          // background-position: -0.46rem 0;
+          background-size: 100% 100%;
         }
         span {
           color: #999;
@@ -70,21 +110,23 @@
       }
     }
     .scanCode {
-      min-width: 1rem;
+      min-width: 1.6rem;
       @include flexbox(center,
       center,
       column,
       wrap);
       color: #fff;
-      font-size: 12px;
+      font-size: 10px;
       span {
         padding-top: 2px;
+        color: #333
       }
       .searchQrcodeIcon {
-        width: .65rem;
-        height: .65rem;
+        width: .46rem;
+        height: .44rem;
         background-position: 0 0;
       }
+      
     }
     .searchMsg {
       min-width: 1rem;
@@ -94,6 +136,7 @@
       wrap);
       color: #fff;
       font-size: 12px;
+      visibility: hidden;
       span {
         padding-top: 2px;
       }
@@ -188,34 +231,45 @@
         // font-weight: bold;
         color: #333;
         text-align: left;
+        // padding: $padding;
+        margin-bottom: $margin;
       }
       .search-hot-list {
         @include flexbox(flex-start,
         center,
         row,
-        nowrap);
+        wrap);
         padding: $padding 0 0;
         .search-hot-item {
-          width: 2.5rem;
-          background: #f5f5f5;
           border-radius: 10px;
-          color: #333;
-          padding: 5px 0;
+          color: #666;
+          padding: 5px 16px 8px 0;
+          // margin: 6px 6px 0px;
           font-size: $subtitle;
           text-align: center;
         }
       }
     }
     .search-history {
-      margin-top: $margin;
+      // margin-top: $margin;
       background: #fff;
+      padding: $padding 0 $padding $padding;
       >p {
         font-size: $title;
-        padding: $padding;
         // font-weight: bold;
+        margin-bottom: $margin;
         color: #333;
         text-align: left;
         // border-bottom: 1px solid $border;
+        span{
+          display: inline-block;
+          background: url('~jd/images/hositoytdel.png') no-repeat;
+          width: 0.41rem;
+          height: 0.41rem;
+          background-size: 100%;
+          float: right;
+          margin-right: .4rem
+        }
       }
       .clear-history {
         width: 5rem;
@@ -233,15 +287,17 @@
       .search-history-list {
         @include flexbox(flex-start,
         center,
-        column,
-        nowrap);
+        row,
+        wrap);
+        padding: $padding 0 0;
         .search-history-item {
-          width: 100%;
-          text-align: left;
-          padding: $padding;
-          color: $gray;
+          background: #f2f2f2;
+          border-radius: 10px;
+          color: #666;
+          padding: 5px 14px;
+          margin: 0 10px 10px 0;
           font-size: $subtitle;
-          border-bottom: 1px solid $border;
+          text-align: center;
         }
       }
     }
@@ -288,18 +344,20 @@
 </style>
 <template>
   <div style="position:relative;">
-    <div class="searchRusult" :class="Status?'scrollbtm':''" v-if="!searchVisiblie">
+    <div class="searchRusultall"  v-if="!searchVisiblie">
+
+    <div class="searchRusult">
       <slot name="left-icon">
         <div class="scanCode">
           <i class="searchIcon searchQrcodeIcon"></i>
-          <span>扫一扫</span>
+          <span>快图搜</span>
         </div>
       </slot>
       <div class="searchInput" @click="()=>searchVisiblie=true">
         <slot name="title-icon">
           <div class="search-box">
             <i class="searchIcon searchContentIcon"></i>
-            <span>MacBook Pro 15.4寸</span>
+            <span>品质生活必备</span>
           </div>
         </slot>
       </div>
@@ -310,13 +368,23 @@
         </div>
       </slot>
     </div>
+    <div class="homesearch-hot">
+            <p>热搜：</p>
+            <ul class="homesearch-hot-list">
+              <li class="homesearch-hot-item">智能手发</li>
+              <li class="homesearch-hot-item">智能手收</li>
+              <li class="homesearch-hot-item">智能手收</li>
+            </ul>
+          </div>
+    </div>
+    
     <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="searchContainer">
         <div class="search-top">
           <div class="searchInput" @click="$refs.searchInput.focus()">
             <div class="search-box">
               <i class="searchIcon searchContentIcon"></i>
-              <input v-model="Keyword" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
+              <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
               <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
             </div>
           </div>
@@ -324,9 +392,17 @@
         </div>
         <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
           <div class="search-history">
-            <p>历史记录</p>
+            <p>历史记录 <span></span></p>
             <ul class="search-history-list">
-              <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li>
+              <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
+
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
             </ul>
             <div class="clear-history">
               <i></i>
@@ -337,7 +413,7 @@
             <p>热门搜索</p>
             <ul class="search-hot-list">
               <li class="search-hot-item">智能手表</li>
-              <li class="search-hot-item">智能手表</li>
+              <li class="search-hot-item">智能</li>
               <li class="search-hot-item">智能手表</li>
               <li class="search-hot-item">智能手表</li>
               <li class="search-hot-item">智能手表</li>
@@ -376,6 +452,10 @@
     setLocalStorage
   } from '@/utils/mixin'
   import LoadMore from 'common/loadMore';
+  import {
+    
+    Toast
+  } from 'mint-ui'
   export default {
     data() {
       return {
@@ -398,14 +478,14 @@
     },
     directives: {
       searchFocus: {
-        inserted: function (el) {
-          // 聚焦元素
-          el.focus();
-        },
-        update: function (el) {
-          // 聚焦元素
-          el.focus();
-        }
+        // inserted: function (el) {
+        //   // 聚焦元素
+        //   el.focus();
+        // },
+        // update: function (el) {
+        //   // 聚焦元素
+        //   el.focus();
+        // }
       }
     },
     components: {
@@ -435,6 +515,14 @@
           Data.push({keywords:this.Keyword,Date:new Date()});
           setLocalStorage('searchHistoryData',Data);
         }catch(err){}
+      },
+
+      truesearchGoods(event) { 
+      if (event.keyCode == 13) { //如果按的是enter键 13是enter 
+          event.preventDefault(); //禁止默认事件（默认是换行） 
+          console.log(event.target.value)
+          Toast("点击了确认") 
+      } 
       }
     },
 
