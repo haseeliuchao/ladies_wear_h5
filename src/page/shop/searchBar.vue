@@ -37,7 +37,7 @@
     max-width: 10rem;
      margin: 0 auto;
     z-index: 10000;
-    .search-hot{
+    .homesearch-hot{
       height: 1rem;
       padding-bottom: 10px;
       @include flexbox(space-between, center, row, nowrap);
@@ -336,8 +336,8 @@
 <template>
   <div style="position:relative;">
     <div class="searchRusultall"  v-if="!searchVisiblie">
-      <!-- :class="Status?'scrollbtm':''" -->
-    <div class="searchRusult" >
+
+    <div class="searchRusult">
       <slot name="left-icon">
         <div class="scanCode">
           <i class="searchIcon searchQrcodeIcon"></i>
@@ -359,12 +359,12 @@
         </div>
       </slot>
     </div>
-    <div class="search-hot">
+    <div class="homesearch-hot">
             <p>热搜：</p>
-            <ul class="search-hot-list">
-              <li class="search-hot-item">智能手发</li>
-              <li class="search-hot-item">智能手收</li>
-              <li class="search-hot-item">智能手收</li>
+            <ul class="homesearch-hot-list">
+              <li class="homesearch-hot-item">智能手发</li>
+              <li class="homesearch-hot-item">智能手收</li>
+              <li class="homesearch-hot-item">智能手收</li>
             </ul>
           </div>
     </div>

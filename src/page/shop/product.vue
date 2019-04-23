@@ -89,21 +89,21 @@
 
   #mainLayout {
     .prouct-swiper {
-      box-shadow: 0px 0px 6px 1px #eee;
+      // box-shadow: 0px 0px 6px 1px #eee;
       position: relative;
       .swiper-indicators {
         font-size: $title;
         z-index: 666;
         position: absolute;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        background: rgba(0, 0, 0, .15);
+        width: 50px;
+        height: 22px;
+        border-radius: 11px;
+        -webkit-border-radius: 11px;
+        background: rgba(0, 0, 0, .3);
         right: 15px;
         bottom: 11px;
         text-align: center;
-        line-height: 40px;
+        line-height: 22px;
         color: #fff;
         overflow: hidden;
       }
@@ -124,55 +124,107 @@
       wrap);
       padding: $padding;
       background: #fff;
-      .product-name-text {
-        font-size: $title;
-        color: #232326;
+      .product-title-textbottom{
+        @include flexbox(space-between,
+        center,
+        row,
+        nowrap);
+        .product-name-text {
+        font-size: 14px;
+        line-height: 20px;
+        color: #333;
+        flex: 4;
         @include textoverflow(2);
       }
+      .product-share{
+           flex: 1;
+           display: block;
+           height: 22px;
+         
+           line-height: 22px;
+           border-top-left-radius: 11px;
+           border-bottom-left-radius: 11px;
+           font-size: 13px;
+           color: #666;
+           position: relative;
+           left: 10px;
+           margin-left: 10px;
+           text-align: center;
+           background:#e8e8e8 url('~jd/images/sharelink.png') no-repeat 9px center;
+           background-size: 16%
+      }
+      }
+      
+
       .product-summary-text {
         font-size: $subtitle;
         padding: 5px 0;
-        color: #f23030;
+        color: #ff2741;
         line-height: 1.6;
         @include textoverflow(2);
       }
       .product-price {
-        color: #f23030;
+        color: #ff2741;
         text-align: left;
         width: 100%;
-        span {
-          font-size: 14px;
-          margin-right: 5px;
+        margin-bottom: .2rem;
+        @include flexbox(space-between,
+        center,
+        row,
+        nowrap);
+        .product-price span{
+         font-size: 14px;
         }
-        strong {
-          font-size: 23px;
+        
+        .freight{
+          color: #999999;
         }
       }
     }
     .product-sku {
-      margin-top: $margin;
+      margin-top: 8px;
       background: #fff;
-      padding: $padding;
+      padding: 15px 10px;
       @include flexbox(space-between,
       center,
       row,
-      nowrap);
+      wrap);
       .sku-select {
-        font-size: $subtitle;
+        font-size: 16px;
         color: #999;
-        margin-right: 5px;
+        margin-right: 15px;
       }
       .sku-info {
-        font-size: $subtitle;
-        color: #232326;
+        font-size: 14px;
+        color: #333;
       }
       .right-menu {
-        width: 19px;
-        height: 4px;
+        width: 10px;
+        height: 10px;
         background-image: url('~jd/images/product-detail-sprites-mjs.png');
         background-repeat: no-repeat;
         background-size: 100px 100px;
-        background-position: -42px -17px;
+        background-position: 5px -20px;
+      }
+      .product-skuimg{
+        width: 8rem;
+        margin-left: 1.36rem;
+        margin-top: 10px;
+        img{
+          margin-right: 10px;
+          border-radius: 6px;
+        }
+        span{
+          padding: 5px 10px;
+          font-size: 12px;
+          color: #999999;
+          border:1px solid #999999;
+          
+          vertical-align: top;
+          margin-top: 6px;
+          display: inline-block;
+          border-radius: 4px;
+        }
       }
     }
     .product-comment {
@@ -425,12 +477,12 @@
     /* 为您推荐 */
     .my-recommend {
       clear: both;
-      margin-top: 10px;
+      
       .recommend-tip {
         text-align: center;
-        margin: 0 0 10px;
+        margin: 15px 0;
         img {
-          height: 35px;
+          height: 15px;
         }
       }
       .recommend-list {
@@ -762,11 +814,15 @@
 </style>
 <style lang="scss">
   #prodContent-container {
-    width: 100%;
-    clear: both;
     overflow: hidden;
+    width: 94%;
+    clear: both;
+    margin-left: 3%;
+    border-radius: 6px;
   }
-
+  em{
+    font-style: normal
+  }
   #prodContent-container * {
     max-width: 100% !important;
     width: 100% !important;
@@ -778,7 +834,7 @@
 <template>
   <div style="background:#f8f8f8;">
     <!-- 顶部导航栏 -->
-    <div class="product-header">
+    <!-- <div class="product-header">
       <div class="product-header-container">
         <div class="goback" @click="$router.go(-1)">
           <i class="back"></i>
@@ -794,45 +850,82 @@
           <i class="menu"></i>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- 顶部导航栏 -->
     <!-- 内容区 -->
-    <mt-tab-container v-model="containerTab" :swipeable="true" style="margin: 1.25rem 0;">
+    <mt-tab-container v-model="containerTab" :swipeable="true" style="margin: 0 0 1.25rem 0; ">
       <!-- 商品 -->
       <mt-tab-container-item id="mainLayout"  v-if="containerTab==='mainLayout'">
-        <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="recommendParam" :loadMoreIconVisible="false"
-          ref="recommendLoadmore">
+        <!-- <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="recommendParam" :loadMoreIconVisible="false"
+          ref="recommendLoadmore"> -->
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
-                <mt-swipe-item v-for="(item,index) in productInfo.image_url" :key="index">
+                <!-- <mt-swipe-item v-for="(item,index) in productInfo.image_url" :key="index">
                   <img :src="item.url" :alt="item.name">
+                </mt-swipe-item> -->
+
+                <mt-swipe-item>
+                  <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" >
                 </mt-swipe-item>
+
               </mt-swipe>
               <div class="swiper-indicators">{{swipeIndex.nowIndex}}/{{swipeIndex.total}}</div>
             </div>
             <!-- 商品轮播图 -->
             <!-- 商品信息 -->
             <div class="product-title-text">
-              <p class="product-name-text">{{productInfo.productName}}</p>
-              <p class="product-summary-text">{{productInfo.summary}}</p>
+              <!-- <p class="product-name-text">{{productInfo.productName}}</p> -->
               <div class="product-price">
+                <p class="product-pricep">
                 <span>&yen;</span>
-                <strong>{{productInfo.price}}</strong>
+                <!-- <strong>{{productInfo.price}}</strong> -->
+                <span><em style="font-size:16px;">56</em>.00</span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">500</em></span>
+                </p>
+                <span class="freight"><em style="font-size:13px;">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
               </div>
+              <div class="product-title-textbottom">
+              <p class="product-name-text">LACOSTE L!VE（法国鳄鱼）女士简约通
+勤条纹短袖T恤MF0TF7297K2</p>
+              <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+              </div>
+              <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
             <!-- 商品信息 -->
-            <!-- 商品规格 -->
-            <!-- <div class="product-sku">
+            <!-- 商品服务 -->
+            <div class="product-sku" >
               <div>
-                <span class="sku-select">已选</span>
-                <span class="sku-info">银色，64gb，1件，保障服务</span>
+                <span class="sku-select">服务</span>
+                <span class="sku-info">7天无理由退货</span>
               </div>
               <span class="right-menu"></span>
-            </div> -->
+            </div>
             <!-- 商品规格 -->
+             <div class="product-sku" style="margin-top:0;border-top:1px solid #e4e4e4;
+          border-bottom:1px solid #e4e4e4;">
+              <div>
+                <span class="sku-select">规格</span>
+                <span class="sku-info">选择 颜色分类、尺码</span>
+              </div>
+              <span class="right-menu"></span>
+              <div class="product-skuimg">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" style="height:.96rem;width:.96rem" >
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" style="height:.96rem;width:.96rem" >
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" style="height:.96rem;width:.96rem" >
+                <span>共6种颜色分类可选</span>
+              </div>
+            </div>
+            <!-- 商品参数 -->
+            <div class="product-sku" style="margin-top:0;">
+              <div>
+                <span class="sku-select">参数</span>
+                <span class="sku-info">面料 成分含量…</span>
+              </div>
+              <span class="right-menu"></span>
+            </div>
 
             <!-- 商品留言 -->
             <!-- <div class="product-comment">
@@ -907,9 +1000,9 @@
             <!-- 为你推荐 -->
             <div class="my-recommend">
               <div class="recommend-tip">
-                <img src="~jd/images/tuijian.png" alt="">
+                <img src="~jd/images/xiangqing.png" alt="">
               </div>
-              <ul class="recommend-list">
+              <!-- <ul class="recommend-list">
                 <li class="recommend-item" @click="$router.push(`/product/${item.productNo}`)" v-for="(item,index) in recommendData" :key="index">
                   <div class="item-posre">
                     <img v-lazy="item.image_url[0].url" alt="">
@@ -919,7 +1012,8 @@
                     <span>&yen;</span>{{item.price}}</p>
                   <p class="item-product-praise">好评率100%</p>
                 </li>
-              </ul>
+              </ul> -->
+              <div id="prodContent-container" v-html="productInfo.content"></div>
             </div>
             <!-- 为你推荐 -->
           </div>
@@ -941,7 +1035,7 @@
                 <div class="top-tip">
                   <span>商品信息</span>
                 </div>
-                <div id="prodContent-container" v-html="productInfo.content"></div>
+                <!-- <div id="prodContent-container" v-html="productInfo.content"></div> -->
               </div>
               <div v-show="detailTab==='skuContent'">skuContent</div>
               <div v-show="detailTab==='service'">service</div>
@@ -1050,7 +1144,9 @@
       return {
         containerTab: 'mainLayout',
         detailTab: 'description',
-        productInfo: {},
+        productInfo: {
+          content:'<p><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/818972668/O1CN01osEpdp1VZzD8En8na_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/818972668/O1CN01ZQqa7S1VZzDAoYRiZ_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/818972668/O1CN01dpQBR71VZzDAoTxFf_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i3/818972668/O1CN01AcJeoR1VZzDAwTfkM_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/818972668/O1CN01S5Pqsp1VZzDAnJZlM_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN015YAHho1VZzDBRsynU_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/818972668/O1CN013IAs361VZzDBwvaie_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/818972668/O1CN01AJRUYQ1VZzD7TZLCl_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/818972668/O1CN01NZkGXu1VZzDAoTkpX_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/818972668/O1CN01PWIXXB1VZzDAoT5Hq_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01GlEdIG1VZzDAwWguB_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01x3jYy31VZzDAnLWM5_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i3/818972668/O1CN01P20jxV1VZzDBvL2Ko_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i3/818972668/O1CN01fTRooT1VZzD33YqNF_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01ojVELe1VZzD1f0pzh_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01fhHyeK1VZzD0uZJ1n_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/818972668/O1CN01ah9FFd1VZzD0H9415_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/818972668/O1CN01bcoanl1VZzD1nXjA4_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/818972668/O1CN01EftYf41VZzD1f6LpG_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01JrP7Fu1VZzD3M0HGm_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01yVgimc1VZzCyOLCBg_!!818972668.jpg" style="max-width: 750.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/818972668/O1CN01IzEQqv1VZzD9yPzM4_!!818972668.jpg" style="max-width: 750.0px;"></p>'
+        },
         shopInfo: null,
         commad: getRecommend,
         recommendParam: {
@@ -1156,7 +1252,7 @@
           ShopId: Data.shopId
         });
         Data.price = Data.price.toFixed(2);
-        this.productInfo = Data;
+        // this.productInfo = Data;
         this.swipeIndex.total = Data.image_url.length;
         this.shopInfo = shopData.Data;
       }
@@ -1164,6 +1260,7 @@
 
     mounted: function () {
       this.initData();
+        
     }
   }
 
