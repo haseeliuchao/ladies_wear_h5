@@ -79,21 +79,6 @@
 <!-- category -->
 <template>
   <div>
-    <!-- <search-bar :Status="true">
-      <div class="scanCode" slot="left-icon">
-        <!-- <i class="searchIcon searchQrcodeIcon"></i> -->
-      </div>
-      <div slot="title-icon" class="category-title">商品分类</div>
-      <div class="searchMsg" slot="right-icon">
-        <!-- <i class="searchIcon searchMsgIcon"></i> -->
-      </div>
-<<<<<<< HEAD
-    </search-bar>
-    <div style="height: 1.413rem;"></div>
-=======
-    </search-bar> -->
-    <div style="height: 1.255rem;"></div>
->>>>>>> 4ca03f9cca7c5bf76302e6b792dd7e61bcc463d1
     <div class="categoryBody">
       <!-- 分类列表 -->
       <div class="rootList" style="width:25.86%;">

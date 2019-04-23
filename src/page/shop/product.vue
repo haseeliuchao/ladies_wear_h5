@@ -539,28 +539,26 @@
     left: 0;
     right: 0;
     width: 100%;
-    height: 1.25rem;
+    height: 49px;
     background: #fff;
-    border-top: 1px solid $border;
     @include flexbox(space-between,
     center,
     row,
     nowrap);
     .left {
-      width: 60%;
       height: 100%;
       @include flexbox(space-between,
       center,
       row,
       nowrap);
-      flex: initial;
+      
       >div {
-        width: 33.33%;
+        width: 50%;
         @include flexbox(space-between,
         center,
         column,
         wrap);
-        flex: initial;
+      
         span {
           color: #333;
           font-size: $smsub;
@@ -598,16 +596,17 @@
       }
     }
     .right {
-      width: 40%;
+      
       height: 100%;
-      background: $red;
+      background: #ff2741;
+      
       color: #fff;
       font-size: $title;
       @include flexbox(center,
       center,
       row,
       nowrap);
-      flex: initial;
+      
     }
   }
 
@@ -1148,18 +1147,19 @@
       <div class="left">
         <div class="goods-part">
           <i></i>
-          <span>店铺</span>
+          <span>首页</span>
         </div>
-        <div class="like-icon" @click="favShop">
+        <!-- <div class="like-icon" @click="favShop">
           <i></i>
           <span>关注</span>
-        </div>
+        </div> -->
         <div class="shopping-cart" @click="$router.push('/cart')">
           <i></i>
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" @click="addShopCart">加入购物车</div>
+      <div class="right" @click="addShopCart" style="background: #ff5527;">加入购物车</div>
+      <div class="right" @click="addShopCart">立即购买</div>
     </div>
     <!-- 底部导航栏 -->
 

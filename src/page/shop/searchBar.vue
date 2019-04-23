@@ -35,12 +35,8 @@
    width: 10rem;
    
     max-width: 10rem;
-<<<<<<< HEAD
     min-height:1.2rem;
     margin: 0 auto;
-=======
-     margin: 0 auto;
->>>>>>> 4ca03f9cca7c5bf76302e6b792dd7e61bcc463d1
     z-index: 10000;
     .homesearch-hot{
       height: 1rem;
@@ -70,11 +66,7 @@
    
     
     @include flexbox(space-between, center, row, nowrap);
-<<<<<<< HEAD
     // min-height: 40px;
-=======
-    min-height: 50px;
->>>>>>> 4ca03f9cca7c5bf76302e6b792dd7e61bcc463d1
     padding: .1rem .1rem;
     
     .searchIcon {
