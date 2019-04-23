@@ -33,11 +33,12 @@
     top: 0;
     width: 10rem;
     max-width: 10rem;
+    min-height:1.2rem;
     margin: 0 auto;
     z-index: 10000;
     transition: .6s;
     @include flexbox(space-between, center, row, nowrap);
-    min-height: 40px;
+    // min-height: 40px;
     padding: .1rem .1rem;
     background: transparent;
     .searchIcon {

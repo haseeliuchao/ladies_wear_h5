@@ -7,10 +7,10 @@
   }
 
   .my-header {
-    height: 3rem;
-    padding: 10px 15px;
-    background: -webkit-linear-gradient(left, #eb3c3c, #ff7459);
-    background: linear-gradient(90deg, #eb3c3c, #ff7459);
+    height: 6rem;
+    padding: .33rem;
+    background: -webkit-linear-gradient(left, #ff5527, #ff2741);
+    background: linear-gradient( #ff5527, #ff2741);
     box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
     position: relative;
     &:after {
@@ -19,10 +19,10 @@
       bottom: -20px;
       left: 0px;
       width: 100%;
-      background: -webkit-linear-gradient(left, #eb3c3c, #ff7459);
-      background: linear-gradient(90deg, #eb3c3c, #ff7459);
-      height: 1rem;
-      border-radius: 50%;
+      // background: -webkit-linear-gradient(left, #eb3c3c, #ff7459);
+      // background: linear-gradient(90deg, #eb3c3c, #ff7459);
+      // height: 1rem;
+      // border-radius: 50%;
     }
     @include flexbox(flex-start, space-between, column, wrap);
     .my-settings {
@@ -30,6 +30,7 @@
       text-align: right;
       >div {
         @include flexbox(flex-end, center, row, nowrap);
+        height:1rem;
         i {
           width: .65rem;
           height: .65rem;
@@ -45,6 +46,11 @@
           background: url('~jd/images/searchIcon.png') no-repeat;
           background-size: 600% 100%;
           background-position: -1.3rem 0 !important;
+        }
+        .myhome-title {
+          @include flexbox(center, center, row, nowrap);
+          font-size: 18px;
+          color:#fff;
         }
       }
     }
@@ -68,13 +74,23 @@
         column,
         wrap);
         flex: initial;
-        padding: 0 15px;
+        padding: 0 .4rem;
         color: #fff;
-        font-size: 16px;
+        font-size: 15px;
         .my-validWalletAmount {
+          width:9.27rem;
           margin: 5px 0;
+          margin-left:-75px;
+          >span{
+            @include flexbox(center,
+            center,
+            row,
+            nowrap);
+            width:50%;
+            float:left;
+          }
         }
-        .username {
+        .username,.userphone {
           margin-top: 10px;
         }
       }
@@ -100,33 +116,33 @@
       }
       span {
         margin: 10px 0 0;
-        font-size: 13px;
+        font-size: 15px;
         color: #333;
       }
       &.myorder {
         position: relative;
-        border-left: 1px solid #eee;
-        &:before {
-          content: '';
-          position: absolute;
-          left: -2px;
-          z-index: 999;
-          top: calc(100%/2 - 10px);
-          width: 0;
-          height: 0;
-          border: 8px solid transparent;
-          border-left-color: #fff;
-        }
-        &:after {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: calc(100%/2 - 10px);
-          width: 0;
-          height: 0;
-          border: 8px solid transparent;
-          border-left-color: #eee;
-        }
+        // border-left: 1px solid #eee;
+        // &:before {
+        //   content: '';
+        //   position: absolute;
+        //   left: -2px;
+        //   z-index: 999;
+        //   top: calc(100%/2 - 10px);
+        //   width: 0;
+        //   height: 0;
+        //   border: 8px solid transparent;
+        //   border-left-color: #fff;
+        // }
+        // &:after {
+        //   content: '';
+        //   position: absolute;
+        //   left: 0;
+        //   top: calc(100%/2 - 10px);
+        //   width: 0;
+        //   height: 0;
+        //   border: 8px solid transparent;
+        //   border-left-color: #eee;
+        // }
       }
     }
   }
@@ -150,7 +166,7 @@
         text-align: center;
         font-size: 16px;
         font-weight: normal;
-        background-image: -webkit-linear-gradient(left, rgb(255, 42, 0), rgb(255, 0, 175));
+        background-image: -webkit-linear-gradient(left, rgb(255, 85, 39), rgb(255, 39, 65));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -229,8 +245,9 @@
         <div class="my-header">
           <div class="my-settings">
             <div>
-              <i class="settings" @click="$router.push('/sttings')"></i>
-              <i class="msg-icon"></i>
+              <div slot="title-icon" class="myhome-title">我的</div>
+              <!-- <i class="settings" @click="$router.push('/sttings')"></i> -->
+              <!-- <i class="msg-icon"></i> -->
             </div>
           </div>
           <div class="userinfo" @click.stop.prevent="$router.push(!userInfo ? `/login` : `/sttings`)">
@@ -239,7 +256,18 @@
             </div>
             <div class="info-box">
               <span class="username" >{{!userInfo || !userData.userInfo? '登录/注册 >' : userData.userInfo.nickName}}</span>
-              <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">我的余额：{{userData.userInfo.validWalletAmount}}元</div>
+              <!-- 假数据 -->
+              <span class="userphone" v-if="!userInfo || !userData.userInfo">18867202256</span>
+              <div class="my-validWalletAmount" v-if="!userInfo || !userData.userInfo">
+                <span>17<br/>我的卡劵</span>
+                <span>2019-04-22<br/>图搜有效期</span>
+              </div>
+              <!-- 真数据 -->
+              <span class="userphone" v-if="userInfo && userData.userInfo">{{userData.userInfo.nickPhone}}</span>
+              <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">
+                <span>{{userData.userInfo.validWalletAmount}}<br/>我的卡劵</span>
+                <span>{{userData.userInfo.validWalletAmount}}<br/>图搜有效期</span>
+              </div>
             </div>
           </div>
         </div>
@@ -248,24 +276,28 @@
             <img src="~jd/images/paymenticon.png" alt="">
             <span>待付款</span>
           </div>
+           <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/3'):false">
+            <img src="~jd/images/send.png" alt="">
+            <span>待发货</span>
+          </div>
           <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">
             <img src="~jd/images/received.png" alt="">
             <span>待收货</span>
           </div>
-          <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
+          <!-- <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
             <img src="~jd/images/evaluated.png" alt="">
             <span>待评价</span>
-          </div>
-          <div class="order-item">
+          </div> -->
+          <!-- <div class="order-item">
             <img src="~jd/images/Aftermarket.png" alt="">
             <span>退换/售后</span>
-          </div>
+          </div> -->
           <div class="order-item myorder" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
             <img src="~jd/images/myordericon.png" alt="">
-            <span>我的订单</span>
+            <span>全部订单</span>
           </div>
         </div>
-        <div class="my-attention">
+        <!-- <div class="my-attention">
           <div class="attention-item">
             <strong>0</strong>
             <span>商品关注</span>
@@ -282,9 +314,9 @@
             <strong>0</strong>
             <span>商品关注</span>
           </div>
-        </div>
-        <div class="my-recommend">
-          <div class="recommend-tip">
+        </div> -->
+        <!-- <div class="my-recommend"> -->
+          <!-- <div class="recommend-tip">
             <img src="~jd/images/tuijian.png" alt="">
           </div>
           <ul class="recommend-list">
@@ -298,7 +330,7 @@
               <p class="item-product-praise">好评率100%</p>
             </li>
           </ul>
-        </div>
+        </div> -->
       </load-more>
     </div>
     <FooterView/>

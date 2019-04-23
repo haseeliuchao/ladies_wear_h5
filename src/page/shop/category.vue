@@ -1,5 +1,9 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
+  .category-title {
+    @include flexbox(center, center, row, nowrap);
+    font-size: 16px;
+  }
   .categoryBody {
     display: flex;
     flex: 1;
@@ -8,24 +12,27 @@
     flex-wrap: nowrap;
 
     .rootListcontent {
-      border-right: 1px solid #eee;
+      // border-right: 1px solid #eee;
       list-style: none;
       min-height: 85vh;
       li {
         padding: .25rem .15rem;
         text-align: center;
-        font-size: 12px;
+        font-size: 14px;
         color: #333;
         background: #fff;
         @include textoverflow(1);
         line-height: 2;
-        border-bottom: 1px solid #eee;
+        // border-bottom: 1px solid #eee;
         &:last-child {
           border: none;
         }
         &.active {
-          background: #F5F5F5;
-          color: #f23030;
+          background: #F2F2F2;
+          color: #ff2741;
+          border-left:.1333rem solid #ff2741;
+          padding-left:.0167rem;
+
         }
       }
     }
@@ -33,8 +40,9 @@
       padding: 0rem .3rem 0;
       .categoryContentBox {
         @include flexbox(flex-start, flex-start, row, wrap);
-        padding: .4rem 0; // min-height: 86vh;
+        padding: .2rem .2rem; // min-height: 86vh;
         background: #fff;
+        border-radius:8px;
         >p {
           @include flexbox(center, center, row, nowrap);
           color: #999;
@@ -43,20 +51,24 @@
       }
       .categorytItem {
         width: 33%;
-        height: 3rem;
+        height: 2.64rem;
         background: #fff;
         @include flexbox(center, center, column, wrap);
         flex: initial;
-        font-size: 13px;
-        color: #999;
+        font-size: 12px;
+        color: #333;
         text-align: center;
         p {
+          width:60px;
           @include textoverflow(1);
           padding: .1rem 0;
+          padding-bottom:0;
+          text-overflow:ellipsis;
         }
         img {
-          width: 55px;
-          height: 55px;
+          width: 1.7333rem;
+          height: 1.7333rem;
+          border-radius:6px;
         }
       }
     }
@@ -69,16 +81,17 @@
   <div>
     <search-bar :Status="true">
       <div class="scanCode" slot="left-icon">
-        <i class="searchIcon searchQrcodeIcon"></i>
+        <!-- <i class="searchIcon searchQrcodeIcon"></i> -->
       </div>
+      <div slot="title-icon" class="category-title">商品分类</div>
       <div class="searchMsg" slot="right-icon">
-        <i class="searchIcon searchMsgIcon"></i>
+        <!-- <i class="searchIcon searchMsgIcon"></i> -->
       </div>
     </search-bar>
-    <div style="height: 1.255rem;"></div>
+    <div style="height: 1.413rem;"></div>
     <div class="categoryBody">
       <!-- 分类列表 -->
-      <div class="rootList" style="width:20%;">
+      <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
             <li :class="selectedRoot === item.Id ? 'active' : ''" @click="rootScrollTo(item)" v-for="(item,index) in categoryBody.categoryRoot"
