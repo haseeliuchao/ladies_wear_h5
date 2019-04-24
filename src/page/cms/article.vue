@@ -245,9 +245,15 @@
         Status: false,
         commad: getArticleList,
         params: {
-          Type: null,
-          pageSize: 10,
-          pageIndex: 1
+        sort_type:"APPLY_MEMBER_COUNT",
+        sort_enum: "DESC",
+        item_category_id: "",
+        item_category_second_id:"",
+        item_type: "ALL",
+        reward:0,
+        coupon_range:1,
+        current_page:1,
+        page_size:10
         },
         articleData: [],
       };
@@ -270,8 +276,8 @@
 
     methods: {
       async onRefreshCallback() { //下拉加载
-        this.params.pageSize = 10;
-        this.params.pageIndex = 1;
+        // this.params.pageSize = 10;
+        // this.params.pageIndex = 1;
         this.articleData = [];
         this.$refs.articleLoadmore.onTopLoaded(this.$refs.articleLoadmore.uuid);
       },
@@ -286,7 +292,7 @@
         this.active = Id;
         switch (String(this.active)) {
           case 'tab-container1': //精选
-            this.params.Type = null;
+            // this.params.Type = null;
             break;
           case 'tab-container2': //生活
             this.params.Type = 'life';

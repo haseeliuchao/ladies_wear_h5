@@ -71,7 +71,7 @@ export const commitMessage = (params) => new Http().require({api: '/api/shop/Com
 //cms
 export const getArticle = (params) => new Http().require({api: '/api/cms/GetArticle',param:params}); //获取文章信息
 
-export const getArticleList = (params) => new Http().require({api: '/api/cms/GetArticleList',param:params}); //获取文章列表
+export const getArticleList = (params) => new Http().require({api: '/api/items',param:params}); //获取文章列表
 
 export const getGoodsCategoryList = (params) => new Http().require({api: '/api/cms/GetGoodsCategoryList',param:params}); //获取咨询分类列表
 

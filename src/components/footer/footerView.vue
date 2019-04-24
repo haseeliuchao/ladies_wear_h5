@@ -4,7 +4,7 @@
     position: fixed;
     width: 10rem;
     margin: 0 auto;
-    bottom: -1px;
+    bottom: 0px;
     left: 0;
     right: 0;
     height: 50px;
@@ -12,7 +12,7 @@
     background: #fff;
     // overflow: hidden;
     clear: both;
-    box-shadow: 0px 0px 20px -8px #999;
+    // box-shadow: 0px 0px 20px -8px #999;
     display: flex;
     flex: 1;
     z-index: 5000;

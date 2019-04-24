@@ -117,33 +117,36 @@
     }
     .topnav {
       display: flex;
+      width: 9rem;
+     
       flex: 1;
       justify-content: space-between;
       align-items: center;
       flex-direction: row;
       flex-wrap: nowrap;
-      margin: 0;
+      margin-left: .5rem;
       z-index: 111;
       position: relative;
+      
       #loadingbar {
         position: absolute;
         transition: .4s;
         width: calc((100%/8));
-        background: red;
+        background: $red;
         bottom: 0;
         height: 2px;
       }
       >span {
-        width: 33.33%;
-        padding: 12px 0;
+        // width: 33.33%;
+        padding: 12px 0 6px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 14px;
-        background: #fff;
+        font-size: 13px;
+        color: #333;
       }
       .active {
-        color: red;
+        color: $red;
       }
     }
     .order-container {
@@ -175,12 +178,17 @@
         background: #f5f5f5;
       }
       .order-list {
-        background: #fff;
+        // background: #fff;
         margin-top: $margin;
         .order-item {
           margin-top: 10px;
+          background: #fff;
+          width: 9.4rem;
+          margin-left: .3rem;
+          border-radius: 6px;
           .order-top {
             padding: $padding;
+            border-bottom: 1px solid #e4e4e4;
             @include flexbox(space-between,
             center,
             row,
@@ -193,15 +201,15 @@
                 vertical-align: bottom;
               }
               span {
-                font-size: $subtitle;
-                color: #333;
-                margin-left: 5px;
+                font-size: 15px;
+                color: #666;
+                // margin-left: 5px;
               }
             }
             .right {
               .order-status {
                 color: $red;
-                font-size: $subtitle;
+                font-size: 15px;
               }
             }
           }
@@ -220,17 +228,30 @@
                 nowrap);
                 width: 100%;
                 img {
-                  max-width: 80px;
-                  max-height: 80px;
-                  border: 1px solid #eee;
+                  max-width: 90px;
+                  max-height: 90px;
+                  // border: 1px solid #eee;
+                  border-radius: 6px;
                 }
                 .product-info {
                   margin-left: $margin;
                   .prod-price {
                     font-size: 14px;
+                    >span{
+                      color: #999;
+                    }
                     strong {
-                      font-size: 15px;
-                      color: $red;
+                      font-weight: normal;
+                      font-size: 14px;
+                      span{
+                        font-size: 12px;
+                        color: $red;
+                        
+                      }
+                      em{
+                        color: $red;
+                        font-style: normal
+                      }
                     }
                     @include flexbox(space-between,
                     center,
@@ -239,10 +260,16 @@
                   }
                   p {
                     @include textoverflow(3);
-                    font-size: $subtitle;
-                    margin: $margin 0;
+                    font-size: 14px;
+                    margin: 4px 0;
                     color: #333;
+                    line-height: 20px;
                   }
+                  .prodsku-info{
+                    color: #666;
+                    font-size: 13px;
+                  }
+
                 }
               }
             }
@@ -252,25 +279,43 @@
             padding: 8px $padding;
             text-align: right;
             font-size: $subtitle;
-            border-bottom: 1px solid #eee;
-            color: #333;
-            strong {
-              font-size: 17px;
-              color: $red;
+            // border-bottom: 1px solid #eee;
+            // color: #333;
+            span{
+              font-size: 15px;
+              color: #333;
+              em{
+                color: $red;
+                margin-left: 6px;
+              }
             }
+            strong {
+                      font-weight: normal;
+                      font-size: 14px;
+                      span{
+                        font-size: 12px;
+                        color: $red;
+                        
+                      }
+                      em{
+                        color: $red;
+                        font-style: normal
+                      }
+                    }
           }
           .order-btn-group {
             @include flexbox(flex-end,
             center,
             row,
             nowrap);
-            padding: 5px $padding;
+            padding: 5px $padding 16px;
             >span {
-              padding: 5px 20px;
+              padding: 5px 12px;
               color: $red;
-              font-size: $subtitle;
+              font-size: 16px;
               border: 1px solid $red;
-              border-radius: 2px;
+              border-radius: 3px;
+              margin-left: 15px;
             }
           }
         }
@@ -282,22 +327,19 @@
 
 <template>
   <div class="my-order">
-    <!-- <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
-      <strong>我的订单</strong>
-      <i class="myMsg"></i>
-    </div> -->
     <div class="topnav">
       <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">全部</span>
       <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待付款</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">待收货</span>
-      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已完成</span>
-      <span @click.stop.prevent="switchTabs(4)" :class="{'active':active===4}">已取消</span>
-      <div id="loadingbar" :style="active===0 ? 'left:4%' : active===1 ?  'left:24%' : active===2 ?'left:44%' : active===3 ? 'left:64%' : 'left: 84%'"></div>
+      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">待发货</span>
+      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">待收货</span>
+      <span @click.stop.prevent="switchTabs(4)" :class="{'active':active===4}">已完成</span>
+      <span @click.stop.prevent="switchTabs(5)" :class="{'active':active===5}">已关闭</span>
+      <div id="loadingbar" :style="active===0 ? 'left:-1%' : active===1 ?  'left:14%' : active===2 ?'left:32%' : active===3 ? 'left:51%' : active===4 ? 'left:69%' : 'left: 87%'"></div>
     </div>
     <div class="order-container">
-      <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
-        :loadMoreIconVisible="false" ref="orderLoadmore">
+      <!-- style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+        :loadMoreIconVisible="false" ref="orderLoadmore" -->
+      <load-more>
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <!-- 全部订单 -->
@@ -347,7 +389,100 @@
             </div>
           </div>
         </div>
-        <!-- 全部订单 -->
+
+        <div class="all-order">
+          <div class="order-list">
+            <div class="order-item">
+              <div class="order-top">
+                <div class="left">
+                  <!-- <img src="~jd/images/applist (5).png" alt=""> -->
+                  <span>订单编号：38757328485</span>
+                </div>
+                <div class="right">
+                  <div class="order-status">
+                    <span>等待付款</span>
+          
+                  </div>
+                </div>
+              </div>
+              <div class="order-product-list">
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="order-sku">
+                <span>共2件商品&nbsp;<em>实付：</em></span>
+                <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+              </div>
+              <div class="order-btn-group">
+                <span style="color:#999;border:1px solid #999" class="payment" @click="cancelOrder(item)">取消订单</span>
+                <span class="payment" @click="payment(item)">立即支付</span>
+              </div>
+            </div>
+
+            <div class="order-item">
+              <div class="order-top">
+                <div class="left">
+                  <!-- <img src="~jd/images/applist (5).png" alt=""> -->
+                  <span>订单编号：38757328485</span>
+                </div>
+                <div class="right">
+                  <div class="order-status">
+                    <span>等待付款</span>
+          
+                  </div>
+                </div>
+              </div>
+              <div class="order-product-list">
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              
+              </div>
+              <div class="order-sku">
+                <span>共2件商品&nbsp;<em>实付：</em></span>
+                <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+              </div>
+              <div class="order-btn-group">
+                <span class="payment" @click="payment(item)">立即支付</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
 
         <!-- 没有订单 -->
         <div class="order-nomore-tip" v-if="orderList==''">
@@ -469,19 +604,25 @@
             this.params.pay_status = 0;
             this.params.finish_status = 0;
             break;
-          case 2: //待收货
+          case 2: //待发货
+            this.params.cancel_status = 0;
+            this.params.confirm_status = null;
+            this.params.pay_status = 0;
+            this.params.finish_status = 0;
+            break;
+          case 3: //待收货
             this.params.cancel_status = 0;
             this.params.confirm_status = 1;
             this.params.pay_status = 1;
             this.params.finish_status = 0;
             break;
-          case 3: //已完成
+          case 4: //已完成
             this.params.cancel_status = 0;
             this.params.confirm_status = null;
             this.params.pay_status = null;
             this.params.finish_status = 1;
             break;
-          case 4: //已取消
+          case 5: //已取消
             this.params.cancel_status = 1;
             this.params.confirm_status = null;
             this.params.finish_status = null;

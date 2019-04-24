@@ -49,7 +49,18 @@
     }
     .goods {
       @include flexbox(flex-start, space-between, column, wrap);
-      background: linear-gradient(180deg, #fff, #efefef);
+      background: #f2f2f2;
+      .top-edit{
+        @include flexbox(space-between, center, row, nowrap);
+        width: 9.4rem;
+        margin-left: .3rem;
+        height: 42px;
+        list-style: 42px;
+        p{
+          font-size: 16px;
+          color: #333;
+        }
+      }
       .store {
         @include flexbox(flex-start, center, row, nowrap);
         flex: initial;
@@ -63,19 +74,22 @@
         @include flexbox(flex-start, space-between, column, wrap);
         background: #fff;
         flex: initial;
+        width: 9.4rem;
+        margin: 0 .3rem 110px;
+        border-radius: 5px;
         .store-pd-item {
           @include flexbox(flex-start, center, row, nowrap);
           padding: 10px;
-          border-bottom: 1px solid #eee;
+          // border-bottom: 1px solid #eee;
           &:last-child {
             border-bottom: none;
           }
           .pd-images {
-            border: 1px solid #eee;
-            margin: 0 15px 0 20px;
+            // border: 1px solid #eee;
+            margin: 0 10px;
             img {
-              width: 75px;
-              height: 75px;
+              width: 89px;
+              height: 89px;
             }
           }
           .pd-info {
@@ -84,35 +98,37 @@
             // flex: initial;
             .pd-title {
               @include textoverflow(2); // width: 90%;
-              font-size: 13px;
+              font-size: 14px;
               color: #333;
+              p{
+                line-height: 20px;
+              }
             }
             .pd-sku {
               @include textoverflow(1);
               padding: 5px 0;
               line-height: 1.5;
-              font-size: 12px;
-              color: #999;
+              font-size: 13px;
+              color: #666;
             }
             .pd-price {
-              margin-top: 10px;
+              // margin-top: 10px;
               @include flexbox(space-between, center, row, nowrap);
               flex: initial;
               .left {
-                color: #e93b3d;
+                color: #ff2741;
                 span {
                   font-size: 12px;
                 }
                 strong {
-                  font-size: 16px;
+                  font-size: 15px;
                   font-weight: normal;
                 }
               }
               .right {
                 @include flexbox(space-between, center, row, nowrap);
                 flex: initial;
-                border-radius: 2px;
-                border: 1px solid #eee;
+                border: 1px solid #999;
                 width: 2rem;
                 .cut {
                   padding: 2px 0;
@@ -127,7 +143,7 @@
                     position: absolute;
                     right: 0;
                     top: 0;
-                    background: #eee;
+                    background: #999;
                     width: 1px;
                     height: 100%;
                   }
@@ -154,7 +170,7 @@
                     position: absolute;
                     left: 0;
                     top: 0;
-                    background: #eee;
+                    background: #999;
                     width: 1px;
                     height: 100%;
                   }
@@ -189,10 +205,11 @@
 
   .section-bar {
     position: fixed;
-    border-top: 1px solid #eee;
-    bottom: 1.34rem;
-    width: 100%;
-    height: 1.25rem;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    bottom: 50px;
+    width: 10rem;
+    height: 49px;
     @include flexbox(space-between, center, row, nowrap);
     .left {
       background: #fff;
@@ -203,21 +220,38 @@
       @include flexbox(flex-start, center, row, nowrap);
       flex: initial;
       font-size: 13px;
+      em{
+        font-style: normal;
+        font-size: 14px;
+        color: #333;
+        width: 20%;
+      }
       i {
         vertical-align: text-top;
         margin-right: 5px;
+      
       }
       strong {
-        margin-left: 10px;
         font-weight: normal;
-        font-size: 17px;
+        font-size: 14px;
+        width: 66%;
+        text-align: right;
+        color: #333;
         @include textoverflow(1);
+        span{
+          font-size: 12px;
+          color: #ff2741;
+          
+        }
+        em{
+          color: #ff2741;
+        }
       }
     }
     .right {
       width: 30%;
       height: 100%;
-      background: #e4393c;
+      background: #ff2741;
       color: #fff;
       @include flexbox(center, center, row, nowrap);
       strong {
@@ -290,9 +324,12 @@
             </div>
           </div>
 
+          <div class="top-edit">
+            <p class="cartListNum">共3件宝贝</p>
+            <p class="cartListEdit">管理</p>
+          </div>
           <div class="store-pd">
             <div class="store-pd-item">
-
               <i class="select-default-icon select-icon"></i>
               <div class="pd-images">
                 <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
@@ -343,7 +380,7 @@
               </div>
             </div>
             <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
+              <i class="select-default-icon"></i>
               <div class="pd-images">
                 <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
               </div>
@@ -368,7 +405,7 @@
               </div>
             </div>
             <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
+              <i class="select-default-icon"></i>
               <div class="pd-images">
                 <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
               </div>
@@ -469,19 +506,21 @@
             </div>
           </div>
         </div>
-        <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p>
+        <!-- <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p> -->
       </load-more>
     </div>
     <!-- 购物车列表 -->
     <!-- 底部价格计算 -->
     <div class="section-bar">
       <div class="left">
-        <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click="selectedAllGoods"></i>全选
-        <strong>合计：&yen;{{totalFee}}</strong>
+        <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click="selectedAllGoods"></i>
+        <em>全选</em>
+        <!-- {{totalFee}} -->
+        <strong>合计：<span>&yen;</span> <em>399</em><em style="font-size:12px;">.00</em></strong>
       </div>
       <div class="right" @click="confirmOrder">
-        <strong>去结算
-          <span>({{selectedCounter}})</span>
+        <strong>结算
+          <!-- <span>({{selectedCounter}})</span> -->
         </strong>
       </div>
     </div>
