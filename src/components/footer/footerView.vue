@@ -7,27 +7,25 @@
     bottom: -1px;
     left: 0;
     right: 0;
-    height: 1.35rem;
-    padding: .066667rem 0 0;
+    height: 50px;
+    padding: 0;
     background: #fff;
-    overflow: hidden;
+    // overflow: hidden;
     clear: both;
     box-shadow: 0px 0px 20px -8px #999;
     display: flex;
     flex: 1;
     z-index: 5000;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    // border-top: 1px solid #eee;
     .barIcon {
-      width: 2rem;
       height: 100%;
-      margin-bottom:.1rem;
+      padding-bottom:4px;
       cursor: pointer;
       background: url('~jd/images/navbar1.png') 0 0 no-repeat;
-      background-size: 700% 416%;
+      background-size: 700% 370%;
       color:#666;
       display: flex;
       flex: 1;
@@ -35,41 +33,40 @@
       align-items:flex-end;
     }
     .home {
-      background-position: -.9rem -1.02rem;
+      background-position: -.88rem -34px;
       &.active {
-        background-position: -.9rem -3.04rem;
+        background-position: -.88rem -106px;
+         color: #ff2741;
       }
     }
     .category {
-      background-position: -3.5rem -1.02rem;
-      margin-right:1rem;
+      background-position: -3.5rem -34px;
       &.active {
-        background-position: -3.5rem -3.04rem;
+        background-position: -3.5rem -105px;
+         color: #ff2741;
       }
     }
     .find {
-      position: fixed;
-      bottom: 8px;
-      left: 50%;
-      height: 1.45rem;  
-      margin-left: -1rem;
-      background-position: -11.5rem -1.8rem;
-      background-size:700%;
+      position: relative;
+      top:-10px;
+      background-position: -11.5rem -62px;
       &.active {
-        background-position: -11.5rem -1.8rem;
+        background-position: -11.5rem -62px;
       }
     }
     .cart {
-      background-position: -6.15rem -1.02rem;
-      margin-left:1rem;
+      background-position: -6.16rem -34px;
       &.active {
-        background-position: -6.15rem -3.04rem;
+        background-position: -6.16rem -105px;
+         color: #ff2741;
       }
     }
     .myHome {
-      background-position: -8.8rem -1.02rem;
+      background-position: -8.78rem -34px;
+      
       &.active {
-        background-position: -8.8rem -3.04rem;
+        background-position: -8.78rem -105px;
+        color: #ff2741;
       }
     }
   }
@@ -86,6 +83,8 @@
 </template>
 
 <script>
+
+
   export default {
     data() {
       return {

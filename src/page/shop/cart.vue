@@ -81,7 +81,7 @@
           .pd-info {
             @include flexbox(flex-start, space-between, column, wrap);
             width: 100%;
-            flex: initial;
+            // flex: initial;
             .pd-title {
               @include textoverflow(2); // width: 90%;
               font-size: 13px;
@@ -190,7 +190,7 @@
   .section-bar {
     position: fixed;
     border-top: 1px solid #eee;
-    bottom: 1.35rem;
+    bottom: 1.34rem;
     width: 100%;
     height: 1.25rem;
     @include flexbox(space-between, center, row, nowrap);
@@ -247,10 +247,10 @@
 
     <!-- 购物车列表 -->
     <div class="Section">
-      <div class="login-info" v-if="!isLogin">
+      <!-- <div class="login-info" v-if="!isLogin">
         <button class="login" @click="$router.push('/login')">登录</button>
         <span>登录后同步电脑与手机购物车中的商品</span>
-      </div>
+      </div> -->
       <load-more :style="{width:'100%',height: '85%',paddingTop: isLogin ? '1.2rem' : '0'}" :topMethod="onRefreshCallback" :loadMoreIconVisible="false"
         ref="cartLoadmore">
         <div class="goods">
@@ -284,6 +284,185 @@
                     <div class="cut" @click="editProductNum({item:item,increment:-1})"></div>
                     <input type="text" v-model="item.counter" class="num-inp" @change="editProductNum({item:item,counter:item.counter})">
                     <div class="add" @click="editProductNum({item:item,increment:1})"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-pd">
+            <div class="store-pd-item">
+
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="store-pd-item">
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="store-pd-item">
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="store-pd-item">
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="store-pd-item">
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="store-pd-item">
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="store-pd-item">
+              <i class="select-default-icon select-icon"></i>
+              <div class="pd-images">
+                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+              </div>
+              <div class="pd-info">
+                <div class="pd-title">
+                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                </div>
+                <div class="pd-sku">
+                  <p class="sku-info">打飞机哈斯</p>
+                </div>
+                <div class="pd-price">
+                  <div class="left">
+                    <span>&yen;</span>
+                    <strong>55.66</strong>
+                  </div>
+                  <div class="right">
+                    <div class="cut"></div>
+                    <input type="text" class="num-inp" >
+                    <div class="add"></div>
                   </div>
                 </div>
               </div>
