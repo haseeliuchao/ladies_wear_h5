@@ -7,12 +7,13 @@
   }
 
   .my-header {
-    height: 6rem;
-    padding: .33rem;
+    height: 205px;
+    padding: 18px .33rem;
     background: -webkit-linear-gradient(left, #ff5527, #ff2741);
     background: linear-gradient( #ff5527, #ff2741);
     box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
     position: relative;
+    z-index:-1;
     &:after {
       content: '';
       position: absolute;
@@ -47,18 +48,15 @@
           background-size: 600% 100%;
           background-position: -1.3rem 0 !important;
         }
-        .myhome-title {
-          @include flexbox(center, center, row, nowrap);
-          font-size: 18px;
-          color:#fff;
-        }
       }
     }
     .userinfo {
-      @include flexbox(flex-start,
-      flex-start,
-      row,
-      nowrap);
+      >div{
+        @include flexbox(flex-start,
+        flex-start,
+        row,
+        nowrap);
+      }
       .avatar {
         img {
           border: 1px solid hsla(0, 0%, 100%, .4);
@@ -68,43 +66,70 @@
           height: 60px;
         }
       }
-      .info-box {
-        @include flexbox(center,
+      .user{
+        @include flexbox(flex-start,
         flex-start,
         column,
         wrap);
-        flex: initial;
-        padding: 0 .4rem;
-        color: #fff;
-        font-size: 15px;
-        .my-validWalletAmount {
-          width:9.27rem;
-          margin: 5px 0;
-          margin-left:-75px;
-          >span{
-            @include flexbox(center,
-            center,
-            row,
-            nowrap);
-            width:50%;
-            float:left;
-          }
-        }
+        margin-left:.4rem;
         .username,.userphone {
           margin-top: 10px;
+          color:#fff;
+          font-size:15px;
+        }
+      }
+      
+      .info-box {
+        color: #fff;
+        font-size: 14px;
+        .my-validWalletAmount {
+          @include flexbox(center,
+          center,
+          row,
+          nowrap);
+          margin: 16px 0;
+          >p{
+            @include flexbox(center,
+            center,
+            column,
+            nowrap);
+            span:last-child{
+              margin-top:6px;
+            }
+          }   
         }
       }
     }
   }
 
   .my-order {
+    position:relative;
+    top:-53px;
     clear: both;
     background: #fff;
-    padding: 40px 0 20px;
+    margin: 0 .33rem 8px;
+    border-radius:5px;
+    z-index:1;
     @include flexbox(center,
     center,
-    row,
-    nowrap);
+    column,
+    wrap);
+    h2{
+      width:100%;
+      text-indent: 10px;
+      line-height:36px;
+      border-bottom:1px solid #e4e4e4;
+      font-size:16px;
+    }
+    >div{
+      width:100%;
+      padding:15px 0;
+      @include flexbox(center,
+      center,
+      row,
+      nowrap);
+    }
+
     .order-item {
       width: 20%;
       @include flexbox(space-between,
@@ -112,11 +137,11 @@
       column,
       wrap);
       img {
-        height: 35px;
+        height: 25px;
       }
       span {
         margin: 10px 0 0;
-        font-size: 15px;
+        font-size: 14px;
         color: #333;
       }
       &.myorder {
@@ -143,6 +168,37 @@
         //   border: 8px solid transparent;
         //   border-left-color: #eee;
         // }
+      }
+    }
+  }
+  // 关于我们
+  .my-about{
+    position:relative;
+    top:-53px;
+    margin: 0 .33rem;
+    border-radius:5px;
+    background:#fff;
+    .about-item{
+      @include flexbox(space-between,
+      center,
+      row,
+      wrap);
+      padding:0 .266rem;
+      border-bottom:1px solid #e4e4e4;
+      height:48px;
+      span{
+        color:#333;
+        font-size:16px;
+        img{
+          width:20px;
+          height:20px;
+          margin-right:.266rem;
+          margin-bottom:-3px;
+        }
+      }
+      span:last-child{
+        color:#999;
+        font-size:13px;
       }
     }
   }
@@ -233,6 +289,11 @@
   }
 
   /* 为您推荐 */
+  .mint-toast{
+    padding:15px .4rem!important;
+    white-space:nowrap;
+    opacity:.8
+  }
 </style>
 
 <template>
@@ -243,44 +304,57 @@
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <div class="my-header">
-          <div class="my-settings">
-            <div>
-              <div slot="title-icon" class="myhome-title">我的</div>
+          <!-- <div class="my-settings"> -->
+            <!-- <div> -->
               <!-- <i class="settings" @click="$router.push('/sttings')"></i> -->
               <!-- <i class="msg-icon"></i> -->
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div> -->
           <div class="userinfo" @click.stop.prevent="$router.push(!userInfo ? `/login` : `/sttings`)">
-            <div class="avatar">
-              <img :src="!userInfo || !userData.userInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.userInfo.photoUrl" alt="">
+            <div>
+              <div class="avatar">
+                <img :src="!userInfo || !userData.userInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.userInfo.photoUrl" alt="">
+              </div>
+              <div class="user">
+                <span class="username" >{{!userInfo || !userData.userInfo? '登录/注册 >' : userData.userInfo.nickName}}</span>
+                <!-- 假数据 -->
+                <span class="userphone" v-if="!userInfo || !userData.userInfo">18867202256</span>
+                 <!-- 真数据 -->
+              <!-- <span class="userphone" v-if="userInfo && userData.userInfo">{{userData.userInfo.nickPhone}}</span> -->
+              </div>
             </div>
             <div class="info-box">
-              <span class="username" >{{!userInfo || !userData.userInfo? '登录/注册 >' : userData.userInfo.nickName}}</span>
               <!-- 假数据 -->
-              <span class="userphone" v-if="!userInfo || !userData.userInfo">18867202256</span>
               <div class="my-validWalletAmount" v-if="!userInfo || !userData.userInfo">
-                <span>17<br/>我的卡劵</span>
-                <span>2019-04-22<br/>图搜有效期</span>
+                <p class="card">
+                  <span>17</span>
+                  <span>我的卡劵</span>
+                </p>
+                <p class="expiry-time">
+                  <span>2019-04-22</span>
+                  <span>图搜有效期</span>
+                </p>
               </div>
               <!-- 真数据 -->
-              <span class="userphone" v-if="userInfo && userData.userInfo">{{userData.userInfo.nickPhone}}</span>
-              <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">
+              <!-- <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">
                 <span>{{userData.userInfo.validWalletAmount}}<br/>我的卡劵</span>
                 <span>{{userData.userInfo.validWalletAmount}}<br/>图搜有效期</span>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
         <div class="my-order">
+          <h2>我的订单</h2>
+          <div>
           <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
             <img src="~jd/images/paymenticon.png" alt="">
             <span>待付款</span>
           </div>
-           <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/3'):false">
+           <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">
             <img src="~jd/images/send.png" alt="">
             <span>待发货</span>
           </div>
-          <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">
+          <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/3'):false">
             <img src="~jd/images/received.png" alt="">
             <span>待收货</span>
           </div>
@@ -296,30 +370,24 @@
             <img src="~jd/images/myordericon.png" alt="">
             <span>全部订单</span>
           </div>
+          </div>
         </div>
-        <!-- <div class="my-attention">
-          <div class="attention-item">
-            <strong>0</strong>
-            <span>商品关注</span>
-          </div>
-          <div class="attention-item">
-            <strong>0</strong>
-            <span>商品关注</span>
-          </div>
-          <div class="attention-item">
-            <strong>0</strong>
-            <span>商品关注</span>
-          </div>
-          <div class="attention-item">
-            <strong>0</strong>
-            <span>商品关注</span>
-          </div>
-        </div> -->
-        <!-- <div class="my-recommend"> -->
-          <!-- <div class="recommend-tip">
-            <img src="~jd/images/tuijian.png" alt="">
-          </div>
-          <ul class="recommend-list">
+        <div class="my-about">
+          <p class="about-item" @click="$router.push('/addressList')">
+            <span><img src="~jd/images/addressicon.png">收货地址</span>
+            <span>快速管理 ></span>
+          </p>
+          <p class="about-item" @click="showToast">
+            <span><img src="~jd/images/kefuicon.png">在线客服</span>
+            <span>有问题找小惠 ></span>
+          </p>
+          <p class="about-item" @click="showToast">
+            <span><img src="~jd/images/usicon.png">关于我们</span>
+            <span>图搜搜索品质生活 ></span>
+      
+          </p>
+        </div>
+          <!-- <ul class="recommend-list">
             <li class="recommend-item" v-for="(item,index) in cmsData.recommendData" :key="index">
               <div class="item-posre">
                 <img :src="item.image_url[0].url" alt="">
@@ -329,8 +397,7 @@
                 <span>&yen;</span>{{item.price}}</p>
               <p class="item-product-praise">好评率100%</p>
             </li>
-          </ul>
-        </div> -->
+          </ul> -->
       </load-more>
     </div>
     <FooterView/>
@@ -342,6 +409,9 @@
   import FooterView from 'component/footer/footerView';
   import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
+  import {
+    Toast
+  } from 'mint-ui';
   import {
     setSessionStorage,
     getSessionStorage,
@@ -369,7 +439,7 @@
         },
         cmsData: {
           recommendData: []
-        }
+        },
       };
     },
 
@@ -378,7 +448,8 @@
     components: {
       FooterView,
       LoadMore,
-      BackHead
+      BackHead,
+      Toast
     },
 
     computed: {
@@ -421,6 +492,13 @@
         } else {
           this.userData.userInfo = this.userInfo;
         }
+      },
+      async showToast(){
+        Toast({
+          message:'该模块暂未开放，请尽情期待!',
+          duration:1000,
+          className:'tipToast'
+        })
       }
     },
     mounted: function () {
