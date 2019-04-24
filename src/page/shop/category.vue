@@ -38,6 +38,7 @@
     }
     .jd-categoryContent {
       padding: 0rem .3rem 0;
+      margin-top:10px;
       .categoryContentBox {
         @include flexbox(flex-start, flex-start, row, wrap);
         padding: .2rem .2rem; // min-height: 86vh;
