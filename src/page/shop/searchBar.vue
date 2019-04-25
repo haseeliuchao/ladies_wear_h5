@@ -67,8 +67,14 @@
     
     @include flexbox(space-between, center, row, nowrap);
     // min-height: 40px;
-    padding: .1rem .1rem;
-    
+    padding: .33rem;
+    .logoIcon{
+      width:1.3rem;
+      height:.9rem;
+      margin-right:.24rem;
+      background:url('~jd/images/logoicon.png') no-repeat;
+      background-size:100% 100%;
+    }
     .searchIcon {
       display: block;
       background: url('~jd/images/camera_sach.png') no-repeat;
@@ -102,13 +108,14 @@
       }
     }
     .scanCode {
-      min-width: 1.6rem;
+      min-width: 1.2rem;
       @include flexbox(center,
       center,
       column,
       wrap);
       color: #fff;
       font-size: 10px;
+      margin-left:.2rem;
       span {
         padding-top: 2px;
         color: #333
@@ -338,36 +345,37 @@
   <div style="position:relative;">
     <div class="searchRusultall"  v-if="!searchVisiblie">
 
-    <div class="searchRusult">
-      <slot name="left-icon">
-        <div class="scanCode">
-          <i class="searchIcon searchQrcodeIcon"></i>
-          <span>快图搜</span>
+      <div class="searchRusult">
+        <slot name="left-icon">
+          <i class="logoIcon logoQrcodeIcon"></i>
+        </slot>
+        <div class="searchInput" @click="()=>searchVisiblie=true">
+          <slot name="title-icon">
+            <div class="search-box">
+              <i class="searchIcon searchContentIcon"></i>
+              <span>品质生活必备</span>
+            </div>
+          </slot>
         </div>
-      </slot>
-      <div class="searchInput" @click="()=>searchVisiblie=true">
-        <slot name="title-icon">
-          <div class="search-box">
-            <i class="searchIcon searchContentIcon"></i>
-            <span>品质生活必备</span>
+        <slot name="right-icon">
+          <div class="scanCode">
+            <i class="searchIcon searchQrcodeIcon"></i>
+            <span>找同款</span>
           </div>
+          <!-- <div class="searchMsg">
+            <i class="searchIcon searchMsgIcon"></i>
+            <span>消息</span>
+          </div> -->
         </slot>
       </div>
-      <slot name="right-icon">
-        <div class="searchMsg">
-          <i class="searchIcon searchMsgIcon"></i>
-          <span>消息</span>
-        </div>
-      </slot>
-    </div>
-    <div class="homesearch-hot">
-            <p>热搜：</p>
-            <ul class="homesearch-hot-list">
-              <li class="homesearch-hot-item">智能手发</li>
-              <li class="homesearch-hot-item">智能手收</li>
-              <li class="homesearch-hot-item">智能手收</li>
-            </ul>
-          </div>
+      <!-- <div class="homesearch-hot">
+          <p>热搜：</p>
+          <ul class="homesearch-hot-list">
+            <li class="homesearch-hot-item">智能手发</li>
+            <li class="homesearch-hot-item">智能手收</li>
+            <li class="homesearch-hot-item">智能手收</li>
+          </ul>
+      </div> -->
     </div>
     
     <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
