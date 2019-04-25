@@ -119,7 +119,7 @@
       text-indent: 10px;
       line-height:36px;
       border-bottom:1px solid #e4e4e4;
-      font-size:16px;
+      font-size:15px;
     }
     >div{
       width:100%;
@@ -188,7 +188,7 @@
       height:48px;
       span{
         color:#333;
-        font-size:16px;
+        font-size:15px;
         img{
           width:20px;
           height:20px;
