@@ -62,7 +62,7 @@
         p {
           width:60px;
           @include textoverflow(1);
-          padding: .1rem 0;
+          padding: 4px 0;
           padding-bottom:0;
           text-overflow:ellipsis;
         }
@@ -85,8 +85,16 @@
       <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
-            <li :class="selectedRoot === item.Id ? 'active' : ''" @click="rootScrollTo(item)" v-for="(item,index) in categoryBody.categoryRoot"
-              v-if="categoryBody.categoryRoot!=null">{{item.name}}</li>
+            <!-- <li :class="selectedRoot === item.Id ? 'active' : ''" @click="rootScrollTo(item)" v-for="(item,index) in categoryBody.categoryRoot"
+              v-if="categoryBody.categoryRoot!=null">{{item.name}}</li> -->
+              <li class="active">女装</li>
+              <li>外套</li>
+              <li>女装</li>
+              <li>外套</li>
+              <li>女装</li>
+              <li>外套</li>
+              <li>女装</li>
+              <li>外套</li>
           </ul>
         </load-more>
       </div>
@@ -96,7 +104,7 @@
       <div class="jd-category-content" style="width: 85%;">
         <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;height:85%;left:initial;right:0;">
           <div class="jd-categoryContent">
-            <div class="categoryContentBox" v-if="categoryBody.categoryList!=null && categoryBody.categoryList.length>0">
+            <!-- <div class="categoryContentBox" v-if="categoryBody.categoryList!=null && categoryBody.categoryList.length>0">
               <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click="$router.push({path: '/searchRusult',query: {categoryId:item.Id}})">
                 <img :src="item.image_url" alt="" />
                 <p>{{item.name}}</p>
@@ -104,7 +112,68 @@
             </div>
             <div class="categoryContentBox" v-else>
               <p>暂无数据</p>
+            </div> -->
+            <div class="categoryContentBox" >
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
+              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
+                <img  src="~jd/images/product.png" alt="" />
+                <p>连衣裙</p>
+              </div>
             </div>
+            <!-- <div class="categoryContentBox">
+              <p>暂无数据</p>
+            </div> -->
           </div>
         </load-more>
       </div>
