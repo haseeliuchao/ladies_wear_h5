@@ -32,71 +32,82 @@ class Http {
             spinnerType: 'snake'
         })
     };
-    // const postLogin=function(data){
-    //     var app_key="689cf76eb3c96b7cb3ddb07e4e5efe54";
-    //     var pwd="5ef962cdf5700cc8e97e3660ca065e72";
-    //     var myJsDate=Format(new Date(),"yyyyMMddhhmmss");
-    //     Array.prototype.unique3 = function(){           //去重
-    //       var res = [];
-    //       var json = {};
-    //       for(var i = 0; i < this.length; i++){
-    //         if(!json[this[i]]){
-    //           res.push(this[i]);
-    //           json[this[i]] = 1;
-    //         }
-    //       }
-    //       return res;
-    //     };
-    //     var  ifurl=function (){
-    //         data.app_key=app_key;
-    //         data.date=myJsDate;
-    //         data.access_token=undefined;
-    //         data.session_token=undefined;
-    //         var arr = [];
-    //         for (var i in data) {
-    //             arr.push(i+"="+data[i]); //属性
-    //         }
-    //         return arr.unique3().sort().join("&");
-    //     };
-    //     if(data!=undefined){
-    //         data.api_sign=md5(pwd+ifurl()+pwd);
-    //       }else{
-    //         data={
-    //           access_token:window.localStorage.access_token,
-    //           app_key:app_key,
-    //           date:myJsDate,
-    //           session_token:window.localStorage.session_token
-    //         };
-    //         data.api_sign=md5(pwd+"access_token="+window.localStorage.access_token+"&app_key="+app_key+"&date="+myJsDate+"&session_token="+window.localStorage.session_token+pwd);
-    //       }
-    //       var arr = [];
-    //         for (var i in data) {
-    //             arr.push(i+"="+data[i]); //属性
-    //         }
-    //         // return arr.unique3().sort().join("&");
-    //       return data;
-    //     }
+    
+    // options.param.access_token='laqu_1651838a17bff886971e6ea782198486';
+    // options.param.session_token='laqu_71d35fe7681fadb310dc239c8eeaff92';
+    const postLogin=function(data){
+        var app_key="68A6F45CD7AAFC0287F4AF8FF4F3991C";
+        var pwd="C6DB7C0AE306CDDAA1087A9542762B10";
+        var myJsDate=Format(new Date(),"yyyyMMddhhmmss");
+        data.access_token=window.localStorage.access_token;
+        data.session_token=window.localStorage.session_token;
+        data.app_key=app_key;
+        data.date=myJsDate;
+        for (var j in data) {
+          // arr.push(i+"="+data[i]); //属性
+          if(data[j]==undefined){
+            delete data[j]
+          }
+        }
+        Array.prototype.unique3 = function(){           //去重
+          var res = [];
+          var json = {};
+          for(var i = 0; i < this.length; i++){
+            if(!json[this[i]]){
+              res.push(this[i]);
+              json[this[i]] = 1;
+            }
+          }
+          return res;
+        };
+        var  ifurl=function (){
+            var arr = [];
+            for (var i in data) {
+                arr.push(i+"="+data[i]); //属性
+            }
+            var arrstr= arr.unique3().sort().join("&")
+            return arrstr;
+        };
+        if(data!=undefined){
+            data.api_sign=md5(pwd+ifurl()+pwd);
+          }else{
+            data={
+              access_token:window.localStorage.access_token,
+              app_key:app_key,
+              date:myJsDate,
+              session_token:window.localStorage.session_token
+            };
+            data.api_sign=md5(pwd+"access_token="+window.localStorage.access_token+"&app_key="+app_key+"&date="+myJsDate+"&session_token="+window.localStorage.session_token+pwd);
+          }
+          var arr = [];
+            for (var i in data) {
+                arr.push(i+"="+data[i]); //属性
+            }
+            // return arr.unique3().sort().join("&");
+          return data;
+        }
     // options.param.MemberToken = options.param.MemberToken ? options.param.MemberToken : getSessionStorage('MemberToken');
     return new Promise((resolve,reject) => {
         return axios({
             method: options.methods,
             url: options.api,
-            baseURL: this.Domain,  
+            // baseURL: this.Domain,  
             // `withCredentials` indicates whether or not cross-site Access-Control requests
             // should be made using credentials
             // withCredentials: true, // default
             headers: {
-                // 'Content-Type':'application/x-www-form-urlencoded'
-                'Content-Type':'text/plain'
+                'Content-Type':'application/x-www-form-urlencoded'
+                // 'Content-Type':'text/plain'
             },
-            // qs.stringify(postLogin(options.param))
-            data:options.param
+            
+            // data:options.param
+            data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
-            if(response.data.Code === 0){ //请求成功
+            if(response.data.code === 10000){ //请求成功
                 return resolve(response.data)
             }else{
-                if(response.data.Code === 2){ //未登录
+                if(response.data.code === 2){ //未登录
                 //   router.push('/Login')
                 }
                 Toast({

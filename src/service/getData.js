@@ -57,7 +57,7 @@ export const cancelOrder = (params) => new Http().require({api: '/api/shop/Cance
 
 export const getOrderList = (params) => new Http().require({api: '/api/shop/GetOrderList',param: params}); //获取
 
-export const getOrder = (params) => new Http().require({api: '/api/shop/GetOrder',param: params}); //获取
+export const getOrder = (params) => new Http().require({api: '/api/items',param: params}); //获取
 
 export const getShopInfo = (params) => new Http().require({api: '/api/shop/GetShopInfo',param: params}); //获取
 

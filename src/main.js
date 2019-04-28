@@ -12,7 +12,10 @@ import store from '@/store'
 import FastClick from 'fastclick'
 import '@/utils/directives'
 import '@/utils/filters'
+import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import VeeValidate from 'vee-validate';
+// VeeValidate.addLocale(zh_CN);
+VeeValidate.Validator.localize('zh_CN');
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body);
@@ -20,7 +23,31 @@ if ('addEventListener' in document) {
 }
 
 Vue.use(MintUI)
-Vue.use(VeeValidate);
+const config = {
+  errorBagName: 'errors', 
+  fieldsBagName: 'fields',
+  delay: 100,  
+  locale: 'zh_CN', 
+  strict: true, 
+  enableAutoClasses: true,
+  // events: 'blur', 
+  inject: true
+ };
+
+ // 自定义规则
+
+ VeeValidate.Validator.extend('mobile', {
+    messages: {
+      zh_CN:field => field + '必须是11位手机号码',
+    },
+    validate: value => {
+      return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+    }
+  });
+
+ Vue.use(VeeValidate, config); //一般插件都要use一下
+
+// Vue.use(VeeValidate);
 router.beforeEach((to,from,next)=>{
     next();
 })

@@ -15,7 +15,7 @@ module.exports = {
         target: 'https://mopp.laqu.com',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/api'
+          '^/api': ''
         }
       },
       '/util': {
@@ -28,7 +28,7 @@ module.exports = {
     }, //代理
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.8.140', // can be overwritten by process.env.HOST
     port: 3000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

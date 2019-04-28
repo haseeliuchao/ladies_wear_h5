@@ -142,7 +142,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 13px;
+        font-size: 14px;
         color: #333;
       }
       .active {
@@ -201,7 +201,7 @@
                 vertical-align: bottom;
               }
               span {
-                font-size: 15px;
+                font-size: 14px;
                 color: #666;
                 // margin-left: 5px;
               }
@@ -209,7 +209,7 @@
             .right {
               .order-status {
                 color: $red;
-                font-size: 15px;
+                font-size: 14px;
               }
             }
           }
@@ -260,14 +260,14 @@
                   }
                   p {
                     @include textoverflow(3);
-                    font-size: 14px;
+                    font-size: 13px;
                     margin: 4px 0;
                     color: #333;
                     line-height: 20px;
                   }
                   .prodsku-info{
                     color: #666;
-                    font-size: 13px;
+                    font-size: 12px;
                   }
 
                 }
@@ -310,9 +310,9 @@
             nowrap);
             padding: 5px $padding 16px;
             >span {
-              padding: 5px 12px;
+              padding: 4px 10px;
               color: $red;
-              font-size: 16px;
+              font-size: 14px;
               border: 1px solid $red;
               border-radius: 3px;
               margin-left: 15px;
@@ -393,7 +393,7 @@
         <div class="all-order">
           <div class="order-list">
             <div class="order-item">
-              <div class="order-top">
+              <div class="order-top" @click="$router.push(`/order/38757328485`)">
                 <div class="left">
                   <!-- <img src="~jd/images/applist (5).png" alt=""> -->
                   <span>订单编号：38757328485</span>
@@ -405,7 +405,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list">
+              <div class="order-product-list" @click="$router.push(`/order/38757328485`)">
                 <div class="order-product-item">
                   <div>
                     <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
@@ -433,7 +433,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-sku">
+              <div class="order-sku" @click="$router.push(`/order/38757328485`)">
                 <span>共2件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
               </div>

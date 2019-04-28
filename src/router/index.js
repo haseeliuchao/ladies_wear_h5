@@ -45,7 +45,7 @@ const appRouter = {
                 path: '/article',
                 name: 'article',
                 component: Article,
-                meta: { keepAlive: true }
+                meta: { keepAlive: false }
             },
             {
                 path: '/articleDetail/:Id',
@@ -96,7 +96,7 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/order',
+                path: '/order/:OrderNo',
                 name: 'order',
                 component: Order,
                 meta: { keepAlive: false }

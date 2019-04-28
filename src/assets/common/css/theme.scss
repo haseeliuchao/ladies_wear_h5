@@ -28,7 +28,7 @@ button,
 input,
 select,
 figure,
-figcaption,
+figcaption
 {
   padding: 0;
   margin: 0;
@@ -39,13 +39,17 @@ figcaption,
   font-weight: normal;
   font-family: "PingFang SC";
   box-sizing: border-box;
+  
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
+  
   &:hover {
     outline: none;
   }
 }
-
+body{
+  background: #f2f2f2;
+}
 em{
   font-style: normal
 }
@@ -57,7 +61,12 @@ em{
   height: 0px;
   background-color: #F5F5F5;
 }
-
+.htmlover{
+  overflow-y: hidden; height: 100%;
+}
+.htmlnoover{
+  overflow-y: auto; height: auto;
+}
 
 /*定义滚动条轨道 内阴影+圆角*/
 
@@ -210,13 +219,14 @@ body,
 //按钮
 .cell-btn{
   background: #f23030;
+  background-image: -webkit-linear-gradient(top, #ff2741, #ff5427);
+  background-image: linear-gradient(top, #ff2741, #ff5427);
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   margin: .8rem auto;
-  border-radius: 2px;
-  width: 90%;
-  padding: 10px 0;
+  border-radius: 4px;
+  padding: 12px 0;
 }
 .disabled-btn{
   background: #f4f4f4!important;
