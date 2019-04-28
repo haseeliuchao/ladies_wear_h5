@@ -37,7 +37,7 @@
     max-width: 10rem;
     min-height:1.2rem;
     margin: 0 auto;
-    z-index: 10000;
+    z-index: 2000;
     .homesearch-hot{
       height: 1rem;
       padding-bottom: 10px;
@@ -358,7 +358,7 @@
           </slot>
         </div>
         <slot name="right-icon">
-          <div class="scanCode">
+          <div class="scanCode" @click="()=>searchImgVisiblie=true">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>
@@ -377,7 +377,7 @@
           </ul>
       </div> -->
     </div>
-    
+    <!-- 文字搜索 -->
     <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="searchContainer">
         <div class="search-top">
@@ -440,6 +440,75 @@
         </div>
       </div>
     </mt-popup>
+
+    <!-- 图片上传搜索 -->
+    <mt-popup v-model="searchImgVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+      <div class="overlayer">
+        <img src="~jd/images/popup-con.png">
+        <div class="jump-btn"></div>
+      </div>
+    </mt-popup>
+    <div class="searchContainer">
+      <div class="search-top">
+        <div class="searchInput" @click="$refs.searchInput.focus()">
+          <div class="search-box">
+            <i class="searchIcon searchContentIcon"></i>
+            <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
+            <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
+          </div>
+        </div>
+        <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span>
+      </div>
+
+      <!-- 精品推荐 -->
+      <div class="recommend-content" v-show="Keyword.length>0">
+        <load-more style="background:#fff;width: 100%;height: 100%;">
+          <div class="recommend-content-goods">
+            <ul class="recommend-content-list" v-if="searchRusultData!=''">
+              <li class="search-rusult-item" v-for="(item,index) in searchRusultData" :key="index" @click="selectedProd(item)">
+                <p>{{item.productName}}</p>
+              </li>
+            </ul>
+          </div>
+        </load-more>
+      </div>
+      <!-- 搜索历史记录 -->
+      <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
+        <div class="search-history">
+          <p>搜索记录 <span></span></p>
+          <ul class="search-history-img">
+            <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
+
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+          </ul>
+          <div class="clear-history">
+            <i></i>
+            <span>清空历史搜索</span>
+          </div>
+        </div>
+        <div class="search-hot">
+          <p>热门搜索</p>
+          <ul class="search-hot-list">
+            <li class="search-hot-item">智能手表</li>
+            <li class="search-hot-item">智能</li>
+            <li class="search-hot-item">智能手表</li>
+            <li class="search-hot-item">智能手表</li>
+            <li class="search-hot-item">智能手表</li>
+            <li class="search-hot-item">智能手表</li>
+            <li class="search-hot-item">智能手表</li>
+          </ul>
+        </div>
+        
+      </load-more>
+  
+    </div>
+
   </div>
 </template>
 
@@ -462,7 +531,8 @@
         searchVisiblie: false,
         Keyword: '',
         searchHistoryData: [],
-        searchRusultData: []
+        searchRusultData: [],
+        searchImgVisiblie: false
       }
     },
     props: {
