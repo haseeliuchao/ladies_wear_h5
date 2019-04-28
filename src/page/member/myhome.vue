@@ -13,17 +13,12 @@
     background: linear-gradient( #ff5527, #ff2741);
     box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
     position: relative;
-    z-index:-1;
     &:after {
       content: '';
       position: absolute;
       bottom: -20px;
       left: 0px;
       width: 100%;
-      // background: -webkit-linear-gradient(left, #eb3c3c, #ff7459);
-      // background: linear-gradient(90deg, #eb3c3c, #ff7459);
-      // height: 1rem;
-      // border-radius: 50%;
     }
     @include flexbox(flex-start, space-between, column, wrap);
     .my-settings {
@@ -119,7 +114,7 @@
       text-indent: 10px;
       line-height:36px;
       border-bottom:1px solid #e4e4e4;
-      font-size:16px;
+      font-size:15px;
     }
     >div{
       width:100%;
@@ -188,7 +183,7 @@
       height:48px;
       span{
         color:#333;
-        font-size:16px;
+        font-size:15px;
         img{
           width:20px;
           height:20px;
@@ -299,17 +294,17 @@
 <template>
   <div>
     <div class="content">
-      <load-more @translate-change="translateChange" style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="recommendParam" :topMethod="onRefreshCallback"
+      <load-more @translate-change="translateChange" style="width:100%;" @loadMore="infiniteCallback"  :param="recommendParam" :topMethod="onRefreshCallback"
         :loadMoreIconVisible="false" ref="recommendLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <div class="my-header">
-          <!-- <div class="my-settings"> -->
-            <!-- <div> -->
-              <!-- <i class="settings" @click="$router.push('/sttings')"></i> -->
-              <!-- <i class="msg-icon"></i> -->
-            <!-- </div> -->
-          <!-- </div> -->
+          <!-- <div class="my-settings">
+            <div>
+              <i class="settings" @click="$router.push('/sttings')"></i>
+              <i class="msg-icon"></i>
+            </div>
+          </div> -->
           <div class="userinfo" @click.stop.prevent="$router.push(!userInfo ? `/login` : `/sttings`)">
             <div>
               <div class="avatar">
@@ -318,9 +313,9 @@
               <div class="user">
                 <span class="username" >{{!userInfo || !userData.userInfo? '登录/注册 >' : userData.userInfo.nickName}}</span>
                 <!-- 假数据 -->
-                <span class="userphone" v-if="!userInfo || !userData.userInfo">18867202256</span>
+                <span class="userphone" v-if="!userInfo || !userData.userInfo">18867202256</span> 
                  <!-- 真数据 -->
-              <!-- <span class="userphone" v-if="userInfo && userData.userInfo">{{userData.userInfo.nickPhone}}</span> -->
+              <span class="userphone" v-if="userInfo && userData.userInfo">{{userData.userInfo.nickPhone}}</span>
               </div>
             </div>
             <div class="info-box">
@@ -336,10 +331,10 @@
                 </p>
               </div>
               <!-- 真数据 -->
-              <!-- <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">
+              <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">
                 <span>{{userData.userInfo.validWalletAmount}}<br/>我的卡劵</span>
                 <span>{{userData.userInfo.validWalletAmount}}<br/>图搜有效期</span>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -387,17 +382,6 @@
       
           </p>
         </div>
-          <!-- <ul class="recommend-list">
-            <li class="recommend-item" v-for="(item,index) in cmsData.recommendData" :key="index">
-              <div class="item-posre">
-                <img :src="item.image_url[0].url" alt="">
-              </div>
-              <p class="item-product-text">{{item.productName}}位</p>
-              <p class="item-product-info">
-                <span>&yen;</span>{{item.price}}</p>
-              <p class="item-product-praise">好评率100%</p>
-            </li>
-          </ul> -->
       </load-more>
     </div>
     <FooterView/>

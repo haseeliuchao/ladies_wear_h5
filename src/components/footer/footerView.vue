@@ -15,7 +15,7 @@
     // box-shadow: 0px 0px 20px -8px #999;
     display: flex;
     flex: 1;
-    z-index: 5000;
+    z-index: 2000;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
