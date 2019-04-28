@@ -33,8 +33,8 @@
         }
         .settings {
           display: block;
-          background: url('~jd/images/settings.png') no-repeat;
-          background-size: 100%; // background-position: -2.6rem 0!important;
+          // background: url('~jd/images/settings.png') no-repeat;
+          // background-size: 100%; // background-position: -2.6rem 0!important;
         }
         .msg-icon {
           display: block;
