@@ -446,6 +446,9 @@ import utils from '@/utils/urlfun'
         'indexCmsData'
       ])
     },
+    created:{
+     
+    },
     methods: {
       isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
@@ -498,7 +501,7 @@ import utils from '@/utils/urlfun'
           app_key:utils.getUrlKey('state').slice(8)
         })
        }
-        
+        console.log(Data);
       },
       
     },
