@@ -72,7 +72,8 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
-      },
+      }
+    },
     /**
      * Source Maps
      */
