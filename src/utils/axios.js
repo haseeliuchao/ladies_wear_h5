@@ -107,6 +107,8 @@ class Http {
             Indicator.close();
             if(response.data.code === 10000){ //请求成功
                 return resolve(response.data)
+            }else if(response.data.code === 20018){ //请求成功
+              return resolve(response.data)
             }else{
                 if(response.data.code === 2){ //未登录
                 //   router.push('/Login')

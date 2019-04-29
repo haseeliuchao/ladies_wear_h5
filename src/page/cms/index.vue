@@ -500,8 +500,9 @@ import utils from '@/utils/urlfun'
           code:utils.getUrlKey('code'),
           app_key:utils.getUrlKey('state').slice(8)
         })
-       }
         console.log(Data);
+       }
+        
       },
       
     },
