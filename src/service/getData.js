@@ -1,7 +1,7 @@
 import Http from '@/utils/axios';
 
 //member
-export const login = (params) => new Http().require({api: '/login/token/get',param:params}); //登录
+export const login = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
 
 export const getUserInfo = (params) => new Http().require({api: '/api/member/GetUserInfo',param:params}); //获取个人信息
 
