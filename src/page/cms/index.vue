@@ -493,8 +493,8 @@
        async loginData() { //更新数据
        if(this.isWeiXin()){
        let Data = await this.$store.dispatch('Login', {
-          code: this.$route.query.code,
-          app_key: this.$route.query.state
+          code: this.$Request.code,
+          app_key: this.$Request.state
         })
        }
         
