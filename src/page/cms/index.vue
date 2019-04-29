@@ -383,6 +383,7 @@
   </div>
 </template>
 <script>
+import utils from '@/utils/urlfun'
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
@@ -493,8 +494,8 @@
        async loginData() { //更新数据
        if(this.isWeiXin()){
        let Data = await this.$store.dispatch('Login', {
-          code:$utils.getUrlKey('code'),
-          app_key:$utils.getUrlKey('state')
+          code:utils.getUrlKey('code'),
+          app_key:utils.getUrlKey('state')
         })
        }
         

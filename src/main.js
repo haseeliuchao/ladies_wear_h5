@@ -23,7 +23,7 @@ if ('addEventListener' in document) {
         FastClick.attach(document.body);
     }, false);
 }
-Vue.prototype.$utils = utils
+// Vue.prototype.$utils = utils
 Vue.use(MintUI)
 const config = {
   errorBagName: 'errors', 
