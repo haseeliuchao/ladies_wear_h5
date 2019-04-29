@@ -130,7 +130,7 @@
               <div style="height:18px;">
           <span v-show="errors.has('registeredCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
               </div>
-          <div :class="['cell-btn',errors.has('mobile')?'disabled-btn':'']" @click="registeredNext">确定</div>
+          <div :class="['cell-btn',errors.has('mobile')?'disabled-btn':'']" @click="LoginBind">确定</div>
           </div>
           
       </div>
@@ -287,15 +287,15 @@
           }
         }, 1000)
       },
-      async Login() { //登录
-        let Data = await this.$store.dispatch('Login', {
-          username: this.loginForm.username,
-          password: this.loginForm.password
+      async LoginBind() { //登录
+        let Data = await this.$store.dispatch('LoginBind', {
+          phone: this.registeredForm.phone,
+          code: this.registeredForm.code
         })
-        if (Data.Code !== 0) return Toast({
-          message: Data.Message,
-          position: 'bottom'
-        })
+        // if (Data.Code !== 0) return Toast({
+        //   message: Data.Message,
+        //   position: 'bottom'
+        // })
         this.$router.go(-1);
       }
     },

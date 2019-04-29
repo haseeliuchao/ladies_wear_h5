@@ -33,15 +33,13 @@ class Http {
         })
     };
     
-    // options.param.access_token='laqu_1651838a17bff886971e6ea782198486';
-    // options.param.session_token='laqu_71d35fe7681fadb310dc239c8eeaff92';
     const postLogin=function(data){
         // var app_key="68A6F45CD7AAFC0287F4AF8FF4F3991C";
         
         var pwd="C6DB7C0AE306CDDAA1087A9542762B10";
         var myJsDate=Format(new Date(),"yyyyMMddhhmmss");
-        data.access_token=window.localStorage.access_token;
-        data.session_token=window.localStorage.session_token;
+        data.access_token=getLocalStorage('access_token');
+        data.session_token=getLocalStorage('session_token');
         data.app_key=data.app_key?data.app_key:"68A6F45CD7AAFC0287F4AF8FF4F3991C";
         data.date=myJsDate;
         for (var j in data) {
@@ -105,20 +103,9 @@ class Http {
             data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
-            if(response.data.code === 10000){ //请求成功
                 return resolve(response.data)
-            }else if(response.data.code === 20018){ //请求成功
-              return resolve(response.data)
-            }else{
-                if(response.data.code === 2){ //未登录
-                //   router.push('/Login')
-                }
-                Toast({
-                    message: response.data.Message,
-                    position: 'bottom'
-                });
-                return reject(response.data)
-            }
+              
+
         },error => {
             Indicator.close();
             Toast({

@@ -383,11 +383,12 @@
   </div>
 </template>
 <script>
-import utils from '@/utils/urlfun'
+  import utils from '@/utils/urlfun';
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
-    showBack
+    showBack,getLocalStorage,
+    setLocalStorage
   } from '@/utils/mixin';
   import {
     getRecommend,
@@ -405,6 +406,10 @@ import utils from '@/utils/urlfun'
     Lazyload,
     Popup
   } from 'mint-ui';
+  import {
+  Indicator,
+  Toast
+} from 'mint-ui';
   import {
     mapGetters,
     mapMutations
@@ -501,6 +506,15 @@ import utils from '@/utils/urlfun'
           app_key:utils.getUrlKey('state').slice(8)
         })
         console.log(Data);
+        if(Data.code==10000){
+          setLocalStorage('session_token',Data.data.session_token);
+          setLocalStorage('access_token',Data.data.access_token);
+        }else{
+          Toast({
+                message: Data.msg,
+                position: 'bottom'
+            });
+        }
        }
         
       },

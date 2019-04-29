@@ -1,5 +1,6 @@
 import {
   login,
+  LoginBind,
   getUserInfo,
   sendPhoneMessage,
   registered,
@@ -53,6 +54,19 @@ const user = {
       return new Promise((resolve, reject) => {
         login(parameterData).then(response => {
           setSessionStorage('MemberToken', response.Data);
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    LoginBind({ //登录
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        loginBind(parameterData).then(response => {
+          // setSessionStorage('MemberToken', response.Data);
           resolve(response)
         }, err => {
           reject(err)
