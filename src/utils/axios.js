@@ -14,7 +14,7 @@ import {Format} from '@/utils/filters'
 import {md5} from '@/utils/md5'
 class Http {
   constructor(){
-    this.Domain = 'https://awei.fun:3032';
+    this.Domain = 'http://192.168.9.44:8182';
   }
   
      
@@ -92,7 +92,7 @@ class Http {
         return axios({
             method: options.methods,
             url: options.api,
-            // baseURL: this.Domain,  
+            baseURL: this.Domain,  
             // `withCredentials` indicates whether or not cross-site Access-Control requests
             // should be made using credentials
             // withCredentials: true, // default
