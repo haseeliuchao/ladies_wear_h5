@@ -492,12 +492,12 @@ import utils from '@/utils/urlfun'
         }
       },
        async loginData() { //更新数据
-      //  if(this.isWeiXin()){
+       if(this.isWeiXin()){
        let Data = await this.$store.dispatch('Login', {
           code:utils.getUrlKey('code'),
-          app_key:''
+          app_key:utils.getUrlKey('state').slice(8)
         })
-      //  }
+       }
         
       },
       
