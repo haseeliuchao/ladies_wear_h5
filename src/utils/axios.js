@@ -7,7 +7,8 @@ import {
 import router from '@/router';
 import {
 	setSessionStorage,
-	getSessionStorage,
+  getSessionStorage,
+  getLocalStorage,
 	removeSessionStorage
 } from '@/utils/mixin';
 import {Format} from '@/utils/filters'
