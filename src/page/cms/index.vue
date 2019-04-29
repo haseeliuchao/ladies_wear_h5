@@ -235,7 +235,7 @@
         </div>
       </mt-popup> -->
         <!-- 搜索栏 -->
-        <!-- <search-bar :Status="Status"  v-if="searchBarVisilbe" /> -->
+        <search-bar :Status="Status"  v-if="searchBarVisilbe" />
         <!-- 搜索栏 -->
         <load-more @translate-change="translateChange" style="width:100%;" @loadMore="infiniteCallback"  :param="recommendParam" :topMethod="onRefreshCallback"
           :loadMoreIconVisible="false" ref="recommendLoadmore" >

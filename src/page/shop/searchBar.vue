@@ -448,7 +448,7 @@
         <div class="jump-btn"></div>
       </div>
     </mt-popup>
-    <div class="searchContainer">
+    <div class="searchContainer" v-show="searchVisiblie">
       <div class="search-top">
         <div class="searchInput" @click="$refs.searchInput.focus()">
           <div class="search-box">

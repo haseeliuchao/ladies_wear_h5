@@ -10,9 +10,10 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // https://mopp.laqu.com
     proxyTable: {
       '/api': {
-        target: 'https://mopp.laqu.com',
+        target: 'http://192.168.9.44:8182',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
