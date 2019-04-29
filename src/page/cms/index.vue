@@ -418,6 +418,10 @@
           pageSize: 10,
           pageIndex: 1
         },
+        
+         code:null,
+         app_key:null,
+      
         recommendData: [],
         cmsData: null,
         searchBarVisilbe: true,
@@ -442,6 +446,16 @@
       ])
     },
     methods: {
+      isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        console.log(ua);//mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            return true;
+        }
+        else {
+            return false;
+        }
+      },
       translateChange(y){ //监听下拉的阈值
         this.searchBarVisilbe = y>8 ? false : true;
       },
@@ -475,11 +489,22 @@
         } else {
           this.cmsData = this.indexCmsData.Data;
         }
-      }
+      },
+       async loginData() { //更新数据
+       if(this.isWeiXin()){
+       let Data = await this.$store.dispatch('Login', {
+          code: this.$route.query.code,
+          app_key: this.$route.query.state
+        })
+       }
+        
+      },
+      
     },
     beforeDestroy() {},
     mounted: function () {
       this.initData();
+      this.loginData();
       showBack(status => {
         this.Status = status;
       })
