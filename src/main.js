@@ -12,7 +12,7 @@ import store from '@/store'
 import FastClick from 'fastclick'
 import '@/utils/directives'
 import '@/utils/filters'
-import UrlSearch from '@/utils/urlfun'
+import utils from '@/utils/urlfun'
 
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import VeeValidate from 'vee-validate';
@@ -23,8 +23,7 @@ if ('addEventListener' in document) {
         FastClick.attach(document.body);
     }, false);
 }
-let Request= new UrlSearch();
-Vue.prototype.$Request=Request;
+Vue.prototype.$utils = utils
 Vue.use(MintUI)
 const config = {
   errorBagName: 'errors', 
