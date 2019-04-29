@@ -1,6 +1,6 @@
 import {
   login,
-  LoginBind,
+  loginBind,
   getUserInfo,
   sendPhoneMessage,
   registered,
