@@ -228,14 +228,14 @@
 <template>
   <div id="jd">
     <!-- 遮罩层 -->
-      <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
+      <!-- <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con.png">
           <div class="jump-btn" @click="()=>{$router.push('/searchResult');popupVisible=false}"></div>
         </div>
-      </mt-popup>
+      </mt-popup> -->
         <!-- 搜索栏 -->
-        <search-bar :Status="Status"  v-if="searchBarVisilbe" />
+        <!-- <search-bar :Status="Status"  v-if="searchBarVisilbe" /> -->
         <!-- 搜索栏 -->
         <load-more @translate-change="translateChange" style="width:100%;" @loadMore="infiniteCallback"  :param="recommendParam" :topMethod="onRefreshCallback"
           :loadMoreIconVisible="false" ref="recommendLoadmore" >
