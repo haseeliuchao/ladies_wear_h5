@@ -358,7 +358,7 @@
           </slot>
         </div>
         <slot name="right-icon">
-          <div class="scanCode" @click="()=>searchImgVisiblie=true">
+          <div class="scanCode" @click="()=>searchImgVisible=true">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>
@@ -442,22 +442,31 @@
     </mt-popup>
 
     <!-- 图片上传搜索 -->
-    <mt-popup v-model="searchImgVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+    <mt-popup v-model="searchImgVisible" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="overlayer">
         <img src="~jd/images/popup-con.png">
         <div class="jump-btn"></div>
       </div>
     </mt-popup>
-    <div class="searchContainer">
+    <div class="searchContainer" v-if="!searchImgVisible">
       <div class="search-top">
-        <div class="searchInput" @click="$refs.searchInput.focus()">
+        <div class="searchInput">
+          <input type="file">
+          <img src="">
+        </div>
+        <p class="search-tip">同款商品更低价，不花冤枉钱！</p>
+        <p class="expire-time">
+          图搜有效期:<span>2012/01/29</span>到期
+        </p>
+        <p class="renew-btn">续费 > </p>
+        <!-- <div class="searchInput" @click="$refs.searchInput.focus()">
           <div class="search-box">
             <i class="searchIcon searchContentIcon"></i>
             <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
             <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
           </div>
         </div>
-        <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span>
+        <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span> -->
       </div>
 
       <!-- 精品推荐 -->
@@ -479,7 +488,7 @@
           <ul class="search-history-img">
             <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
 
-            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item"><img src=""></li>
             <li class="search-history-item">智能</li>
             <li class="search-history-item">智能手表</li>
             <li class="search-history-item">智能手表</li>
@@ -487,24 +496,7 @@
             <li class="search-history-item">智能手表</li>
             <li class="search-history-item">智能手表</li>
           </ul>
-          <div class="clear-history">
-            <i></i>
-            <span>清空历史搜索</span>
-          </div>
         </div>
-        <div class="search-hot">
-          <p>热门搜索</p>
-          <ul class="search-hot-list">
-            <li class="search-hot-item">智能手表</li>
-            <li class="search-hot-item">智能</li>
-            <li class="search-hot-item">智能手表</li>
-            <li class="search-hot-item">智能手表</li>
-            <li class="search-hot-item">智能手表</li>
-            <li class="search-hot-item">智能手表</li>
-            <li class="search-hot-item">智能手表</li>
-          </ul>
-        </div>
-        
       </load-more>
   
     </div>
@@ -532,7 +524,7 @@
         Keyword: '',
         searchHistoryData: [],
         searchRusultData: [],
-        searchImgVisiblie: false
+        searchImgVisible: false     
       }
     },
     props: {
