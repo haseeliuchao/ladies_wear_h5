@@ -34,15 +34,17 @@ export const getMyShopFavorite = (params) => new Http().require({api: '/api/memb
 //shop
 export const getCategoryList = (params) => new Http().require({api: '/api/shop/GetCategoryList',param:params}); //获取分类列表
 
-export const getSelectedProductList = (params) => new Http().require({api: '/api/shop/GetSelectedProductList',param:params}); //获取购物车列表
+export const getSelectedProductList = (params) => new Http().require({api: '/api/member/shopping/cart/list',param:params}); //获取购物车列表
 
 export const searchGoods = (params) => new Http().require({api: '/api/shop/SearchGoods',param:params}); //获取购物车列表
 
-export const getProduct = (params) => new Http().require({api: '/api/shop/GetProduct',param:params}); //获取购物车列表
+export const getProduct = (params) => new Http().require({api: '/api/item/details',param:params}); //获取购物车列表
 
 export const getProductList = (params) => new Http().require({api: '/api/shop/GetProductList',param: params}); //获取
 
-export const selectProduct = (params) => new Http().require({api: '/api/shop/SelectProduct',param: params}); //获取
+export const selectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/add',param: params}); //获取
+
+export const updselectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/upd',param: params}); //获取
 
 export const removeSelectedProduct = (params) => new Http().require({api: '/api/shop/RemoveSelectedProduct',param: params}); //获取
 

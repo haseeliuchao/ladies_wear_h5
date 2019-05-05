@@ -135,6 +135,7 @@
         color: #333;
         flex: 4;
         @include textoverflow(2);
+        width: 8.1rem;
       }
       .product-share{
            flex: 1;
@@ -212,7 +213,9 @@
         margin-top: 10px;
         img{
           margin-right: 10px;
-          border-radius: 6px;
+          border-radius: 4px;
+          height: 40px;
+          width: 40px;
         }
         span{
           padding: 5px 8px;
@@ -672,6 +675,15 @@
 
   /* 商品详情 */
 
+.productparameterall{
+  height: 230px;
+      // overflow: auto;
+      overflow-y: scroll;
+  /* ios需要下面这个属性 */
+  -webkit-overflow-scrolling: touch;
+}
+
+
   /* 商品评价 */
 
   #goodcommentList {
@@ -813,6 +825,11 @@
     }
   }
 
+  .productActive{
+    color: $red!important;
+    border: 1px solid $red!important;
+  }
+
   /* 商品评价 */
 
 </style>
@@ -821,7 +838,8 @@
     overflow: hidden;
     width: 100%;
     clear: both;
-    border-radius: 6px;
+    // border-radius: 6px;
+    padding-bottom: 44px;
   }
   em{
     font-style: normal
@@ -833,6 +851,46 @@
   }
 
 </style>
+<style lang="scss" scoped>
+  @import '~assets/common/css/mixin.scss';
+.productConten {
+    margin-bottom: 1rem;
+}
+.product-delcom {
+    padding: 0.24rem 7%;
+    color: #323232;
+    font-size: 0.26rem;
+    border-bottom: 1px solid #EEEEEE;
+}
+.product-footerlist {
+    margin-top: 0.1rem;
+@include flexbox(start,
+            center,
+            row,
+            nowrap);
+}
+.product-footerlist li {
+    border: 1px solid #606060;
+    border-radius: 0.08rem;
+    color: #606060;
+    text-align: center;
+    padding: 0.04rem 0.16rem;
+    margin-right: 0.16rem;
+    min-width: 0.96rem;
+    margin-bottom: 0.16rem;
+}
+.product-footerlist li.productActive {
+    background-color: #1A1A29;
+    color: #fff;
+    border: 1px solid #1A1A29;
+}
+.product-footerlist li.noneActive {
+    background-color: #ccc;
+    opacity: 0.4;
+    color: #000;
+    pointer-events: none;
+}
+</style>
 
 <template>
   <div style="background:#f8f8f8;">
@@ -843,22 +901,25 @@
         <span class="closepop" @click="()=>{Keyword='';visiblePopup.checkSku=false}"></span>
       </div>
       <ul class="skuColorlist">
-        <li>红色</li>
-        <li>紫色</li>
-        <li>绿色</li>
+        <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}</li>
       </ul>
       <div style="border-top:1px solid #e4e4e4;
           border-bottom:1px solid #e4e4e4;">
       <p class="checkSkuColortitle">尺寸</p>
       <ul class="skuSizelist">
-        <li>XS</li>
-        <li>S</li>
-        <li>M</li>
-        <li>L</li>
-        <li>XL</li>
-        <li>XXL</li>
+        <li v-for="(item,index) in sizearr" v-on:click="sizecheckBtn(item.size,index)" v-bind:class="[checksizeindex == index?'productActive':'']" :key="index">{{item.size}}</li>
       </ul>
       </div>
+      <!-- <div class="productConten">
+                    <div class="product-delcom" v-for="(ProductItem,n) in simulatedDATA.specifications" :key='n'>
+                        <p>{{ProductItem.name}}</p>
+                        <ul class="product-footerlist clearfix">
+                            <li v-for="(oItem,index) in ProductItem.item" v-on:click="specificationBtn(oItem.name,n,$event,index)" v-bind:class="[oItem.isShow?'':'noneActive',subIndex[n] == index?'productActive':'']" :key='index'>{{oItem.name}}</li>
+                        </ul>
+                    </div>
+     </div> -->
+
+
       <div class="skuNum">
                   <div class="left">
                     选择数量
@@ -878,10 +939,9 @@
         <p class="checkSkuColortitle" style="text-align: center;">产品参数</p>
         <span class="closepop" @click="()=>{visiblePopup.checkInfo=false}"></span>
       </div>
-      <p class="productparameter">面料<span>棉纶</span></p>
-      <p class="productparameter">面料<span>棉纶</span></p>
-      <p class="productparameter">面料<span>棉纶</span></p>
-      <p class="productparameter">面料<span>棉纶</span></p>
+      <div class="productparameterall">
+      <p class="productparameter" v-for="(item,index) in productInfo.propertyList" :key="index">{{item|toafter}}<span>{{item|tonext}}</span></p>
+      </div>
       <div class="popupOk" @click="()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
 
@@ -915,13 +975,13 @@
             <div class="prouct-swiper">
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
-                <!-- <mt-swipe-item v-for="(item,index) in productInfo.image_url" :key="index">
-                  <img :src="item.url" :alt="item.name">
-                </mt-swipe-item> -->
-
-                <mt-swipe-item>
-                  <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" >
+                <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
+                  <img :src="item">
                 </mt-swipe-item>
+
+                <!-- <mt-swipe-item>
+                  <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" >
+                </mt-swipe-item> -->
 
               </mt-swipe>
               <div class="swiper-indicators">{{swipeIndex.nowIndex}}/{{swipeIndex.total}}</div>
@@ -934,14 +994,13 @@
                 <p class="product-pricep">
                 <span>&yen;</span>
                 <!-- <strong>{{productInfo.price}}</strong> -->
-                <span><em style="font-size:16px;">56</em>.00</span>
-                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">500</em></span>
+                <span><em style="font-size:16px;">{{productInfo.salesConsumerPrice}}</em>.00</span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">{{productInfo.salesPrice}}</em></span>
                 </p>
                 <span class="freight"><em style="font-size:13px;">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
               </div>
               <div class="product-title-textbottom">
-              <p class="product-name-text">LACOSTE L!VE（法国鳄鱼）女士简约通
-勤条纹短袖T恤MF0TF7297K2</p>
+              <p class="product-name-text">{{productInfo.title}}</p>
               <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
               <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
@@ -964,10 +1023,8 @@
               </div>
               <span class="right-menu"></span>
               <div class="product-skuimg">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" style="height:.96rem;width:.96rem" >
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" style="height:.96rem;width:.96rem" >
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" style="height:.96rem;width:.96rem" >
-                <span>共6种颜色分类可选</span>
+                <img v-for="(item,index) in colorarr" :key="index" :src="item.colorImg">
+                <span>共{{colorarr.length}}种颜色分类可选</span>
               </div>
             </div>
             <!-- 商品参数 -->
@@ -1065,7 +1122,10 @@
                   <p class="item-product-praise">好评率100%</p>
                 </li>
               </ul> -->
-              <div id="prodContent-container" v-html="productInfo.content"></div>
+              <div id="prodContent-container">
+              
+              <img v-for="(item,index) in productInfo.item_detailsimg" :key="index" :src="item" style="width:10rem">
+              </div>
             </div>
             <!-- 为你推荐 -->
           </div>
@@ -1201,6 +1261,12 @@
           checkSku: false,
           checkInfo: false,
         },
+        colorarr:[],
+        sizearr:[],
+        checkcolorindex:null,
+        checksizeindex:null,
+        curcolorname:null,
+        checkId:null,
         containerTab: 'mainLayout',
         detailTab: 'description',
         productInfo: {
@@ -1224,12 +1290,28 @@
           pageSize: 10,
           pageIndex: 1
         },
-        commentData: [],
+        commentData: []
+        
       };
     },
-
-    watch: {},
-
+    created: function () {
+        
+    },
+    watch: {
+      wcvisiblePopup:function(newvs,oldvs){
+            if (newvs) {
+                document.getElementsByTagName('html')[0].className='htmlover';
+                document.body.className='htmlover';
+              } else {
+                document.getElementsByTagName('html')[0].className='htmlnoover';
+                document.body.className='htmlnoover';
+              }
+              // 下面需要这两行代码，兼容不同浏览器
+              document.body.scrollTop = this.pageScrollYoffset;
+              window.scroll(0, this.pageScrollYoffset);
+            }
+    },
+        
     components: {
       TabContainer,
       TabContainerItem,
@@ -1239,63 +1321,35 @@
       BackHead
     },
 
-    computed: {},
-
-    methods: {
-      // switchTabs(Id) {
-      //   if (this.containerTab === String(Id)) return;
-      //   this.containerTab = Id;
-      //   switch (String(this.containerTab)) {
-      //     case 'mainLayout': 
-      //       break;
-      //     case 'goodDetail':
-      //       break;
-      //     case 'goodcommentList':
-      //       setTimeout(()=>{
-      //         this.$refs.commentLoadmore.onTopLoaded(this.$refs.commentLoadmore.uuid);
-      //       },500)
-      //       break;
-      //     default: //其他
-      //       throw new Error('未知TabId')
-      //       break
-      //   }
-      // },
-      // async commentinfiniteCallback(response) { //下拉加载更多评论
-      //   if (response.Data.length > 0) {
-      //     response.Data.map(i => {
-      //       this.commentData.push(i)
-      //     })
-      //   }
-      // },
-      // async infiniteCallback(response) { //下拉加载推荐商品
-      //   if (response.Data.length > 0) {
-      //     response.Data.map(i => {
-      //       this.recommendData.push(i)
-      //     })
-      //   }
-      // },
-      handleChange(index) {
+    computed: {
+      wcvisiblePopup(){
+          return this.visiblePopup.checkInfo;
+        }
+    },
+methods: {
+        
+        handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
-      async favShop() { //收藏店铺
-        await this.$store.dispatch('ShopFavorite', {
-          Id: this.shopInfo._id
-        });
-        return Toast({
-          message: '收藏店铺成功',
-          position: 'bottom'
-        })
-      },
+       
       async checkSkufun(){
       
       },
       async addShopCart() { //加入购物车
-        let SelectedList = [{
-          ProductNo: this.productInfo.productNo
-        }];
+        // let SelectedList = [{
+        //   ProductNo: this.productInfo.productNo
+        // }];
+        if(this.checkId==null){
+           Toast({
+            message: '先选择商品规格',
+            position: 'bottom'
+          })
+          return;
+         }
         this.$store.dispatch('SelectProduct', {
-          SelectedList: JSON.stringify(SelectedList),
-          Increment: 1
+          item_id:this.$route.params.id,
+          item_sku_id: this.checkId,
+          num:2
         }).then(response => {
           return Toast({
             message: '加入购物车成功',
@@ -1303,23 +1357,66 @@
           })
         })
       },
+      
       async initData() {
         this.commentParam.ProductNo = this.$route.params.id;
-        let {
-          Data
-        } = await getProduct({
-          ProductNo: this.$route.params.id
+        let Data = await getProduct({
+         itemId: this.$route.params.id
         });
-        let shopData = await getShop({
-          ShopId: Data.shopId
-        });
-        Data.price = Data.price.toFixed(2);
-        // this.productInfo = Data;
-        this.swipeIndex.total = Data.image_url.length;
-        this.shopInfo = shopData.Data;
-      }
+        this.productInfo = Data.data;
+        this.productInfo.imgList = JSON.parse(JSON.parse(Data.data.item_info).imgList);
+        this.productInfo.salesConsumerPrice = JSON.parse(Data.data.item_info).salesConsumerPrice;
+        this.productInfo.salesPrice = JSON.parse(Data.data.item_info).salesPrice;
+        this.productInfo.title = JSON.parse(Data.data.item_info).title;
+        this.productInfo.item_sku = JSON.parse(Data.data.item_sku);
+        this.productInfo.item_skulength =this.productInfo.item_sku.length;
+        this.productInfo.item_detailsimg =JSON.parse(JSON.parse(this.productInfo.item_details).itemDesc);
+        this.productInfo.propertyList =JSON.parse(JSON.parse(this.productInfo.item_details).propertyList);
+        this.swipeIndex.total =JSON.parse(JSON.parse(Data.data.item_info).imgList).length;
+        this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
+        this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
+      },
+      colorcheckBtn(name,index){
+          this.checkcolorindex=index;
+          this.curcolorname=name;
+          // this.productInfo.item_sku.filter((item)=>{return item.color==name})
+          this.sizearr =this.productInfo.item_sku.filter((item)=>{return item.color==name})
+          this.checksizeindex=null;
+       },
+       sizecheckBtn(size,index){
+         if(this.checkcolorindex==null){
+           Toast({
+            message: '请先选择颜色',
+            position: 'bottom'
+          })
+          return;
+         }
+          this.checksizeindex=index;
+          let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
+          this.checkId=checkIdarr[0].id;
+       },
+      rmSome(arr, key) {
+          let tempObj = {}
+          arr.forEach(item => {
+              if (tempObj[item[key]]) {
+                  return
+              } else {
+                  tempObj[item[key]] = item;
+              }
+          })
+          return Object.values(tempObj)
+          }
+ 
+    }
+    ,
+    filters:{
+        toafter(value){
+            return value.substring(0, value.indexOf(':'));
+        },
+        tonext(value){
+            return value.substring(value.indexOf(':')+1);
+        }
     },
-
     mounted: function () {
       this.initData();
         

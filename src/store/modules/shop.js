@@ -5,6 +5,7 @@ import {
   getProduct,
   getProductList,
   selectProduct,
+  updselectProduct,
   removeSelectedProduct,
   confirmSelectProduct,
   finishOrder,
@@ -148,6 +149,18 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         selectProduct(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    UpdselectProduct({ // 加入购物车
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        updselectProduct(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
