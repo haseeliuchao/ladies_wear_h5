@@ -186,9 +186,9 @@
         let params = {
           name:this.addressForm.name,
           phone: this.addressForm.phone,
-          province: this.addressForm.province,
+          province:this.addressForm.province,
           city: this.addressForm.city,
-          area: this.addressForm.area,
+          area:this.addressForm.area,
           address: this.addressForm.address,
           if_default: this.addressForm.selected ? 1 : 0,
         };
@@ -196,13 +196,13 @@
           params.Id = this.$route.params.Id
         }
         this.$store.dispatch('SaveAddress',params).then(response=>{
-          if(response.code != 200){
+          if(response.code != 10000){
             Toast({
-              message: '保存失败',
+              message: response.msg,
             })
-          }else if(response.code == 200){
+          }else{
             Toast({
-              message: response.Message
+              message: '保存成功'
             })
           }
         }).catch(error=>{
@@ -211,6 +211,7 @@
             })
         })
       },
+      
       onMyAddressChange(picker, values) {
        if(myaddress[values[0]]){  //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
           picker.setSlotValues(1,Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
