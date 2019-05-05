@@ -1,7 +1,8 @@
 import Http from '@/utils/axios';
 
 //member
-export const login = (params) => new Http().require({api: '/api/member/Login',param:params}); //登录
+export const login = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
+export const loginBind = (params) => new Http().require({api: '/api/bind/phone',param:params}); //登录
 
 export const getUserInfo = (params) => new Http().require({api: '/api/member/GetUserInfo',param:params}); //获取个人信息
 
@@ -33,15 +34,17 @@ export const getMyShopFavorite = (params) => new Http().require({api: '/api/memb
 //shop
 export const getCategoryList = (params) => new Http().require({api: '/api/shop/GetCategoryList',param:params}); //获取分类列表
 
-export const getSelectedProductList = (params) => new Http().require({api: '/api/shop/GetSelectedProductList',param:params}); //获取购物车列表
+export const getSelectedProductList = (params) => new Http().require({api: '/api/member/shopping/cart/list',param:params}); //获取购物车列表
 
 export const searchGoods = (params) => new Http().require({api: '/api/shop/SearchGoods',param:params}); //获取购物车列表
 
-export const getProduct = (params) => new Http().require({api: '/api/shop/GetProduct',param:params}); //获取购物车列表
+export const getProduct = (params) => new Http().require({api: '/api/item/details',param:params}); //获取购物车列表
 
 export const getProductList = (params) => new Http().require({api: '/api/shop/GetProductList',param: params}); //获取
 
-export const selectProduct = (params) => new Http().require({api: '/api/shop/SelectProduct',param: params}); //获取
+export const selectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/add',param: params}); //获取
+
+export const updselectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/upd',param: params}); //获取
 
 export const removeSelectedProduct = (params) => new Http().require({api: '/api/shop/RemoveSelectedProduct',param: params}); //获取
 
@@ -57,7 +60,7 @@ export const cancelOrder = (params) => new Http().require({api: '/api/shop/Cance
 
 export const getOrderList = (params) => new Http().require({api: '/api/shop/GetOrderList',param: params}); //获取
 
-export const getOrder = (params) => new Http().require({api: '/api/shop/GetOrder',param: params}); //获取
+export const getOrder = (params) => new Http().require({api: '/api/items',param: params}); //获取
 
 export const getShopInfo = (params) => new Http().require({api: '/api/shop/GetShopInfo',param: params}); //获取
 

@@ -295,28 +295,31 @@
             <span>Apple旗舰店</span>
           </div>
           <!-- 暂时还没做分店铺订单 -->
-
+          <div class="top-edit">
+            <p class="cartListNum">共3件宝贝</p>
+            <p class="cartListEdit">管理</p>
+          </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="checked(item)"></i>
               <div class="pd-images">
-                <img :src="item.product.image_url[0].url" alt="">
+                <img :src="item.index_img_url" alt="">
               </div>
               <div class="pd-info">
                 <div class="pd-title">
-                  <p>{{item.product.productName}}</p>
+                  <p>{{item.item_title}}</p>
                 </div>
                 <div class="pd-sku">
-                  <p class="sku-info">{{item.product.summary}}</p>
+                  <p class="sku-info">{{item.color}}  {{item.size}}</p>
                 </div>
                 <div class="pd-price">
                   <div class="left">
                     <span>&yen;</span>
-                    <strong>{{item.product.price}}</strong>
+                    <strong>{{item.sales_consumer_price}}</strong>
                   </div>
                   <div class="right">
                     <div class="cut" @click="editProductNum({item:item,increment:-1})"></div>
-                    <input type="text" v-model="item.counter" class="num-inp" @change="editProductNum({item:item,counter:item.counter})">
+                    <input type="text" v-model="item.num" class="num-inp" @change="editProductNum({item:item,num:item.num})">
                     <div class="add" @click="editProductNum({item:item,increment:1})"></div>
                   </div>
                 </div>
@@ -324,11 +327,8 @@
             </div>
           </div>
 
-          <div class="top-edit">
-            <p class="cartListNum">共3件宝贝</p>
-            <p class="cartListEdit">管理</p>
-          </div>
-          <div class="store-pd">
+          
+          <!-- <div class="store-pd">
             <div class="store-pd-item">
               <i class="select-default-icon select-icon"></i>
               <div class="pd-images">
@@ -504,9 +504,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
-        <!-- <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p> -->
+        <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p>
       </load-more>
     </div>
     <!-- 购物车列表 -->
@@ -516,7 +516,7 @@
         <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click="selectedAllGoods"></i>
         <em>全选</em>
         <!-- {{totalFee}} -->
-        <strong>合计：<span>&yen;</span> <em>399</em><em style="font-size:12px;">.00</em></strong>
+        <strong>合计：<span>&yen;</span> <em>{{totalFee}}</em><em style="font-size:12px;">.00</em></strong>
       </div>
       <div class="right" @click="confirmOrder">
         <strong>结算
@@ -575,7 +575,7 @@
     methods: {
       selectedAllGoods() {
         this.cartList.map(item => {
-          if (item.status === 1) {
+          if (item.item_status === 1) {
             item.checked = !this.selectedAll
           }
         })
@@ -585,8 +585,8 @@
       confirmOrder() {
         let SelectedList = [];
         this.cartList.map(item => {
-          if (item.status === 1 && item.checked) {
-            SelectedList.push(item.product.productNo)
+          if (item.item_status === 1 && item.checked) {
+            SelectedList.push(item.shopping_cart_id)
           }
         })
         if (SelectedList == '') return Toast({
@@ -603,8 +603,8 @@
         let computedFee = 0,
           selectedCounter = 0;
         this.cartList.map(item => {
-          if (item.checked && item.status === 1) {
-            computedFee += parseFloat(item.counter * item.product.price)
+          if (item.checked && item.item_status === 1) {
+            computedFee += parseFloat(item.num * item.sales_consumer_price)
             selectedCounter++
           }
         })
@@ -618,40 +618,36 @@
         counter
       }) {
         let params = {
-          SelectedList: JSON.stringify([{
-            ProductNo: item.product.productNo
-          }])
+            shopping_cart_id: item.shopping_cart_id
         }
         if (counter) {
-          params.Counter = counter
+          params.num = counter
         } else {
-          params.Increment = increment
+          params.num = increment
         }
-        await this.$store.dispatch('SelectProduct', params)
+        await this.$store.dispatch('UpdselectProduct', params)
         this.onRefreshCallback();
       },
       async checked(item) {
         item.checked = !item.checked;
         let count = 0;
         this.cartList.map(item => {
-          if (item.status === 1 && item.checked) return count++;
+          if (item.item_status === 1 && item.checked) return count++;
         })
         if (count === this.cartList.length) return this.selectedAllGoods();
         this.computedTotalFee();
       },
       async initData() {
-        let token = getSessionStorage('MemberToken')
-        this.isLogin = token ? true : false;
-        if (!token) return;
-        let {
-          Data
-        } = await this.$store.dispatch('GetSelectedProductList');
-        this.cartList = Data || null;
+        // let token = getSessionStorage('MemberToken')
+        // this.isLogin = token ? true : false;
+        // if (!token) return;
+        let Data = await this.$store.dispatch('GetSelectedProductList');
+        this.cartList = Data.data.data || null;
       },
       async onRefreshCallback() {
         this.$store.dispatch('GetSelectedProductList').then(response => {
           setTimeout(() => {
-            this.cartList = response.Data;
+            this.cartList = response.Data.data;
             this.computedTotalFee();
             this.selectedAll = false;
             this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);

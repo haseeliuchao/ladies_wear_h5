@@ -1,4 +1,4 @@
-<!-- article -->
+
 <style scoped lang="scss">
   @import '~assets/common/css/mixin.scss';
   .acticle-icon {
@@ -19,12 +19,6 @@
       padding: 15px 0 !important;
     }
   }
-
-  .content {
-    position: relative;
-    top: 40px;
-  }
-
   .topnav {
     display: flex;
     flex: 1;
@@ -111,7 +105,6 @@
       }
     }
   }
-
 </style>
 <style lang="scss">
   #articleContainer {
@@ -124,13 +117,6 @@
 </style>
 <template>
   <div id="articleContainer">
-    <search-bar :Status="Status" v-if="!Status">
-      <div slot="left-icon"></div>
-      <div slot="right-icon"></div>
-      <div slot="title-icon">
-        <div class="acticle-icon">发现</div>
-      </div>
-    </search-bar>
     <div class="content">
       <div style="border-bottom:1px solid #eee;background:#fff;">
         <div class="topnav" :class="Status? 'Navfixed': ''">
@@ -295,13 +281,13 @@
             // this.params.Type = null;
             break;
           case 'tab-container2': //生活
-            this.params.Type = 'life';
+            // this.params.Type = 'life';
             break;
           case 'tab-container3': //视频
-            this.params.Type = 'video';
+            // this.params.Type = 'video';
             break;
           case 'tab-container4': //数码
-            this.params.Type = 'digital';
+            // this.params.Type = 'digital';
             break;
           default: //其他
             throw new Error('未知TabId')

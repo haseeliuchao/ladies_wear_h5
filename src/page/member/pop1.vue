@@ -105,16 +105,24 @@
 </style>
 <template>
   <div>
-    <div class="comment-container">
+    <div class="my-header">
+      <i class="back" @click="$router.go(-1)"></i>
+      <strong>评价</strong>
+      <span @click="commitMsg">发布</span>
+    </div>
+    <div class="comment-container" v-if="orderData">
       <div class="commentList">
-        <div class="comment-item">
+        <div class="comment-item" v-for="(item,index) in orderData.ProductList" :key="index">
           <div class="star-container">
-            <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" alt="">
+            <img :src="item.product.image_url[0].url" alt="">
             <span>评价：</span>
-           
+            <div class="starList">
+              <i :class="star===1?'star':'blur'" v-for="(star,starIndex) in item.starList" :key="starIndex" @click="starChange(item.starList,starIndex,item)"></i>
+            </div>
+            <span class="starTip">{{item.starTip}}</span>
           </div>
           <div class="content">
-            <textarea  placeholder="宝贝满足你的期待吗？说说它的优点和美中不足的地方吧" name="" id="" cols="30" rows="10"></textarea>
+            <textarea v-model="item.content" placeholder="宝贝满足你的期待吗？说说它的优点和美中不足的地方吧" name="" id="" cols="30" rows="10"></textarea>
           </div>
           <div class="uploadFile-container">
             <file-upload ref="upload" v-model="item.uploadFiles" :multiple="true" accept="image/*" post-action="http://awei.fun:3333/Unit/uploadfile"
@@ -124,10 +132,9 @@
                 <span>添加图片</span>
               </div>
             </file-upload>
-           <div class="file-data" v-for="(file,fileIndex) in item.uploadFiles" :key="fileIndex">
+            <div class="file-data" v-for="(file,fileIndex) in item.uploadFiles" :key="fileIndex">
               <img :src="file.blob" alt="" :key="fileIndex">
             </div>
-            <span @click="commitMsg">发布</span>
           </div>
         </div>
       </div>
@@ -143,10 +150,7 @@
   export default {
     data() {
       return {
-        orderData: null,
-        item:{
-          uploadFiles :[]
-        }
+        orderData: null
       };
     },
 
@@ -193,25 +197,17 @@
         }
       },
       async initData() {
-        const Data =await this.$store.dispatch('GetOrder', {
-          sort_type:"APPLY_MEMBER_COUNT",
-          sort_enum: "DESC",
-          item_category_id: "",
-          item_category_second_id:"",
-          item_type: "ALL",
-          reward:0,
-          coupon_range:1,
-          current_page:1,
-          page_size:10
+        let {
+          Data
+        } = await this.$store.dispatch('GetOrder', {
+          OrderNo: this.$route.params.OrderNo
         })
-        Data.data.data.map(item => {
-          // item.uploadFiles = [];
-          // item.content = '';
-          // item.starTip = '非常好'
-          // item.starList = [1, 1, 1, 1, 1];
-          console.log(item)
+        Data.ProductList.map(item => {
+          item.uploadFiles = [];
+          item.content = '';
+          item.starTip = '非常好'
+          item.starList = [1, 1, 1, 1, 1];
         })
-        console.log(Data)
         this.orderData = Data;
       },
       async commitMsg() {

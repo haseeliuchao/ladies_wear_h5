@@ -228,12 +228,12 @@
 <template>
   <div id="jd">
     <!-- 遮罩层 -->
-      <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
+      <!-- <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con.png">
           <div class="jump-btn" @click="()=>{$router.push('/searchResult');popupVisible=false}"></div>
         </div>
-      </mt-popup>
+      </mt-popup> -->
         <!-- 搜索栏 -->
         <search-bar :Status="Status"  v-if="searchBarVisilbe" />
         <!-- 搜索栏 -->
@@ -383,10 +383,12 @@
   </div>
 </template>
 <script>
+  import utils from '@/utils/urlfun';
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
-    showBack
+    showBack,getLocalStorage,
+    setLocalStorage
   } from '@/utils/mixin';
   import {
     getRecommend,
@@ -405,6 +407,10 @@
     Popup
   } from 'mint-ui';
   import {
+  Indicator,
+  Toast
+} from 'mint-ui';
+  import {
     mapGetters,
     mapMutations
   } from 'vuex';
@@ -418,6 +424,10 @@
           pageSize: 10,
           pageIndex: 1
         },
+        
+         code:null,
+         app_key:null,
+      
         recommendData: [],
         cmsData: null,
         searchBarVisilbe: true,
@@ -441,7 +451,20 @@
         'indexCmsData'
       ])
     },
+    created:{
+     
+    },
     methods: {
+      isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        console.log(ua);//mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            return true;
+        }
+        else {
+            return false;
+        }
+      },
       translateChange(y){ //监听下拉的阈值
         this.searchBarVisilbe = y>8 ? false : true;
       },
@@ -475,11 +498,35 @@
         } else {
           this.cmsData = this.indexCmsData.Data;
         }
-      }
+      },
+       async loginData() { //更新数据
+          setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
+          setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
+       
+       if(this.isWeiXin()){
+       let Data = await this.$store.dispatch('Login', {
+          code:utils.getUrlKey('code'),
+          app_key:utils.getUrlKey('state').slice(8)
+        })
+        console.log(Data);
+        if(Data.code==10000){
+          setLocalStorage('session_token',Data.data.session_token);
+          setLocalStorage('access_token',Data.data.access_token);
+        }else{
+          Toast({
+                message: Data.msg,
+                position: 'bottom'
+            });
+        }
+       }
+        
+      },
+      
     },
     beforeDestroy() {},
     mounted: function () {
-      this.initData();
+      // this.initData();
+      this.loginData();
       showBack(status => {
         this.Status = status;
       })

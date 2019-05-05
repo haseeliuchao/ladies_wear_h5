@@ -42,7 +42,7 @@
   }
 
   .address-pricker {
-    @include wh(100%, 70%);
+    @include wh(100%, 180px);
     .address-picker-header {
       position: relative;
       p {
@@ -63,9 +63,9 @@
     }
   }
 
-  .popupVisible {
-    transform: scale(0.95) !important;
-  }
+  // .popupVisible {
+  //   transform: scale(0.95) !important;
+  // }
 
 </style>
 <template>
@@ -87,7 +87,7 @@
         <div class="cell-from-item" @click="()=>addressVisible=true" style="justify-content:space-between;">
           <span class="title">所在地区：</span>
           <div class="content">
-            <input type="text" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="">
+            <input type="text" readonly="readonly" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="">
           </div>
           <i class="arrow-right" style="opacity: .4"></i>
         </div>
@@ -107,13 +107,14 @@
       </div>
     </div>
     <div>
-      <mt-popup v-model="addressVisible" position="bottom" class="address-pricker">
-        <div class="address-picker-header">
+      <mt-popup v-model="addressVisible" position="bottom"  class="address-pricker">
+        <!-- <div class="address-picker-header">
           <p>配送至</p>
           <span class="picker-close">&times;</span>
         </div>
         <v-distpicker :placeholders="{ province: '请选择', city: '请选择', area: '请选择' }" wrapper="address-pricker-wrapper" type="mobile"
-          @selected="onSelected"></v-distpicker>
+          @selected="onSelected"></v-distpicker> -->
+          <mt-picker :slots="myAddressSlots" @change="onMyAddressChange" @touchmove.native.stop.prevent></mt-picker>
       </mt-popup>
     </div>
   </div>
@@ -122,9 +123,10 @@
 <script>
   import {
     Switch,
-    Toast
+    Toast,Picker
   } from 'mint-ui'
-  import VDistpicker from 'v-distpicker'
+  // import VDistpicker from 'v-distpicker'
+  import myaddress from '@/utils/address3.json'
   export default {
     data() {
       return {
@@ -138,13 +140,43 @@
           selected: false
         },
         addressVisible: false,
+        myAddressSlots: [
+          {
+            flex: 1,
+            defaultIndex: 1,    
+            values: Object.keys(myaddress),  //省份数组
+            className: 'slot1',
+            textAlign: 'center'
+          }, {
+            divider: true,
+            content: '-',
+            className: 'slot2'
+          }, {
+            flex: 1,
+            values: [],
+            className: 'slot3',
+            textAlign: 'center'
+          },
+          {
+            divider: true,
+            content: '-',
+            className: 'slot4'
+          },
+          {
+            flex: 1,
+            values: [],
+            className: 'slot5',
+            textAlign: 'center'
+          }
+        ]
       };
     },
 
     watch: {},
 
     components: {
-      VDistpicker
+      // VDistpicker
+      'mt-picker': Picker
     },
 
     computed: {},
@@ -168,6 +200,19 @@
           })
         })
       },
+      onMyAddressChange(picker, values) {
+       if(myaddress[values[0]]){  //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
+          picker.setSlotValues(1,Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
+          picker.setSlotValues(2,myaddress[values[0]][values[1]]); // 区/县数据就是一个数组
+          this.myAddressProvince = values[0];
+          this.myAddressCity = values[1];
+          this.myAddresscounty = values[2];
+
+          this.addressForm.province=values[0];
+          this.addressForm.city= values[1];
+          this.addressForm.area= values[2];
+        }
+      },
       onSelected(data) {
         this.addressVisible = false;
         this.addressForm.province = data.province.value;
@@ -190,6 +235,11 @@
 
     mounted: function () {
       this.initData();
+      this.$nextTick(() => { //vue里面全部加载好了再执行的函数  （类似于setTimeout）
+        this.myAddressSlots[0].defaultIndex = 0    
+        // 这里的值需要和 data里面 defaultIndex 的值不一样才能够初始化
+        //因为我没有看过源码（我猜测是因为数据没有改变，不会触发更新）
+      });
     }
   }
 

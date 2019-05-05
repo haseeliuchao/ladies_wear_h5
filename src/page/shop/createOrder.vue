@@ -9,9 +9,9 @@
       border-bottom: 1px solid #eee;
       .back {
         display: block;
-        width: .65rem;
-        height: .65rem;
-        background: url('~jd/images/arrow-left.png') no-repeat;
+        width: .56rem;
+        height: .56rem;
+        background: url('~jd/images/close.png') no-repeat;
         background-size: 100%;
       }
       strong {
@@ -30,6 +30,33 @@
       }
     }
     .payContainer {
+      padding: $padding $padding 100px $padding;
+       .ordertop-address{
+          padding: $padding;
+          background: #fff;
+          color: #333;
+          border-radius: 6px;
+          @include flexbox(space-between, center, row, nowrap);
+      .ordertop-addressleft{
+        width: 84%;
+        .address-username{
+                font-size: 14px;
+                line-height: 25px;
+              }
+              .address-text{
+                font-size: 13px;
+                line-height: 18px;
+              }
+      }
+      .ordertop-addressright{
+        width: 16%;
+        color: #999;
+        font-size: 13px;
+        text-align: right
+      }
+      
+    }
+
       .addressContainer {
         background: #fff;
         .addressDefault {
@@ -123,14 +150,26 @@
       width: 100%;
       background: #fff;
       font-size: 17px;
-      @include flexbox(flex-end,
+      @include flexbox(space-between,
       center,
       row,
       nowrap);
-      span {
-        color: $red;
-        text-align: right;
-        padding: 0 $padding;
+      >span{
+        padding-left: $padding;
+        font-size: 16px;
+        color: #333
+      }
+      strong {
+        font-weight: normal;
+        font-size: 14px;
+        span{
+          font-size: 12px;
+          color: #ff2741;
+          
+        }
+        em{
+          color: #ff2741;
+        }
       }
       .payBtn {
         width: 40%;
@@ -158,7 +197,196 @@
       width: 3rem;
     }
   }
+.order-list {
+        // background: #fff;
+        margin-top: $margin;
+        .order-item {
+          margin-top: 10px;
+          background: #fff;
+         
+          border-radius: 6px;
+          padding: $padding 0 5px;
+          .order-top {
+            padding: $padding;
+            // border-bottom: 1px solid #e4e4e4;
+            @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            .left {
+              text-align: left;
+              img {
+                width: 15px;
+                height: 15px;
+                vertical-align: bottom;
+              }
+              span {
+                font-size: 15px;
+                color: #666;
+                // margin-left: 5px;
+              }
+            }
+            .right {
+              .order-status {
+                color: $red;
+                font-size: 15px;
+              }
+            }
+          }
+          .order-product-list {
+            @include flexbox(flex-start,
+            flex-start,
+            column,
+            wrap);
+            border-bottom: 1px solid #e4e4e4;
+            .order-product-item {
+              padding: $padding;
+              width: 100%;
+              >div {
+                @include flexbox(flex-start,
+                flex-start,
+                row,
+                nowrap);
+                width: 100%;
+                img {
+                  max-width: 90px;
+                  max-height: 90px;
+                  // border: 1px solid #eee;
+                  border-radius: 6px;
+                }
+                .product-info {
+                  margin-left: $margin;
+                  .prod-price {
+                    font-size: 14px;
+                    >span{
+                      color: #999;
+                    }
+                    strong {
+                      font-weight: normal;
+                      font-size: 14px;
+                      span{
+                        font-size: 12px;
+                        color: $red;
+                        
+                      }
+                      em{
+                        color: $red;
+                        font-style: normal
+                      }
+                    }
+                    @include flexbox(space-between,
+                    center,
+                    row,
+                    nowrap);
+                  }
+                  p {
+                    @include textoverflow(3);
+                    font-size: 13px;
+                    margin: 4px 0;
+                    color: #333;
+                    line-height: 20px;
+                  }
+                  .prodsku-info{
+                    color: #666;
+                    font-size: 12px;
+                  }
 
+                }
+              }
+            }
+          }
+
+          .order-product-detail{
+           padding: 6px 10px 10px;
+           background: #fff;
+           p{
+             @include flexbox(space-between,
+              center,
+              row,
+              nowrap);
+              font-size: 15px;
+             line-height: 26px;
+              strong{
+                font-weight: normal;
+                      font-size: 14px;
+                      span{
+                        font-size: 12px;
+                        color: $red;
+                        
+                      }
+                      em{
+                        color: $red;
+                        font-style: normal
+                      }
+              }
+           }
+           .order-product-detailone{
+             color: #333
+           }
+           .order-product-detailtwo{
+             color: #666;
+             strong{
+                
+                      span{
+                       
+                        color: #666;
+                        
+                      }
+                      em{
+                        color: #666;
+                      
+                      }
+              }
+           }
+          }
+          
+          .order-sku {
+            background: #fff;
+            padding: 8px $padding;
+            text-align: right;
+            font-size: $subtitle;
+            // border-bottom: 1px solid #eee;
+            // color: #333;
+            span{
+              font-size: 15px;
+              color: #333;
+              em{
+                color: $red;
+                margin-left: 6px;
+              }
+            }
+            strong {
+                      font-weight: normal;
+                      font-size: 14px;
+                      span{
+                        font-size: 12px;
+                        color: $red;
+                        
+                      }
+                      em{
+                        color: $red;
+                        font-style: normal
+                      }
+                    }
+          }
+          .order-btn-group {
+            @include flexbox(flex-end,
+            center,
+            row,
+            nowrap);
+            padding: 5px $padding 16px;
+            width: 10rem;
+            >span {
+              padding: 4px 10px;
+              color: $red;
+              font-size: 14px;
+              border: 1px solid $red;
+              border-radius: 3px;
+              margin-left: 15px;
+            }
+          }
+        }
+      }
   .paymentContainer {
     position: fixed;
     width: 100%;
@@ -224,7 +452,9 @@
       }
     }
   }
-
+  .noScroll {
+  overflow-y: hidden;
+  }
   .addressList {
     .my-header {
       padding: $padding;
@@ -258,52 +488,81 @@
     }
     .addNewAddressbtn {
       position: fixed;
-      bottom: .2rem;
-      width: 90%;
+      bottom: 0;
+      width: 100%;
       text-align: center;
-      padding: $padding 0;
+      padding: 14px 0;
       background: $red;
-      font-size: $title;
+      font-size: 18px;
       color: #fff;
-      margin: 0 .5rem;
-      border-radius: 2px;
     }
+    
     .address-container {
+      height: 300px;
+      // overflow: auto;
+      overflow-y: scroll;
+  /* ios需要下面这个属性 */
+  -webkit-overflow-scrolling: touch;
       .address-item {
+        // @include flexbox(space-between,
+        // flex-start,
+        // column,
+        // wrap);
         @include flexbox(space-between,
-        flex-start,
-        column,
-        wrap);
+        center,
+        row,
+        nowrap);
         background: #fff;
-        padding-left: 60px;
+        border-bottom: 1px solid #e4e4e4;
+        // padding-left: 60px;
         position: relative;
-        .selectedIcon{
-          display: inline-block;
-          position: absolute;
-          left: 15px;
-          top: calc(100%/2 - 12.5px);
-          background: url('~jd/images/product-detail-sprites-mjs.png') no-repeat;
-          width: 25px;
-          height: 25px;
-          background-position: -93px -24px;
-          background-size: 140px;
-          vertical-align: -8px;
-        }
-        >p {
+        .address-itemleft{
+           @include flexbox(start,
+        center,
+        row,
+        wrap);
+        padding-left: $padding;
+        padding-right: $padding;
+            >p {
           width: 100%;
+           span{
+             font-size: 12px;
+             background: #ffe6df;
+             color: $red;
+             padding: 3px 6px;
+             border-radius: 4px;
+             margin-left: $margin;
+           }
+          }
+        
         }
+        .address-itemright{
+              width: 1.34rem;
+              text-align: center;
+              border-left: 1px solid #e4e4e4;
+              img{
+                margin-bottom: 5px;
+                height: 15px;
+              }
+              p{
+                color: #999;
+                font-size: 12px;
+              }
+        }
+        
         .name {
-          font-size: $title;
+          font-size: 14px;
           color: #333;
           padding: $padding 0;
           @include textoverflow(1);
         }
         .address {
-          font-size: $smsub;
-          color: $gray;
+          font-size: 13px;
+          color: #333;
           padding: 0 0 15px;
           @include textoverflow(2);
-          border-bottom: 1px solid #eee;
+          
+          line-height: 18px;
         }
         .address-status {
           width: 100%;
@@ -366,6 +625,7 @@
       }
     }
   }
+ 
 
 </style>
 <style lang="scss">
@@ -375,12 +635,8 @@
 </style>
 <template>
   <div class="pagePay">
-    <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
-      <strong>确认订单</strong>
-      <i class="myMsg"></i>
-    </div>
-    <div class="payContainer">
+    
+    <!-- <div class="payContainer">
       <div class="addressContainer" v-if="defaultAddress" @click="()=>visiblePopup.selectedAdressVisible=true">
         <div class="addressDefault">
           <div class="cell">
@@ -409,10 +665,121 @@
       <p v-else style="text-align:center;padding:15px 0; color:#999;font-size:17px;">
         暂无数据
       </p>
+    </div> -->
+
+    <div class="payContainer">
+      <!-- <div class="addressContainer" @click="()=>visiblePopup.selectedAdressVisible=true">
+        <div class="addressDefault">
+          <div class="cell">
+            <strong>张三三 18146546556</strong>
+            <span class="defaultIcon">默认</span>
+          </div>
+          <div class="cell">
+            <i class="positionIcon"></i>广东省 云浮市 云安县 文明街道 福光小区60幢3
+单元3号301室</div>
+          <i class="arrow-right"></i>
+        </div>
+      </div> -->
+      <div class="ordertop-address" @click="()=>visiblePopup.selectedAdressVisible=true">
+        <div class="ordertop-addressleft">
+        <p class="address-username">张三三<em style="margin-left:12px;font-size:12px;">18312345678</em></p>
+        <p class="address-text">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+        </div>
+        <p class="ordertop-addressright">
+          修改 >
+        </p>
+      </div>
+
+      <div class="all-order">
+          <div class="order-list">
+            <div class="order-item">
+              <div class="order-product-list">
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-product-item">
+                  <div>
+                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <div class="product-info">
+                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-price">
+                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+                        <span>x2</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="order-product-detail">
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     </div>
+
+
+
+
     <div class="payOnline">
-      <span>实付款：&yen;{{totalFee}}</span>
-      <div class="payBtn" @click="submitOrder">提交订单</div>
+      <!-- &yen;{{totalFee}}  -->
+      <span>合计：<strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.47</em></strong></span>
+      <div class="payBtn" @click="submitOrder">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
       <img src="~jd/images/paymentloading.gif" />
@@ -431,28 +798,116 @@
         <mt-button size="large" type="primary" @click="payByWallet">确认支付</mt-button>
       </div>
     </div>
-    <mt-popup v-model="visiblePopup.selectedAdressVisible" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+    <mt-popup v-model="visiblePopup.selectedAdressVisible" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup" style="height:400px;" >
       <div class="my-header">
-        <i class="back" @click="()=>visiblePopup.selectedAdressVisible=false"></i>
-        <strong>选择地址</strong>
         <i class="myMsg"></i>
+        
+        <strong>地址管理</strong>
+        <i class="back" @click="()=>visiblePopup.selectedAdressVisible=false"></i>
       </div>
       <div class="addressList">
-        <div class="my-header">
-          <i class="back" @click="$router.go(-1)"></i>
-          <strong>地址管理</strong>
-          <i class="myMsg"></i>
-        </div>
-        <scroller width="100%" height="100%" style="margin-top:1.2rem;background:#fff;">
-          <div class="address-container" v-if="addressData">
+        <!-- <scroller width="100%" height="100%" style="margin-top:1.2rem;background:#fff;"> -->
+          <!-- <div class="address-container" v-if="addressData">
             <div class="address-item" v-for="(item,index) in addressData" :key="index" @click="selectedAddress(item)">
               <p class="name">{{item.nickName}} {{item.Phone}}</p>
               <p class="address">{{item.Province + item.City + item.Area}}&nbsp;;&nbsp;{{item.Address}}</p>
               <i class="selectedIcon" v-if="item.Selected===1"></i>
             </div>
+          </div> -->
+          <div class="address-container">
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058 <span>默认</span></p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
+            <div class="address-item" @click="selectedAddress(item)">
+              <div class="address-itemleft">
+              <p class="name">张山 18146703058</p>
+              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              </div>
+              <div class="address-itemright">
+                <img src="~jd/images/addressedit.png"/>
+                <p>编辑</p>
+              </div>
+            </div>
           </div>
-        </scroller>
-        <div class="addNewAddressbtn">+&nbsp;新建地址</div>
+        <!-- </scroller> -->
+        <div class="addNewAddressbtn">添加新地址</div>
       </div>
     </mt-popup>
   </div>
@@ -485,16 +940,30 @@
       };
     },
 
-    watch: {},
-
-    components: {},
-
-    computed: {
-      ...mapGetters([
-        'addressList'
-      ])
+    watch: {
+        wcvisiblePopup:function(newvs,oldvs){
+            if (newvs) {
+                document.getElementsByTagName('html')[0].className='htmlover';
+                document.body.className='htmlover';
+              } else {
+                document.getElementsByTagName('html')[0].className='htmlnoover';
+                document.body.className='htmlnoover';
+              }
+              // 下面需要这两行代码，兼容不同浏览器
+              document.body.scrollTop = this.pageScrollYoffset;
+              window.scroll(0, this.pageScrollYoffset);
+            }
     },
 
+    components: {},
+    computed: {
+      ...mapGetters(["addressList"]),
+      ...{
+        wcvisiblePopup(){
+          return this.visiblePopup.selectedAdressVisible;
+        }
+      }
+    },
     methods: {
       selectedAddress(item){
         this.visiblePopup.selectedAdressVisible = false;
@@ -559,11 +1028,12 @@
 
     mounted: function () {
       this.initData();
+      
     }
   }
 
 </script>
-<style lang="scss" scoped>
-
+<style lang="css" scoped>
+ 
 
 </style>
