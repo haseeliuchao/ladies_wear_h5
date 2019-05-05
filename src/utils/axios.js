@@ -96,7 +96,7 @@ class Http {
             // should be made using credentials
             // withCredentials: true, // default
             headers: {
-                'Content-Type':'application/x-www-form-urlencoded'
+                'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
                 // 'Content-Type':'text/plain'
             },
             
