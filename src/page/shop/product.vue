@@ -994,8 +994,8 @@
                 <p class="product-pricep">
                 <span>&yen;</span>
                 <!-- <strong>{{productInfo.price}}</strong> -->
-                <span><em style="font-size:16px;">{{productInfo.salesConsumerPrice}}</em>.00</span>
-                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">{{productInfo.salesPrice}}</em></span>
+                <span><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.salesConsumerPrice/100.00|topricenext}}</span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">{{productInfo.salesPrice/100.00}}</em></span>
                 </p>
                 <span class="freight"><em style="font-size:13px;">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
               </div>
@@ -1023,7 +1023,7 @@
               </div>
               <span class="right-menu"></span>
               <div class="product-skuimg">
-                <img v-for="(item,index) in colorarr" :key="index" :src="item.colorImg">
+                <img v-for="(item,index) in colorarr" :key="index" :src="item.color_img">
                 <span>共{{colorarr.length}}种颜色分类可选</span>
               </div>
             </div>
@@ -1122,9 +1122,9 @@
                   <p class="item-product-praise">好评率100%</p>
                 </li>
               </ul> -->
-              <div id="prodContent-container">
-              
-              <img v-for="(item,index) in productInfo.item_detailsimg" :key="index" :src="item" style="width:10rem">
+              <div id="prodContent-container" >
+                <!-- v-html="productInfo.item_detailsimg" -->
+                <img  v-for="(img,imgIndex) in productInfo.item_detailsimg" :key="imgIndex" :src="img" alt="">
               </div>
             </div>
             <!-- 为你推荐 -->
@@ -1351,28 +1351,44 @@ methods: {
           item_sku_id: this.checkId,
           num:2
         }).then(response => {
+          if(response.code==10000){
           return Toast({
             message: '加入购物车成功',
             position: 'bottom'
           })
+          }else{
+            Toast({
+            message: Data.msg,
+            position: 'bottom'
+            })
+            return
+          }
+          
         })
       },
       
       async initData() {
         this.commentParam.ProductNo = this.$route.params.id;
         let Data = await getProduct({
-         itemId: this.$route.params.id
+         item_id: this.$route.params.id
         });
+        if(Data.code!=10000){
+          Toast({
+            message: Data.msg,
+            position: 'bottom'
+          })
+          return
+        }
         this.productInfo = Data.data;
-        this.productInfo.imgList = JSON.parse(JSON.parse(Data.data.item_info).imgList);
-        this.productInfo.salesConsumerPrice = JSON.parse(Data.data.item_info).salesConsumerPrice;
-        this.productInfo.salesPrice = JSON.parse(Data.data.item_info).salesPrice;
-        this.productInfo.title = JSON.parse(Data.data.item_info).title;
-        this.productInfo.item_sku = JSON.parse(Data.data.item_sku);
+        this.productInfo.imgList = JSON.parse(Data.data.img_list);
+        this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
+        this.productInfo.salesPrice = Data.data.sales_price;
+        this.productInfo.title =Data.data.title;
+        this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
-        this.productInfo.item_detailsimg =JSON.parse(JSON.parse(this.productInfo.item_details).itemDesc);
-        this.productInfo.propertyList =JSON.parse(JSON.parse(this.productInfo.item_details).propertyList);
-        this.swipeIndex.total =JSON.parse(JSON.parse(Data.data.item_info).imgList).length;
+        this.productInfo.item_detailsimg =JSON.parse(this.productInfo.item_details_b_o.item_desc);
+        this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
+        this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
       },
@@ -1393,7 +1409,7 @@ methods: {
          }
           this.checksizeindex=index;
           let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
-          this.checkId=checkIdarr[0].id;
+          this.checkId=checkIdarr[0].item_sku_id;
        },
       rmSome(arr, key) {
           let tempObj = {}
@@ -1415,6 +1431,12 @@ methods: {
         },
         tonext(value){
             return value.substring(value.indexOf(':')+1);
+        },
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
         }
     },
     mounted: function () {

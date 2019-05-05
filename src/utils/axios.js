@@ -15,7 +15,7 @@ import {Format} from '@/utils/filters'
 import {md5} from '@/utils/md5'
 class Http {
   constructor(){
-    this.Domain = 'http://192.168.9.63:8182';
+    this.Domain = 'http://192.168.10.54:8182';
   }
   
      
@@ -104,8 +104,7 @@ class Http {
             data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
-                return resolve(response.data)
-              
+            return resolve(response.data)  
 
         },error => {
             Indicator.close();

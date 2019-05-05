@@ -54,8 +54,7 @@
         @include flexbox(space-between, center, row, nowrap);
         width: 9.4rem;
         margin-left: .3rem;
-        height: 42px;
-        list-style: 42px;
+        padding: 12px 0;
         p{
           font-size: 16px;
           color: #333;
@@ -210,6 +209,7 @@
     bottom: 50px;
     width: 10rem;
     height: 49px;
+    background: #fff;
     @include flexbox(space-between, center, row, nowrap);
     .left {
       background: #fff;
@@ -262,6 +262,16 @@
         }
       }
     }
+    .del{
+      height: 30px;
+      border: 1px solid $red;
+      padding: 0 26px;
+      border-radius: 16px;
+      color: $red;
+      font-size: 16px;
+      line-height: 30px;
+      margin-right: 20px;
+    }
   }
 
   /* 底部计算栏 */
@@ -296,8 +306,9 @@
           </div>
           <!-- 暂时还没做分店铺订单 -->
           <div class="top-edit">
-            <p class="cartListNum">共3件宝贝</p>
-            <p class="cartListEdit">管理</p>
+            <p class="cartListNum">共{{cartlength}}件宝贝</p>
+            <p class="cartListEdit" v-if="!delshow" @click="editProductdelshow()">管理</p>
+            <p class="cartListEdit" v-if="delshow" @click="editProductdelshow()">完成</p>
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
@@ -315,7 +326,8 @@
                 <div class="pd-price">
                   <div class="left">
                     <span>&yen;</span>
-                    <strong>{{item.sales_consumer_price}}</strong>
+                    <strong><em>{{item.sales_consumer_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.sales_consumer_price/100.00|topricenext}}</em></strong>
+                    
                   </div>
                   <div class="right">
                     <div class="cut" @click="editProductNum({item:item,increment:-1})"></div>
@@ -326,185 +338,6 @@
               </div>
             </div>
           </div>
-
-          
-          <!-- <div class="store-pd">
-            <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="store-pd-item">
-              <i class="select-default-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="store-pd-item">
-              <i class="select-default-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="store-pd-item">
-              <i class="select-default-icon select-icon"></i>
-              <div class="pd-images">
-                <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-              </div>
-              <div class="pd-info">
-                <div class="pd-title">
-                  <p>LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                </div>
-                <div class="pd-sku">
-                  <p class="sku-info">打飞机哈斯</p>
-                </div>
-                <div class="pd-price">
-                  <div class="left">
-                    <span>&yen;</span>
-                    <strong>55.66</strong>
-                  </div>
-                  <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp" >
-                    <div class="add"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
         <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p>
       </load-more>
@@ -516,13 +349,12 @@
         <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click="selectedAllGoods"></i>
         <em>全选</em>
         <!-- {{totalFee}} -->
-        <strong>合计：<span>&yen;</span> <em>{{totalFee}}</em><em style="font-size:12px;">.00</em></strong>
+        <strong v-if="!delshow">合计：<span>&yen;</span> <em>{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
       </div>
-      <div class="right" @click="confirmOrder">
-        <strong>结算
-          <!-- <span>({{selectedCounter}})</span> -->
-        </strong>
+      <div v-if="!delshow" class="right" @click="confirmOrder">
+        <strong>结算</strong>
       </div>
+      <span class="del" v-if="delshow" @click="editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
     <FooterView/>
@@ -553,7 +385,9 @@
         totalFee: 0,
         selectedCounter: 0,
         selectedAll: false,
-        isLogin: false
+        isLogin: false,
+        delshow:false,
+        cartlength:0
       };
     },
 
@@ -582,7 +416,7 @@
         this.selectedAll = !this.selectedAll;
         this.computedTotalFee();
       },
-      confirmOrder() {
+      editProductdel(){
         let SelectedList = [];
         this.cartList.map(item => {
           if (item.item_status === 1 && item.checked) {
@@ -593,6 +427,24 @@
           message: '请选择商品',
           position: 'bottom'
         });
+        this.$store.dispatch('RemoveSelectedProduct', {
+          shopping_cart_ids: JSON.stringify(SelectedList)
+        }).then(response => {
+          // this.$router.push('/createOrder');
+          this.onRefreshCallback();
+        })
+      },
+      confirmOrder() {
+        let SelectedList = [];
+        this.cartList.map(item => {
+          if (item.item_status === 1 && item.checked) {
+            SelectedList.push(item.shopping_cart_id)
+          }
+        })
+        if (SelectedList == '') return Toast({
+          message: '请选择商品',
+          position: 'center'
+        });
         this.$store.dispatch('ConfirmSelectProduct', {
           SelectedList: JSON.stringify(SelectedList)
         }).then(response => {
@@ -602,6 +454,7 @@
       computedTotalFee() {
         let computedFee = 0,
           selectedCounter = 0;
+        if(this.cartList!=null){
         this.cartList.map(item => {
           if (item.checked && item.item_status === 1) {
             computedFee += parseFloat(item.num * item.sales_consumer_price)
@@ -610,23 +463,38 @@
         })
         this.selectedCounter = selectedCounter;
         this.selectedAll = selectedCounter === this.cartList.length ? true : false;
-        this.totalFee = computedFee.toFixed(2);
+        this.totalFee = computedFee;
+        }
+        
       },
       async editProductNum({
         item,
         increment,
-        counter
+        num
       }) {
-        let params = {
-            shopping_cart_id: item.shopping_cart_id
-        }
-        if (counter) {
-          params.num = counter
+        if (num) {
+          item.num = num
         } else {
-          params.num = increment
+          item.num = item.num+increment
         }
+        if(item.num<1){
+          item.num=1;
+          Toast({
+            message: '宝贝不能再减少了哦',
+            position: 'center'
+          })
+          return;
+        }
+        let params = {
+            shopping_cart_id: item.shopping_cart_id,
+            num:item.num
+        }
+        this.computedTotalFee();
         await this.$store.dispatch('UpdselectProduct', params)
-        this.onRefreshCallback();
+        // this.onRefreshCallback();
+      },
+      async editProductdelshow() {
+       this.delshow=!this.delshow;
       },
       async checked(item) {
         item.checked = !item.checked;
@@ -638,16 +506,14 @@
         this.computedTotalFee();
       },
       async initData() {
-        // let token = getSessionStorage('MemberToken')
-        // this.isLogin = token ? true : false;
-        // if (!token) return;
         let Data = await this.$store.dispatch('GetSelectedProductList');
         this.cartList = Data.data.data || null;
+        this.cartlength=this.cartList?this.cartList.length:0
       },
       async onRefreshCallback() {
         this.$store.dispatch('GetSelectedProductList').then(response => {
           setTimeout(() => {
-            this.cartList = response.Data.data;
+            this.cartList = response.data.data || null;
             this.computedTotalFee();
             this.selectedAll = false;
             this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
@@ -659,6 +525,14 @@
           return this.$refs.cartLoadmore.LoadMoreLoading = false;
         });
       },
+    },
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
     },
     mounted: function () {
       this.initData();
