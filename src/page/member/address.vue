@@ -75,7 +75,7 @@
         <div class="cell-from-item">
           <span class="title">收货人：</span>
           <div class="content">
-            <input type="text" v-focus v-model="addressForm.nickName">
+            <input type="text" v-focus v-model="addressForm.name">
           </div>
         </div>
         <div class="cell-from-item">
@@ -131,7 +131,7 @@
     data() {
       return {
         addressForm: {
-          nickName: '',
+          name: '',
           phone: '',
           province: '',
           city: '',
@@ -184,20 +184,31 @@
     methods: {
       async saveAddress(){
         let params = {
-          Phone: this.addressForm.phone,
-          Province: this.addressForm.province,
-          City: this.addressForm.city,
-          Area: this.addressForm.area,
-          Address: this.addressForm.address,
-          Selected: this.addressForm.selected ? 1 : 9,
+          name:this.addressForm.name,
+          phone: this.addressForm.phone,
+          province: this.addressForm.province,
+          city: this.addressForm.city,
+          area: this.addressForm.area,
+          address: this.addressForm.address,
+          if_default: this.addressForm.selected ? 1 : 0,
         };
         if(this.$route.params.Id){ //有传Id则是编辑模式 没传是新增
           params.Id = this.$route.params.Id
         }
         this.$store.dispatch('SaveAddress',params).then(response=>{
-          Toast({
-            message: response.Message
-          })
+          if(response.code != 200){
+            Toast({
+              message: '保存失败',
+            })
+          }else if(response.code == 200){
+            Toast({
+              message: response.Message
+            })
+          }
+        }).catch(error=>{
+            Toast({
+              message: '访问接口失败'
+            })
         })
       },
       onMyAddressChange(picker, values) {
@@ -222,13 +233,13 @@
       async initData(){
         if(this.$route.params.Id){
           let { Data } = await this.$store.dispatch('GetAddress',{Id:this.$route.params.Id});
-          this.addressForm.nickName = Data.nickName;
-          this.addressForm.phone = Data.Phone;
-          this.addressForm.province = Data.Province;
-          this.addressForm.city = Data.City;
-          this.addressForm.area = Data.Area;
-          this.addressForm.address = Data.Address;
-          this.addressForm.selected = Data.Selected===1 ? true : false;
+          this.addressForm.name = Data.name;
+          this.addressForm.phone = Data.phone;
+          this.addressForm.province = Data.province;
+          this.addressForm.city = Data.city;
+          this.addressForm.area = Data.area;
+          this.addressForm.address = Data.address;
+          this.addressForm.selected = Data.if_default===1 ? true : false;
         }
       }
     },
