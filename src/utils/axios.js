@@ -104,8 +104,7 @@ class Http {
             data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
-                return resolve(response.data)
-              
+            return resolve(response.data)  
 
         },error => {
             Indicator.close();
