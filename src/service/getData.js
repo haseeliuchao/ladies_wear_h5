@@ -16,7 +16,7 @@ export const setPassword = (params) => new Http().require({api: '/api/member/Set
 
 export const saveAddress = (params) => new Http().require({api: '/api/consignee/add',param: params}); //新建地址
 
-export const getAddressList = (params) => new Http().require({api: '/api/member/GetAddressList',param: params}); //获取地址信息
+export const getAddressList = (params) => new Http().require({api: '/api/consignee/list',param: params}); //获取地址信息
 
 export const getAddress = (params) => new Http().require({api: '/api/member/GetAddress',param: params}); //获取地址详细信息
 

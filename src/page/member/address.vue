@@ -196,13 +196,13 @@
           params.Id = this.$route.params.Id
         }
         this.$store.dispatch('SaveAddress',params).then(response=>{
-          if(response.code != 200){
+          if(response.code != 10000){
             Toast({
-              message: '保存失败',
+              message: response.msg,
             })
-          }else if(response.code == 200){
+          }else{
             Toast({
-              message: response.Message
+              message: '保存成功'
             })
           }
         }).catch(error=>{

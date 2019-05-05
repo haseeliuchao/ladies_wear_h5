@@ -130,12 +130,7 @@
 </style>
 <template>
   <div class="addressList">
-    <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
-      <strong>地址管理</strong>
-      <i class="myMsg"></i>
-    </div>
-    <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+    <load-more style="width:100%;"  :commad="commad" :params="params" :topMethod="onRefreshCallback"
       :loadMoreIconVisible="false" ref="recommendLoadmore">
       <div class="address-container" v-if="addressList!=''">
         <div class="address-item" v-for="(item,index) in addressList" :key="index">
@@ -174,8 +169,7 @@
       return {
         addressList: [],
         params: {
-          pageSize: 10,
-          pageIndex: 1
+  
         },
         commad: getAddressList
       };
@@ -201,18 +195,16 @@
         })
       },
       async onRefreshCallback() {
-        this.params.pageSize = 10;
-        this.params.pageIndex = 1;
         this.addressList = [];
         this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
       },
-      async infiniteCallback(response) { //下拉加载
-        if (response.Data.length > 0) {
-          response.Data.map(i => {
-            this.addressList.push(i)
-          })
-        }
-      }
+      // async infiniteCallback(response) { //下拉加载
+      //   if (response.Data.length > 0) {
+      //     response.Data.map(i => {
+      //       this.addressList.push(i)
+      //     })
+      //   }
+      // }
     },
 
     mounted: function () {}
