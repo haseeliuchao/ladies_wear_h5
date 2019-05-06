@@ -88,12 +88,11 @@
       <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
-            <li v-if="item.parent_id==0" v-for="(item,index) in categoryBody.categoryRoot" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click="rootScrollTo(item)">{{item.name}}</li>
+            <li v-if="item.parent_id===0" v-for="(item,index) in categoryBody.categoryRoot" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click="rootScrollTo(item)">{{item.name}}</li>
           </ul>
         </load-more>
       </div>
       <!-- 分类列表 -->
-
       <!-- 分类下的产品目录 -->
       <div class="jd-category-content" style="width: 85%;height:100vh;overflow: auto;">
         <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;left:initial;right:0;">
