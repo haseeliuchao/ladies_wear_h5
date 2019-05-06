@@ -92,30 +92,37 @@
     .content{
       width: 100%;
       .product-list{
-        @include flexbox(flex-start,center,column,wrap);
+        @include flexbox(space-between,center,row,wrap);
+        padding: 0 12px;
         .prod-item{
           background: #fff;
-          @include flexbox(space-between,flex-start,row,nowrap);
-          padding: 5px 0px 0px 5px;
-          flex: initial;
+          width: 48.6%;
+          margin-bottom: 8px;
+          border-radius: 6px;
+          overflow: hidden;
           img{
-            width: 125px;
-            height: 125px;
+            width: 100%;
+            height: 162px;
+            border-radius: 6px;
           }
           .prod-info{
-            margin-left: 10px;
-            padding-right: 5px;
-            border-bottom: 1px solid #eee;
+            // margin-left: 10px;
+            padding: 0px 6px;
+            
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
-              font-size: $title;
+              font-size: 14px;
               color: #333;
               @include textoverflow(2);
+              height: 40px;
+              line-height: 20px;
+              margin-top: 4px;
             }
             .prod-price{
               color: $red;
-              margin-top: 50px;
               text-align:left;
+              line-height: 30px;
+              margin-bottom: 8px;
               span{
                 font-size: $smsub;
                 margin-right: 5px;
@@ -146,7 +153,7 @@
       <div class="searchInput">
         <div class="search-box">
           <i class="searchIcon searchContentIcon"></i>
-          <input :placeholder="searchParams.Keyword" v-model="searchParams.Keyword">
+          <input :placeholder="searchParams.title" v-model="searchParams.title">
         </div>
       </div>
     </div>
@@ -168,12 +175,14 @@
       <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
           ref="searchRusultloadMore">
         <ul class="product-list" >
-          <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click="()=>$router.push('/product/'+item.productNo)">
-            <img :src="item.image_url[0].url" alt="">
+          <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+            <img :src="item.index_img_url" alt="">
             <div class="prod-info">
-              <p class="prod-title">{{item.productName}}</p>
-              <p class="prod-price"><span>&yen;</span><strong>{{item.price}}</strong></p>
-              <p class="prod-pro">999条评价</p>
+              <p class="prod-title">{{item.title}}</p>
+              <p class="prod-price">
+                <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:15px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
+                </p>
             </div>
           </li>
         </ul>
@@ -196,15 +205,16 @@
         searchRusultData: [],
         commad: searchGoods,
         searchParams: {
-          Keyword: '',
-          pageSize: 10,
-          pageIndex: 1
+          title: '',
+          category_id:'',
+          page_size: 10,
+          current_page: 1
         }
       };
     },
 
     watch: {
-      'searchParams.Keyword': function(val){
+      'searchParams.title': function(val){
         this.searchRusult()
       }
     },
@@ -218,23 +228,39 @@
 
     methods: {
       async searchRusult() {
-        this.searchParams.pageSize = 10;
-        this.searchParams.pageIndex = 1;
+        this.searchParams.page_size = 10;
+        this.searchParams.current_page = 1;
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
         this.$refs.searchRusultloadMore.onloadMoreScroll();
       },
       async infiniteCallback(response) { //下拉加载
-        if (response.Data.length > 0) {
-          response.Data.map(i => {
+      // this.searchRusultData=response.data.items
+        if (response.data.items.length > 0) {
+          response.data.items.map(i => {
             this.searchRusultData.push(i)
           })
         }
       },
+      async initData() {
+          this.searchParams.page_size = 10;
+          this.searchParams.current_page = 1;
+          this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+          let Data = await this.$store.dispatch('SearchGoods');
+          this.searchRusultData= Data.data.items;
+      }
     },
-
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
     mounted: function () {
       this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
       this.$refs.searchRusultloadMore.onloadMoreScroll();
+      // this.initData()
     }
   }
 

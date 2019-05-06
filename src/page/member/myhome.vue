@@ -418,8 +418,8 @@
         commad: getRecommend,
         recommendParam: {
           Type: 'recommend',
-          pageSize: 10,
-          pageIndex: 1
+          page_size: 10,
+          current_page: 1
         },
         cmsData: {
           recommendData: []
@@ -449,8 +449,8 @@
       async onRefreshCallback() {
         let token = getSessionStorage('MemberToken')
         if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-        this.recommendParam.pageSize = 10;
-        this.recommendParam.pageIndex = 1;
+        this.recommendParam.page_size = 10;
+        this.recommendParam.current_page = 1;
         this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
         this.userData.userInfo = res.Data;

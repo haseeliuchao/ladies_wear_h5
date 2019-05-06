@@ -14,7 +14,9 @@
     .rootListcontent {
       // border-right: 1px solid #eee;
       list-style: none;
-      min-height: 85vh;
+      height: 100vh;
+      overflow: auto;
+      background:#fff;
       li {
         padding: .25rem .15rem;
         text-align: center;
@@ -37,13 +39,14 @@
       }
     }
     .jd-categoryContent {
-      padding: 0rem .3rem 0;
-      margin-top:10px;
+      margin: .3rem .3rem 0;
+      border-radius:8px;
+      min-height:100vh;
+      background: #fff;
       .categoryContentBox {
         @include flexbox(flex-start, flex-start, row, wrap);
-        padding: .2rem .2rem; // min-height: 86vh;
-        background: #fff;
-        border-radius:8px;
+        padding: .2rem .2rem 60px;
+        
         >p {
           @include flexbox(center, center, row, nowrap);
           color: #999;
@@ -85,95 +88,25 @@
       <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
-            <!-- <li :class="selectedRoot === item.Id ? 'active' : ''" @click="rootScrollTo(item)" v-for="(item,index) in categoryBody.categoryRoot"
-              v-if="categoryBody.categoryRoot!=null">{{item.name}}</li> -->
-              <li class="active">女装</li>
-              <li>外套</li>
-              <li>女装</li>
-              <li>外套</li>
-              <li>女装</li>
-              <li>外套</li>
-              <li>女装</li>
-              <li>外套</li>
+            <li v-for="(item,index) in categoryBody.categoryRoot" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''" v-if="item.parent_id==0"  @click="rootScrollTo(item)">{{item.name}}</li>
           </ul>
         </load-more>
       </div>
       <!-- 分类列表 -->
 
       <!-- 分类下的产品目录 -->
-      <div class="jd-category-content" style="width: 85%;">
-        <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;height:85%;left:initial;right:0;">
+      <div class="jd-category-content" style="width: 85%;height:100vh;overflow: auto;">
+        <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;left:initial;right:0;">
           <div class="jd-categoryContent">
-            <!-- <div class="categoryContentBox" v-if="categoryBody.categoryList!=null && categoryBody.categoryList.length>0">
-              <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click="$router.push({path: '/searchRusult',query: {categoryId:item.Id}})">
-                <img :src="item.image_url" alt="" />
+            <div class="categoryContentBox" v-if="categoryBody.categoryList!=null && categoryBody.categoryList.length>0">
+              <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click="$router.push({path: '/searchRusult',query: {category_id:item.category_id}})">
+                <img :src="item.icon" alt="" />
                 <p>{{item.name}}</p>
               </div>
             </div>
             <div class="categoryContentBox" v-else>
               <p>暂无数据</p>
-            </div> -->
-            <div class="categoryContentBox" >
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
-              <div class="categorytItem"  @click="$router.push({path: '/searchRusult'})">
-                <img  src="~jd/images/product.png" alt="" />
-                <p>连衣裙</p>
-              </div>
             </div>
-            <!-- <div class="categoryContentBox">
-              <p>暂无数据</p>
-            </div> -->
           </div>
         </load-more>
       </div>
@@ -198,8 +131,8 @@
         selectedRoot: 0,
         ErrorImage,
         categoryBody: {
-          categoryRoot: null,
-          categoryList: null
+          categoryRoot: [],
+          categoryList: []
         }
       };
     },
@@ -223,27 +156,25 @@
         'SET_CATEGORY_DATA'
       ]),
       async rootScrollTo(item) {
-        this.selectedRoot = item.Id;
-        let { Data } = await this.$store.dispatch('GetCategoryList',{RootId: item.Id });
-        Data.map(i=>{
-          try{
-            i.image_url = i.image_url[0].url
-          }catch(err){
-            i.image_url = this.ErrorImage
+        let that=this;
+        that.selectedRoot = item.category_id;
+        that.categoryBody.categoryList=[];
+        this.categoryBody.categoryRoot.map(i=>{
+          if(i.parent_id==that.selectedRoot){
+          that.categoryBody.categoryList.push(i);
           }
         })
-        this.categoryBody.categoryList = Data;
       },
       async initData(){
         if(!this.categoryData){
-          let res = await this.$store.dispatch('GetCategoryList',{RootId: "0"});
+          let res = await this.$store.dispatch('GetCategoryList');
           this.SET_CATEGORY_DATA(res)
-          this.selectedRoot = res.Data[0].Id;
-          this.categoryBody.categoryRoot = res.Data;
-          this.rootScrollTo(res.Data[0]);
+          this.selectedRoot = res.data[0].category_id;
+          this.categoryBody.categoryRoot = res.data;
+          this.rootScrollTo(res.data[0]);
         }else{
-          this.selectedRoot = this.categoryData.Data[0].Id;
-          this.categoryBody.categoryRoot = this.categoryData.Data;
+          this.selectedRoot = this.categoryData.data[0].category_id;
+          this.categoryBody.categoryRoot = this.categoryData.data;
         }
       }
     },

@@ -166,8 +166,8 @@
         type: Object,
         default: ()=>{
           return {
-            pageIndex: 1,
-            pageSize: 10
+            current_page: 1,
+            page_size: 10
           }
         }
       },
@@ -257,9 +257,11 @@
             // throw new Error('the commad is Error !')
           });
           try {
-            if(response.Data.length<=0 /*|| response.total <= (this.param.pageIndex*this.param.pageSize)*/){
+            if(response.data.length<=0 || response.data.totalCount <= (this.param.current_page*this.param.page_size)){
                 this.AllLoaded = true;
+                this.$emit('loadMore',response);
                 return this.LoadMoreLoading = false;
+                
             };
           } catch (error) {
               this.AllLoaded = true;
@@ -267,7 +269,7 @@
           }
           setTimeout(() => {
             this.$emit('loadMore',response);
-            this.param.pageIndex +=1;
+            this.param.current_page +=1;
             this.LoadMoreLoading = false;
           }, 500);
       },

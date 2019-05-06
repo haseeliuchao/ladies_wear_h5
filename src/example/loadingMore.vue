@@ -26,8 +26,8 @@
         data: [],
         commad: getAddressList,
         param: {
-          pageSize: 10,
-          pageIndex: 1
+          page_size: 10,
+          current_page: 1
         }
       }
     },
@@ -44,8 +44,8 @@
         }
       },
       async loadTop() {
-        this.param.pageSize = 10;
-        this.param.pageIndex = 1;
+        this.param.page_size = 10;
+        this.param.current_page = 1;
         let response = await this.commad(this.param);
         setTimeout(() => {
           this.data = response.Data;

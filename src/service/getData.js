@@ -32,11 +32,13 @@ export const getMyShopFavorite = (params) => new Http().require({api: '/api/memb
 
 
 //shop
-export const getCategoryList = (params) => new Http().require({api: '/api/shop/GetCategoryList',param:params}); //获取分类列表
+export const getCategoryList = (params) => new Http().require({api: '/api/item/Category',param:params}); //获取分类列表
 
 export const getSelectedProductList = (params) => new Http().require({api: '/api/member/shopping/cart/list',param:params}); //获取购物车列表
 
-export const searchGoods = (params) => new Http().require({api: '/api/shop/SearchGoods',param:params}); //获取购物车列表
+export const searchGoods = (params) => new Http().require({api: '/api/items',param:params}); //获取购物车列表
+
+export const searchhotGoods = (params) => new Http().require({api: '/api/hot/search/word/list',param:params}); //获取购物车列表
 
 export const getProduct = (params) => new Http().require({api: '/api/item/details',param:params}); //获取购物车列表
 

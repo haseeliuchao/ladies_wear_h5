@@ -567,8 +567,8 @@
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
         params: {
-          pageSize: 10,
-          pageIndex: 1,
+          page_size: 10,
+          current_page: 1,
           cancel_status: null,
           confirm_status: null,
           pay_status: null,

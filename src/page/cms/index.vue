@@ -378,8 +378,6 @@
         <!-- 为您推荐 -->
         <FooterView/>
         <BackHead/>
-        
-     
   </div>
 </template>
 <script>
@@ -421,8 +419,8 @@
         commad: getRecommend,
         recommendParam: {
           Type: 'recommend',
-          pageSize: 10,
-          pageIndex: 1
+          page_size: 10,
+          current_page: 1
         },
         
          code:null,
@@ -451,9 +449,6 @@
         'indexCmsData'
       ])
     },
-    created:{
-     
-    },
     methods: {
       isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
@@ -469,8 +464,8 @@
         this.searchBarVisilbe = y>8 ? false : true;
       },
       async onRefreshCallback() { //下拉刷新
-        this.recommendParam.pageSize = 10;
-        this.recommendParam.pageIndex = 1;
+        this.recommendParam.page_size = 10;
+        this.recommendParam.current_page = 1;
         this.updatedData();
         setTimeout(() => {
           this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
@@ -487,8 +482,8 @@
         let {
           Data
         } = await this.$store.dispatch('GetIndexCmsData', {
-          pageIndex: 1,
-          pageSize: 100
+          current_page: 1,
+          page_size: 100
         });
         this.cmsData = Data;
       },
@@ -525,11 +520,11 @@
     },
     beforeDestroy() {},
     mounted: function () {
-      // this.initData();
+      this.initData();
       this.loginData();
-      showBack(status => {
-        this.Status = status;
-      })
+      // showBack(status => {
+      //   this.Status = status;
+      // })
     }
   }
 
