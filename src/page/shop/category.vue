@@ -88,7 +88,7 @@
       <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
-            <li v-for="(item,index) in categoryBody.categoryRoot" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''" v-if="item.parent_id==0"  @click="rootScrollTo(item)">{{item.name}}</li>
+            <li v-if="item.parent_id==0" v-for="(item,index) in categoryBody.categoryRoot" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click="rootScrollTo(item)">{{item.name}}</li>
           </ul>
         </load-more>
       </div>
