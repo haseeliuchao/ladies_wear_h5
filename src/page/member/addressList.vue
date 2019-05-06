@@ -134,15 +134,15 @@
       :loadMoreIconVisible="false" ref="recommendLoadmore">
       <div class="address-container" v-if="addressList!=''">
         <div class="address-item" v-for="(item,index) in addressList" :key="index">
-          <p class="name">{{item.nickName}} {{item.Phone}}</p>
-          <p class="address">{{item.Province + item.City + item.Area}} &nbsp;&nbsp;{{item.Address}}</p>
+          <p class="name">{{item.name}} {{item.phone}}</p>
+          <p class="address">{{item.province + item.city + item.area}} &nbsp;&nbsp;{{item.address}}</p>
           <div class="address-status">
             <div class="left">
-              <i :class="['select-default-icon', item.Selected === 1 ? 'select-icon' :'']"></i>
+              <i :class="['select-default-icon', item.selected === 1 ? 'select-icon' :'']"></i>
               <span>默认地址</span>
             </div>
             <div class="right">
-              <div class="edit" @click="$router.push(`/address/${item._id}`)">
+              <div class="edit" @click="$router.push(`/address/${item.consignee_id}`)">
                 <i class="edit-address-icon"></i>
                 <span>编辑</span>
               </div>
@@ -186,7 +186,7 @@
     methods: {
       async deleteAddress(item) {
         this.$store.dispatch('RemoveAddress', {
-          Id: item._id
+          Id: item.consignee_id
         }).then(response => {
           this.onRefreshCallback();
           Toast({
