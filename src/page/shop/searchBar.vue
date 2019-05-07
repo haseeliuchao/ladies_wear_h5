@@ -358,7 +358,7 @@
           </slot>
         </div>
         <slot name="right-icon">
-          <div class="scanCode" @click="$router.push(`/searchImg`)">
+          <div class="scanCode" @click="$router.push(`/searchBar`)">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>

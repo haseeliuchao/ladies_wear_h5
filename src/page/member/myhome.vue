@@ -282,8 +282,9 @@
       }
     }
   }
-
   /* 为您推荐 */
+  
+  // 提示框样式
   .mint-toast{
     padding:15px .4rem!important;
     white-space:nowrap;
@@ -308,19 +309,19 @@
           <div class="userinfo" @click.stop.prevent="$router.push(!userInfo ? `/login` : `/sttings`)">
             <div>
               <div class="avatar">
-                <img :src="!userInfo || !userData.userInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.userInfo.photoUrl" alt="">
+                <img :src="!userInfo || !userData.userInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.userInfo.memberInfo.head_img" alt="">
               </div>
               <div class="user">
-                <span class="username" >{{!userInfo || !userData.userInfo? '登录/注册 >' : userData.userInfo.nickName}}</span>
+                <span class="username" >{{!userData.userInfo? '登录/注册 >' : userData.userInfo.memberInfo.nick}}</span>
                 <!-- 假数据 -->
-                <span class="userphone" v-if="!userInfo || !userData.userInfo">18867202256</span> 
+                <span class="userphone" v-if="!userData.userInfo">18867202256</span> 
                  <!-- 真数据 -->
-              <span class="userphone" v-if="userInfo && userData.userInfo">{{userData.userInfo.nickPhone}}</span>
+              <span class="userphone" v-if="userData.userInfo">{{userData.userInfo.memberInfo.phone}}</span>
               </div>
             </div>
             <div class="info-box">
               <!-- 假数据 -->
-              <div class="my-validWalletAmount" v-if="!userInfo || !userData.userInfo">
+              <div class="my-validWalletAmount" v-if="!userData.userInfo">
                 <p class="card">
                   <span>17</span>
                   <span>我的卡劵</span>
@@ -331,9 +332,15 @@
                 </p>
               </div>
               <!-- 真数据 -->
-              <div class="my-validWalletAmount" v-if="userInfo && userData.userInfo">
-                <span>{{userData.userInfo.validWalletAmount}}<br/>我的卡劵</span>
-                <span>{{userData.userInfo.validWalletAmount}}<br/>图搜有效期</span>
+              <div class="my-validWalletAmount" v-if="userData.userInfo">
+                <p class="card">
+                  <span>{{userData.userInfo.memeberInfo.userCouponsCount}}</span>
+                  <span>我的卡劵</span>
+                </p>
+                <p class="expiry-time">
+                  <span>{{userData.userInfo.memeberInfo.img_search_end_time}}</span>
+                  <span>图搜有效期</span>
+                </p>
               </div>
             </div>
           </div>
@@ -447,10 +454,10 @@
         'SET_USERINFO_DATA'
       ]),
       async onRefreshCallback() {
-        let token = getSessionStorage('MemberToken')
-        if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-        this.recommendParam.pageSize = 10;
-        this.recommendParam.pageIndex = 1;
+        // let token = getSessionStorage('MemberToken')
+        // if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
+        // this.recommendParam.pageSize = 10;
+        // this.recommendParam.pageIndex = 1;
         this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
         this.userData.userInfo = res.Data;
@@ -467,15 +474,15 @@
         this.handlerEvent = y>8 ? true : false;
       },
       async initData() {
-        if (!this.userInfo) {
-          let token = getSessionStorage('MemberToken')
-          if (!token) return;
+        // if (!this.userInfo) {
+        //   let token = getSessionStorage('MemberToken')
+        //   if (!token) return;
           let res = await this.$store.dispatch('GetUserInfo');
           await this.SET_USERINFO_DATA(res.Data);
           this.userData.userInfo = res.Data;
-        } else {
-          this.userData.userInfo = this.userInfo;
-        }
+        // } else {
+        //   this.userData.userInfo = this.userInfo;
+        // }
       },
       async showToast(){
         Toast({

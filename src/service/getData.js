@@ -4,7 +4,7 @@ import Http from '@/utils/axios';
 export const login = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
 export const loginBind = (params) => new Http().require({api: '/api/bind/phone',param:params}); //登录
 
-export const getUserInfo = (params) => new Http().require({api: '/api/member/GetUserInfo',param:params}); //获取个人信息
+export const getUserInfo = (params) => new Http().require({api: '/api/member/info',param:params}); //获取个人信息
 
 export const sendPhoneMessage = (params) => new Http().require({api: '/api/member/SendPhoneMessage',param: params}); //获取短信验证码
 
@@ -16,13 +16,20 @@ export const setPassword = (params) => new Http().require({api: '/api/member/Set
 
 export const saveAddress = (params) => new Http().require({api: '/api/consignee/add',param: params}); //新建地址
 
+
+
+export const updataAddress = (params) => new Http().require({api: '/api/consignee/upd',param: params}); //新建地址
+
+// export const getAddressList = (params) => new Http().require({api: '/api/consignee/list',param: params}); //获取地址信息
+
+
 export const getAddressList = (params) => new Http().require({api: '/api/consignee/list',param: params}); //获取地址信息
 
 export const getAddress = (params) => new Http().require({api: '/api/consignee/get',param: params}); //获取地址详细信息
 
-export const getDefaultAddress = (params) => new Http().require({api: '/api/member/GetDefaultAddress',param: params}); //获取默认地址信息
+export const getDefaultAddress = (params) => new Http().require({api: '/api/consignee/get',param: params}); //获取默认地址信息
 
-export const removeAddress = (params) => new Http().require({api: '/api/member/RemoveAddress',param: params}); //删除地址
+export const removeAddress = (params) => new Http().require({api: '/api/consignee/del',param: params}); //删除地址
 
 export const payByWallet = (params) => new Http().require({api: '/api/member/PayByWallet',param: params}); //余额支付
 

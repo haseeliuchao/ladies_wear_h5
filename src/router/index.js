@@ -141,10 +141,10 @@ const appRouter = {
                 path: '/addressList',
                 name: 'addresslist',
                 component: AddressList,
-                meta: { keepAlive: true }
+                meta: { keepAlive: false }
             },
             {
-                path: '/address/:Id?',
+                path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
                 meta: { keepAlive: false }

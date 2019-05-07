@@ -1,43 +1,59 @@
 <!-- address -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
+  .address-tip{
+    padding:.3rem;
+    color:#999;
+    font-size:14px;
+    i{
+      color:$red;
+      margin-right:6px;
+    }
+  }
   .address-from {
-    background: #fff;
+    background: #f2f2f2;
     .cell-from-item {
       @include flexbox(flex-start, center, row, nowrap);
       padding: 15px $padding;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #e4e4e4;
+      background:#fff;
       .title {
-        font-size: $subtitle;
-        color: #333;
+        width:2.4rem;
+        font-size: 15px;
+        color: #999;
         white-space: nowrap;
       }
       .content {
         width: 70%;
         @include placeholderColor($gray);
-        input {
+        input,textarea {
           width: 100%;
           border: none;
           outline: none;
           box-shadow: none;
           text-shadow: none;
           text-align: left;
-          font-size: $subtitle;
+          font-size: 15px;
           color: #333;
         }
       }
     }
+    .detail-address,.default-address,.del-address{
+      border:none;
+    }
+    .del-address{
+      color:$red;
+      font-size:15px;
+    }
     .save-address {
       position: fixed;
-      bottom: .2rem;
-      width: 70%;
+      bottom: 0;
+      width: 100%;
       text-align: center;
-      padding: $padding 0;
+      padding: 14px 0;
       background: $red;
-      font-size: $title;
+      font-size: 18px;
       color: #fff;
-      margin: 0 1.5rem;
-      border-radius: 2px;
     }
   }
 
@@ -62,47 +78,60 @@
       }
     }
   }
-
   // .popupVisible {
   //   transform: scale(0.95) !important;
   // }
 
 </style>
+<style>
+  /* 弹窗样式 */
+  .mint-msgbox-message{
+    color:#333;
+  }
+  .cancelButton{
+      color:#333 !important;
+  }
+  .confirmButton{
+    color:#ff2741 !important;
+  }
+</style>
 <template>
   <div style="height:100%;">
-    <div style="transition:1s;background:#000;height:100%;">
+    <div style="transition:1s;background:#f2f2f2;height:100%;">
+      <p class="address-tip"><i>*</i>为了提高发货速度，请填写真实信息</p>
       <div class="address-from" style="transition:1s;height:100%;transform: scale(1);" :class="addressVisible? 'popupVisible' : ''">
         <div class="cell-from-item">
-          <span class="title">收货人：</span>
+          <span class="title">姓名</span>
           <div class="content">
             <input type="text" v-focus v-model="addressForm.name">
           </div>
         </div>
         <div class="cell-from-item">
-          <span class="title">联系方式：</span>
+          <span class="title">手机</span>
           <div class="content">
             <input type="text" v-model="addressForm.phone">
           </div>
         </div>
-        <div class="cell-from-item" @click="()=>addressVisible=true" style="justify-content:space-between;">
-          <span class="title">所在地区：</span>
+        <div class="cell-from-item" @click="()=>addressVisible=true" >
+          <span class="title">选择城市</span>
           <div class="content">
             <input type="text" readonly="readonly" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="">
           </div>
-          <i class="arrow-right" style="opacity: .4"></i>
+          <!-- <i class="arrow-right" style="opacity: .4"></i> -->
         </div>
-        <div class="cell-from-item">
-          <span class="title">详细地址：</span>
+        <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
+          <span class="title">详细地址</span>
           <div class="content">
-            <input type="text" placeholder="街道、楼牌号" v-model="addressForm.address">
+            <textarea type="text" placeholder=" 街道、楼牌号" v-model="addressForm.address"></textarea>
           </div>
         </div>
-        <div class="cell-from-item">
-          <span class="title">设为默认地址：</span>
+        <div class="cell-from-item default-address" style="margin:8px 0">
+          <span class="title" style='width:3rem;color:#333'>设为默认地址</span>
           <div class="content">
-            <mt-switch v-model="addressForm.selected"></mt-switch>
+            <mt-switch v-model="addressForm.selected" style="justify-content:flex-end"></mt-switch>
           </div>
         </div>
+        <div class="cell-from-item del-address" @click="deleteAddresspop">删除收货地址</div>
         <div class="save-address" @click="saveAddress">保存</div>
       </div>
     </div>
@@ -123,14 +152,20 @@
 <script>
   import {
     Switch,
-    Toast,Picker
+    Toast,Picker,
+    MessageBox 
   } from 'mint-ui'
   // import VDistpicker from 'v-distpicker'
   import myaddress from '@/utils/address3.json'
+  import {
+    getLocalStorage,
+    setLocalStorage
+  } from '@/utils/mixin';
   export default {
     data() {
       return {
         addressForm: {
+          id: '',
           name: '',
           phone: '',
           province: '',
@@ -184,34 +219,87 @@
     methods: {
       async saveAddress(){
         let params = {
+          consignee_id:this.addressForm.id,
           name:this.addressForm.name,
           phone: this.addressForm.phone,
-          province:this.addressForm.province,
+          province: this.addressForm.province,
           city: this.addressForm.city,
-          area:this.addressForm.area,
+          area: this.addressForm.area,
           address: this.addressForm.address,
-          if_default: this.addressForm.selected ? 1 : 0,
+          if_default: this.addressForm.selected ? 0 : 1,
         };
-        if(this.$route.params.Id){ //有传Id则是编辑模式 没传是新增
-          params.Id = this.$route.params.Id
-        }
-        this.$store.dispatch('SaveAddress',params).then(response=>{
+        if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
+          params.consignee_id = this.$route.params.consignee_id
+           this.$store.dispatch('UpdataAddress',params).then(response=>{
           if(response.code != 10000){
             Toast({
-              message: response.msg,
+              message: '保存失败',
             })
-          }else{
+          }else {
             Toast({
               message: '保存成功'
             })
+            this.$router.push({path: '/addressList'})
           }
         }).catch(error=>{
             Toast({
               message: '访问接口失败'
             })
-        })
+        });
+        }else{
+           this.$store.dispatch('SaveAddress',params).then(response=>{
+          if(response.code != 10000){
+            Toast({
+              message: '保存失败',
+            })
+          }else {
+            Toast({
+              message: '保存成功'
+            })
+            this.$router.push({path: '/addressList'})
+          }
+        }).catch(error=>{
+            Toast({
+              message: '访问接口失败'
+            })
+        });
+        }
+        
+        
       },
-      
+
+      deleteAddresspop(){
+          MessageBox.confirm('', { 
+            message: '确定要删除该地址吗？', 
+            title: '',
+            cancelButtonClass:'cancelButton', 
+            confirmButtonClass:'confirmButton',
+          }).then(action => {
+            if (action == 'confirm') {     //确认的回调
+              this.deleteAddress();
+            }
+          }).catch(err => { 
+            if (err == 'cancel') {     //取消的回调
+              
+            } 
+          });
+      },
+      async deleteAddress() {
+        this.$store.dispatch('RemoveAddress', {
+          consignee_id: this.$route.params.consignee_id
+        }).then(response => {
+          if(response.code != 10000){
+            Toast({
+              message: '删除失败',
+            })
+          }else {
+            Toast({
+              message: '删除成功'
+            })
+            this.$router.push({path: '/addressList'})
+          }
+        });
+      },
       onMyAddressChange(picker, values) {
        if(myaddress[values[0]]){  //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
           picker.setSlotValues(1,Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
@@ -232,15 +320,21 @@
         this.addressForm.area = data.area.value;
       },
       async initData(){
-        if(this.$route.params.Id){
-          let { Data } = await this.$store.dispatch('GetAddress',{Id:this.$route.params.Id});
-          this.addressForm.name = Data.name;
-          this.addressForm.phone = Data.phone;
-          this.addressForm.province = Data.province;
-          this.addressForm.city = Data.city;
-          this.addressForm.area = Data.area;
-          this.addressForm.address = Data.address;
-          this.addressForm.selected = Data.if_default===1 ? true : false;
+        if(this.$route.params.consignee_id){
+          let that =this;
+          let Data=JSON.parse(getLocalStorage('addressList'))
+          Data.map(item => {
+          if (item.consignee_id === parseInt(that.$route.params.consignee_id)) {
+          that.addressForm.name = item.name;
+          that.addressForm.phone = item.phone;
+          that.addressForm.province = item.province;
+          that.addressForm.city = item.city;
+          that.addressForm.area = item.area;
+          that.addressForm.address = item.address;
+          that.addressForm.selected = item.if_default===0 ? true : false;
+          }
+        })
+          
         }
       }
     },
@@ -257,6 +351,4 @@
 
 </script>
 <style lang="scss" scoped>
-
-
 </style>
