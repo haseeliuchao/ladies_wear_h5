@@ -7,6 +7,7 @@ import {
   editUserInfo,
   setPassword,
   saveAddress,
+  updataAddress,
   getAddressList,
   getDefaultAddress,
   removeAddress,
@@ -127,6 +128,18 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         saveAddress(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    UpdataAddress({ //编辑地址
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        updataAddress(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

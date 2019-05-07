@@ -31,79 +31,91 @@
     }
     .addNewAddressbtn {
       position: fixed;
-      bottom: .2rem;
-      width: 90%;
+      bottom: 0;
+      width: 100%;
       text-align: center;
-      padding: $padding 0;
+      padding: 14px 0;
       background: $red;
-      font-size: $title;
+      font-size: 18px;
       color: #fff;
-      margin: 0 .5rem;
-      border-radius: 2px;
+      margin: 0;
     }
     .address-container {
       .address-item {
-        @include flexbox(space-between,
-        flex-start,
-        column,
+        @include flexbox(center,
+        center,
+        row,
         wrap);
+        height:82px;
         background: #fff;
-        padding-left: $padding;
-        >p {
-          width: 100%;
+        padding:14px .3rem;
+        border-bottom: 1px solid #e4e4e4;
+        // >p {
+        //   width: 100%;
+        // }
+        >div{
+          @include flexbox(flex-start,
+        flex-start,
+        row,
+        wrap);
         }
         .name {
-          font-size: $title;
+          width:auto;
+          font-size: 14px;
           color: #333;
-          padding: $padding 0;
+          padding-bottom:$padding ;
           @include textoverflow(1);
         }
         .address {
-          font-size: $smsub;
-          color: $gray;
-          padding: 0 0 30px;
+          width:96%;
+          font-size: $subtitle;
+          color: #333;
           @include textoverflow(2);
-          border-bottom: 1px solid #eee;
         }
-        .address-status {
-          width: 100%;
+        .address-status{
+          padding:2px 5px;
+          background:rgba(255,89,39,.15);
+          color:$red;
+          font-size:12px;
+          margin:9px;
+          margin-top:-1px;
+          border-radius: 2px;
+        }
+        .address-edit {
+          // width: 100%;
           @include flexbox(space-between,
           center,
           row,
           nowrap);
-          padding: $padding 0;
-          .left {
-            @include flexbox(flex-start,
-            center,
-            row,
-            nowrap);
-            flex: initial;
-            font-size: $subtitle;
-            letter-spacing: 1px;
-            color: $gray;
-            i {
-              vertical-align: middle;
-              margin-right: $margin;
-            }
-          }
-          .right {
-            @include flexbox(space-between,
-            center,
-            row,
-            nowrap); // width: 4rem;
+          padding: 3px 0 3px .44rem;
+          border-left:1px solid #e4e4e4;
+          // .left {
+          //   @include flexbox(flex-start,
+          //   center,
+          //   row,
+          //   nowrap);
+          //   flex: initial;
+          //   font-size: $subtitle;
+          //   letter-spacing: 1px;
+          //   color: $gray;
+          //   i {
+          //     vertical-align: middle;
+          //     margin-right: $margin;
+          //   }
+          //   span{
+          //     padding:2px 5px;
+          //     background:rgba(256,230,223,.15)
+          //   }
+          // }
             flex: initial;
             font-size: $subtitle;
             color: $gray;
             letter-spacing: 1px;
             >div {
-              margin-right: 10px;
-              @include flexbox(space-between,
+              @include flexbox(center,
               center,
-              row,
+              column,
               nowrap);
-              i {
-                margin-right: 5px;
-              }
             }
             .edit {
               .edit-address-icon {
@@ -111,6 +123,11 @@
                 @include wh(16px,
                 16px);
                 @include bg('~jd/images/edit.png');
+                margin-bottom:6px;
+              }
+              span{
+                font-size:12px;
+                color:#999;
               }
             }
             .delect {
@@ -121,7 +138,6 @@
                 @include bg('~jd/images/edit.png');
               }
             }
-          }
         }
       }
     }
@@ -130,32 +146,26 @@
 </style>
 <template>
   <div class="addressList">
-    <load-more style="width:100%;"  :commad="commad" :params="params" :topMethod="onRefreshCallback"
-      :loadMoreIconVisible="false" ref="recommendLoadmore">
       <div class="address-container" v-if="addressList!=''">
         <div class="address-item" v-for="(item,index) in addressList" :key="index">
-          <p class="name">{{item.name}} {{item.phone}}</p>
-          <p class="address">{{item.province + item.city + item.area}} &nbsp;&nbsp;{{item.address}}</p>
-          <div class="address-status">
-            <div class="left">
-              <i :class="['select-default-icon', item.selected === 1 ? 'select-icon' :'']"></i>
-              <span>默认地址</span>
-            </div>
-            <div class="right">
+          <div>
+            <p class="name">{{item.name}} {{item.phone}}</p>
+            <span v-if="item.if_default===0" class="address-status">默认</span>
+            <p class="address">{{item.province + item.city + item.area}} &nbsp;&nbsp;{{item.address}}</p>
+          </div>
+          <div class="address-edit">
               <div class="edit" @click="$router.push(`/address/${item.consignee_id}`)">
                 <i class="edit-address-icon"></i>
                 <span>编辑</span>
               </div>
-              <div class="delect" @click="deleteAddress(item)">
+              <!-- <div class="delect" @click="deleteAddress(item)">
                 <i class="delect-address-icon"></i>
                 <span>删除</span>
-              </div>
-            </div>
+              </div> -->
           </div>
         </div>
       </div>
-    </load-more>
-    <div class="addNewAddressbtn" @click="$router.push('/address')">+&nbsp;新建地址</div>
+    <div class="addNewAddressbtn" @click="$router.push('/address')">添加新地址</div>
   </div>
 </template>
 
@@ -164,12 +174,16 @@
     getAddressList
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
+  import {
+    getLocalStorage,
+    setLocalStorage
+  } from '@/utils/mixin';
   export default {
     data() {
       return {
         addressList: [],
         params: {
-  
+          
         },
         commad: getAddressList
       };
@@ -184,30 +198,57 @@
     computed: {},
 
     methods: {
-      async deleteAddress(item) {
-        this.$store.dispatch('RemoveAddress', {
-          Id: item.consignee_id
-        }).then(response => {
-          this.onRefreshCallback();
-          Toast({
-            message: response.message
-          })
-        })
-      },
-      async onRefreshCallback() {
-        this.addressList = [];
-        this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-      },
+      // async deleteAddress(item) {
+      //   this.$store.dispatch('RemoveAddress', {
+      //     Id: item.consignee_id
+      //   }).then(response => {
+      //     this.onRefreshCallback();
+      //     Toast({
+      //       message: response.message
+      //     })
+      //   });
+      //   //删除数据时缓存
+      //   this.addressList.splice(item,1);
+      //   setLocalStorage('addressList',this.addressList)
+      // },
+      // async onRefreshCallback() {
+      //   this.addressList = []
+
+      //   this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
+      // },
       // async infiniteCallback(response) { //下拉加载
       //   if (response.Data.length > 0) {
       //     response.Data.map(i => {
       //       this.addressList.push(i)
       //     })
       //   }
+      // },
+      async initData() {
+        let Data = await getAddressList({});
+        if(Data.code!=10000){
+          Toast({
+            message: Data.msg,
+            position: 'bottom'
+          })
+          return
+        }else{
+          this.addressList=Data.data;
+          //初始化数据时缓存
+          setLocalStorage('addressList',this.addressList)
+        }
+        
+
+      },
+      // async updData() { //更新数据
+      //   setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
+      //   setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
       // }
+       
     },
 
-    mounted: function () {}
+    mounted: function () {
+          this.initData()
+    }
   }
 
 </script>

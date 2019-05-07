@@ -59,8 +59,55 @@
       }
     }
   }
-
-  .scanCode {
+  .searchRusult {
+    
+   
+    
+   
+    
+    @include flexbox(space-between, center, row, nowrap);
+    // min-height: 40px;
+    padding: .33rem;
+    .logoIcon{
+      width:1.3rem;
+      height:.9rem;
+      margin-right:.24rem;
+      background:url('~jd/images/logoicon.png') no-repeat;
+      background-size:100% 100%;
+    }
+    .searchIcon {
+      display: block;
+      background: url('~jd/images/camera_sach.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .searchInput {
+      width: 100%;
+      .search-box {
+        background: #fff;
+        height: .86rem;
+        border-radius: .86rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        @include flexbox(flex-start,
+        center,
+        row,
+        nowrap);
+        padding: 0 .3rem;
+        .searchContentIcon {
+          height: .45rem;
+          width: .45rem;
+          margin-right: .3rem;
+          background: url('~jd/images/sarchicon.png') no-repeat;
+          // background-position: -0.46rem 0;
+          background-size: 100% 100%;
+        }
+        span {
+          color: #999;
+          font-size: 14px;
+        }
+      }
+    }
+    .scanCode {
       min-width: 1.2rem;
       @include flexbox(center,
       center,
@@ -80,53 +127,6 @@
       }
       
     }
-
-     .searchIcon {
-      display: block;
-      background: url('~jd/images/camera_sach.png') no-repeat;
-      background-size: 100% 100%;
-    }
-
-    .searchContentIcon {
-          height: .45rem;
-          width: .45rem;
-          margin-right: .3rem;
-          background: url('~jd/images/sarchicon.png') no-repeat;
-          background-size: 100% 100%;
-        }
-  .searchRusult {
-    @include flexbox(space-between, center, row, nowrap);
-    // min-height: 40px;
-    padding: .33rem;
-    .logoIcon{
-      width:1.3rem;
-      height:.9rem;
-      margin-right:.24rem;
-      background:url('~jd/images/logoicon.png') no-repeat;
-      background-size:100% 100%;
-    }
-   
-    .searchInput {
-      width: 100%;
-      .search-box {
-        background: #fff;
-        height: .86rem;
-        border-radius: .86rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        @include flexbox(flex-start,
-        center,
-        row,
-        nowrap);
-        padding: 0 .3rem;
-        
-        span {
-          color: #999;
-          font-size: 14px;
-        }
-      }
-    }
-    
     .searchMsg {
       min-width: 1rem;
       @include flexbox(center,
@@ -164,18 +164,15 @@
       nowrap);
       padding: 10px 0 10px 20px;
       background: #fff;
-      // border-bottom: 1px solid $border;
+      border-bottom: 1px solid $border;
       .searchInput {
         width: 90%;
         .search-box {
           width: 100%;
           position: relative;
-          background: #fff;
-          padding: 0px 14px;
-          border-radius: 26px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    height: .86rem;
+          background: #f4f4f4;
+          padding: 5px 10px;
+          border-radius: 10px;
           @include flexbox(space-between,
           center,
           row,
@@ -190,8 +187,6 @@
             text-shadow: none;
             font-weight: normal;
             background: transparent;
-            height: .86rem;
-            line-height: normal
           }
           .clear {
             width: .42rem;
@@ -211,10 +206,12 @@
           }
           .searchIcon {
             display: block;
-    height: .48rem;
-    margin-right: .05rem;
-    width: .52rem;
-            
+            height: .38rem;
+            margin-right: .05rem;
+            width: .4rem;
+            background: url('~jd/images/searchIcon.png') no-repeat;
+            background-size: 600% 100%;
+            background-position: -0.34rem 0;
           }
         }
       }
@@ -346,82 +343,57 @@
 </style>
 <template>
   <div style="position:relative;">
-    <div class="searchRusultall"  v-if="!searchVisiblie">
-
-      <div class="searchRusult">
-        <slot name="left-icon">
-          <i class="logoIcon logoQrcodeIcon"></i>
-        </slot>
-        <div class="searchInput" @click="()=>searchVisiblie=true">
-          <slot name="title-icon">
-            <div class="search-box">
-              <i class="searchIcon searchContentIcon"></i>
-              <span>品质生活必备</span>
-            </div>
-          </slot>
-        </div>
-        <slot name="right-icon">
-          <div class="scanCode" @click="$router.push(`/searchBar`)">
-            <i class="searchIcon searchQrcodeIcon"></i>
-            <span>找同款</span>
-          </div>
-        </slot>
-      </div>
-      <!-- <div class="homesearch-hot">
-          <p>热搜：</p>
-          <ul class="homesearch-hot-list">
-            <li class="homesearch-hot-item">智能手发</li>
-            <li class="homesearch-hot-item">智能手收</li>
-            <li class="homesearch-hot-item">智能手收</li>
-          </ul>
-      </div> -->
-    </div>
     <!-- 文字搜索 -->
-    <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+    <!-- <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="searchContainer">
         <div class="search-top">
-           <slot name="right-icon">
-          <div style="margin-right:.2rem;margin-left:0" class="scanCode" @click="$router.push(`/searchImg`)">
-            <i class="searchIcon searchQrcodeIcon"></i>
-            <span>找同款</span>
-          </div>
-        </slot>
           <div class="searchInput" @click="$refs.searchInput.focus()">
             <div class="search-box">
-              <!-- <i class="searchIcon searchContentIcon"></i> -->
-              <!-- @keypress="truesearchGoods" -->
-              <input type="search" v-model="title" @keypress="truesearchGoods" placeholder="品质生活必备" ref="searchInput" v-searchFocus>
-              <!-- <span class="clear" @click="title=''" v-show="title.length>0">&times;</span> -->
-              <i class="searchIcon searchContentIcon" @click="selectedProd(title)"></i>
+              <i class="searchIcon searchContentIcon"></i>
+              <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
+              <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
             </div>
           </div>
-          <span @click="()=>{title='';searchVisiblie=false}">取消</span>
+          <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span>
         </div>
-        <load-more style="width:100%;height:100%;background:#fff;" >
+        <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
           <div class="search-history">
             <p>历史记录 <span></span></p>
             <ul class="search-history-list">
-              <li class="search-history-item"  v-for="(item,index) in searchHistoryData" @click="selectedProd(item.keywords)" :key="index">{{item.keywords}}</li>
+              <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
+
+              <!-- <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
+              <li class="search-history-item">智能手表</li>
             </ul>
-            <!-- <div class="clear-history">
+            <div class="clear-history">
               <i></i>
               <span>清空历史搜索</span>
-            </div> -->
+            </div>
           </div>
           <div class="search-hot">
             <p>热门搜索</p>
             <ul class="search-hot-list">
-              <li class="search-hot-item" v-for="(item,index) in searchHotData" :key="index" @click="selectedProd(item.title)">{{item.title}}</li>
-        
+              <li class="search-hot-item">智能手表</li>
+              <li class="search-hot-item">智能</li>
+              <li class="search-hot-item">智能手表</li>
+              <li class="search-hot-item">智能手表</li>
+              <li class="search-hot-item">智能手表</li>
+              <li class="search-hot-item">智能手表</li>
+              <li class="search-hot-item">智能手表</li>
             </ul>
           </div>
           
         </load-more>
-        <!-- <div class="search-rusult-content" v-show="title.length>0">
+        <div class="search-rusult-content" v-show="Keyword.length>0">
           <load-more style="background:#fff;width: 100%;height: 100%;">
             <div class="search-rusult-goods">
               <i></i>
-              <span>搜素 {{title}}...</span>
+              <span>搜素 {{Keyword}}...</span>
             </div>
             <ul class="search-rusult-list" v-if="searchRusultData!=''">
               <li class="search-rusult-item" v-for="(item,index) in searchRusultData" :key="index" @click="selectedProd(item)">
@@ -431,16 +403,83 @@
             <p style="text-align:center;text-align: left;padding: 10px;color: #81838e;font-size: 13px;border-bottom: 1px solid #e1e1e1;"
               v-else>暂无数据...</p>
           </load-more>
-        </div> -->
+        </div>
+      </div> -->
+    <!-- </mt-popup> -->
+
+    <!-- 图片上传搜索 -->
+    <mt-popup v-model="searchImgVisible" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+      <div class="overlayer">
+        <img src="~jd/images/popup-con.png">
+        <div class="jump-btn"></div>
       </div>
     </mt-popup>
+    <div class="searchContainer" v-if="searchImgVisible">
+      <div class="search-top">
+        <div class="searchInput">
+          <div class="upload">
+            <div class="img-container">
+              <!-- 接受预览的img container -->
+              <img :src="src" alt="user image">
+            </div>
+            <!-- 文件上传的input -->
+            <input type="file" @change="getFile" ref="file" id="file"> 
+            <label for="file">画像変更</label>
+          </div>
+        </div>
+        <p class="search-tip">同款商品更低价，不花冤枉钱！</p>
+        <p class="expire-time">
+          图搜有效期:<span>2012/01/29</span>到期
+        </p>
+        <p class="renew-btn">续费 > </p>
+        <!-- <div class="searchInput" @click="$refs.searchInput.focus()">
+          <div class="search-box">
+            <i class="searchIcon searchContentIcon"></i>
+            <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
+            <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
+          </div>
+        </div>
+        <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span> -->
+      </div>
+
+      <!-- 精品推荐 -->
+      <div class="recommend-content" v-show="Keyword.length>0">
+        <load-more style="background:#fff;width: 100%;height: 100%;">
+          <div class="recommend-content-goods">
+            <ul class="recommend-content-list" v-if="searchRusultData!=''">
+              <li class="search-rusult-item" v-for="(item,index) in searchRusultData" :key="index" @click="selectedProd(item)">
+                <p>{{item.productName}}</p>
+              </li>
+            </ul>
+          </div>
+        </load-more>
+      </div>
+      <!-- 搜索历史记录 -->
+      <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
+        <div class="search-history">
+          <p>搜索记录 <span></span></p>
+          <ul class="search-history-img">
+            <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
+
+            <li class="search-history-item"><img src=""></li>
+            <li class="search-history-item">智能</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item">智能手表</li>
+          </ul>
+        </div>
+      </load-more>
+  
+    </div>
 
   </div>
 </template>
 
 <script>
   import {
-    searchGoods,searchhotGoods
+    searchGoods
   } from '@/service/getData'
   import {
     getLocalStorage,
@@ -452,13 +491,15 @@
     Toast
   } from 'mint-ui'
   export default {
+    name: 'upload',
     data() {
       return {
         searchVisiblie: false,
-        title: '',
+        Keyword: '',
         searchHistoryData: [],
-        searchHotData: [],
-        searchRusultData: [],  
+        searchRusultData: [],
+        searchImgVisible: false ,
+        src: '/static/image/avatar.png' //先设置一个默认图片   
       }
     },
     props: {
@@ -468,24 +509,24 @@
       }
     },
     watch: {
-      title(val) {
-        // this.searchRusult(val)
+      Keyword(val) {
+        this.searchRusult(val)
       }
     },
     directives: {
       searchFocus: {
-        inserted: function (el) {
-          // 聚焦元素
-          el.focus();
-        },
-        update: function (el) {
-          // 聚焦元素
-          el.focus();
-        }
+        // inserted: function (el) {
+        //   // 聚焦元素
+        //   el.focus();
+        // },
+        // update: function (el) {
+        //   // 聚焦元素
+        //   el.focus();
+        // }
       }
     },
     components: {
-      LoadMore
+      LoadMore,
     },
 
     computed: {},
@@ -496,42 +537,45 @@
         let {
           Data
         } = await searchGoods({
-          title: keyWords,
-          page_size: 10,
-          current_page: 1
+          Keyword: keyWords,
+          pageSize: 100,
+          pageIndex: 1
         });
         this.searchRusultData = Data;
       },
-      async initData() {
-        let Data= await searchhotGoods({});
-        this.searchHotData = Data.data;
-      },
       async selectedProd(prod) {
-        if(prod.length<1){
-          Toast("请输入搜索词")
-          return;
-        }
-        this.$router.push({path: '/searchRusult',query: {title:prod}})
+        this.$router.push({path: '/searchRusult',query: {Keyword:this.Keyword}})
         let HistoryData = getLocalStorage('searchHistoryData');
-        if(!HistoryData)return setLocalStorage('searchHistoryData',[{keywords:prod,Date:new Date()}]);
+        if(!HistoryData)return setLocalStorage('searchHistoryData',[{keywords:this.Keyword,Date:new Date()}]);
         try{
           let Data = JSON.parse(HistoryData);
-          Data.push({keywords:prod,Date:new Date()});
+          Data.push({keywords:this.Keyword,Date:new Date()});
           setLocalStorage('searchHistoryData',Data);
         }catch(err){}
       },
 
       truesearchGoods(event) { 
-      if (event.keyCode == 13) { //如果按的是enter键 13是enter 
-          event.preventDefault(); //禁止默认事件（默认是换行） 
-          this.selectedProd(this.title)
-      } 
+        if (event.keyCode == 13) { //如果按的是enter键 13是enter 
+            event.preventDefault(); //禁止默认事件（默认是换行） 
+            console.log(event.target.value)
+            Toast("点击了确认") 
+        } 
+      },
+
+      async getFile(e){
+        let _this = this;
+        var files = e.target.files[0];
+        if(!e || !windows.FileReader) return //是否支持FileReader
+        let reader = new FileReader();
+        reader.readAsDataURL(files);//转换
+        reader.onloadend = function(){
+          _this.src = this.result;
+        }
+
       }
     },
 
     mounted: function () {
-       this.initData();
-
       try{
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
       }catch(err){}
