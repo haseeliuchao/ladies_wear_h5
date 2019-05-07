@@ -975,7 +975,7 @@
         let defaultAddress = await this.$store.dispatch('GetDefaultAddress', {})
         let confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {})
         if(!this.addressList){
-          let addressData = await this.$store.dispatch('GetAddressList',{pageSize:100,pageIndex:1});
+          let addressData = await this.$store.dispatch('GetAddressList',{page_size:100,current_page:1});
           this.addressData = addressData.Data;
         }else{
           this.addressData = this.addressList.Data;

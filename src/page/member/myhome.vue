@@ -425,8 +425,8 @@
         commad: getRecommend,
         recommendParam: {
           Type: 'recommend',
-          pageSize: 10,
-          pageIndex: 1
+          page_size: 10,
+          current_page: 1
         },
         cmsData: {
           recommendData: []
@@ -454,10 +454,17 @@
         'SET_USERINFO_DATA'
       ]),
       async onRefreshCallback() {
+<<<<<<< HEAD
         // let token = getSessionStorage('MemberToken')
         // if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
         // this.recommendParam.pageSize = 10;
         // this.recommendParam.pageIndex = 1;
+=======
+        let token = getSessionStorage('MemberToken')
+        if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
+        this.recommendParam.page_size = 10;
+        this.recommendParam.current_page = 1;
+>>>>>>> d206a3b3147918d21250166cf656c13717d72a5a
         this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
         this.userData.userInfo = res.Data;

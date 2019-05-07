@@ -262,8 +262,8 @@
 
     methods: {
       async onRefreshCallback() { //下拉加载
-        // this.params.pageSize = 10;
-        // this.params.pageIndex = 1;
+        // this.params.page_size = 10;
+        // this.params.current_page = 1;
         this.articleData = [];
         this.$refs.articleLoadmore.onTopLoaded(this.$refs.articleLoadmore.uuid);
       },

@@ -898,7 +898,7 @@
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
       <div class="checkSkuColortitleall">
         <p class="checkSkuColortitle">颜色</p>
-        <span class="closepop" @click="()=>{Keyword='';visiblePopup.checkSku=false}"></span>
+        <span class="closepop" @click="()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;}"></span>
       </div>
       <ul class="skuColorlist">
         <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}</li>
@@ -910,27 +910,17 @@
         <li v-for="(item,index) in sizearr" v-on:click="sizecheckBtn(item.size,index)" v-bind:class="[checksizeindex == index?'productActive':'']" :key="index">{{item.size}}</li>
       </ul>
       </div>
-      <!-- <div class="productConten">
-                    <div class="product-delcom" v-for="(ProductItem,n) in simulatedDATA.specifications" :key='n'>
-                        <p>{{ProductItem.name}}</p>
-                        <ul class="product-footerlist clearfix">
-                            <li v-for="(oItem,index) in ProductItem.item" v-on:click="specificationBtn(oItem.name,n,$event,index)" v-bind:class="[oItem.isShow?'':'noneActive',subIndex[n] == index?'productActive':'']" :key='index'>{{oItem.name}}</li>
-                        </ul>
-                    </div>
-     </div> -->
-
-
       <div class="skuNum">
                   <div class="left">
                     选择数量
                   </div>
                   <div class="right">
-                    <div class="cut"></div>
-                    <input type="text" class="num-inp">
-                    <div class="add"></div>
+                    <div class="cut" @click="operationnum(-1)"></div>
+                    <input type="text" v-model="shopnum" class="num-inp">
+                    <div class="add" @click="operationnum(1)"></div>
                   </div>
       </div>
-      <div class="popupOk" @click="()=>{Keyword='';visiblePopup.checkSku=false}">选好了</div>
+      <div class="popupOk" @click="()=>{title='';visiblePopup.checkSku=false}">选好了</div>
     </mt-popup>
 
     <!-- 颜色尺码选择popup -->
@@ -940,7 +930,7 @@
         <span class="closepop" @click="()=>{visiblePopup.checkInfo=false}"></span>
       </div>
       <div class="productparameterall">
-      <p class="productparameter" v-for="(item,index) in productInfo.propertyList" :key="index">{{item|toafter}}<span>{{item|tonext}}</span></p>
+      <p class="productparameter" v-for="(item,index) in productInfo.propertyList" :key="index">{{item.name}}<span>{{item.value}}</span></p>
       </div>
       <div class="popupOk" @click="()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
@@ -993,9 +983,8 @@
               <div class="product-price">
                 <p class="product-pricep">
                 <span>&yen;</span>
-                <!-- <strong>{{productInfo.price}}</strong> -->
-                <span><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.salesConsumerPrice/100.00|topricenext}}</span>
-                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">{{productInfo.salesPrice/100.00}}</em></span>
+                <span><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.sales_consumer_price/100.00|topricenext}}</span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:16px;">{{productInfo.cost_price/100.00|topriceafter}}</em>.{{productInfo.cost_price/100.00|topricenext}}</span>
                 </p>
                 <span class="freight"><em style="font-size:13px;">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
               </div>
@@ -1019,7 +1008,8 @@
           border-bottom:1px solid #e4e4e4;" @click="()=>visiblePopup.checkSku=true">
               <div>
                 <span class="sku-select">规格</span>
-                <span class="sku-info">选择 颜色分类、尺码</span>
+                <span class="sku-info" v-if="!curcolorname">选择 颜色分类、尺码</span>
+                <span class="sku-info" v-else>{{curcolorname}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cursizename}}</span>
               </div>
               <span class="right-menu"></span>
               <div class="product-skuimg">
@@ -1122,9 +1112,9 @@
                   <p class="item-product-praise">好评率100%</p>
                 </li>
               </ul> -->
-              <div id="prodContent-container" >
-                <!-- v-html="productInfo.item_detailsimg" -->
-                <img  v-for="(img,imgIndex) in productInfo.item_detailsimg" :key="imgIndex" :src="img" alt="">
+              <div id="prodContent-container" v-html="productInfo.item_detailsimg">
+                <!--  -->
+                <!-- <img  v-for="(img,imgIndex) in productInfo.item_detailsimg" :key="imgIndex" :src="img" alt=""> -->
               </div>
             </div>
             <!-- 为你推荐 -->
@@ -1266,7 +1256,9 @@
         checkcolorindex:null,
         checksizeindex:null,
         curcolorname:null,
+        cursizename:null,
         checkId:null,
+        shopnum:1,
         containerTab: 'mainLayout',
         detailTab: 'description',
         productInfo: {
@@ -1276,8 +1268,8 @@
         commad: getRecommend,
         recommendParam: {
           Type: 'recommend',
-          pageSize: 10,
-          pageIndex: 1
+          page_size: 10,
+          current_page: 1
         },
         recommendData: [],
         swipeIndex: {
@@ -1287,8 +1279,8 @@
         commadComment: getCommentList,
         commentParam: {
           ProductNo: null,
-          pageSize: 10,
-          pageIndex: 1
+          page_size: 10,
+          current_page: 1
         },
         commentData: []
         
@@ -1340,16 +1332,28 @@ methods: {
         //   ProductNo: this.productInfo.productNo
         // }];
         if(this.checkId==null){
-           Toast({
-            message: '先选择商品规格',
+          
+           
+          if(this.curcolorname==null){
+            Toast({
+            message: '先选择商品颜色',
             position: 'bottom'
           })
           return;
+          }
+          if(this.cursizename==null){
+            Toast({
+            message: '先选择商品尺寸',
+            position: 'bottom'
+          })
+          return;
+          }
+          
          }
         this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
           item_sku_id: this.checkId,
-          num:2
+          num:this.shopnum
         }).then(response => {
           if(response.code==10000){
           return Toast({
@@ -1358,7 +1362,7 @@ methods: {
           })
           }else{
             Toast({
-            message: Data.msg,
+            message: response.msg,
             position: 'bottom'
             })
             return
@@ -1386,7 +1390,7 @@ methods: {
         this.productInfo.title =Data.data.title;
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
-        this.productInfo.item_detailsimg =JSON.parse(this.productInfo.item_details_b_o.item_desc);
+        this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
@@ -1395,9 +1399,11 @@ methods: {
       colorcheckBtn(name,index){
           this.checkcolorindex=index;
           this.curcolorname=name;
+          this.cursizename=null;
           // this.productInfo.item_sku.filter((item)=>{return item.color==name})
           this.sizearr =this.productInfo.item_sku.filter((item)=>{return item.color==name})
           this.checksizeindex=null;
+          this.checkId=null;
        },
        sizecheckBtn(size,index){
          if(this.checkcolorindex==null){
@@ -1408,8 +1414,20 @@ methods: {
           return;
          }
           this.checksizeindex=index;
+          this.cursizename=size;
           let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
           this.checkId=checkIdarr[0].item_sku_id;
+       },
+       operationnum(operation){
+         this.shopnum += operation;
+         if(this.shopnum<1){
+           this.shopnum =1;
+         Toast({
+            message: '宝贝不能再减少了哦',
+            position: 'bottom'
+          })
+          return;
+         }
        },
       rmSome(arr, key) {
           let tempObj = {}

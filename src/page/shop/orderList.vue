@@ -530,8 +530,8 @@
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
         params: {
-          pageSize: 10,
-          pageIndex: 1,
+          page_size: 10,
+          current_page: 1,
           cancel_status: null,
           confirm_status: null,
           pay_status: null,
@@ -583,8 +583,8 @@
         })
       },
       async onRefreshCallback() { //下拉刷新
-        this.params.pageSize = 10;
-        this.params.pageIndex = 1;
+        this.params.page_size = 10;
+        this.params.current_page = 1;
         this.orderList = [];
         this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
       },
