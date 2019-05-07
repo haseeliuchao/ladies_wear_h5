@@ -1213,8 +1213,8 @@
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" @click="addShopCart" style="background: #ff5527;">加入购物车</div>
-      <div class="right" @click="addShopCart">立即购买</div>
+      <div class="right" @click="addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" @click="addShopCart('directBuy')">立即购买</div>
     </div>
     <!-- 底部导航栏 -->
 
@@ -1327,7 +1327,7 @@ methods: {
       async checkSkufun(){
       
       },
-      async addShopCart() { //加入购物车
+      async addShopCart(addType) { //加入购物车
         // let SelectedList = [{
         //   ProductNo: this.productInfo.productNo
         // }];
@@ -1350,7 +1350,9 @@ methods: {
           }
           
          }
-        this.$store.dispatch('SelectProduct', {
+
+        if(addType==='cart'){
+          this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
           item_sku_id: this.checkId,
           num:this.shopnum
@@ -1369,6 +1371,10 @@ methods: {
           }
           
         })
+        }else{
+          this.$router.push({path: '/createOrder',query: {id:this.$route.params.id,number:this.shopnum,checkout_type:2}})
+        }
+       
       },
       
       async initData() {

@@ -402,13 +402,6 @@
             <p>历史记录 <span></span></p>
             <ul class="search-history-list">
               <li class="search-history-item"  v-for="(item,index) in searchHistoryData" @click="selectedProd(item.keywords)" :key="index">{{item.keywords}}</li>
-              <!-- <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li> -->
             </ul>
             <!-- <div class="clear-history">
               <i></i>

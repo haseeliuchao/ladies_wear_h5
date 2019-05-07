@@ -15,7 +15,9 @@
       // border-right: 1px solid #eee;
       list-style: none;
       height: 100vh;
-      overflow: auto;
+      overflow-y: scroll;
+  /* ios需要下面这个属性 */
+  -webkit-overflow-scrolling: touch;
       background:#fff;
       li {
         padding: .25rem .15rem;
@@ -88,16 +90,17 @@
       <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
-            <li v-if="item.parent_id===0" v-for="(item,index) in categoryBody.categoryRoot" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click="rootScrollTo(item)">{{item.name}}</li>
+            <li v-for="(item,index) in categoryRootfilter" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click="rootScrollTo(item)">{{item.name}}</li>
           </ul>
         </load-more>
       </div>
       <!-- 分类列表 -->
       <!-- 分类下的产品目录 -->
-      <div class="jd-category-content" style="width: 85%;height:100vh;overflow: auto;">
+      <div class="jd-category-content" style="width: 85%;height:100vh;overflow: auto;overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;">
         <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;left:initial;right:0;">
           <div class="jd-categoryContent">
-            <div class="categoryContentBox" v-if="categoryBody.categoryList!=null && categoryBody.categoryList.length>0">
+            <div class="categoryContentBox" v-if="categoryBody.categoryList.length>0">
               <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click="$router.push({path: '/searchRusult',query: {category_id:item.category_id}})">
                 <img :src="item.icon" alt="" />
                 <p>{{item.name}}</p>
@@ -147,7 +150,12 @@
     computed: {
       ...mapGetters([
         'categoryData'
-      ])
+      ]),
+      categoryRootfilter: function () {
+      return this.categoryBody.categoryRoot.filter(function (item) {
+        return item.parent_id===0
+      })
+      }
     },
 
     methods: {
@@ -167,7 +175,7 @@
       async initData(){
         if(!this.categoryData){
           let res = await this.$store.dispatch('GetCategoryList');
-          this.SET_CATEGORY_DATA(res)
+          this.SET_CATEGORY_DATA(res.data)
           this.selectedRoot = res.data[0].category_id;
           this.categoryBody.categoryRoot = res.data;
           this.rootScrollTo(res.data[0]);
