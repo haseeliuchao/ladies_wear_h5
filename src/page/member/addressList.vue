@@ -108,7 +108,7 @@
         <div class="address-item" v-for="(item,index) in addressList" :key="index">
           <div>
             <p class="name">{{item.name}} {{item.phone}}</p>
-            <span v-if="item.if_default===0" class="address-status">默认</span>
+            <span v-if="item.if_default" class="address-status">默认</span>
             <p class="address">{{item.province + item.city + item.area}} &nbsp;&nbsp;{{item.address}}</p>
           </div>
           <div class="address-edit">

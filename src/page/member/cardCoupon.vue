@@ -15,17 +15,15 @@
             @include flexbox(center,center,row,nowrap);
             font-size:15px;
             color:#333;
+            padding:14px 0;
             &:first-child{
               justify-content:flex-start;
             }
             &:last-child{
               justify-content:flex-end;
             }
-            &:active{
+            &.active{
               color:$red;
-            }
-            .active{
-              
             }
           }
         }
@@ -33,51 +31,98 @@
       .cardCoupon-detail{
         padding:0 .3rem;
         background-color:#fff;
+        .cardCoupon-item{
+          margin-top:22px;
+          .cardCoupon-item-con{
+            @include flexbox(space-between,center,row,nowrap);
+            padding:10px 0 15px .4rem;
+            background:url("~jd/images/couponBg.png");
+            background-size:100% 100%;
+            .item-left{
+              width:67%;
+              .item-price{
+                color:$red;
+                font-size:22px;
+                font-weight:bold;
+                text-indent:-5px;
+              }
+              .item-useTip{
+                color:$red;
+                font-size:13px;
+                margin: 8px 0;
+              }
+              .item-expiryTime{
+                color:#999;
+                font-size:13px;
+              }
+            }
+            .item-right{
+              display:flex;
+              flex:1;
+              justify-content:center;
+              align-items:center;
+              img{
+                width:50%;
+                height:50%;
+              }
+            }
+          }
+          .cardCoupon-item-useExplain{
+            color:#333;
+            font-size:13px;
+            margin-top:8px;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
+            :hover{
+              overflow:visible;
+            }
+          }
+        }
+      }
+      .cardCoupon-tip{
+        display:flex;
+        flex:1;
+        justify-content:center;
+        width:100%;
+        padding:0 .3rem;
+        margin-top:50px;
       }
     }
   }
 </style>
 <template>
   <div class="cardCoupon">
-    <div class="cardCoupon-container">
+    <div class="cardCoupon-container" v-if="cardCoupon!= ''">
       <div class="cardCoupon-title">
-        <ul>
-          <li>未使用<span>(0)</span></li>
-          <li class="active">使用记录<span>(17)</span></li>
-          <li>已过期<span>(0)</span></li>
+        <ul v-for="(item,index) in cardCoupon.list" :key="index">
+          <li >未使用<span>({{cardCoupon.notUse}})</span></li>
+          <li class="active">使用记录<span>({{cardCoupon.use}})</span></li>
+          <li>已过期<span>({{cardCoupon.expire}})</span></li>
         </ul>
       </div>
-      <!-- <ul class="cardCoupon-detail" v-if="cardCoupon!=''" v-for="(item,index) in cardConpon" :key="index">
-        <li calss="cardCoupon-item">
+      <ul class="cardCoupon-detail"  v-for="(item,index) in cardCoupon.list" :key="index">
+        <li class="cardCoupon-item">
           <div class="cardCoupon-item-con">
             <div class="item-left">
-              <p class="item-price">{{item}}</p>
-              <p class="item-useTip">{{item}}</p>
-              <p class="item-expiryTime">{{item}}</p>
+              <p class="item-price">￥{{item.discount_price}}</p>
+              <p class="item-useTip">{{item.title}} (不包含运费)</p>
+              <p class="item-expiryTime">有效期{{item.used_start}}-{{item.used_end}}</p>
             </div>
-            <div class="item-right">
-              <img src="">
-            </div>
-          </div>
-          <p class="cardCoupon-item-useExplain"></p>
-        </li>
-      </ul> -->
-
-      <ul class="cardCoupon-detail">
-        <li calss="cardCoupon-item">
-          <div class="cardCoupon-item-con">
-            <div class="item-left">
-              <p class="item-price">￥20</p>
-              <p class="item-useTip">订单满218元使用 （不包含运费）</p>
-              <p class="item-expiryTime">有效期2019.05.03-2019.06.03</p>
-            </div>
-            <div class="item-right">
-              <img src="~jd/images/usicon.png">
+            <div class="item-right coupon-status">
+              <img src="~jd/images/couponUse.png">
             </div>
           </div>
-          <p class="cardCoupon-item-useExplain">券码使用详细说明文字展示，超过一行显示折叠效果</p>
+          <p class="cardCoupon-item-useExplain">{{item.use_scope_type_str}}</p>
         </li>
       </ul>
+      <div class="cardCoupon-tip" v-if="cardCoupon">
+        ——————&nbsp;&nbsp;&nbsp;以上是近期得优惠券&nbsp;&nbsp;&nbsp;——————
+      </div>
+    </div>
+    <div class="cardCoupon-container" v-else>
+      <img src="~jd/images/couponUse.png">
+      暂无优惠券
     </div>
   </div>
 </template>
@@ -121,8 +166,8 @@ import BackHead from 'common/backHead';
           return
         }else{
           this.cardCoupon=Data.data;
-          //初始化数据时缓存
-          setLocalStorage('cardCoupon',this.cardCoupon)
+          // //初始化数据时缓存
+          // setLocalStorage('cardCoupon',this.cardCoupon)
         }
         
 
