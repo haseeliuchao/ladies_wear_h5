@@ -15,6 +15,7 @@ const Forget = () =>    import ('page/member/forget')
 const Sttings = () =>   import ('page/member/sttings')
 const AddressList = () =>   import ('page/member/addressList')
 const Address = () =>   import ('page/member/address')
+const CardCoupon = () =>   import ('page/member/cardCoupon')
     /* member */
 
 /* shop */
@@ -63,6 +64,12 @@ const appRouter = {
                 path: '/myhome',
                 name: 'myhome',
                 component: Myhome,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/cardCoupon',
+                name: 'cardCoupon',
+                component: CardCoupon,
                 meta: { keepAlive: false }
             },
             {

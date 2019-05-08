@@ -283,7 +283,7 @@
     }
   }
   /* 为您推荐 */
-  
+
   // 提示框样式
   .mint-toast{
     padding:15px .4rem!important;
@@ -316,13 +316,13 @@
                 <!-- 假数据 -->
                 <span class="userphone" v-if="!userData.userInfo">18867202256</span> 
                  <!-- 真数据 -->
-              <span class="userphone" v-if="userData.userInfo">{{userData.userInfo.memberInfo.phone}}</span>
+              <!-- <span class="userphone" v-if="userData.userInfo">{{userData.userInfo.memberInfo.phone}}</span> -->
               </div>
             </div>
             <div class="info-box">
               <!-- 假数据 -->
               <div class="my-validWalletAmount" v-if="!userData.userInfo">
-                <p class="card">
+                <p class="card" @click="$router.push('/cardCoupon')">
                   <span>17</span>
                   <span>我的卡劵</span>
                 </p>
@@ -333,7 +333,7 @@
               </div>
               <!-- 真数据 -->
               <div class="my-validWalletAmount" v-if="userData.userInfo">
-                <p class="card">
+                <p class="card" @click="$router.push('/cardCoupon')">
                   <span>{{userData.userInfo.memeberInfo.userCouponsCount}}</span>
                   <span>我的卡劵</span>
                 </p>
@@ -348,30 +348,34 @@
         <div class="my-order">
           <h2>我的订单</h2>
           <div>
-          <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
-            <img src="~jd/images/paymenticon.png" alt="">
-            <span>待付款</span>
-          </div>
-           <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">
-            <img src="~jd/images/send.png" alt="">
-            <span>待发货</span>
-          </div>
-          <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/3'):false">
-            <img src="~jd/images/received.png" alt="">
-            <span>待收货</span>
-          </div>
-          <!-- <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
-            <img src="~jd/images/evaluated.png" alt="">
-            <span>待评价</span>
-          </div> -->
-          <!-- <div class="order-item">
-            <img src="~jd/images/Aftermarket.png" alt="">
-            <span>退换/售后</span>
-          </div> -->
-          <div class="order-item myorder" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
-            <img src="~jd/images/myordericon.png" alt="">
-            <span>全部订单</span>
-          </div>
+            <div class="order-item" @click = "$router.push('/cardCoupon')">
+              <img src="~jd/images/paymenticon.png" alt="">
+              <span>待付款</span>
+            </div>
+            <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
+              <img src="~jd/images/paymenticon.png" alt="">
+              <span>待付款</span>
+            </div>
+            <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">
+              <img src="~jd/images/send.png" alt="">
+              <span>待发货</span>
+            </div>
+            <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/3'):false">
+              <img src="~jd/images/received.png" alt="">
+              <span>待收货</span>
+            </div>
+            <!-- <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
+              <img src="~jd/images/evaluated.png" alt="">
+              <span>待评价</span>
+            </div> -->
+            <!-- <div class="order-item">
+              <img src="~jd/images/Aftermarket.png" alt="">
+              <span>退换/售后</span>
+            </div> -->
+            <div class="order-item myorder" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
+              <img src="~jd/images/myordericon.png" alt="">
+              <span>全部订单</span>
+            </div>
           </div>
         </div>
         <div class="my-about">
@@ -414,6 +418,7 @@
   } from 'vuex';
   import {
     getRecommend,
+    cardCoupon
   } from '@/service/getData';
   export default {
     data() {
@@ -454,10 +459,10 @@
         'SET_USERINFO_DATA'
       ]),
       async onRefreshCallback() {
-        let token = getSessionStorage('MemberToken')
-        if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-        this.recommendParam.page_size = 10;
-        this.recommendParam.current_page = 1;
+        // let token = getSessionStorage('MemberToken')
+        // if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
+        // this.recommendParam.pageSize = 10;
+        // this.recommendParam.pageIndex = 1;
         this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
         this.userData.userInfo = res.Data;

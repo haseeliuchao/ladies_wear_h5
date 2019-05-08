@@ -15,6 +15,7 @@ import {
   payByWallet,
   shopFavorite,
   getMyShopFavorite,
+  cardCoupon
 } from '@/service/getData';
 import {
   setSessionStorage,
@@ -67,6 +68,19 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         loginBind(parameterData).then(response => {
+          // setSessionStorage('MemberToken', response.Data);
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    CardCoupon({ //卡券
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        cardCoupon(parameterData).then(response => {
           // setSessionStorage('MemberToken', response.Data);
           resolve(response)
         }, err => {

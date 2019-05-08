@@ -45,7 +45,9 @@
       color:$red;
       font-size:15px;
     }
-    .save-address {
+    
+  }
+  .save-address {
       position: fixed;
       bottom: 0;
       width: 100%;
@@ -55,8 +57,6 @@
       font-size: 18px;
       color: #fff;
     }
-  }
-
   .address-pricker {
     @include wh(100%, 180px);
     .address-picker-header {
@@ -99,7 +99,7 @@
   <div style="height:100%;">
     <div style="transition:1s;background:#f2f2f2;height:100%;">
       <p class="address-tip"><i>*</i>为了提高发货速度，请填写真实信息</p>
-      <div class="address-from" style="transition:1s;height:100%;transform: scale(1);" :class="addressVisible? 'popupVisible' : ''">
+      <div class="address-from" style="transition:1s;transform: scale(1);" :class="addressVisible? 'popupVisible' : ''">
         <div class="cell-from-item">
           <span class="title">姓名</span>
           <div class="content">
@@ -131,9 +131,9 @@
             <mt-switch v-model="addressForm.selected" style="justify-content:flex-end"></mt-switch>
           </div>
         </div>
-        <div class="cell-from-item del-address" @click="deleteAddresspop">删除收货地址</div>
-        <div class="save-address" @click="saveAddress">保存</div>
+        <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click="deleteAddresspop">删除收货地址</div>
       </div>
+      <div class="save-address" @click="saveAddress">保存</div>
     </div>
     <div>
       <mt-popup v-model="addressVisible" position="bottom"  class="address-pricker">

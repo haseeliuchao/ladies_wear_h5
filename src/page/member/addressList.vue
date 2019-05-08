@@ -2,33 +2,7 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   .addressList {
-    .my-header {
-      padding: $padding;
-      background: #fff;
-      @include flexbox(space-between, center, row, nowrap);
-      border-bottom: 1px solid #eee;
-      .back {
-        display: block;
-        width: .65rem;
-        height: .65rem;
-        background: url('~jd/images/arrow-left.png') no-repeat;
-        background-size: 100%;
-      }
-      strong {
-        font-size: 18px;
-        font-weight: normal;
-        color: #333;
-      }
-      .myMsg {
-        display: block;
-        background: url('~jd/images/searchIcon.png') no-repeat;
-        background-size: 600% 100%;
-        height: .65rem;
-        width: .65rem;
-        opacity: 0;
-        background-position: -2.6rem 0;
-      }
-    }
+     @include wh(100%,100%); 
     .addNewAddressbtn {
       position: fixed;
       bottom: 0;
@@ -41,6 +15,7 @@
       margin: 0;
     }
     .address-container {
+       @include wh(100%,100%);
       .address-item {
         @include flexbox(center,
         center,
@@ -50,9 +25,6 @@
         background: #fff;
         padding:14px .3rem;
         border-bottom: 1px solid #e4e4e4;
-        // >p {
-        //   width: 100%;
-        // }
         >div{
           @include flexbox(flex-start,
         flex-start,
@@ -89,24 +61,6 @@
           nowrap);
           padding: 3px 0 3px .44rem;
           border-left:1px solid #e4e4e4;
-          // .left {
-          //   @include flexbox(flex-start,
-          //   center,
-          //   row,
-          //   nowrap);
-          //   flex: initial;
-          //   font-size: $subtitle;
-          //   letter-spacing: 1px;
-          //   color: $gray;
-          //   i {
-          //     vertical-align: middle;
-          //     margin-right: $margin;
-          //   }
-          //   span{
-          //     padding:2px 5px;
-          //     background:rgba(256,230,223,.15)
-          //   }
-          // }
             flex: initial;
             font-size: $subtitle;
             color: $gray;
@@ -130,14 +84,18 @@
                 color:#999;
               }
             }
-            .delect {
-              .delect-address-icon {
-                display: block;
-                @include wh(16px,
-                16px);
-                @include bg('~jd/images/edit.png');
-              }
-            }
+        }
+      }
+      .address-no{
+        @include wh(100%,100%);
+        @include flexbox(center,center,column,wrap);
+        img{
+          height:90px;
+          margin-bottom:24px;
+        }
+        >p{
+          font-size:15px;
+          color:#999;
         }
       }
     }
@@ -150,7 +108,7 @@
         <div class="address-item" v-for="(item,index) in addressList" :key="index">
           <div>
             <p class="name">{{item.name}} {{item.phone}}</p>
-            <span v-if="item.if_default===0" class="address-status">默认</span>
+            <span v-if="item.if_default" class="address-status">默认</span>
             <p class="address">{{item.province + item.city + item.area}} &nbsp;&nbsp;{{item.address}}</p>
           </div>
           <div class="address-edit">
@@ -165,7 +123,14 @@
           </div>
         </div>
       </div>
-    <div class="addNewAddressbtn" @click="$router.push('/address')">添加新地址</div>
+      <div class="address-container" v-if="addressList==''">
+        <div class='address-no'>
+          <img src='~jd/images/blank.png'>
+          <p>您还没有收货地址，请尽快添加哦</p>
+        </div>
+       
+      </div>
+      <div class="addNewAddressbtn" @click="$router.push('/address')">添加新地址</div>
   </div>
 </template>
 
@@ -178,6 +143,7 @@
     getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
+  import {Toast} from 'mint-ui'
   export default {
     data() {
       return {
@@ -238,12 +204,7 @@
         }
         
 
-      },
-      // async updData() { //更新数据
-      //   setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
-      //   setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
-      // }
-       
+      },      
     },
 
     mounted: function () {
