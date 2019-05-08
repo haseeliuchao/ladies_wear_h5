@@ -33,12 +33,13 @@ class Http {
             spinnerType: 'snake'
         })
     };
-    
+    options.param.api_sign=null;
     const postLogin=function(data){
         // var app_key="68A6F45CD7AAFC0287F4AF8FF4F3991C";
         
         var pwd="C6DB7C0AE306CDDAA1087A9542762B10";
         var myJsDate=Format(new Date(),"yyyyMMddhhmmss");
+        
         data.access_token=getLocalStorage('access_token');
         data.session_token=getLocalStorage('session_token');
         data.app_key=data.app_key?data.app_key:"68A6F45CD7AAFC0287F4AF8FF4F3991C";

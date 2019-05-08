@@ -249,15 +249,14 @@
     },
     methods: {
       async onloadMoreScroll(){
-          if(this.AllLoaded || this.LoadMoreLoading || !this.commad)return;
+          if(this.AllLoaded || this.LoadMoreLoading || !this.commad) return;
           this.LoadMoreLoading = true;
           let response = await this.commad(this.param).catch(()=>{
             this.LoadMoreError = true;
             this.LoadMoreLoading = false;
-            // throw new Error('the commad is Error !')
           });
           try {
-            if(response.data.length<=0 || response.data.totalCount <= (this.param.current_page*this.param.page_size)){
+            if(response.data.length<=0 || response.data.total_count <= (this.param.current_page*this.param.page_size)){
                 this.AllLoaded = true;
                 this.$emit('loadMore',response);
                 return this.LoadMoreLoading = false;

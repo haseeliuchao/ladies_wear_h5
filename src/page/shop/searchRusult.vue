@@ -1,30 +1,54 @@
 <!-- searchRusult -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
-  .search-rusult-container {
-    height: 100%;
+
+  .searchContentIcon {
+          height: .45rem;
+          width: .45rem;
+          margin-right: .3rem;
+          background: url('~jd/images/sarchicon.png') no-repeat;
+          background-size: 100% 100%;
+        }
+.searchInput {
+      width: 100%;
+      .search-box {
+        background: #fff;
+        height: .86rem;
+        border-radius: .86rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        @include flexbox(flex-start,
+        center,
+        row,
+        nowrap);
+        padding: 0 .3rem;
+        
+        span {
+          color: #999;
+          font-size: 14px;
+        }
+      }
+    }
+
     .search-top {
       @include flexbox(space-between,
       center,
       row,
       nowrap);
-      padding: 10px 20px;
+      padding: 10px 0 10px 20px;
       background: #fff;
-      border-bottom: 1px solid #eee;
-      .back-icon{
-        width: 23px;
-        height: 23px;
-        background: url('~jd/images/arrow-left.png') no-repeat;
-        background-size: 100%;
-      }
+      // border-bottom: 1px solid $border;
       .searchInput {
         width: 90%;
         .search-box {
           width: 100%;
           position: relative;
-          background: #f4f4f4;
-          padding: 5px 10px;
-          border-radius: 10px;
+          background: #fff;
+          padding: 0px 14px;
+          border-radius: 26px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    height: .86rem;
           @include flexbox(space-between,
           center,
           row,
@@ -39,15 +63,31 @@
             text-shadow: none;
             font-weight: normal;
             background: transparent;
+            height: .86rem;
+            line-height: normal
+          }
+          .clear {
+            width: .42rem;
+            height: .42rem;
+            margin: 0;
+            position: absolute;
+            right: 10px;
+            padding: 5px;
+            @include flexbox(center,
+            center,
+            row,
+            nowrap);
+            color: #fff;
+            font-size: 15px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .15);
           }
           .searchIcon {
             display: block;
-            height: .38rem;
-            margin-right: .05rem;
-            width: .4rem;
-            background: url('~jd/images/searchIcon.png') no-repeat;
-            background-size: 600% 100%;
-            background-position: -0.34rem 0;
+    height: .48rem;
+    margin-right: .05rem;
+    width: .52rem;
+            
           }
         }
       }
@@ -58,6 +98,51 @@
         color: $gray;
       }
     }
+    
+    .search-rusult-content {
+      .search-rusult-goods {
+        @include flexbox(flex-start,
+        center,
+        row,
+        nowrap);
+        padding: $padding;
+        span {
+          font-size: $subtitle;
+          margin-left: 5px;
+          color: $gray;
+        }
+        i {
+          display: block;
+          width: 17px;
+          height: 16px;
+          background: url('~jd/images/store.png') no-repeat;
+          background-size: 100%;
+        }
+      }
+      .search-rusult-list {
+        @include flexbox(flex-start,
+        center,
+        column,
+        wrap);
+        .search-rusult-item {
+          width: 100%;
+          text-align: left;
+          padding: $padding;
+          color: $gray;
+          font-size: $subtitle;
+          border-bottom: 1px solid $border;
+          p {
+            @include textoverflow(1)
+          }
+        }
+      }
+    }
+    
+
+
+  .search-rusult-container {
+    height: 100%;
+    
     .search-filter{
       // border-top: 1px solid $border;
       border-bottom: 1px solid #eee;
@@ -148,7 +233,7 @@
 <template>
   <div class="search-rusult-container">
     <!-- 搜索框 -->
-    <div class="search-top">
+    <!-- <div class="search-top">
       <i class="back-icon" @click="$router.go(-1)"></i>
       <div class="searchInput">
         <div class="search-box">
@@ -156,7 +241,19 @@
           <input :placeholder="searchParams.title" v-model="searchParams.title">
         </div>
       </div>
-    </div>
+    </div> -->
+    <div class="search-top">
+    <div class="searchInput">
+            <div class="search-box">
+              <!-- <i class="searchIcon searchContentIcon"></i> -->
+              <!-- @keypress="truesearchGoods" -->
+              <input type="search" v-model="searchParams.title" placeholder="品质生活必备" >
+              <!-- <span class="clear" @click="title=''" v-show="title.length>0">&times;</span> -->
+              <i class="searchIcon searchContentIcon" @click="changeQuery(searchParams.title)"></i>
+            </div>
+          </div>
+     <span @click="()=>{title=''}">取消</span>
+     </div>
     <!-- 搜索框 -->
     
     <!-- 筛选 -->
@@ -176,7 +273,7 @@
           ref="searchRusultloadMore">
         <ul class="product-list" >
           <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
-            <img :src="item.index_img_url" alt="">
+            <img  v-lazy="item.index_img_url" alt="">
             <div class="prod-info">
               <p class="prod-title">{{item.title}}</p>
               <p class="prod-price">
@@ -215,7 +312,7 @@
 
     watch: {
       'searchParams.title': function(val){
-        this.searchRusult()
+        // this.searchRusult()
       }
     },
 
@@ -227,26 +324,31 @@
     computed: {},
 
     methods: {
+      changeQuery(title){
+         this.$router.push({path:'/searchRusult',query:{title:title}})
+         this.searchRusult()
+      },
       async searchRusult() {
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
-        this.$refs.searchRusultloadMore.onloadMoreScroll();
+        // this.$refs.searchRusultloadMore.onloadMoreScroll();
+        this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
       },
       async infiniteCallback(response) { //下拉加载
       // this.searchRusultData=response.data.items
+      if(this.searchParams.current_page ==1){
+        this.searchRusultData=[];
+      }
+        if(response.data.items!=undefined&&response.data.items!=null){
         if (response.data.items.length > 0) {
           response.data.items.map(i => {
             this.searchRusultData.push(i)
           })
         }
-      },
-      async initData() {
-          this.searchParams.page_size = 10;
-          this.searchParams.current_page = 1;
-          this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
-          let Data = await this.$store.dispatch('SearchGoods');
-          this.searchRusultData= Data.data.items;
+        }else{
+          this.searchRusultData=[];
+        }
       }
     },
     filters:{

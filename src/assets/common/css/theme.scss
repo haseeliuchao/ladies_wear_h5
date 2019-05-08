@@ -47,6 +47,12 @@ figcaption
     outline: none;
   }
 }
+img[lazy] {
+ 
+  margin: auto;
+  background: url('~jd/images/jdload.gif') center no-repeat;
+  background-size: 60%
+}
 body{
   background: #f2f2f2;
 }

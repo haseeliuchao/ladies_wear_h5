@@ -2,6 +2,7 @@ import {
   getCategoryList,
   getSelectedProductList,
   searchGoods,
+  searchtwoGoods,
   getProduct,
   getProductList,
   selectProduct,
@@ -113,6 +114,18 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         searchGoods(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    SearchtwoGoods({ // 搜索商品
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        searchtwoGoods(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

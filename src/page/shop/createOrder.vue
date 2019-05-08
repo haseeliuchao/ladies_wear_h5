@@ -693,75 +693,30 @@
       <div class="all-order">
           <div class="order-list">
             <div class="order-item">
-              <div class="order-product-list">
-                <div class="order-product-item">
+              <div class="order-product-list" v-if="confirmSelectedProduct">
+                <div class="order-product-item" v-for="(item,index) in confirmSelectedProduct.item_info_list" :key="index">
                   <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <img :src="item.item_img">
                     <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-name">{{item.item_title}}</p>
+                      <p class="prodsku-info">颜色 {{item.color}}   尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
+                        <strong><span>&yen;</span><em>{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
+                        <span>x{{item.num}}</span>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="order-product-list" v-else>
+                <p style="text-align:center;padding:15px 0; color:#999;font-size:17px;">
+            暂无数据
+               </p>
+              </div>
+
+
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
               </div>
@@ -778,7 +733,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.47</em></strong></span>
+      <span>合计：<strong><span>&yen;</span><em>{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></span>
       <div class="payBtn" @click="submitOrder">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
@@ -814,97 +769,18 @@
               <i class="selectedIcon" v-if="item.Selected===1"></i>
             </div>
           </div> -->
-          <div class="address-container">
-            <div class="address-item" @click="selectedAddress(item)">
+          <div class="address-container" v-if="addressData">
+            <div class="address-item" v-for="(item,index) in addressData" :key="index" @click="selectedAddress(item)">
               <div class="address-itemleft">
-              <p class="name">张山 18146703058 <span>默认</span></p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+              <p class="name">{{item.name}} {{item.phone}} <span v-if="item.if_default">默认</span></p>
+              <p class="address">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</p>
               </div>
               <div class="address-itemright">
                 <img src="~jd/images/addressedit.png"/>
                 <p>编辑</p>
               </div>
             </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
-            <div class="address-item" @click="selectedAddress(item)">
-              <div class="address-itemleft">
-              <p class="name">张山 18146703058</p>
-              <p class="address">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
-              </div>
-              <div class="address-itemright">
-                <img src="~jd/images/addressedit.png"/>
-                <p>编辑</p>
-              </div>
-            </div>
+            
           </div>
         <!-- </scroller> -->
         <div class="addNewAddressbtn">添加新地址</div>
@@ -930,7 +806,7 @@
         totalFee: 0.00,
         paymentPassword: null,
         PaymentNo: null,
-        confirmSelectedProduct: null,
+        confirmSelectedProduct: {},
         addressData: null,
         visiblePopup: {
           paymentContainerVisible: false,
@@ -967,33 +843,43 @@
     methods: {
       selectedAddress(item){
         this.visiblePopup.selectedAdressVisible = false;
-        this.addressData.map(item=>item.Selected=9);
-        item.Selected = 1;
+        // this.addressData.map(item=>item.Selected=9);
+        // item.Selected = 1;
         this.defaultAddress = item;
       },
+
       async initData() {
-        let defaultAddress = await this.$store.dispatch('GetDefaultAddress', {})
-        let confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {})
+        // let defaultAddress = await this.$store.dispatch('GetDefaultAddress', {})
+        let confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
+          shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
+          number:this.$route.query.number}),
+          checkout_type:this.$route.query.checkout_type
+        })
         if(!this.addressList){
           let addressData = await this.$store.dispatch('GetAddressList',{page_size:100,current_page:1});
-          this.addressData = addressData.Data;
+          this.addressData = addressData.data;
         }else{
-          this.addressData = this.addressList.Data;
+          this.addressData = this.addressList.data;
         }
-        this.defaultAddress = defaultAddress.Data;
-        if(confirmSelectedData.Data==''){
+       
+         this.addressData.map(item => {
+          if (item.if_default) {
+            this.defaultAddress =item;
+          }
+        });
+        if(confirmSelectedData.data==''){
           Toast({
             message: '暂无订单信息'
           })
           return this.$router.go(-1);
         }
-        confirmSelectedData.Data.map(item => {
-          if (item.status === 9) {
-            this.totalFee += item.counter * item.product.price;
-          }
-        })
-        this.totalFee = this.totalFee.toFixed(2);
-        this.confirmSelectedProduct = confirmSelectedData.Data;
+        // confirmSelectedData.data.map(item => {
+        //   if (item.status === 9) {
+        //     this.totalFee += item.counter * item.product.price;
+        //   }
+        // })
+        // this.totalFee = this.totalFee.toFixed(2);
+        this.confirmSelectedProduct = confirmSelectedData.data;
       },
       async submitOrder() {
         this.$store.dispatch('CreateOrder', {
@@ -1025,10 +911,18 @@
         })
       }
     },
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
 
     mounted: function () {
       this.initData();
-      
+      console.log(this.$route.query)
     }
   }
 

@@ -83,12 +83,16 @@
       .deploy-item{
         width:100%;
         height:100%;
+        border-radius: 6px;
+        overflow: hidden;
       }
     }
     .deploy-floor-r{
       .deploy-item{
         width:100%;
         height:48%;
+        border-radius: 6px;
+        overflow: hidden;
       }
      
 
@@ -97,6 +101,60 @@
   /* 配置专题 */
 
   /* 推荐 */
+.content{
+      width: 100%;
+      .product-list{
+        @include flexbox(space-between,center,row,wrap);
+        padding: 0 12px;
+        .prod-item{
+          background: #fff;
+          width: 48.6%;
+          margin-bottom: 8px;
+          border-radius: 6px;
+          overflow: hidden;
+          img{
+            width: 100%;
+            height: 162px;
+            border-radius: 6px;
+          }
+          .prod-info{
+            // margin-left: 10px;
+            padding: 0px 6px;
+            
+            @include flexbox(space-between,flex-start,column,wrap);
+            .prod-title{
+              font-size: 14px;
+              color: #333;
+              @include textoverflow(2);
+              height: 40px;
+              line-height: 20px;
+              margin-top: 4px;
+            }
+            .prod-price{
+              color: $red;
+              text-align:left;
+              line-height: 30px;
+              margin-bottom: 8px;
+              span{
+                font-size: $smsub;
+                margin-right: 5px;
+              }
+              strong{
+                font-size: 19px;
+              }
+            }
+            .prod-pro{
+              padding: 5px 0;
+              text-align: left;
+              color: $gray;
+              font-size: $subtitle;
+            }
+          }
+        }
+      }
+    }
+
+
   .recommend {
     background: #f0f2f5;
     .gray-text {
@@ -244,14 +302,9 @@
             slot="refresh-spinner">更新中...</span>
           <!-- banner -->
           <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
-            <mt-swipe-item>
-              <img src="~jd/images/floor1.jpg" alt="女装上新">
-            </mt-swipe-item>
-            <mt-swipe-item>
-              <img src="~jd/images/floor (1).jpg" alt="女装上新">
-            </mt-swipe-item>
-            <mt-swipe-item>
-              <img src="~jd/images/floor (2).jpg" alt="女装上新">
+            <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
+             :key="index" @click="()=>$router.push(item.http_url)">
+              <img :src="item.img_url" alt="item.title">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->
@@ -266,113 +319,58 @@
           </div>
           <!-- 活动广告位 -->
           <div class="activity-manage">
-            <div class="activity-list">
-                <img src="~jd/images/floor (1).jpg">
+            <div class="activity-list" v-for="(item,index) in cmsDataTypeads" :key="index">
+              <a :href="item.http_url">
+                <img :src="item.img_url" >
+              </a>
             </div>
           </div>
           <!-- 配置专题 -->
           <div class="deploy-floor">
-            <div class="deploy-floor-l">
-              <div class="deploy-item">
-                <img src="~jd/images/product.png">
+            <div class="deploy-floor-l" >
+              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
+                <img  :src="item.img_url">
               </div>
             </div>
+            <!-- cmsData -->
             <div class="deploy-floor-r">
-              <div class="deploy-item">
-                <img src="~jd/images/product.png">
-              </div>
-              <div class="deploy-item">
-                <img src="~jd/images/product.png">
+             <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
+                <img  :src="item.img_url">
               </div>
             </div>
           </div>
-          <!-- <div class="seckill-floor">
-            <div class="jd-flex-box">
-              <div class="jd-f-b-l">
-                <div class="jd-f-b-item">
-                  <div class="seckill-prd">
-                    <div class="prd-item" @click="$router.push(`/searchResult`)">
-                      <img src="~jd/images/product.png" alt="连衣裙套装专题">
-                    </div>
-                  </div>
-                </div>
-                <div class="jd-f-b-pd-item">
-                  <div class="seckill-p-item" @click="$router.push(`/searchResult`)">
-                    <div class="seckill-t">
-                      <img src="~jd/images/product.png" alt="连衣裙套装">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="jd-f-b-r">
-                <div class="jd-f-b-r-item">
-                  <div class="seckill-pd-r">
-                    <img src="~jd/images/product.png" alt="连衣裙套装" @click="$router.push(`/searchResult`)">
-                  </div>
-                </div>
-                <div class="jd-f-b-r-item">
-                  <div class="seckill-pd-r">
-                    <img @click="$router.push(`/searchResult`)" src="~jd/images/product.png" alt="连衣裙套装">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
+
+          
+         
           <!--配置专题 -->
             
           <!-- 为您推荐 -->
           <div class="floor recommend" style="top:0rem;">
             <div class="recommend-title">
               <ul>
-                <li class="active">为您精选</li>
-                <li>推荐</li>
-                <li>生活</li>
-                <li>社区</li>
-                <li>时尚</li>
+                <li @click="getGoodsdata('',0)" class="active">为您精选</li>
+                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" @click="getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
               </ul>
             </div>
-            <ul class="find-recommend-product">
-              <li class="recommend-item" @click="$router.push(`/searchResult`)">
-                <div class="item-product-pic">
-                  <img src="~jd/images/product.png" alt="连衣裙">
-                </div>
-                <p class="item-product-text">2019最近上新甜美超仙连衣裙</p>
-                <p class="item-product-info">
-                  <strong>&yen;199</strong>
-                  <del>&yen;399</del>
-                </p>
-              </li>
-              <li class="recommend-item" @click="$router.push(`/searchResult`)">
-                <div class="item-product-pic">
-                  <img src="~jd/images/product.png" alt="连衣裙">
-                </div>
-                <p class="item-product-text">2019最近上新甜美超仙连衣裙</p>
-                <p class="item-product-info">
-                  <strong>&yen;199</strong>
-                  <del>&yen;399</del>
-                </p>
-              </li>
-              <li class="recommend-item" @click="$router.push(`/searchResult`)">
-                <div class="item-product-pic">
-                  <img src="~jd/images/product.png" alt="连衣裙">
-                </div>
-                <p class="item-product-text">2019最近上新甜美超仙连衣裙</p>
-                <p class="item-product-info">
-                  <strong>&yen;199</strong>
-                  <del>&yen;399</del>
-                </p>
-              </li>
-              <li class="recommend-item" @click="$router.push(`/searchResult`)">
-                <div class="item-product-pic">
-                  <img src="~jd/images/product.png" alt="连衣裙">
-                </div>
-                <p class="item-product-text">2019最近上新甜美超仙连衣裙</p>
-                <p class="item-product-info">
-                  <strong>&yen;199</strong>
-                  <del>&yen;399</del>
-                </p>
-              </li>
-            </ul>
+            
+          </div>
+
+          <div class="content">
+            <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+                ref="indexRusultloadMore">
+              <ul class="product-list" >
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+                  <img :src="item.item_index_img_url" alt="">
+                  <div class="prod-info">
+                    <p class="prod-title">{{item.item_title}}</p>
+                    <p class="prod-price">
+                      <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:15px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                      <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
+                      </p>
+                  </div>
+                </li>
+              </ul>
+            </load-more>
           </div>
         </load-more>
         <!-- 为您推荐 -->
@@ -392,7 +390,8 @@
     getRecommend,
     getArticle,
     getArticleList,
-    getGoodsCategoryList
+    getGoodsCategoryList,
+    searchtwoGoods
   } from '@/service/getData';
   import marquee from 'common/marquee/marquee';
   import marqueeItem from 'common/marquee/marquee-item';
@@ -416,9 +415,8 @@
     data() {
       return {
         Status: false,
-        commad: getRecommend,
+        // commad: getRecommend,
         recommendParam: {
-          Type: 'recommend',
           page_size: 10,
           current_page: 1
         },
@@ -427,9 +425,17 @@
          app_key:null,
       
         recommendData: [],
-        cmsData: null,
+        cmsData: [],
         searchBarVisilbe: true,
-        popupVisible:true
+        popupVisible:false,
+        indexRusultData: [],
+        commad: searchtwoGoods,
+        indexParams: {
+          title: '',
+          category_id:'',
+          page_size: 10,
+          current_page: 1
+        }
       };
     },
     watch: {},
@@ -447,7 +453,35 @@
     computed: {
       ...mapGetters([
         'indexCmsData'
-      ])
+      ]),
+      cmsDataTypeones: function () {
+      return this.cmsData.filter(function (item) {
+        return item.type==1
+      })
+      },
+      cmsDataTypeads: function () {
+      return this.cmsData.filter(function (item) {
+        return item.type==2&&item.postion==1;
+      })
+      },
+      cmsDataTypeconfigsone: function () {
+      return this.cmsData.filter(function (item) {
+        return item.type==2&&item.postion==2;
+      })
+      },
+      cmsDataTypeconfigstwo: function () {
+      return this.cmsData.filter(function (item) {
+        return item.type==2&&(item.postion==3||item.postion==4);
+      })
+      },
+      cmsDataTyperecommends: function () {
+      return this.cmsData.filter(function (item) {
+        return item.type==2&&(item.postion==5||item.postion==6||item.postion==7||item.postion==8);
+      })
+      }
+
+      
+      
     },
     methods: {
       isWeiXin() {
@@ -471,27 +505,39 @@
           this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
         }, 1000); 
       },
-      async infiniteCallback(response) { //加载更多
-        if (response.Data.length > 0) {
-          response.Data.map(i => {
-            this.recommendData.push(i)
+      async getGoodsdata(advertising_id,index) {
+        this.indexParams.page_size = 10;
+        this.indexParams.current_page = 1;
+        this.indexParams.advertising_id = advertising_id;
+        this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+        // this.$refs.indexRusultloadMore.onloadMoreScroll();
+         this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+      },
+      async infiniteCallback(response) { //下拉加载
+      if(this.indexParams.current_page===1){
+        this.indexRusultData=[];
+      }
+        if(response.data.data!=undefined&&response.data.data!=null){
+         if (response.data.data.length > 0) {
+          response.data.data.map(i => {
+            this.indexRusultData.push(i)
           })
         }
+        }else{
+          this.indexRusultData=[];
+        }
+        
       },
       async updatedData() { //更新数据
-        let {
-          Data
-        } = await this.$store.dispatch('GetIndexCmsData', {
-          current_page: 1,
-          page_size: 100
+        let Data = await this.$store.dispatch('GetIndexCmsData', {
         });
-        this.cmsData = Data;
+        this.cmsData = Data.data;
       },
       async initData() { //初始化数据
         if (!this.indexCmsData) {
           this.updatedData();
         } else {
-          this.cmsData = this.indexCmsData.Data;
+          this.cmsData = this.indexCmsData.data;
         }
       },
        async loginData() { //更新数据
@@ -518,9 +564,20 @@
       },
       
     },
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
     beforeDestroy() {},
     mounted: function () {
+     
       this.initData();
+      this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+      this.$refs.indexRusultloadMore.onloadMoreScroll();
       this.loginData();
       // showBack(status => {
       //   this.Status = status;

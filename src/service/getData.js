@@ -43,6 +43,8 @@ export const getSelectedProductList = (params) => new Http().require({api: '/api
 
 export const searchGoods = (params) => new Http().require({api: '/api/items',param:params}); //获取购物车列表
 
+export const searchtwoGoods = (params) => new Http().require({api: '/api/ad/appoint/obj/list',param:params}); //获取购物车列表
+
 export const searchhotGoods = (params) => new Http().require({api: '/api/hot/search/word/list',param:params}); //获取购物车列表
 
 export const getProduct = (params) => new Http().require({api: '/api/item/details',param:params}); //获取购物车列表
@@ -57,7 +59,7 @@ export const removeSelectedProduct = (params) => new Http().require({api: '/api/
 
 export const confirmSelectProduct = (params) => new Http().require({api: '/api/shop/ConfirmSelectProduct',param: params}); //获取
 
-export const getConfirmSelectedProductList = (params) => new Http().require({api: '/api/shop/GetConfirmSelectedProductList',param: params}); //获取
+export const getConfirmSelectedProductList = (params) => new Http().require({api: '/api/order/preview',param: params}); //获取
 
 export const createOrder = (params) => new Http().require({api: '/api/shop/CreateOrder',param: params}); //获取
 
@@ -89,7 +91,7 @@ export const getGoodsCategory = (params) => new Http().require({api: '/api/cms/G
 
 export const getRecommend = (params) => new Http().require({api: '/api/cms/GetRecommend',param:params}); //获取咨询分类信息
 
-export const getIndexCmsData = (params) => new Http().require({api: '/api/cms/GetIndexCmsData',param:params}); //获取首页的全部资讯
+export const getIndexCmsData = (params) => new Http().require({api: '/api/ad/advertising/list',param:params}); //获取首页的全部资讯
 
 export const getShop = (params) => new Http().require({api: '/system/GetShop',param:params}); //获取购物车列表
 
