@@ -118,7 +118,7 @@
     .topnav {
       display: flex;
       width: 9rem;
-     
+      background: #f2f2f2;
       flex: 1;
       justify-content: space-between;
       align-items: center;
@@ -259,7 +259,7 @@
                     nowrap);
                   }
                   p {
-                    @include textoverflow(3);
+                    @include textoverflow(2);
                     font-size: 13px;
                     margin: 4px 0;
                     color: #333;
@@ -339,11 +339,12 @@
     <div class="order-container">
       <!-- style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
         :loadMoreIconVisible="false" ref="orderLoadmore" -->
-      <load-more>
+      <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+        :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <!-- 全部订单 -->
-        <div class="all-order" v-if="orderList!=''">
+        <!-- <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
               <div class="order-top">
@@ -388,96 +389,46 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="all-order">
+        <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
-            <div class="order-item">
-              <div class="order-top" @click="$router.push(`/order/38757328485`)">
+            <div class="order-item" v-for="(item,index) in orderList" :key="index">
+              <div class="order-top" @click="$router.push(`/order/${item.order_id}`)">
                 <div class="left">
-                  <!-- <img src="~jd/images/applist (5).png" alt=""> -->
-                  <span>订单编号：38757328485</span>
+                  <span>订单编号：{{item.order_code}}</span>
                 </div>
                 <div class="right">
                   <div class="order-status">
-                    <span>等待付款</span>
-          
+                    <span>{{item.order_status_str}}</span>
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click="$router.push(`/order/38757328485`)">
+              <div class="order-product-list" @click="$router.push(`/order/${item.order_id}`)"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
                 <div class="order-product-item">
                   <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <img :src="itemdetail.item_img">
                     <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-name">{{itemdetail.item_title}}</p>
+                      <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
+                        <strong><span>&yen;</span><em>{{itemdetail.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{itemdetail.item_price/100.00|topricenext}}</em></strong>
+                        <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="order-sku" @click="$router.push(`/order/38757328485`)">
-                <span>共2件商品&nbsp;<em>实付：</em></span>
-                <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
+              <div class="order-sku" @click="$router.push(`/order/${item.order_id}`)">
+                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
+                <strong><span>&yen;</span><em>{{item.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.total_item_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment" @click="cancelOrder(item)">取消订单</span>
-                <span class="payment" @click="payment(item)">立即支付</span>
-              </div>
-            </div>
-
-            <div class="order-item">
-              <div class="order-top">
-                <div class="left">
-                  <!-- <img src="~jd/images/applist (5).png" alt=""> -->
-                  <span>订单编号：38757328485</span>
-                </div>
-                <div class="right">
-                  <div class="order-status">
-                    <span>等待付款</span>
-          
-                  </div>
-                </div>
-              </div>
-              <div class="order-product-list">
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              
-              </div>
-              <div class="order-sku">
-                <span>共2件商品&nbsp;<em>实付：</em></span>
-                <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-              </div>
-              <div class="order-btn-group">
-                <span class="payment" @click="payment(item)">立即支付</span>
+                <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click="cancelOrder(item)">取消订单</span>
+                <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click="tipSend">提醒发货</span>
+                <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment">查看物流</span>
+                <span class="payment" @click="payment(item)"   v-if="item.order_status===1">立即支付</span>
+                <span class="payment" @click="finishOrder(item)"   v-if="item.order_status===3">确认收货</span>
               </div>
             </div>
           </div>
@@ -517,7 +468,7 @@
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
   import {
-    Toast
+    Toast,MessageBox
   } from 'mint-ui'
   export default {
     data() {
@@ -532,13 +483,17 @@
         params: {
           page_size: 10,
           current_page: 1,
-          cancel_status: null,
-          confirm_status: null,
-          pay_status: null,
-          finish_status: null
+          // cancel_status: null,
+          // confirm_status: null,
+          // pay_status: null,
+          // finish_status: null
+          order_status:null
         },
         orderList: [],
-        active: null
+        active: null,
+        totalNum:null,
+        orderListDetail:[],
+        orderListDetailin:[]
       };
     },
 
@@ -560,28 +515,51 @@
         }, 2000)
       },
       finishOrder(item) { //确认收货
-        this.$store.dispatch('FinishOrder', {
-          OrderNo: item.orderInfo.OrdertNo
-        }).then(response => {
-          Toast({
-            message: response.Message
-          })
-          this.onRefreshCallback()
-        })
+         MessageBox.confirm('', { 
+            message: '确定已经收到货物了吗?', 
+            title: '',
+            cancelButtonClass:'cancelButton', 
+            confirmButtonClass:'confirmButton',
+          }).then(action => {
+            if (action == 'confirm') {     //确认的回调
+              this.$store.dispatch('FinishOrder', {
+                order_id: item.order_id
+              }).then(response => {
+                if(response.code!=10000){
+                  Toast({
+                  message: response.msg
+                  })
+                }else{
+                this.onRefreshCallback()
+                }
+              })
+            }
+          }).catch(err => { 
+            if (err == 'cancel') {     //取消的回调
+            } 
+          });
+
+        
       },
       commitMessage(item) { //评论
         this.$router.push(`/review/${item.orderInfo.OrdertNo}`)
       },
       cancelOrder(item) { //取消订单
         this.$store.dispatch('CancelOrder', {
-          OrderNo: item.orderInfo.OrdertNo
+          order_id: item.order_id
         }).then(response => {
           Toast({
-            message: response.Message
+            message: "订单已取消"
           })
           this.onRefreshCallback()
         })
       },
+      tipSend(){
+        Toast({
+            message: "提醒卖家发货成功"
+          })
+      },
+      // 提醒卖家发货成功
       async onRefreshCallback() { //下拉刷新
         this.params.page_size = 10;
         this.params.current_page = 1;
@@ -593,40 +571,46 @@
         this.active = Id;
         switch (Number(this.active)) {
           case 0: //全部订单
-            this.params.cancel_status = null;
-            this.params.confirm_status = null;
-            this.params.pay_status = null;
-            this.params.finish_status = null;
+            // this.params.cancel_status = null;
+            // this.params.confirm_status = null;
+            // this.params.pay_status = null;
+            // this.params.finish_status = null;
+            this.params.order_status = null;
             break;
           case 1: //待付款
-            this.params.cancel_status = 0;
-            this.params.confirm_status = null;
-            this.params.pay_status = 0;
-            this.params.finish_status = 0;
+            // this.params.cancel_status = 0;
+            // this.params.confirm_status = null;
+            // this.params.pay_status = 0;
+            // this.params.finish_status = 0;
+            this.params.order_status = 1;
             break;
           case 2: //待发货
-            this.params.cancel_status = 0;
-            this.params.confirm_status = null;
-            this.params.pay_status = 0;
-            this.params.finish_status = 0;
+            // this.params.cancel_status = 0;
+            // this.params.confirm_status = null;
+            // this.params.pay_status = 0;
+            // this.params.finish_status = 0;
+            this.params.order_status = 2;
             break;
           case 3: //待收货
-            this.params.cancel_status = 0;
-            this.params.confirm_status = 1;
-            this.params.pay_status = 1;
-            this.params.finish_status = 0;
+            // this.params.cancel_status = 0;
+            // this.params.confirm_status = null;
+            // this.params.pay_status = 0;
+            // this.params.finish_status = 0;
+            this.params.order_status = 3;
             break;
           case 4: //已完成
-            this.params.cancel_status = 0;
-            this.params.confirm_status = null;
-            this.params.pay_status = null;
-            this.params.finish_status = 1;
+            // this.params.cancel_status = 0;
+            // this.params.confirm_status = null;
+            // this.params.pay_status = null;
+            // this.params.finish_status = 1;
+            this.params.order_status = 4;
             break;
-          case 5: //已取消
-            this.params.cancel_status = 1;
-            this.params.confirm_status = null;
-            this.params.finish_status = null;
-            this.params.pay_status = null;
+          case 5: //已关闭
+            // this.params.cancel_status = 1;
+            // this.params.confirm_status = null;
+            // this.params.finish_status = null;
+            // this.params.pay_status = null;
+            this.params.order_status = 5;
             break;
           default: //其他
             throw new Error('未知TabId')
@@ -652,13 +636,33 @@
         })
       },
       async infiniteCallback(response) { //加载更多订单
-        if (response.Data.length > 0) {
-          response.Data.map(i => {
-            i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
+        if (response.data.data.length > 0) {
+          response.data.data.map(i => {
+            // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
             this.orderList.push(i)
+            
           })
         }
+        // this.orderList.map(item=>{
+        //       this.orderListDetail.push(item)
+        // })
+        // this.orderListDetail.map(i=>{
+        //         // this.totalNum += i.num
+        //         this.orderListDetailin.push(i.item_info_list)
+        // })
+        // this.orderListDetailin.map(i=>{
+        //         this.totalNum += i.num
+        // })
+
       },
+    },
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
     },
     mounted: function () {
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))

@@ -226,7 +226,7 @@
           city: this.addressForm.city,
           area: this.addressForm.area,
           address: this.addressForm.address,
-          if_default: this.addressForm.selected ? 0 : 1,
+          if_default: this.addressForm.selected ? 1 : 0,
         };
         if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
           params.consignee_id = this.$route.params.consignee_id
@@ -239,7 +239,8 @@
             Toast({
               message: '保存成功'
             })
-            this.$router.push({path: '/addressList'})
+            // this.$router.push({path: '/addressList'})
+            this.$router.go(-1)
           }
         }).catch(error=>{
             Toast({
@@ -256,7 +257,8 @@
             Toast({
               message: '保存成功'
             })
-            this.$router.push({path: '/addressList'})
+            // this.$router.push({path: '/addressList'})
+            this.$router.go(-1)
           }
         }).catch(error=>{
             Toast({
@@ -280,7 +282,6 @@
             }
           }).catch(err => { 
             if (err == 'cancel') {     //取消的回调
-              
             } 
           });
       },
@@ -296,7 +297,8 @@
             Toast({
               message: '删除成功'
             })
-            this.$router.push({path: '/addressList'})
+            // this.$router.push({path: '/addressList'})
+            this.$router.go(-1)
           }
         });
       },
@@ -331,7 +333,7 @@
           that.addressForm.city = item.city;
           that.addressForm.area = item.area;
           that.addressForm.address = item.address;
-          that.addressForm.selected = item.if_default===0 ? true : false;
+          that.addressForm.selected = item.if_default===1 ? true : false;
           }
         })
           

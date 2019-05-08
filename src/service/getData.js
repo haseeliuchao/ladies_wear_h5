@@ -65,11 +65,13 @@ export const getConfirmSelectedProductList = (params) => new Http().require({api
 
 export const createOrder = (params) => new Http().require({api: '/api/shop/CreateOrder',param: params}); //获取
 
-export const finishOrder = (params) => new Http().require({api: '/api/shop/FinishOrder',param: params}); //确认收货
+export const finishOrder = (params) => new Http().require({api: '/api/order/receipt',param: params}); //确认收货
 
-export const cancelOrder = (params) => new Http().require({api: '/api/shop/CancelOrder',param: params}); //取消订单
+export const cancelOrder = (params) => new Http().require({api: '/api/order/cancel',param: params}); //取消订单
 
-export const getOrderList = (params) => new Http().require({api: '/api/shop/GetOrderList',param: params}); //获取
+export const getOrderList = (params) => new Http().require({api: '/api/order/list',param: params}); //获取
+
+export const getOrderDetail = (params) => new Http().require({api: '/api/order/details',param: params}); //获取
 
 export const getOrder = (params) => new Http().require({api: '/api/items',param: params}); //获取
 

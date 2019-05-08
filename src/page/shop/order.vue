@@ -314,11 +314,12 @@
               padding: $padding;
               width: 100%;
               >div {
-                @include flexbox(flex-start,
+                @include flexbox(flex-end,
                 flex-start,
                 row,
                 nowrap);
                 width: 100%;
+                padding: 0px;
                 img {
                   max-width: 90px;
                   max-height: 90px;
@@ -351,7 +352,7 @@
                     nowrap);
                   }
                   p {
-                    @include textoverflow(3);
+                    @include textoverflow(2);
                     font-size: 13px;
                     margin: 4px 0;
                     color: #333;
@@ -406,10 +407,10 @@
             >span {
               padding: 4px 10px;
               color: $red;
-              font-size: 14px;
+              font-size: 13px;
               border: 1px solid $red;
               border-radius: 3px;
-              margin-left: 15px;
+              margin: 5px 0 5px 15px;
             }
           }
         }
@@ -422,66 +423,25 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p>订单已完成</p>
-         <img src="~jd/images/order_wancheng.png" style="height:48px;">
+         <p v-if="orderDetail.order_status===1">等待买家付款</p>
+         <p v-if="orderDetail.order_status===2">等待卖家发货</p>
+         <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
+         <p v-if="orderDetail.order_status===4">订单已完成</p>
+         <p v-if="orderDetail.order_status===5">订单已关闭</p>
+         <img v-if="orderDetail.order_status===1" src="~jd/images/order_daifu.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===2" src="~jd/images/order_daifa.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===3" src="~jd/images/order_daishou.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===4" src="~jd/images/order_wancheng.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===5" src="~jd/images/order_guanbi.png" style="height:48px;">
     </div>
     <div class="ordertop-address">
       <p class="address-title">收货地址</p>
-      <p class="address-username">张三三<em style="margin-left:12px;font-size:12px;">18312345678</em></p>
-      <p class="address-text">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301
-室</p>
+      <p class="address-username">{{orderDetail.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.consignee_phone}}</em></p>
+      <p class="address-text">{{orderDetail.consignee_address}}</p>
     </div>
 
 
     <div class="order-container">
-        <!-- 全部订单 -->
-        <!-- <div class="all-order" v-if="orderList!=''">
-          <div class="order-list">
-            <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top">
-                <div class="left">
-                  <img src="~jd/images/applist (5).png" alt="">
-                  <span>京东Apple 官方旗舰店</span>
-                </div>
-                <div class="right">
-                  <div class="order-status">
-                    <span v-if="item.orderInfo.pay_status === 0 && item.orderInfo.finish_status === 0">等待付款</span>
-                    <span v-if="item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 1 && item.orderInfo.finish_status === 0">等待收货</span>
-                    <span v-if="item.orderInfo.finish_status === 1">已完成</span>
-                    <span v-if="item.orderInfo.cancel_status === 1">已取消</span>
-                  </div>
-                </div>
-              </div>
-              <div class="order-product-list">
-                <div class="order-product-item" v-for="(prod,prodindex) in item.ProductList" :key="prodindex">
-                  <div>
-                    <img :src="prod.product.image_url[0].url" alt="">
-                    <div class="product-info">
-                      <p class="prod-name">{{prod.product.productName}}</p>
-                      <p class="prod-price">
-                        <strong>&yen;{{prod.product.price * prod.counter}}</strong>
-                        <span>x {{prod.counter}}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="order-sku">
-                <span>共{{item.ProductList.length}}件商品&nbsp;需支付：</span>
-                <strong>&yen;&nbsp;{{item.orderInfo.total_fee}}</strong>
-              </div>
-              <div class="order-btn-group">
-                <span class="payment" v-if="item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 0" @click="payment(item)">去支付</span>
-                <span class="payment" v-if="item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 1 && item.orderInfo.finish_status === 0"
-                  @click="finishOrder(item)">确认收货</span>
-                <span class="payment" v-if="item.orderInfo.confirm_status === 0 && item.orderInfo.pay_status === 0" @click="cancelOrder(item)">取消</span>
-                <span class="payment" v-if="item.orderInfo.comment_status === 0 && item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 1 && item.orderInfo.finish_status === 1"
-                  @click="commitMessage(item)">去评论</span>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
         <div class="all-order">
           <div class="order-list">
             <div class="order-item">
@@ -491,39 +451,30 @@
                 </div>
               </div>
               <div class="order-product-list">
-                <div class="order-product-item">
+                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
                   <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
+                    <img :src="item.item_img">
                     <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
+                      <p class="prod-name">{{item.item_title}}</p>
+                      <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
+                        <strong><span>&yen;</span><em>{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
+                        <span>x{{item.num}}</span>
                       </p>
                     </div>
                   </div>
-                </div>
-                <!-- <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment">售后中</span>
-                </div> -->
-                <div class="order-product-item">
-                  <div>
-                    <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232">
-                    <div class="product-info">
-                      <p class="prod-name">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-                      <p class="prodsku-info">颜色 红色   尺寸 M</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong>
-                        <span>x2</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
                 <div class="order-btn-group">
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5">退款</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==1">售后中</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==2">售后成功</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==3">售后驳回</span>
+                </div>
+                </div>
+                
+                <!-- <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" class="payment">售后成功</span>
             
-                </div>
+                </div> -->
               </div>
               
             </div>
@@ -531,18 +482,20 @@
         </div>
     </div>
     <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
         </div>
 
         <div class="order-product-detail" style="margin-top:10px;margin-bottom:90px">
-                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em>399</em><em style="font-size:12px;">.99</em></strong></p>
-                <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>38757328485</span></p>
-                <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>2018-01-13 13:36</span></p>
+                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em>{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
+                <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment">查看物流</span>
-                <span class="payment">确认收货</span>
+                <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment">取消订单</span>
+                <span v-if="orderDetail.order_status===1" class="payment">立即支付</span>
+                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment">查看物流</span>
+                <span v-if="orderDetail.order_status===3" class="payment">确认收货</span>
                 </div>
         </div>
   </div>
@@ -550,7 +503,7 @@
 
 <script>
   import {
-    getOrderList
+    getOrderDetail
   } from '@/service/getData';
   // import LoadMore from 'common/loadMore';
   import {
@@ -559,22 +512,15 @@
   export default {
     data() {
       return {
-        commad: getOrderList,
+        // commad: getOrderDetail,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false
         },
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
-        params: {
-          page_size: 10,
-          current_page: 1,
-          cancel_status: null,
-          confirm_status: null,
-          pay_status: null,
-          finish_status: null
+        orderDetail: {
         },
-        orderList: [],
         active: null
       };
     },
@@ -588,6 +534,23 @@
     computed: {},
 
     methods: {
+      async initData() {
+        // this.commentParam.ProductNo = this.$route.params.id;
+        let Data = await getOrderDetail({
+         order_id: this.$route.params.OrderNo
+        });
+        if(Data.code!=10000){
+          Toast({
+            message: Data.msg,
+            position: 'bottom'
+          })
+          return
+        }
+        this.orderDetail=Data.data
+        // this.orderDetail.orderDetailList=Data.data
+      },
+
+
       payment(item) {
         this.visiblePopup.paymentLoadingVisible = true;
         setTimeout(() => {
@@ -603,12 +566,19 @@
           Toast({
             message: response.Message
           })
-          this.onRefreshCallback()
         })
       },
     },
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
     mounted: function () {
-      
+      this.initData()
     }
   }
 

@@ -680,16 +680,15 @@
           <i class="arrow-right"></i>
         </div>
       </div> -->
-      <div class="ordertop-address" @click="()=>visiblePopup.selectedAdressVisible=true">
-        <div class="ordertop-addressleft">
-        <p class="address-username">张三三<em style="margin-left:12px;font-size:12px;">18312345678</em></p>
-        <p class="address-text">广东省 云浮市 云安县 文明街道 福光小区60幢3单元3号301室</p>
+      <div class="ordertop-address" v-for="(item,index) in defaultAddress" :key="index" @click="()=>visiblePopup.selectedAdressVisible=true">
+        <div class="ordertop-addressleft"  >
+        <p class="address-username">{{item.name}}<em style="margin-left:12px;font-size:12px;">{{item.phone}}</em></p>
+        <p class="address-text">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</p>
         </div>
         <p class="ordertop-addressright">
           修改 >
         </p>
       </div>
-
       <div class="all-order">
           <div class="order-list">
             <div class="order-item">
@@ -770,12 +769,12 @@
             </div>
           </div> -->
           <div class="address-container" v-if="addressData">
-            <div class="address-item" v-for="(item,index) in addressData" :key="index" @click="selectedAddress(item)">
-              <div class="address-itemleft">
+            <div class="address-item" v-for="(item,index) in addressData" :key="index" >
+              <div class="address-itemleft" @click="selectedAddress(item)">
               <p class="name">{{item.name}} {{item.phone}} <span v-if="item.if_default">默认</span></p>
               <p class="address">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</p>
               </div>
-              <div class="address-itemright">
+              <div class="address-itemright" @click="$router.push(`/address/${item.consignee_id}`)">
                 <img src="~jd/images/addressedit.png"/>
                 <p>编辑</p>
               </div>
@@ -783,13 +782,17 @@
             
           </div>
         <!-- </scroller> -->
-        <div class="addNewAddressbtn">添加新地址</div>
+        <div class="addNewAddressbtn" @click="$router.push(`/address`)">添加新地址</div>
       </div>
     </mt-popup>
   </div>
 </template>
 
 <script>
+import {
+    getLocalStorage,
+    setLocalStorage
+  } from '@/utils/mixin';
   import {
     Field,
     Button,
@@ -802,7 +805,7 @@
   export default {
     data() {
       return {
-        defaultAddress: null,
+        defaultAddress: [],
         totalFee: 0.00,
         paymentPassword: null,
         PaymentNo: null,
@@ -845,7 +848,7 @@
         this.visiblePopup.selectedAdressVisible = false;
         // this.addressData.map(item=>item.Selected=9);
         // item.Selected = 1;
-        this.defaultAddress = item;
+        this.defaultAddress[0] = item;
       },
 
       async initData() {
@@ -855,16 +858,16 @@
           number:this.$route.query.number}),
           checkout_type:this.$route.query.checkout_type
         })
-        if(!this.addressList){
+        // if(!this.addressList){
           let addressData = await this.$store.dispatch('GetAddressList',{page_size:100,current_page:1});
           this.addressData = addressData.data;
-        }else{
-          this.addressData = this.addressList.data;
-        }
-       
+        // }else{
+        //   this.addressData = this.addressList.data;
+        // }
+        setLocalStorage('addressList',this.addressData)
          this.addressData.map(item => {
-          if (item.if_default) {
-            this.defaultAddress =item;
+          if (item.if_default===1) {
+            this.defaultAddress.push(item);
           }
         });
         if(confirmSelectedData.data==''){

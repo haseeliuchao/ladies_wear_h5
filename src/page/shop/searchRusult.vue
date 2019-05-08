@@ -331,15 +331,11 @@
       async searchRusult() {
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
+        this.searchRusultData=[];
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
-        // this.$refs.searchRusultloadMore.onloadMoreScroll();
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
       },
       async infiniteCallback(response) { //下拉加载
-      // this.searchRusultData=response.data.items
-      if(this.searchParams.current_page ==1){
-        this.searchRusultData=[];
-      }
         if(response.data.items!=undefined&&response.data.items!=null){
         if (response.data.items.length > 0) {
           response.data.items.map(i => {
@@ -362,7 +358,6 @@
     mounted: function () {
       this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
       this.$refs.searchRusultloadMore.onloadMoreScroll();
-      // this.initData()
     }
   }
 

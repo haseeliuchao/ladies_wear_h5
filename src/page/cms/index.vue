@@ -155,6 +155,8 @@
     }
 
 
+
+
   .recommend {
     background: #f0f2f5;
     .gray-text {
@@ -347,12 +349,13 @@
           <!-- 为您推荐 -->
           <div class="floor recommend" style="top:0rem;">
             <div class="recommend-title">
+
+
               <ul>
-                <li @click="getGoodsdata('',0)" class="active">为您精选</li>
-                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" @click="getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
+                <li @click="getGoodsdata('',0)" :class="{'active':active===0}">为您精选</li>
+                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" :class="{'active':active===index+1}" @click="getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
               </ul>
             </div>
-            
           </div>
 
           <div class="content">
@@ -435,7 +438,8 @@
           category_id:'',
           page_size: 10,
           current_page: 1
-        }
+        },
+        active:0
       };
     },
     watch: {},
@@ -506,17 +510,16 @@
         }, 1000); 
       },
       async getGoodsdata(advertising_id,index) {
+        this.active = index;
         this.indexParams.page_size = 10;
         this.indexParams.current_page = 1;
         this.indexParams.advertising_id = advertising_id;
+        this.indexRusultData=[];
         this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-        // this.$refs.indexRusultloadMore.onloadMoreScroll();
+        
          this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
       },
       async infiniteCallback(response) { //下拉加载
-      if(this.indexParams.current_page===1){
-        this.indexRusultData=[];
-      }
         if(response.data.data!=undefined&&response.data.data!=null){
          if (response.data.data.length > 0) {
           response.data.data.map(i => {

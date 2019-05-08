@@ -149,7 +149,14 @@ const appRouter = {
                 component: Address,
                 meta: { keepAlive: false }
             }
-        ]
+        ],
+        scrollBehavior(to, from,savedPosition) {
+            return {
+              x: 0,
+              y: 0
+            }
+          }
+        
     }
     // import example from '@/router/example'
     // example.map(i=>{appRouter.routes.push(i)}) // 部署线上记得吧这行代码注释掉

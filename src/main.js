@@ -47,12 +47,13 @@ const config = {
     }
   });
 
- Vue.use(VeeValidate, config); //一般插件都要use一下
+ Vue.use(VeeValidate, config); 
 
-// Vue.use(VeeValidate);
+ 
 router.beforeEach((to,from,next)=>{
     next();
 })
+
 Vue.config.productionTip = false
 
 
