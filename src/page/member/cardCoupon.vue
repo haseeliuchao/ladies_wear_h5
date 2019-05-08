@@ -79,15 +79,16 @@
             }
           }
         }
+        .cardCoupon-tip{
+          display:flex;
+          flex:1;
+          justify-content:center;
+          width:100%;
+          padding:0 .3rem;
+          margin-top:50px;
+        }
       }
-      .cardCoupon-tip{
-        display:flex;
-        flex:1;
-        justify-content:center;
-        width:100%;
-        padding:0 .3rem;
-        margin-top:50px;
-      }
+      
     }
   }
 </style>
@@ -95,13 +96,13 @@
   <div class="cardCoupon">
     <div class="cardCoupon-container" v-if="cardCoupon!= ''">
       <div class="cardCoupon-title">
-        <ul v-for="(item,index) in cardCoupon.list" :key="index">
-          <li >未使用<span>({{cardCoupon.notUse}})</span></li>
-          <li class="active">使用记录<span>({{cardCoupon.use}})</span></li>
-          <li>已过期<span>({{cardCoupon.expire}})</span></li>
+        <ul>
+          <li @click="tab(1)" >未使用<span>({{cardCoupon.notUse}})</span></li>
+          <li @click="tab(2)" >使用记录<span>({{cardCoupon.use}})</span></li>
+          <li @click="tab(0)" >已过期<span>({{cardCoupon.expire}})</span></li>
         </ul>
       </div>
-      <ul class="cardCoupon-detail"  v-for="(item,index) in cardCoupon.list" :key="index">
+      <ul class="cardCoupon-detail"  v-show="item.user_coupon_status===num" v-for="(item,index) in cardCoupon.list" :key="index">
         <li class="cardCoupon-item">
           <div class="cardCoupon-item-con">
             <div class="item-left">
@@ -115,10 +116,10 @@
           </div>
           <p class="cardCoupon-item-useExplain">{{item.use_scope_type_str}}</p>
         </li>
+        <div class="cardCoupon-tip" v-if="cardCoupon.list">
+          ——————&nbsp;&nbsp;&nbsp;以上是近期得优惠券&nbsp;&nbsp;&nbsp;——————
+        </div>
       </ul>
-      <div class="cardCoupon-tip" v-if="cardCoupon">
-        ——————&nbsp;&nbsp;&nbsp;以上是近期得优惠券&nbsp;&nbsp;&nbsp;——————
-      </div>
     </div>
     <div class="cardCoupon-container" v-else>
       <img src="~jd/images/couponUse.png">
@@ -169,9 +170,11 @@ import BackHead from 'common/backHead';
           // //初始化数据时缓存
           // setLocalStorage('cardCoupon',this.cardCoupon)
         }
-        
-
-      },      
+      },
+      async tab(index){
+        this.num = index;
+        console.log(this.num) ;
+      }      
     },
     mounted: function () {
           this.initData()
