@@ -516,8 +516,7 @@
         this.indexParams.advertising_id = advertising_id;
         this.indexRusultData=[];
         this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-        
-         this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+        this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
       },
       async infiniteCallback(response) { //下拉加载
         if(response.data.data!=undefined&&response.data.data!=null){

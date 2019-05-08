@@ -55,7 +55,7 @@ export const selectProduct = (params) => new Http().require({api: '/api/member/s
 
 export const updselectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/upd',param: params}); //获取
 
-export const removeSelectedProduct = (params) => new Http().require({api: '/api/shop/RemoveSelectedProduct',param: params}); //获取
+export const removeSelectedProduct = (params) => new Http().require({api: '/api/member/shopping/cart/del',param: params}); //获取
 
 export const confirmSelectProduct = (params) => new Http().require({api: '/api/shop/ConfirmSelectProduct',param: params}); //获取
 

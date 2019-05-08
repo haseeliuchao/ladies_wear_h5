@@ -716,8 +716,8 @@
 
               <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>5</em><em style="font-size:12px;">.00</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
               </div>
             </div>
           </div>
@@ -732,7 +732,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><span>&yen;</span><em>{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></span>
+      <span>合计：<strong><span>&yen;</span><em>{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
       <div class="payBtn" @click="submitOrder">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
@@ -846,18 +846,24 @@ import {
     methods: {
       selectedAddress(item){
         this.visiblePopup.selectedAdressVisible = false;
-        // this.addressData.map(item=>item.Selected=9);
-        // item.Selected = 1;
         this.defaultAddress[0] = item;
       },
 
       async initData() {
-        // let defaultAddress = await this.$store.dispatch('GetDefaultAddress', {})
-        let confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
+        let confirmSelectedData={};
+        if(this.$route.query.checkout_type==1){
+          confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
+          shopping_cart_ids:this.$route.query.Selectedstr,
+          checkout_type:this.$route.query.checkout_type
+        })
+        }else{
+          confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
           shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
           number:this.$route.query.number}),
           checkout_type:this.$route.query.checkout_type
         })
+        }
+        
         // if(!this.addressList){
           let addressData = await this.$store.dispatch('GetAddressList',{page_size:100,current_page:1});
           this.addressData = addressData.data;

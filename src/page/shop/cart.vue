@@ -24,6 +24,93 @@
   /* 购物车列表 */
 
   .Section {
+    .cartListNoneOut{
+      .cartListNone{
+      height: 236px;
+      width: 100%;
+      background: #fff;
+      text-align: center;
+      overflow: hidden;
+      img{
+        height: 78px;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      };
+      p{
+        font-size: 15px;
+        line-height: 22px;
+        color: #999;
+      }
+    }
+    .product-list-top{
+      padding: 15px 12px; 
+      @include flexbox(space-between,center,row,nowrap);
+      font-size: 15px;
+      .product-list-topl{
+        color: #333;
+        border-left: 4px solid $red;
+        padding-left: 6px
+      }
+      .product-list-topr{
+        color: #666;
+        em{
+          color: $red
+        }
+      }
+    }
+      .product-list{
+        @include flexbox(space-between,center,row,wrap);
+        padding: 0 12px;
+        .prod-item{
+          background: #fff;
+          width: 48.6%;
+          margin-bottom: 8px;
+          border-radius: 6px;
+          overflow: hidden;
+          img{
+            width: 100%;
+            height: 162px;
+            border-radius: 6px;
+          }
+          .prod-info{
+            // margin-left: 10px;
+            padding: 0px 6px;
+            
+            @include flexbox(space-between,flex-start,column,wrap);
+            .prod-title{
+              font-size: 14px;
+              color: #333;
+              @include textoverflow(2);
+              height: 40px;
+              line-height: 20px;
+              margin-top: 4px;
+            }
+            .prod-price{
+              color: $red;
+              text-align:left;
+              line-height: 30px;
+              margin-bottom: 8px;
+              span{
+                font-size: $smsub;
+                margin-right: 5px;
+              }
+              strong{
+                font-size: 19px;
+              }
+            }
+            .prod-pro{
+              padding: 5px 0;
+              text-align: left;
+              color: $gray;
+              font-size: $subtitle;
+            }
+          }
+        }
+      }
+    }
+    
+
+
     .login-info {
       margin-top: 40px;
       position: relative;
@@ -216,7 +303,7 @@
       font-size: 12px;
       height: 100%;
       padding: 10px;
-      width: 70%;
+      width: 66%;
       @include flexbox(flex-start, center, row, nowrap);
       flex: initial;
       font-size: 13px;
@@ -249,7 +336,7 @@
       }
     }
     .right {
-      width: 30%;
+      width: 34%;
       height: 100%;
       background: #ff2741;
       color: #fff;
@@ -270,7 +357,8 @@
       color: $red;
       font-size: 16px;
       line-height: 30px;
-      margin-right: 20px;
+      margin-right: 12px;
+      // width: 2.8rem;
     }
   }
 
@@ -305,7 +393,7 @@
             <span>Apple旗舰店</span>
           </div>
           <!-- 暂时还没做分店铺订单 -->
-          <div class="top-edit">
+          <div class="top-edit" v-if="cartlength>0">
             <p class="cartListNum">共{{cartlength}}件宝贝</p>
             <p class="cartListEdit" v-if="!delshow" @click="editProductdelshow()">管理</p>
             <p class="cartListEdit" v-if="delshow" @click="editProductdelshow()">完成</p>
@@ -339,12 +427,39 @@
             </div>
           </div>
         </div>
-        <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p>
+        <!-- <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p> -->
+        <div class="cartListNoneOut" v-if="!cartList || cartList == ''">
+          <div class="cartListNone">
+            <img src="~jd/images/cartnone.png">
+            <p>购物车快饿瘪了<br>
+              快给我挑点宝贝吧！</p>
+          </div>
+          <p class="product-list-top">
+            <span class="product-list-topl">精选推荐</span>
+            <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
+          </p>
+          <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+                ref="indexRusultloadMore">
+              <ul class="product-list" >
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+                  <img :src="item.item_index_img_url" alt="">
+                  <div class="prod-info">
+                    <p class="prod-title">{{item.item_title}}</p>
+                    <p class="prod-price">
+                      <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:15px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                      <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
+                      </p>
+                  </div>
+                </li>
+              </ul>
+            </load-more>
+
+        </div>
       </load-more>
     </div>
     <!-- 购物车列表 -->
     <!-- 底部价格计算 -->
-    <div class="section-bar">
+    <div class="section-bar" v-if="cartlength>0">
       <div class="left">
         <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click="selectedAllGoods"></i>
         <em>全选</em>
@@ -377,7 +492,7 @@
     mapMutations
   } from 'vuex';
   import LoadMore from 'common/loadMore';
-
+ import {searchtwoGoods} from '@/service/getData';
   export default {
     data() {
       return {
@@ -387,7 +502,15 @@
         selectedAll: false,
         isLogin: false,
         delshow:false,
-        cartlength:0
+        cartlength:0,
+        commad: searchtwoGoods,
+        indexRusultData:[],
+        indexParams: {
+          title: '',
+          category_id:'',
+          page_size: 10,
+          current_page: 1
+        },
       };
     },
 
@@ -417,39 +540,47 @@
         this.computedTotalFee();
       },
       editProductdel(){
-        let SelectedList = [];
+         let SelectedList = [];
+        let Selectedstr = '';
         this.cartList.map(item => {
           if (item.item_status === 1 && item.checked) {
             SelectedList.push(item.shopping_cart_id)
           }
         })
+        Selectedstr=SelectedList.join(",");
         if (SelectedList == '') return Toast({
           message: '请选择商品',
           position: 'bottom'
         });
         this.$store.dispatch('RemoveSelectedProduct', {
-          shopping_cart_ids: JSON.stringify(SelectedList)
+          shopping_cart_ids: Selectedstr
         }).then(response => {
           // this.$router.push('/createOrder');
           this.onRefreshCallback();
         })
+        
       },
       confirmOrder() {
         let SelectedList = [];
+        let Selectedstr = '';
         this.cartList.map(item => {
           if (item.item_status === 1 && item.checked) {
             SelectedList.push(item.shopping_cart_id)
           }
         })
+        Selectedstr=SelectedList.join(",");
         if (SelectedList == '') return Toast({
           message: '请选择商品',
           position: 'center'
         });
-        this.$store.dispatch('ConfirmSelectProduct', {
-          SelectedList: JSON.stringify(SelectedList)
-        }).then(response => {
-          this.$router.push('/createOrder');
-        })
+
+        this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
+
+        // this.$store.dispatch('ConfirmSelectProduct', {
+        //   SelectedList: JSON.stringify(SelectedList)
+        // }).then(response => {
+        //   this.$router.push('/createOrder');
+        // })
       },
       computedTotalFee() {
         let computedFee = 0,
@@ -514,6 +645,8 @@
         this.$store.dispatch('GetSelectedProductList').then(response => {
           setTimeout(() => {
             this.cartList = response.data.data || null;
+            this.cartlength=this.cartList?this.cartList.length:0;
+            // this.getGoodsdata()
             this.computedTotalFee();
             this.selectedAll = false;
             this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
@@ -525,6 +658,26 @@
           return this.$refs.cartLoadmore.LoadMoreLoading = false;
         });
       },
+      async getGoodsdata() {
+        this.indexParams.page_size = 10;
+        this.indexParams.current_page = 1;
+        this.indexRusultData=[];
+        this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+        this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+      },
+      async infiniteCallback(response) { //下拉加载
+        if(response.data.data!=undefined&&response.data.data!=null){
+         if (response.data.data.length > 0) {
+          response.data.data.map(i => {
+            this.indexRusultData.push(i)
+          })
+        }
+        }else{
+          this.indexRusultData=[];
+        }
+        
+      },
+
     },
     filters:{
         topriceafter(value){
@@ -536,6 +689,8 @@
     },
     mounted: function () {
       this.initData();
+      this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+      this.$refs.indexRusultloadMore.onloadMoreScroll();
     }
   }
 </script>
