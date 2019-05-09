@@ -58,7 +58,7 @@
       color: #fff;
     }
   .address-pricker {
-    @include wh(100%, 180px);
+    @include wh(100%, 220px);
     .address-picker-header {
       position: relative;
       p {
@@ -75,6 +75,17 @@
         font-size: 25px;
         color: #999;
         opacity: .7;
+      }
+    }
+    .pop-btn{
+      @include flexbox(space-between, center, row, nowrap);
+      font-size:16px;
+      padding:10px .3rem;
+      .cancle{
+        color:#999;
+      }
+      .confirm{
+        color:#333;
       }
     }
   }
@@ -94,6 +105,21 @@
   .confirmButton{
     color:#ff2741 !important;
   }
+  /* 收货地址城市选择样式 */
+  .picker-item{
+    color:#333;
+    font-size:16px;
+  }
+  .picker-item.picker-selected{
+    color:#333;
+  }
+  .picker-center-highlight{
+    border:none;
+    background:#f2f2f2;
+    z-index:-1
+  }
+  
+
 </style>
 <template>
   <div style="height:100%;">
@@ -143,7 +169,12 @@
         </div>
         <v-distpicker :placeholders="{ province: '请选择', city: '请选择', area: '请选择' }" wrapper="address-pricker-wrapper" type="mobile"
           @selected="onSelected"></v-distpicker> -->
-          <mt-picker :slots="myAddressSlots" @change="onMyAddressChange" @touchmove.native.stop.prevent></mt-picker>
+          <div class="pop-btn clearfix">
+            <p class="cancle" @click="cancle">取消</p>
+            <p class="confirm" @click="confirm">完成</p>
+          </div>
+          <mt-picker v-model="addressVisible" :slots="myAddressSlots" :show-toolbar="false" ref="picker" :item-height="44" @change="onMyAddressChange" @touchmove.native.stop.prevent>
+          </mt-picker>
       </mt-popup>
     </div>
   </div>
@@ -176,17 +207,20 @@
         },
         addressVisible: false,
         myAddressSlots: [
+    
           {
             flex: 1,
             defaultIndex: 1,    
             values: Object.keys(myaddress),  //省份数组
             className: 'slot1',
-            textAlign: 'center'
-          }, {
+            textAlign: 'left'
+          },
+           {
             divider: true,
-            content: '-',
+            content: '',
             className: 'slot2'
-          }, {
+          }, 
+          {
             flex: 1,
             values: [],
             className: 'slot3',
@@ -194,14 +228,14 @@
           },
           {
             divider: true,
-            content: '-',
+            content: '',
             className: 'slot4'
-          },
+          }, 
           {
             flex: 1,
             values: [],
             className: 'slot5',
-            textAlign: 'center'
+            textAlign: 'right'
           }
         ]
       };
@@ -315,6 +349,22 @@
           this.addressForm.area= values[2];
         }
       },
+      confirm(){
+        this.addressVisible = false;
+        // 获取变换后的城市数据
+        var valueArr = this.$refs.picker.getValues()
+        this.oldSlots = valueArr.concat();
+        this.myAddressCity = this.$refs.picker.getSlotValues(1);
+        this.myAddresscounty = this.$refs.picker.getSlotValues(2)
+      },
+      cancle(){
+        this.addressVisible = false;
+         // 把缓存的数据赋值给对应的slot
+        this.$refs.picker.setSlotValues(1,this.myAddressCity);
+        this.$refs.picker.setSlotValues(2,this.myAddresscounty);
+        this.$refs.picker.setValues(this.oldSlots);
+
+      },
       onSelected(data) {
         this.addressVisible = false;
         this.addressForm.province = data.province.value;
@@ -336,9 +386,8 @@
           that.addressForm.selected = item.if_default===1 ? true : false;
           }
         })
-          
         }
-      }
+      },
     },
 
     mounted: function () {
