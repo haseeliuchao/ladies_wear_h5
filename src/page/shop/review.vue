@@ -127,7 +127,7 @@
            <div class="file-data" v-for="(file,fileIndex) in item.uploadFiles" :key="fileIndex">
               <img :src="file.blob" alt="" :key="fileIndex">
             </div>
-            <span @click="commitMsg">发布</span>
+            <!-- <span @click="commitMsg">发布</span> -->
           </div>
         </div>
       </div>

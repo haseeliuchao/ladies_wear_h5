@@ -28,6 +28,9 @@ const SearchRusult = () =>  import ('page/shop/searchRusult')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
 const Review = () =>    import ('page/shop/review')
+const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
+const AfterSale = () =>    import ('page/shop/afterSale')
+const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
     /* shop */
 
 const appRouter = {
@@ -154,6 +157,24 @@ const appRouter = {
                 path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/afterSaleChoice',
+                name: 'afterSaleChoice',
+                component: AfterSaleChoice,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/afterSale',
+                name: 'afterSale',
+                component: AfterSale,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/afterSaleDetail',
+                name: 'afterSaleDetail',
+                component: AfterSaleDetail,
                 meta: { keepAlive: false }
             }
         ],

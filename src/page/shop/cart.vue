@@ -658,13 +658,13 @@
           return this.$refs.cartLoadmore.LoadMoreLoading = false;
         });
       },
-      async getGoodsdata() {
-        this.indexParams.page_size = 10;
-        this.indexParams.current_page = 1;
-        this.indexRusultData=[];
-        this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-        this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
-      },
+      // async getGoodsdata() {
+      //   this.indexParams.page_size = 10;
+      //   this.indexParams.current_page = 1;
+      //   this.indexRusultData=[];
+      //   this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+      //   this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+      // },
       async infiniteCallback(response) { //下拉加载
         if(response.data.data!=undefined&&response.data.data!=null){
          if (response.data.data.length > 0) {
