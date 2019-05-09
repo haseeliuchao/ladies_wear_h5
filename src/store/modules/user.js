@@ -15,7 +15,8 @@ import {
   payByWallet,
   shopFavorite,
   getMyShopFavorite,
-  cardCoupon
+  cardCoupon,
+  searchImg
 } from '@/service/getData';
 import {
   setSessionStorage,

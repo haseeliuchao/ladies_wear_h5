@@ -1,152 +1,34 @@
-<!-- searchRusult -->
+<!-- searchImg -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
-  .scrollbtm {
-    background: #ffffff !important;
-    .scanCode {
-      .searchQrcodeIcon {
-        background-position: -1.933rem 0 !important;
-      }
-      color: #333 !important;
-    }
-    .searchInput {
-      .search-box {
-        background: #e2e2e2 !important;
-        span {
-          color: #ffffff !important;
-        }
-      }
-      .searchContentIcon {
-        background-position: -2.24rem 0 !important;
-      }
-    }
-    .searchMsg {
-      .searchMsgIcon {
-        background-position: -2.6rem 0 !important;
-      }
-      color: #333 !important;
-    }
-  }
-  .searchRusultall{
-   position: fixed;
-   top: 0;
-   transition: .6s;
-   background: #fff;
-   width: 10rem;
-   
-    max-width: 10rem;
-    min-height:1.2rem;
-    margin: 0 auto;
-    z-index: 2000;
-    .homesearch-hot{
-      height: 1rem;
-      padding-bottom: 10px;
-      @include flexbox(space-between, center, row, nowrap);
-      p{
-        padding-left: .4rem;
-        color: #666;
-       @include flexbox(space-between, center, row, nowrap);
-      }
-      ul{
-        @include flexbox(start, center, row, nowrap);
-        flex: 7;
-        li{padding: 5px 10px;
-    background: #f2f2f2;
-    border-radius: 10rem;
-    margin-right: 10px;
-    color: #666
-    }
-      }
-    }
-  }
-  .searchRusult {
-    
-   
-    
-   
-    
-    @include flexbox(space-between, center, row, nowrap);
-    // min-height: 40px;
-    padding: .33rem;
-    .logoIcon{
-      width:1.3rem;
-      height:.9rem;
-      margin-right:.24rem;
-      background:url('~jd/images/logoicon.png') no-repeat;
-      background-size:100% 100%;
-    }
-    .searchIcon {
-      display: block;
-      background: url('~jd/images/camera_sach.png') no-repeat;
-      background-size: 100% 100%;
-    }
-    .searchInput {
-      width: 100%;
-      .search-box {
-        background: #fff;
-        height: .86rem;
-        border-radius: .86rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        @include flexbox(flex-start,
-        center,
-        row,
-        nowrap);
-        padding: 0 .3rem;
-        .searchContentIcon {
-          height: .45rem;
-          width: .45rem;
-          margin-right: .3rem;
-          background: url('~jd/images/sarchicon.png') no-repeat;
-          // background-position: -0.46rem 0;
-          background-size: 100% 100%;
-        }
-        span {
-          color: #999;
-          font-size: 14px;
-        }
-      }
-    }
-    .scanCode {
-      min-width: 1.2rem;
-      @include flexbox(center,
-      center,
-      column,
-      wrap);
-      color: #fff;
-      font-size: 10px;
-      margin-left:.2rem;
-      span {
-        padding-top: 2px;
-        color: #333
-      }
-      .searchQrcodeIcon {
-        width: .46rem;
-        height: .44rem;
-        background-position: 0 0;
-      }
-      
-    }
-    .searchMsg {
-      min-width: 1rem;
-      @include flexbox(center,
-      center,
-      column,
-      wrap);
-      color: #fff;
-      font-size: 12px;
-      visibility: hidden;
-      span {
-        padding-top: 2px;
-      }
-      .searchMsgIcon {
-        height: .65rem;
-        min-width: .65rem;
-        background-position: -1.3rem 0;
-      }
-    }
-  }
-
+  // .scrollbtm {
+  //   background: #ffffff !important;
+  //   .scanCode {
+  //     .searchQrcodeIcon {
+  //       background-position: -1.933rem 0 !important;
+  //     }
+  //     color: #333 !important;
+  //   }
+  //   .searchInput {
+  //     .search-box {
+  //       background: #e2e2e2 !important;
+  //       span {
+  //         color: #ffffff !important;
+  //       }
+  //     }
+  //     .searchContentIcon {
+  //       background-position: -2.24rem 0 !important;
+  //     }
+  //   }
+  //   .searchMsg {
+  //     .searchMsgIcon {
+  //       background-position: -2.6rem 0 !important;
+  //     }
+  //     color: #333 !important;
+  //   }
+  // }
+  
+  /* 图搜 */
   .searchContainer {
     position: fixed;
     left: 0;
@@ -157,63 +39,50 @@
     overflow-x: hidden;
     overflow-y: hidden;
     background: #f8f8f8;
+    /* 搜索图片 */
     .search-top {
-      @include flexbox(space-between,
+      @include flexbox(center,
       center,
-      row,
-      nowrap);
-      padding: 10px 0 10px 20px;
+      column,
+      wrap);
+      padding: 0 .3rem;
+      margin-bottom:8px;
       background: #fff;
-      border-bottom: 1px solid $border;
-      .searchInput {
-        width: 90%;
-        .search-box {
-          width: 100%;
-          position: relative;
-          background: #f4f4f4;
-          padding: 5px 10px;
-          border-radius: 10px;
-          @include flexbox(space-between,
-          center,
-          row,
-          nowrap);
-          input {
-            width: 100%;
-            color: #333;
-            font-size: $subtitle;
-            outline: none;
-            border: none;
-            box-shadow: none;
-            text-shadow: none;
-            font-weight: normal;
-            background: transparent;
-          }
-          .clear {
-            width: .42rem;
-            height: .42rem;
-            margin: 0;
-            position: absolute;
-            right: 10px;
-            padding: 5px;
-            @include flexbox(center,
-            center,
-            row,
-            nowrap);
-            color: #fff;
-            font-size: 15px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, .15);
-          }
-          .searchIcon {
-            display: block;
-            height: .38rem;
-            margin-right: .05rem;
-            width: .4rem;
-            background: url('~jd/images/searchIcon.png') no-repeat;
-            background-size: 600% 100%;
-            background-position: -0.34rem 0;
+      .searchImgInput {
+        @include flexbox(center,center,column,wrap);
+        position:relative;
+        .img-container{
+          width:3rem;
+          height:3rem;
+          margin:30px 0 20px;
+          img{
+            width:100%;
+            height:100%;
+            border-radius:50%;
           }
         }
+        input{
+          position:absolute;
+          top:30px;
+          width:3rem;
+          height:3rem;
+          border-radius:1.5rem;
+          opacity: 0;
+        }
+      }
+      >p{
+        color:#333;
+        font-size:15px;
+      }
+      p.expire-time{
+        margin-top:10px;
+      }
+      p.renew-btn{
+        margin:20px 0;
+        padding:6px .9rem;
+        color:$red;
+        border:1px solid $red;
+        border-radius:16px;
       }
       >span {
         text-align: center;
@@ -222,252 +91,170 @@
         color: $gray;
       }
     }
-    .search-hot {
-      padding: $padding;
-      background: #fff;
-      >p {
-        font-size: $title;
-        // font-weight: bold;
-        color: #333;
-        text-align: left;
-        // padding: $padding;
-        margin-bottom: $margin;
-      }
-      .search-hot-list {
-        @include flexbox(flex-start,
-        center,
-        row,
-        wrap);
-        padding: $padding 0 0;
-        .search-hot-item {
-          border-radius: 10px;
-          color: #666;
-          padding: 5px 16px 8px 0;
-          // margin: 6px 6px 0px;
-          font-size: $subtitle;
-          text-align: center;
-        }
-      }
-    }
+    /* 搜索历史 */
     .search-history {
-      // margin-top: $margin;
       background: #fff;
-      padding: $padding 0 $padding $padding;
-      >p {
-        font-size: $title;
-        // font-weight: bold;
-        margin-bottom: $margin;
-        color: #333;
-        text-align: left;
-        // border-bottom: 1px solid $border;
-        span{
-          display: inline-block;
-          background: url('~jd/images/hositoytdel.png') no-repeat;
-          width: 0.41rem;
-          height: 0.41rem;
-          background-size: 100%;
-          float: right;
-          margin-right: .4rem
-        }
-      }
-      .clear-history {
-        width: 5rem;
-        padding: $padding 0;
-        margin: $margin auto;
-        border: 1px solid $border;
-        border-radius: 2px;
-        font-size: $subtitle;
-        color: $gray;
-        @include flexbox(center,
-        center,
-        row,
-        nowrap);
+      padding: 0 .3rem;
+      .search-history-title{
+        padding:10px 0;
+        font-size:15px;
+        color:#333;
       }
       .search-history-list {
         @include flexbox(flex-start,
         center,
         row,
         wrap);
-        padding: $padding 0 0;
+        width:100%;
         .search-history-item {
-          background: #f2f2f2;
-          border-radius: 10px;
-          color: #666;
-          padding: 5px 14px;
-          margin: 0 10px 10px 0;
-          font-size: $subtitle;
-          text-align: center;
-        }
-      }
-    }
-    .search-rusult-content {
-      .search-rusult-goods {
-        @include flexbox(flex-start,
-        center,
-        row,
-        nowrap);
-        padding: $padding;
-        span {
-          font-size: $subtitle;
-          margin-left: 5px;
-          color: $gray;
-        }
-        i {
-          display: block;
-          width: 17px;
-          height: 16px;
-          background: url('~jd/images/store.png') no-repeat;
-          background-size: 100%;
-        }
-      }
-      .search-rusult-list {
-        @include flexbox(flex-start,
-        center,
-        column,
-        wrap);
-        .search-rusult-item {
-          width: 100%;
-          text-align: left;
-          padding: $padding;
-          color: $gray;
-          font-size: $subtitle;
-          border-bottom: 1px solid $border;
-          p {
-            @include textoverflow(1)
+          width: 2.15rem;
+          border-radius: 5px;
+          margin: .1rem;
+          img{
+            width:100%;
           }
         }
       }
+    }
+    /* 精品推荐 */
+    .recommend-content{
+      padding:0 .3rem;
+      .product-list-top{
+        padding: 15px 12px; 
+        @include flexbox(space-between,center,row,nowrap);
+        font-size: 15px;
+        .product-list-topl{
+          color: #333;
+          border-left: 4px solid $red;
+          padding-left: 6px
+        }
+        .product-list-topr{
+          color: #666;
+          em{
+            color: $red
+          }
+        }
+      }
+      .product-list{
+        @include flexbox(space-between,center,row,wrap);
+        padding: 0 12px;
+        .prod-item{
+          background: #fff;
+          width: 48.6%;
+          margin-bottom: 8px;
+          border-radius: 6px;
+          overflow: hidden;
+          img{
+            width: 100%;
+            height: 162px;
+            border-radius: 6px;
+          }
+          .prod-info{
+            // margin-left: 10px;
+            padding: 0px 6px;
+            
+            @include flexbox(space-between,flex-start,column,wrap);
+            .prod-title{
+              font-size: 14px;
+              color: #333;
+              @include textoverflow(2);
+              height: 40px;
+              line-height: 20px;
+              margin-top: 4px;
+            }
+            .prod-price{
+              color: $red;
+              text-align:left;
+              line-height: 30px;
+              margin-bottom: 8px;
+              span{
+                font-size: $smsub;
+                margin-right: 5px;
+              }
+              strong{
+                font-size: 19px;
+              }
+            }
+            .prod-pro{
+              padding: 5px 0;
+              text-align: left;
+              color: $gray;
+              font-size: $subtitle;
+            }
+          }
+        }
+      }
+
     }
   }
 
 </style>
 <template>
   <div style="position:relative;">
-    <!-- 文字搜索 -->
-    <!-- <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
-      <div class="searchContainer">
-        <div class="search-top">
-          <div class="searchInput" @click="$refs.searchInput.focus()">
-            <div class="search-box">
-              <i class="searchIcon searchContentIcon"></i>
-              <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
-              <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
-            </div>
-          </div>
-          <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span>
-        </div>
-        <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
-          <div class="search-history">
-            <p>历史记录 <span></span></p>
-            <ul class="search-history-list">
-              <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
-
-              <!-- <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-              <li class="search-history-item">智能手表</li>
-            </ul>
-            <div class="clear-history">
-              <i></i>
-              <span>清空历史搜索</span>
-            </div>
-          </div>
-          <div class="search-hot">
-            <p>热门搜索</p>
-            <ul class="search-hot-list">
-              <li class="search-hot-item">智能手表</li>
-              <li class="search-hot-item">智能</li>
-              <li class="search-hot-item">智能手表</li>
-              <li class="search-hot-item">智能手表</li>
-              <li class="search-hot-item">智能手表</li>
-              <li class="search-hot-item">智能手表</li>
-              <li class="search-hot-item">智能手表</li>
-            </ul>
-          </div>
-          
-        </load-more>
-        <div class="search-rusult-content" v-show="Keyword.length>0">
-          <load-more style="background:#fff;width: 100%;height: 100%;">
-            <div class="search-rusult-goods">
-              <i></i>
-              <span>搜素 {{Keyword}}...</span>
-            </div>
-            <ul class="search-rusult-list" v-if="searchRusultData!=''">
-              <li class="search-rusult-item" v-for="(item,index) in searchRusultData" :key="index" @click="selectedProd(item)">
-                <p>{{item.productName}}</p>
-              </li>
-            </ul>
-            <p style="text-align:center;text-align: left;padding: 10px;color: #81838e;font-size: 13px;border-bottom: 1px solid #e1e1e1;"
-              v-else>暂无数据...</p>
-          </load-more>
-        </div>
-      </div> -->
-    <!-- </mt-popup> -->
-
     <!-- 图片上传搜索 -->
-    <mt-popup v-model="searchImgVisible" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+    <mt-popup  :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="overlayer">
         <img src="~jd/images/popup-con.png">
         <div class="jump-btn"></div>
       </div>
     </mt-popup>
-    <div class="searchContainer" v-if="searchImgVisible">
+    <div class="searchContainer">
+      <!-- v-if="searchImgVisible" -->
       <div class="search-top">
-        <div class="searchInput">
+        <div class="searchImgInput">
           <div class="upload">
             <div class="img-container">
               <!-- 接受预览的img container -->
-              <img :src="src" alt="user image">
+              <img src='~jd/images/photo.png' alt="">
             </div>
             <!-- 文件上传的input -->
             <input type="file" @change="getFile" ref="file" id="file"> 
-            <label for="file">画像変更</label>
+            <!-- <label for="file">图像上传</label> -->
           </div>
         </div>
-        <p class="search-tip">同款商品更低价，不花冤枉钱！</p>
+        <p class="search-tip">同款商品更低价，不花冤枉钱!</p>
         <p class="expire-time">
-          图搜有效期:<span>2012/01/29</span>到期
+          图搜有效期：<span>2012/01/29</span>到期
         </p>
         <p class="renew-btn">续费 > </p>
-        <!-- <div class="searchInput" @click="$refs.searchInput.focus()">
-          <div class="search-box">
-            <i class="searchIcon searchContentIcon"></i>
-            <input type="search" v-model="Keyword" @keypress="truesearchGoods" placeholder="MacBook Pro 15.4寸" ref="searchInput" v-searchFocus>
-            <span class="clear" @click="Keyword=''" v-show="Keyword.length>0">&times;</span>
-          </div>
-        </div>
-        <span @click="()=>{Keyword='';searchVisiblie=false}">取消</span> -->
       </div>
 
       <!-- 精品推荐 -->
-      <div class="recommend-content" v-show="Keyword.length>0">
-        <load-more style="background:#fff;width: 100%;height: 100%;">
-          <div class="recommend-content-goods">
-            <ul class="recommend-content-list" v-if="searchRusultData!=''">
-              <li class="search-rusult-item" v-for="(item,index) in searchRusultData" :key="index" @click="selectedProd(item)">
-                <p>{{item.productName}}</p>
+      <div class="recommend-content" style="display:none;">
+        <p class="product-list-top">
+          <span class="product-list-topl">精选推荐</span>
+          <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
+        </p>
+        <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+              ref="indexRusultloadMore">
+            <ul class="product-list" >
+              <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+                <img :src="item.item_index_img_url" alt="">
+                <div class="prod-info">
+                  <p class="prod-title">{{item.item_title}}</p>
+                  <p class="prod-price">
+                    <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:15px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                    <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
+                    </p>
+                </div>
               </li>
             </ul>
-          </div>
         </load-more>
       </div>
       <!-- 搜索历史记录 -->
       <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
         <div class="search-history">
-          <p>搜索记录 <span></span></p>
-          <ul class="search-history-img">
+          <p class="search-history-title">搜索记录</p>
+          <ul class="search-history-list">
             <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
 
-            <li class="search-history-item"><img src=""></li>
-            <li class="search-history-item">智能</li>
-            <li class="search-history-item">智能手表</li>
-            <li class="search-history-item">智能手表</li>
-            <li class="search-history-item">智能手表</li>
-            <li class="search-history-item">智能手表</li>
-            <li class="search-history-item">智能手表</li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item"><img src="~jd/images/product.png"></li>
           </ul>
         </div>
       </load-more>
@@ -476,7 +263,6 @@
 
   </div>
 </template>
-
 <script>
   import {
     searchGoods
@@ -486,6 +272,8 @@
     setLocalStorage
   } from '@/utils/mixin'
   import LoadMore from 'common/loadMore';
+  import SearchBar from 'page/shop/searchBar';
+  import {searchtwoGoods} from '@/service/getData';
   import {
     
     Toast
@@ -499,15 +287,22 @@
         searchHistoryData: [],
         searchRusultData: [],
         searchImgVisible: false ,
-        src: '/static/image/avatar.png' //先设置一个默认图片   
+        // src: '/static/image/avatar.png' //先设置一个默认图片
+        indexRusultData:[],
+        indexParams: {
+          title: '',
+          category_id:'',
+          page_size: 10,
+          current_page: 1
+        },   
       }
     },
-    props: {
-      Status: {
-        type: Boolean,
-        required: true
-      }
-    },
+    // props: {
+    //   Status: {
+    //     type: Boolean,
+    //     required: true
+    //   }
+    // },
     watch: {
       Keyword(val) {
         this.searchRusult(val)
@@ -571,14 +366,69 @@
         reader.onloadend = function(){
           _this.src = this.result;
         }
+      },
 
-      }
+       async initData() {
+        let Data = await this.$store.dispatch('GetSelectedProductList');
+        this.cartList = Data.data.data || null;
+        this.cartlength=this.cartList?this.cartList.length:0
+      },
+      async onRefreshCallback() {
+        this.$store.dispatch('GetSelectedProductList').then(response => {
+          setTimeout(() => {
+            this.cartList = response.data.data || null;
+            this.cartlength=this.cartList?this.cartList.length:0;
+            // this.getGoodsdata()
+            this.computedTotalFee();
+            this.selectedAll = false;
+            this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
+          }, 500);
+        }, error => {
+          this.$refs.cartLoadmore.translate = 0;
+          this.$refs.cartLoadmore.topStatus = 'pull';
+          this.$refs.cartLoadmore.AllLoaded = false;
+          return this.$refs.cartLoadmore.LoadMoreLoading = false;
+        });
+      },
+      async getGoodsdata() {
+        this.indexParams.page_size = 10;
+        this.indexParams.current_page = 1;
+        this.indexRusultData=[];
+        this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+        this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+      },
+      async infiniteCallback(response) { //下拉加载
+        if(response.data.data!=undefined&&response.data.data!=null){
+         if (response.data.data.length > 0) {
+          response.data.data.map(i => {
+            this.indexRusultData.push(i)
+          })
+        }
+        }else{
+          this.indexRusultData=[];
+        }
+        
+      },
     },
 
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
     mounted: function () {
       try{
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
-      }catch(err){}
+      }catch(err){};
+
+      this.initData();
+      this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+      this.$refs.indexRusultloadMore.onloadMoreScroll();
+
+
     }
   }
 

@@ -361,7 +361,7 @@
           </slot>
         </div>
         <slot name="right-icon">
-          <div class="scanCode" @click="$router.push(`/searchBar`)">
+          <div class="scanCode" @click="$router.push(`/searchImg`)">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>
@@ -440,7 +440,7 @@
 
 <script>
   import {
-    searchGoods,searchhotGoods
+    searchGoods,searchhotGoods,
   } from '@/service/getData'
   import {
     getLocalStorage,

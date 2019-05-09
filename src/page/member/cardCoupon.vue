@@ -62,8 +62,8 @@
               justify-content:center;
               align-items:center;
               img{
-                width:50%;
-                height:50%;
+                width:55%;
+                height:55%;
               }
             }
           }
@@ -97,21 +97,23 @@
     <div class="cardCoupon-container" v-if="cardCoupon!= ''">
       <div class="cardCoupon-title">
         <ul>
-          <li @click="tab(1)" >未使用<span>({{cardCoupon.notUse}})</span></li>
-          <li @click="tab(2)" >使用记录<span>({{cardCoupon.use}})</span></li>
-          <li @click="tab(0)" >已过期<span>({{cardCoupon.expire}})</span></li>
+          <li @click="couponRecord(0)" :class="{'active':active===0}">未使用<span>({{cardCoupon.notUse}})</span></li>
+          <li @click="couponRecord(1)" :class="{'active':active===1}">使用记录<span>({{cardCoupon.use}})</span></li>
+          <li @click="couponRecord(2)" :class="{'active':active===2}">已过期<span>({{cardCoupon.expire}})</span></li>
         </ul>
       </div>
-      <ul class="cardCoupon-detail"  v-show="item.user_coupon_status===num" v-for="(item,index) in cardCoupon.list" :key="index">
+      <ul class="cardCoupon-detail" v-for="(item,index) in cardCoupon.list" :key="index">
         <li class="cardCoupon-item">
           <div class="cardCoupon-item-con">
             <div class="item-left">
-              <p class="item-price">￥{{item.discount_price}}</p>
+              <p class="item-price">￥{{item.discount_price/100}}</p>
               <p class="item-useTip">{{item.title}} (不包含运费)</p>
-              <p class="item-expiryTime">有效期{{item.used_start}}-{{item.used_end}}</p>
+              <p class="item-expiryTime">有效期{{item.used_start|DateFormat('yyyy.MM.dd')}}-{{item.used_end|DateFormat('yyyy.MM.dd')}}</p>
             </div>
             <div class="item-right coupon-status">
-              <img src="~jd/images/couponUse.png">
+              <img  v-if="item.user_coupon_status==1" src="~jd/images/couponNotuse.png">
+              <img  v-if="item.user_coupon_status==2" src="~jd/images/couponUse.png">
+              <img  v-if="item.user_coupon_status==0" src="~jd/images/couponNotuse.png">
             </div>
           </div>
           <p class="cardCoupon-item-useExplain">{{item.use_scope_type_str}}</p>
@@ -141,10 +143,13 @@ import BackHead from 'common/backHead';
   export default {
     data() {
       return {
-        cardCoupon: [],
+        active:0,
+        cardCoupon: {},
         params: {  
         },
         // commad: cardCoupon
+        user_coupon_status:1,
+        status_url:''
       };
     },
 
@@ -158,7 +163,9 @@ import BackHead from 'common/backHead';
 
     methods: {
       async initData() {
-        let Data = await cardCoupon({});
+        let Data = await cardCoupon({
+          user_coupon_status:this.user_coupon_status
+        });
         if(Data.code!=10000){
           Toast({
             message: Data.msg,
@@ -171,9 +178,18 @@ import BackHead from 'common/backHead';
           // setLocalStorage('cardCoupon',this.cardCoupon)
         }
       },
-      async tab(index){
-        this.num = index;
-        console.log(this.num) ;
+      async couponRecord(index){
+        this.active = index;
+        if(index===0){
+          this.user_coupon_status=1;
+        }
+        if(index===1){
+          this.user_coupon_status=2;
+        }
+        if(index===2){
+          this.user_coupon_status=0;
+        }
+        this.initData()
       }      
     },
     mounted: function () {
