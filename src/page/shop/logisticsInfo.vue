@@ -120,6 +120,9 @@
     mounted: function () {
       this.initData();
     }
+
+
+    
   }
 
 </script>
