@@ -187,7 +187,8 @@
     <div class="order-container">
             <div class="order-item">
               <div class="order-product-list">
-                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" v-if="item.order_item_id==order_item_id" :key="index">
+                  <!-- v-if="item.order_item_id==order_item_id" -->
+                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list"  :key="index">
                   <div>
                     <img :src="item.item_img">
                     <div class="product-info">
