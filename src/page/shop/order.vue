@@ -494,7 +494,7 @@
         <div class="order-btn-group">
                 <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment">取消订单</span>
                 <span v-if="orderDetail.order_status===1" class="payment">立即支付</span>
-                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click="$router.push({path: '/afterSaleChoice',query: {order_id:itemdetail.order_id}})">查看物流</span>
+                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_id:itemdetail.order_id}})">查看物流</span>
                 <span v-if="orderDetail.order_status===3" class="payment">确认收货</span>
                 </div>
         </div>
