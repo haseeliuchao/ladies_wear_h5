@@ -81,7 +81,6 @@ export const getShopInfo = (params) => new Http().require({api: '/api/shop/GetSh
 
 export const getCommentList = (params) => new Http().require({api: '/api/shop/GetCommentList',param: params}); //获取
 
-export const commitMessage = (params) => new Http().require({api: '/api/shop/CommitMessage',param: params}); //获取
 export const logisticsInfo = (params) => new Http().require({api: '/api/order/query/logistics/info',param: params}); //获取物流信息
 export const commitMessage = (params) => new Http().require({api: '/api/post/sales/add',param: params}); //获取
 
