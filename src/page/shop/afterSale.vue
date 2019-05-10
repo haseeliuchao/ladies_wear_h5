@@ -339,12 +339,9 @@
               :maximum="6" @input-file="inputFile" @input-filter="inputFilter">
               <div class="uploadFile">
                 <i class="camera"></i>
-                <span>上传凭证<br>
-(最多6张)</span>
+                <span>上传凭证<br>(最多6张)</span>
               </div>
             </file-upload>
-          
-            <!-- <span @click="commitMsg">发布</span> -->
           </div>
     </div>
     <p class="backMoneyTip" style="line-height: 20px;

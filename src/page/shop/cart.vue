@@ -442,9 +442,9 @@
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
-                  <img :src="item.item_index_img_url" alt="">
+                  <img :src="item.index_img_url" alt="">
                   <div class="prod-info">
-                    <p class="prod-title">{{item.item_title}}</p>
+                    <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
                       <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:15px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
                       <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
@@ -492,7 +492,7 @@
     mapMutations
   } from 'vuex';
   import LoadMore from 'common/loadMore';
- import {searchtwoGoods} from '@/service/getData';
+ import {searchGoods} from '@/service/getData';
   export default {
     data() {
       return {
@@ -503,7 +503,7 @@
         isLogin: false,
         delshow:false,
         cartlength:0,
-        commad: searchtwoGoods,
+        commad: searchGoods,
         indexRusultData:[],
         indexParams: {
           title: '',
@@ -658,17 +658,10 @@
           return this.$refs.cartLoadmore.LoadMoreLoading = false;
         });
       },
-      // async getGoodsdata() {
-      //   this.indexParams.page_size = 10;
-      //   this.indexParams.current_page = 1;
-      //   this.indexRusultData=[];
-      //   this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-      //   this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
-      // },
       async infiniteCallback(response) { //下拉加载
-        if(response.data.data!=undefined&&response.data.data!=null){
-         if (response.data.data.length > 0) {
-          response.data.data.map(i => {
+        if(response.data.items!=undefined&&response.data.items!=null){
+         if (response.data.items.length > 0) {
+          response.data.items.map(i => {
             this.indexRusultData.push(i)
           })
         }

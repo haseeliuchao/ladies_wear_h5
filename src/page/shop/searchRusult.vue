@@ -303,6 +303,7 @@
         commad: searchGoods,
         searchParams: {
           title: '',
+          item_url:'',
           category_id:'',
           page_size: 10,
           current_page: 1
