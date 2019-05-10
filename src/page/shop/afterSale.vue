@@ -50,13 +50,25 @@
             width: 76px;
             height: 76px;
             margin-bottom: 16px;
+            position: relative;
+            span{
+                height: 22px;
+                width: 22px;
+                background: url('~jd/images/delImg.png') no-repeat;
+                display: block;
+                position: absolute;
+                z-index: 1;
+                background-size: 100%;
+                left: 64px;
+                top: -10px;
+            }
             img {
               width: 74px;
               height: 74px;
             }
           }
           .file-data:nth-of-type(3){
-           margin-right: 0px;
+        //    margin-right: 0px;
           }
           .uploadFile {
             border: 1px dashed #999;
@@ -317,8 +329,13 @@
     </div>
     <div class="uploadImg">
         <p>上传截图</p>
+        <!-- post-action="http://v0.api.upyun.com/laquimage" -->
         <div class="uploadFile-container">
-            <file-upload ref="upload" v-model="item.uploadFiles" :multiple="true" accept="image/*" post-action="http://awei.fun:3333/Unit/uploadfile"
+             <div class="file-data" v-for="(file,fileIndex) in item.uploadFiles" :key="fileIndex">
+              <span  @click.prevent="remove(file)"></span>
+              <img :src="file.blob" alt="" :key="fileIndex">
+            </div>
+            <file-upload ref="upload" v-model="item.uploadFiles" :multiple="true" accept="image/*" 
               :maximum="6" @input-file="inputFile" @input-filter="inputFilter">
               <div class="uploadFile">
                 <i class="camera"></i>
@@ -326,9 +343,7 @@
 (最多6张)</span>
               </div>
             </file-upload>
-           <div class="file-data" v-for="(file,fileIndex) in item.uploadFiles" :key="fileIndex">
-              <img :src="file.blob" alt="" :key="fileIndex">
-            </div>
+          
             <!-- <span @click="commitMsg">发布</span> -->
           </div>
     </div>
@@ -419,6 +434,7 @@
     getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
+  import axios from 'axios';
   import VueUploadComponent from 'vue-upload-component';
   import {
     Toast,
@@ -436,7 +452,11 @@
         visiblePopup: {
           selectedGoodStateVisible: false,
           selectedchoiceReasonVisible: false
-        }
+        },
+        imgRemoveIndex:null,
+        postSalesImgList: [],
+        postSalesImgstr: '',
+        imgRemoveIndexcur:''
       };
     },
 
@@ -456,14 +476,65 @@
       },
 
       inputFile: function (newFile, oldFile) {
-        if (newFile && oldFile && !newFile.active && oldFile.active) {
-          // 获得相应数据
-          console.log('response', newFile.response)
-          if (newFile.xhr) {
-            //  获得响应状态码
-            console.log('status', newFile.xhr.status)
-          }
+        // if (newFile && oldFile && !newFile.active && oldFile.active) {
+        //   // 获得相应数据
+        //   console.log('response', newFile.response)
+        //   if (newFile.xhr) {
+        //     //  获得响应状态码
+        //     console.log('status', newFile.xhr.status)
+        //   }
+        // }
+        // 自动上传
+        if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
+            if (newFile && !oldFile) {
+                    if (!this.$refs.upload.active) {
+                            var bucketname="laquimage";
+                            var username="laquimage";
+                            var password="laqu@2016";
+                            var ontime=new Date();
+                            var datename=ontime.getFullYear()+"/"+ontime.getMonth()+"/"+ontime.getDay();
+                            var save_key="/ICON/"+datename+"/{filename}"+new Date().getTime()+"{.suffix}";
+                            var url="http://v0.api.upyun.com/"+bucketname;
+                            var policy=btoa(JSON.stringify({"bucket": bucketname, "save-key": save_key, "expiration": parseInt(Date.parse(new Date())+3600),}));
+                            var signature="UPYUN "+username+":"+b64hamcsha1(HexMD5.MD5(password).toString(HexMD5.enc.Hex), "POST&/"+bucketname+"&"+policy);
+                            var index1 = newFile.file.name.lastIndexOf(".");
+                            var index2 = newFile.file.name.length;
+                            var suffix = newFile.file.name.substring(index1 + 1, index2);
+                            let that=this;
+                            let formData = new FormData();
+                            formData.append("file",newFile.file);
+                            formData.append("policy",policy);
+                            formData.append("authorization",signature);
+                            axios.post(url, formData).then(function (response) {
+                                that.postSalesImgList.push("https://laquimage.b0.upaiyun.com"+response.data.url);
+            // 　　                 console.log(that.postSalesImgList)
+                              that.postSalesImgstr=that.postSalesImgList.join(",");
+            }).catch(function (error) {
+                        　　alert(error);
+                            })
+                    }
+            }else{
+                // this.cartList.map(item => {
+                // if (item.item_status === 1 && item.checked) {
+                //     SelectedList.push(item.shopping_cart_id)
+                // }
+                // })
+                // Selectedstr=SelectedList.join(",");
+               this.postSalesImgList.map(item => {
+                    if(item.indexOf(oldFile.file.name.substring(0, oldFile.file.name.indexOf('.'))) != -1 ){
+                        // let index = this.postSalesImgList.indexOf(oldFile.file.name);
+                        this.imgRemoveIndexcur=item;
+                        // console.log(this.imgRemoveIndexcur)   
+                  }
+               })
+
+               let index = this.postSalesImgList.indexOf(this.imgRemoveIndexcur);
+               this.postSalesImgList.splice(index, 1);
+            //    console.log(this.postSalesImgList)
+               this.postSalesImgstr=this.postSalesImgList.join(",");
+            }
         }
+
       },
       inputFilter: function (newFile, oldFile, prevent) {
         if (newFile && !oldFile) {
@@ -473,11 +544,21 @@
           }
         }
         // 创建 blob 字段 用于图片预览
+        if (!newFile && oldFile) {
+            // console.log('0')
+        }else{
         newFile.blob = ''
         let URL = window.URL || window.webkitURL
         if (URL && URL.createObjectURL) {
           newFile.blob = URL.createObjectURL(newFile.file)
         }
+        }
+        
+
+         
+      },
+      remove(file){
+         this.$refs.upload.remove(file)
       },
       commitMsg(){
         this.$store.dispatch('CommitMessage',{
@@ -486,7 +567,7 @@
               item_status:1,
               reason:'颜色/尺码/参数不符',
               post_sales_explain:'不好看',
-              post_sales_img:'https://laquimage.b0.upaiyun.com/activity/2019/5/9/img1557380743045_495.jpg'
+              post_sales_img:this.postSalesImgstr
             }).then(response=>{
                 if(response.code==10000){
                 setTimeout(()=>{
