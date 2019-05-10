@@ -71,6 +71,10 @@ export const getOrderList = (params) => new Http().require({api: '/api/order/lis
 
 export const getOrderDetail = (params) => new Http().require({api: '/api/order/details',param: params}); //获取
 
+export const getSaleDetail = (params) => new Http().require({api: '/api/post/sales/details',param: params}); //获取
+
+export const logisticsSend = (params) => new Http().require({api: '/api/post/sales/logistics',param: params}); //获取
+
 export const getOrder = (params) => new Http().require({api: '/api/items',param: params}); //获取
 
 export const getShopInfo = (params) => new Http().require({api: '/api/shop/GetShopInfo',param: params}); //获取
@@ -79,6 +83,8 @@ export const getCommentList = (params) => new Http().require({api: '/api/shop/Ge
 
 export const commitMessage = (params) => new Http().require({api: '/api/shop/CommitMessage',param: params}); //获取
 export const logisticsInfo = (params) => new Http().require({api: '/api/order/query/logistics/info',param: params}); //获取物流信息
+export const commitMessage = (params) => new Http().require({api: '/api/post/sales/add',param: params}); //获取
+
 
 
 

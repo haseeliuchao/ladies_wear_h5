@@ -30,15 +30,7 @@
   
   /* 图搜 */
   .searchContainer {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 9999;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    background: #f8f8f8;
+
     /* 搜索图片 */
     .search-top {
       @include flexbox(center,
@@ -59,6 +51,12 @@
             width:100%;
             height:100%;
             border-radius:50%;
+          }
+          .file-uploads{
+               height: 3rem;
+               width: 3rem;
+               position: absolute;
+               top: 30px;
           }
         }
         input{
@@ -118,7 +116,6 @@
     }
     /* 精品推荐 */
     .recommend-content{
-      padding:0 .3rem;
       .product-list-top{
         padding: 15px 12px; 
         @include flexbox(space-between,center,row,nowrap);
@@ -219,9 +216,13 @@
             <div class="img-container">
               <!-- 接受预览的img container -->
               <img src='~jd/images/photo.png' alt="">
+              <file-upload ref="upload" v-model="item.uploadFiles" :multiple="true" accept="image/*" 
+              :maximum="1" @input-file="inputFile" @input-filter="inputFilter">
+              </file-upload>
             </div>
             <!-- 文件上传的input -->
-            <input type="file" @change="getFile" ref="file" id="file"> 
+            <!-- <input type="file" @change="getFile" ref="file" id="file">  -->
+            
             <!-- <label for="file">图像上传</label> -->
           </div>
         </div>
@@ -234,7 +235,7 @@
       </div>
 
       <!-- 精品推荐 -->
-      <div class="recommend-content" style="display:none;">
+      <div class="recommend-content">
         <p class="product-list-top">
           <span class="product-list-topl">精选推荐</span>
           <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
@@ -243,9 +244,9 @@
               ref="indexRusultloadMore">
             <ul class="product-list" >
               <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
-                <img :src="item.item_index_img_url" alt="">
+                <img :src="item.index_img_url" alt="">
                 <div class="prod-info">
-                  <p class="prod-title">{{item.item_title}}</p>
+                  <p class="prod-title">{{item.title}}</p>
                   <p class="prod-price">
                     <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:15px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
                     <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
@@ -256,7 +257,7 @@
         </load-more>
       </div>
       <!-- 搜索历史记录 -->
-      <load-more v-show="Keyword.length<=0" style="width:100%;height:100%;background:#fff;" >
+     
         <div class="search-history">
           <p class="search-history-title">搜索记录</p>
           <ul class="search-history-list">
@@ -271,7 +272,6 @@
             <li class="search-history-item"><img src="~jd/images/product.png"></li>
           </ul>
         </div>
-      </load-more>
   
     </div>
 
@@ -287,7 +287,10 @@
   } from '@/utils/mixin'
   import LoadMore from 'common/loadMore';
   import SearchBar from 'page/shop/searchBar';
-  import {searchtwoGoods} from '@/service/getData';
+  import axios from 'axios';
+  import VueUploadComponent from 'vue-upload-component';
+
+
   import {
     
     Toast
@@ -299,10 +302,8 @@
         searchVisiblie: false,
         Keyword: '',
         searchHistoryData: [],
-        searchRusultData: [],
         searchImgVisible: false ,
-        popupVisible:true,
-        // src: '/static/image/avatar.png' //先设置一个默认图片
+        commad: searchGoods,
         indexRusultData:[],
         indexParams: {
           title: '',
@@ -310,6 +311,10 @@
           page_size: 10,
           current_page: 1
         },   
+         item:{
+          uploadFiles :[]
+        },
+        postSalesImg:null
       }
     },
     // props: {
@@ -319,103 +324,23 @@
     //   }
     // },
     watch: {
-      Keyword(val) {
-        this.searchRusult(val)
-      }
-    },
-    directives: {
-      searchFocus: {
-        // inserted: function (el) {
-        //   // 聚焦元素
-        //   el.focus();
-        // },
-        // update: function (el) {
-        //   // 聚焦元素
-        //   el.focus();
-        // }
-      }
     },
     components: {
       LoadMore,
+      FileUpload: VueUploadComponent
     },
 
     computed: {},
 
     methods: {
-      async searchRusult(keyWords) {
-        this.searchRusultData = [];
-        let {
-          Data
-        } = await searchGoods({
-          Keyword: keyWords,
-          pageSize: 100,
-          pageIndex: 1
-        });
-        this.searchRusultData = Data;
-      },
-      async selectedProd(prod) {
-        this.$router.push({path: '/searchRusult',query: {Keyword:this.Keyword}})
-        let HistoryData = getLocalStorage('searchHistoryData');
-        if(!HistoryData)return setLocalStorage('searchHistoryData',[{keywords:this.Keyword,Date:new Date()}]);
-        try{
-          let Data = JSON.parse(HistoryData);
-          Data.push({keywords:this.Keyword,Date:new Date()});
-          setLocalStorage('searchHistoryData',Data);
-        }catch(err){}
-      },
-
-      truesearchGoods(event) { 
-        if (event.keyCode == 13) { //如果按的是enter键 13是enter 
-            event.preventDefault(); //禁止默认事件（默认是换行） 
-            console.log(event.target.value)
-            Toast("点击了确认") 
-        } 
-      },
-
-      async getFile(e){
-        let _this = this;
-        var files = e.target.files[0];
-        if(!e || !windows.FileReader) return //是否支持FileReader
-        let reader = new FileReader();
-        reader.readAsDataURL(files);//转换
-        reader.onloadend = function(){
-          _this.src = this.result;
-        }
-      },
 
        async initData() {
-        let Data = await this.$store.dispatch('GetSelectedProductList');
-        this.cartList = Data.data.data || null;
-        this.cartlength=this.cartList?this.cartList.length:0
-      },
-      async onRefreshCallback() {
-        this.$store.dispatch('GetSelectedProductList').then(response => {
-          setTimeout(() => {
-            this.cartList = response.data.data || null;
-            this.cartlength=this.cartList?this.cartList.length:0;
-            // this.getGoodsdata()
-            this.computedTotalFee();
-            this.selectedAll = false;
-            this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
-          }, 500);
-        }, error => {
-          this.$refs.cartLoadmore.translate = 0;
-          this.$refs.cartLoadmore.topStatus = 'pull';
-          this.$refs.cartLoadmore.AllLoaded = false;
-          return this.$refs.cartLoadmore.LoadMoreLoading = false;
-        });
-      },
-      async getGoodsdata() {
-        this.indexParams.page_size = 10;
-        this.indexParams.current_page = 1;
-        this.indexRusultData=[];
-        this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-        this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+
       },
       async infiniteCallback(response) { //下拉加载
-        if(response.data.data!=undefined&&response.data.data!=null){
-         if (response.data.data.length > 0) {
-          response.data.data.map(i => {
+        if(response.data.items!=undefined&&response.data.items!=null){
+         if (response.data.items.length > 0) {
+          response.data.items.map(i => {
             this.indexRusultData.push(i)
           })
         }
@@ -423,13 +348,63 @@
           this.indexRusultData=[];
         }
       },
-      async showToast(){
-        Toast({
-          message:'图搜体验功能已到期',
-          duration:1000,
-          className:'tipToast'
-        })
-      }
+      inputFile: function (newFile, oldFile) {
+        // if (newFile && oldFile && !newFile.active && oldFile.active) {
+        //   // 获得相应数据
+        //   console.log('response', newFile.response)
+        //   if (newFile.xhr) {
+        //     //  获得响应状态码
+        //     console.log('status', newFile.xhr.status)
+        //   }
+        // }
+        // 自动上传
+        if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
+                    if (!this.$refs.upload.active) {
+                            var bucketname="laquimage";
+                            var username="laquimage";
+                            var password="laqu@2016";
+                            var ontime=new Date();
+                            var datename=ontime.getFullYear()+"/"+ontime.getMonth()+"/"+ontime.getDay();
+                            var save_key="/ICON/"+datename+"/{filename}"+new Date().getTime()+"{.suffix}";
+                            var url="http://v0.api.upyun.com/"+bucketname;
+                            var policy=btoa(JSON.stringify({"bucket": bucketname, "save-key": save_key, "expiration": parseInt(Date.parse(new Date())+3600),}));
+                            var signature="UPYUN "+username+":"+b64hamcsha1(HexMD5.MD5(password).toString(HexMD5.enc.Hex), "POST&/"+bucketname+"&"+policy);
+                            var index1 = newFile.file.name.lastIndexOf(".");
+                            var index2 = newFile.file.name.length;
+                            var suffix = newFile.file.name.substring(index1 + 1, index2);
+                            let that=this;
+                            let formData = new FormData();
+                            formData.append("file",newFile.file);
+                            formData.append("policy",policy);
+                            formData.append("authorization",signature);
+                            axios.post(url, formData).then(function (response) {
+                            that.postSalesImg="https://laquimage.b0.upaiyun.com"+response.data.url;
+                            that.$router.push({path: '/searchRusult',query: {item_url:that.postSalesImg}})
+                            }).catch(function (error) {
+                        　　alert(error);
+                            })
+            }
+        }
+
+      },
+      inputFilter: function (newFile, oldFile, prevent) {
+        if (newFile && !oldFile) {
+          // 过滤不是图片后缀的文件
+          if (!/\.(jpeg|jpe|jpg|gif|png|webp)$/i.test(newFile.name)) {
+            return prevent()
+          }
+        }
+        // 创建 blob 字段 用于图片预览
+        if (!newFile && oldFile) {
+            // console.log('0')
+        }else{
+        newFile.blob = ''
+        let URL = window.URL || window.webkitURL
+        if (URL && URL.createObjectURL) {
+          newFile.blob = URL.createObjectURL(newFile.file)
+        }
+        } 
+      },
     },
 
     filters:{
@@ -445,7 +420,7 @@
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
       }catch(err){};
 
-      this.initData();
+
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
 

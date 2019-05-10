@@ -30,6 +30,9 @@ const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
 const Review = () =>    import ('page/shop/review')
 const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
+const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
+const AfterSale = () =>    import ('page/shop/afterSale')
+const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
     /* shop */
 
 const appRouter = {
@@ -165,11 +168,29 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/logisticsInfo/:order_id?',
+                path: '/logisticsInfo',
                 name: 'logisticsInfo',
                 component: LogisticsInfo,
                 meta: { keepAlive: false }
             },
+            {
+                path: '/afterSaleChoice',
+                name: 'afterSaleChoice',
+                component: AfterSaleChoice,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/afterSale',
+                name: 'afterSale',
+                component: AfterSale,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/afterSaleDetail',
+                name: 'afterSaleDetail',
+                component: AfterSaleDetail,
+                meta: { keepAlive: false }
+            }
         ],
         scrollBehavior(to, from,savedPosition) {
             return {
