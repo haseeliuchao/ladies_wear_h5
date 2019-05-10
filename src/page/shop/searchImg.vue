@@ -187,16 +187,29 @@
 
     }
   }
-
+  /* 遮罩层 */
+  .model-popup{
+  img{
+      position:relative;
+      width:5.6rem;
+  }
+  div.jump-btn{
+    position:absolute;
+    top:0;
+    right:0;
+    width:1.2rem;
+    height:1.2rem;
+  }
+}
 </style>
 <template>
   <div style="position:relative;">
     <!-- 图片上传搜索 -->
-    <mt-popup  :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
-      <div class="overlayer">
-        <img src="~jd/images/popup-con.png">
-        <div class="jump-btn"></div>
-      </div>
+    <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:2.8rem;background:rgba(0,0,0,0)">
+        <div class="overlayer">
+          <img src="~jd/images/popup-con2.png">
+          <div class="jump-btn" @click="()=>{$router.push('/searchResult');popupVisible=false}"></div>
+        </div>
     </mt-popup>
     <div class="searchContainer">
       <!-- v-if="searchImgVisible" -->
@@ -217,6 +230,7 @@
           图搜有效期：<span>2012/01/29</span>到期
         </p>
         <p class="renew-btn">续费 > </p>
+        <!-- <p class="renew-btn" v-if="" @click="showToast">续费 > </p> -->
       </div>
 
       <!-- 精品推荐 -->
@@ -287,6 +301,7 @@
         searchHistoryData: [],
         searchRusultData: [],
         searchImgVisible: false ,
+        popupVisible:true,
         // src: '/static/image/avatar.png' //先设置一个默认图片
         indexRusultData:[],
         indexParams: {
@@ -407,8 +422,14 @@
         }else{
           this.indexRusultData=[];
         }
-        
       },
+      async showToast(){
+        Toast({
+          message:'图搜体验功能已到期',
+          duration:1000,
+          className:'tipToast'
+        })
+      }
     },
 
     filters:{

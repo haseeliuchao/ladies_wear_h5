@@ -16,7 +16,8 @@ import {
   shopFavorite,
   getMyShopFavorite,
   cardCoupon,
-  searchImg
+  searchImg,
+  logisticsInfo
 } from '@/service/getData';
 import {
   setSessionStorage,
@@ -223,6 +224,23 @@ const user = {
       })
     },
     SendPhoneMessage({ //获取验证码
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        sendPhoneMessage(parameterData).then(response => {
+          if (response.Code !== 0) return Toast({
+            message: response.Message,
+            position: 'bottom'
+          })
+          return resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+
+    LogisticsInfo({ //获取物流信息
       commit,
       state
     }, parameterData) {

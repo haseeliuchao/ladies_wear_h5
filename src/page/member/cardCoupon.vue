@@ -130,11 +130,9 @@
   </div>
 </template>
 <script>
-import BackHead from 'common/backHead';
-  import {
-    cardCoupon
-  } from '@/service/getData';
+  import BackHead from 'common/backHead';
   import LoadMore from 'common/loadMore';
+  import cardCoupon from '@/service/getData';
   import {
     getLocalStorage,
     setLocalStorage
@@ -169,7 +167,6 @@ import BackHead from 'common/backHead';
         if(Data.code!=10000){
           Toast({
             message: Data.msg,
-            position: 'bottom'
           })
           return
         }else{

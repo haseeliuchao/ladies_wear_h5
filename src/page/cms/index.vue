@@ -291,7 +291,7 @@
       <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con.png">
-          <div class="jump-btn" @click="()=>{$router.push('/searchResult');popupVisible=false}"></div>
+          <div class="jump-btn" @click="()=>{$router.push('/searchImg');popupVisible=false}"></div>
         </div>
       </mt-popup>
         <!-- 搜索栏 -->

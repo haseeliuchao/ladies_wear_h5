@@ -29,6 +29,7 @@ const SearchImg = () =>   import ('page/shop/searchImg')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
 const Review = () =>    import ('page/shop/review')
+const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
     /* shop */
 
 const appRouter = {
@@ -162,7 +163,13 @@ const appRouter = {
                 name: 'address',
                 component: Address,
                 meta: { keepAlive: false }
-            }
+            },
+            {
+                path: '/logisticsInfo/:order_id?',
+                name: 'logisticsInfo',
+                component: LogisticsInfo,
+                meta: { keepAlive: false }
+            },
         ],
         scrollBehavior(to, from,savedPosition) {
             return {
