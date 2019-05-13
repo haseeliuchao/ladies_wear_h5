@@ -348,10 +348,10 @@
         <div class="my-order">
           <h2>我的订单</h2>
           <div>
-            <div class="order-item" @click = "$router.push('/cardCoupon')">
+            <!-- <div class="order-item" @click = "$router.push('/cardCoupon')">
               <img src="~jd/images/paymenticon.png" alt="">
               <span>待付款</span>
-            </div>
+            </div> -->
             <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
               <img src="~jd/images/paymenticon.png" alt="">
               <span>待付款</span>

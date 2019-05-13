@@ -148,22 +148,31 @@
       border-bottom: 1px solid #eee;
       .search-filter-list{
         background: #fff;
+        padding: 0 1rem;
         @include flexbox(space-between,center,row,nowrap);
         .search-filter-item{
           width: 25%;
           @include flexbox(center,center,row,nowrap);
           color: #333;
           font-size: 15px;
-          padding: 12px 0;
+          margin: 15px .8rem;
+          padding-bottom:3px;
+          @media all and(max-width:374px){
+             margin: 15px .6rem;
+          }
+          @media all and(min-width:376px){
+             margin: 15px .9rem;
+          }
           &.active{
             color: $red;
+            border-bottom:1px solid $red;
           }
           &.more-sort{
             position: relative;
             &:after{
               content:'';
               position: absolute;
-              right: .5rem;
+              right: 0;
               top: 44%;
               width: 0;
               height: 0;
@@ -233,36 +242,38 @@
 <template>
   <div class="search-rusult-container">
     <!-- 搜索框 -->
-    <!-- <div class="search-top">
-      <i class="back-icon" @click="$router.go(-1)"></i>
+    <!-- 文字搜索 -->
+    <div class="search-top" v-if="searchParams.title">
       <div class="searchInput">
-        <div class="search-box">
-          <i class="searchIcon searchContentIcon"></i>
-          <input :placeholder="searchParams.title" v-model="searchParams.title">
-        </div>
-      </div>
-    </div> -->
-    <div class="search-top">
-    <div class="searchInput">
-            <div class="search-box">
-              <!-- <i class="searchIcon searchContentIcon"></i> -->
-              <!-- @keypress="truesearchGoods" -->
-              <input type="search" v-model="searchParams.title" placeholder="品质生活必备" >
-              <!-- <span class="clear" @click="title=''" v-show="title.length>0">&times;</span> -->
-              <i class="searchIcon searchContentIcon" @click="changeQuery(searchParams.title)"></i>
-            </div>
+          <div class="search-box">
+            <!-- <i class="searchIcon searchContentIcon"></i> -->
+            <!-- @keypress="truesearchGoods" -->
+            <input type="search" v-model="searchParams.title" placeholder="品质生活必备" >
+            <!-- <span class="clear" @click="title=''" v-show="title.length>0">&times;</span> -->
+            <i class="searchIcon searchContentIcon" @click="changeQuery(searchParams.title)"></i>
           </div>
-     <span @click="()=>{title=''}">取消</span>
-     </div>
+      </div>
+      <span @click="changeQuery(searchParams.title)">搜索</span>
+    </div>
+    <!-- 配置搜索 -->
+    <div class="search-top" v-if="searchParams.category_id">
+      <div>
+        <img src="searchParams.img_url">
+      </div>
+    </div>
+    <!-- 图片搜索 -->
+    <div class="search-top" v-if="searchParams.item_url">
+      <div>
+        <img src="searchParams.item_url">
+      </div>
+    </div>
     <!-- 搜索框 -->
     
     <!-- 筛选 -->
     <div class="search-filter">
       <ul class="search-filter-list">
-        <li class="search-filter-item active more-sort">综合</li>
-        <li class="search-filter-item">销量</li>
-        <li class="search-filter-item">价格</li>
-        <li class="search-filter-item">筛选</li>
+        <li class="search-filter-item active more-sort">综合排序</li>
+        <li class="search-filter-item">价格排序</li>
       </ul>
     </div>
     <!-- 筛选 -->

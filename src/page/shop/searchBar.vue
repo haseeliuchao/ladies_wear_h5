@@ -381,7 +381,7 @@
       <div class="searchContainer">
         <div class="search-top">
            <slot name="right-icon">
-          <div style="margin-right:.2rem;margin-left:0" class="scanCode" @click="$router.push(`/searchImg`)">
+          <div style="margin-right:.2rem;margin-left:0" class="scanCode" @click="()=>{$router.push(`/searchImg`);popupVisible=false}">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>
@@ -455,6 +455,7 @@
     data() {
       return {
         searchVisiblie: false,
+        popupVisible:false,
         title: '',
         searchHistoryData: [],
         searchHotData: [],

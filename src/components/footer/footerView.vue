@@ -76,7 +76,7 @@
   <ul class="nav-bar fool">
     <li :class="['barIcon','home',$route.name==='index'?'active':'']" @click="$router.push('/index')">首页</li>
     <li :class="['barIcon','category',$route.name==='category'?'active':'']" @click="$router.push('/category')">分类</li>
-    <li :class="['barIcon','find',$route.name==='article'?'active':'']" @click="$router.push('/article')"></li>
+    <li :class="['barIcon','find',$route.name==='article'?'active':'']" @click="$router.push('/searchImg')"></li>
     <li :class="['barIcon','cart',$route.name==='cart'?'active':'']" @click="$router.push('/cart')">购物车</li>
     <li :class="['barIcon','myHome',$route.name==='myhome'?'active':'']" @click="$router.push('/myhome')">我的</li>
   </ul>

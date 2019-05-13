@@ -188,7 +188,7 @@
   .model-popup{
   img{
       position:relative;
-      width:5.6rem;
+      width:3.9rem;
   }
   div.jump-btn{
     position:absolute;
@@ -202,7 +202,7 @@
 <template>
   <div style="position:relative;">
     <!-- 图片上传搜索 -->
-    <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:2.8rem;background:rgba(0,0,0,0)">
+    <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:3.6rem;right:3.2rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con2.png">
           <div class="jump-btn" @click="()=>{$router.push('/searchResult');popupVisible=false}"></div>
@@ -302,7 +302,7 @@
         searchVisiblie: false,
         Keyword: '',
         searchHistoryData: [],
-        searchImgVisible: false ,
+        popupVisible: true ,
         commad: searchGoods,
         indexRusultData:[],
         indexParams: {
