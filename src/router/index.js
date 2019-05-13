@@ -29,6 +29,7 @@ const SearchImg = () =>   import ('page/shop/searchImg')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
 const Review = () =>    import ('page/shop/review')
+const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
 const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
 const AfterSale = () =>    import ('page/shop/afterSale')
 const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
@@ -164,6 +165,12 @@ const appRouter = {
                 path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/logisticsInfo',
+                name: 'logisticsInfo',
+                component: LogisticsInfo,
                 meta: { keepAlive: false }
             },
             {
