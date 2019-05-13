@@ -259,11 +259,12 @@
 <br>{{orderDetail.gmt_created|DateFormat('yyyy-MM-dd hh:mm')}}</p>
          <p style="line-height:21px;" v-if="orderDetail.post_sales_status===5">卖家拒绝了您的退款<br><em style="font-size:13px;">如有疑问，请联系在线客服</em>
 <br>{{orderDetail.gmt_created|DateFormat('yyyy-MM-dd hh:mm')}}</p>
-         <!--<img v-if="orderDetail.order_status===1" src="~jd/images/order_daifu.png" style="height:48px;">
-         <img v-if="orderDetail.order_status===2" src="~jd/images/order_daifa.png" style="height:48px;">
-         <img v-if="orderDetail.order_status===3" src="~jd/images/order_daishou.png" style="height:48px;">
-         <img v-if="orderDetail.order_status===4" src="~jd/images/order_wancheng.png" style="height:48px;"> -->
-         <img src="~jd/images/order_guanbi.png" style="height:48px;">
+         <img v-if="orderDetail.post_sales_status===1" src="~jd/images/daishen.png" style="height:48px;">
+         <img v-if="orderDetail.post_sales_status===2" src="~jd/images/daitui.png" style="height:48px;">
+         <img v-if="orderDetail.post_sales_status===3&&orderDetail.post_sales_type===1" src="~jd/images/order_daishou.png" style="height:48px;">
+         <img v-if="orderDetail.post_sales_status===3&&orderDetail.post_sales_type===2" src="~jd/images/daitui.png" style="height:48px;">
+         <img v-if="orderDetail.post_sales_status===4" src="~jd/images/yitui.png" style="height:48px;">
+         <img v-if="orderDetail.post_sales_status===5" src="~jd/images/weitui.png" style="height:48px;">
     </div>
     <div class="order-container" v-if="orderDetail.post_sales_status!=2">
             <div class="order-item">

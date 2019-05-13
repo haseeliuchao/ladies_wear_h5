@@ -452,7 +452,7 @@
               </div>
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
-                  <div>
+                  <div @click="()=>$router.push('/product/'+item.item_id)">
                     <img :src="item.item_img">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
@@ -492,10 +492,10 @@
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         <div class="order-btn-group">
-                <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment">取消订单</span>
+                <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click="cancelOrder(orderDetail)">取消订单</span>
                 <span v-if="orderDetail.order_status===1" class="payment">立即支付</span>
                 <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_id:itemdetail.order_id}})">查看物流</span>
-                <span v-if="orderDetail.order_status===3" class="payment">确认收货</span>
+                <span v-if="orderDetail.order_status===3" @click="finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
         </div>
   </div>
@@ -539,6 +539,7 @@
     methods: {
       async initData() {
         // this.commentParam.ProductNo = this.$route.params.id;
+         console.log(window.location.href)
         let Data = await getOrderDetail({
          order_id: this.$route.params.OrderNo
         });
@@ -555,21 +556,39 @@
       },
 
 
-      payment(item) {
-        this.visiblePopup.paymentLoadingVisible = true;
-        setTimeout(() => {
-          this.visiblePopup.paymentLoadingVisible = false;
-          this.visiblePopup.paymentContainerVisible = true;
-          this.currentOrder = item;
-        }, 2000)
+       finishOrder(item) { //确认收货
+         MessageBox.confirm('', { 
+            message: '确定已经收到货物了吗?', 
+            title: '',
+            cancelButtonClass:'cancelButton', 
+            confirmButtonClass:'confirmButton',
+          }).then(action => {
+            if (action == 'confirm') {     //确认的回调
+              this.$store.dispatch('FinishOrder', {
+                order_id: item.order_id
+              }).then(response => {
+                if(response.code!=10000){
+                  Toast({
+                  message: response.msg
+                  })
+                }else{
+                 this.initData()
+                }
+              })
+            }
+          }).catch(err => { 
+            if (err == 'cancel') {     //取消的回调
+            } 
+          });
       },
-      finishOrder(item) { //确认收货
-        this.$store.dispatch('FinishOrder', {
-          OrderNo: item.orderInfo.OrdertNo
+      cancelOrder(item) { //取消订单
+        this.$store.dispatch('CancelOrder', {
+          order_id: item.order_id
         }).then(response => {
           Toast({
-            message: response.Message
+            message: "订单已取消"
           })
+          this.initData()
         })
       },
     },

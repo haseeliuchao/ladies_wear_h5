@@ -188,7 +188,7 @@
             <div class="order-item">
               <div class="order-product-list">
                   <!-- v-if="item.order_item_id==order_item_id" -->
-                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list"  :key="index">
+                <div class="order-product-item" v-for="(item,index) in goodInfofilter"  :key="index">
                   <div>
                     <img :src="item.item_img">
                     <div class="product-info">
@@ -200,7 +200,7 @@
               </div>
         </div>
     </div>
-    <div class="choicebtn" @click="$router.push({path: '/afterSale',query: {post_sales_type:2}})">
+    <div class="choicebtn" @click="$router.push({path: '/afterSale',query: {post_sales_type:2,order_item_id:order_item_id}})">
     
          <img src="~jd/images/only_money.png">
          <div>
@@ -208,7 +208,7 @@
              <p class="botp">未收到货物（包含未签收），或卖价协商同意前提</p>
          </div>
     </div>
-    <div class="choicebtn" @click="$router.push({path: '/afterSale',query: {post_sales_type:1}})">
+    <div class="choicebtn" @click="$router.push({path: '/afterSale',query: {post_sales_type:1,order_item_id:order_item_id}})">
          <img src="~jd/images/back_good.png">
          <div>
              <p class="topp">退货退款</p>
@@ -234,6 +234,7 @@ import {
           paymentContainerVisible: false
         },
         orderDetail: {
+            item_info_list:[]
         },
         active: null,
         order_item_id:null
@@ -246,11 +247,17 @@ import {
       // LoadMore
     },
 
-    computed: {},
+    computed: {
+      goodInfofilter: function () {
+          let that=this;
+      return this.orderDetail.item_info_list.filter(function (item) {
+        return item.order_item_id==that.order_item_id
+      })
+      }
+    },
 
     methods: {
       async initData() {
-        
         this.orderDetail=JSON.parse(getLocalStorage('salesList'))
       },
     },
