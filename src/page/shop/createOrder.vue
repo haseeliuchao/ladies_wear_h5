@@ -636,50 +636,9 @@
 <template>
   <div class="pagePay">
     
-    <!-- <div class="payContainer">
-      <div class="addressContainer" v-if="defaultAddress" @click="()=>visiblePopup.selectedAdressVisible=true">
-        <div class="addressDefault">
-          <div class="cell">
-            <strong>{{defaultAddress.nickName}} {{defaultAddress.Phone}}</strong>
-            <span class="defaultIcon" v-if="defaultAddress.Selected===1">默认</span>
-          </div>
-          <div class="cell">
-            <i class="positionIcon"></i>{{defaultAddress.Province + defaultAddress.City + defaultAddress.Area}}&nbsp;&nbsp;{{ defaultAddress.Address}}</div>
-          <i class="arrow-right"></i>
-        </div>
-      </div>
-      <div class="venderOrderList" v-if="confirmSelectedProduct">
-        <div class="venderItem" v-for="(item,index) in confirmSelectedProduct" :key="index">
-          <img :src="item.product.image_url[0].url" alt="">
-          <div class="orderInfo">
-            <p class="title">{{item.product.productName}}</p>
-            <div class="price">
-              <span class="fee">&yen;
-                <strong>{{item.product.price}}</strong>
-              </span>
-              <span class="count">x {{item.counter}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p v-else style="text-align:center;padding:15px 0; color:#999;font-size:17px;">
-        暂无数据
-      </p>
-    </div> -->
+    
 
     <div class="payContainer">
-      <!-- <div class="addressContainer" @click="()=>visiblePopup.selectedAdressVisible=true">
-        <div class="addressDefault">
-          <div class="cell">
-            <strong>张三三 18146546556</strong>
-            <span class="defaultIcon">默认</span>
-          </div>
-          <div class="cell">
-            <i class="positionIcon"></i>广东省 云浮市 云安县 文明街道 福光小区60幢3
-单元3号301室</div>
-          <i class="arrow-right"></i>
-        </div>
-      </div> -->
       <div class="ordertop-address" v-for="(item,index) in defaultAddress" :key="index" @click="()=>visiblePopup.selectedAdressVisible=true">
         <div class="ordertop-addressleft"  >
         <p class="address-username">{{item.name}}<em style="margin-left:12px;font-size:12px;">{{item.phone}}</em></p>
@@ -733,7 +692,7 @@
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
       <span>合计：<strong><span>&yen;</span><em>{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
-      <div class="payBtn" @click="submitOrder">支付</div>
+      <div class="payBtn" @click="payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
       <img src="~jd/images/paymentloading.gif" />
@@ -793,6 +752,7 @@ import {
     getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
+  import {payToken,payGetData} from '@/service/getData';
   import {
     Field,
     Button,
@@ -815,7 +775,8 @@ import {
           paymentContainerVisible: false,
           paymentLoadingVisible: false,
           selectedAdressVisible: false
-        }
+        },
+        consignee_id:null
       };
     },
 
@@ -847,6 +808,7 @@ import {
       selectedAddress(item){
         this.visiblePopup.selectedAdressVisible = false;
         this.defaultAddress[0] = item;
+        this.consignee_id=item.consignee_id;
       },
 
       async initData() {
@@ -873,6 +835,7 @@ import {
         setLocalStorage('addressList',this.addressData)
          this.addressData.map(item => {
           if (item.if_default===1) {
+            this.consignee_id=item.consignee_id;
             this.defaultAddress.push(item);
           }
         });
@@ -902,22 +865,30 @@ import {
           }, 2000)
         })
       },
-      payByWallet() {
-        this.$store.dispatch('PayByWallet', {
-          PaymentNo: this.PaymentNo,
-          PaymentPassword: this.paymentPassword
-        }).then(response => {
-          if (response.Code === 0) {
-            Toast({
-              message: response.Message
-            });
-            this.visiblePopup.paymentContainerVisible = false;
-            this.visiblePopup.paymentLoadingVisible = false;
-            setTimeout(() => {
-              this.$router.push('/orderList/2')
-            }, 1000)
-          }
+        
+      // let Data = await cardCoupon({
+      //     user_coupon_status:this.user_coupon_status
+      //   });
+      // /order/generate/token
+      async payByWallet(){
+        let Data = await payToken({});
+        let payData={};
+        if(this.$route.query.checkout_type==1){
+        payData=await payGetData({
+          shopping_cart_ids:this.$route.query.Selectedstr,
+          checkout_type:this.$route.query.checkout_type,
+          token:Data.data,
+          consignee_id:this.consignee_id
         })
+        }else{
+          payData=await payGetData({
+          shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
+          number:this.$route.query.number}),
+          checkout_type:this.$route.query.checkout_type,
+          token:Data.data,
+          consignee_id:this.consignee_id
+          })
+        }
       }
     },
     filters:{
