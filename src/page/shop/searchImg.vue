@@ -188,6 +188,14 @@
   }
   /* 遮罩层 */
   .model-popup{
+    top:3.6rem;
+    right:3.25rem;
+    @media all and(max-width:374px){
+      top:3.7rem;
+    }
+    @media all and(min-width:376px){
+      top:3.5rem;
+    }
   img{
       position:relative;
       width:3.9rem;
@@ -196,18 +204,18 @@
     position:absolute;
     top:0;
     right:0;
-    width:1.2rem;
-    height:1.2rem;
+    width:3.4rem;
+    height:3.4rem;
   }
 }
 </style>
 <template>
   <div style="position:relative;">
     <!-- 图片上传搜索 -->
-    <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:3.6rem;right:3.2rem;background:rgba(0,0,0,0)">
+    <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con2.png">
-          <div class="jump-btn" @click="()=>{$router.push('/searchResult');popupVisible=false}"></div>
+          <div class="jump-btn" @click="()=>{popupVisible=false}"></div>
         </div>
     </mt-popup>
     <div class="searchContainer">
@@ -294,6 +302,7 @@
     data() {
       return {
         searchVisiblie: false,
+        popupVisible:true,
         Keyword: '',
         HistoryImgData: [],
         popupVisible: true ,

@@ -331,7 +331,7 @@
           <div class="deploy-floor">
             <div class="deploy-floor-l" >
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
-                <img  :src="item.img_url">
+                <img  :src="item.img_url" @click="()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
               </div>
             </div>
             <!-- cmsData -->
@@ -430,12 +430,15 @@
         recommendData: [],
         cmsData: [],
         searchBarVisilbe: true,
-        popupVisible:false,
+        popupVisible:true,
         indexRusultData: [],
         commad: searchGoods,
         indexParams: {
           title: '',
+          item_url:'',
           category_id:'',
+          ad_advertising_id:'',
+          img_url:'',
           page_size: 10,
           current_page: 1
         },
