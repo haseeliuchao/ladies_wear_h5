@@ -12,7 +12,7 @@ import store from '@/store'
 import FastClick from 'fastclick'
 import '@/utils/directives'
 import '@/utils/filters'
-import '@/utils/hash'
+// import '@/utils/hash'
 import utils from '@/utils/urlfun'
 
 import zh_CN from 'vee-validate/dist/locale/zh_CN';

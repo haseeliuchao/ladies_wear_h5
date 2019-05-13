@@ -288,7 +288,9 @@
     getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
-
+  import {
+    hash
+  } from '@/utils/hash'
   import LoadMore from 'common/loadMore';
   import SearchBar from 'page/shop/searchBar';
   import axios from 'axios';
@@ -373,7 +375,7 @@
                             var save_key="/ICON/"+datename+"/{filename}"+new Date().getTime()+"{.suffix}";
                             var url="http://v0.api.upyun.com/"+bucketname;
                             var policy=btoa(JSON.stringify({"bucket": bucketname, "save-key": save_key, "expiration": parseInt(Date.parse(new Date())+3600),}));
-                            var signature="UPYUN "+username+":"+b64hamcsha1(HexMD5.MD5(password).toString(HexMD5.enc.Hex), "POST&/"+bucketname+"&"+policy);
+                            var signature="UPYUN "+username+":"+hash.b64hamcsha1(hash.HexMD5.MD5(password).toString(hash.HexMD5.enc.Hex), "POST&/"+bucketname+"&"+policy);
                             var index1 = newFile.file.name.lastIndexOf(".");
                             var index2 = newFile.file.name.length;
                             var suffix = newFile.file.name.substring(index1 + 1, index2);
