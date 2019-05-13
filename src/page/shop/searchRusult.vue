@@ -35,11 +35,13 @@
       center,
       row,
       nowrap);
-      padding: 10px 0 10px 20px;
+      // padding: 10px 0 10px 20px;
       background: #fff;
       // border-bottom: 1px solid $border;
+      // 文字搜索
       .searchInput {
         width: 90%;
+        padding: 10px 0 10px 20px;
         .search-box {
           width: 100%;
           position: relative;
@@ -47,8 +49,8 @@
           padding: 0px 14px;
           border-radius: 26px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    height: .86rem;
+          -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          height: .86rem;
           @include flexbox(space-between,
           center,
           row,
@@ -84,10 +86,43 @@
           }
           .searchIcon {
             display: block;
-    height: .48rem;
-    margin-right: .05rem;
-    width: .52rem;
-            
+            height: .48rem;
+            margin-right: .05rem;
+            width: .52rem;  
+          }
+        }
+      }
+
+      // 配置搜索结果
+      .searchDeploy-box{
+        width:100%;
+        height:175px;
+        img{
+          @include wh(100%,100%);
+        }
+      }
+      // 图搜搜索结果
+      .searchImg-box{
+        @include flexbox(center,center,row,nowrap);
+        padding:25px 0;
+        img{
+          width:2.1rem;
+          height:2.1rem;
+          border-radius:1.1rem;
+        }
+        i{
+          display:flex;
+          flex:1;
+          img{
+            @include wh(50%,50%);
+          }
+          &:first-child{
+            justify-content: flex-end; 
+            margin-right: 15px; 
+          }
+          &:last-child{
+            justify-content: flex-start; 
+            margin-left: 15px; 
           }
         }
       }
@@ -165,7 +200,6 @@
           }
           &.active{
             color: $red;
-            border-bottom:1px solid $red;
           }
           &.more-sort{
             position: relative;
@@ -256,15 +290,17 @@
       <span @click="changeQuery(searchParams.title)">搜索</span>
     </div>
     <!-- 配置搜索 -->
-    <div class="search-top" v-if="searchParams.category_id">
-      <div>
-        <img src="searchParams.img_url">
+    <div class="search-top" v-if="searchParams.ad_advertising_id">
+      <div class="searchDeploy-box">
+        <img :src="searchParams.img_url">
       </div>
     </div>
     <!-- 图片搜索 -->
     <div class="search-top" v-if="searchParams.item_url">
-      <div>
-        <img src="searchParams.item_url">
+      <div class="searchImg-box">
+        <i><img src="~jd/images/lineLeft.png"></i>
+        <img :src="searchParams.item_url">
+        <i><img src="~jd/images/lineRight.png"></i>
       </div>
     </div>
     <!-- 搜索框 -->
@@ -310,12 +346,15 @@
   export default {
     data() {
       return {
+        popupVisible:false,
         searchRusultData: [],
         commad: searchGoods,
         searchParams: {
           title: '',
           item_url:'',
           category_id:'',
+          ad_advertising_id:'',
+          img_url:'',
           page_size: 10,
           current_page: 1
         }

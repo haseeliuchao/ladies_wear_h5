@@ -132,7 +132,7 @@
 <script>
   import BackHead from 'common/backHead';
   import LoadMore from 'common/loadMore';
-  import cardCoupon from '@/service/getData';
+  import {cardCoupon} from '@/service/getData';
   import {
     getLocalStorage,
     setLocalStorage
