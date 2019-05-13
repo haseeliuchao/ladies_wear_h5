@@ -279,7 +279,7 @@
 
   </div>
 </template>
-<script src="@/utils/hash.js" ></script>
+
 <script>
   import {
     searchGoods
