@@ -84,7 +84,7 @@ export const getCommentList = (params) => new Http().require({api: '/api/shop/Ge
 export const logisticsInfo = (params) => new Http().require({api: '/api/order/query/logistics/info',param: params}); //获取物流信息
 export const commitMessage = (params) => new Http().require({api: '/api/post/sales/add',param: params}); //获取
 
-
+export const searchRenew = (params) => new Http().require({api: '/api/order/query/logistics/info',param: params}); //获取续费信息
 
 
 //cms

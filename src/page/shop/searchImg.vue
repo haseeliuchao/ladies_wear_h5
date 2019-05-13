@@ -240,7 +240,7 @@
         <p class="expire-time">
           图搜有效期：<span>2012/01/29</span>到期
         </p>
-        <p class="renew-btn">续费 > </p>
+        <p class="renew-btn" @click="()=>$router.push('/searchRenew')">续费 > </p>
         <!-- <p class="renew-btn" v-if="" @click="showToast">续费 > </p> -->
       </div>
 

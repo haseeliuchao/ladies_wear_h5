@@ -26,6 +26,7 @@ const OrderList = () => import ('page/shop/orderList')
 const Product = () =>   import ('page/shop/product')
 const SearchRusult = () =>  import ('page/shop/searchRusult')
 const SearchImg = () =>   import ('page/shop/searchImg')
+const SearchRenew = () =>   import ('page/shop/searchRenew')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
 const Review = () =>    import ('page/shop/review')
@@ -135,6 +136,12 @@ const appRouter = {
                 path: '/searchImg',
                 name: 'searchImg',
                 component: SearchImg,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/searchRenew',
+                name: 'searchRenew',
+                component: SearchRenew,
                 meta: { keepAlive: false }
             },
             {

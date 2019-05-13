@@ -17,6 +17,7 @@ import {
   getMyShopFavorite,
   cardCoupon,
   searchImg,
+  searchRenew,
   logisticsInfo
 } from '@/service/getData';
 import {
@@ -256,6 +257,24 @@ const user = {
         })
       })
     },
+
+    SearchRenew({//获取续费信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        sendPhoneMessage(parameterData).then(response => {
+          if (response.Code !== 0) return Toast({
+            message: response.Message,
+            position: 'bottom'
+          })
+          return resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    
   }
 }
 
