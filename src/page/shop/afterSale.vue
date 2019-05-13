@@ -266,6 +266,7 @@
         }
         .selectedList{
             border: 1px solid #e4e4e4;
+            border-bottom: none;
             margin: 0 10px 45px;
             div{
                 @include flexbox(space-between,
@@ -306,7 +307,7 @@
     <div class="order-container">
             <div class="order-item">
               <div class="order-product-list">
-                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
+                <div class="order-product-item" v-for="(item,index) in goodInfofilter" :key="index">
                   <div>
                     <img :src="item.item_img">
                     <div class="product-info">
@@ -319,13 +320,19 @@
         </div>
     </div>
     <div class="choiceReason">
-      <p class="choiceReasonList" style="border-bottom:1px solid #e4e4e4"><span>商品状态</span> <span style="color:#999" @click="()=>visiblePopup.selectedGoodStateVisible=true">请选择 ></span></p>
-      <p class="choiceReasonList"><span>退款原因</span> <span style="color:#999" @click="()=>visiblePopup.selectedchoiceReasonVisible=true">请选择 ></span></p>
-      <p class="choiceReasonList" style="line-height:20px;padding-bottom:8px;"><span>退款金额：<em style="color:#ff2741" v-for="(item,index) in orderDetail.item_info_list" :key="index">¥{{item.coupons_price/100.00|topriceafter}}.{{item.coupons_price/100.00|topricenext}}</em></span></p>
+      <p class="choiceReasonList" style="border-bottom:1px solid #e4e4e4"><span>商品状态</span> 
+      <span style="color:#999" v-if="item_status" @click="()=>visiblePopup.selectedGoodStateVisible=true">{{item_statustext}} ></span>
+      <span style="color:#999" v-else @click="()=>visiblePopup.selectedGoodStateVisible=true">请选择 ></span>
+      </p>
+      <p class="choiceReasonList"><span>退款原因</span> 
+      <span style="color:#999" v-if="reason" @click="()=>visiblePopup.selectedchoiceReasonVisible=true">{{reason}} ></span>
+      <span style="color:#999" v-else @click="()=>visiblePopup.selectedchoiceReasonVisible=true">请选择 ></span>
+      </p>
+      <p class="choiceReasonList" style="line-height:20px;padding-bottom:8px;"><span>退款金额：<em style="color:#ff2741" v-for="(item,index) in goodInfofilter" :key="index">¥{{item.coupons_price/100.00|topriceafter}}.{{item.coupons_price/100.00|topricenext}}</em></span></p>
     </div>
-    <p class="backMoneyTip" v-for="(item,index) in orderDetail.item_info_list" :key="index"><em style="color:#ff2741">*</em> 最多退￥{{item.coupons_price/100.00|topriceafter}}.{{item.coupons_price/100.00|topricenext}}，不含发货运费￥{{orderDetail.post_fee/100.00|topriceafter}}.{{orderDetail.post_fee/100.00|topricenext}}</p>
+    <p class="backMoneyTip" v-for="(item,index) in goodInfofilter" :key="index"><em style="color:#ff2741">*</em> 最多退￥{{item.coupons_price/100.00|topriceafter}}.{{item.coupons_price/100.00|topricenext}}，不含发货运费￥{{orderDetail.post_fee/100.00|topriceafter}}.{{orderDetail.post_fee/100.00|topricenext}}</p>
     <div class="choiceReason" style="margin-top:0">
-       <p class="choiceReasonList" style="justify-content:start"><span>退款说明：</span> <input type="text" placeholder="选填"></p>
+       <p class="choiceReasonList" style="justify-content:start"><span>退款说明：</span> <input type="text" v-model="post_sales_explain" placeholder="选填"></p>
     </div>
     <div class="uploadImg">
         <p>上传截图</p>
@@ -357,68 +364,31 @@
         <strong>商品状态</strong>
       </div>
     </mt-popup> -->
-        <mt-popup v-model="visiblePopup.selectedGoodStateVisible" position="bottom" class="modal-popup">
+        <mt-popup v-model="visiblePopup.selectedGoodStateVisible" :closeOnClickModal='false' position="bottom" class="modal-popup">
           <p class="popup_title">商品状态</p>
           <div class="selectedList">
+              <div v-for="(item,index) in selectedGoodStateList" :key="index">
               <div>
-              <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="checkedone(item)"></i>
               </div>
-              <p>未收到货</p>
+              <p>{{item.name}}</p>
               </div>
-              <div style="border-bottom:none">
-                  <div style="border-bottom:none">
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
-                  </div>
-              <p>已收到货</p>
-              </div>
+              
           </div>
-          <div class="selectedTrue">选好了</div>
+          <div class="selectedTrue" @click="visiblePopup.selectedGoodStateVisible=false">选好了</div>
         </mt-popup>
 
-        <mt-popup v-model="visiblePopup.selectedchoiceReasonVisible" position="bottom" class="modal-popup">
+        <mt-popup v-model="visiblePopup.selectedchoiceReasonVisible" position="bottom" :closeOnClickModal='false' class="modal-popup">
           <p class="popup_title">退款原因</p>
           <div class="selectedList">
+              <div v-for="(item,index) in selectedchoiceReasonList" :key="index">
               <div>
-              <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="checkedtwo(item)"></i>
               </div>
-              <p>拍多/错拍/不想要</p>
-              </div>
-              <div>
-              <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
-              </div>
-              <p>颜色/尺码/参数不符</p>
-              </div>
-              <div>
-              <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
-              </div>
-              <p>质量问题</p>
-              </div>
-              <div>
-              <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
-              </div>
-              <p>未按时发货</p>
-              </div>
-              <div>
-              <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
-              </div>
-              <p>物流信息无法跟踪</p>
-              </div>
-
-
-              <div style="border-bottom:none">
-                  <div style="border-bottom:none">
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']"></i>
-                  </div>
-              <p>其他</p>
+              <p>{{item.reason}}</p>
               </div>
           </div>
-          <div class="selectedTrue">选好了</div>
+          <div class="selectedTrue" @click="visiblePopup.selectedchoiceReasonVisible=false">选好了</div>
         </mt-popup>
   </div>
 </template>
@@ -445,15 +415,56 @@
         },
         currentOrder: {}, //当前订单
         orderDetail: {
+            item_info_list:[]
         },
         visiblePopup: {
           selectedGoodStateVisible: false,
           selectedchoiceReasonVisible: false
         },
+        selectedGoodStateList:[
+            {
+            checked:false,
+            name:'未收到货',
+            item_status:1
+            },{
+            checked:false,
+            name:'已收到货',
+            item_status:2
+        }],
+        selectedchoiceReasonList:[
+           {
+            checked:false,
+            reason:'拍多/错拍/不想要',
+            },{
+            checked:false,
+            reason:'颜色/尺码/参数不符',
+            }
+            ,{
+            checked:false,
+            reason:'质量问题',
+            }
+            ,{
+            checked:false,
+            reason:'未按时发货',
+            }
+            ,{
+            checked:false,
+            reason:'物流信息无法跟踪',
+            }
+            ,{
+            checked:false,
+            reason:'其他',
+            }
+        ],
         imgRemoveIndex:null,
         postSalesImgList: [],
         postSalesImgstr: '',
-        imgRemoveIndexcur:''
+        imgRemoveIndexcur:'',
+        order_item_id:null,
+        reason:null,
+        item_status:null,
+        item_statustext:null,
+        post_sales_explain:''
       };
     },
 
@@ -463,7 +474,14 @@
       FileUpload: VueUploadComponent
     },
 
-    computed: {},
+    computed: {
+        goodInfofilter: function () {
+          let that=this;
+      return this.orderDetail.item_info_list.filter(function (item) {
+        return item.order_item_id==that.order_item_id
+      })
+      }
+    },
 
     methods: {
       async initData() {
@@ -471,7 +489,21 @@
         this.orderDetail=JSON.parse(getLocalStorage('salesList'))
 
       },
-
+      checkedone(item){
+        this.selectedGoodStateList.map(i => {
+          i.checked=false;
+        })
+         item.checked = !item.checked;
+         this.item_status=item.item_status;
+         this.item_statustext=item.name;
+      },
+      checkedtwo(item){
+        this.selectedchoiceReasonList.map(i => {
+          i.checked=false;
+        })
+         item.checked = !item.checked;
+         this.reason=item.reason;
+      },
       inputFile: function (newFile, oldFile) {
         // if (newFile && oldFile && !newFile.active && oldFile.active) {
         //   // 获得相应数据
@@ -511,17 +543,9 @@
                             })
                     }
             }else{
-                // this.cartList.map(item => {
-                // if (item.item_status === 1 && item.checked) {
-                //     SelectedList.push(item.shopping_cart_id)
-                // }
-                // })
-                // Selectedstr=SelectedList.join(",");
                this.postSalesImgList.map(item => {
                     if(item.indexOf(oldFile.file.name.substring(0, oldFile.file.name.indexOf('.'))) != -1 ){
-                        // let index = this.postSalesImgList.indexOf(oldFile.file.name);
                         this.imgRemoveIndexcur=item;
-                        // console.log(this.imgRemoveIndexcur)   
                   }
                })
 
@@ -558,17 +582,25 @@
          this.$refs.upload.remove(file)
       },
       commitMsg(){
+          if(!this.item_status){
+              Toast({message: '请选择商品状态'})
+              return;
+          }
+          if(!this.reason){
+              Toast({message: '请选择退款原因'})
+              return;
+          }
         this.$store.dispatch('CommitMessage',{
-              order_item_id:this.orderDetail.item_info_list[0].order_item_id,
+              order_item_id:this.order_item_id,
               post_sales_type:this.$route.query.post_sales_type,
-              item_status:1,
-              reason:'颜色/尺码/参数不符',
-              post_sales_explain:'不好看',
+              item_status:this.item_status,
+              reason:this.reason,
+              post_sales_explain:this.post_sales_explain,
               post_sales_img:this.postSalesImgstr
             }).then(response=>{
                 if(response.code==10000){
                 setTimeout(()=>{
-                  this.$router.push({path: '/afterSaleDetail',query: {post_sales_id:this.orderDetail.item_info_list[0].post_sales_id}})
+                  this.$router.push({path: '/afterSaleDetail',query: {post_sales_id:this.$route.query.post_sales_id}})
                  },1000)
                 }else{
                   Toast({
@@ -588,7 +620,8 @@
         }
     },
     mounted: function () {
-      this.initData()
+      this.initData();
+      this.order_item_id=this.$route.query.order_item_id
     }
   }
 

@@ -344,53 +344,6 @@
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <!-- 全部订单 -->
-        <!-- <div class="all-order" v-if="orderList!=''">
-          <div class="order-list">
-            <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top">
-                <div class="left">
-                  <img src="~jd/images/applist (5).png" alt="">
-                  <span>京东Apple 官方旗舰店</span>
-                </div>
-                <div class="right">
-                  <div class="order-status">
-                    <span v-if="item.orderInfo.pay_status === 0 && item.orderInfo.finish_status === 0">等待付款</span>
-                    <span v-if="item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 1 && item.orderInfo.finish_status === 0">等待收货</span>
-                    <span v-if="item.orderInfo.finish_status === 1">已完成</span>
-                    <span v-if="item.orderInfo.cancel_status === 1">已取消</span>
-                  </div>
-                </div>
-              </div>
-              <div class="order-product-list">
-                <div class="order-product-item" v-for="(prod,prodindex) in item.ProductList" :key="prodindex">
-                  <div>
-                    <img :src="prod.product.image_url[0].url" alt="">
-                    <div class="product-info">
-                      <p class="prod-name">{{prod.product.productName}}</p>
-                      <p class="prod-price">
-                        <strong>&yen;{{prod.product.price * prod.counter}}</strong>
-                        <span>x {{prod.counter}}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="order-sku">
-                <span>共{{item.ProductList.length}}件商品&nbsp;需支付：</span>
-                <strong>&yen;&nbsp;{{item.orderInfo.total_fee}}</strong>
-              </div>
-              <div class="order-btn-group">
-                <span class="payment" v-if="item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 0" @click="payment(item)">去支付</span>
-                <span class="payment" v-if="item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 1 && item.orderInfo.finish_status === 0"
-                  @click="finishOrder(item)">确认收货</span>
-                <span class="payment" v-if="item.orderInfo.confirm_status === 0 && item.orderInfo.pay_status === 0" @click="cancelOrder(item)">取消</span>
-                <span class="payment" v-if="item.orderInfo.comment_status === 0 && item.orderInfo.confirm_status === 1 && item.orderInfo.pay_status === 1 && item.orderInfo.finish_status === 1"
-                  @click="commitMessage(item)">去评论</span>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
         <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
@@ -441,23 +394,6 @@
         </div>
         <!-- 没有订单 -->
       </load-more>
-      <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
-        <img src="~jd/images/paymentloading.gif" />
-      </div>
-      <div class="paymentContainer" v-if="visiblePopup.paymentContainerVisible">
-        <div class="content">
-          <div class="title">
-            <i class="closeIcon" @click="()=>visiblePopup.paymentContainerVisible=false"></i>
-            <strong>请输入支付密码</strong>
-          </div>
-          <div class="paymentInfo">
-            <span>订单付款</span>
-            <strong>&yen;{{currentOrder.orderInfo.total_fee}}</strong>
-          </div>
-          <mt-field placeholder="请输入支付密码" type="password" v-model="paymentPassword"></mt-field>
-          <mt-button size="large" type="primary" @click="payByWallet">确认支付</mt-button>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -540,9 +476,6 @@
           });
 
         
-      },
-      commitMessage(item) { //评论
-        this.$router.push(`/review/${item.orderInfo.OrdertNo}`)
       },
       cancelOrder(item) { //取消订单
         this.$store.dispatch('CancelOrder', {
