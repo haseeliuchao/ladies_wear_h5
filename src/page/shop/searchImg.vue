@@ -290,7 +290,7 @@
   } from '@/utils/mixin';
   import {
     b64hamcsha1,
-    HexMD5
+    HexMD5,MD5
   } from '@/utils/hash'
   import LoadMore from 'common/loadMore';
   import SearchBar from 'page/shop/searchBar';
