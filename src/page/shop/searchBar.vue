@@ -398,8 +398,8 @@
           <span @click="()=>{title='';searchVisiblie=false}">取消</span>
         </div>
         <load-more style="width:100%;height:100%;background:#fff;" >
-          <div class="search-history">
-            <p>历史记录 <span></span></p>
+          <div class="search-history" v-if="searchHistoryData">
+            <p>历史记录 <span @click="clearProd"></span></p>
             <ul class="search-history-list">
               <li class="search-history-item"  v-for="(item,index) in searchHistoryData" @click="selectedProd(item.keywords)" :key="index">{{item.keywords}}</li>
             </ul>
@@ -412,26 +412,9 @@
             <p>热门搜索</p>
             <ul class="search-hot-list">
               <li class="search-hot-item" v-for="(item,index) in searchHotData" :key="index" @click="selectedProd(item.title)">{{item.title}}</li>
-        
             </ul>
           </div>
-          
         </load-more>
-        <!-- <div class="search-rusult-content" v-show="title.length>0">
-          <load-more style="background:#fff;width: 100%;height: 100%;">
-            <div class="search-rusult-goods">
-              <i></i>
-              <span>搜素 {{title}}...</span>
-            </div>
-            <ul class="search-rusult-list" v-if="searchRusultData!=''">
-              <li class="search-rusult-item" v-for="(item,index) in searchRusultData" :key="index" @click="selectedProd(item)">
-                <p>{{item.productName}}</p>
-              </li>
-            </ul>
-            <p style="text-align:center;text-align: left;padding: 10px;color: #81838e;font-size: 13px;border-bottom: 1px solid #e1e1e1;"
-              v-else>暂无数据...</p>
-          </load-more>
-        </div> -->
       </div>
     </mt-popup>
 
@@ -503,6 +486,10 @@
         });
         this.searchRusultData = Data;
       },
+      clearProd(){
+         this.searchHistoryData=[];
+         localStorage.removeItem("searchHistoryData")
+      },
       async initData() {
         let Data= await searchhotGoods({});
         this.searchHotData = Data.data;
@@ -517,7 +504,7 @@
         if(!HistoryData)return setLocalStorage('searchHistoryData',[{keywords:prod,Date:new Date()}]);
         try{
           let Data = JSON.parse(HistoryData);
-          Data.push({keywords:prod,Date:new Date()});
+          Data.unshift({keywords:prod,Date:new Date()});
           setLocalStorage('searchHistoryData',Data);
         }catch(err){}
       },
