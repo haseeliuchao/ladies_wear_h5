@@ -15,7 +15,7 @@ import {Format} from '@/utils/filters'
 import {md5} from '@/utils/md5'
 class Http {
   constructor(){
-    this.Domain = 'http://192.168.10.54:8182';
+    this.Domain = 'http://tencent-ai.com/mop/';
   }
   
      
