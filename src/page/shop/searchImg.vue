@@ -106,10 +106,12 @@
         width:100%;
         .search-history-item {
           width: 2.15rem;
-          border-radius: 5px;
+          height: 2.15rem;
           margin: .1rem;
           img{
             width:100%;
+            height: 100%;
+            border-radius: 6px;
           }
         }
       }
@@ -243,12 +245,12 @@
       </div>
 
       <!-- 精品推荐 -->
-      <div class="recommend-content">
+      <div class="recommend-content" v-if="HistoryImgData.length==0">
         <p class="product-list-top">
           <span class="product-list-topl">精选推荐</span>
           <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
         </p>
-        <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+        <load-more style="width:100%;"  @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore">
             <ul class="product-list" >
               <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
@@ -266,18 +268,10 @@
       </div>
       <!-- 搜索历史记录 -->
      
-        <div class="search-history">
+        <div class="search-history" v-if="HistoryImgData.length>0">
           <p class="search-history-title">搜索记录</p>
           <ul class="search-history-list">
-            <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
-
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
-            <li class="search-history-item"><img src="~jd/images/product.png"></li>
+            <li class="search-history-item" @click="$router.push({path: '/searchRusult',query: {item_url:item.item_url}})" v-for="(item,index) in HistoryImgData" :key="index"><img :src="item.item_url"></li>
           </ul>
         </div>
   
@@ -310,7 +304,7 @@
         searchVisiblie: false,
         popupVisible:true,
         Keyword: '',
-        searchHistoryData: [],
+        HistoryImgData: [],
         popupVisible: true ,
         commad: searchGoods,
         indexRusultData:[],
@@ -389,6 +383,17 @@
                             axios.post(url, formData).then(function (response) {
                             that.postSalesImg="https://laquimage.b0.upaiyun.com"+response.data.url;
                             that.$router.push({path: '/searchRusult',query: {item_url:that.postSalesImg}})
+                            that.HistoryImgData = getLocalStorage('searchHistoryImgData')?getLocalStorage('searchHistoryImgData'):[];
+                            if(that.HistoryImgData.length==0)return setLocalStorage('searchHistoryImgData',[{item_url:that.postSalesImg,Date:new Date()}]);
+                            try{
+                              let Data = JSON.parse(that.HistoryImgData);
+                              if(Data.length>=8){
+                               Data=Data.splice(0,Data.length-1);
+                              }
+                              Data.unshift({item_url:that.postSalesImg,Date:new Date()});
+                              setLocalStorage('searchHistoryImgData',Data);
+                            }catch(err){}
+
                             }).catch(function (error) {
                         　　alert(error);
                             })
@@ -425,12 +430,9 @@
         }
     },
     mounted: function () {
-      try{
-        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
-      }catch(err){};
-
-
+      this.HistoryImgData =  JSON.parse(getLocalStorage('searchHistoryImgData'))?JSON.parse(getLocalStorage('searchHistoryImgData')):[];
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+      
       this.$refs.indexRusultloadMore.onloadMoreScroll();
 
 
