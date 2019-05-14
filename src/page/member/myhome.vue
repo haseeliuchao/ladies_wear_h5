@@ -88,8 +88,11 @@
             center,
             column,
             nowrap);
-            span:last-child{
-              margin-top:6px;
+            span{
+              height:16px;
+              &:last-child{
+                margin-top:6px;
+              }
             }
           }   
         }
@@ -295,10 +298,10 @@
 <template>
   <div>
     <div class="content">
-      <load-more @translate-change="translateChange" style="width:100%;" @loadMore="infiniteCallback"  :param="recommendParam" :topMethod="onRefreshCallback"
+      <!-- <load-more @translate-change="translateChange" style="width:100%;" :topMethod="onRefreshCallback"
         :loadMoreIconVisible="false" ref="recommendLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
-          slot="refresh-spinner">更新中...</span>
+          slot="refresh-spinner">更新中...</span> -->
         <div class="my-header">
           <div class="userinfo" @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/sttings`)">
             <div>
@@ -312,25 +315,14 @@
               </div>
             </div>
             <div class="info-box">
-              <!-- 假数据 -->
-              <!-- <div class="my-validWalletAmount" v-if="!userData.memberInfo">
-                <p class="card" @click="$router.push('/cardCoupon')">
-                  <span>17</span>
-                  <span>我的卡劵</span>
-                </p>
-                <p class="expiry-time">
-                  <span>2019-04-22</span>
-                  <span>图搜有效期</span>
-                </p>
-              </div> -->
               <!-- 真数据 -->
               <div class="my-validWalletAmount" v-if="userData.memberInfo">
                 <p class="card" @click="$router.push('/cardCoupon')">
-                  <span>{{userData.memeberInfo.userCouponsCount}}</span>
+                  <span>{{userData.userCouponsCount}}</span>
                   <span>我的卡劵</span>
                 </p>
                 <p class="expiry-time">
-                  <span>{{userData.memeberInfo.img_search_end_time}}</span>
+                  <span>{{userData.img_search_end_time|DateFormat('yyyy.MM.dd')}}</span>
                   <span>图搜有效期</span>
                 </p>
               </div>
@@ -381,7 +373,7 @@
       
           </p>
         </div>
-      </load-more>
+      <!-- </load-more> -->
     </div>
     <FooterView/>
     <BackHead/>
@@ -435,25 +427,18 @@
     mapMutations
   } from 'vuex';
   import {
-    getRecommend,
     cardCoupon
   } from '@/service/getData';
   export default {
     data() {
       return {
         userData: {
-          userInfo: null
+          memberInfo:{}
         },
         handlerEvent: false,
-        commad: getRecommend,
-        recommendParam: {
-          Type: 'recommend',
-          page_size: 10,
-          current_page: 1
-        },
-        cmsData: {
-          recommendData: []
-        },
+        // cmsData: {
+        //   recommendData: []
+        // },
         isSdkReady:false
       };
     },
@@ -469,7 +454,7 @@
 
     computed: {
       ...mapGetters([
-        'userInfo',
+        'memberInfo',
       ])
     },
 
@@ -478,22 +463,17 @@
         'SET_USERINFO_DATA'
       ]),
       async onRefreshCallback() {
-        // let token = getSessionStorage('MemberToken')
-        // if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-        // this.recommendParam.pageSize = 10;
-        // this.recommendParam.pageIndex = 1;
-        this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
         this.userData = res.data;
         this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
       },
-      async infiniteCallback(response) { //下拉加载推荐商品
-        if (response.Data.length > 0) {
-          response.Data.map(i => {
-            this.cmsData.recommendData.push(i)
-          })
-        }
-      },
+      // async infiniteCallback(response) { //下拉加载推荐商品
+      //   if (response.Data.length > 0) {
+      //     response.Data.map(i => {
+      //       this.cmsData.recommendData.push(i)
+      //     })
+      //   }
+      // },
       translateChange(y){ //监听下拉的阈值
         this.handlerEvent = y>8 ? true : false;
       },
@@ -515,7 +495,6 @@
 
     },
     mounted: function () {
-      // this.$refs.scrollView.triggerPullToRefresh();
       this.initData();
     }
   }
