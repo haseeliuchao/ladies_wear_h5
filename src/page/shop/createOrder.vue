@@ -693,6 +693,7 @@
     
 
     <div class="payContainer">
+      <div v-if="defaultAddress.length>0">
       <div class="ordertop-address" v-for="(item,index) in defaultAddress" :key="index" @click="()=>visiblePopup.selectedAdressVisible=true">
         <div class="ordertop-addressleft"  >
         <p class="address-username">{{item.name}}<em style="margin-left:12px;font-size:12px;">{{item.phone}}</em></p>
@@ -702,6 +703,21 @@
           修改 >
         </p>
       </div>
+      </div>
+
+      <div v-if="!defaultAddress.length">
+      <div class="ordertop-address">
+        <div class="ordertop-addressleft">
+        <p style="text-align:center"><img src="~jd/images/noaddress.png" height="40" style="margin-bottom:4px;"></p>
+        <p class="address-text" style="text-align:center;color:#999">您还没有收货地址，请尽快添加哦</p>
+        </div>
+        <p class="ordertop-addressright" @click="$router.push(`/address`)">
+          添加 >
+        </p>
+      </div>
+      </div>
+
+
       <div class="all-order">
           <div class="order-list">
             <div class="order-item">
@@ -928,6 +944,12 @@ import {
       //   });
       // /order/generate/token
       async payByWallet(){
+        if(!this.consignee_id){
+          Toast({
+            message: '请先添加收货地址'
+          })
+          return
+        }
         let Data = await payToken({});
         let payData={};
         if(this.$route.query.checkout_type==1){
