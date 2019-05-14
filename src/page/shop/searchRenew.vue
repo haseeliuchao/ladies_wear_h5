@@ -126,7 +126,7 @@
             span{
               font-size:14px;
               &:first-child{
-                color:#999;
+                color:#666;
               }
               &:last-child{
                 margin-top:6px;

@@ -207,7 +207,7 @@
               content:'';
               position: absolute;
               right: 0;
-              top: 44%;
+              top: 48%;
               width: 0;
               height: 0;
               border: 5px solid transparent;
@@ -217,11 +217,11 @@
               content:'';
               position: absolute;
               right: 0;
-              top: 42%;
+              top: -12%;
               width: 0;
               height: 0;
               border: 5px solid transparent;
-              border-top-color: $red;
+              border-bottom-color: $red;
             }
           }
         }
@@ -318,7 +318,7 @@
     <!-- 筛选 -->
     <div class="search-filter">
       <ul class="search-filter-list">
-        <li class="search-filter-item active more-sort">综合排序</li>
+        <li class="search-filter-item active">综合排序</li>
         <li class="search-filter-item more-sort">价格排序</li>
       </ul>
     </div>
