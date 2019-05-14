@@ -105,6 +105,9 @@
     <!-- 登陆 -->
     <mt-popup v-model="visiblePopup.login" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
       <div class="registered-container">
+        <p style="text-align:center">
+        <img src="~jd/images/huiyanlogo.png" style="height:90px;margin-top:40px;">
+        </p>
         <div class="cell-box">
           <div class="phone-cell">
             <div class="phone-cellimg">
