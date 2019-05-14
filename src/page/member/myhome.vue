@@ -326,11 +326,11 @@
               <!-- 真数据 -->
               <div class="my-validWalletAmount" v-if="userData.memberInfo">
                 <p class="card" @click="$router.push('/cardCoupon')">
-                  <span>{{userData.memeberInfo.userCouponsCount}}</span>
+                  <span>{{userData.userCouponsCount}}</span>
                   <span>我的卡劵</span>
                 </p>
                 <p class="expiry-time">
-                  <span>{{userData.memeberInfo.img_search_end_time}}</span>
+                  <span>{{userData.img_search_end_time}}</span>
                   <span>图搜有效期</span>
                 </p>
               </div>
@@ -442,7 +442,8 @@
     data() {
       return {
         userData: {
-          userInfo: null
+          // userInfo: null
+          memberInfo:{}
         },
         handlerEvent: false,
         commad: getRecommend,
@@ -482,7 +483,7 @@
         // if (!token) return this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
         // this.recommendParam.pageSize = 10;
         // this.recommendParam.pageIndex = 1;
-        this.cmsData.recommendData = [];
+        // this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
         this.userData = res.data;
         this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
