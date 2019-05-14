@@ -347,7 +347,7 @@
         <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top" @click="$router.push(`/order/${item.order_id}`)">
+              <div class="order-top" @click="$router.push(`/order/${item.order_code}`)">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>
@@ -357,7 +357,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click="$router.push(`/order/${item.order_id}`)"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
+              <div class="order-product-list" @click="$router.push(`/order/${item.order_code}`)"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
                 <div class="order-product-item">
                   <div>
                     <img :src="itemdetail.item_img">
@@ -372,14 +372,14 @@
                   </div>
                 </div>
               </div>
-              <div class="order-sku" @click="$router.push(`/order/${item.order_id}`)">
+              <div class="order-sku" @click="$router.push(`/order/${item.order_code}`)">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em>{{item.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.total_item_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click="cancelOrder(item)">取消订单</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click="tipSend">提醒发货</span>
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_id:item.order_id}})">查看物流</span>
+                <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_code:item.order_code}})">查看物流</span>
                 <span class="payment" @click="payment(item)"   v-if="item.order_status===1">立即支付</span>
                 <span class="payment" @click="finishOrder(item)"   v-if="item.order_status===3">确认收货</span>
               </div>
@@ -400,7 +400,8 @@
 
 <script>
   import {
-    getOrderList
+    getOrderList,
+    payDirect
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
   import {
@@ -442,13 +443,39 @@
     computed: {},
 
     methods: {
-      payment(item) {
-        this.visiblePopup.paymentLoadingVisible = true;
-        setTimeout(() => {
-          this.visiblePopup.paymentLoadingVisible = false;
-          this.visiblePopup.paymentContainerVisible = true;
-          this.currentOrder = item;
-        }, 2000)
+      async payment(item) {
+        let payData = await payDirect({
+          order_code:item.order_code
+        });
+        if(payData.code==10000){
+           this.wxPay(payData.data)
+        }else{
+          Toast({
+                  message: payData.msg
+               })
+        }
+      },
+      wxPay(data){
+         let that = this
+            WeixinJSBridge.invoke(
+            //微信支付的一些认证  需要去网站设置好  然后在这调用
+                'getBrandWCPayRequest', {
+                    "appId":data.app_id,                            //公众号名称，由商户传入     
+                    "timeStamp":data.time_stamp,         //时间戳，自1970年以来的秒数     
+                    "nonceStr":data.nonce_str,                //随机串     
+                    "package":data.package_value,     
+                    "signType":data.sign_type,         //微信签名方式：     
+                    "paySign":data.pay_sign             //微信签名 
+                },
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                            that.$router.push({
+                                path:'/orderRusult' 
+                            })
+                    } else{
+                        that.$router.push({path:'/order/'+data.order_code+''})
+                    }
+                }); 
       },
       finishOrder(item) { //确认收货
          MessageBox.confirm('', { 
@@ -459,7 +486,7 @@
           }).then(action => {
             if (action == 'confirm') {     //确认的回调
               this.$store.dispatch('FinishOrder', {
-                order_id: item.order_id
+                order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
                   Toast({
@@ -479,7 +506,7 @@
       },
       cancelOrder(item) { //取消订单
         this.$store.dispatch('CancelOrder', {
-          order_id: item.order_id
+          order_code: item.order_code
         }).then(response => {
           Toast({
             message: "订单已取消"

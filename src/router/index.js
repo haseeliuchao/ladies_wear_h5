@@ -22,6 +22,7 @@ const CardCoupon = () =>   import ('page/member/cardCoupon')
 const Cart = () =>  import ('page/shop/cart')
 const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
+const OrderRusult = () => import ('page/shop/orderRusult')
 const OrderList = () => import ('page/shop/orderList')
 const Product = () =>   import ('page/shop/product')
 const SearchRusult = () =>  import ('page/shop/searchRusult')
@@ -196,6 +197,12 @@ const appRouter = {
                 path: '/afterSaleDetail',
                 name: 'afterSaleDetail',
                 component: AfterSaleDetail,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/orderRusult',
+                name: 'orderRusult',
+                component: OrderRusult,
                 meta: { keepAlive: false }
             }
         ],

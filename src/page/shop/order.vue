@@ -493,8 +493,8 @@
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         <div class="order-btn-group">
                 <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click="cancelOrder(orderDetail)">取消订单</span>
-                <span v-if="orderDetail.order_status===1" class="payment">立即支付</span>
-                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_id:orderDetail.order_id}})">查看物流</span>
+                <span v-if="orderDetail.order_status===1" class="payment" @click="payment(orderDetail)">立即支付</span>
+                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
                 <span v-if="orderDetail.order_status===3" @click="finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
         </div>
@@ -503,7 +503,7 @@
 
 <script>
   import {
-    getOrderDetail
+    getOrderDetail,payDirect
   } from '@/service/getData';
   import {
     getLocalStorage,
@@ -541,7 +541,7 @@
         // this.commentParam.ProductNo = this.$route.params.id;
          console.log(window.location.href)
         let Data = await getOrderDetail({
-         order_id: this.$route.params.OrderNo
+         order_code: this.$route.params.OrderNo
         });
         if(Data.code!=10000){
           Toast({
@@ -554,7 +554,40 @@
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },
-
+       async payment(item) {
+        let payData = await payDirect({
+          order_code:item.order_code
+        });
+        if(payData.code==10000){
+           this.wxPay(payData.data)
+        }else{
+          Toast({
+                  message: payData.msg
+               })
+        }
+      },
+      wxPay(data){
+         let that = this
+            WeixinJSBridge.invoke(
+            //微信支付的一些认证  需要去网站设置好  然后在这调用
+                'getBrandWCPayRequest', {
+                    "appId":data.app_id,                            //公众号名称，由商户传入     
+                    "timeStamp":data.time_stamp,         //时间戳，自1970年以来的秒数     
+                    "nonceStr":data.nonce_str,                //随机串     
+                    "package":data.package_value,     
+                    "signType":data.sign_type,         //微信签名方式：     
+                    "paySign":data.pay_sign             //微信签名 
+                },
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                            that.$router.push({
+                                path:'/orderRusult' 
+                            })
+                    } else{
+                        that.$router.push({path:'/order/'+data.order_code+''})
+                    }
+                }); 
+      },  
 
        finishOrder(item) { //确认收货
          MessageBox.confirm('', { 
@@ -565,7 +598,7 @@
           }).then(action => {
             if (action == 'confirm') {     //确认的回调
               this.$store.dispatch('FinishOrder', {
-                order_id: item.order_id
+                order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
                   Toast({
@@ -583,7 +616,7 @@
       },
       cancelOrder(item) { //取消订单
         this.$store.dispatch('CancelOrder', {
-          order_id: item.order_id
+          order_code: item.order_code
         }).then(response => {
           Toast({
             message: "订单已取消"

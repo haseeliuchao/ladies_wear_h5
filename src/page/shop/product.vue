@@ -141,7 +141,6 @@
            flex: 1;
            display: block;
            height: 22px;
-         
            line-height: 22px;
            border-top-left-radius: 11px;
            border-bottom-left-radius: 11px;
