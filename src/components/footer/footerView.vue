@@ -25,7 +25,7 @@
       padding-bottom:4px;
       cursor: pointer;
       background: url('~jd/images/navbar1.png') 0 0 no-repeat;
-      background-size: 700% 370%;
+      background-size: 700% 400%;
       color:#666;
       display: flex;
       flex: 1;
@@ -33,39 +33,39 @@
       align-items:flex-end;
     }
     .home {
-      background-position: -.88rem -34px;
+      background-position: -.88rem -40px;
       &.active {
-        background-position: -.88rem -106px;
+        background-position: -.88rem -117px;
          color: #ff2741;
       }
     }
     .category {
-      background-position: -3.5rem -34px;
+      background-position: -3.5rem -40px;
       &.active {
-        background-position: -3.5rem -105px;
+        background-position: -3.5rem -117px;
          color: #ff2741;
       }
     }
     .find {
       position: relative;
       top:-10px;
-      background-position: -11.5rem -62px;
+      background-position: -11.5rem -66px;
       &.active {
-        background-position: -11.5rem -62px;
+        background-position: -11.5rem -66px;
       }
     }
     .cart {
-      background-position: -6.16rem -34px;
+      background-position: -6.16rem -40px;
       &.active {
-        background-position: -6.16rem -105px;
+        background-position: -6.16rem -117px;
          color: #ff2741;
       }
     }
     .myHome {
-      background-position: -8.78rem -34px;
+      background-position: -8.78rem -40px;
       
       &.active {
-        background-position: -8.78rem -105px;
+        background-position: -8.78rem -117px;
         color: #ff2741;
       }
     }
