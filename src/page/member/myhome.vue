@@ -88,8 +88,11 @@
             center,
             column,
             nowrap);
-            span:last-child{
-              margin-top:6px;
+            span{
+              height:16px;
+              &:last-child{
+                margin-top:6px;
+              }
             }
           }   
         }
@@ -442,7 +445,6 @@
     data() {
       return {
         userData: {
-          // userInfo: null
           memberInfo:{}
         },
         handlerEvent: false,
@@ -470,7 +472,7 @@
 
     computed: {
       ...mapGetters([
-        'userInfo',
+        'memberInfo',
       ])
     },
 
