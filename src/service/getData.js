@@ -35,6 +35,8 @@ export const payToken = (params) => new Http().require({api: '/api/order/generat
 
 export const payGetData = (params) => new Http().require({api: '/api/order/generate',param: params}); //余额支付
 
+export const payDirect = (params) => new Http().require({api: '/api/order/pay',param: params}); //余额支付
+
 export const shopFavorite = (params) => new Http().require({api: '/api/member/ShopFavorite',param: params}); //收藏店铺
 
 export const getMyShopFavorite = (params) => new Http().require({api: '/api/member/GetMyShopFavorite',param: params}); //获取我收藏的店铺

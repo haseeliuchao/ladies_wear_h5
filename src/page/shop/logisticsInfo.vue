@@ -86,7 +86,7 @@
     data() {
       return {
         logisticsInfo:{},
-        order_id:null,
+        order_code:null,
       }
     },
     directives: {
@@ -99,7 +99,7 @@
 
     methods: {
        async initData() {
-        let Data = await logisticsInfo({order_id : this.$route.query.order_id});
+        let Data = await logisticsInfo({order_code : this.$route.query.order_code});
         if(Data.code!=10000){
           Toast({
             message:Data.msg

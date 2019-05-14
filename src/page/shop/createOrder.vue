@@ -947,7 +947,7 @@ import {
           })
         }
         
-         this.wxPay(payData.data.data)
+         this.wxPay(payData.data)
       },
       wxPay(data){
          let that = this
@@ -971,22 +971,15 @@ import {
                             // alert(1)
                             // alert(res.err_msg)
                             that.$router.push({
-                                path:'/ing',
-                                query:{
-                                    ordersn:that.ordersn
-                                }
+                                path:'/orderRusult'
+                                
                             })
                     } else{
                     //else 支付不成功的回调
                     
                         // alert(2)
                         // alert(res.err_msg)
-                        that.$router.push({
-                            path:'/ing',
-                            query:{
-                                ordersn:that.ordersn
-                            }
-                        })
+                        that.$router.push({path:'/order/'+data.order_code+''})
                     }
                 }); 
       }
