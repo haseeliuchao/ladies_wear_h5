@@ -66,7 +66,9 @@
         text-align: center;
         p {
           width:100%;
-          @include textoverflow(1);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           padding: 0 4px;
           // padding-bottom:0;
         }
