@@ -142,7 +142,10 @@
   </div>
 </template>
 <script>
-
+import {
+getLocalStorage,
+    setLocalStorage
+  } from '@/utils/mixin';
   import {
     Field,
     Button,
