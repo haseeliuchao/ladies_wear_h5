@@ -430,7 +430,7 @@
         recommendData: [],
         cmsData: [],
         searchBarVisilbe: true,
-        popupVisible:true,
+        popupVisible:false,
         indexRusultData: [],
         commad: searchGoods,
         indexParams: {
@@ -442,7 +442,8 @@
           page_size: 10,
           current_page: 1
         },
-        active:0
+        active:0,
+        guideindex:null
       };
     },
     watch: {},
@@ -539,6 +540,11 @@
         this.cmsData = Data.data;
       },
       async initData() { //初始化数据
+
+        this.guideindex=getLocalStorage('guideindex');
+        if(!this.guideindex){
+          this.popupVisible=true;
+        }
         if (!this.indexCmsData) {
           this.updatedData();
         } else {
@@ -546,24 +552,24 @@
         }
       },
        async loginData() { //更新数据
-          setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
-          setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
-       
+          // setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
+          // setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
        if(this.isWeiXin()){
-       let Data = await this.$store.dispatch('Login', {
-          code:utils.getUrlKey('code'),
-          app_key:utils.getUrlKey('state').slice(8)
-        })
-        console.log(Data);
-        if(Data.code==10000){
-          setLocalStorage('session_token',Data.data.session_token);
-          setLocalStorage('access_token',Data.data.access_token);
-        }else{
-          Toast({
-                message: Data.msg,
-                position: 'bottom'
-            });
-        }
+            let Data = await this.$store.dispatch('Login', {
+                code:utils.getUrlKey('code'),
+                app_key:utils.getUrlKey('state').slice(8)
+              })
+              console.log(Data);
+              if(Data.code==10000){
+                setLocalStorage('session_token',Data.data.session_token);
+                setLocalStorage('access_token',Data.data.access_token);
+                setLocalStorage('guideindex',1);
+              }else{
+                Toast({
+                      message: Data.msg,
+                      position: 'bottom'
+                  });
+              }
        }
         
       },

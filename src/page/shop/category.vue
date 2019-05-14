@@ -25,7 +25,10 @@
         font-size: 14px;
         color: #333;
         background: #fff;
-        @include textoverflow(1);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
         line-height: 2;
         // border-bottom: 1px solid #eee;
         &:last-child {
