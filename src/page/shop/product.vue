@@ -1371,7 +1371,7 @@ methods: {
           
         })
         }else{
-          this.$router.push({path: '/createOrder',query: {id:this.$route.params.id,number:this.shopnum,checkout_type:2}})
+          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
         }
        
       },
