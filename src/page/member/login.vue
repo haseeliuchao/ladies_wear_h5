@@ -257,6 +257,8 @@
         if (Data.code !== 10000) return Toast({
           message: Data.msg
         })
+        setLocalStorage('session_token',Data.data.session_token);
+        setLocalStorage('access_token',Data.data.access_token);
         this.$router.go(-1);
       }
     },
