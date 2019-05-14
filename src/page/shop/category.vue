@@ -59,8 +59,8 @@
         width: 33%;
         height: 2.64rem;
         background: #fff;
-        @include flexbox(center, center, column, wrap);
-        flex: initial;
+        // @include flexbox(center, center, column, wrap);
+        // flex: initial;
         font-size: 12px;
         color: #333;
         text-align: center;
