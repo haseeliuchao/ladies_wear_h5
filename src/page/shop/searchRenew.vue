@@ -172,16 +172,15 @@
               <span class="recommend">推荐</span>
             </li>
             <li class="renew-type-item">
-              <p class="renew-time">1天</p>
-              <p class="renew-price">￥0.9</p>
-              <span class="renew-btn">支付</span>
-            </li>
-            <li class="renew-type-item">
               <p class="renew-time">1个月</p>
               <p class="renew-price">￥25.9</p>
               <span class="renew-btn">支付</span>
-              <span class="recommend">推荐</span>
             </li>
+            <li class="renew-type-item">
+              <p class="renew-time">1天</p>
+              <p class="renew-price">￥0.9</p>
+              <span class="renew-btn">支付</span>
+            </li> 
           </ul>
         </div>
       </div>
