@@ -59,16 +59,16 @@
         width: 33%;
         height: 2.64rem;
         background: #fff;
-        // @include flexbox(center, center, column, wrap);
+        @include flexbox(center, center, row, wrap);
         // flex: initial;
         font-size: 12px;
         color: #333;
         text-align: center;
         p {
-          width:60px;
+          width:100%;
           @include textoverflow(1);
-          padding: 4px 0;
-          padding-bottom:0;
+          padding: 0 4px;
+          // padding-bottom:0;
         }
         img {
           width: 1.7333rem;
