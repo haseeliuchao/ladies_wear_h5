@@ -554,16 +554,23 @@
        async loginData() { //更新数据
           // setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
           // setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
+          let that=this;
        if(this.isWeiXin()){
             let Data = await this.$store.dispatch('Login', {
                 code:utils.getUrlKey('code'),
                 app_key:utils.getUrlKey('state').slice(8)
               })
-              console.log(Data);
+              // console.log(Data);
               if(Data.code==10000){
                 setLocalStorage('session_token',Data.data.session_token);
                 setLocalStorage('access_token',Data.data.access_token);
-                setLocalStorage('guideindex',1);
+                that.guideindex=getLocalStorage('guideindex');
+                if(!that.guideindex){
+                   setLocalStorage('guideindex',1);
+                }else{
+                   setLocalStorage('guideindex',2);
+                }
+                
               }else{
                 Toast({
                       message: Data.msg,

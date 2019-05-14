@@ -307,7 +307,7 @@
         popupVisible:true,
         Keyword: '',
         HistoryImgData: [],
-        popupVisible: true ,
+        popupVisible: false,
         commad: searchGoods,
         indexRusultData:[],
         indexParams: {
@@ -319,7 +319,8 @@
          item:{
           uploadFiles :[]
         },
-        postSalesImg:null
+        postSalesImg:null,
+        guideindex:null
       }
     },
     // props: {
@@ -340,7 +341,12 @@
     methods: {
 
        async initData() {
-
+          this.guideindex=getLocalStorage('guideindex');
+          if(this.guideindex==1){
+            this.popupVisible=true;
+          }else{
+            this.popupVisible=false;
+          }
       },
       async infiniteCallback(response) { //下拉加载
         if(response.data.items!=undefined&&response.data.items!=null){
@@ -434,9 +440,8 @@
     mounted: function () {
       this.HistoryImgData =  JSON.parse(getLocalStorage('searchHistoryImgData'))?JSON.parse(getLocalStorage('searchHistoryImgData')):[];
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-      
       this.$refs.indexRusultloadMore.onloadMoreScroll();
-
+      this.initData();
 
     }
   }
