@@ -183,7 +183,7 @@
       border-bottom: 1px solid #eee;
       .search-filter-list{
         background: #fff;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
         @include flexbox(space-between,center,row,nowrap);
         .search-filter-item{
           width: 25%;
@@ -191,7 +191,7 @@
           color: #333;
           font-size: 15px;
           margin: 15px .8rem;
-          padding-bottom:3px;
+          padding-bottom:5px;
           @media all and(max-width:374px){
              margin: 15px .6rem;
           }
@@ -200,20 +200,62 @@
           }
           &.active{
             color: $red;
-          }
-          &.more-sort{
-            position: relative;
-            &:after{
-              content:'';
-              position: absolute;
-              right: 0;
-              top: 44%;
-              width: 0;
-              height: 0;
-              border: 5px solid transparent;
-              border-top-color: $red;
+            // border-bottom: 2px solid $red
+            .more-sort{
+              display: block!important;
             }
           }
+          .more-sort{
+              display: none;
+          }
+          .more-sortAsc{
+            position: relative;
+            
+            &:before{
+                  content: '';
+                  position: absolute;
+                  right: -18px;
+                  top: 2px;
+                  width: 0;
+                  height: 0;
+                  border: 4px solid transparent;
+                  border-top-color: #ff2741;
+            }
+            &:after{
+              content: '';
+              position: absolute;
+              right: -18px;
+              top: -10px;
+              width: 0;
+              height: 0;
+              border: 4px solid transparent;
+              border-bottom-color: #666;
+            }
+          }
+          .more-sortDesc{
+            position: relative;
+            &:before{
+                  content: '';
+                  position: absolute;
+                  right: -18px;
+                  top: 2px;
+                  width: 0;
+                  height: 0;
+                  border: 4px solid transparent;
+                  border-top-color:  #666;
+            }
+            &:after{
+              content: '';
+              position: absolute;
+              right: -18px;
+              top: -10px;
+              width: 0;
+              height: 0;
+              border: 4px solid transparent;
+              border-bottom-color: #ff2741;
+            }
+          }
+          
         }
       }
     }
@@ -277,7 +319,7 @@
   <div class="search-rusult-container">
     <!-- 搜索框 -->
     <!-- 文字搜索 -->
-    <div class="search-top" v-if="searchParams.title">
+    <div class="search-top" v-if="searchParams.title||searchParams.category_id">
       <div class="searchInput">
           <div class="search-box">
             <!-- <i class="searchIcon searchContentIcon"></i> -->
@@ -308,8 +350,8 @@
     <!-- 筛选 -->
     <div class="search-filter">
       <ul class="search-filter-list">
-        <li class="search-filter-item active more-sort">综合排序</li>
-        <li class="search-filter-item">价格排序</li>
+        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click="sortType(1)">综合排序</li>
+        <li :class="['search-filter-item',active==1 ? 'active' : '']" @click="sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
     <!-- 筛选 -->
@@ -352,12 +394,16 @@
         searchParams: {
           title: '',
           item_url:'',
+          sort_type:1,
           category_id:'',
           ad_advertising_id:'',
           img_url:'',
           page_size: 10,
           current_page: 1
-        }
+        },
+        active:0,
+        sort_enum:null,
+        sort_enumboo:true
       };
     },
 
@@ -377,6 +423,23 @@
     methods: {
       changeQuery(title){
          this.$router.push({path:'/searchRusult',query:{title:title}})
+         this.searchRusult()
+      },
+      sortType(index){
+        this.searchParams.sort_type=index;
+         if(index==1){
+           this.active=0
+         }else{
+           this.active=1
+           this.sort_enum='ASC'
+           if(this.sort_enumboo){
+             this.sort_enum='ASC'
+           }else{
+             this.sort_enum='DESC'
+           }
+           this.sort_enumboo=!this.sort_enumboo;
+         }
+         this.searchParams.sort_enum=this.sort_enum;
          this.searchRusult()
       },
       async searchRusult() {
