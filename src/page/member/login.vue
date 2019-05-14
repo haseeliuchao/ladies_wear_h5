@@ -128,7 +128,7 @@
                 <i class="clear" v-show="registeredForm.code.length>0" @click="registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
               <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click="registeredSendPhoneMessage"
-                    :disabled="errors.has('mobile')||registeredForm.phone.length==0">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
+                    :disabled="errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
               </div>
               <div style="height:18px;">
           <span v-show="errors.has('registeredCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
