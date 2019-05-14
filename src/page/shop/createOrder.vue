@@ -180,6 +180,26 @@
         text-align: center;
       }
     }
+    .getCoupon{
+      height: 48px;
+      line-height: 48px;
+      background: #e2e2e2;
+      width: 10rem;
+      position: fixed;
+      bottom: 48px;
+      padding: 0 12px;
+      @include flexbox(space-between,
+    center,
+    row,
+    nowrap);
+     p{
+       font-size: 16px;
+       color: #333;
+       span{
+         color: $red;
+       }
+     }
+    }
   }
 
   .paymentLoading {
@@ -623,6 +643,40 @@
           }
         }
       }
+      .coupon-item{
+        height: 99px;
+        width: 9.6rem;
+        margin-left: .2rem;
+        background: url('~jd/images/coupon-itembg.png') no-repeat center;
+        background-size: 100%;
+        @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+        .coupon-itemleft{
+             width: 66%;
+             height: 80%;
+             padding-left: 20px;
+             .coupon-price{
+                color: $red;
+                font-size: 14px;
+                padding: 3px 0;
+                em{
+                  font-size: 22px;
+                }
+             }
+             .coupon-text{
+               line-height: 23px;
+               font-size: 13px;
+               color: #999;
+             }
+        }
+        i{
+          margin-right: 1.1rem;
+          width: 35px;
+          height: 35px;
+        }
+      }
     }
   }
  
@@ -687,7 +741,10 @@
     </div>
 
 
-
+    <div class="getCoupon" @click="()=>visiblePopup.couponVisible=true">
+      <p>可用券码 <span>7张</span></p>
+      <img src="~jd/images/arrow-right.png" height="16">
+    </div>
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
@@ -697,36 +754,13 @@
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
       <img src="~jd/images/paymentloading.gif" />
     </div>
-    <div class="paymentContainer" v-if="visiblePopup.paymentContainerVisible">
-      <div class="content">
-        <div class="title">
-          <i class="closeIcon" @click="()=>visiblePopup.paymentContainerVisible=false"></i>
-          <strong>请输入支付密码</strong>
-        </div>
-        <div class="paymentInfo">
-          <span>订单付款</span>
-          <strong>&yen;{{totalFee}}</strong>
-        </div>
-        <mt-field placeholder="请输入支付密码" type="password" v-model="paymentPassword"></mt-field>
-        <mt-button size="large" type="primary" @click="payByWallet">确认支付</mt-button>
-      </div>
-    </div>
-    <mt-popup v-model="visiblePopup.selectedAdressVisible" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup" style="height:400px;" >
+    <mt-popup v-model="visiblePopup.selectedAdressVisible" :closeOnClickModal="true" :modal="true" position="bottom" class="modal-popup" style="height:400px;" >
       <div class="my-header">
         <i class="myMsg"></i>
-        
         <strong>地址管理</strong>
         <i class="back" @click="()=>visiblePopup.selectedAdressVisible=false"></i>
       </div>
       <div class="addressList">
-        <!-- <scroller width="100%" height="100%" style="margin-top:1.2rem;background:#fff;"> -->
-          <!-- <div class="address-container" v-if="addressData">
-            <div class="address-item" v-for="(item,index) in addressData" :key="index" @click="selectedAddress(item)">
-              <p class="name">{{item.nickName}} {{item.Phone}}</p>
-              <p class="address">{{item.Province + item.City + item.Area}}&nbsp;;&nbsp;{{item.Address}}</p>
-              <i class="selectedIcon" v-if="item.Selected===1"></i>
-            </div>
-          </div> -->
           <div class="address-container" v-if="addressData">
             <div class="address-item" v-for="(item,index) in addressData" :key="index" >
               <div class="address-itemleft" @click="selectedAddress(item)">
@@ -742,6 +776,29 @@
           </div>
         <!-- </scroller> -->
         <div class="addNewAddressbtn" @click="$router.push(`/address`)">添加新地址</div>
+      </div>
+    </mt-popup>
+    <!-- 运费券 -->
+    <mt-popup v-model="visiblePopup.couponVisible" :closeOnClickModal="true" :modal="true" position="bottom" class="modal-popup" style="height:400px;" >
+      <div class="my-header">
+        <!-- <i class="myMsg"></i> -->
+        <strong>可用券码</strong>
+        <i class="back" @click="()=>visiblePopup.couponVisible=false"></i>
+      </div>
+      <div class="addressList">
+       
+          <div class="address-container">
+            <div class="coupon-item">
+                <div class="coupon-itemleft">
+                  <p class="coupon-price"><span>&yen;</span><em>{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:14px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></p>
+                  <p class="coupon-text" style="color:#ff2741">仅限天猫平台使用，特殊商品除外</p>
+                  <p class="coupon-text">有效期2019.04.03-2019.05.03</p>
+                </div>
+                <!-- ,item.checked ? 'select-icon' : '' -->
+                <i :class="['select-default-icon']"></i>
+            </div>
+          </div>
+        <div class="addNewAddressbtn" @click="()=>visiblePopup.couponVisible=false">确定</div>
       </div>
     </mt-popup>
   </div>
@@ -773,7 +830,7 @@ import {
         addressData: null,
         visiblePopup: {
           paymentContainerVisible: false,
-          paymentLoadingVisible: false,
+          couponVisible: false,
           selectedAdressVisible: false
         },
         consignee_id:null
@@ -889,6 +946,49 @@ import {
           consignee_id:this.consignee_id
           })
         }
+        
+         this.wxPay(payData.data.data)
+      },
+      wxPay(data){
+         let that = this
+            WeixinJSBridge.invoke(
+            //微信支付的一些认证  需要去网站设置好  然后在这调用
+                'getBrandWCPayRequest', {
+                    "appId":data.app_id,                            //公众号名称，由商户传入     
+                    "timeStamp":data.time_stamp,         //时间戳，自1970年以来的秒数     
+                    "nonceStr":data.nonce_str,                //随机串     
+                    "package":data.package_value,     
+                    "signType":data.sign_type,         //微信签名方式：     
+                    "paySign":data.pay_sign             //微信签名 
+                },
+                function(res){
+                //这个是支付成功的回调
+                
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                    // 使用以上方式判断前端返回,微信团队郑重提示：
+                            //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+
+                            // alert(1)
+                            // alert(res.err_msg)
+                            that.$router.push({
+                                path:'/ing',
+                                query:{
+                                    ordersn:that.ordersn
+                                }
+                            })
+                    } else{
+                    //else 支付不成功的回调
+                    
+                        // alert(2)
+                        // alert(res.err_msg)
+                        that.$router.push({
+                            path:'/ing',
+                            query:{
+                                ordersn:that.ordersn
+                            }
+                        })
+                    }
+                }); 
       }
     },
     filters:{
