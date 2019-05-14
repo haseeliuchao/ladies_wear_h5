@@ -110,7 +110,7 @@
             <div class="phone-cellimg">
             <img src="~jd/images/login-phone.png" style="height:20px;" alt="">
             </div>
-            <input v-focus v-validate="'required|mobile'" name="mobile" type="tel" v-model="registeredForm.phone" placeholder="请输入手机号">
+            <input v-focus v-validate.initial="'required|mobile'" name="mobile" type="tel" v-model="registeredForm.phone" placeholder="请输入手机号">
             <i class="clear" v-show="registeredForm.phone.length>0" @click="registeredForm.phone=''" style="right: 10px;top:12px;"></i>
           </div>
           <div style="height:18px;">
@@ -124,7 +124,7 @@
                 <input v-focus v-validate.initial="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="registeredForm.code.length>0" @click="registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
-              <div :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click="registeredSendPhoneMessage"
+              <div style="background:none" :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click="registeredSendPhoneMessage"
                     :disabled="errors.has('mobile')">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
               </div>
               <div style="height:18px;">
@@ -232,33 +232,6 @@
           })
         })
       },
-      async registeredNext() { //注册账号发送短信
-        this.$store.dispatch('GetUserInfo', {
-          MemberToken: this.registeredForm.phone
-        }).then(response => {
-          if (response.Code === 0) return Toast({
-            message: '该手机已被注册',
-            position: 'bottom'
-          })
-        }, err => {
-          this.visiblePopup.registeredCode = true
-        })
-      },
-      async setPasswordNext() { //忘记密码
-        let {
-          Code,
-          Message,
-          Data,
-        } = await this.$store.dispatch('GetUserInfo', {
-          MemberToken: this.forgetForm.phone
-        });
-        if (Code !== 0) return Toast({
-          message: Message,
-          position: 'bottom'
-        })
-        this.forgetForm.userName = Data.username;
-        this.visiblePopup.forgetCode = true
-      },
       async registeredSendPhoneMessage() { //获取验证码
         await this.$store.dispatch('SendPhoneMessage', {
           phone: this.registeredForm.phone
@@ -270,20 +243,6 @@
             clearInterval(times);
           } else {
             this.registeredForm.resetSendPhoneMessage--;
-          }
-        }, 1000)
-      },
-      async forgetSendPhoneMessage() { //获取验证码
-        await this.$store.dispatch('SendPhoneMessage', {
-          phone: this.forgetForm.phone
-        });
-        this.forgetForm.resetSendPhoneMessage = 120;
-        let times = setInterval(() => {
-          if (this.forgetForm.resetSendPhoneMessage <= 0) {
-            this.forgetForm.resetSendPhoneMessage = null;
-            clearInterval(times);
-          } else {
-            this.forgetForm.resetSendPhoneMessage--;
           }
         }, 1000)
       },
