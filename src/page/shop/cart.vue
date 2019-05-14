@@ -187,7 +187,9 @@
               font-size: 14px;
               color: #333;
               p{
+                @include textoverflow(2);
                 line-height: 20px;
+                 
               }
             }
             .pd-sku {

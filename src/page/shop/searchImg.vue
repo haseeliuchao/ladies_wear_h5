@@ -279,6 +279,7 @@
 
   </div>
 </template>
+
 <script>
   import {
     searchGoods
@@ -286,7 +287,8 @@
   import {
     getLocalStorage,
     setLocalStorage
-  } from '@/utils/mixin'
+  } from '@/utils/mixin';
+  // import '@/utils/hash'
   import LoadMore from 'common/loadMore';
   import SearchBar from 'page/shop/searchBar';
   import axios from 'axios';
