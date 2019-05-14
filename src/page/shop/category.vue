@@ -25,7 +25,10 @@
         font-size: 14px;
         color: #333;
         background: #fff;
-        @include textoverflow(1);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
         line-height: 2;
         // border-bottom: 1px solid #eee;
         &:last-child {
@@ -59,18 +62,18 @@
         width: 33%;
         height: 2.64rem;
         background: #fff;
-        @include flexbox(center, center, column, wrap);
-        flex: initial;
+        @include flexbox(center, center, row, wrap);
+        // flex: initial;
         font-size: 12px;
         color: #333;
         text-align: center;
         p {
-          width:60px;
-          @include textoverflow(1);
-          -webkit-box-orient: vertical;
-          padding: 4px 0;
-          padding-bottom:0;
-          text-overflow:ellipsis;
+          width:100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          padding: 0 4px;
+          // padding-bottom:0;
         }
         img {
           width: 1.7333rem;
