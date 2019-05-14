@@ -300,28 +300,20 @@
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <div class="my-header">
-          <!-- <div class="my-settings">
-            <div>
-              <i class="settings" @click="$router.push('/sttings')"></i>
-              <i class="msg-icon"></i>
-            </div>
-          </div> -->
-          <div class="userinfo" @click.stop.prevent="$router.push(!userInfo ? `/login` : `/sttings`)">
+          <div class="userinfo" @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/sttings`)">
             <div>
               <div class="avatar">
-                <img :src="!userInfo || !userData.userInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.userInfo.memberInfo.head_img" alt="">
+                <img :src="!userData.memberInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
               </div>
               <div class="user">
-                <span class="username" >{{!userData.userInfo? '登录/注册 >' : userData.userInfo.memberInfo.nick}}</span>
+                <span class="username" v-if="userData.memberInfo">{{userData.memberInfo.nick}}</span>
                 <!-- 假数据 -->
-                <span class="userphone" v-if="!userData.userInfo">18867202256</span> 
-                 <!-- 真数据 -->
-              <!-- <span class="userphone" v-if="userData.userInfo">{{userData.userInfo.memberInfo.phone}}</span> -->
+                <!-- <span class="userphone" v-if="!userData.memberInfo">18867202256</span>  -->
               </div>
             </div>
             <div class="info-box">
               <!-- 假数据 -->
-              <div class="my-validWalletAmount" v-if="!userData.userInfo">
+              <!-- <div class="my-validWalletAmount" v-if="!userData.memberInfo">
                 <p class="card" @click="$router.push('/cardCoupon')">
                   <span>17</span>
                   <span>我的卡劵</span>
@@ -330,15 +322,15 @@
                   <span>2019-04-22</span>
                   <span>图搜有效期</span>
                 </p>
-              </div>
+              </div> -->
               <!-- 真数据 -->
-              <div class="my-validWalletAmount" v-if="userData.userInfo">
+              <div class="my-validWalletAmount" v-if="userData.memberInfo">
                 <p class="card" @click="$router.push('/cardCoupon')">
-                  <span>{{userData.userInfo.memeberInfo.userCouponsCount}}</span>
+                  <span>{{userData.memeberInfo.userCouponsCount}}</span>
                   <span>我的卡劵</span>
                 </p>
                 <p class="expiry-time">
-                  <span>{{userData.userInfo.memeberInfo.img_search_end_time}}</span>
+                  <span>{{userData.memeberInfo.img_search_end_time}}</span>
                   <span>图搜有效期</span>
                 </p>
               </div>
@@ -348,10 +340,6 @@
         <div class="my-order">
           <h2>我的订单</h2>
           <div>
-            <!-- <div class="order-item" @click = "$router.push('/cardCoupon')">
-              <img src="~jd/images/paymenticon.png" alt="">
-              <span>待付款</span>
-            </div> -->
             <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
               <img src="~jd/images/paymenticon.png" alt="">
               <span>待付款</span>
@@ -383,7 +371,7 @@
             <span><img src="~jd/images/addressicon.png">收货地址</span>
             <span>快速管理 ></span>
           </p>
-          <p class="about-item" @click="showToast">
+          <p class="about-item" @click="openSdk()">
             <span><img src="~jd/images/kefuicon.png">在线客服</span>
             <span>有问题找小惠 ></span>
           </p>
@@ -401,6 +389,36 @@
 </template>
 
 <script>
+  // (
+				
+	// 			function (w, d, n, a, j) {
+	// 				w[n] = w[n] || function () {
+	// 					(w[n].a = w[n].a || []).push(arguments);
+	// 				};
+	// 				j = d.createElement('script');
+	// 				j.async = true;
+	// 				j.src ='https://qiyukf.com/script/43c880891a4096d21928cd3db4db00b0.js';
+	// 				d.body.appendChild(j);
+  //       })(window, document, 'ysf');
+
+	// 		var isSdkReady = false;
+	// 		ysf('onLayerload', function () {
+	// 			isSdkReady = true;
+	// 		})
+	// 		window.openSdk = function () {
+	// 			if (isSdkReady) {
+	// 				ysf('open');
+	// 			} else {
+	// 				alert('sdk尚未加载成功，请稍后再试');
+	// 			}
+	// 		}
+	// 		ysf('config', {
+	// 				uid: "123456789",  // 用户Id
+	// 				name: 'mmp',          // 用户名称
+	// 				email: 'test@163.com', // 用户邮箱
+	// 				mobile: '138823288888'  // 用户电话
+  //       })      
+  
   import FooterView from 'component/footer/footerView';
   import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
@@ -436,6 +454,7 @@
         cmsData: {
           recommendData: []
         },
+        isSdkReady:false
       };
     },
 
@@ -465,7 +484,7 @@
         // this.recommendParam.pageIndex = 1;
         this.cmsData.recommendData = [];
         let res = await this.$store.dispatch('GetUserInfo');
-        this.userData.userInfo = res.Data;
+        this.userData = res.data;
         this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
       },
       async infiniteCallback(response) { //下拉加载推荐商品
@@ -479,12 +498,9 @@
         this.handlerEvent = y>8 ? true : false;
       },
       async initData() {
-        // if (!this.userInfo) {
-        //   let token = getSessionStorage('MemberToken')
-        //   if (!token) return;
           let res = await this.$store.dispatch('GetUserInfo');
-          await this.SET_USERINFO_DATA(res.Data);
-          this.userData.userInfo = res.Data;
+          await this.SET_USERINFO_DATA(res.data);
+          this.userData = res.data;
         // } else {
         //   this.userData.userInfo = this.userInfo;
         // }
@@ -495,7 +511,8 @@
           duration:1000,
           className:'tipToast'
         })
-      }
+      },
+
     },
     mounted: function () {
       // this.$refs.scrollView.triggerPullToRefresh();

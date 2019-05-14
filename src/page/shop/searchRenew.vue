@@ -41,12 +41,6 @@
             margin:24px .2rem;
             border:1px solid #d3d3d3;
             border-radius:4px;
-            &:first-child{
-              margin-left:0;
-            }
-            &:last-child{
-              margin-right:0;
-            }
             &.active{
               border:none;
               background-color:rgba(255,179,158,.23)
