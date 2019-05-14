@@ -292,10 +292,9 @@
           phone: this.registeredForm.phone,
           code: this.registeredForm.code
         })
-        // if (Data.Code !== 0) return Toast({
-        //   message: Data.Message,
-        //   position: 'bottom'
-        // })
+        if (Data.code !== 10000) return Toast({
+          message: Data.msg
+        })
         this.$router.go(-1);
       }
     },

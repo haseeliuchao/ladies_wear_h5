@@ -918,13 +918,17 @@ import {
           })
           return this.$router.go(-1);
         }
-        // confirmSelectedData.data.map(item => {
-        //   if (item.status === 9) {
-        //     this.totalFee += item.counter * item.product.price;
-        //   }
-        // })
-        // this.totalFee = this.totalFee.toFixed(2);
-        this.confirmSelectedProduct = confirmSelectedData.data;
+        if(confirmSelectedData.code==10000){
+          this.confirmSelectedProduct = confirmSelectedData.data;
+        }else if(confirmSelectedData.code==30029){
+          this.$router.push('/login');
+        }else{
+          Toast({
+            message: confirmSelectedData.msg
+          })
+        }
+
+        
       },
       async submitOrder() {
         this.$store.dispatch('CreateOrder', {
