@@ -130,7 +130,7 @@
               <div style="height:18px;">
           <span v-show="errors.has('registeredCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
               </div>
-          <div :class="['cell-btn',errors.has('mobile')?'disabled-btn':'']" @click="LoginBind">确定</div>
+          <div :class="['cell-btn',errors.has('mobile')||errors.has('registeredCode')?'disabled-btn':'']" @click="LoginBind">确定</div>
           </div>
           
       </div>
