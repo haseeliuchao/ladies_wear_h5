@@ -121,7 +121,7 @@
                 <div class="code-cellimg">
                 <img src="~jd/images/login-msg.png" style="height:13px;" alt="">
                 </div>
-                <input v-focus v-validate="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
+                <input v-focus v-validate.initial="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="registeredForm.code.length>0" @click="registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
               <div :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click="registeredSendPhoneMessage"
