@@ -242,7 +242,7 @@
                   width: 0;
                   height: 0;
                   border: 4px solid transparent;
-                  border-top-color:  #666;
+                  border-top-color: #666;
             }
             &:after{
               content: '';
@@ -253,16 +253,6 @@
               height: 0;
               border: 4px solid transparent;
               border-bottom-color: #ff2741;
-            }
-            &:before{
-              content:'';
-              position: absolute;
-              right: 0;
-              top: -12%;
-              width: 0;
-              height: 0;
-              border: 5px solid transparent;
-              border-bottom-color: $red;
             }
           }
           
