@@ -130,7 +130,7 @@
         row,
         nowrap);
         .product-name-text {
-        font-size: 14px;
+        font-size: 13px;
         line-height: 20px;
         color: #333;
         flex: 4;

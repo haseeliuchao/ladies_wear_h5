@@ -67,10 +67,8 @@
         p {
           width:60px;
           @include textoverflow(1);
-          -webkit-box-orient: vertical;
           padding: 4px 0;
           padding-bottom:0;
-          text-overflow:ellipsis;
         }
         img {
           width: 1.7333rem;
