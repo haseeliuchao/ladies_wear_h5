@@ -300,12 +300,6 @@
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <div class="my-header">
-          <!-- <div class="my-settings">
-            <div>
-              <i class="settings" @click="$router.push('/sttings')"></i>
-              <i class="msg-icon"></i>
-            </div>
-          </div> -->
           <div class="userinfo" @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/sttings`)">
             <div>
               <div class="avatar">

@@ -63,7 +63,6 @@
     }
     .myHome {
       background-position: -8.78rem -40px;
-      
       &.active {
         background-position: -8.78rem -117px;
         color: #ff2741;
