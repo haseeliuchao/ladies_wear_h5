@@ -542,6 +542,7 @@
       async initData() { //初始化数据
 
         this.guideindex=getLocalStorage('guideindex');
+        if(this.isWeiXin()){
         if(!this.guideindex){
           this.popupVisible=true;
         }
@@ -549,6 +550,7 @@
           this.updatedData();
         } else {
           this.cmsData = this.indexCmsData.data;
+        }
         }
       },
        async loginData() { //更新数据
