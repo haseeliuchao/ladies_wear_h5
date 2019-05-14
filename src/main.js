@@ -48,6 +48,15 @@ const config = {
     }
   });
 
+  VeeValidate.Validator.extend('phonecode', {
+      messages: {
+        zh_CN:field => field + '必须是6位验证码',
+      },
+      validate: value => {
+        return value.length == /^(\d{6})$/.test(value)
+      }
+   });
+
  Vue.use(VeeValidate, config); 
 
 
