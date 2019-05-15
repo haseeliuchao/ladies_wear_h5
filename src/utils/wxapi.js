@@ -19,7 +19,7 @@ const wxApi = {
         });
         let data = Data.data// PS: 这里根据你接口的返回值来使用
       wx.config({
-        debug: false, // 开启调试模式
+        debug: true, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
         timestamp: data.timestamp, // 必填，生成签名的时间戳
         nonceStr: data.nonce_str, // 必填，生成签名的随机串
