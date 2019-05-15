@@ -116,7 +116,6 @@
     <li :class="['barIcon','myHome',$route.name==='myhome'?'active':'']" @click= "$router.push('/myhome')">我的</li>
   </ul>
 </template>
-
 <script>
 
 
