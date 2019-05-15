@@ -339,8 +339,8 @@
     <div class="order-container">
       <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore"> -->
-              <!-- :topMethod="onRefreshCallback" -->
-      <load-more style="width:100%;" v-if="$route.path=='/orderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" 
+              <!--  -->
+      <load-more style="width:100%;" v-if="$route.name=='orderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
@@ -494,7 +494,7 @@
                   message: response.msg
                   })
                 }else{
-                this.getOrderdata()
+                this.onRefreshCallback()
                 }
               })
             }
@@ -512,7 +512,7 @@
           Toast({
             message: "订单已取消"
           })
-          this.getOrderdata()
+          this.onRefreshCallback()
         })
       },
       tipSend(){
@@ -522,15 +522,6 @@
       },
       // 提醒卖家发货成功
       async onRefreshCallback() { //下拉刷新
-        this.params.page_size = 10;
-        this.params.current_page = 1;
-        this.orderList = [];
-        setTimeout(() => {
-        this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
-        }, 1000); 
-      },
-
-       async getOrderdata() { //下拉刷新
         this.params.page_size = 10;
         this.params.current_page = 1;
         this.orderList = [];
@@ -562,7 +553,7 @@
             throw new Error('未知TabId')
             break
         }
-        this.getOrderdata();
+        this.onRefreshCallback();
       },
       payByWallet() {
         this.$store.dispatch('PayByWallet', {
@@ -599,6 +590,7 @@
         }
     },
     mounted: function () {
+      console.log(this.$route.name)
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0)
     }
