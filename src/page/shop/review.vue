@@ -163,10 +163,10 @@
       inputFile: function (newFile, oldFile) {
         if (newFile && oldFile && !newFile.active && oldFile.active) {
           // 获得相应数据
-          console.log('response', newFile.response)
+          // console.log('response', newFile.response)
           if (newFile.xhr) {
             //  获得响应状态码
-            console.log('status', newFile.xhr.status)
+            // console.log('status', newFile.xhr.status)
           }
         }
       },

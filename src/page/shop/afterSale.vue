@@ -505,14 +505,6 @@
          this.reason=item.reason;
       },
       inputFile: function (newFile, oldFile) {
-        // if (newFile && oldFile && !newFile.active && oldFile.active) {
-        //   // 获得相应数据
-        //   console.log('response', newFile.response)
-        //   if (newFile.xhr) {
-        //     //  获得响应状态码
-        //     console.log('status', newFile.xhr.status)
-        //   }
-        // }
         // 自动上传
         if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
             if (newFile && !oldFile) {
@@ -536,7 +528,6 @@
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
                                 that.postSalesImgList.push("https://laquimage.b0.upaiyun.com"+response.data.url);
-            // 　　                 console.log(that.postSalesImgList)
                               that.postSalesImgstr=that.postSalesImgList.join(",");
             }).catch(function (error) {
                         　　alert(error);
@@ -551,7 +542,6 @@
 
                let index = this.postSalesImgList.indexOf(this.imgRemoveIndexcur);
                this.postSalesImgList.splice(index, 1);
-            //    console.log(this.postSalesImgList)
                this.postSalesImgstr=this.postSalesImgList.join(",");
             }
         }
@@ -566,7 +556,6 @@
         }
         // 创建 blob 字段 用于图片预览
         if (!newFile && oldFile) {
-            // console.log('0')
         }else{
         newFile.blob = ''
         let URL = window.URL || window.webkitURL

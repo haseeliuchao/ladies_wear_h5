@@ -424,7 +424,7 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p v-if="orderDetail.order_status===1">等待买家付款</p>
+         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>24小时后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
          <p v-if="orderDetail.order_status===2">等待卖家发货</p>
          <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
          <p v-if="orderDetail.order_status===4">订单已完成</p>
@@ -540,7 +540,7 @@
     methods: {
       async initData() {
         // this.commentParam.ProductNo = this.$route.params.id;
-         console.log(window.location.href)
+        //  console.log(window.location.href)
         let Data = await getOrderDetail({
          order_code: this.$route.params.OrderNo
         });

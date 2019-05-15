@@ -453,7 +453,6 @@
     },
     watch: {
      $route(to,from){
-        // console.log(to.path);
         if(to.path!='/index'&& to.path!='/searchRusult'){
          this.searchVisiblie=false 
         }

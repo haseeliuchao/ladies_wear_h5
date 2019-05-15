@@ -1159,7 +1159,7 @@ methods: {
           }
           
         })
-        }else{
+        }else if(this.addType==='directBuy'){
           this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
         }
         }
