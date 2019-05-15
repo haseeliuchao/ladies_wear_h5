@@ -128,9 +128,9 @@
               font-size: 15px;
              line-height: 26px;
               strong{
-                font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -334,14 +334,15 @@
                       color: #999;
                     }
                     strong {
-                      font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
                       }
                       em{
+                        font-size:16px;
                         color: $red;
                         font-style: normal
                       }
@@ -384,9 +385,9 @@
               }
             }
             strong {
-                      font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -458,7 +459,7 @@
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em>{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
                         <span>x{{item.num}}</span>
                       </p>
                     </div>
@@ -482,13 +483,13 @@
         </div>
     </div>
     <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
         </div>
 
         <div class="order-product-detail" style="margin-top:10px;margin-bottom:90px">
-                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em>{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         <div class="order-btn-group">
