@@ -201,12 +201,29 @@
           &.active{
             color: $red;
             // border-bottom: 2px solid $red
-            .more-sort{
-              display: block!important;
-            }
           }
           .more-sort{
-              display: none;
+              // display: none;
+               &:before{
+                  content: '';
+                  position: absolute;
+                  right: -18px;
+                  top: 2px;
+                  width: 0;
+                  height: 0;
+                  border: 4px solid transparent;
+                  border-top-color: #666;
+                  }
+                  &:after{
+                    content: '';
+                    position: absolute;
+                    right: -18px;
+                    top: -10px;
+                    width: 0;
+                    height: 0;
+                    border: 4px solid transparent;
+                    border-bottom-color: #666;
+                  }
           }
           .more-sortAsc{
             position: relative;
@@ -358,7 +375,7 @@
 
     <!-- 搜索内容 -->
     <div class="content">
-      <load-more style="width:100%;" v-if="$route.path=='/searchRusult'" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
+      <load-more style="width:100%;" v-if="$route.name=='searchRusult'" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
           ref="searchRusultloadMore">
         <ul class="product-list" >
           <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
