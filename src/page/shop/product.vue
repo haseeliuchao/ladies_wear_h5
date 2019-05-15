@@ -1177,13 +1177,13 @@ methods: {
         }).then(response => {
           if(response.code==10000){
           return Toast({
-            message: '加入购物车成功',
-            position: 'bottom'
+            message: '加入购物车成功'
+      
           })
           }else{
             Toast({
-            message: response.msg,
-            position: 'bottom'
+            message: response.msg
+           
             })
             return
           }
@@ -1202,8 +1202,7 @@ methods: {
         });
         if(Data.code!=10000){
           Toast({
-            message: Data.msg,
-            position: 'bottom'
+            message: Data.msg
           })
           return
         }
@@ -1232,8 +1231,7 @@ methods: {
        sizecheckBtn(size,index){
          if(this.checkcolorindex==null){
            Toast({
-            message: '请先选择颜色',
-            position: 'bottom'
+            message: '请先选择颜色'
           })
           return;
          }
@@ -1247,8 +1245,7 @@ methods: {
          if(this.shopnum<1){
            this.shopnum =1;
          Toast({
-            message: '宝贝不能再减少了哦',
-            position: 'bottom'
+            message: '宝贝不能再减少了哦'
           })
           return;
          }
