@@ -66,7 +66,7 @@
         flex-start,
         column,
         wrap);
-        height:60px;
+        height:64px;
         margin-left:.4rem;
         .username,.userphone {
           // margin-top: 10px;

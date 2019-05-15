@@ -153,6 +153,24 @@
            background:#e8e8e8 url('~jd/images/sharelink.png') no-repeat 9px center;
            background-size: 16%
       }
+      @media all and(min-width:321px) and(max-width:374px){
+        .product-share{
+          left:16px;
+          text-indent: -5px;
+        }
+      }
+      @media all and(min-width:375px) and(max-width:375px){
+        .product-share{
+          left:23px;
+          text-indent: -6px;
+        }
+      }
+      @media all and(min-width:376px){
+        .product-share{
+          left:40px;
+          text-indent: -10px;
+        }
+      }
       }
       
 
@@ -972,7 +990,7 @@
                 <span class="sku-select">服务</span>
                 <span class="sku-info">7天无理由退货</span>
               </div>
-              <span class="right-menu"></span>
+              <!-- <span class="right-menu"></span> -->
             </div>
             <!-- 商品规格 -->
              <div class="product-sku" style="margin-top:0;border-top:1px solid #e4e4e4;
