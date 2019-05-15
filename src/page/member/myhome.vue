@@ -303,7 +303,8 @@
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span> -->
         <div class="my-header">
-          <div class="userinfo" @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/sttings`)">
+          <div class="userinfo">
+            <!-- @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/myhome`)" -->
             <div>
               <div class="avatar">
                 <img :src="!userData.memberInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
