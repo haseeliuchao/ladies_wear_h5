@@ -24,8 +24,8 @@
       height: 100%;
       padding-bottom:4px;
       cursor: pointer;
-      background: url('~jd/images/navbar1.png') 0 0 no-repeat;
-      background-size: 700% 400%;
+      // background: url('~jd/images/navbar1.png') 0 0 no-repeat;
+      // background-size: 700% 400%;
       color:#666;
       display: flex;
       flex: 1;
@@ -33,38 +33,74 @@
       align-items:flex-end;
     }
     .home {
-      background-position: -.88rem -40px;
+      // background-position: -.88rem -40px;
+      // &.active {
+      //   background-position: -.88rem -117px;
+      //    color: #ff2741;
+      // }
+      background:url('~jd/images/home.png') no-repeat center 7px;
+      background-size:28%;
       &.active {
-        background-position: -.88rem -117px;
-         color: #ff2741;
+        background:url('~jd/images/home_on.png') no-repeat center 7px;
+        background-size:28%;
+        color: #ff2741;
       }
     }
     .category {
-      background-position: -3.5rem -40px;
+      // background-position: -3.5rem -40px;
+      // &.active {
+      //   background-position: -3.5rem -117px;
+      //    color: #ff2741;
+      // }
+      background:url('~jd/images/category.png') no-repeat center 7px;
+      background-size:30%;
       &.active {
-        background-position: -3.5rem -117px;
-         color: #ff2741;
+        background:url('~jd/images/category_on.png') no-repeat center 7px;
+        background-size:30%;
+        color: #ff2741;
       }
     }
     .find {
       position: relative;
-      top:-10px;
-      background-position: -11.5rem -66px;
+      top:-12px;
+      height:1.3rem;
+      // background-position: -11.5rem -66px;
+      // &.active {
+      //   background-position: -11.5rem -66px;
+      // }
+      background:url('~jd/images/find.png') no-repeat center 0;
+      background-size:1.3rem;
       &.active {
-        background-position: -11.5rem -66px;
+        background:url('~jd/images/find.png') no-repeat center 0;
+        background-size:1.3rem;
+        color: #ff2741;
       }
     }
     .cart {
-      background-position: -6.16rem -40px;
+      // background-position: -6.16rem -40px;
+      // &.active {
+      //   background-position: -6.16rem -117px;
+      //    color: #ff2741;
+      // }
+      background:url('~jd/images/cart.png') no-repeat center 7px;
+      background-size:30%;
       &.active {
-        background-position: -6.16rem -117px;
-         color: #ff2741;
+        background:url('~jd/images/cart_on.png') no-repeat center 7px;
+        background-size:30%;
+        color: #ff2741;
       }
     }
     .myHome {
-      background-position: -8.78rem -40px;
+      // background-position: -8.78rem -40px;
+      // &.active {
+      //   background-position: -8.78rem -117px;
+      //   color: #ff2741;
+      // }
+      background:url('~jd/images/myhome.png') no-repeat center 6px;
+      background-size:28%;
       &.active {
-        background-position: -8.78rem -117px;
+        background:url('~jd/images/myhome_on.png') no-repeat center 6px;
+        background-size:28%;
         color: #ff2741;
       }
     }
@@ -80,7 +116,6 @@
     <li :class="['barIcon','myHome',$route.name==='myhome'?'active':'']" @click= "$router.push('/myhome')">我的</li>
   </ul>
 </template>
-
 <script>
 
 
