@@ -555,9 +555,9 @@
           return
         }
         this.orderDetail=Data.data
-        this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime()+86400000);
         let times = setInterval(() => {
-          this.countDown=this.countDownTime-parseInt(new Date(new Date().getTime()));
+          this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime()+86400000);
+          this.countDown=this.countDownTime-parseInt(new Date().getTime());
         }, 1000)
         
         setLocalStorage('salesList',this.orderDetail)
