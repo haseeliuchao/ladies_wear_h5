@@ -112,11 +112,11 @@
             <p class="address">{{item.province + item.city + item.area}} &nbsp;&nbsp;{{item.address}}</p>
           </div>
           <div class="address-edit">
-              <div class="edit" @click="$router.push(`/address/${item.consignee_id}`)">
+              <div class="edit" @click= "$router.push(`/address/${item.consignee_id}`)">
                 <i class="edit-address-icon"></i>
                 <span>编辑</span>
               </div>
-              <!-- <div class="delect" @click="deleteAddress(item)">
+              <!-- <div class="delect" @click= "deleteAddress(item)">
                 <i class="delect-address-icon"></i>
                 <span>删除</span>
               </div> -->
@@ -130,7 +130,7 @@
         </div>
        
       </div>
-      <div class="addNewAddressbtn" @click="$router.push('/address')">添加新地址</div>
+      <div class="addNewAddressbtn" @click= "$router.push('/address')">添加新地址</div>
   </div>
 </template>
 

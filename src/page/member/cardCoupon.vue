@@ -97,9 +97,9 @@
     <div class="cardCoupon-container" v-if="cardCoupon!= ''">
       <div class="cardCoupon-title">
         <ul>
-          <li @click="couponRecord(0)" :class="{'active':active===0}">未使用<span>({{cardCoupon.notUse}})</span></li>
-          <li @click="couponRecord(1)" :class="{'active':active===1}">使用记录<span>({{cardCoupon.use}})</span></li>
-          <li @click="couponRecord(2)" :class="{'active':active===2}">已过期<span>({{cardCoupon.expire}})</span></li>
+          <li @click= "couponRecord(0)" :class="{'active':active===0}">未使用<span>({{cardCoupon.notUse}})</span></li>
+          <li @click= "couponRecord(1)" :class="{'active':active===1}">使用记录<span>({{cardCoupon.use}})</span></li>
+          <li @click= "couponRecord(2)" :class="{'active':active===2}">已过期<span>({{cardCoupon.expire}})</span></li>
         </ul>
       </div>
       <ul class="cardCoupon-detail" v-for="(item,index) in cardCoupon.list" :key="index">

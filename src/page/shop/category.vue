@@ -94,7 +94,7 @@
       <div class="rootList" style="width:25.86%;">
         <load-more ref="rootScroll" style="height:85%;">
           <ul class="rootListcontent">
-            <li v-for="(item,index) in categoryRootfilter" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click="rootScrollTo(item)">{{item.name}}</li>
+            <li v-for="(item,index) in categoryRootfilter" :key="index" :class="selectedRoot === item.category_id ? 'active' : ''"   @click= "rootScrollTo(item)">{{item.name}}</li>
           </ul>
         </load-more>
       </div>
@@ -105,7 +105,7 @@
         <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;left:initial;right:0;">
           <div class="jd-categoryContent">
             <div class="categoryContentBox" v-if="categoryBody.categoryList.length>0">
-              <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click="$router.push({path: '/searchRusult',query: {category_id:item.category_id}})">
+              <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click= "$router.push({path: '/searchRusult',query: {category_id:item.category_id}})">
                 <img :src="item.icon" alt="" />
                 <p>{{item.name}}</p>
               </div>

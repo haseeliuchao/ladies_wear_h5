@@ -897,7 +897,7 @@
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
       <div class="checkSkuColortitleall">
         <p class="checkSkuColortitle">颜色</p>
-        <span class="closepop" @click="()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;}"></span>
+        <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;}"></span>
       </div>
       <ul class="skuColorlist">
         <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}</li>
@@ -914,25 +914,25 @@
                     选择数量
                   </div>
                   <div class="right">
-                    <div class="cut" @click="operationnum(-1)"></div>
+                    <div class="cut" @click= "operationnum(-1)"></div>
                     <input type="text" v-model="shopnum" class="num-inp">
-                    <div class="add" @click="operationnum(1)"></div>
+                    <div class="add" @click= "operationnum(1)"></div>
                   </div>
       </div>
-      <!-- @click="()=>{title='';visiblePopup.checkSku=false}" -->
-      <div class="popupOk" @click="checkSkuOk">选好了</div>
+      <!-- @click= "()=>{title='';visiblePopup.checkSku=false}" -->
+      <div class="popupOk" @click= "checkSkuOk">选好了</div>
     </mt-popup>
 
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkInfo" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
       <div class="checkSkuColortitleall">
         <p class="checkSkuColortitle" style="text-align: center;">产品参数</p>
-        <span class="closepop" @click="()=>{visiblePopup.checkInfo=false}"></span>
+        <span class="closepop" @click= "()=>{visiblePopup.checkInfo=false}"></span>
       </div>
       <div class="productparameterall">
       <p class="productparameter" v-for="(item,index) in productInfo.propertyList" :key="index">{{item.name}}<span>{{item.value}}</span></p>
       </div>
-      <div class="popupOk" @click="()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
+      <div class="popupOk" @click= "()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
           <div id="mainLayout">
             <!-- 商品轮播图 -->
@@ -975,7 +975,7 @@
             </div>
             <!-- 商品规格 -->
              <div class="product-sku" style="margin-top:0;border-top:1px solid #e4e4e4;
-          border-bottom:1px solid #e4e4e4;" @click="()=>visiblePopup.checkSku=true">
+          border-bottom:1px solid #e4e4e4;" @click= "()=>visiblePopup.checkSku=true">
               <div>
                 <span class="sku-select">规格</span>
                 <span class="sku-info" v-if="!curcolorname">选择 颜色分类、尺码</span>
@@ -988,7 +988,7 @@
               </div>
             </div>
             <!-- 商品参数 -->
-            <div class="product-sku" style="margin-top:0;" @click="()=>visiblePopup.checkInfo=true">
+            <div class="product-sku" style="margin-top:0;" @click= "()=>visiblePopup.checkInfo=true">
               <div>
                 <span class="sku-select">参数</span>
                 <span class="sku-info">面料 成分含量…</span>
@@ -1019,22 +1019,22 @@
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
       <div class="left">
-        <div class="goods-part" @click="$router.push('/index')">
+        <div class="goods-part" @click= "$router.push('/index')">
           <i></i>
           <span>首页</span>
         </div>
-        <!-- <div class="like-icon" @click="favShop">
+        <!-- <div class="like-icon" @click= "favShop">
           <i></i>
           <span>关注</span>
         </div> -->
-        <div class="shopping-cart" @click="$router.push('/cart')">
+        <div class="shopping-cart" @click= "$router.push('/cart')">
           <em>4</em>
           <i></i>
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" @click="addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
-      <div class="right" @click="addShopCart('directBuy')">立即购买</div>
+      <div class="right" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" @click= "addShopCart('directBuy')">立即购买</div>
     </div>
     <!-- 底部导航栏 -->
 

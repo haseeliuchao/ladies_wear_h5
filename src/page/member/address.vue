@@ -138,7 +138,7 @@
             <input type="text" v-model="addressForm.phone">
           </div>
         </div>
-        <div class="cell-from-item" @click="()=>addressVisible=true" >
+        <div class="cell-from-item" @click= "()=>addressVisible=true" >
           <span class="title">选择城市</span>
           <div class="content">
             <input type="text" readonly="readonly" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="">
@@ -157,9 +157,9 @@
             <mt-switch v-model="addressForm.selected" style="justify-content:flex-end"></mt-switch>
           </div>
         </div>
-        <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click="deleteAddresspop">删除收货地址</div>
+        <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
-      <div class="save-address" @click="saveAddress">保存</div>
+      <div class="save-address" @click= "saveAddress">保存</div>
     </div>
     <div>
       <mt-popup v-model="addressVisible" position="bottom"  class="address-pricker">
@@ -170,8 +170,8 @@
         <v-distpicker :placeholders="{ province: '请选择', city: '请选择', area: '请选择' }" wrapper="address-pricker-wrapper" type="mobile"
           @selected="onSelected"></v-distpicker> -->
           <div class="pop-btn clearfix">
-            <p class="cancle" @click="cancle">取消</p>
-            <p class="confirm" @click="confirm">完成</p>
+            <p class="cancle" @click= "cancle">取消</p>
+            <p class="confirm" @click= "confirm">完成</p>
           </div>
           <mt-picker v-model="addressVisible" :slots="myAddressSlots" :show-toolbar="false" ref="picker" :item-height="44" @change="onMyAddressChange" @touchmove.native.stop.prevent>
           </mt-picker>

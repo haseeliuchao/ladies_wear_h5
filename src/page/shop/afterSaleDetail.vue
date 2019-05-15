@@ -327,11 +327,11 @@
        <p class="logisticsAddress">浙江省 杭州市 西湖区 蒋村街道 中国五园新村 2幢幢幢302室</p>
     </div>
 
-    <p class="backmyHome" @click="$router.push('/myhome')">
+    <p class="backmyHome" @click= "$router.push('/myhome')">
       返回我的主页
     </p>
 
-    <div class="sand-data" v-if="orderDetail.post_sales_status==2" @click="commitMsg">提交</div>
+    <div class="sand-data" v-if="orderDetail.post_sales_status==2" @click= "commitMsg">提交</div>
     </div>
 </template>
 

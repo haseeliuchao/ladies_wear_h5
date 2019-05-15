@@ -106,9 +106,9 @@
 <template>
   <div>
     <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
+      <i class="back" @click= "$router.go(-1)"></i>
       <strong>评价</strong>
-      <span @click="commitMsg">发布</span>
+      <span @click= "commitMsg">发布</span>
     </div>
     <div class="comment-container" v-if="orderData">
       <div class="commentList">
@@ -117,7 +117,7 @@
             <img :src="item.product.image_url[0].url" alt="">
             <span>评价：</span>
             <div class="starList">
-              <i :class="star===1?'star':'blur'" v-for="(star,starIndex) in item.starList" :key="starIndex" @click="starChange(item.starList,starIndex,item)"></i>
+              <i :class="star===1?'star':'blur'" v-for="(star,starIndex) in item.starList" :key="starIndex" @click= "starChange(item.starList,starIndex,item)"></i>
             </div>
             <span class="starTip">{{item.starTip}}</span>
           </div>

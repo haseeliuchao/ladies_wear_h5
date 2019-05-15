@@ -104,9 +104,9 @@
 <template>
   <div>
     <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
+      <i class="back" @click= "$router.go(-1)"></i>
       <strong>评价</strong>
-      <span @click="commitMsg">发布</span>
+      <span @click= "commitMsg">发布</span>
     </div>
     <div class="comment-container" >
       <div class="commentList">

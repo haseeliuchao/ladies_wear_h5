@@ -382,7 +382,7 @@
     <!-- 购物车列表 -->
     <div class="Section">
       <!-- <div class="login-info" v-if="!isLogin">
-        <button class="login" @click="$router.push('/login')">登录</button>
+        <button class="login" @click= "$router.push('/login')">登录</button>
         <span>登录后同步电脑与手机购物车中的商品</span>
       </div> -->
       <load-more :style="{width:'100%',height: '85%',paddingTop: isLogin ? '1.2rem' : '0'}" :topMethod="onRefreshCallback" :loadMoreIconVisible="false"
@@ -397,12 +397,12 @@
           <!-- 暂时还没做分店铺订单 -->
           <div class="top-edit" v-if="cartlength>0">
             <p class="cartListNum">共{{cartlength}}件宝贝</p>
-            <p class="cartListEdit" v-if="!delshow" @click="editProductdelshow()">管理</p>
-            <p class="cartListEdit" v-if="delshow" @click="editProductdelshow()">完成</p>
+            <p class="cartListEdit" v-if="!delshow" @click= "editProductdelshow()">管理</p>
+            <p class="cartListEdit" v-if="delshow" @click= "editProductdelshow()">完成</p>
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="checked(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img :src="item.index_img_url" alt="">
               </div>
@@ -420,9 +420,9 @@
                     
                   </div>
                   <div class="right">
-                    <div class="cut" @click="editProductNum({item:item,increment:-1})"></div>
+                    <div class="cut" @click= "editProductNum({item:item,increment:-1})"></div>
                     <input type="text" v-model="item.num" class="num-inp" @change="editProductNum({item:item,num:item.num})">
-                    <div class="add" @click="editProductNum({item:item,increment:1})"></div>
+                    <div class="add" @click= "editProductNum({item:item,increment:1})"></div>
                   </div>
                 </div>
               </div>
@@ -438,12 +438,12 @@
           </div>
           <p class="product-list-top">
             <span class="product-list-topl">精选推荐</span>
-            <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
+            <span class="product-list-topr">去<em @click= "$router.push('/index')">商城首页</em>逛逛</span>
           </p>
           <load-more style="width:100%;" v-if="$route.path=='/cart'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
                   <img v-lazy="item.index_img_url" alt="">
                   <div class="prod-info">
                     <p class="prod-title">{{item.title}}</p>
@@ -463,15 +463,15 @@
     <!-- 底部价格计算 -->
     <div class="section-bar" v-if="cartlength>0">
       <div class="left">
-        <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click="selectedAllGoods"></i>
+        <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click= "selectedAllGoods"></i>
         <em>全选</em>
         <!-- {{totalFee}} -->
         <strong v-if="!delshow">合计：<span>&yen;</span> <em>{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
       </div>
-      <div v-if="!delshow" class="right" @click="confirmOrder()">
+      <div v-if="!delshow" class="right" @click= "confirmOrder()">
         <strong>结算</strong>
       </div>
-      <span class="del" v-if="delshow" @click="editProductdel()">删除</span>
+      <span class="del" v-if="delshow" @click= "editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
     <FooterView/>

@@ -352,7 +352,7 @@
         <slot name="left-icon">
           <i class="logoIcon logoQrcodeIcon"></i>
         </slot>
-        <div class="searchInput" @click="()=>searchVisiblie=true">
+        <div class="searchInput" @click= "()=>searchVisiblie=true">
           <slot name="title-icon">
             <div class="search-box">
               <i class="searchIcon searchContentIcon"></i>
@@ -361,7 +361,7 @@
           </slot>
         </div>
         <slot name="right-icon">
-          <div class="scanCode" @click="$router.push(`/searchImg`)">
+          <div class="scanCode" @click= "$router.push(`/searchImg`)">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>
@@ -381,27 +381,27 @@
       <div class="searchContainer">
         <div class="search-top">
            <slot name="right-icon">
-          <div style="margin-right:.2rem;margin-left:0" class="scanCode" @click="()=>{$router.push(`/searchImg`);popupVisible=false}">
+          <div style="margin-right:.2rem;margin-left:0" class="scanCode" @click= "()=>{$router.push(`/searchImg`);popupVisible=false}">
             <i class="searchIcon searchQrcodeIcon"></i>
             <span>找同款</span>
           </div>
         </slot>
-          <div class="searchInput" @click="$refs.searchInput.focus()">
+          <div class="searchInput" @click= "$refs.searchInput.focus()">
             <div class="search-box">
               <!-- <i class="searchIcon searchContentIcon"></i> -->
               <!-- @keypress="truesearchGoods" -->
-              <input type="search" v-model="title" @keypress="truesearchGoods" placeholder="品质生活必备" ref="searchInput" v-searchFocus>
-              <!-- <span class="clear" @click="title=''" v-show="title.length>0">&times;</span> -->
-              <i class="searchIcon searchContentIcon" @click="selectedProd(title)"></i>
+              <input type="search" v-model="title" @keypress="truesearchGoods" placeholder="品质生活必备" ref="searchInput">
+              <!-- <span class="clear" @click= "title=''" v-show="title.length>0">&times;</span> -->
+              <i class="searchIcon searchContentIcon" @click= "selectedProd(title)"></i>
             </div>
           </div>
-          <span @click="()=>{title='';searchVisiblie=false}">取消</span>
+          <span @click= "()=>{title='';searchVisiblie=false}">取消</span>
         </div>
         <load-more style="width:100%;height:100%;background:#fff;" >
           <div class="search-history" v-if="searchHistoryData">
-            <p>历史记录 <span @click="clearProd"></span></p>
+            <p>历史记录 <span @click= "clearProd"></span></p>
             <ul class="search-history-list">
-              <li class="search-history-item"  v-for="(item,index) in searchHistoryData" @click="selectedProd(item.keywords)" :key="index">{{item.keywords}}</li>
+              <li class="search-history-item"  v-for="(item,index) in searchHistoryData" @click= "selectedProd(item.keywords)" :key="index">{{item.keywords}}</li>
             </ul>
             <!-- <div class="clear-history">
               <i></i>
@@ -411,7 +411,7 @@
           <div class="search-hot">
             <p>热门搜索</p>
             <ul class="search-hot-list">
-              <li class="search-hot-item" v-for="(item,index) in searchHotData" :key="index" @click="selectedProd(item.title)">{{item.title}}</li>
+              <li class="search-hot-item" v-for="(item,index) in searchHotData" :key="index" @click= "selectedProd(item.title)">{{item.title}}</li>
             </ul>
           </div>
         </load-more>
@@ -452,8 +452,12 @@
       }
     },
     watch: {
-      title(val) {
-        // this.searchRusult(val)
+     $route(to,from){
+        // console.log(to.path);
+        if(to.path!='/index'&& to.path!='/searchRusult'){
+         this.searchVisiblie=false 
+        }
+        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
       }
     },
     directives: {

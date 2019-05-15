@@ -291,7 +291,7 @@
       <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con.png">
-          <div class="jump-btn" @click="()=>{$router.push('/searchImg');popupVisible=false}"></div>
+          <div class="jump-btn" @click= "()=>{$router.push('/searchImg');popupVisible=false}"></div>
         </div>
       </mt-popup>
         <!-- 搜索栏 -->
@@ -305,7 +305,7 @@
           <!-- banner -->
           <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
-             :key="index" @click="()=>$router.push(item.http_url)">
+             :key="index" @click= "()=>$router.push(item.http_url)">
               <img :src="item.img_url" alt="item.title">
             </mt-swipe-item>
           </mt-swipe>
@@ -331,7 +331,7 @@
           <div class="deploy-floor">
             <div class="deploy-floor-l" >
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
-                <img  :src="item.img_url" @click="()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
+                <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
               </div>
             </div>
             <!-- cmsData -->
@@ -352,8 +352,8 @@
 
 
               <ul>
-                <li @click="getGoodsdata('',0)" :class="{'active':active===0}">为您精选</li>
-                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" :class="{'active':active===index+1}" @click="getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
+                <li @click= "getGoodsdata('',0)" :class="{'active':active===0}">为您精选</li>
+                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" :class="{'active':active===index+1}" @click= "getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
               </ul>
             </div>
           </div>
@@ -362,7 +362,7 @@
             <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
                   <img v-lazy="item.index_img_url" alt="">
                   <div class="prod-info">
                     <p class="prod-title">{{item.title}}</p>
@@ -446,7 +446,9 @@
         guideindex:null
       };
     },
-    watch: {},
+    watch:{
+      
+    },
     components: {
       FooterView,
       BackHead,
@@ -591,7 +593,10 @@
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
         }
     },
-    beforeDestroy() {},
+    beforeDestroy() {
+
+      console.log('11')
+    },
     mounted: function () {
      
       this.initData();
