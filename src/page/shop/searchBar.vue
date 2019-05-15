@@ -452,8 +452,12 @@
       }
     },
     watch: {
-      title(val) {
-        // this.searchRusult(val)
+     $route(to,from){
+        // console.log(to.path);
+        if(to.path!='/index'&& to.path!='/searchRusult'){
+         this.searchVisiblie=false 
+        }
+        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
       }
     },
     directives: {

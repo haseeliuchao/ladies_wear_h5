@@ -446,7 +446,9 @@
         guideindex:null
       };
     },
-    watch: {},
+    watch:{
+      
+    },
     components: {
       FooterView,
       BackHead,
@@ -591,7 +593,10 @@
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
         }
     },
-    beforeDestroy() {},
+    beforeDestroy() {
+
+      console.log('11')
+    },
     mounted: function () {
      
       this.initData();
