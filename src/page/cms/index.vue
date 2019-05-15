@@ -384,7 +384,7 @@
 <script>
   import utils from '@/utils/urlfun';
   import FooterView from 'component/footer/footerView';
-  // import BackHead from 'common/backHead';
+  import BackHead from 'common/backHead';
   import {
  getLocalStorage,
     setLocalStorage
