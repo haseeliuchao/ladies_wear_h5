@@ -380,38 +380,7 @@
     <BackHead/>
   </div>
 </template>
-
 <script>
-  // (
-				
-	// 			function (w, d, n, a, j) {
-	// 				w[n] = w[n] || function () {
-	// 					(w[n].a = w[n].a || []).push(arguments);
-	// 				};
-	// 				j = d.createElement('script');
-	// 				j.async = true;
-	// 				j.src ='https://qiyukf.com/script/43c880891a4096d21928cd3db4db00b0.js';
-	// 				d.body.appendChild(j);
-  //       })(window, document, 'ysf');
-
-	// 		var isSdkReady = false;
-	// 		ysf('onLayerload', function () {
-	// 			isSdkReady = true;
-	// 		})
-	// 		window.openSdk = function () {
-	// 			if (isSdkReady) {
-	// 				ysf('open');
-	// 			} else {
-	// 				alert('sdk尚未加载成功，请稍后再试');
-	// 			}
-	// 		}
-	// 		ysf('config', {
-	// 				uid: "123456789",  // 用户Id
-	// 				name: 'mmp',          // 用户名称
-	// 				email: 'test@163.com', // 用户邮箱
-	// 				mobile: '138823288888'  // 用户电话
-  //       })      
-  
   import FooterView from 'component/footer/footerView';
   import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
@@ -499,6 +468,36 @@
       this.initData();
     }
   }
+</script>
+<script>
+  (function (w, d, n, a, j) {
+    w[n] = w[n] || function () {
+      (w[n].a = w[n].a || []).push(arguments);
+    };
+    j = d.createElement('script');
+    j.async = true;
+    j.src ='https://qiyukf.com/script/43c880891a4096d21928cd3db4db00b0.js';
+    d.body.appendChild(j);
+  })(window, document, 'ysf');
+
+  var isSdkReady = false;
+  ysf('onLayerload', function () {
+    isSdkReady = true;
+  })
+  window.openSdk = function () {
+    if (isSdkReady) {
+      ysf('open');
+    } else {
+      alert('sdk尚未加载成功，请稍后再试');
+    }
+  }
+  ysf('config', {
+      uid: "123456789",  // 用户Id
+      name: 'mmp',          // 用户名称
+      email: 'test@163.com', // 用户邮箱
+      mobile: '138823288888'  // 用户电话
+  })      
+  
 </script>
 <style lang='scss' scoped>
 </style>
