@@ -1039,7 +1039,7 @@
     getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
-  // import BackHead from 'common/backHead';
+  import BackHead from 'common/backHead';
 
   export default {
     data() {
