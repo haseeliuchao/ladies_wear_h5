@@ -554,7 +554,7 @@
           return
         }
         this.orderDetail=Data.data
-        this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created)+86400000);
+        this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime+86400000);
         let times = setInterval(() => {
           this.countDown=this.countDownTime-parseInt(new Date().getTime);
         }, 1000)
