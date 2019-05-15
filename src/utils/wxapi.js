@@ -1,5 +1,10 @@
 import wx from 'weixin-js-sdk'
-import Axios from 'axios'
+// import Axios from 'axios'
+import {
+    getSignature
+  } from '@/service/getData';
+
+
 const wxApi = {
   /**
   * [wxRegister 微信Api初始化]
@@ -8,8 +13,12 @@ const wxApi = {
   wxRegister (callback) {
     // 这边的接口请换成你们自己的
     // , { timeout: 5000, withCredentials: true }
-    Axios.post('/api/jsapi/signature', { url: BASE64.encoder(location.href.split("#")[0])}).then((res) => {
-      let data = JSON.parse(res.data) // PS: 这里根据你接口的返回值来使用
+
+        let Data = getSignature({
+            url: BASE64.encoder(location.href.split("#")[0])
+        });
+    // Axios.post('/api/jsapi/signature', { }).then((res) => {
+      let data = Data.data// PS: 这里根据你接口的返回值来使用
       wx.config({
         debug: false, // 开启调试模式
         appId: data.appId, // 必填，公众号的唯一标识
@@ -18,9 +27,7 @@ const wxApi = {
         signature: data.signature, // 必填，签名，见附录1
         jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       })
-    }).catch((error) => {
-      console.log(error)
-    })
+  
     wx.ready((res) => {
       // 如果需要定制ready回调方法
       if (callback) {
