@@ -539,7 +539,7 @@
     methods: {
       async initData() {
         // this.commentParam.ProductNo = this.$route.params.id;
-         console.log(window.location.href)
+        //  console.log(window.location.href)
         let Data = await getOrderDetail({
          order_code: this.$route.params.OrderNo
         });

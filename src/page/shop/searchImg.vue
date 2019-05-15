@@ -360,14 +360,6 @@
         }
       },
       inputFile: function (newFile, oldFile) {
-        // if (newFile && oldFile && !newFile.active && oldFile.active) {
-        //   // 获得相应数据
-        //   console.log('response', newFile.response)
-        //   if (newFile.xhr) {
-        //     //  获得响应状态码
-        //     console.log('status', newFile.xhr.status)
-        //   }
-        // }
         // 自动上传
         if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
                     if (!this.$refs.upload.active) {
@@ -418,7 +410,6 @@
         }
         // 创建 blob 字段 用于图片预览
         if (!newFile && oldFile) {
-            // console.log('0')
         }else{
         newFile.blob = ''
         let URL = window.URL || window.webkitURL

@@ -1021,7 +1021,7 @@ import {
 
     mounted: function () {
       this.initData();
-      console.log(this.$route.query)
+      // console.log(this.$route.query)
     }
   }
 

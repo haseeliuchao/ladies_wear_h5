@@ -215,8 +215,6 @@ const isServer = Vue.prototype.$isServer;
           this.swiping = false;
           return;
         }
-        // console.log(offsetLeft)
-        // console.log(index);
         this.offsetLeft = offsetLeft;
         this.index = index;
         this.swipeMove(offset);
