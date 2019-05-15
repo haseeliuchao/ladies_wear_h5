@@ -161,8 +161,8 @@
       }
       @media all and(min-width:375px) and(max-width:375px){
         .product-share{
-          left:20px;
-          text-indent: -5px;
+          left:23px;
+          text-indent: -6px;
         }
       }
       @media all and(min-width:376px){
