@@ -468,7 +468,7 @@
         <!-- {{totalFee}} -->
         <strong v-if="!delshow">合计：<span>&yen;</span> <em>{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
       </div>
-      <div v-if="!delshow" class="right" @click="confirmOrder">
+      <div v-if="!delshow" class="right" @click="confirmOrder()">
         <strong>结算</strong>
       </div>
       <span class="del" v-if="delshow" @click="editProductdel()">删除</span>
@@ -577,12 +577,6 @@
         });
 
         this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
-
-        // this.$store.dispatch('ConfirmSelectProduct', {
-        //   SelectedList: JSON.stringify(SelectedList)
-        // }).then(response => {
-        //   this.$router.push('/createOrder');
-        // })
       },
       computedTotalFee() {
         let computedFee = 0,
