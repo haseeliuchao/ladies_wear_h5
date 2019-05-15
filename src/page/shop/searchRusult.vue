@@ -351,7 +351,7 @@
     <!-- 配置搜索 -->
     <div class="search-top" v-if="searchParams.ad_advertising_id">
       <div class="searchDeploy-box">
-        <img :src="searchParams.img_url">
+        <img :src="this.img_url">
       </div>
     </div>
     <!-- 图片搜索 -->
@@ -415,13 +415,13 @@
           sort_type:1,
           category_id:'',
           ad_advertising_id:'',
-          img_url:'',
           page_size: 10,
           current_page: 1
         },
         active:0,
         sort_enum:null,
-        sort_enumboo:true
+        sort_enumboo:true,
+        img_url:'',
       };
     },
 
@@ -467,6 +467,9 @@
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
       },
+      async initData(){
+        this.img_url = this.$route.query.img_url;
+      },
       async infiniteCallback(response) { //下拉加载
         if(response.data.items!=undefined&&response.data.items!=null){
         if (response.data.items.length > 0) {
@@ -488,6 +491,7 @@
         }
     },
     mounted: function () {
+      this.initData();
       this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
       this.$refs.searchRusultloadMore.onloadMoreScroll();
     }
