@@ -1025,74 +1025,10 @@
               <span class="right-menu"></span>
             </div>
 
-            <!-- 商品留言 -->
-            <!-- <div class="product-comment">
-              <div class="comment-info">
-                <span class="comment-num">评价(298)</span>
-                <span class="comment-percentage">好评度
-                  <strong>97%</strong>
-                </span>
-              </div>
-              <div class="comment-list">
-                <div class="comment-item">
-                  <div class="comment-userinfo">
-                    <div class="avatar">
-                      <img src="~jd/images/rem.jpg" alt="">
-                      <span>xxxxxx用户</span>
-                    </div>
-                    <div class="comment-star">
-                      <i class="star-item"></i>
-                    </div>
-                  </div>
-                  <div class="comment-content">
-                    <p class="content">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
-                    <div class="comment-images-list">
-                      <img src="~jd/images/rem.jpg" alt="">
-                    </div>
-                  </div>
-                  <div class="comment-sku">
-                    <span>银色：64GB</span>
-                  </div>
-                  <div class="comment-more">查看全部评价</div>
-                </div>
-              </div>
-            </div> -->
+           
             <!-- 商品留言 -->
 
-            <!-- 商家信息 -->
-            <div class="goods-part" v-if="shopInfo">
-              <div class="goods-part-info">
-                <img v-lazy="shopInfo.shop_logo[0].url" alt="">
-                <div>
-                  <span class="goods-part-title">{{shopInfo.shop_name}}</span>
-                  <span class="goods-part-summary">店铺描述 9.9</span>
-                </div>
-              </div>
-              <div class="good-part-quantity">
-                <div class="quantity-attention">
-                  <strong>{{shopInfo.like_count}}</strong>
-                  <span>关注人数</span>
-                </div>
-                <div class="quantity-prodall">
-                  <strong>{{shopInfo.goods_total_num}}</strong>
-                  <span>全部商品</span>
-                </div>
-                <div class="good-part-news">
-                  <strong>9.9</strong>
-                  <span>综合评分</span>
-                </div>
-              </div>
-              <div class="good-part-service">
-                <div class="good-part-contact">
-                  <i></i>
-                  <span>联系客服</span>
-                </div>
-                <div class="go-good-part">
-                  <i></i>
-                  <span>进店逛逛</span>
-                </div>
-              </div>
-            </div>
+         
             <!-- 商家信息 -->
 
             <!-- 为你推荐 -->
@@ -1100,97 +1036,11 @@
               <div class="recommend-tip">
                 <img src="~jd/images/xiangqing.png" alt="">
               </div>
-              <!-- <ul class="recommend-list">
-                <li class="recommend-item" @click="$router.push(`/product/${item.productNo}`)" v-for="(item,index) in recommendData" :key="index">
-                  <div class="item-posre">
-                    <img v-lazy="item.image_url[0].url" alt="">
-                  </div>
-                  <p class="item-product-text">{{item.productName}}</p>
-                  <p class="item-product-info">
-                    <span>&yen;</span>{{item.price}}</p>
-                  <p class="item-product-praise">好评率100%</p>
-                </li>
-              </ul> -->
-              <div id="prodContent-container" v-html="productInfo.item_detailsimg">
-                <!--  -->
-                <!-- <img  v-for="(img,imgIndex) in productInfo.item_detailsimg" :key="imgIndex" :src="img" alt=""> -->
-              </div>
+              <div id="prodContent-container" v-html="productInfo.item_detailsimg"></div>
             </div>
             <!-- 为你推荐 -->
           </div>
       <!-- 商品 -->
-
-      <!-- 商品详情 -->
-      <mt-tab-container-item id="goodDetail">
-        <div id="goodDetail">
-          <ul class="detail-tab">
-            <li :class="{active:detailTab==='description'}" @click="detailTab='description'">产品介绍</li>
-            <li :class="{active:detailTab==='skuContent'}" @click="detailTab='skuContent'">规格参数</li>
-            <li :class="{active:detailTab==='service'}" @click="detailTab='service'">包装售后</li>
-          </ul>
-          <div class="good-detail-content">
-            <div class="content">
-              <div v-show="detailTab==='description'">
-                <div class="top-tip">
-                  <span>商品信息</span>
-                </div>
-                <!-- <div id="prodContent-container" v-html="productInfo.content"></div> -->
-              </div>
-              <div v-show="detailTab==='skuContent'">skuContent</div>
-              <div v-show="detailTab==='service'">service</div>
-            </div>
-          </div>
-        </div>
-      </mt-tab-container-item>
-      <!-- 商品详情 -->
-
-      <!-- 评价 -->
-      <mt-tab-container-item id="goodcommentList" style="min-height: 100vh" v-if="containerTab==='goodcommentList'">
-
-        <load-more style="width:100%;" @loadMore="commentinfiniteCallback" :commad="commadComment" :param="commentParam" :loadMoreIconVisible="false"
-          ref="commentLoadmore">
-          <div id="goodcommentList" v-if="commentData!=''">
-            <div class="goodcomment-item" v-for="(item,index) in commentData" :key="index">
-              <div class="comment-userinfo">
-                <div>
-                  <div class="avatar">
-                    <img :src="item.avatar" alt="">
-                  </div>
-                  <div class="comment-username">
-                    <span class="name">{{item.username}}</span>
-                    <div class="starList">
-                      <i class="star" v-for="(star,startIndex) in item.star" :key="startIndex"></i>
-                    </div>
-                  </div>
-                </div>
-                <span class="comment-date">{{item.createTime | DateFormat('yyyy-MM-dd hh:mm')}}</span>
-              </div>
-              <div class="comment-content">
-                <p>{{item.content}}</p>
-                <div class="comment-imageslist">
-                  <img v-for="(img,imgIndex) in item.image_url" :key="imgIndex" :src="img.url" :alt="img.name">
-                </div>
-              </div>
-              <!-- <div class="comment-sku">
-                <p>规格规格规格规格规格规格</p>
-              </div> -->
-              <div class="comment-other">
-                <span class="createDate">{{item.createTime | DateFormat('yyyy-MM-dd hh:mm')}}</span>
-                <div>
-                  <!-- <div class="like-icon">
-                    <i></i>
-                    <span>0</span>
-                  </div>
-                  <div class="sendcomment">
-                    <i></i>
-                    <span>0</span>
-                  </div> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </load-more>
-      </mt-tab-container-item>
       <!-- 评价 -->
     <!-- </mt-tab-container> -->
     <!-- 内容区 -->
@@ -1240,7 +1090,7 @@
     getCommentList,
     getRecommend
   } from '@/service/getData'
-  import LoadMore from 'common/loadMore';
+  // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
 
   export default {
@@ -1308,7 +1158,6 @@
       TabContainerItem,
       Swipe,
       SwipeItem,
-      LoadMore,
       BackHead
     },
 
