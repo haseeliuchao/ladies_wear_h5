@@ -452,7 +452,7 @@
               </div>
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
-                  <div @click="()=>$router.push('/product/'+item.item_id)">
+                  <div @click= "()=>$router.push('/product/'+item.item_id)">
                     <img :src="item.item_img">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
@@ -464,8 +464,8 @@
                     </div>
                   </div>
                 <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click="$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
-                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==1" @click="$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
                 <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==2">售后成功</span>
                 <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==3">售后驳回</span>
                 </div>
@@ -492,10 +492,10 @@
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         <div class="order-btn-group">
-                <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click="cancelOrder(orderDetail)">取消订单</span>
-                <span v-if="orderDetail.order_status===1" class="payment" @click="payment(orderDetail)">立即支付</span>
-                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click="$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
-                <span v-if="orderDetail.order_status===3" @click="finishOrder(orderDetail)" class="payment">确认收货</span>
+                <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click= "cancelOrder(orderDetail)">取消订单</span>
+                <span v-if="orderDetail.order_status===1" class="payment" @click= "payment(orderDetail)">立即支付</span>
+                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
+                <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
         </div>
   </div>

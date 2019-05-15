@@ -1,6 +1,6 @@
 <!-- backHead -->
 <template>
-  <div class="backHead" v-if="Status" @click="backHead"></div>
+  <div class="backHead" v-if="Status" @click= "backHead"></div>
 </template>
 
 <script>

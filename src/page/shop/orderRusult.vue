@@ -118,7 +118,7 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p style="line-height:25px;">订单支付成功<br><em @click="$router.push('/index')">继续购物</em> | <em @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
+         <p style="line-height:25px;">订单支付成功<br><em @click= "$router.push('/index')">继续购物</em> | <em @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
          <img src="~jd/images/zhifuchenggong.png" style="height:48px;">
     </div>
     <div class="searchImgtab">
@@ -132,7 +132,7 @@
     <load-more style="width:100%;background:#f2f2f2" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
                   <img v-lazy="item.index_img_url" alt="">
                   <div class="prod-info">
                     <p class="prod-title">{{item.title}}</p>
@@ -181,7 +181,7 @@
        
       },
       async infiniteCallback(response) { //下拉加载
-      
+
         if(response.data.items!=undefined&&response.data.items!=null){
          if (response.data.items.length > 0) {
           response.data.items.map(i => {

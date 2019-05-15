@@ -132,7 +132,7 @@
         <mt-tab-container v-model="active" :swipeable="true">
           <mt-tab-container-item id="tab-container1">
             <div class="article-container" v-if="articleData!=''">
-              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click="$router.push(`/articleDetail/${item.id}`)">
+              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click= "$router.push(`/articleDetail/${item.id}`)">
                 <div class="video-item" v-if="item.type==='video'">
                   <p class="title">{{item.article_title}}</p>
                   <div class="video-container">
@@ -157,7 +157,7 @@
           </mt-tab-container-item>
           <mt-tab-container-item id="tab-container2">
             <div class="article-container" v-if="articleData!=''">
-              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click="$router.push(`/articleDetail/${item.id}`)">
+              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click= "$router.push(`/articleDetail/${item.id}`)">
                 <div class="article-item" >
                   <div class="left">
                     <p class="title">{{item.article_title}}</p>
@@ -172,7 +172,7 @@
           </mt-tab-container-item>
           <mt-tab-container-item id="tab-container3">
             <div class="article-container" v-if="articleData!=''">
-              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click="$router.push(`/articleDetail/${item.id}`)">
+              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click= "$router.push(`/articleDetail/${item.id}`)">
                 <div class="video-item">
                   <p class="title">{{item.article_title}}</p>
                   <div class="video-container">
@@ -188,7 +188,7 @@
           </mt-tab-container-item>
           <mt-tab-container-item id="tab-container4">
             <div class="article-container" v-if="articleData!=''">
-              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click="$router.push(`/articleDetail/${item.id}`)">
+              <div class="data-item" v-for="(item,index) in articleData" :key="index" @click= "$router.push(`/articleDetail/${item.id}`)">
                 <div class="article-item" >
                   <div class="left">
                     <p class="title">{{item.article_title}}</p>

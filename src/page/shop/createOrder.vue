@@ -694,7 +694,7 @@
 
     <div class="payContainer">
       <div v-if="defaultAddress.length>0">
-      <div class="ordertop-address" v-for="(item,index) in defaultAddress" :key="index" @click="()=>visiblePopup.selectedAdressVisible=true">
+      <div class="ordertop-address" v-for="(item,index) in defaultAddress" :key="index" @click= "()=>visiblePopup.selectedAdressVisible=true">
         <div class="ordertop-addressleft"  >
         <p class="address-username">{{item.name}}<em style="margin-left:12px;font-size:12px;">{{item.phone}}</em></p>
         <p class="address-text">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</p>
@@ -711,7 +711,7 @@
         <p style="text-align:center"><img src="~jd/images/noaddress.png" height="40" style="margin-bottom:4px;"></p>
         <p class="address-text" style="text-align:center;color:#999">您还没有收货地址，请尽快添加哦</p>
         </div>
-        <p class="ordertop-addressright" @click="$router.push(`/address`)">
+        <p class="ordertop-addressright" @click= "$router.push(`/address`)">
           添加 >
         </p>
       </div>
@@ -757,7 +757,7 @@
     </div>
 
 
-    <!-- <div class="getCoupon" @click="()=>visiblePopup.couponVisible=true">
+    <!-- <div class="getCoupon" @click= "()=>visiblePopup.couponVisible=true">
       <p>可用券码 <span>7张</span></p>
       <img src="~jd/images/arrow-right.png" height="16">
     </div> -->
@@ -765,7 +765,7 @@
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
       <span>合计：<strong><span>&yen;</span><em>{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
-      <div class="payBtn" @click="payByWallet">支付</div>
+      <div class="payBtn" @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
       <img src="~jd/images/paymentloading.gif" />
@@ -774,16 +774,16 @@
       <div class="my-header">
         <i class="myMsg"></i>
         <strong>地址管理</strong>
-        <i class="back" @click="()=>visiblePopup.selectedAdressVisible=false"></i>
+        <i class="back" @click= "()=>visiblePopup.selectedAdressVisible=false"></i>
       </div>
       <div class="addressList">
           <div class="address-container" v-if="addressData">
             <div class="address-item" v-for="(item,index) in addressData" :key="index" >
-              <div class="address-itemleft" @click="selectedAddress(item)">
+              <div class="address-itemleft" @click= "selectedAddress(item)">
               <p class="name">{{item.name}} {{item.phone}} <span v-if="item.if_default">默认</span></p>
               <p class="address">{{item.province}} {{item.city}} {{item.area}} {{item.address}}</p>
               </div>
-              <div class="address-itemright" @click="$router.push(`/address/${item.consignee_id}`)">
+              <div class="address-itemright" @click= "$router.push(`/address/${item.consignee_id}`)">
                 <img src="~jd/images/addressedit.png"/>
                 <p>编辑</p>
               </div>
@@ -791,7 +791,7 @@
             
           </div>
         <!-- </scroller> -->
-        <div class="addNewAddressbtn" @click="$router.push(`/address`)">添加新地址</div>
+        <div class="addNewAddressbtn" @click= "$router.push(`/address`)">添加新地址</div>
       </div>
     </mt-popup>
     <!-- 运费券 -->
@@ -799,7 +799,7 @@
       <div class="my-header">
         <!-- <i class="myMsg"></i> -->
         <strong>可用券码</strong>
-        <i class="back" @click="()=>visiblePopup.couponVisible=false"></i>
+        <i class="back" @click= "()=>visiblePopup.couponVisible=false"></i>
       </div>
       <div class="addressList">
        
@@ -814,7 +814,7 @@
                 <i :class="['select-default-icon']"></i>
             </div>
           </div>
-        <div class="addNewAddressbtn" @click="()=>visiblePopup.couponVisible=false">确定</div>
+        <div class="addNewAddressbtn" @click= "()=>visiblePopup.couponVisible=false">确定</div>
       </div>
     </mt-popup>
   </div>

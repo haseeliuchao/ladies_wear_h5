@@ -200,7 +200,7 @@
               </div>
         </div>
     </div>
-    <div class="choicebtn" @click="$router.push({path: '/afterSale',query: {post_sales_type:2,order_item_id:order_item_id}})">
+    <div class="choicebtn" @click= "$router.push({path: '/afterSale',query: {post_sales_type:2,order_item_id:order_item_id}})">
     
          <img src="~jd/images/only_money.png">
          <div>
@@ -208,7 +208,7 @@
              <p class="botp">未收到货物（包含未签收），或卖价协商同意前提</p>
          </div>
     </div>
-    <div class="choicebtn" @click="$router.push({path: '/afterSale',query: {post_sales_type:1,order_item_id:order_item_id}})">
+    <div class="choicebtn" @click= "$router.push({path: '/afterSale',query: {post_sales_type:1,order_item_id:order_item_id}})">
          <img src="~jd/images/back_good.png">
          <div>
              <p class="topp">退货退款</p>

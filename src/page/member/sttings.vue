@@ -117,7 +117,7 @@
 <template>
   <div class="sttings">
     <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
+      <i class="back" @click= "$router.go(-1)"></i>
       <strong>账户设置</strong>
       <i class="myMsg"></i>
     </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="cell-container">
         <div class="cell-list">
-          <div class="cell-item" @click="$router.push(`/addressList`)">
+          <div class="cell-item" @click= "$router.push(`/addressList`)">
             <div class="left">
               <span>地址管理</span>
             </div>
@@ -172,7 +172,7 @@
           </div>
         </div>
       </div>
-      <div class="loginOutbtn" @click="loginOut">退出登录</div>
+      <div class="loginOutbtn" @click= "loginOut">退出登录</div>
     </scroller>
   </div>
 </template>

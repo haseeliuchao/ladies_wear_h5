@@ -183,7 +183,7 @@
       <div class="renew-history">
         <h2 class="search-history-title"><p class="search-history-title">历史订单</p></h2>
         <ul class="search-history-list">
-          <!-- <li class="search-history-item" @click="()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
+          <!-- <li class="search-history-item" @click= "()=>Keyword = item.keywords" v-for="(item,index) in searchHistoryData" :key="index">{{item.keywords}}</li> -->
 
           <li class="search-history-item">
             <p>

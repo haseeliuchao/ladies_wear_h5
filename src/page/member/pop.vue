@@ -286,7 +286,7 @@
             <div class="right">
               <input v-focus v-validate.initial="'required'" type="text" name="username" v-model="loginForm.username" placeholder="请输入用户名或手机号码">
             </div>
-            <i class="clear" style="" v-show="loginForm.username.length>0" @click="loginForm.username=''"></i>
+            <i class="clear" style="" v-show="loginForm.username.length>0" @click= "loginForm.username=''"></i>
           </div>
           <div class="cell-item">
             <div class="left">
@@ -295,15 +295,15 @@
             <div class="right">
               <input v-validate.initial="'required'" name="password" @keyup.enter="Login" :type="loginForm.passwordFormType" v-model="loginForm.password" placeholder="请输入密码">
             </div>
-            <i class="clear" style="" v-show="loginForm.password.length>0" @click="loginForm.password=''" style="right: 40px"></i>
+            <i class="clear" style="" v-show="loginForm.password.length>0" @click= "loginForm.password=''" style="right: 40px"></i>
             <i :class="['eye-icon', loginForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
-              @click="loginForm.passwordFormType=loginForm.passwordFormType=='password'?'text':'password'"></i>
+              @click= "loginForm.passwordFormType=loginForm.passwordFormType=='password'?'text':'password'"></i>
           </div>
         </div>
-        <div :class="['cell-btn',errors.has('username')||errors.has('password')?'disabled-btn':'']" @click="()=>{errors.has('username')||errors.has('password')?false:Login()}">登录</div>
+        <div :class="['cell-btn',errors.has('username')||errors.has('password')?'disabled-btn':'']" @click= "()=>{errors.has('username')||errors.has('password')?false:Login()}">登录</div>
         <div class="other-link">
-          <span @click="()=>visiblePopup.registered=true">手机快速注册</span>
-          <span @click="()=>visiblePopup.forget=true">忘记密码</span>
+          <span @click= "()=>visiblePopup.registered=true">手机快速注册</span>
+          <span @click= "()=>visiblePopup.forget=true">忘记密码</span>
         </div>
       </div>
     </mt-popup>
@@ -313,22 +313,22 @@
     <mt-popup v-model="visiblePopup.registered" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="registered-container">
         <div class="my-header">
-          <i class="back" @click="()=>visiblePopup.registered=false"></i>
+          <i class="back" @click= "()=>visiblePopup.registered=false"></i>
           <strong>手机快速注册</strong>
           <i class="myMsg"></i>
         </div>
         <div class="cell-box">
           <div class="phone-cell">
             <input v-focus v-validate.initial="'required'" name="registered-phone" type="tel" v-model="registeredForm.phone" placeholder="请输入手机号">
-            <i class="clear" style="" v-show="registeredForm.phone.length>0" @click="registeredForm.phone=''" style="right: 10px;top:12px;"></i>
+            <i class="clear" style="" v-show="registeredForm.phone.length>0" @click= "registeredForm.phone=''" style="right: 10px;top:12px;"></i>
           </div>
-          <div :class="['cell-btn',errors.has('registered-phone')?'disabled-btn':'']" @click="registeredNext">下一步</div>
+          <div :class="['cell-btn',errors.has('registered-phone')?'disabled-btn':'']" @click= "registeredNext">下一步</div>
         </div>
       </div>
       <mt-popup v-model="visiblePopup.registeredCode" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
         <div class="registered-container">
           <div class="my-header">
-            <i class="back" @click="()=>visiblePopup.registeredCode=false"></i>
+            <i class="back" @click= "()=>visiblePopup.registeredCode=false"></i>
             <strong>手机快速注册</strong>
             <i class="myMsg"></i>
           </div>
@@ -337,19 +337,19 @@
             <div class="registered-code-cell">
               <div class="code-cell">
                 <input v-focus v-validate.initial="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
-                <i class="clear" v-show="registeredForm.code.length>0" @click="registeredForm.code=''" style="right: 10px;top:12px;"></i>
+                <i class="clear" v-show="registeredForm.code.length>0" @click= "registeredForm.code=''" style="right: 10px;top:12px;"></i>
               </div>
-              <div :class="['registered-getCode',registeredForm.resetSendPhoneMessage?'disabled-btn':'']" @click="registeredSendPhoneMessage"
+              <div :class="['registered-getCode',registeredForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
                 :disabled="registeredForm.resetSendPhoneMessage">{{registeredForm.resetSendPhoneMessage ? `(${registeredForm.resetSendPhoneMessage})` : '获取验证码'}}</div>
             </div>
-            <div :class="['cell-btn',errors.has('registeredCode')?'disabled-btn':'']" @click="()=>{errors.has('registeredCode')?false: visiblePopup.registeredFormId = true}">下一步</div>
+            <div :class="['cell-btn',errors.has('registeredCode')?'disabled-btn':'']" @click= "()=>{errors.has('registeredCode')?false: visiblePopup.registeredFormId = true}">下一步</div>
           </div>
         </div>
       </mt-popup>
       <mt-popup v-model="visiblePopup.registeredFormId" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
         <div class="registered-container">
           <div class="my-header">
-            <i class="back" @click="()=>visiblePopup.registeredFormId=false"></i>
+            <i class="back" @click= "()=>visiblePopup.registeredFormId=false"></i>
             <strong>填写注册信息</strong>
             <i class="myMsg"></i>
           </div>
@@ -363,7 +363,7 @@
                   <input v-focus v-validate.initial="'required'" type="text" name="registeredMemberName" v-model="registeredForm.username"
                     placeholder="请输入用户名">
                 </div>
-                <i class="clear" style="" v-show="registeredForm.username.length>0" @click="registeredForm.username=''"></i>
+                <i class="clear" style="" v-show="registeredForm.username.length>0" @click= "registeredForm.username=''"></i>
               </div>
               <div class="cell-item">
                 <div class="left">
@@ -373,9 +373,9 @@
                   <input v-validate.initial="'required'" name="registeredPassword" :type="registeredForm.passwordFormType" v-model="registeredForm.password"
                     placeholder="请输入密码">
                 </div>
-                <i class="clear" style="" v-show="registeredForm.password.length>0" @click="registeredForm.password=''" style="right: 40px;"></i>
+                <i class="clear" style="" v-show="registeredForm.password.length>0" @click= "registeredForm.password=''" style="right: 40px;"></i>
                 <i :class="['eye-icon', registeredForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
-                  @click="registeredForm.passwordFormType=registeredForm.passwordFormType=='password'?'text':'password'"></i>
+                  @click= "registeredForm.passwordFormType=registeredForm.passwordFormType=='password'?'text':'password'"></i>
               </div>
               <div class="cell-item">
                 <div class="left">
@@ -385,15 +385,15 @@
                   <input v-validate.initial="'required'" name="registeredConfirmPassword" :type="registeredForm.passwordConfirmFormType" v-model="registeredForm.confirmpassword"
                     placeholder="请重新输入确认密码">
                 </div>
-                <i class="clear" style="" v-show="registeredForm.confirmpassword.length>0" @click="registeredForm.confirmpassword=''" style="right: 40px;"></i>
+                <i class="clear" style="" v-show="registeredForm.confirmpassword.length>0" @click= "registeredForm.confirmpassword=''" style="right: 40px;"></i>
                 <i :class="['eye-icon', registeredForm.passwordConfirmFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
-                  @click="registeredForm.passwordConfirmFormType=registeredForm.passwordConfirmFormType=='password'?'text':'password'"></i>
+                  @click= "registeredForm.passwordConfirmFormType=registeredForm.passwordConfirmFormType=='password'?'text':'password'"></i>
               </div>
             </div>
           </div>
           <div class="cell-box">
             <div :class="['cell-btn',errors.has('registeredMemberName') || errors.has('registeredPassword') || errors.has('registeredConfirmPassword') ?'disabled-btn':'']"
-              @click="registered">注册</div>
+              @click= "registered">注册</div>
           </div>
         </div>
       </mt-popup>
@@ -404,7 +404,7 @@
     <mt-popup v-model="visiblePopup.forget" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="forget-container">
         <div class="my-header">
-          <i class="back" @click="()=>visiblePopup.forget=false"></i>
+          <i class="back" @click= "()=>visiblePopup.forget=false"></i>
           <strong>忘记密码</strong>
           <i class="myMsg"></i>
         </div>
@@ -413,9 +413,9 @@
             <div class="validate-username">
               <span>账号</span>
               <input v-focus v-model="forgetForm.phone" v-validate.initial="'required'" name="forgetusername" type="text" placeholder="用户名/手机号">
-              <i class="clear" v-show="forgetForm.phone.length>0" @click="forgetForm.phone=''" style="right: 10px;top:12px;"></i>
+              <i class="clear" v-show="forgetForm.phone.length>0" @click= "forgetForm.phone=''" style="right: 10px;top:12px;"></i>
             </div>
-            <div :class="['cell-btn',errors.has('forgetusername')?'disabled-btn':'']" @click="()=>{
+            <div :class="['cell-btn',errors.has('forgetusername')?'disabled-btn':'']" @click= "()=>{
               if(!errors.has('forgetusername')){
                 setPasswordNext()
               }
@@ -426,7 +426,7 @@
       <mt-popup v-model="visiblePopup.forgetCode" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
         <div class="forget-container">
           <div class="my-header">
-            <i class="back" @click="()=>visiblePopup.forgetCode=false"></i>
+            <i class="back" @click= "()=>visiblePopup.forgetCode=false"></i>
             <strong>忘记密码</strong>
             <i class="myMsg"></i>
           </div>
@@ -437,18 +437,18 @@
               <div class="registered-code-cell">
                 <div class="code-cell">
                   <input v-focus v-validate.initial="'required'" name="forgetCode" type="tel" v-model="forgetForm.code" placeholder="请输入验证码">
-                  <i class="clear" v-show="forgetForm.code.length>0" @click="forgetForm.code=''" style="right: 10px;top:12px;"></i>
+                  <i class="clear" v-show="forgetForm.code.length>0" @click= "forgetForm.code=''" style="right: 10px;top:12px;"></i>
                 </div>
-                <div :class="['registered-getCode',forgetForm.resetSendPhoneMessage?'disabled-btn':'']" @click="forgetSendPhoneMessage" :disabled="forgetForm.resetSendPhoneMessage">{{forgetForm.resetSendPhoneMessage ? `(${forgetForm.resetSendPhoneMessage})` : '获取验证码'}}</div>
+                <div :class="['registered-getCode',forgetForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "forgetSendPhoneMessage" :disabled="forgetForm.resetSendPhoneMessage">{{forgetForm.resetSendPhoneMessage ? `(${forgetForm.resetSendPhoneMessage})` : '获取验证码'}}</div>
               </div>
-              <div :class="['cell-btn',errors.has('forgetCode')?'disabled-btn':'']" @click="()=>{errors.has('forgetCode')?false: visiblePopup.forgetResetPassword=true }">下一步</div>
+              <div :class="['cell-btn',errors.has('forgetCode')?'disabled-btn':'']" @click= "()=>{errors.has('forgetCode')?false: visiblePopup.forgetResetPassword=true }">下一步</div>
             </div>
           </div>
         </div>
       </mt-popup>
       <mt-popup v-model="visiblePopup.forgetResetPassword" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
         <div class="my-header">
-          <i class="back" @click="()=>visiblePopup.forgetResetPassword=false"></i>
+          <i class="back" @click= "()=>visiblePopup.forgetResetPassword=false"></i>
           <strong>设置密码</strong>
           <i class="myMsg"></i>
         </div>
@@ -462,9 +462,9 @@
                 <input v-validate.initial="'required'" name="forgetFormPassword" :type="forgetForm.passwordFormType" v-model="forgetForm.password"
                   placeholder="请输入新的密码，位数6-12位">
               </div>
-              <i class="clear" style="" v-show="forgetForm.password.length>0" @click="forgetForm.password=''" style="right: 40px;"></i>
+              <i class="clear" style="" v-show="forgetForm.password.length>0" @click= "forgetForm.password=''" style="right: 40px;"></i>
               <i :class="['eye-icon', forgetForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
-                @click="forgetForm.passwordFormType=forgetForm.passwordFormType=='password'?'text':'password'"></i>
+                @click= "forgetForm.passwordFormType=forgetForm.passwordFormType=='password'?'text':'password'"></i>
             </div>
             <div class="cell-item">
               <div class="left">
@@ -474,13 +474,13 @@
                 <input v-validate.initial="'required'" name="forgetFormConfirmPassword" :type="forgetForm.confirmPasswordFormType" v-model="forgetForm.confirmPassword"
                   placeholder="请输入确认密码">
               </div>
-              <i class="clear" style="" v-show="forgetForm.confirmPassword.length>0" @click="forgetForm.confirmPassword=''" style="right: 40px;"></i>
+              <i class="clear" style="" v-show="forgetForm.confirmPassword.length>0" @click= "forgetForm.confirmPassword=''" style="right: 40px;"></i>
               <i :class="['eye-icon', forgetForm.confirmPasswordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
-                @click="forgetForm.confirmPasswordFormType=forgetForm.confirmPasswordFormType=='password'?'text':'password'"></i>
+                @click= "forgetForm.confirmPasswordFormType=forgetForm.confirmPasswordFormType=='password'?'text':'password'"></i>
             </div>
           </div>
           <div :class="['cell-btn',(!errors.has('forgetFormPassword')&&!errors.has('forgetFormConfirmPassword'))&&forgetForm.password === forgetForm.confirmPassword?'':'disabled-btn']"
-            @click="setPassword">确认</div>
+            @click= "setPassword">确认</div>
         </div>
       </mt-popup>
     </mt-popup>

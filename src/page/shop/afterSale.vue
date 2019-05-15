@@ -321,12 +321,12 @@
     </div>
     <div class="choiceReason">
       <p class="choiceReasonList" style="border-bottom:1px solid #e4e4e4"><span>商品状态</span> 
-      <span style="color:#999" v-if="item_status" @click="()=>visiblePopup.selectedGoodStateVisible=true">{{item_statustext}} ></span>
-      <span style="color:#999" v-else @click="()=>visiblePopup.selectedGoodStateVisible=true">请选择 ></span>
+      <span style="color:#999" v-if="item_status" @click= "()=>visiblePopup.selectedGoodStateVisible=true">{{item_statustext}} ></span>
+      <span style="color:#999" v-else @click= "()=>visiblePopup.selectedGoodStateVisible=true">请选择 ></span>
       </p>
       <p class="choiceReasonList"><span>退款原因</span> 
-      <span style="color:#999" v-if="reason" @click="()=>visiblePopup.selectedchoiceReasonVisible=true">{{reason}} ></span>
-      <span style="color:#999" v-else @click="()=>visiblePopup.selectedchoiceReasonVisible=true">请选择 ></span>
+      <span style="color:#999" v-if="reason" @click= "()=>visiblePopup.selectedchoiceReasonVisible=true">{{reason}} ></span>
+      <span style="color:#999" v-else @click= "()=>visiblePopup.selectedchoiceReasonVisible=true">请选择 ></span>
       </p>
       <p class="choiceReasonList" style="line-height:20px;padding-bottom:8px;"><span>退款金额：<em style="color:#ff2741" v-for="(item,index) in goodInfofilter" :key="index">¥{{item.coupons_price/100.00|topriceafter}}.{{item.coupons_price/100.00|topricenext}}</em></span></p>
     </div>
@@ -354,7 +354,7 @@
     <p class="backMoneyTip" style="line-height: 20px;
     margin-top: 6px;"><em style="color:#ff2741">*</em> 如您对退款金额有疑问或需要修改退款金额，请提交退
 款申请后联系“个人中心”-“在线客服”。</p>
-    <div class="sand-data" @click="commitMsg">提交</div>
+    <div class="sand-data" @click= "commitMsg">提交</div>
      
 
      <!-- 选择弹窗 -->
@@ -369,13 +369,13 @@
           <div class="selectedList">
               <div v-for="(item,index) in selectedGoodStateList" :key="index">
               <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="checkedone(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checkedone(item)"></i>
               </div>
               <p>{{item.name}}</p>
               </div>
               
           </div>
-          <div class="selectedTrue" @click="visiblePopup.selectedGoodStateVisible=false">选好了</div>
+          <div class="selectedTrue" @click= "visiblePopup.selectedGoodStateVisible=false">选好了</div>
         </mt-popup>
 
         <mt-popup v-model="visiblePopup.selectedchoiceReasonVisible" position="bottom" :closeOnClickModal='false' class="modal-popup">
@@ -383,12 +383,12 @@
           <div class="selectedList">
               <div v-for="(item,index) in selectedchoiceReasonList" :key="index">
               <div>
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="checkedtwo(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checkedtwo(item)"></i>
               </div>
               <p>{{item.reason}}</p>
               </div>
           </div>
-          <div class="selectedTrue" @click="visiblePopup.selectedchoiceReasonVisible=false">选好了</div>
+          <div class="selectedTrue" @click= "visiblePopup.selectedchoiceReasonVisible=false">选好了</div>
         </mt-popup>
   </div>
 </template>

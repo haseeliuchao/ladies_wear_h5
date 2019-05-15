@@ -325,11 +325,11 @@
             <!-- <i class="searchIcon searchContentIcon"></i> -->
             <!-- @keypress="truesearchGoods" -->
             <input type="search" v-model="searchParams.title" placeholder="品质生活必备" >
-            <!-- <span class="clear" @click="title=''" v-show="title.length>0">&times;</span> -->
-            <i class="searchIcon searchContentIcon" @click="changeQuery(searchParams.title)"></i>
+            <!-- <span class="clear" @click= "title=''" v-show="title.length>0">&times;</span> -->
+            <i class="searchIcon searchContentIcon" @click= "changeQuery(searchParams.title)"></i>
           </div>
       </div>
-      <span @click="changeQuery(searchParams.title)">搜索</span>
+      <span @click= "changeQuery(searchParams.title)">搜索</span>
     </div>
     <!-- 配置搜索 -->
     <div class="search-top" v-if="searchParams.ad_advertising_id">
@@ -350,8 +350,8 @@
     <!-- 筛选 -->
     <div class="search-filter">
       <ul class="search-filter-list">
-        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click="sortType(1)">综合排序</li>
-        <li :class="['search-filter-item',active==1 ? 'active' : '']" @click="sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
+        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(1)">综合排序</li>
+        <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
     <!-- 筛选 -->
@@ -361,7 +361,7 @@
       <load-more style="width:100%;" v-if="$route.path=='/searchRusult'" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
           ref="searchRusultloadMore">
         <ul class="product-list" >
-          <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+          <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
             <img  v-lazy="item.index_img_url" alt="">
             <div class="prod-info">
               <p class="prod-title">{{item.title}}</p>

@@ -215,7 +215,7 @@
     <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con2.png">
-          <div class="jump-btn" @click="()=>{popupVisible=false}"></div>
+          <div class="jump-btn" @click= "()=>{popupVisible=false}"></div>
         </div>
     </mt-popup>
     <div class="searchContainer">
@@ -240,20 +240,20 @@
         <p class="expire-time">
           图搜有效期：<span>2012/01/29</span>到期
         </p>
-        <p class="renew-btn" @click="()=>$router.push('/searchRenew')">续费 > </p>
-        <!-- <p class="renew-btn" v-if="" @click="showToast">续费 > </p> -->
+        <p class="renew-btn" @click= "()=>$router.push('/searchRenew')">续费 > </p>
+        <!-- <p class="renew-btn" v-if="" @click= "showToast">续费 > </p> -->
       </div>
 
       <!-- 精品推荐 -->
       <div class="recommend-content" v-if="HistoryImgData.length==0">
         <p class="product-list-top">
           <span class="product-list-topl">精选推荐</span>
-          <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
+          <span class="product-list-topr">去<em @click= "$router.push('/index')">商城首页</em>逛逛</span>
         </p>
         <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore">
             <ul class="product-list" >
-              <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
+              <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
                 <img v-lazy="item.index_img_url" alt="">
                 <div class="prod-info">
                   <p class="prod-title">{{item.title}}</p>
@@ -271,7 +271,7 @@
         <div class="search-history" v-if="HistoryImgData.length>0">
           <p class="search-history-title">搜索记录</p>
           <ul class="search-history-list">
-            <li class="search-history-item" @click="$router.push({path: '/searchRusult',query: {item_url:item.item_url}})" v-for="(item,index) in HistoryImgData" :key="index"><img :src="item.item_url"></li>
+            <li class="search-history-item" @click= "$router.push({path: '/searchRusult',query: {item_url:item.item_url}})" v-for="(item,index) in HistoryImgData" :key="index"><img :src="item.item_url"></li>
           </ul>
         </div>
   

@@ -66,7 +66,7 @@
 <template>
   <div class="article-container" v-if="articleData">
     <div class="my-header">
-      <i class="back" @click="$router.go(-1)"></i>
+      <i class="back" @click= "$router.go(-1)"></i>
       <strong>资讯详情</strong>
       <i class="myMsg"></i>
     </div>
