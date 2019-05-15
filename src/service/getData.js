@@ -6,7 +6,7 @@ export const loginBind = (params) => new Http().require({api: '/api/bind/phone',
 
 export const getUserInfo = (params) => new Http().require({api: '/api/member/info',param:params}); //获取个人信息
 
-export const sendPhoneMessage = (params) => new Http().require({api: '/api/member/SendPhoneMessage',param: params}); //获取短信验证码
+export const sendPhoneMessage = (params) => new Http().require({api: '/api/sms/bind/phone',param: params}); //获取短信验证码
 
 export const registered = (params) => new Http().require({api: '/api/member/Registered',param: params}); //注册账号
 

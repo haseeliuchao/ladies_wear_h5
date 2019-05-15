@@ -105,6 +105,9 @@
     <!-- 登陆 -->
     <mt-popup v-model="visiblePopup.login" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
       <div class="registered-container">
+        <p style="text-align:center">
+        <img src="~jd/images/huiyanlogo.png" style="height:90px;margin-top:40px;">
+        </p>
         <div class="cell-box">
           <div class="phone-cell">
             <div class="phone-cellimg">
@@ -121,16 +124,16 @@
                 <div class="code-cellimg">
                 <img src="~jd/images/login-msg.png" style="height:13px;" alt="">
                 </div>
-                <input v-focus v-validate.initial="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
+                <input v-focus v-validate="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="registeredForm.code.length>0" @click="registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
-              <div :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click="registeredSendPhoneMessage"
-                    :disabled="errors.has('mobile')">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
+              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click="registeredSendPhoneMessage"
+                    :disabled="errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
               </div>
               <div style="height:18px;">
           <span v-show="errors.has('registeredCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
               </div>
-          <div :class="['cell-btn',errors.has('mobile')?'disabled-btn':'']" @click="LoginBind">确定</div>
+          <div :class="['cell-btn',errors.has('mobile')||errors.has('registeredCode')||registeredForm.phone.length==0||registeredForm.code.length==0?'disabled-btn':'']" @click="LoginBind">确定</div>
           </div>
           
       </div>
@@ -139,7 +142,10 @@
   </div>
 </template>
 <script>
-
+import {
+getLocalStorage,
+    setLocalStorage
+  } from '@/utils/mixin';
   import {
     Field,
     Button,
@@ -232,33 +238,6 @@
           })
         })
       },
-      async registeredNext() { //注册账号发送短信
-        this.$store.dispatch('GetUserInfo', {
-          MemberToken: this.registeredForm.phone
-        }).then(response => {
-          if (response.Code === 0) return Toast({
-            message: '该手机已被注册',
-            position: 'bottom'
-          })
-        }, err => {
-          this.visiblePopup.registeredCode = true
-        })
-      },
-      async setPasswordNext() { //忘记密码
-        let {
-          Code,
-          Message,
-          Data,
-        } = await this.$store.dispatch('GetUserInfo', {
-          MemberToken: this.forgetForm.phone
-        });
-        if (Code !== 0) return Toast({
-          message: Message,
-          position: 'bottom'
-        })
-        this.forgetForm.userName = Data.username;
-        this.visiblePopup.forgetCode = true
-      },
       async registeredSendPhoneMessage() { //获取验证码
         await this.$store.dispatch('SendPhoneMessage', {
           phone: this.registeredForm.phone
@@ -273,29 +252,16 @@
           }
         }, 1000)
       },
-      async forgetSendPhoneMessage() { //获取验证码
-        await this.$store.dispatch('SendPhoneMessage', {
-          phone: this.forgetForm.phone
-        });
-        this.forgetForm.resetSendPhoneMessage = 120;
-        let times = setInterval(() => {
-          if (this.forgetForm.resetSendPhoneMessage <= 0) {
-            this.forgetForm.resetSendPhoneMessage = null;
-            clearInterval(times);
-          } else {
-            this.forgetForm.resetSendPhoneMessage--;
-          }
-        }, 1000)
-      },
       async LoginBind() { //登录
         let Data = await this.$store.dispatch('LoginBind', {
           phone: this.registeredForm.phone,
           code: this.registeredForm.code
         })
-        // if (Data.Code !== 0) return Toast({
-        //   message: Data.Message,
-        //   position: 'bottom'
-        // })
+        if (Data.code !== 10000) return Toast({
+          message: Data.msg
+        })
+        setLocalStorage('session_token',Data.data.session_token);
+        setLocalStorage('access_token',Data.data.access_token);
         this.$router.go(-1);
       }
     },

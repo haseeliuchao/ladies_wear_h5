@@ -230,9 +230,8 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.Code !== 0) return Toast({
-            message: response.Message,
-            position: 'bottom'
+          if (response.code !== 10000) return Toast({
+            message: response.msg
           })
           return resolve(response)
         }, err => {

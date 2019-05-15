@@ -374,7 +374,7 @@
               </div>
               <div class="order-sku" @click="$router.push(`/order/${item.order_code}`)">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
-                <strong><span>&yen;</span><em>{{item.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.total_item_price/100.00|topricenext}}</em></strong>
+                <strong><span>&yen;</span><em>{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click="cancelOrder(item)">取消订单</span>
@@ -531,45 +531,21 @@
         this.active = Id;
         switch (Number(this.active)) {
           case 0: //全部订单
-            // this.params.cancel_status = null;
-            // this.params.confirm_status = null;
-            // this.params.pay_status = null;
-            // this.params.finish_status = null;
             this.params.order_status = null;
             break;
           case 1: //待付款
-            // this.params.cancel_status = 0;
-            // this.params.confirm_status = null;
-            // this.params.pay_status = 0;
-            // this.params.finish_status = 0;
             this.params.order_status = 1;
             break;
           case 2: //待发货
-            // this.params.cancel_status = 0;
-            // this.params.confirm_status = null;
-            // this.params.pay_status = 0;
-            // this.params.finish_status = 0;
             this.params.order_status = 2;
             break;
           case 3: //待收货
-            // this.params.cancel_status = 0;
-            // this.params.confirm_status = null;
-            // this.params.pay_status = 0;
-            // this.params.finish_status = 0;
             this.params.order_status = 3;
             break;
           case 4: //已完成
-            // this.params.cancel_status = 0;
-            // this.params.confirm_status = null;
-            // this.params.pay_status = null;
-            // this.params.finish_status = 1;
             this.params.order_status = 4;
             break;
           case 5: //已关闭
-            // this.params.cancel_status = 1;
-            // this.params.confirm_status = null;
-            // this.params.finish_status = null;
-            // this.params.pay_status = null;
             this.params.order_status = 5;
             break;
           default: //其他
@@ -600,20 +576,8 @@
           response.data.data.map(i => {
             // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
             this.orderList.push(i)
-            
           })
         }
-        // this.orderList.map(item=>{
-        //       this.orderListDetail.push(item)
-        // })
-        // this.orderListDetail.map(i=>{
-        //         // this.totalNum += i.num
-        //         this.orderListDetailin.push(i.item_info_list)
-        // })
-        // this.orderListDetailin.map(i=>{
-        //         this.totalNum += i.num
-        // })
-
       },
     },
     filters:{

@@ -562,7 +562,7 @@
                 code:utils.getUrlKey('code'),
                 app_key:utils.getUrlKey('state').slice(8)
               })
-              // console.log(Data);
+             
               if(Data.code==10000){
                 setLocalStorage('session_token',Data.data.session_token);
                 setLocalStorage('access_token',Data.data.access_token);
@@ -571,13 +571,12 @@
                    setLocalStorage('guideindex',1);
                 }else{
                    setLocalStorage('guideindex',2);
-                }
-                
+                }  
               }else{
-                Toast({
-                      message: Data.msg,
-                      position: 'bottom'
-                  });
+                // Toast({
+                //       message: Data.msg,
+                //       position: 'bottom'
+                //   });
               }
        }
         

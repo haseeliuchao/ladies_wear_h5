@@ -16,6 +16,7 @@ import {md5} from '@/utils/md5'
 class Http {
   constructor(){
     this.Domain = 'http://tencent-ai.com/mop/';
+    // this.Domain = 'http://192.168.9.92:8182';
   }
   
      
