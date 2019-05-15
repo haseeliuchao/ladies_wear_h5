@@ -339,8 +339,8 @@
     <div class="order-container">
       <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore"> -->
-              <!--  -->
-      <load-more style="width:100%;" v-if="$route.path=='/orderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+              <!-- :topMethod="onRefreshCallback" -->
+      <load-more style="width:100%;" v-if="$route.path=='/orderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" 
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
@@ -494,7 +494,7 @@
                   message: response.msg
                   })
                 }else{
-                this.onRefreshCallback()
+                this.getOrderdata()
                 }
               })
             }
@@ -512,7 +512,7 @@
           Toast({
             message: "订单已取消"
           })
-          this.onRefreshCallback()
+          this.getOrderdata()
         })
       },
       tipSend(){
@@ -528,6 +528,13 @@
         setTimeout(() => {
         this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
         }, 1000); 
+      },
+
+       async getOrderdata() { //下拉刷新
+        this.params.page_size = 10;
+        this.params.current_page = 1;
+        this.orderList = [];
+        this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
       },
       switchTabs(Id) {
         if (this.active === Number(Id)) return;
@@ -555,7 +562,7 @@
             throw new Error('未知TabId')
             break
         }
-        this.onRefreshCallback();
+        this.getOrderdata();
       },
       payByWallet() {
         this.$store.dispatch('PayByWallet', {
