@@ -328,7 +328,7 @@
 <template>
   <div class="my-order">
     <div class="topnav">
-      <span @click="switchTabs(0)" :class="{'active':active===0}">全部</span>
+      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">全部</span>
       <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待付款</span>
       <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">待发货</span>
       <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">待收货</span>
