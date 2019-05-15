@@ -358,7 +358,7 @@
 
     <!-- 搜索内容 -->
     <div class="content">
-      <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
+      <load-more style="width:100%;" v-if="$route.path=='/searchRusult'" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
           ref="searchRusultloadMore">
         <ul class="product-list" >
           <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">

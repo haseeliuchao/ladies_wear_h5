@@ -250,7 +250,7 @@
           <span class="product-list-topl">精选推荐</span>
           <span class="product-list-topr">去<em @click="$router.push('/index')">商城首页</em>逛逛</span>
         </p>
-        <load-more style="width:100%;"  @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+        <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore">
             <ul class="product-list" >
               <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">

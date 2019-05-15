@@ -181,6 +181,7 @@
        
       },
       async infiniteCallback(response) { //下拉加载
+      
         if(response.data.items!=undefined&&response.data.items!=null){
          if (response.data.items.length > 0) {
           response.data.items.map(i => {

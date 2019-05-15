@@ -297,7 +297,7 @@
         <!-- 搜索栏 -->
         <search-bar :Status="Status"  v-if="searchBarVisilbe" />
         <!-- 搜索栏 -->
-        <load-more @translate-change="translateChange" style="width:100%;" @loadMore="infiniteCallback"  :param="recommendParam" :topMethod="onRefreshCallback"
+        <load-more @translate-change="translateChange" style="width:100%;"  :param="recommendParam" :topMethod="onRefreshCallback"
           :loadMoreIconVisible="false" ref="recommendLoadmore" >
           <!-- <scroller class="cmsScroll" refreshLayerColor="#999" refreshText="下拉刷新..." :snapping="true" :onRefresh="onRefreshCallback" ref="cmsScroll" width="100%" height="100%"> -->
           <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
@@ -359,7 +359,7 @@
           </div>
 
           <div class="content">
-            <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+            <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click="()=>$router.push('/product/'+item.item_id)">
@@ -386,18 +386,18 @@
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
-    showBack,getLocalStorage,
+ getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
   import {
-    getRecommend,
+
     getArticle,
     getArticleList,
     getGoodsCategoryList,
     searchGoods
   } from '@/service/getData';
-  import marquee from 'common/marquee/marquee';
-  import marqueeItem from 'common/marquee/marquee-item';
+  // import marquee from 'common/marquee/marquee';
+  // import marqueeItem from 'common/marquee/marquee-item';
   import SearchBar from 'page/shop/searchBar';
   import LoadMore from 'common/loadMore';
   import {
@@ -452,8 +452,8 @@
       BackHead,
       Swipe,
       SwipeItem,
-      marquee,
-      marqueeItem,
+      // marquee,
+      // marqueeItem,
       SearchBar,
       LoadMore,
       Popup
@@ -523,16 +523,16 @@
         this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
       },
       async infiniteCallback(response) { //下拉加载
-        if(response.data.items!=undefined&&response.data.items!=null){
-         if (response.data.items.length > 0) {
-          response.data.items.map(i => {
-            this.indexRusultData.push(i)
-          })
-        }
-        }else{
-          this.indexRusultData=[];
-        }
-        
+        // if(this.$route.path=='/index'){
+          if(response.data.items!=undefined&&response.data.items!=null){
+          if (response.data.items.length > 0) {
+            response.data.items.map(i => {
+              this.indexRusultData.push(i)
+            })
+          }
+          }else{
+            this.indexRusultData=[];
+          }
       },
       async updatedData() { //更新数据
         let Data = await this.$store.dispatch('GetIndexCmsData', {

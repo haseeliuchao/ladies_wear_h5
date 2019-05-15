@@ -757,10 +757,10 @@
     </div>
 
 
-    <div class="getCoupon" @click="()=>visiblePopup.couponVisible=true">
+    <!-- <div class="getCoupon" @click="()=>visiblePopup.couponVisible=true">
       <p>可用券码 <span>7张</span></p>
       <img src="~jd/images/arrow-right.png" height="16">
-    </div>
+    </div> -->
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->

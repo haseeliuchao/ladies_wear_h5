@@ -206,12 +206,19 @@ const appRouter = {
                 meta: { keepAlive: false }
             }
         ],
-        scrollBehavior(to, from,savedPosition) {
-            return {
-              x: 0,
-              y: 0
+       
+            scrollBehavior(to, from, savedPosition) {
+                console.log(savedPosition)
+                if(savedPosition) {
+                    return savedPosition
+                } else {
+                    return {
+                        x: 0,
+                        y: 0
+                    }
+                }
             }
-          }
+          
         
     }
     // import example from '@/router/example'
