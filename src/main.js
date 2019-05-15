@@ -61,6 +61,7 @@ const config = {
 
 
 router.beforeEach((to,from,next)=>{
+  
     next();
 })
 
