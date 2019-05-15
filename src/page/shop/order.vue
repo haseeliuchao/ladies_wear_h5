@@ -423,7 +423,7 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>24小时后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
+         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|DateFormat('hh 小时 mm ')}}分后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
          <p v-if="orderDetail.order_status===2">等待卖家发货</p>
          <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
          <p v-if="orderDetail.order_status===4">订单已完成</p>
@@ -524,7 +524,9 @@
         currentOrder: {}, //当前订单
         orderDetail: {
         },
-        active: null
+        active: null, 
+        countDownTime:null,
+        countDown:null
       };
     },
 
@@ -551,6 +553,11 @@
           return
         }
         this.orderDetail=Data.data
+        this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created)+86400000);
+        let times = setInterval(() => {
+          this.countDown=this.countDownTime-parseInt(new Date().getTime);
+        }, 1000)
+        
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },
