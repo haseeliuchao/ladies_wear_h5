@@ -559,7 +559,7 @@
         let times = setInterval(() => {
           let that=this;
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
-        }, 60000)
+        }, 1000)
         
 
         setLocalStorage('salesList',this.orderDetail)
