@@ -86,7 +86,7 @@
   .my-order {
     .ordertop-status{
       width: 10rem;
-      height: 79px;
+      height: 100px;
       background: -webkit-gradient(linear, left 0, right 0, from(#ff2741), to(#ff5527));
       @include flexbox(start,
       center,
