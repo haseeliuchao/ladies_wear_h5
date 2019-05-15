@@ -364,7 +364,7 @@
             <span><img src="~jd/images/addressicon.png">收货地址</span>
             <span>快速管理 ></span>
           </p>
-          <p class="about-item" @click= "openSdk()">
+          <p class="about-item" @click= "openSdk">
             <span><img src="~jd/images/kefuicon.png">在线客服</span>
             <span>有问题找小惠 ></span>
           </p>
@@ -380,6 +380,7 @@
     <BackHead/>
   </div>
 </template>
+
 <script>
   import FooterView from 'component/footer/footerView';
   import LoadMore from 'common/loadMore';
@@ -429,6 +430,9 @@
     },
 
     methods: {
+      openSdk(){
+          window.openSdk()
+      },
       ...mapMutations([
         'SET_USERINFO_DATA'
       ]),
@@ -437,13 +441,6 @@
         this.userData = res.data;
         this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
       },
-      // async infiniteCallback(response) { //下拉加载推荐商品
-      //   if (response.Data.length > 0) {
-      //     response.Data.map(i => {
-      //       this.cmsData.recommendData.push(i)
-      //     })
-      //   }
-      // },
       translateChange(y){ //监听下拉的阈值
         this.handlerEvent = y>8 ? true : false;
       },
@@ -469,35 +466,6 @@
     }
   }
 </script>
-<script>
-  (function (w, d, n, a, j) {
-    w[n] = w[n] || function () {
-      (w[n].a = w[n].a || []).push(arguments);
-    };
-    j = d.createElement('script');
-    j.async = true;
-    j.src ='https://qiyukf.com/script/43c880891a4096d21928cd3db4db00b0.js';
-    d.body.appendChild(j);
-  })(window, document, 'ysf');
 
-  var isSdkReady = false;
-  ysf('onLayerload', function () {
-    isSdkReady = true;
-  })
-  window.openSdk = function () {
-    if (isSdkReady) {
-      ysf('open');
-    } else {
-      alert('sdk尚未加载成功，请稍后再试');
-    }
-  }
-  ysf('config', {
-      uid: "123456789",  // 用户Id
-      name: 'mmp',          // 用户名称
-      email: 'test@163.com', // 用户邮箱
-      mobile: '138823288888'  // 用户电话
-  })      
-  
-</script>
 <style lang='scss' scoped>
 </style>

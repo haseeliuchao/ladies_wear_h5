@@ -33,6 +33,8 @@ export const payByWallet = (params) => new Http().require({api: '/api/member/Pay
 
 export const payToken = (params) => new Http().require({api: '/api/order/generate/token',param: params}); //余额支付
 
+export const getSignature = (params) => new Http().require({api: '/api/jsapi/signature',param: params}); //分享
+
 export const payGetData = (params) => new Http().require({api: '/api/order/generate',param: params}); //余额支付
 
 export const payDirect = (params) => new Http().require({api: '/api/order/pay',param: params}); //余额支付
