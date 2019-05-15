@@ -294,7 +294,14 @@
     opacity:.8
   }
 </style>
-
+<style>
+.layer-4{
+  display:none;
+}
+#YSF-IFRAME-LAYER.ysf-chat-mobile-layeropen{
+  height:100%!important;
+}
+</style>
 <template>
   <div>
     <div class="content">
