@@ -212,6 +212,11 @@
                 }
                 strong {
                   font-size: 16px;
+                  em{
+                    &:first-child{
+                      margin-left:-3px;
+                    }
+                  }
                 }
               }
               .right {
@@ -337,6 +342,9 @@
         em{
           font-weight: bold;
           color: #ff2741;
+          &:first-child{
+            margin-left:-3px;
+          }
         }
       }
     }
@@ -419,7 +427,7 @@
                 <div class="pd-price">
                   <div class="left">
                     <span>&yen;</span>
-                    <strong><em>{{item.sales_consumer_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.sales_consumer_price/100.00|topricenext}}</em></strong>
+                    <strong><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.sales_consumer_price/100.00|topricenext}}</em></strong>
                     
                   </div>
                   <div class="right">

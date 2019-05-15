@@ -367,7 +367,7 @@
               <p class="prod-title">{{item.title}}</p>
               <p class="prod-price">
                 <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:16px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
+                <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
                 </p>
             </div>
           </li>

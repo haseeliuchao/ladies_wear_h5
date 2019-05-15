@@ -160,12 +160,11 @@
         color: #333
       }
       strong {
-        font-weight: normal;
         font-size: 14px;
         span{
+          font-weight:bold;
           font-size: 12px;
-          color: #ff2741;
-          
+          color: #ff2741; 
         }
         em{
           color: #ff2741;
@@ -282,9 +281,9 @@
                       color: #999;
                     }
                     strong {
-                      font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -327,9 +326,9 @@
               font-size: 15px;
              line-height: 26px;
               strong{
-                font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -345,16 +344,14 @@
            }
            .order-product-detailtwo{
              color: #666;
-             strong{
-                
+             strong{       
                       span{
-                       
+                        font-weight:bold;
                         color: #666;
                         
                       }
                       em{
                         color: #666;
-                      
                       }
               }
            }
@@ -376,9 +373,9 @@
               }
             }
             strong {
-                      font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -386,6 +383,7 @@
                       em{
                         color: $red;
                         font-style: normal
+                        
                       }
                     }
           }
@@ -729,7 +727,7 @@
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}   尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em>{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
                         <span>x{{item.num}}</span>
                       </p>
                     </div>
@@ -744,9 +742,9 @@
 
 
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em>{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em>{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
               </div>
             </div>
           </div>
@@ -764,7 +762,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><span>&yen;</span><em>{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
+      <span>合计：<strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
       <div class="payBtn" @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
