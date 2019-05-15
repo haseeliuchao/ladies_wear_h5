@@ -205,12 +205,13 @@
               flex: initial;
               .left {
                 color: #ff2741;
+                font-weight:bold;
                 span {
                   font-size: 12px;
+                  font-weight:bold;
                 }
                 strong {
-                  font-size: 15px;
-                  font-weight: normal;
+                  font-size: 16px;
                 }
               }
               .right {
@@ -328,11 +329,13 @@
         color: #333;
         @include textoverflow(1);
         span{
+          font-weight: bold;
           font-size: 12px;
           color: #ff2741;
           
         }
         em{
+          font-weight: bold;
           color: #ff2741;
         }
       }
@@ -466,7 +469,7 @@
         <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click= "selectedAllGoods"></i>
         <em>全选</em>
         <!-- {{totalFee}} -->
-        <strong v-if="!delshow">合计：<span>&yen;</span> <em>{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
+        <strong v-if="!delshow">合计：<span>&yen;</span> <em style="font-size:16px;">{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
       </div>
       <div v-if="!delshow" class="right" @click= "confirmOrder()">
         <strong>结算</strong>
