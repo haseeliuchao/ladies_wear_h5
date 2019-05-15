@@ -48,12 +48,12 @@ const config = {
     }
   });
 
-  VeeValidate.Validator.extend('phonecode', {
+  VeeValidate.Validator.extend('registeredCode', {
       messages: {
         zh_CN:field => field + '必须是6位验证码',
       },
       validate: value => {
-        return value.length == /^(\d{6})$/.test(value)
+        return value.length ==6 && /^\d{6}$/.test(value)
       }
    });
 

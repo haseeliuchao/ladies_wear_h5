@@ -124,10 +124,10 @@
                 <div class="code-cellimg">
                 <img src="~jd/images/login-msg.png" style="height:13px;" alt="">
                 </div>
-                <input v-focus v-validate="'required'" name="registeredCode" type="tel" v-model="registeredForm.code" placeholder="请输入验证码">
+                <input v-focus v-validate="'required|registeredCode'" name="registeredCode" type="num" v-model="registeredForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="registeredForm.code.length>0" @click= "registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
-              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
+              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
                     :disabled="errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
               </div>
               <div style="height:18px;">
@@ -164,28 +164,7 @@ getLocalStorage,
           registeredFormId: false,
           forgetResetPassword: false
         },
-        loginForm: {
-          username: '',
-          password: '',
-          passwordFormType: 'password'
-        },
         registeredForm: {
-          phone: '',
-          username: '',
-          password: '',
-          confirmpassword: '',
-          passwordFormType: 'password',
-          passwordConfirmFormType: 'password',
-          resetSendPhoneMessage: null,
-          code: ''
-        },
-        forgetForm: {
-          resetSendPhoneMessage: null,
-          userName: null,
-          password: '',
-          passwordFormType: 'password',
-          confirmPasswordFormType: 'password',
-          confirmPassword: '',
           phone: '',
           code: ''
         }
@@ -198,23 +177,6 @@ getLocalStorage,
         setTimeout(() => {
           this.$router.go(-1)
         }, 200)
-      },
-      async setPassword() { //设置密码
-        let {
-          Code,
-          Message
-        } = await this.$store.dispatch('SetPassword', {
-          phone: this.forgetForm.phone,
-          challengecode: this.forgetForm.code,
-          newpassword: this.forgetForm.confirmPassword
-        })
-        Toast({
-          message: Code === 0 ? '修改成功' : Message,
-          position: 'bottom'
-        })
-        this.visiblePopup.forget = false;
-        this.visiblePopup.forgetCode = false;
-        this.visiblePopup.forgetResetPassword = false;
       },
       async registered() { //注册账号
         let formData = {
