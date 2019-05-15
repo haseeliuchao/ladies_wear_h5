@@ -933,32 +933,6 @@
       </div>
       <div class="popupOk" @click="()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
-
-    <!-- 顶部导航栏 -->
-    <!-- <div class="product-header">
-      <div class="product-header-container">
-        <div class="goback" @click="$router.go(-1)">
-          <i class="back"></i>
-        </div>
-        <div class="product-tabs">
-          <span @click="switchTabs('mainLayout')" :class="['product-tabs-item',containerTab==='mainLayout'?'active':'']">商品</span>
-          <span @click="switchTabs('goodDetail')" :class="['product-tabs-item',containerTab==='goodDetail'?'active':'']">详情</span>
-          <span @click="switchTabs('goodcommentList')" :class="['product-tabs-item',containerTab==='goodcommentList'?'active':'']">评价</span>
-          <div id="loadingbar" :style="containerTab==='mainLayout' ? 'left:5%' : containerTab==='goodDetail' ?  'left:38.63%' : 'left:71.66%'"></div>
-        </div>
-        <div class="other">
-          <i class="share"></i>
-          <i class="menu"></i>
-        </div>
-      </div>
-    </div> -->
-    <!-- 顶部导航栏 -->
-    <!-- 内容区 -->
-    <!-- <mt-tab-container v-model="containerTab" :swipeable="true" style="margin: 0 0 1.25rem 0; "> -->
-      <!-- 商品 -->
-      <!-- <mt-tab-container-item id="mainLayout"  v-if="containerTab==='mainLayout'"> -->
-        <!-- <load-more style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="recommendParam" :loadMoreIconVisible="false"
-          ref="recommendLoadmore"> -->
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
@@ -967,18 +941,12 @@
                 <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
                   <img :src="item">
                 </mt-swipe-item>
-
-                <!-- <mt-swipe-item>
-                  <img src="https://laquimage.b0.upaiyun.com/activity/2019/4/14/img1555229165205_344.jpg!232x232" >
-                </mt-swipe-item> -->
-
               </mt-swipe>
               <div class="swiper-indicators">{{swipeIndex.nowIndex}}/{{swipeIndex.total}}</div>
             </div>
-            <!-- 商品轮播图 -->
             <!-- 商品信息 -->
             <div class="product-title-text">
-              <!-- <p class="product-name-text">{{productInfo.productName}}</p> -->
+
               <div class="product-price">
                 <p class="product-pricep">
                 <span>&yen;</span>
@@ -991,9 +959,7 @@
               <p class="product-name-text">{{productInfo.title}}</p>
               <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
-              <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
-            <!-- 商品信息 -->
             <!-- 商品服务 -->
             <div class="product-sku" >
               <div>
@@ -1024,26 +990,13 @@
               </div>
               <span class="right-menu"></span>
             </div>
-
-           
-            <!-- 商品留言 -->
-
-         
-            <!-- 商家信息 -->
-
-            <!-- 为你推荐 -->
             <div class="my-recommend">
               <div class="recommend-tip">
                 <img src="~jd/images/xiangqing.png" alt="">
               </div>
               <div id="prodContent-container" v-html="productInfo.item_detailsimg"></div>
             </div>
-            <!-- 为你推荐 -->
           </div>
-      <!-- 商品 -->
-      <!-- 评价 -->
-    <!-- </mt-tab-container> -->
-    <!-- 内容区 -->
 
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
@@ -1052,10 +1005,6 @@
           <i></i>
           <span>首页</span>
         </div>
-        <!-- <div class="like-icon" @click="favShop">
-          <i></i>
-          <span>关注</span>
-        </div> -->
         <div class="shopping-cart" @click="$router.push('/cart')">
           <em>4</em>
           <i></i>
@@ -1065,7 +1014,6 @@
       <div class="right" @click="addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
       <div class="right" @click="addShopCart('directBuy')">立即购买</div>
     </div>
-    <!-- 底部导航栏 -->
 
     <!-- 返回顶部 -->
     <BackHead/>
@@ -1077,8 +1025,8 @@
 
 <script>
   import {
-    TabContainer,
-    TabContainerItem,
+    // TabContainer,
+    // TabContainerItem,
     Swipe,
     Toast,
     SwipeItem,
@@ -1091,7 +1039,7 @@
     getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
-  import BackHead from 'common/backHead';
+  // import BackHead from 'common/backHead';
 
   export default {
     data() {
@@ -1114,24 +1062,6 @@
           content:''
         },
         shopInfo: null,
-        commad: getRecommend,
-        recommendParam: {
-          Type: 'recommend',
-          page_size: 10,
-          current_page: 1
-        },
-        recommendData: [],
-        swipeIndex: {
-          nowIndex: 1,
-          total: 0
-        },
-        commadComment: getCommentList,
-        commentParam: {
-          ProductNo: null,
-          page_size: 10,
-          current_page: 1
-        },
-        commentData: []
         
       };
     },
@@ -1154,8 +1084,8 @@
     },
         
     components: {
-      TabContainer,
-      TabContainerItem,
+      // TabContainer,
+      // TabContainerItem,
       Swipe,
       SwipeItem,
       BackHead

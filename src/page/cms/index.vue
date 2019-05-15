@@ -384,19 +384,19 @@
 <script>
   import utils from '@/utils/urlfun';
   import FooterView from 'component/footer/footerView';
-  import BackHead from 'common/backHead';
+  // import BackHead from 'common/backHead';
   import {
-    showBack,getLocalStorage,
+ getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
   import {
-    getRecommend,
+
     getArticle,
     getArticleList,
     getGoodsCategoryList,
     searchGoods
   } from '@/service/getData';
-  import marquee from 'common/marquee/marquee';
+  // import marquee from 'common/marquee/marquee';
   import marqueeItem from 'common/marquee/marquee-item';
   import SearchBar from 'page/shop/searchBar';
   import LoadMore from 'common/loadMore';
