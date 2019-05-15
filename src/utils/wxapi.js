@@ -13,12 +13,11 @@ const wxApi = {
   wxRegister (callback) {
     // 这边的接口请换成你们自己的
     // , { timeout: 5000, withCredentials: true }
-
-        let Data = getSignature({
+       async () =>{
+        let Data = await getSignature({
             url: BASE64.encoder(location.href.split("#")[0])
         });
-    // Axios.post('/api/jsapi/signature', { }).then((res) => {
-      let data = Data.data// PS: 这里根据你接口的返回值来使用
+        let data = Data.data// PS: 这里根据你接口的返回值来使用
       wx.config({
         debug: false, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
@@ -28,12 +27,16 @@ const wxApi = {
         jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       })
   
-    wx.ready((res) => {
-      // 如果需要定制ready回调方法
-      if (callback) {
-        callback()
-      }
-    })
+            wx.ready((res) => {
+            // 如果需要定制ready回调方法
+            if (callback) {
+                callback()
+            }
+            })
+      };
+
+      
+      
   },
   /**
   * [ShareTimeline 微信分享到朋友圈]
