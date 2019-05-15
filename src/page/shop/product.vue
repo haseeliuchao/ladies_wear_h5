@@ -1081,7 +1081,7 @@
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
-  import {wxapi} from '@/utils/wxapi'
+  import wxapi from '@/utils/wxapi'
   export default {
     data() {
       return {
