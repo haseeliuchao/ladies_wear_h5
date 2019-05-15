@@ -549,7 +549,7 @@
              font-size: 12px;
              background: #ffe6df;
              color: $red;
-             padding: 3px 6px;
+             padding: 2px 6px;
              border-radius: 4px;
              margin-left: $margin;
            }
