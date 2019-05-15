@@ -941,9 +941,11 @@
                 <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
                   <img :src="item">
                 </mt-swipe-item>
+
               </mt-swipe>
               <div class="swiper-indicators">{{swipeIndex.nowIndex}}/{{swipeIndex.total}}</div>
             </div>
+            <!-- 商品轮播图 -->
             <!-- 商品信息 -->
             <div class="product-title-text">
 
@@ -959,7 +961,9 @@
               <p class="product-name-text">{{productInfo.title}}</p>
               <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
+              <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
+            <!-- 商品信息 -->
             <!-- 商品服务 -->
             <div class="product-sku" >
               <div>
@@ -990,13 +994,26 @@
               </div>
               <span class="right-menu"></span>
             </div>
+
+           
+            <!-- 商品留言 -->
+
+         
+            <!-- 商家信息 -->
+
+            <!-- 为你推荐 -->
             <div class="my-recommend">
               <div class="recommend-tip">
                 <img src="~jd/images/xiangqing.png" alt="">
               </div>
               <div id="prodContent-container" v-html="productInfo.item_detailsimg"></div>
             </div>
+            <!-- 为你推荐 -->
           </div>
+      <!-- 商品 -->
+      <!-- 评价 -->
+    <!-- </mt-tab-container> -->
+    <!-- 内容区 -->
 
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
@@ -1005,6 +1022,10 @@
           <i></i>
           <span>首页</span>
         </div>
+        <!-- <div class="like-icon" @click="favShop">
+          <i></i>
+          <span>关注</span>
+        </div> -->
         <div class="shopping-cart" @click="$router.push('/cart')">
           <em>4</em>
           <i></i>
@@ -1014,6 +1035,7 @@
       <div class="right" @click="addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
       <div class="right" @click="addShopCart('directBuy')">立即购买</div>
     </div>
+    <!-- 底部导航栏 -->
 
     <!-- 返回顶部 -->
     <BackHead/>
@@ -1035,8 +1057,8 @@
   import {
     getProduct,
     getShop,
-    getCommentList,
-    getRecommend
+    getCommentList
+    // getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
@@ -1062,7 +1084,12 @@
           content:''
         },
         shopInfo: null,
-        
+        // commad: getRecommend,
+        // recommendData: [],
+        swipeIndex: {
+          nowIndex: 1,
+          total: 0
+        }
       };
     },
     created: function () {
@@ -1156,7 +1183,7 @@ methods: {
       },
       
       async initData() {
-        this.commentParam.ProductNo = this.$route.params.id;
+        // this.commentParam.ProductNo = this.$route.params.id;
         let Data = await getProduct({
          item_id: this.$route.params.id
         });

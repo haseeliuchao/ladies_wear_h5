@@ -258,7 +258,7 @@
           try {
             if(response.data.length<=0 || response.data.total_count <= (this.param.current_page*this.param.page_size)){
                 this.AllLoaded = true;
-                this.$emit('loadMore',response);
+                // this.$emit('loadMore',response);
                 return this.LoadMoreLoading = false;
                 
             };
