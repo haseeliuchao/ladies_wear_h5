@@ -425,7 +425,7 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|DateFormat('hh 小时 mm ')}}分后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
+         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
          <p v-if="orderDetail.order_status===2">等待卖家发货</p>
          <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
          <p v-if="orderDetail.order_status===4">订单已完成</p>
@@ -559,8 +559,9 @@
         let times = setInterval(() => {
           let that=this;
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
-        }, 1000)
+        }, 60000)
         
+
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },
@@ -641,7 +642,13 @@
         },
         topricenext(value){
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        },
+        countDownfun(mss){
+          let hours = Math.floor(mss / (1000 * 60 * 60));
+          let minutes = Math.floor((mss % (1000 * 60 * 60)) / (1000 * 60));
+          return hours + "小时" + minutes + "分钟";
         }
+
     },
     mounted: function () {
       this.initData()
