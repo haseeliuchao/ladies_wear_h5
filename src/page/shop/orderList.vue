@@ -337,9 +337,10 @@
       <div id="loadingbar" :style="active===0 ? 'left:-1%' : active===1 ?  'left:14%' : active===2 ?'left:32%' : active===3 ? 'left:51%' : active===4 ? 'left:69%' : 'left: 87%'"></div>
     </div>
     <div class="order-container">
-      <!-- style="width:100%;" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
-        :loadMoreIconVisible="false" ref="orderLoadmore" -->
-      <load-more style="width:100%;" v-if="$route.path=='/orderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+      <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+              ref="indexRusultloadMore"> -->
+              <!-- :topMethod="onRefreshCallback" -->
+      <load-more style="width:100%;" v-if="$route.path=='/orderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" 
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
