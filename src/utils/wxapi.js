@@ -13,7 +13,7 @@ const wxApi = {
   wxRegister (callback) {
     // 这边的接口请换成你们自己的
     // , { timeout: 5000, withCredentials: true }
-       async () =>{
+       const foo= async () =>{
         let Data = await getSignature({
             url: BASE64.encoder(location.href.split("#")[0])
         });
@@ -35,7 +35,7 @@ const wxApi = {
             })
       };
 
-      
+      foo();
       
   },
   /**
