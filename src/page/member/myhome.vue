@@ -62,13 +62,14 @@
         }
       }
       .user{
-        @include flexbox(flex-start,
+        @include flexbox(center,
         flex-start,
         column,
         wrap);
+        height:60px;
         margin-left:.4rem;
         .username,.userphone {
-          margin-top: 10px;
+          // margin-top: 10px;
           color:#fff;
           font-size:15px;
         }
