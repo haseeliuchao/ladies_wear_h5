@@ -919,7 +919,8 @@
                     <div class="add" @click="operationnum(1)"></div>
                   </div>
       </div>
-      <div class="popupOk" @click="()=>{title='';visiblePopup.checkSku=false}">选好了</div>
+      <!-- @click="()=>{title='';visiblePopup.checkSku=false}" -->
+      <div class="popupOk" @click="checkSkuOk">选好了</div>
     </mt-popup>
 
     <!-- 颜色尺码选择popup -->
@@ -1089,7 +1090,8 @@
         swipeIndex: {
           nowIndex: 1,
           total: 0
-        }
+        },
+        addType:null
       };
     },
     created: function () {
@@ -1132,30 +1134,41 @@ methods: {
       async checkSkufun(){
       
       },
+      checkSkuOk(){
+        
+        this.visiblePopup.checkSku=false;
+        if(this.checkId){
+            if(this.addType==='cart'){
+          this.$store.dispatch('SelectProduct', {
+          item_id:this.$route.params.id,
+          item_sku_id: this.checkId,
+          num:this.shopnum
+        }).then(response => {
+          if(response.code==10000){
+          return Toast({
+            message: '加入购物车成功',
+            position: 'bottom'
+          })
+          }else{
+            Toast({
+            message: response.msg,
+            position: 'bottom'
+            })
+            return
+          }
+          
+        })
+        }else{
+          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
+        }
+        }
+      },
       async addShopCart(addType) { //加入购物车
-        // let SelectedList = [{
-        //   ProductNo: this.productInfo.productNo
-        // }];
+        this.addType=addType;
         if(this.checkId==null){
-          
-           
-          if(this.curcolorname==null){
-            Toast({
-            message: '先选择商品颜色',
-            position: 'bottom'
-          })
-          return;
-          }
-          if(this.cursizename==null){
-            Toast({
-            message: '先选择商品尺寸',
-            position: 'bottom'
-          })
-          return;
-          }
-          
+          this.visiblePopup.checkSku=true
+          return
          }
-
         if(addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
