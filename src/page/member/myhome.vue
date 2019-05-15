@@ -108,7 +108,6 @@
     background: #fff;
     margin: 0 .33rem 8px;
     border-radius:5px;
-    z-index:1;
     @include flexbox(center,
     center,
     column,
