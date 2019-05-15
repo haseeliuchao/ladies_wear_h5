@@ -201,12 +201,29 @@
           &.active{
             color: $red;
             // border-bottom: 2px solid $red
-            .more-sort{
-              display: block!important;
-            }
           }
           .more-sort{
-              display: none;
+              // display: none;
+               &:before{
+                  content: '';
+                  position: absolute;
+                  right: -18px;
+                  top: 2px;
+                  width: 0;
+                  height: 0;
+                  border: 4px solid transparent;
+                  border-top-color: #666;
+                  }
+                  &:after{
+                    content: '';
+                    position: absolute;
+                    right: -18px;
+                    top: -10px;
+                    width: 0;
+                    height: 0;
+                    border: 4px solid transparent;
+                    border-bottom-color: #666;
+                  }
           }
           .more-sortAsc{
             position: relative;
