@@ -397,7 +397,7 @@
     searchGoods
   } from '@/service/getData';
   // import marquee from 'common/marquee/marquee';
-  import marqueeItem from 'common/marquee/marquee-item';
+  // import marqueeItem from 'common/marquee/marquee-item';
   import SearchBar from 'page/shop/searchBar';
   import LoadMore from 'common/loadMore';
   import {
@@ -452,8 +452,8 @@
       BackHead,
       Swipe,
       SwipeItem,
-      marquee,
-      marqueeItem,
+      // marquee,
+      // marqueeItem,
       SearchBar,
       LoadMore,
       Popup
