@@ -88,6 +88,7 @@
   /* 商品 */
 
   #mainLayout {
+    overflow: hidden;
     .prouct-swiper {
       // box-shadow: 0px 0px 6px 1px #eee;
       position: relative;
@@ -1194,7 +1195,7 @@ wxShareAppMessage () {
   wxapi.ShareAppMessage(option)
 },
         
-        handleChange(index) {
+      handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
        
