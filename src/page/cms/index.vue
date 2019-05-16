@@ -352,7 +352,7 @@
 
 
               <ul>
-                <li @click= "getGoodsdata('',0)" :class="{'active':active===0}">为您精选</li>
+                <li @click= "getGoodsdata('',0)" :class="{'active':active===0}">精选</li>
                 <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" :class="{'active':active===index+1}" @click= "getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
               </ul>
             </div>

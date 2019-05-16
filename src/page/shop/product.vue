@@ -242,7 +242,7 @@
           border:1px solid #999999;
           
           vertical-align: top;
-          margin-top: 6px;
+          margin-top: 8px;
           display: inline-block;
           border-radius: 4px;
         }
@@ -1379,7 +1379,7 @@ wxShareAppMessage () {
             wrap);
             li{
               padding: 5px 17px;
-              border: 1px solid #333333;
+              border: 1px solid #999;
               color: #333;
               border-radius: 14px;
               font-size: 13px;
@@ -1395,7 +1395,7 @@ wxShareAppMessage () {
             wrap);
             li{
               padding: 5px 17px;
-              border: 1px solid #333333;
+              border: 1px solid #999;
               color: #333;
               border-radius: 14px;
               font-size: 13px;

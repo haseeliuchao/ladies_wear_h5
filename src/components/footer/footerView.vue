@@ -83,10 +83,10 @@
       //    color: #ff2741;
       // }
       background:url('~jd/images/cart.png') no-repeat center 7px;
-      background-size:30%;
+      background-size:31% 43%;
       &.active {
         background:url('~jd/images/cart_on.png') no-repeat center 7px;
-        background-size:30%;
+        background-size:31% 43%;
         color: #ff2741;
       }
     }

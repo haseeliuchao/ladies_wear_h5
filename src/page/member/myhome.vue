@@ -83,7 +83,7 @@
           center,
           row,
           nowrap);
-          margin: 16px 0;
+          margin: 10px 0;
           >p{
             @include flexbox(center,
             center,

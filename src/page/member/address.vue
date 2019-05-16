@@ -145,7 +145,7 @@
           </div>
           <!-- <i class="arrow-right" style="opacity: .4"></i> -->
         </div>
-        <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
+        <div class="cell-from-item detail-address" style="height:80px;line-height:2;align-items:flex-start">
           <span class="title">详细地址</span>
           <div class="content">
             <textarea type="text" placeholder=" 街道、楼牌号" v-model="addressForm.address"></textarea>
