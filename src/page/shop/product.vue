@@ -1366,12 +1366,14 @@ wxShareAppMessage () {
             row,
             nowrap);
           span{
-            height: 18px;
-            width: 18px;
-            background-image: url('~jd/images/product-detail-sprites-mjs.png');
-            background-repeat: no-repeat;
-            background-size: 100px 100px;
-            background-position: -24px -12px;
+            height: .56rem;
+            width: .56rem;
+            // background-image: url('~jd/images/product-detail-sprites-mjs.png');
+            // background-repeat: no-repeat;
+            // background-size: 100px 100px;
+            // background-position: -24px -12px;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
           }  
         }
         .checkSkuColortitle{

@@ -155,7 +155,7 @@
         // background: #fff;
       }
       .order-nomore-tip {
-        margin-top: 50px;
+        margin-top: 40%;
         @include flexbox(space-between,
         center,
         column,
