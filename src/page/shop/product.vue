@@ -88,6 +88,7 @@
   /* 商品 */
 
   #mainLayout {
+    overflow: hidden;
     .prouct-swiper {
       // box-shadow: 0px 0px 6px 1px #eee;
       position: relative;
@@ -1082,7 +1083,7 @@
   // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
   import wxapi from '@/utils/wxapi';
-  
+
   export default {
     data() {
       return {
@@ -1153,14 +1154,19 @@ methods: {
 wxShareTimeline () {
   // 微信自定义分享到朋友圈
   let option = {
-    title: '限时团购周 挑战最低价', // 分享标题, 请自行替换
-    link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
+    title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
+    desc: this.productInfo.title, // 分享描述, 请自行替换
+    link: window.location.href.split('#')[0]+'#'+window.location.href.split('#')[1], // 分享链接，根据自身项目决定是否需要split
     imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
     success: () => {
-      alert('分享成功')
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
     },
     error: () => {
-      alert('已取消分享')
+      // alert('已取消分享')
     }
   }
   // 将配置注入通用方法
@@ -1168,23 +1174,28 @@ wxShareTimeline () {
 },
 wxShareAppMessage () {
   // 微信自定义分享给朋友
-  let option = {
-    title: '限时团购周 挑战最低价', // 分享标题, 请自行替换
-    desc: '限时团购周 挑战最低价', // 分享描述, 请自行替换
-    link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
+  // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
+    let option = {
+    title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
+    desc: this.productInfo.title, // 分享描述, 请自行替换
+    link: window.location.href.split('#')[0]+'#'+window.location.href.split('#')[1]+'?&', // 分享链接，根据自身项目决定是否需要split
     imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
     success: () => {
-      alert('分享成功')
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
     },
     error: () => {
-      alert('已取消分享')
+      // alert('已取消分享')
     }
   }
   // 将配置注入通用方法
   wxapi.ShareAppMessage(option)
 },
         
-        handleChange(index) {
+      handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
        

@@ -11,6 +11,7 @@
     padding: 0;
     background: #fff;
     // overflow: hidden;
+    -webkit-transform: translateZ(0);
     clear: both;
     // box-shadow: 0px 0px 20px -8px #999;
     display: flex;
