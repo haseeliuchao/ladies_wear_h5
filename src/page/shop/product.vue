@@ -1173,11 +1173,11 @@ wxShareTimeline () {
 },
 wxShareAppMessage () {
   // 微信自定义分享给朋友
-  var shareWxLink = window.location.href.split('#')[0] + '../static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
-  let option = {
+  // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
+    let option = {
     title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
     desc: this.productInfo.title, // 分享描述, 请自行替换
-    link: shareWxLink, // 分享链接，根据自身项目决定是否需要split
+    link: window.location.href.split('#')[0]+'#'+window.location.href.split('#')[1], // 分享链接，根据自身项目决定是否需要split
     imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
     success: () => {
       // alert('分享成功')
