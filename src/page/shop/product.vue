@@ -1173,7 +1173,7 @@ wxShareTimeline () {
 },
 wxShareAppMessage () {
   // 微信自定义分享给朋友
-  var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
+  var shareWxLink = window.location.href.split('#')[0] + '../static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
   let option = {
     title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
     desc: this.productInfo.title, // 分享描述, 请自行替换
