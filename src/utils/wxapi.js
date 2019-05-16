@@ -19,7 +19,7 @@ const wxApi = {
         });
         let data = Data.data// PS: 这里根据你接口的返回值来使用
       wx.config({
-        debug: true, // 开启调试模式
+        debug: false, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
         timestamp: data.timestamp, // 必填，生成签名的时间戳
         nonceStr: data.nonce_str, // 必填，生成签名的随机串
@@ -48,6 +48,7 @@ const wxApi = {
     wx.onMenuShareTimeline({
       title: option.title, // 分享标题
       link: option.link, // 分享链接
+      desc: option.desc, // 分享描述
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
