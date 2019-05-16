@@ -1158,10 +1158,14 @@ wxShareTimeline () {
     link: window.location.href.split('#')[0]+'#'+window.location.href.split('#')[1], // 分享链接，根据自身项目决定是否需要split
     imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
     success: () => {
-      alert('分享成功')
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
     },
     error: () => {
-      alert('已取消分享')
+      // alert('已取消分享')
     }
   }
   // 将配置注入通用方法
@@ -1175,10 +1179,14 @@ wxShareAppMessage () {
     link: window.location.href.split('#')[0]+'#'+window.location.href.split('#')[1], // 分享链接，根据自身项目决定是否需要split
     imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
     success: () => {
-      alert('分享成功')
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
     },
     error: () => {
-      alert('已取消分享')
+      // alert('已取消分享')
     }
   }
   // 将配置注入通用方法

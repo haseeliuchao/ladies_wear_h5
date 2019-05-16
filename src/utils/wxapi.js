@@ -47,8 +47,8 @@ const wxApi = {
   ShareTimeline (option) {
     wx.onMenuShareTimeline({
       title: option.title, // 分享标题
-      link: option.link, // 分享链接
       desc: option.desc, // 分享描述
+      link: option.link, // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
