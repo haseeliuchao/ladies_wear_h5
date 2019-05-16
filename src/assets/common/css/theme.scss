@@ -60,7 +60,12 @@ body{
 em{
   font-style: normal
 }
-
+.layer-4{
+  display:none!important;
+}
+#YSF-IFRAME-LAYER.ysf-chat-mobile-layeropen{
+  height:100%!important;
+}
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 
 ::-webkit-scrollbar {
