@@ -194,12 +194,40 @@
 
           <li class="search-history-item">
             <p>
+              <span>续费时间</span>
+              <span>2018-11-12</span>
+            </p>
+            <p>
               <span>类型</span>
               <span>3个月</span>
             </p>
             <p>
+              <span>有效期</span>
+              <span>2018-11-12</span>
+            </p>
+          </li>
+          <li class="search-history-item">
+            <p>
               <span>续费时间</span>
               <span>2018-11-12</span>
+            </p>
+             <p>
+              <span>类型</span>
+              <span>3个月</span>
+            </p>
+            <p>
+              <span>有效期</span>
+              <span>2018-11-12</span>
+            </p>
+          </li>
+          <li class="search-history-item">
+            <p>
+              <span>续费时间</span>
+              <span>2018-11-12</span>
+            </p>
+            <p>
+              <span>类型</span>
+              <span>3个月</span>
             </p>
             <p>
               <span>有效期</span>
@@ -208,13 +236,13 @@
           </li>
           <li class="search-history-item">
              <p>
-              <span>类型</span>
-              <span>3个月</span>
-            </p>
-            <p>
               <span>续费时间</span>
               <span>2018-11-12</span>
             </p>
+            <p>
+              <span>类型</span>
+              <span>3个月</span>
+            </p> 
             <p>
               <span>有效期</span>
               <span>2018-11-12</span>
@@ -222,40 +250,12 @@
           </li>
           <li class="search-history-item">
             <p>
-              <span>类型</span>
-              <span>3个月</span>
-            </p>
-            <p>
               <span>续费时间</span>
               <span>2018-11-12</span>
             </p>
             <p>
-              <span>有效期</span>
-              <span>2018-11-12</span>
-            </p>
-          </li>
-          <li class="search-history-item">
-            <p>
               <span>类型</span>
               <span>3个月</span>
-            </p>
-            <p>
-              <span>续费时间</span>
-              <span>2018-11-12</span>
-            </p>
-            <p>
-              <span>有效期</span>
-              <span>2018-11-12</span>
-            </p>
-          </li>
-          <li class="search-history-item">
-            <p>
-              <span>类型</span>
-              <span>3个月</span>
-            </p>
-            <p>
-              <span>续费时间</span>
-              <span>2018-11-12</span>
             </p>
             <p>
               <span>有效期</span>
