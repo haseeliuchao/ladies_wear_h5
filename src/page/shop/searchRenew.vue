@@ -39,7 +39,7 @@
             position:relative;
             @include flexbox(space-between,center,column,wrap);
             padding:15px .3rem 10px;
-            margin:24px .2rem;
+            margin:24px .18rem;
             border:1px solid #d3d3d3;
             border-radius:4px;
             &:first-child{
