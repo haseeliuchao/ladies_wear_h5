@@ -37,8 +37,8 @@
         &.active {
           background: #F2F2F2;
           color: #ff2741;
-          border-left:.1333rem solid #ff2741;
-          padding-left:.0167rem;
+          border-left:.13rem solid #ff2741;
+          padding-left:.02rem;
 
         }
       }
