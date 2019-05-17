@@ -544,8 +544,7 @@
       },
       async initData() { //初始化数据
       // var unicode=BASE64.decoder('YXBwX2tleSUzRDY4QTZGNDVDRDdBQUZDMDI4N0Y0QUY4RkY0RjM5OTFDQGxpbms9L3Byb2R1Y3QvMTE2')
-              
-        console.log(str)
+
         this.guideindex=getLocalStorage('guideindex');
         if(this.isWeiXin()){
         if(!this.guideindex){

@@ -46,14 +46,17 @@ import {
           var retstr='';
           var unicode=BASE64.decoder(utils.getUrlKey('state'));
           var unicodestr = '';
+          var app_keystr=''
           for(var i = 0 , len =  unicode.length ; i < len ;++i){
               unicodestr += String.fromCharCode(unicode[i]);
           }
           if(unicodestr.indexOf('@')!=-1){
              var ret = unicodestr.split("@");
-             retstr= ret[0]
+             retstr= ret[0];
+             app_keystr=retstr.slice(10)
           }else{
             retstr=utils.getUrlKey('state');
+            app_keystr=retstr.slice(8)
           }
 
        if(this.isWeiXin()){
