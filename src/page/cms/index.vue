@@ -447,7 +447,8 @@
       };
     },
     watch:{
-      
+         
+        
     },
     components: {
       FooterView,
@@ -542,6 +543,7 @@
         this.cmsData = Data.data;
       },
       async initData() { //初始化数据
+      // var unicode=BASE64.decoder('YXBwX2tleSUzRDY4QTZGNDVDRDdBQUZDMDI4N0Y0QUY4RkY0RjM5OTFDQGxpbms9L3Byb2R1Y3QvMTE2')
 
         this.guideindex=getLocalStorage('guideindex');
         if(this.isWeiXin()){
@@ -556,15 +558,14 @@
         }
       },
        async loginData() { //更新数据
-          // setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
-          // setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
           let that=this;
+          var ret = utils.getUrlKey('state').split("@");
+          var retstr= ret[0]
        if(this.isWeiXin()){
             let Data = await this.$store.dispatch('Login', {
                 code:utils.getUrlKey('code'),
-                app_key:utils.getUrlKey('state').slice(8)
+                app_key:retstr.slice(8)
               })
-             
               if(Data.code==10000){
                 setLocalStorage('session_token',Data.data.session_token);
                 setLocalStorage('access_token',Data.data.access_token);
@@ -574,11 +575,6 @@
                 }else{
                    setLocalStorage('guideindex',2);
                 }  
-              }else{
-                // Toast({
-                //       message: Data.msg,
-                //       position: 'bottom'
-                //   });
               }
        }
         
@@ -600,7 +596,7 @@
       this.initData();
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
-      this.loginData();
+      // this.loginData();
       // showBack(status => {
       //   this.Status = status;
       // })
