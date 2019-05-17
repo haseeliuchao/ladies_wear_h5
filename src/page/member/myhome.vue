@@ -137,6 +137,11 @@
       img {
         height: 25px;
       }
+      &:first-child{
+        img{
+          height:24px;
+        }
+      }
       span {
         margin: 10px 0 0;
         font-size: 14px;

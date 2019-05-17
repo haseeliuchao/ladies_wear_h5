@@ -188,6 +188,7 @@
               color: #333;
               p{
                 @include textoverflow(2);
+                height:40px;
                 line-height: 20px;
                  
               }
