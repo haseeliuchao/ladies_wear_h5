@@ -155,7 +155,7 @@
         // background: #fff;
       }
       .order-nomore-tip {
-        margin-top: 50px;
+        margin-top: 40%;
         @include flexbox(space-between,
         center,
         column,
@@ -241,9 +241,9 @@
                       color: #999;
                     }
                     strong {
-                      font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -290,9 +290,9 @@
               }
             }
             strong {
-                      font-weight: normal;
                       font-size: 14px;
                       span{
+                        font-weight:bold;
                         font-size: 12px;
                         color: $red;
                         
@@ -366,7 +366,7 @@
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em>{{itemdetail.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{itemdetail.item_price/100.00|topricenext}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;">{{itemdetail.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{itemdetail.item_price/100.00|topricenext}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
@@ -375,7 +375,7 @@
               </div>
               <div class="order-sku" @click= "$router.push(`/order/${item.order_code}`)">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
-                <strong><span>&yen;</span><em>{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
+                <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click= "cancelOrder(item)">取消订单</span>

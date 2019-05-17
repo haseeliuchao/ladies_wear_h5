@@ -26,6 +26,7 @@
           span{
             &:last-child{
               margin-top:5px;
+              color:$red;
             }
           }
         }
@@ -38,9 +39,15 @@
             position:relative;
             @include flexbox(space-between,center,column,wrap);
             padding:15px .3rem 10px;
-            margin:24px .2rem;
+            margin:24px .18rem;
             border:1px solid #d3d3d3;
             border-radius:4px;
+            &:first-child{
+              margin-left:0;
+            }
+            &:last-child{
+              margin-right:0;
+            }
             &.active{
               border:none;
               background-color:rgba(255,179,158,.23)
@@ -83,7 +90,7 @@
             .new,.recommend{
               position:absolute;
               top:-10px;
-              right:0;
+              right:-1px;
               padding:3px .2rem;
               color:#fff;
               font-size:11px;
@@ -153,7 +160,7 @@
         </div>
         <div class="renew-type">
           <ul class="renew-type-list">
-            <li class="renew-type-item active">
+            <li class="renew-type-item">
               <p class="renew-time">首月</p>
               <p class="renew-price">￥9.9</p>
               <span class="renew-btn">支付</span>
@@ -204,7 +211,7 @@
               <span>续费时间</span>
               <span>2018-11-12</span>
             </p>
-            <p>
+             <p>
               <span>类型</span>
               <span>3个月</span>
             </p>
@@ -228,14 +235,14 @@
             </p>
           </li>
           <li class="search-history-item">
-            <p>
+             <p>
               <span>续费时间</span>
               <span>2018-11-12</span>
             </p>
             <p>
               <span>类型</span>
               <span>3个月</span>
-            </p>
+            </p> 
             <p>
               <span>有效期</span>
               <span>2018-11-12</span>

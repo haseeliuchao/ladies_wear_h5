@@ -83,7 +83,7 @@
           center,
           row,
           nowrap);
-          margin: 16px 0;
+          margin: 10px 0;
           >p{
             @include flexbox(center,
             center,
@@ -136,6 +136,11 @@
       wrap);
       img {
         height: 25px;
+      }
+      &:first-child{
+        img{
+          height:24px;
+        }
       }
       span {
         margin: 10px 0 0;
@@ -334,7 +339,7 @@
           <h2>我的订单</h2>
           <div>
             <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
-              <img src="~jd/images/paymenticon.png" alt="">
+              <img src="~jd/images/paymenticon2.png" alt="">
               <span>待付款</span>
             </div>
             <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">

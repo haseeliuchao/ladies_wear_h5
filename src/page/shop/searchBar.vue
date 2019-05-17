@@ -74,8 +74,8 @@
         color: #333
       }
       .searchQrcodeIcon {
-        width: .46rem;
-        height: .44rem;
+        width: 21px;
+        height: 18px;
         background-position: 0 0;
       }
       
@@ -83,8 +83,8 @@
 
      .searchIcon {
       display: block;
-      background: url('~jd/images/camera_sach.png') no-repeat;
-      background-size: 100% 100%;
+      background: url('~jd/images/camera2.png') no-repeat;
+      background-size: 100%;
     }
 
     .searchContentIcon {

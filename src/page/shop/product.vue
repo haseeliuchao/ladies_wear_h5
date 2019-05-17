@@ -243,7 +243,7 @@
           border:1px solid #999999;
           
           vertical-align: top;
-          margin-top: 6px;
+          margin-top: 8px;
           display: inline-block;
           border-radius: 4px;
         }
@@ -1366,12 +1366,14 @@ wxShareAppMessage () {
             row,
             nowrap);
           span{
-            height: 18px;
-            width: 18px;
-            background-image: url('~jd/images/product-detail-sprites-mjs.png');
-            background-repeat: no-repeat;
-            background-size: 100px 100px;
-            background-position: -24px -12px;
+            height: .56rem;
+            width: .56rem;
+            // background-image: url('~jd/images/product-detail-sprites-mjs.png');
+            // background-repeat: no-repeat;
+            // background-size: 100px 100px;
+            // background-position: -24px -12px;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
           }  
         }
         .checkSkuColortitle{
@@ -1390,7 +1392,7 @@ wxShareAppMessage () {
             wrap);
             li{
               padding: 5px 17px;
-              border: 1px solid #333333;
+              border: 1px solid #999;
               color: #333;
               border-radius: 14px;
               font-size: 13px;
@@ -1406,7 +1408,7 @@ wxShareAppMessage () {
             wrap);
             li{
               padding: 5px 17px;
-              border: 1px solid #333333;
+              border: 1px solid #999;
               color: #333;
               border-radius: 14px;
               font-size: 13px;

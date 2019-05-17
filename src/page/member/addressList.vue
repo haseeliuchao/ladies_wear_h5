@@ -88,9 +88,10 @@
       }
       .address-no{
         @include wh(100%,100%);
-        @include flexbox(center,center,column,wrap);
+        @include flexbox(flex-start,center,column,wrap);
         img{
           height:90px;
+          margin-top:180px;
           margin-bottom:24px;
         }
         >p{
