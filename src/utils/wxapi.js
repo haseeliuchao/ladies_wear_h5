@@ -1,10 +1,11 @@
 import wx from 'weixin-js-sdk'
 // import Axios from 'axios'
+import utils from '@/utils/urlfun';
 import {
     getSignature
   } from '@/service/getData';
 
-
+let mBasePath='';
 const wxApi = {
   /**
   * [wxRegister 微信Api初始化]
@@ -18,6 +19,7 @@ const wxApi = {
             url: BASE64.encoder(location.href.split("#")[0])
         });
         let data = Data.data// PS: 这里根据你接口的返回值来使用
+        mBasePath = Data.data.url; 
       wx.config({
         debug: false, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
@@ -48,7 +50,7 @@ const wxApi = {
     wx.onMenuShareTimeline({
       title: option.title, // 分享标题
       desc: option.desc, // 分享描述
-      link: option.link, // 分享链接
+      link: mBasePath+BASE64.encoder(option.link), // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
@@ -70,7 +72,7 @@ const wxApi = {
     wx.onMenuShareAppMessage({
       title: option.title, // 分享标题
       desc: option.desc, // 分享描述
-      link: option.link, // 分享链接
+      link: mBasePath+BASE64.encoder(option.link), // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
