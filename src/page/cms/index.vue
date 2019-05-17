@@ -447,7 +447,8 @@
       };
     },
     watch:{
-      
+         
+        
     },
     components: {
       FooterView,
@@ -556,8 +557,6 @@
         }
       },
        async loginData() { //更新数据
-          // setLocalStorage('session_token','797794855ec9448bf36e3b7ad1a2e659');
-          // setLocalStorage('access_token','1c1a99e5a52e557236f0efedd17652df');
           let that=this;
        if(this.isWeiXin()){
             let Data = await this.$store.dispatch('Login', {
@@ -574,11 +573,6 @@
                 }else{
                    setLocalStorage('guideindex',2);
                 }  
-              }else{
-                // Toast({
-                //       message: Data.msg,
-                //       position: 'bottom'
-                //   });
               }
        }
         
