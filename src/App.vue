@@ -43,12 +43,19 @@ import {
       },
       async loginData() { //更新数据
           let that=this;
+          var retstr='';
+          if(BASE64.decoder(utils.getUrlKey('state')).indexOf('@')!=-1){
+             var ret = BASE64.decoder(utils.getUrlKey('state')).split("@");
+             retstr= ret[0]
+          }else{
+            retstr=utils.getUrlKey('state');
+          }
+
        if(this.isWeiXin()){
             let Data = await this.$store.dispatch('Login', {
                 code:utils.getUrlKey('code'),
-                app_key:utils.getUrlKey('state').slice(8)
+                app_key:retstr.slice(8)
               })
-             
               if(Data.code==10000){
                 setLocalStorage('session_token',Data.data.session_token);
                 setLocalStorage('access_token',Data.data.access_token);
@@ -59,9 +66,21 @@ import {
                    setLocalStorage('guideindex',2);
                 }  
               }
+              if(BASE64.decoder(utils.getUrlKey('state')).indexOf('@')!=-1){
+                if(BASE64.decoder(utils.getUrlKey('state')).split("@")[1].indexOf('product')!=-1){
+                  this.$router.push(BASE64.decoder(utils.getUrlKey('state')).split("@")[1].slice(5))
+                }
+              }
+              
+
        }
-     }
-     }
+        
+      }
+     },
+     mounted: function () {
+      this.loginData();
+    }
+  
   }
 
 </script>
