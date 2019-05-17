@@ -62,7 +62,7 @@ import {
        if(this.isWeiXin()){
             let Data = await this.$store.dispatch('Login', {
                 code:utils.getUrlKey('code'),
-                app_key:retstr.slice(8)
+                app_key:app_keystr
               })
               if(Data.code==10000){
                 setLocalStorage('session_token',Data.data.session_token);
