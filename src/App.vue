@@ -44,8 +44,13 @@ import {
       async loginData() { //更新数据
           let that=this;
           var retstr='';
-          if(BASE64.decoder(utils.getUrlKey('state')).indexOf('@')!=-1){
-             var ret = BASE64.decoder(utils.getUrlKey('state')).split("@");
+          var unicode=BASE64.decoder(utils.getUrlKey('state'));
+          var unicodestr = '';
+          for(var i = 0 , len =  unicode.length ; i < len ;++i){
+              unicodestr += String.fromCharCode(unicode[i]);
+          }
+          if(unicodestr.indexOf('@')!=-1){
+             var ret = unicodestr.split("@");
              retstr= ret[0]
           }else{
             retstr=utils.getUrlKey('state');
@@ -66,9 +71,9 @@ import {
                    setLocalStorage('guideindex',2);
                 }  
               }
-              if(BASE64.decoder(utils.getUrlKey('state')).indexOf('@')!=-1){
-                if(BASE64.decoder(utils.getUrlKey('state')).split("@")[1].indexOf('product')!=-1){
-                  this.$router.push(BASE64.decoder(utils.getUrlKey('state')).split("@")[1].slice(5))
+              if(unicodestr.indexOf('@')!=-1){
+                if(unicodestr.split("@")[1].indexOf('product')!=-1){
+                  this.$router.push(unicodestr.split("@")[1].slice(5))
                 }
               }
               
