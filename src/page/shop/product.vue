@@ -1083,6 +1083,9 @@
   // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
   import wxapi from '@/utils/wxapi';
+  import {
+    isWeiXin
+  } from '@/utils/mixin';
 
   export default {
     data() {
@@ -1146,10 +1149,12 @@
         }
     },
 methods: {
+  
   wxRegCallback () {
   // 用于微信JS-SDK回调
-  this.wxShareTimeline()
-  this.wxShareAppMessage()
+  
+    this.wxShareTimeline()
+    this.wxShareAppMessage()
 },
 wxShareTimeline () {
   // 微信自定义分享到朋友圈
@@ -1347,7 +1352,9 @@ wxShareAppMessage () {
         }
     },
     mounted: function () {
+      if(isWeiXin('state')){
       wxapi.wxRegister(this.wxRegCallback)
+      }
       this.initData();
         
     }

@@ -36,6 +36,27 @@ export const removeSessionStorage = (key) => {
   window.sessionStorage.removeItem(key);
 }
 
+export const isWeiXin = (name) => {
+        var ua = window.navigator.userAgent.toLowerCase();
+         
+        var urlstate= decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
+        if (ua.match(/MicroMessenger/i) == 'micromessenger'&&urlstate) {
+          console.log(1)
+            return true;
+        }
+        else {
+          console.log(2)
+            return false;
+  }
+}
+export const pushHistory = () => {
+  let state = {
+    title: '',
+    url: ''
+  }
+  window.history.pushState(state, state.title, state.url)
+}
+
 export const search = (key) => {
   if (!key) return;
   var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");

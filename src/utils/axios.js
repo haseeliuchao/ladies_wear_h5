@@ -9,20 +9,26 @@ import {
 	setSessionStorage,
   getSessionStorage,
   getLocalStorage,
-	removeSessionStorage
+  removeSessionStorage,
+  isWeiXin
 } from '@/utils/mixin';
 import {Format} from '@/utils/filters'
 import {md5} from '@/utils/md5'
+import utils from '@/utils/urlfun';
+import {
+  mapGetters,
+  mapMutations
+} from 'vuex';
 class Http {
   constructor(){
-    this.Domain = 'http://tencent-ai.com/mop/';
-    // this.Domain = 'http://192.168.9.92:8182';
+    // this.Domain = 'http://tencent-ai.com/mop/';
+    this.Domain = 'http://192.168.11.242:8080';
+    
   }
   
      
 
   require(options) {
-    
     if (!options.api) throw new Error('api 不能为空');
     if (!options.param) { options.param = {} }; 
     if (!options.methods) { options.methods = 'POST' }; //不传递方法默认为POST
@@ -90,6 +96,7 @@ class Http {
         }
     // options.param.MemberToken = options.param.MemberToken ? options.param.MemberToken : getSessionStorage('MemberToken');
     return new Promise((resolve,reject) => {
+      
         return axios({
             method: options.methods,
             url: options.api,
@@ -106,6 +113,11 @@ class Http {
             data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
+            if(response.data.code==20025){
+              if(!isWeiXin('state')){
+                router.push('/browserLogin')
+              }
+          }
             return resolve(response.data)  
 
         },error => {

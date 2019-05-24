@@ -9,6 +9,7 @@ const ArticleDetail = () => import ('page/cms/articleDetail')
 
 /* member */
 const Login = () => import ('page/member/login')
+const BrowserLogin = () => import ('page/member/browserLogin')
 const Myhome = () =>    import ('page/member/myhome')
 const Register = () =>  import ('page/member/register')
 const Forget = () =>    import ('page/member/forget')
@@ -65,6 +66,12 @@ const appRouter = {
                 path: '/login',
                 name: 'login',
                 component: Login,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/browserLogin',
+                name: 'browserLogin',
+                component: BrowserLogin,
                 meta: { keepAlive: false }
             },
             {

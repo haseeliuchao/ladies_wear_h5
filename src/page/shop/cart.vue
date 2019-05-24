@@ -646,7 +646,12 @@
       },
       async initData() {
         let Data = await this.$store.dispatch('GetSelectedProductList');
-        this.cartList = Data.data.data || null;
+        if(Data.data==undefined){
+          this.cartList = [];
+        }else{
+          this.cartList = Data.data.data;
+        }
+        
         this.cartlength=this.cartList?this.cartList.length:0
       },
       async onRefreshCallback() {

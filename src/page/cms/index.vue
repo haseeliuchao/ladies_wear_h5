@@ -596,6 +596,7 @@
       this.initData();
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
+      this.updatedData();
       // this.loginData();
       // showBack(status => {
       //   this.Status = status;
