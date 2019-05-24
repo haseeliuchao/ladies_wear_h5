@@ -162,7 +162,10 @@
       center,
       row,
       nowrap);
-      padding: 10px 0 10px 20px;
+      @media all and(max-width:320px){
+        padding-left:10px;
+      }
+      padding: 10px 0 10px 5px;
       background: #fff;
       // border-bottom: 1px solid $border;
       .searchInput {
