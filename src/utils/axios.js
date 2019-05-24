@@ -22,7 +22,8 @@ import {
 class Http {
   constructor(){
     // this.Domain = 'http://tencent-ai.com/mop/';
-    this.Domain = 'http://192.168.11.242:8080';
+    // this.Domain = 'http://192.168.11.242:8080';
+    this.Domain = 'http://param.iask.in/mop/';
     
   }
   
