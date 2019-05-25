@@ -74,6 +74,14 @@ const config = {
         return value.length ==6 && /^\d{6}$/.test(value)
       }
    });
+  VeeValidate.Validator.extend('registeredCode', {
+      messages: {
+        zh_CN:field => field + '必须是6位验证码',
+      },
+      validate: value => {
+        return value.length ==6 && /^\d{6}$/.test(value)
+      }
+   });
 
  Vue.use(VeeValidate, config); 
 
