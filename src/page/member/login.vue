@@ -269,11 +269,18 @@ getLocalStorage,
         })
       },
       async registeredSendPhoneMessage() { //获取验证码
-        await this.$store.dispatch('SendPhoneMessage', {
+        let Data= await this.$store.dispatch('SendPhoneMessage', {
           phone: this.registeredForm.phone,
           open_id:getSessionStorage('open_id')
         });
         this.registeredForm.resetSendPhoneMessage = 60;
+        if (Data.code !== 10000) return Toast({
+          message: Data.msg
+        })
+        Toast({
+            message: '发送成功',
+            position: 'center'
+          })
         let times = setInterval(() => {
           if (this.registeredForm.resetSendPhoneMessage <= 0) {
             this.registeredForm.resetSendPhoneMessage = null;
