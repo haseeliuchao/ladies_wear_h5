@@ -122,8 +122,16 @@ class Http {
             if(response.data.code==20025){
               if(!isWeiXin('code')){
                 router.push('/browserLogin')
+              }else{
+                router.push('/login')
               }
-          }
+            }else if(response.data.code==30010){
+              if(isWeiXin('code')){
+                setSessionStorage('head_img_url',response.data.head_img_url);
+                setSessionStorage('nickname',response.data.nickname);
+                setSessionStorage('open_id',response.data.open_id);
+              }
+            }
             return resolve(response.data)  
 
         },error => {

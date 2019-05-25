@@ -15,6 +15,52 @@
       height: 100%;
       .cell-box {
         padding: 30px 30px;
+        .cell-item {
+        @include flexbox(flex-start,
+        center,
+        row,
+        nowrap);
+        border-bottom: 1px solid #eee;
+        
+        margin: $margin 0;
+        margin-bottom: 6px;
+        position: relative;
+        .code-cellimg{
+            width: 20px;
+        }
+        .left {
+          span {
+            font-size: $title;
+            color: #333;
+          }
+        }
+        .right {
+          width: 70%;
+          margin-left: 10px;
+          @include placeholderColor($gray);
+          input {
+            width: 100%;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            text-shadow: none;
+            text-align: left;
+            font-size: $title;
+            height: 34px;
+            line-height: normal;
+            color: #333;
+          }
+          .arrow-right {
+            display: block;
+            width: 16px;
+            height: 20px;
+            background: url('~jd/images/arrow-right.png') no-repeat;
+            background-size: 100%;
+          }
+        }
+      }
+
+
         >p {
           padding: 15px 0;
           font-size: $title;
@@ -119,6 +165,23 @@
           <div style="height:18px;">
           <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
           </div>
+          
+          <div class="cell-item" style="margin-top:30px;" >
+           <div class="code-cellimg">
+                <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
+            </div>
+            <div class="right">
+              <input v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">
+            </div>
+            <i class="clear" v-show="registeredForm.password.length>0" @click="registeredForm.password=''" style="right: 40px;"></i>
+            <i :class="['eye-icon', registeredForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
+              @click="registeredForm.passwordFormType=registeredForm.passwordFormType=='password'?'text':'password'"></i>
+          </div>
+           <div style="height:18px;">
+          <span v-show="errors.has('password')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >密码为6-20位，含字母和数字 如：pl9999</span>
+          </div>
+
+
           <div class="code-all">
              <div class="code-cell">
                 <div class="code-cellimg">
@@ -133,7 +196,7 @@
               <div style="height:18px;">
           <span v-show="errors.has('registeredCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
               </div>
-          <div :class="['cell-btn',errors.has('mobile')||errors.has('registeredCode')||registeredForm.phone.length==0||registeredForm.code.length==0?'disabled-btn':'']" @click= "LoginBind">确定</div>
+          <div :class="['cell-btn',errors.has('mobile')||errors.has('registeredCode')||errors.has('password')||registeredForm.phone.length==0||registeredForm.code.length==0||registeredForm.password.length==0?'disabled-btn':'']" @click= "LoginBind">确定</div>
           </div>
           
       </div>
@@ -144,7 +207,8 @@
 <script>
 import {
 getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   import {
     Field,
@@ -166,7 +230,9 @@ getLocalStorage,
         },
         registeredForm: {
           phone: '',
-          code: ''
+          code: '',
+          password:'',
+          passwordFormType: 'password'
         }
       }
     },
@@ -217,7 +283,11 @@ getLocalStorage,
       async LoginBind() { //登录
         let Data = await this.$store.dispatch('LoginBind', {
           phone: this.registeredForm.phone,
-          code: this.registeredForm.code
+          code: this.registeredForm.code,
+          password:registeredForm.password,
+          head_img_url:getSessionStorage('head_img_url'),
+          nickname:getSessionStorage('nickname'),
+          open_id:getSessionStorage('open_id')
         })
         if (Data.code !== 10000) return Toast({
           message: Data.msg
