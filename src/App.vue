@@ -20,6 +20,7 @@ import utils from '@/utils/urlfun';
 import {
  getLocalStorage,
     setLocalStorage,
+    setSessionStorage,
     isWeiXin
   } from '@/utils/mixin';
   export default {
@@ -66,8 +67,8 @@ import {
                 app_key:app_keystr
               })
               if(Data.code==10000){
-                setLocalStorage('session_token',Data.data.session_token);
-                setLocalStorage('access_token',Data.data.access_token);
+                setSessionStorage('session_token',Data.data.session_token);
+                setSessionStorage('access_token',Data.data.access_token);
                 that.guideindex=getLocalStorage('guideindex');
                 if(!that.guideindex){
                    setLocalStorage('guideindex',1);

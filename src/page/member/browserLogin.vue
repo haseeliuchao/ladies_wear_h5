@@ -1,20 +1,4 @@
-Skip to content
- 
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@haseeliuchao 
-11
-228 91 Caitingwei/vue2-jd
- Code  Issues 5  Pull requests 0  Projects 0  Wiki  Security  Insights
-vue2-jd/src/page/member/login.vue
-@Caitingwei Caitingwei updated readme.md
-8ef0f61 on 15 Aug 2018
-Executable File  659 lines (652 sloc)  23.7 KB
     
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss'; // @include flexbox()
@@ -28,30 +12,106 @@ Executable File  659 lines (652 sloc)  23.7 KB
       right: 10px;
       @include bg('~jd/images/close.png');
     }
-    .my-header {
-      padding: $padding;
-      background: #fff;
-      @include flexbox(space-between, center, row, nowrap);
-      margin-bottom: 30px;
-      .back {
-        display: block;
-        width: .65rem;
-        height: .65rem;
-        background: url('~jd/images/close.png') no-repeat;
-        background-size: 100%;
-      }
-      strong {
-        font-size: 18px;
-        font-weight: normal;
-        color: #333;
-      }
-      .myMsg {
-        display: block;
-        height: .65rem;
-        width: .65rem;
-        opacity: 0;
+    /* 手机号快速登录 */
+    .loginPhone-container {
+      height: 100%;
+      .cell-box {
+        padding: 30px 30px;
+        >p {
+          padding: 15px 0;
+          font-size: $title;
+          color: #333;
+          text-align: left;
+          padding: 16px;
+        }
+        .goPasswrold{
+            padding: 0;
+            font-size: 14px;
+            color: #999;
+        }
+        .cell-btn{
+            margin-bottom: 10px;
+        }
+        .phone-cell {
+          position: relative;
+          padding:0 7px;
+          @include flexbox(start,
+            center,
+            row,
+            wrap);
+          @include placeholderColor($gray);
+          width: 100%;
+          border-bottom: 1px solid #e4e4e4;
+          margin-bottom: 6px;
+          .phone-cellimg{
+           width: .7rem
+          }
+          input {
+            width: 90%;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            text-shadow: none;
+            text-align: left;
+            font-size: 15px;
+            color: #999;
+            line-height: normal;
+            height: 34px;
+          }
+        }
+        .code-all{
+           @include flexbox(space-between,
+            center,
+            row,
+            wrap);
+            border-bottom: 1px solid #e4e4e4;
+             margin-top: 8px;
+            margin-bottom: 6px;
+           .code-cell {
+            width: 50%;
+            background: #fff;
+            position: relative;
+            padding:0 7px;
+           
+            @include flexbox(start,
+            center,
+            row,
+            wrap);
+            @include placeholderColor($gray);
+            .code-cellimg{
+             width: .7rem;
+             margin-top: 2px;
+            
+            }
+            input {
+              width: 80%;
+              border: none;
+              outline: none;
+              box-shadow: none;
+              text-shadow: none;
+              text-align: left;
+              font-size: 15px;
+              color: #999;
+              line-height: normal;
+              height: 34px;
+            }
+          }
+          .registered-getCode {
+            
+            color: #333;
+            font-size: 15px;
+            text-align: right;
+            
+            width: 44%;
+    padding: 7px 10px 7px 0;
+          }
+        }
       }
     }
+
+
+
+
     /* 注册 */
     .registered-container {
       height: 100%;
@@ -235,7 +295,7 @@ Executable File  659 lines (652 sloc)  23.7 KB
     }
   }
   .from-user {
-    padding: $padding;
+    padding: 30px;
     background: #fff;
     .cell-list {
       .cell-item {
@@ -244,9 +304,13 @@ Executable File  659 lines (652 sloc)  23.7 KB
         row,
         nowrap);
         border-bottom: 1px solid #eee;
-        padding: $padding $padding $padding 0;
+        
         margin: $margin 0;
+        margin-bottom: 6px;
         position: relative;
+        .code-cellimg{
+            width: 20px;
+        }
         .left {
           span {
             font-size: $title;
@@ -255,7 +319,7 @@ Executable File  659 lines (652 sloc)  23.7 KB
         }
         .right {
           width: 70%;
-          margin-left: 20px;
+          margin-left: 10px;
           @include placeholderColor($gray);
           input {
             width: 100%;
@@ -265,6 +329,8 @@ Executable File  659 lines (652 sloc)  23.7 KB
             text-shadow: none;
             text-align: left;
             font-size: $title;
+            height: 34px;
+            line-height: normal;
             color: #333;
           }
           .arrow-right {
@@ -277,58 +343,135 @@ Executable File  659 lines (652 sloc)  23.7 KB
         }
       }
     }
+    .cell-btn{
+        margin-bottom: 0;
+    }
     .other-link {
       @include flexbox(space-between,
       center,
       row,
       nowrap);
-      font-size: 15px;
-      color: $gray;
-      margin-top: $margin;
+      font-size: 14px;
+      color: #999;
+      margin-top: 10px;
     }
   }
+ 
 </style>
+
 <template>
   <div class="user-container">
-    <!-- 登陆 -->
-    <mt-popup v-model="visiblePopup.login" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
-      <!-- <div class="my-header">
-        <i class="back" @click="closeOpen"></i>
-        <strong>京东登录</strong>
-        <i class="myMsg"></i>
-      </div> -->
-      <div class="from-user">
-        <div class="cell-list">
-          <div class="cell-item">
-            <div class="left">
-              <span>账号</span>
+      <!-- 手机号登录 -->
+      <mt-popup v-model="visiblePopup.loginPhone" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
+      <div class="loginPhone-container">
+        <p style="text-align:center">
+        <img src="~jd/images/huiyanlogo.png" style="height:90px;margin-top:40px;">
+        </p>
+        <div class="cell-box">
+          <div class="phone-cell">
+            <div class="phone-cellimg" @click="focusphoneoneclick">
+            <img src="~jd/images/login-phone.png" style="height:20px;" alt="">
             </div>
-            <div class="right">
-              <input v-focus v-validate.initial="'required'" type="text" name="username" v-model="loginForm.username" placeholder="请输入用户名或手机号码">
+            <div class="right" @click="focusphoneoneclick">
+            <input @blur="gotoView" v-focus="focusphoneoneState" v-validate="'required|mobile'" name="mobile" type="tel" v-model="loginphoneForm.phone" placeholder="请输入手机号">
+            </div>
+            <i class="clear" v-show="loginphoneForm.phone.length>0" @click= "loginphoneForm.phone=''" style="right: 10px;top:12px;"></i>
+          </div>
+          <div style="height:18px;">
+          <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
+          </div>
+          <div class="code-all">
+             <div class="code-cell">
+                <div class="code-cellimg" @click="focuscodeoneclick">
+                <img src="~jd/images/login-msg.png" style="height:13px;" alt="">
+                </div>
+                <input @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState" v-validate="'required|loginCode'" name="loginCode" type="num" v-model="loginphoneForm.code" placeholder="请输入验证码">
+                <i class="clear" v-show="loginphoneForm.code.length>0" @click= "loginphoneForm.code=''" style="right: 10px;top:10px;"></i>
+            </div>
+              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||loginphoneForm.phone.length==0||loginphoneForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
+                    :disabled="errors.has('mobile')||loginphoneForm.phone.length==0||loginphoneForm.resetSendPhoneMessage">{{loginphoneForm.resetSendPhoneMessage ? `${loginphoneForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
+              </div>
+              <div style="height:18px;">
+          <span v-show="errors.has('loginCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
+              </div>
+          <div :class="['cell-btn',errors.has('mobile')||errors.has('loginCode')||loginphoneForm.phone.length==0||loginphoneForm.code.length==0?'disabled-btn':'']" @click="loginRes">下一步</div>
+          <p class="goPasswrold" @click="()=>{visiblePopup.loginPhone=false;visiblePopup.loginPassworld=true}">密码登录</p>
+          </div>
+          
+      </div>
+    </mt-popup>
+    <!-- 密码登陆 -->
+    <mt-popup v-model="visiblePopup.loginPassworld" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
+      <div class="from-user">
+        <p style="text-align:center">
+        <img src="~jd/images/huiyanlogo.png" style="height:90px;margin-top:40px;">
+        </p>
+        <div class="cell-list">
+          <div class="cell-item" >
+            <div class="phone-cellimg" @click="focusphoneclick">
+            <img src="~jd/images/login-phone.png" style="height:20px;margin-left:6px;" alt="">
+            </div>
+            <div class="right" @click="focusphoneclick">
+              <input @blur="gotoView" v-focus="focusphoneState" v-validate="'required|mobileuser'" type="tel" name="mobileuser" v-model="loginForm.username" placeholder="手机号码">
             </div>
             <i class="clear" style="" v-show="loginForm.username.length>0" @click="loginForm.username=''"></i>
           </div>
-          <div class="cell-item">
-            <div class="left">
-              <span>密码</span>
+           <div style="height:18px;">
+          <span v-show="errors.has('mobileuser')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
+          </div>
+          <div class="cell-item" >
+           <div class="code-cellimg" @click="focuspassclick">
+                <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
             </div>
-            <div class="right">
-              <input v-validate.initial="'required'" name="password" @keyup.enter="Login" :type="loginForm.passwordFormType" v-model="loginForm.password" placeholder="请输入密码">
+            <div class="right" @click="focuspassclick">
+              <input @blur="gotoView" v-focus="focuspassState" v-validate="'required|password'" name="password" :type="loginForm.passwordFormType" v-model="loginForm.password" placeholder="请输入密码">
             </div>
             <i class="clear" v-show="loginForm.password.length>0" @click="loginForm.password=''" style="right: 40px;"></i>
             <i :class="['eye-icon', loginForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
               @click="loginForm.passwordFormType=loginForm.passwordFormType=='password'?'text':'password'"></i>
           </div>
+           <div style="height:18px;">
+          <span v-show="errors.has('password')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >密码为6-20位，含字母和数字 如：pl9999</span>
+          </div>
+          <!-- '密码为6-20位，含字母和数字 如：pl9999' -->
         </div>
-        <div :class="['cell-btn',errors.has('username')||errors.has('password')?'disabled-btn':'']" @click="()=>{errors.has('username')||errors.has('password')?false:Login()}">登录</div>
+        <div :class="['cell-btn',loginForm.username.length==0||loginForm.password.length==0||errors.has('mobileuser')||errors.has('password')?'disabled-btn':'']" @click="()=>{loginForm.username.length==0||loginForm.password.length==0||errors.has('username')||errors.has('password')?false:Login()}">登录</div>
         <div class="other-link">
-          <span @click="()=>visiblePopup.registered=true">手机快速注册</span>
+          <span @click="()=>{visiblePopup.loginPhone=true;visiblePopup.loginPassworld=false}">手机快速登录</span>
           <span @click="()=>visiblePopup.forget=true">忘记密码</span>
         </div>
       </div>
     </mt-popup>
-    <!-- 登录 -->
+    
 
+    <!-- 设置密码 -->
+    <mt-popup v-model="visiblePopup.setPass" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
+      <div class="from-user">
+        <p style="text-align:center">
+        <img src="~jd/images/huiyanlogo.png" style="height:90px;margin-top:40px;">
+        </p>
+        <div class="cell-list">
+          <div class="cell-item" style="margin-top:30px;" >
+           <div class="code-cellimg" @click="focussetpassclick">
+                <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
+            </div>
+            <div class="right" @click="focussetpassclick">
+              <input @blur="gotoView" v-focus="focussetpassState" v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">
+            </div>
+            <i class="clear" v-show="registeredForm.password.length>0" @click="registeredForm.password=''" style="right: 40px;"></i>
+            <i :class="['eye-icon', registeredForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
+              @click="registeredForm.passwordFormType=registeredForm.passwordFormType=='password'?'text':'password'"></i>
+          </div>
+           <div style="height:18px;">
+          <span v-show="errors.has('password')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >密码为6-20位，含字母和数字 如：pl9999</span>
+          </div>
+          <!-- '密码为6-20位，含字母和数字 如：pl9999' -->
+        </div>
+        <div :class="['cell-btn',registeredForm.password.length==0||errors.has('password')?'disabled-btn':'']" @click="()=>{registeredForm.password.length==0||errors.has('password')?false:setPassword()}">完成</div>
+      </div>
+    </mt-popup>
+
+    
     <!-- 注册 -->
     <mt-popup v-model="visiblePopup.registered" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
       <div class="registered-container">
@@ -432,7 +575,7 @@ Executable File  659 lines (652 sloc)  23.7 KB
           <div class="forget-validate">
             <div class="validate-username">
               <span>账号</span>
-              <input v-focus v-model="forgetForm.phone" v-validate.initial="'required'" name="forgetusername" type="text" placeholder="用户名/手机号">
+              <input v-model="forgetForm.phone" v-validate.initial="'required'" name="forgetusername" type="text" placeholder="用户名/手机号">
               <i class="clear" v-show="forgetForm.phone.length>0" @click="forgetForm.phone=''" style="right: 10px;top:12px;"></i>
             </div>
             <div :class="['cell-btn',errors.has('forgetusername')?'disabled-btn':'']" @click="()=>{
@@ -512,20 +655,33 @@ Executable File  659 lines (652 sloc)  23.7 KB
     Field,
     Button,
     Toast,
-    Popup
+    Popup,MessageBox
   } from 'mint-ui';
 import {
+  setLocalStorage,
   setSessionStorage,
-  getSessionStorage,
   getLocalStorage,
   removeSessionStorage,
   pushHistory
 } from '@/utils/mixin';
+import {
+    getImgToken,getImgCode
+  } from '@/service/getData';
+
   export default {
     data() {
       return {
+          focusphoneState:false,
+          focuspassState:false,
+          focussetpassState:false,
+          focusphoneoneState : false,
+          focuscodeoneState : false,
+          imgToken:'',
+          
         visiblePopup: {
-          login: true,
+          loginPassworld: false,
+          loginPhone: true,
+          setPass:false ,
           registered: false,
           registeredCode: false,
           forget: false,
@@ -537,6 +693,11 @@ import {
           username: '',
           password: '',
           passwordFormType: 'password'
+        },
+        loginphoneForm: {
+           phone: '',
+           code: '',
+           imgCode:''
         },
         registeredForm: {
           phone: '',
@@ -568,22 +729,32 @@ import {
           this.$router.go(-1)
         }, 200)
       },
+      async loginRes(){
+         let Data = await this.$store.dispatch('Login', {
+          phone: this.loginphoneForm.phone,
+          code: this.loginphoneForm.code
+        })
+        if (Data.code !== 10000&&Data.code !== 30031) return Toast({
+          message: Data.msg
+        })
+        if(Data.code==30031){
+         this.visiblePopup.loginPhone=false;
+         this.visiblePopup.setPass=true;
+        }else if(Data.code==10000){
+          this.$router.push('/index');
+        }
+        setSessionStorage('session_token',Data.data.session_token);
+        setSessionStorage('access_token',Data.data.access_token);
+      },
       async setPassword() { //设置密码
-        let {
-          Code,
-          Message
-        } = await this.$store.dispatch('SetPassword', {
-          phone: this.forgetForm.phone,
-          challengecode: this.forgetForm.code,
-          newpassword: this.forgetForm.confirmPassword
+        let Data = await this.$store.dispatch('SetPassword', {
+          password: this.registeredForm.password,
         })
-        Toast({
-          message: Code === 0 ? '修改成功' : Message,
-          position: 'bottom'
+        if (Data.code !== 10000) return Toast({
+          message: Data.msg
         })
-        this.visiblePopup.forget = false;
-        this.visiblePopup.forgetCode = false;
-        this.visiblePopup.forgetResetPassword = false;
+        this.$router.push('/index');
+         
       },
       async registered() { //注册账号
         let formData = {
@@ -634,19 +805,61 @@ import {
         this.forgetForm.userName = Data.username;
         this.visiblePopup.forgetCode = true
       },
-      async registeredSendPhoneMessage() { //获取验证码
-        await this.$store.dispatch('SendPhoneMessage', {
-          phone: this.registeredForm.phone
-        });
-        this.registeredForm.resetSendPhoneMessage = 120;
-        let times = setInterval(() => {
-          if (this.registeredForm.resetSendPhoneMessage <= 0) {
-            this.registeredForm.resetSendPhoneMessage = null;
-            clearInterval(times);
-          } else {
-            this.registeredForm.resetSendPhoneMessage--;
+
+      getImgTokenasync(){
+          let Data = getImgToken({});
+          if(Data.code!=10000){
+            Toast({
+              message: Data.msg,
+              position: 'bottom'
+            })
+            return
           }
-        }, 1000)
+          return Data.data;
+      },
+       registeredSendPhoneMessage() { //获取验证码
+       let imgToken='' 
+       var htmlstr=''
+        // console.log(this.getImgTokenasync()) ;
+          //  this.getImgTokenasync()
+           htmlstr= '<p>请输入校验码</p><p><input type="text" placeholder="校验码" class="imgcode"><img src="http://param.iask.in/mop/api/captcha/get?token='+this.getImgTokenasync()+'" style="height:27px;width:70px; margin-left:6px;vertical-align: bottom;"><span class="changeImg">换一张</span></p>'
+    
+        MessageBox.confirm('', { 
+            message: htmlstr, 
+            title: '',
+            cancelButtonClass:'cancelButton', 
+            confirmButtonClass:'confirmButton',
+          }).then(action => {
+             if(document.getElementsByClassName('imgcode')[0].value==''){
+                  Toast({
+                    message: '请输入图形验证码',
+                    position: 'bottom'
+                  })
+                  return
+                }
+            if (action == 'confirm') {     //确认的回调
+               
+                this.$store.dispatch('SendLoginMessage', {
+                captcha_code:document.getElementsByClassName('imgcode')[0].value,
+                token:Data.data,
+                phone: this.loginphoneForm.phone
+                });
+                this.registeredForm.resetSendPhoneMessage = 120;
+                let times = setInterval(() => {
+                    if (this.registeredForm.resetSendPhoneMessage <= 0) {
+                        this.registeredForm.resetSendPhoneMessage = null;
+                        clearInterval(times);
+                    } else {
+                        this.registeredForm.resetSendPhoneMessage--;
+                    }
+                }, 1000)
+          }
+          }).catch(err => { 
+            if (err == 'cancel') {     //取消的回调
+            } 
+          });
+
+         
       },
       async forgetSendPhoneMessage() { //获取验证码
         await this.$store.dispatch('SendPhoneMessage', {
@@ -672,7 +885,40 @@ import {
           position: 'bottom'
         })
         this.$router.go(-1);
-      }
+      },
+      focusphoneclick () {
+      this.focusphoneState = true
+      },
+
+      focuspassclick () {
+      this.focuspassState = true
+      },
+      focussetpassclick () {
+      this.focussetpassState = true
+      },
+      focusphoneoneclick () {
+      this.focusphoneoneState = true
+      },
+      focuscodeoneclick () {
+      this.focuscodeoneState = true
+      },
+    gotoView () {
+      window.scroll(0,0)
+      this.focusphoneState = false;
+      this.focuspassState = false;
+      this.focussetpassState = false;
+      this.focusphoneoneState = false;
+      this.focuscodeoneState = false
+    }
+    },
+    directives: {
+        focus: {
+        update: function (el, {value}) {
+            if (value) {
+            el.focus()
+            }
+        }
+        }
     },
     mounted: function () {
         pushHistory()
@@ -683,4 +929,5 @@ import {
     }
   }
 </script>
+
 

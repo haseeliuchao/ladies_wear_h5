@@ -1,18 +1,20 @@
 import Http from '@/utils/axios';
 
 //member
-export const login = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
+export const login = (params) => new Http().require({api: '/api/login/sms',param:params}); //登录
 export const loginBind = (params) => new Http().require({api: '/api/bind/phone',param:params}); //登录
 
 export const getUserInfo = (params) => new Http().require({api: '/api/member/info',param:params}); //获取个人信息
 
-export const sendPhoneMessage = (params) => new Http().require({api: '/api/sms/bind/phone',param: params}); //获取短信验证码
+export const sendLoginMessage = (params) => new Http().require({api: '/api/sms/login',param: params}); //获取短信验证码  
+
+export const sendPhoneMessage = (params) => new Http().require({api: '/api/sms/bind/phone',param: params}); //获取短信验证码  
 
 export const registered = (params) => new Http().require({api: '/api/member/Registered',param: params}); //注册账号
 
 export const editUserInfo = (params) => new Http().require({api: '/api/member/EditUserInfo',param: params}); //编辑用户信息
 
-export const setPassword = (params) => new Http().require({api: '/api/member/SetPassword',param: params}); //设置密码
+export const setPassword = (params) => new Http().require({api: '/api/register/password',param: params}); //设置密码
 
 export const cardCoupon = (params) => new Http().require({api: '/api/member/Coupon',param: params}); //获取卡券
 
@@ -93,6 +95,10 @@ export const logisticsInfo = (params) => new Http().require({api: '/api/order/qu
 export const commitMessage = (params) => new Http().require({api: '/api/post/sales/add',param: params}); //获取
 
 export const searchRenew = (params) => new Http().require({api: '/api/order/query/logistics/info',param: params}); //获取续费信息
+
+export const getImgToken = (params) => new Http().require({api: '/api/token/get',param: params}); //获取续费信息
+
+export const getImgCode = (params) => new Http().require({api: '/api/captcha/get',param: params}); //获取续费信息
 
 
 //cms

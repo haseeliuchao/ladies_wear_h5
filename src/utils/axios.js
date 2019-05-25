@@ -22,7 +22,7 @@ import {
 class Http {
   constructor(){
     // this.Domain = 'http://tencent-ai.com/mop/';
-    // this.Domain = 'http://192.168.11.242:8080';
+    // this.Domain = 'http://192.168.9.187:8182';
     this.Domain = 'http://param.iask.in/mop/';
     
   }
@@ -43,14 +43,19 @@ class Http {
     };
     options.param.api_sign=null;
     const postLogin=function(data){
-        // var app_key="68A6F45CD7AAFC0287F4AF8FF4F3991C";
-        
-        var pwd="C6DB7C0AE306CDDAA1087A9542762B10";
+        var app_key="";
+        var pwd="";
+        if(isWeiXin('code')){
+          app_key='CFBF6F4C8292010FF4193C507B2D9F80';
+          pwd='C6DB7C0AE306CDDAA1087A9542762B10'
+        }else{
+          app_key='65E232ED43477B2F5CB4413023548FCE';
+          pwd='7BB4CB59062C7C9D3717689B901013DD'
+        }
         var myJsDate=Format(new Date(),"yyyyMMddhhmmss");
-        
-        data.access_token=getLocalStorage('access_token');
-        data.session_token=getLocalStorage('session_token');
-        data.app_key=data.app_key?data.app_key:"68A6F45CD7AAFC0287F4AF8FF4F3991C";
+        data.access_token=getSessionStorage('access_token');
+        data.session_token=getSessionStorage('session_token');
+        data.app_key=app_key
         data.date=myJsDate;
         for (var j in data) {
           // arr.push(i+"="+data[i]); //属性
@@ -81,12 +86,12 @@ class Http {
             data.api_sign=md5(pwd+ifurl()+pwd);
           }else{
             data={
-              access_token:window.localStorage.access_token,
+              access_token:window.sessionStorage.access_token,
               app_key:app_key,
               date:myJsDate,
-              session_token:window.localStorage.session_token
+              session_token:window.sessionStorage.session_token
             };
-            data.api_sign=md5(pwd+"access_token="+window.localStorage.access_token+"&app_key="+app_key+"&date="+myJsDate+"&session_token="+window.localStorage.session_token+pwd);
+            data.api_sign=md5(pwd+"access_token="+window.sessionStorage.access_token+"&app_key="+app_key+"&date="+myJsDate+"&session_token="+window.sessionStorage.session_token+pwd);
           }
           var arr = [];
             for (var i in data) {
@@ -115,7 +120,7 @@ class Http {
         }).then(response => {
             Indicator.close();
             if(response.data.code==20025){
-              if(!isWeiXin('state')){
+              if(!isWeiXin('code')){
                 router.push('/browserLogin')
               }
           }

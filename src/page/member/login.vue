@@ -117,7 +117,7 @@
             <i class="clear" v-show="registeredForm.phone.length>0" @click= "registeredForm.phone=''" style="right: 10px;top:12px;"></i>
           </div>
           <div style="height:18px;">
-          <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >该手机号格式有误，请重新输入</span>
+          <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
           </div>
           <div class="code-all">
              <div class="code-cell">

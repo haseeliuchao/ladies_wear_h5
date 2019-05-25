@@ -3,6 +3,7 @@ import {
   loginBind,
   getUserInfo,
   sendPhoneMessage,
+  sendLoginMessage,
   registered,
   editUserInfo,
   setPassword,
@@ -230,6 +231,21 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
+          if (response.code !== 10000) return Toast({
+            message: response.msg
+          })
+          return resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    SendLoginMessage({ //获取验证码
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        sendLoginMessage(parameterData).then(response => {
           if (response.code !== 10000) return Toast({
             message: response.msg
           })

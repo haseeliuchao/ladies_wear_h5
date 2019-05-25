@@ -48,7 +48,25 @@ const config = {
     }
   });
 
-  VeeValidate.Validator.extend('registeredCode', {
+ VeeValidate.Validator.extend('mobileuser', {
+    messages: {
+      zh_CN:field => field + '必须是11位手机号码',
+    },
+    validate: value => {
+      return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+    }
+  });
+
+ VeeValidate.Validator.extend('password', {
+    messages: {
+      zh_CN:field => field + '密码为6-20位，含字母和数字 如：pl9999',
+    },
+    validate: value => {
+      return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(value)
+    }
+  });
+
+  VeeValidate.Validator.extend('loginCode', {
       messages: {
         zh_CN:field => field + '必须是6位验证码',
       },
