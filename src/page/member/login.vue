@@ -285,7 +285,7 @@ getLocalStorage,
         let Data = await this.$store.dispatch('LoginBind', {
           phone: this.registeredForm.phone,
           code: this.registeredForm.code,
-          password:registeredForm.password,
+          password:this.registeredForm.password,
           head_img_url:getSessionStorage('head_img_url'),
           nickname:getSessionStorage('nickname'),
           open_id:getSessionStorage('open_id')
