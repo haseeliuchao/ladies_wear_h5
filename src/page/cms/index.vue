@@ -386,7 +386,7 @@
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
- getLocalStorage,
+    getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
   import {
@@ -556,28 +556,6 @@
           this.cmsData = this.indexCmsData.data;
         }
         }
-      },
-       async loginData() { //更新数据
-          let that=this;
-          var ret = utils.getUrlKey('state').split("@");
-          var retstr= ret[0]
-       if(this.isWeiXin()){
-            let Data = await this.$store.dispatch('Login', {
-                code:utils.getUrlKey('code'),
-                app_key:retstr.slice(8)
-              })
-              if(Data.code==10000){
-                setLocalStorage('session_token',Data.data.session_token);
-                setLocalStorage('access_token',Data.data.access_token);
-                that.guideindex=getLocalStorage('guideindex');
-                if(!that.guideindex){
-                   setLocalStorage('guideindex',1);
-                }else{
-                   setLocalStorage('guideindex',2);
-                }  
-              }
-       }
-        
       },
       
     },

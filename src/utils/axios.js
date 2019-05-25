@@ -52,6 +52,7 @@ class Http {
           app_key='65E232ED43477B2F5CB4413023548FCE';
           pwd='7BB4CB59062C7C9D3717689B901013DD'
         }
+        data.api_sign=null;
         var myJsDate=Format(new Date(),"yyyyMMddhhmmss");
         data.access_token=getSessionStorage('access_token');
         data.session_token=getSessionStorage('session_token');
