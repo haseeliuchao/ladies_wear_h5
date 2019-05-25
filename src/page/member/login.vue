@@ -26,7 +26,7 @@
         margin-bottom: 6px;
         position: relative;
         .code-cellimg{
-            width: 20px;
+            width:.7rem;
         }
         .left {
           span {
@@ -134,7 +134,7 @@
           }
           .registered-getCode {
             
-            color: #999;
+            color: #333;
             font-size: 15px;
             text-align: right;
             
@@ -166,7 +166,7 @@
           <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
           </div>
           
-          <div class="cell-item" style="margin-top:30px;" >
+          <div class="cell-item" >
            <div class="code-cellimg">
                 <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
             </div>
@@ -268,7 +268,8 @@ getLocalStorage,
       },
       async registeredSendPhoneMessage() { //获取验证码
         await this.$store.dispatch('SendPhoneMessage', {
-          phone: this.registeredForm.phone
+          phone: this.registeredForm.phone,
+          open_id:getSessionStorage('open_id')
         });
         this.registeredForm.resetSendPhoneMessage = 60;
         let times = setInterval(() => {
