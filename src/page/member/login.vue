@@ -307,7 +307,7 @@ getLocalStorage,
           code: this.registeredForm.code,
           password:this.registeredForm.password,
           head_img_url:getSessionStorage('head_img_url'),
-          nickname:getSessionStorage('nickname').replace(new RegExp(ranges.join('|'), 'g'), ''),
+          nickname:getSessionStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), ''),
           open_id:getSessionStorage('open_id')
         })
         if (Data.code !== 10000) return Toast({
