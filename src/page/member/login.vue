@@ -207,6 +207,11 @@
   </div>
 </template>
 <script>
+
+
+
+
+
 import {
 getLocalStorage,
     setLocalStorage,
@@ -222,6 +227,11 @@ getLocalStorage,
   export default {
     data() {
       return {
+        ranges : [
+        '\ud83c[\udf00-\udfff]', 
+        '\ud83d[\udc00-\ude4f]', 
+        '\ud83d[\ude80-\udeff]'
+               ],
         visiblePopup: {
           login: true,
           registered: false,
@@ -297,7 +307,7 @@ getLocalStorage,
           code: this.registeredForm.code,
           password:this.registeredForm.password,
           head_img_url:getSessionStorage('head_img_url'),
-          nickname:getSessionStorage('nickname'),
+          nickname:getSessionStorage('nickname').replace(new RegExp(ranges.join('|'), 'g'), ''),
           open_id:getSessionStorage('open_id')
         })
         if (Data.code !== 10000) return Toast({
