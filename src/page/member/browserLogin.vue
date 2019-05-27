@@ -753,7 +753,7 @@ import {
         if (Data.code !== 10000) return Toast({
           message: Data.msg
         })
-        this.$router.push('/index');
+        this.$router.go(-1);
          
       },
       async registered() { //注册账号
@@ -822,7 +822,7 @@ import {
        var htmlstr=''
         // console.log(this.getImgTokenasync()) ;
           //  this.getImgTokenasync()
-           htmlstr= '<p>请输入校验码</p><p><input type="text" placeholder="校验码" class="imgcode"><img src="http://param.iask.in/mop/api/captcha/get?token='+this.getImgTokenasync()+'" style="height:27px;width:70px; margin-left:6px;vertical-align: bottom;"><span class="changeImg">换一张</span></p>'
+           htmlstr= '<p>请输入校验码</p><p><input type="text" placeholder="校验码" class="imgcode"><img src="http://tencent-ai.com/mop/api/captcha/get?token='+this.getImgTokenasync()+'" style="height:27px;width:70px; margin-left:6px;vertical-align: bottom;"><span class="changeImg">换一张</span></p>'
     
         MessageBox.confirm('', { 
             message: htmlstr, 
