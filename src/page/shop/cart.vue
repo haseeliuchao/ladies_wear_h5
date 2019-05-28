@@ -164,9 +164,32 @@
         margin: 0 .3rem 110px;
         border-radius: 5px;
         .store-pd-item {
-          @include flexbox(flex-start, center, row, nowrap);
+          @include flexbox(flex-start, center, row, wrap);
           padding: 10px;
           // border-bottom: 1px solid #eee;
+          .prodskulist-info{
+                width: 100%;
+                border-bottom: 1px solid #e4e4e4;
+                // height: 42px;
+                line-height: 24px;
+                color: #666;
+                font-size: 13px;
+                padding: 0 10px;
+                 @include flexbox(space-between,
+                flex-start,
+                row,
+                nowrap);
+                .sku{
+                  width: 80%;
+                  .price{
+                  width: 20%;
+                  color: $red;
+                  font-size: 16px;
+                  font-weight: bold;
+                }
+                }
+                
+              }
           &:last-child {
             border-bottom: none;
           }
@@ -174,42 +197,27 @@
             // border: 1px solid #eee;
             margin: 0 10px;
             img {
-              width: 89px;
-              height: 89px;
+              width: 75px;
+              height: 75px;
             }
           }
-          .pd-info {
-            @include flexbox(flex-start, space-between, column, wrap);
-            width: 100%;
-            // flex: initial;
-            .pd-title {
-              @include textoverflow(2); // width: 90%;
-              font-size: 14px;
-              color: #333;
-              p{
-                @include textoverflow(2);
-                height:40px;
-                line-height: 20px;
-                 
-              }
-            }
-            .pd-sku {
-              @include textoverflow(1);
-              padding: 5px 0;
-              line-height: 1.5;
-              font-size: 13px;
-              color: #666;
-            }
-            .pd-price {
+          .pd-price {
               // margin-top: 10px;
               @include flexbox(space-between, center, row, nowrap);
               flex: initial;
+                  height: 48px;
+               border-bottom: 1px solid #e4e4e4;
               .left {
-                color: #ff2741;
-                font-weight:bold;
+                color: #666;
+                 width: 60%;
+                 line-height: 18px;
+                 .price{
+                   color: $red;font-size: 16px;
+                   font-weight: bold
+                 }
                 span {
                   font-size: 12px;
-                  font-weight:bold;
+                  // font-weight:bold;
                 }
                 strong {
                   font-size: 16px;
@@ -287,6 +295,35 @@
                   font-size: 12px;
                 }
               }
+            }
+          .pd-info {
+            @include flexbox(flex-start, space-between, column, wrap);
+            width: 100%;
+            // flex: initial;
+            
+            .pd-title {
+              @include textoverflow(2); // width: 90%;
+              font-size: 14px;
+              color: #333;
+              p{
+                @include textoverflow(2);
+                height:40px;
+                line-height: 20px;
+                 
+              }
+            }
+            .pd-sku {
+              @include textoverflow(1);
+              padding: 5px 0;
+              line-height: 1.5;
+              font-size: 13px;
+              color: #666;
+            }
+            .pd-price {
+              // margin-top: 10px;
+              @include flexbox(space-between, center, row, nowrap);
+              flex: initial;
+             
             }
           }
         }
@@ -402,10 +439,10 @@
         <div class="goods">
 
           <!-- 暂时还没做分店铺订单 -->
-          <div class="store" v-if="false">
+          <!-- <div class="store" v-if="false">
             <i class="select-default-icon"></i>
             <span>Apple旗舰店</span>
-          </div>
+          </div> -->
           <!-- 暂时还没做分店铺订单 -->
           <div class="top-edit" v-if="cartlength>0">
             <p class="cartListNum">共{{cartlength}}件宝贝</p>
@@ -422,22 +459,18 @@
                 <div class="pd-title">
                   <p>{{item.item_title}}</p>
                 </div>
-                <div class="pd-sku">
-                  <p class="sku-info">{{item.color}}  {{item.size}}</p>
-                </div>
-                <div class="pd-price">
+              </div>
+               <div class="pd-price" style="width:100%" v-for="(itemdetail,index1) in item.shopping_cart_item_b_o_list" :key="index1">
+                   <i :class="['select-default-icon',itemdetail.checked ? 'select-icon' : '']" @click= "checkeddetail(item,itemdetail)"></i>
                   <div class="left">
-                    <span>&yen;</span>
-                    <strong><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.sales_consumer_price/100.00|topricenext}}</em></strong>
-                    
+                   <span class="sku"><em>颜色 {{itemdetail.color}}   尺寸 {{itemdetail.size}}</em><br><em class="price">￥{{itemdetail.sales_consumer_price/100.00}}</em></span>
                   </div>
                   <div class="right">
-                    <div class="cut" @click= "editProductNum({item:item,increment:-1})"></div>
-                    <input type="text" v-model="item.num" class="num-inp" @change="editProductNum({item:item,num:item.num})">
-                    <div class="add" @click= "editProductNum({item:item,increment:1})"></div>
+                    <div class="cut" @click= "editProductNum({item:item,itemdetail:itemdetail,increment:-1})"></div>
+                    <input type="text" v-model="itemdetail.num" class="num-inp" @change="editProductNum({item:itemdetail,num:itemdetail.num})">
+                    <div class="add" @click= "editProductNum({item:item,itemdetail:itemdetail,increment:1})"></div>
                   </div>
-                </div>
-              </div>
+               </div>
             </div>
           </div>
         </div>
@@ -461,7 +494,7 @@
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
                       <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:16px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
+                      <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:16px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
                       </p>
                   </div>
                 </li>
@@ -514,6 +547,7 @@
         totalFee: 0,
         selectedCounter: 0,
         selectedAll: false,
+        selectedchrenAll: false,
         isLogin: false,
         delshow:false,
         cartlength:0,
@@ -544,15 +578,16 @@
     },
 
     methods: {
-      selectedAllGoods() {
-        this.cartList.map(item => {
-          if (item.item_status === 1) {
-            item.checked = !this.selectedAll
+      selectedAllGoods(item) {
+        this.cartList.map(items => {
+          if (items.item_status === 1) {
+            items.checked = !this.selectedAll
           }
         })
         this.selectedAll = !this.selectedAll;
-        this.computedTotalFee();
+        this.computedTotalFee(item);
       },
+      
       editProductdel(){
          let SelectedList = [];
         let Selectedstr = '';
@@ -574,13 +609,21 @@
         })
         
       },
+      // if (item.item_status === 1 && item.checked) {
+      //   SelectedList.push(item.shopping_cart_id)
+      // }
+
+
       confirmOrder() {
         let SelectedList = [];
         let Selectedstr = '';
-        this.cartList.map(item => {
-          if (item.item_status === 1 && item.checked) {
-            SelectedList.push(item.shopping_cart_id)
-          }
+        this.cartList.map(items => {
+          
+          items.shopping_cart_item_b_o_list.map(itemdetail=>{
+            if (itemdetail.checked && items.item_status === 1) {
+            
+            }
+          })
         })
         Selectedstr=SelectedList.join(",");
         if (SelectedList == '') return Toast({
@@ -590,34 +633,47 @@
 
         this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
       },
-      computedTotalFee() {
-        let computedFee = 0,
-          selectedCounter = 0;
+      computedTotalFee(item) {
+        
+          let computedFee = 0,
+          selectedCounter = 0,
+          selectedCounter1 =0
         if(this.cartList!=null){
-        this.cartList.map(item => {
-          if (item.checked && item.item_status === 1) {
-            computedFee += parseFloat(item.num * item.sales_consumer_price)
+        this.cartList.map(items => {
+          item.shopping_cart_item_b_o_list.map(itemdetail=>{
+            if (itemdetail.checked && items.item_status === 1) {
+            computedFee += parseFloat(itemdetail.num * itemdetail.sales_consumer_price)
             selectedCounter++
+            }
+          })
+        })
+        this.cartList.map(items => {
+          if (items.checked && items.item_status === 1){
+             selectedCounter1++
           }
         })
         this.selectedCounter = selectedCounter;
-        this.selectedAll = selectedCounter === this.cartList.length ? true : false;
+        
+        item.checked = selectedCounter === item.shopping_cart_item_b_o_list.length?true: false;
+         this.selectedAll = selectedCounter1 === this.cartList.length ? true : false;
         this.totalFee = computedFee;
         }
         
+        
+        
       },
-      async editProductNum({
-        item,
+      async editProductNum({item,
+        itemdetail,
         increment,
         num
       }) {
         if (num) {
-          item.num = num
+          itemdetail.num = num
         } else {
-          item.num = item.num+increment
+          itemdetail.num = itemdetail.num+increment
         }
-        if(item.num<1){
-          item.num=1;
+        if(itemdetail.num<1){
+          itemdetail.num=1;
           Toast({
             message: '宝贝不能再减少了哦',
             position: 'center'
@@ -625,10 +681,10 @@
           return;
         }
         let params = {
-            shopping_cart_id: item.shopping_cart_id,
-            num:item.num
+            shopping_cart_item_id: itemdetail.id,
+            num:itemdetail.num
         }
-        this.computedTotalFee();
+        this.computedTotalFee(item);
         await this.$store.dispatch('UpdselectProduct', params)
         // this.onRefreshCallback();
       },
@@ -638,12 +694,39 @@
       async checked(item) {
         item.checked = !item.checked;
         let count = 0;
-        this.cartList.map(item => {
-          if (item.item_status === 1 && item.checked) return count++;
+        
+        this.cartList.map(items => {
+          if (items.item_status === 1 && items.checked) return count++;
         })
-        if (count === this.cartList.length) return this.selectedAllGoods();
-        this.computedTotalFee();
+        
+        if(item.checked==false){
+          item.shopping_cart_item_b_o_list.map(itemdetail => {
+          itemdetail.checked=false;
+        })
+        }else{
+          item.shopping_cart_item_b_o_list.map(itemdetail => {
+          itemdetail.checked=1
+          })
+        }
+        if (count === this.cartList.length) return this.selectedAllGoods(item);
+        this.computedTotalFee(item);
+        
       },
+
+      async checkeddetail(item,itemdetail) {
+        itemdetail.checked = !itemdetail.checked;
+        let count = 0;
+        item.shopping_cart_item_b_o_list.map(itemdetail => {
+          if (item.item_status === 1 && itemdetail.checked) return count++;
+        })
+        if (count === item.shopping_cart_item_b_o_list.length){
+           item.checked=1;
+        }else{
+          item.checked=false;
+        }
+        this.computedTotalFee(item);
+      },
+
       async initData() {
         let Data = await this.$store.dispatch('GetSelectedProductList');
         if(Data.data==undefined){
@@ -660,8 +743,9 @@
             this.cartList = response.data.data || null;
             this.cartlength=this.cartList?this.cartList.length:0;
             // this.getGoodsdata()
-            this.computedTotalFee();
+            this.computedTotalFee(null);
             this.selectedAll = false;
+            this.selectedchrenAll = false;
             this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
           }, 500);
         }, error => {

@@ -848,6 +848,9 @@
     color: $red!important;
     border: 1px solid $red!important;
   }
+  .productSkuActive{
+    color: $red!important;
+  }
 
   /* 商品评价 */
 
@@ -909,6 +912,7 @@
     color: #000;
     pointer-events: none;
 }
+
 </style>
 
 <template>
@@ -916,31 +920,39 @@
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
       <div class="checkSkuColortitleall">
-        <p class="checkSkuColortitle">颜色</p>
-        <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;}"></span>
+        <p class="checkSkuColortitle">请选择颜色：</p>
+        <!-- ()=>{title='';visiblePopup.checkSku=false;} -->
+        <span class="closepop" @click= "closepopcheckSku"></span>
       </div>
       <ul class="skuColorlist">
-        <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}</li>
+        <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}
+          <span class="itemAllnum" v-if="colorCur[index]">{{colorCur[index]}}</span>
+          </li>
       </ul>
       <div style="border-top:1px solid #e4e4e4;
           border-bottom:1px solid #e4e4e4;">
-      <p class="checkSkuColortitle">尺寸</p>
-      <ul class="skuSizelist">
-        <li v-for="(item,index) in sizearr" v-on:click="sizecheckBtn(item.size,index)" v-bind:class="[checksizeindex == index?'productActive':'']" :key="index">{{item.size}}</li>
-      </ul>
+      <p class="checkSkuColortitle">请选择尺寸和数量：</p>
+          <div  v-for="(itemall,index) in colorarr" :key="index" v-show="index==checkcolorindex">
+            <div class="skuNum" v-for="(item,index1) in sizearr[index]"  :key="index1">
+                        <div class="left" v-bind:class="[item.number > 0?'productSkuActive':'']">
+                          {{item.size}}
+                        </div>
+                        <div class="right">
+                          <div class="cut" @click= "operationnum(index,-1,item,index1)"></div>
+                          <input type="text" ref="dataNum" v-model="item.number" class="num-inp">
+                          <div class="add" @click= "operationnum(index,1,item,index1)"></div>
+                        </div>
+            </div>
+          </div>
       </div>
-      <div class="skuNum">
-                  <div class="left">
-                    选择数量
-                  </div>
-                  <div class="right">
-                    <div class="cut" @click= "operationnum(-1)"></div>
-                    <input type="text" v-model="shopnum" class="num-inp">
-                    <div class="add" @click= "operationnum(1)"></div>
-                  </div>
-      </div>
+      <p class="checkSkuColortitle" style="line-height:28px;">已选：</p>
+      <p class="checkSkuColortitle" v-for="(itemall,index) in colorarr" style="color:#ff2741;line-height:18px;" :key="index">
+        <span v-if="colorCur[index]"><em>{{itemall.color}}：</em></span>
+        <span v-for="(item,index1) in sizearr[index]"  :key="index1">
+        <em v-if="item.number!=0">{{item.size}}/{{item.number}}件&nbsp;&nbsp;&nbsp;&nbsp;</em></span>
+        </p>
       <!-- @click= "()=>{title='';visiblePopup.checkSku=false}" -->
-      <div class="popupOk" @click= "checkSkuOk">选好了</div>
+      <div class="popupOk" @click= "checkSkuOk" style="margin-top:16px;">选好了</div>
     </mt-popup>
 
     <!-- 颜色尺码选择popup -->
@@ -998,13 +1010,16 @@
           border-bottom:1px solid #e4e4e4;" @click= "()=>visiblePopup.checkSku=true">
               <div>
                 <span class="sku-select">规格</span>
-                <span class="sku-info" v-if="!curcolorname">选择 颜色分类、尺码</span>
-                <span class="sku-info" v-else>{{curcolorname}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cursizename}}</span>
+                <!-- v-if="!curcolorname" -->
+                <span class="sku-info" >选择 颜色分类、尺码</span>
+                <!-- <span class="sku-info" v-else>{{curcolorname}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cursizename}}</span> -->
               </div>
               <span class="right-menu"></span>
               <div class="product-skuimg">
-                <img v-for="(item,index) in colorarr" :key="index" :src="item.color_img">
+                <p>
+                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img"></em>
                 <span>共{{colorarr.length}}种颜色分类可选</span>
+                </p>
               </div>
             </div>
             <!-- 商品参数 -->
@@ -1018,8 +1033,6 @@
 
            
             <!-- 商品留言 -->
-
-         
             <!-- 商家信息 -->
 
             <!-- 为你推荐 -->
@@ -1094,14 +1107,19 @@
           checkSku: false,
           checkInfo: false,
         },
+        colorCur:[],
         colorarr:[],
+        sizearrrmSome:[],
         sizearr:[],
-        checkcolorindex:null,
-        checksizeindex:null,
+        checkcolorindex:0,
+        colorcheckBtnBoo:[],
+        checksizeBtnBoo:[],
+        checksizeindex:[],
         curcolorname:null,
         cursizename:null,
         checkId:null,
-        shopnum:1,
+        checkIdnums:[],
+        shopnum:[],
         containerTab: 'mainLayout',
         detailTab: 'description',
         productInfo: {
@@ -1118,7 +1136,6 @@
       };
     },
     created: function () {
-        
     },
     watch: {
       wcvisiblePopup:function(newvs,oldvs){
@@ -1152,7 +1169,6 @@ methods: {
   
   wxRegCallback () {
   // 用于微信JS-SDK回调
-  
     this.wxShareTimeline()
     this.wxShareAppMessage()
 },
@@ -1208,20 +1224,19 @@ wxShareAppMessage () {
       
       },
       checkSkuOk(){
-        
         this.visiblePopup.checkSku=false;
-        if(this.checkId){
-            if(this.addType==='cart'){
+        if(this.checkIdnums.length>0){
+          if(this.addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
-          item_sku_id: this.checkId,
-          num:this.shopnum
+          item_sku_info_json: JSON.stringify(this.checkIdnums)
         }).then(response => {
           if(response.code==10000){
           return Toast({
             message: '加入购物车成功',
             position: 'bottom'
           })
+          }else if(response.code==20025){
           }else{
             Toast({
             message: response.msg,
@@ -1232,27 +1247,28 @@ wxShareAppMessage () {
           
         })
         }else if(this.addType==='directBuy'){
-          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
+          this.$router.push({path: '/createOrder',query: {ids:JSON.stringify(this.checkIdnums),checkout_type:2}})
         }
         }
       },
       async addShopCart(addType) { //加入购物车
         this.addType=addType;
-        if(this.checkId==null){
+
+        if(this.checkIdnums.length==0){
           this.visiblePopup.checkSku=true
           return
          }
         if(addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
-          item_sku_id: this.checkId,
-          num:this.shopnum
+          item_sku_info_json: JSON.stringify(this.checkIdnums)
         }).then(response => {
           if(response.code==10000){
           return Toast({
             message: '加入购物车成功'
       
           })
+          }else if(response.code==20025){
           }else{
             Toast({
             message: response.msg
@@ -1263,11 +1279,17 @@ wxShareAppMessage () {
           
         })
         }else{
-          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
+          this.$router.push({path: '/createOrder',query: {ids:JSON.stringify(this.checkIdnums),checkout_type:2}})
         }
        
       },
-      
+      closepopcheckSku(){
+        this.visiblePopup.checkSku=false;
+        for(var i=0;i<this.sizearrrmSome.length;i++){
+          this.sizearrrmSome[i].number=0
+        }
+        this.colorCur=[];
+      },
       async initData() {
         // this.commentParam.ProductNo = this.$route.params.id;
         let Data = await getProduct({
@@ -1287,41 +1309,99 @@ wxShareAppMessage () {
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
         this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
-        this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
+        // this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
-        this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
+        
+
+        this.sizearrrmSome = this.productInfo.item_sku;
+        
+        for(var i=0;i<this.colorarr.length;i++){
+          this.sizearr[i]=[];    
+          this.shopnum[i]=[];
+          for(var j=0;j<this.sizearrrmSome.length;j++){
+            if(this.colorarr[i].color==this.sizearrrmSome[j].color){
+              this.sizearr[i][this.sizearr[i].length]=this.sizearrrmSome[j];
+               this.shopnum[i][this.sizearr[i].length]=0;
+            }  
+          }
+        }
+        
+
+        
+       
+          console.log(this.shopnum)
+          // this.shopnum[i]=0;
+          // this.checksizeBtnBoo[i]=false;
+        
       },
       colorcheckBtn(name,index){
-          this.checkcolorindex=index;
           this.curcolorname=name;
           this.cursizename=null;
-          // this.productInfo.item_sku.filter((item)=>{return item.color==name})
-          this.sizearr =this.productInfo.item_sku.filter((item)=>{return item.color==name})
-          this.checksizeindex=null;
-          this.checkId=null;
+          this.checkcolorindex=index;
+          // this.checkId=null;
        },
-       sizecheckBtn(size,index){
-         if(this.checkcolorindex==null){
-           Toast({
-            message: '请先选择颜色'
-          })
-          return;
-         }
-          this.checksizeindex=index;
-          this.cursizename=size;
-          let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
-          this.checkId=checkIdarr[0].item_sku_id;
-       },
-       operationnum(operation){
-         this.shopnum += operation;
-         if(this.shopnum<1){
-           this.shopnum =1;
-         Toast({
-            message: '宝贝不能再减少了哦'
-          })
-          return;
-         }
+      //  sizecheckBtn(size,index){
+      //    if(this.checkcolorindex==null){
+      //      Toast({
+      //       message: '请先选择颜色'
+      //     })
+      //     return;
+      //    }
+      //     this.checksizeindex=index;
+      //     this.cursizename=size;
+      //     let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
+      //     this.checkId=checkIdarr[0].item_sku_id;
+      //  },
+       operationnum(index,operation,item,index1){
+          item.number+= operation;
+           if(item.number<0){
+            item.number =0;
+          Toast({
+              message: '宝贝不能再减少了哦'
+            })
+            return;
+          }
+
+          let numall=0
+          for(var i=0;i<this.sizearr[index].length;i++){
+             numall+=this.sizearr[index][i].number
+          }
+          let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
+          // console.log(checkIdnumsobj)
+
+          
+          let pushBoo=false;
+          for(var i=0;i< this.checkIdnums.length;i++){
+            if(checkIdnumsobj.item_sku_id==this.checkIdnums[i].item_sku_id){
+              this.checkIdnums[i].number=item.number;
+              pushBoo=true;
+            }
+            if(item.number==0&&item.item_sku_id==this.checkIdnums[i].item_sku_id){
+              this.checkIdnums.splice(i, 1);
+              
+            }
+          }
+          if(pushBoo==false){
+            this.checkIdnums.push(checkIdnumsobj)
+          }
+
+          
+            
+          // console.log(this.checkIdnums)
+          // var hash = {};
+          // this.checkIdnums = this.checkIdnums.reduce(function(arr, current) {
+          //     hash[current.item_sku_id] ? '' : hash[current.item_sku_id] = true && arr.push(current);
+          //     return arr
+          // }, [])
+         
+          console.log(this.checkIdnums)
+           
+          this.colorCur[index]=numall
+          
+          
+
+         
        },
       rmSome(arr, key) {
           let tempObj = {}
@@ -1385,11 +1465,14 @@ wxShareAppMessage () {
         }
         .checkSkuColortitle{
         width: 100%;
-        height: 36px;
+
         line-height: 36px;
         font-size: 16px;
         color: #333;
         padding:0 $padding;
+        span{
+          font-size: 14px;
+        }
         }
         .skuColorlist{
           padding:0 $padding;
@@ -1398,13 +1481,24 @@ wxShareAppMessage () {
             row,
             wrap);
             li{
-              padding: 5px 17px;
+              padding: 4px 16px;
               border: 1px solid #999;
               color: #333;
-              border-radius: 14px;
+              border-radius: 6px;
               font-size: 13px;
               margin-right: 20px;
               margin-bottom: 10px;
+              position: relative;
+              span{
+                position: absolute;
+                right: -10px;
+                top: -10px;
+                padding: 2px 4px;
+                font-size: 12px;
+                background: #ff5527;
+                border-radius: 12px;
+                color: #fff;
+              }
             }
         }
         .skuSizelist{
@@ -1428,11 +1522,13 @@ wxShareAppMessage () {
             center,
             row,
             nowrap);
-            padding: $padding;
-            margin-bottom: 26px;
+            padding: 8px 10px;
+            // margin-bottom: 26px;
             .left{
               font-size: 16px;
               color: #333;
+              min-width: 46%;
+              text-align: center
             }
             .right {
                 @include flexbox(space-between, center, row, nowrap);

@@ -257,19 +257,47 @@
             flex-start,
             column,
             wrap);
-            border-bottom: 1px solid #e4e4e4;
+            // border-bottom: 1px solid #e4e4e4;
             .order-product-item {
-              padding: $padding;
+              // padding: $padding;
               width: 100%;
+              p:last-child{
+                  border-bottom: none
+                }
+              .prodskulist-info{
+                width: 100%;
+                border-bottom: 1px solid #e4e4e4;
+                height: 42px;
+                line-height: 42px;
+                color: #666;
+                font-size: 13px;
+                padding: 0 10px;
+                 @include flexbox(space-between,
+                flex-start,
+                row,
+                nowrap);
+                .sku{
+                  width: 45%;
+                }
+                .price{
+                  width: 20%;
+                  color: $red;
+                  font-size: 16px;
+                  font-weight: bold;
+                }
+                
+                
+              }
               >div {
                 @include flexbox(flex-start,
                 flex-start,
                 row,
                 nowrap);
                 width: 100%;
+                padding: $padding $padding 0;
                 img {
-                  max-width: 90px;
-                  max-height: 90px;
+                  max-width: 75px;
+                  max-height: 75px;
                   // border: 1px solid #eee;
                   border-radius: 6px;
                 }
@@ -719,21 +747,19 @@
       <div class="all-order">
           <div class="order-list">
             <div class="order-item">
-              <div class="order-product-list" v-if="confirmSelectedProduct">
-                <div class="order-product-item" v-for="(item,index) in confirmSelectedProduct.item_info_list" :key="index">
-                  <div>
-                    <img :src="item.item_img">
+              <div class="order-product-list" v-if="confirmSelectedProduct.item_map_list">
+                <div class="order-product-item" v-for="(itemall,index) in confirmSelectedProduct.item_map_list" :key="index">
+                  <div> 
+                    <img :src="itemall.item_bo.index_img_url">
                     <div class="product-info">
-                      <p class="prod-name">{{item.item_title}}</p>
-                      <p class="prodsku-info">颜色 {{item.color}}   尺寸 {{item.size}}</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
-                        <span>x{{item.num}}</span>
-                      </p>
+                      <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                </div>
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">{{item.num}}</span></p>
+                  </div>
               </div>
+
+              
               <div class="order-product-list" v-else>
                 <p style="text-align:center;padding:15px 0; color:#999;font-size:17px;">
             暂无数据
@@ -741,11 +767,11 @@
               </div>
 
 
-              <div class="order-product-detail">
+              <!-- <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -840,7 +866,9 @@ import {
         totalFee: 0.00,
         paymentPassword: null,
         PaymentNo: null,
-        confirmSelectedProduct: {},
+        confirmSelectedProduct: {
+          item_map_list:[]
+          },
         addressData: null,
         visiblePopup: {
           paymentContainerVisible: false,
@@ -886,13 +914,12 @@ import {
         let confirmSelectedData={};
         if(this.$route.query.checkout_type==1){
           confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
-          shopping_cart_ids:this.$route.query.Selectedstr,
+          shopping_cart_ids:this.$route.query.ids,
           checkout_type:this.$route.query.checkout_type
         })
         }else{
           confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
-          shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
-          number:this.$route.query.number}),
+          shopping_cart_ids:this.$route.query.ids,
           checkout_type:this.$route.query.checkout_type
         })
         }
@@ -918,6 +945,7 @@ import {
         }
         if(confirmSelectedData.code==10000){
           this.confirmSelectedProduct = confirmSelectedData.data;
+          console.log(this.confirmSelectedProduct)
         }else if(confirmSelectedData.code==30029){
           this.$router.push('/login');
         }else{
@@ -963,8 +991,7 @@ import {
         })
         }else{
           payData=await payGetData({
-          shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
-          number:this.$route.query.number}),
+          shopping_cart_ids:this.$route.query.ids,
           checkout_type:this.$route.query.checkout_type,
           token:Data.data,
           consignee_id:this.consignee_id
