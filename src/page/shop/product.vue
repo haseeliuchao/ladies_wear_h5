@@ -1061,7 +1061,7 @@
           <span>关注</span>
         </div> -->
         <div class="shopping-cart" @click= "$router.push('/cart')">
-          <em v-if="cartnum">{{cartnum}}</em>
+          <em v-if="cartnum!=0">{{cartnum}}</em>
           <i></i>
           <span>购物车</span>
         </div>
@@ -1286,7 +1286,7 @@ wxShareAppMessage () {
         this.colorCur=[];
       },
       async initData() {
-        this.cartnum = window.sessionStorage.cartnum?window.sessionStorage.cartnum:null;
+        this.cartnum = window.sessionStorage.cartnum!=undefined ? window.sessionStorage.cartnum:0;
         let Data = await getProduct({
          item_id: this.$route.params.id
         });
