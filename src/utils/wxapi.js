@@ -20,6 +20,7 @@ const wxApi = {
         });
         let data = Data.data// PS: 这里根据你接口的返回值来使用
         mBasePath = Data.data.url; 
+        // http://tencent-ai.com/m/?code=071FjLBd0QmaRA1rdtCd0VkTBd0FjLB1&state=1
       wx.config({
         debug: false, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
