@@ -986,7 +986,7 @@
                 <p class="product-pricep">
                 <span style="font-weight:bold;">&yen;</span>
                 <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.sales_consumer_price/100.00|topricenext}}</span>
-                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.cost_price/100.00|topriceafter}}</em>.{{productInfo.cost_price/100.00|topricenext}}</span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.sales_price/100.00|topriceafter}}</em>.{{productInfo.sales_price/100.00|topricenext}}</span>
                 </p>
                 <span class="freight"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
               </div>
@@ -1122,9 +1122,7 @@
         shopnum:[],
         containerTab: 'mainLayout',
         detailTab: 'description',
-        productInfo: {
-          content:''
-        },
+        productInfo: {},
         shopInfo: null,
         // commad: getRecommend,
         // recommendData: [],
@@ -1419,23 +1417,44 @@ wxShareAppMessage () {
     ,
     filters:{
         toafter(value){
+            if(!value){
+              value=0;
+            }else{
+              value=value
+            }
             return value.substring(0, value.indexOf(':'));
         },
         tonext(value){
+          if(!value){
+              value=0;
+            }else{
+              value=value
+            }
             return value.substring(value.indexOf(':')+1);
         },
         topriceafter(value){
+          if(!value){
+              value=0;
+            }else{
+              value=value
+            }
             return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
         },
         topricenext(value){
+          if(!value){
+              value=0;
+            }else{
+              value=value
+            }
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
         }
     },
     mounted: function () {
+       this.initData();
       if(isWeiXin('state')){
       wxapi.wxRegister(this.wxRegCallback)
       }
-      this.initData();
+     
         
     }
   }
