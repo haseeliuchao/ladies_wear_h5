@@ -310,20 +310,47 @@
             flex-start,
             column,
             wrap);
-            border-bottom: 1px solid #e4e4e4;
+            // border-bottom: 1px solid #e4e4e4;
             .order-product-item {
-              padding: $padding;
+              // padding: $padding;
               width: 100%;
+              p:last-child{
+                  border-bottom: none
+                }
+              .prodskulist-info{
+                width: 100%;
+                border-bottom: 1px solid #e4e4e4;
+                // height: 42px;
+                line-height: 22px;
+                color: #666;
+                font-size: 13px;
+                padding: 10px 10px;
+                 @include flexbox(space-between,
+                flex-start,
+                row,
+                nowrap);
+                .sku{
+                  width: 56%;
+                }
+                .price{
+                  width: 20%;
+                  color: $red;
+                  font-size: 16px;
+                  font-weight: bold;
+                }
+                
+                
+              }
               >div {
-                @include flexbox(flex-end,
+                @include flexbox(flex-start,
                 flex-start,
                 row,
                 nowrap);
                 width: 100%;
-                padding: 0px;
+                padding: $padding $padding 0;
                 img {
-                  max-width: 90px;
-                  max-height: 90px;
+                  max-width: 75px;
+                  max-height: 75px;
                   // border: 1px solid #eee;
                   border-radius: 6px;
                 }
@@ -343,7 +370,6 @@
                         
                       }
                       em{
-                        font-size:16px;
                         color: $red;
                         font-style: normal
                       }
@@ -354,7 +380,7 @@
                     nowrap);
                   }
                   p {
-                    @include textoverflow(2);
+                    @include textoverflow(3);
                     font-size: 13px;
                     margin: 4px 0;
                     color: #333;
@@ -453,18 +479,19 @@
                 </div>
               </div>
               <div class="order-product-list">
-                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
-                  <div @click= "()=>$router.push('/product/'+item.item_id)">
-                    <img :src="item.item_img">
+
+                <div class="order-product-item" v-for="(itemall,index) in confirmSelectedProduct.item_map_list" :key="index">
+                  <div @click= "()=>$router.push('/product/'+itemall.item_bo.item_id)"> 
+                    <img :src="itemall.item_bo.index_img_url">
                     <div class="product-info">
-                      <p class="prod-name">{{item.item_title}}</p>
-                      <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
-                        <span>x{{item.num}}</span>
-                      </p>
+                      <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span></p>
+                <!-- </div> -->
+              
+                <!-- <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index"> -->
+                  
                 <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
                 <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
