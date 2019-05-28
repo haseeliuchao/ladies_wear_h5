@@ -43,7 +43,7 @@ import {
       //   }
       // },
       async loginData() { //更新数据
-       if(isWeiXin('state')){
+       if(isWeiXin('code')){
           let that=this;
           var retstr='';
           var unicode=BASE64.decoder(utils.getUrlKey('state'));
@@ -52,9 +52,6 @@ import {
           for(var i = 0 , len =  unicode.length ; i < len ;++i){
               unicodestr += String.fromCharCode(unicode[i]);
           }
-          
-
-      
             let Data = await this.$store.dispatch('LoginInit', {
                 code:utils.getUrlKey('code')
               })

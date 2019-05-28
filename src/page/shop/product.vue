@@ -1304,13 +1304,12 @@ wxShareAppMessage () {
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
         this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
-        // this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
-        
-
         this.sizearrrmSome = this.productInfo.item_sku;
-        
+        if(isWeiXin('code')){
+        wxapi.wxRegister(this.wxRegCallback)
+        }
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];
@@ -1320,34 +1319,13 @@ wxShareAppMessage () {
                this.shopnum[i][this.sizearr[i].length]=0;
             }  
           }
-        }
-        
-
-        
-       
-          console.log(this.shopnum)
-          // this.shopnum[i]=0;
-          // this.checksizeBtnBoo[i]=false;
-        
+        } 
       },
       colorcheckBtn(name,index){
           this.curcolorname=name;
           this.cursizename=null;
           this.checkcolorindex=index;
-          // this.checkId=null;
        },
-      //  sizecheckBtn(size,index){
-      //    if(this.checkcolorindex==null){
-      //      Toast({
-      //       message: '请先选择颜色'
-      //     })
-      //     return;
-      //    }
-      //     this.checksizeindex=index;
-      //     this.cursizename=size;
-      //     let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
-      //     this.checkId=checkIdarr[0].item_sku_id;
-      //  },
        operationnum(index,operation,item,index1){
           item.number+= operation;
            if(item.number<0){
@@ -1363,9 +1341,6 @@ wxShareAppMessage () {
              numall+=this.sizearr[index][i].number
           }
           let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
-          // console.log(checkIdnumsobj)
-
-          
           let pushBoo=false;
           for(var i=0;i< this.checkIdnums.length;i++){
             if(checkIdnumsobj.item_sku_id==this.checkIdnums[i].item_sku_id){
@@ -1380,23 +1355,7 @@ wxShareAppMessage () {
           if(pushBoo==false){
             this.checkIdnums.push(checkIdnumsobj)
           }
-
-          
-            
-          // console.log(this.checkIdnums)
-          // var hash = {};
-          // this.checkIdnums = this.checkIdnums.reduce(function(arr, current) {
-          //     hash[current.item_sku_id] ? '' : hash[current.item_sku_id] = true && arr.push(current);
-          //     return arr
-          // }, [])
-         
-          console.log(this.checkIdnums)
-           
           this.colorCur[index]=numall
-          
-          
-
-         
        },
       rmSome(arr, key) {
           let tempObj = {}
@@ -1448,9 +1407,7 @@ wxShareAppMessage () {
     },
     mounted: function () {
        this.initData();
-      if(isWeiXin('state')){
-      wxapi.wxRegister(this.wxRegCallback)
-      }
+      
      
         
     }
