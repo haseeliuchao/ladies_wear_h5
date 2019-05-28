@@ -1061,7 +1061,7 @@
           <span>关注</span>
         </div> -->
         <div class="shopping-cart" @click= "$router.push('/cart')">
-          <em>4</em>
+          <em v-if="cartnum">{{cartnum}}</em>
           <i></i>
           <span>购物车</span>
         </div>
@@ -1107,6 +1107,7 @@
           checkSku: false,
           checkInfo: false,
         },
+        cartnum:null,
         colorCur:[],
         colorarr:[],
         sizearrrmSome:[],
@@ -1217,10 +1218,6 @@ wxShareAppMessage () {
       handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
-       
-      async checkSkufun(){
-      
-      },
       checkSkuOk(){
         this.visiblePopup.checkSku=false;
         if(this.checkIdnums.length>0){
@@ -1289,7 +1286,7 @@ wxShareAppMessage () {
         this.colorCur=[];
       },
       async initData() {
-        // this.commentParam.ProductNo = this.$route.params.id;
+        this.cartnum = window.sessionStorage.cartnum;
         let Data = await getProduct({
          item_id: this.$route.params.id
         });

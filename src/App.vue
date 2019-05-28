@@ -61,6 +61,7 @@ import {
               if(Data.code==10000){
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
+                setSessionStorage('cartnum',Data.data.add_cart_count);
                 that.guideindex=getLocalStorage('guideindex');
                 if(!that.guideindex){
                    setLocalStorage('guideindex',1);

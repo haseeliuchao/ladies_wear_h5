@@ -453,12 +453,12 @@
             <p class="cartListEdit" v-if="delshow" @click= "editProductdelshow()">完成</p>
           </div>
           <div class="store-pd" v-if="cartList">
-            <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
+            <div class="store-pd-item" v-for="(item,index) in cartList" :key="index" >
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i>
-              <div class="pd-images">
+              <div class="pd-images" @click= "()=>$router.push('/product/'+item.item_id)">
                 <img :src="item.index_img_url" alt="">
               </div>
-              <div class="pd-info">
+              <div class="pd-info" @click= "()=>$router.push('/product/'+item.item_id)">
                 <div class="pd-title">
                   <p>{{item.item_title}}</p>
                 </div>
