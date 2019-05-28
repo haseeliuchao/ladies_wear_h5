@@ -29,7 +29,7 @@ const wxApi = {
 
         // http://tencent-ai.com/m/?code=071FjLBd0QmaRA1rdtCd0VkTBd0FjLB1&state=1
       wx.config({
-        debug: true, // 开启调试模式
+        debug: false, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
         timestamp: data.timestamp, // 必填，生成签名的时间戳
         nonceStr: data.nonce_str, // 必填，生成签名的随机串
