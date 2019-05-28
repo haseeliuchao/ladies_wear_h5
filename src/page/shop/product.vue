@@ -1286,7 +1286,7 @@ wxShareAppMessage () {
         this.colorCur=[];
       },
       async initData() {
-        this.cartnum = window.sessionStorage.cartnum;
+        this.cartnum = window.sessionStorage.cartnum?window.sessionStorage.cartnum:null;
         let Data = await getProduct({
          item_id: this.$route.params.id
         });
