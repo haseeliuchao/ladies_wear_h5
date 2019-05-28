@@ -19,7 +19,9 @@ const wxApi = {
             url: BASE64.encoder(location.href.split("#")[0])
         });
         let data = Data.data// PS: 这里根据你接口的返回值来使用
-        mBasePath = Data.data.url; 
+        // mBasePath = Data.data.url;
+        mBasePath = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+
         // http://tencent-ai.com/m/?code=071FjLBd0QmaRA1rdtCd0VkTBd0FjLB1&state=1
       wx.config({
         debug: false, // 开启调试模式
