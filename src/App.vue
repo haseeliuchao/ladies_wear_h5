@@ -66,11 +66,11 @@ import {
                    setLocalStorage('guideindex',2);
                 }  
               }
-              if(unicodestr.indexOf('@')!=-1){
-                if(unicodestr.split("@")[1].indexOf('product')!=-1){
-                  this.$router.push(unicodestr.split("@")[1].slice(5))
+             
+                if(unicodestr.indexOf('product')!=-1){
+                  this.$router.push(unicodestr)
                 }
-              }
+              
               
 
        }

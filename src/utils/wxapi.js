@@ -24,7 +24,7 @@ const wxApi = {
 
         // http://tencent-ai.com/m/?code=071FjLBd0QmaRA1rdtCd0VkTBd0FjLB1&state=1
       wx.config({
-        debug: true, // 开启调试模式
+        debug: false, // 开启调试模式
         appId: data.app_id, // 必填，公众号的唯一标识
         timestamp: data.timestamp, // 必填，生成签名的时间戳
         nonceStr: data.nonce_str, // 必填，生成签名的随机串
@@ -75,7 +75,7 @@ const wxApi = {
     wx.onMenuShareAppMessage({
       title: option.title, // 分享标题
       desc: option.desc, // 分享描述
-      link: mBasePath.split("state=")[0]+'state='+BASE64.encoder(mBasePath.split("state=")[1]+option.link), // 分享链接
+      link: mBasePath.split("state=1")[0]+'state='+BASE64.encoder(mBasePath.split("state=1")[1]+option.link), // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
