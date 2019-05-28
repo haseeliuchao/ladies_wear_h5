@@ -58,7 +58,7 @@ const wxApi = {
     wx.onMenuShareTimeline({
       title: option.title, // 分享标题
       desc: option.desc, // 分享描述
-      link: '/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接
+      link: 'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
