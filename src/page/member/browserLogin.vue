@@ -805,9 +805,10 @@ import {
         this.forgetForm.userName = Data.username;
         this.visiblePopup.forgetCode = true
       },
-
-      getImgTokenasync(){
-          let Data = getImgToken({});
+       async registeredSendPhoneMessage() { //获取验证码
+       let imgToken='' 
+       var htmlstr=''
+       let Data = await getImgToken({});
           if(Data.code!=10000){
             Toast({
               message: Data.msg,
@@ -815,14 +816,8 @@ import {
             })
             return
           }
-          return Data.data;
-      },
-       registeredSendPhoneMessage() { //获取验证码
-       let imgToken='' 
-       var htmlstr=''
-        // console.log(this.getImgTokenasync()) ;
-          //  this.getImgTokenasync()
-           htmlstr= '<p>请输入校验码</p><p><input type="text" placeholder="校验码" class="imgcode"><img src="http://tencent-ai.com/mop/api/captcha/get?token='+this.getImgTokenasync()+'" style="height:27px;width:70px; margin-left:6px;vertical-align: bottom;"><span class="changeImg">换一张</span></p>'
+
+          var htmlstr= '<p>请输入校验码</p><p><input type="text" placeholder="校验码" class="imgcode"><img src="http://tencent-ai.com/mop/api/captcha/get?token='+Data.data+'" style="height:27px;width:70px; margin-left:6px;vertical-align: bottom;"><span class="changeImg">换一张</span></p>'
     
         MessageBox.confirm('', { 
             message: htmlstr, 
@@ -844,7 +839,7 @@ import {
                 token:Data.data,
                 phone: this.loginphoneForm.phone
                 });
-                this.registeredForm.resetSendPhoneMessage = 120;
+                this.registeredForm.resetSendPhoneMessage = 60;
                 let times = setInterval(() => {
                     if (this.registeredForm.resetSendPhoneMessage <= 0) {
                         this.registeredForm.resetSendPhoneMessage = null;
