@@ -465,7 +465,7 @@
     <div class="ordertop-address">
       <p class="address-title">收货地址</p>
       <p class="address-username">{{orderDetail.order_shipments_b_o.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.order_shipments_b_o.consignee_phone}}</em></p>
-      <p class="address-text">{{orderDetail.order_shipments_b_o.consignee_address}}</p>
+      <p class="address-text">{{orderDetail.order_shipments_b_o.consignee_province}} {{orderDetail.order_shipments_b_o.consignee_city}} {{orderDetail.order_shipments_b_o.consignee_area}} {{orderDetail.order_shipments_b_o.consignee_address}}</p>
     </div>
 
 
