@@ -480,7 +480,7 @@
               </div>
               <div class="order-product-list">
 
-                <div class="order-product-item" v-for="(itemall,index) in confirmSelectedProduct.item_map_list" :key="index">
+                <div class="order-product-item" v-for="(itemall,index) in orderDetail.item_map_list" :key="index">
                   <div @click= "()=>$router.push('/product/'+itemall.item_bo.item_id)"> 
                     <img :src="itemall.item_bo.index_img_url">
                     <div class="product-info">
