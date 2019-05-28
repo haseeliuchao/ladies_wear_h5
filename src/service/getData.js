@@ -40,6 +40,8 @@ export const payToken = (params) => new Http().require({api: '/api/order/generat
 
 export const getSignature = (params) => new Http().require({api: '/api/jsapi/signature',param: params}); //分享
 
+export const goshare = (params) => new Http().require({api: '/api/redirect',param: params}); //分享
+
 export const payGetData = (params) => new Http().require({api: '/api/order/generate',param: params}); //余额支付
 
 export const payDirect = (params) => new Http().require({api: '/api/order/pay',param: params}); //余额支付
