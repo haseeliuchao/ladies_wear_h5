@@ -320,9 +320,9 @@
                 <!-- <span class="userphone" v-if="!userData.memberInfo">18867202256</span>  -->
               </div>
             </div>
-            <div class="info-box">
+            <!-- <div class="info-box"> -->
               <!-- 真数据 -->
-              <div class="my-validWalletAmount" v-if="userData.memberInfo">
+              <!-- <div class="my-validWalletAmount" v-if="userData.memberInfo">
                 <p class="card" @click= "$router.push('/cardCoupon')">
                   <span>{{userData.userCouponsCount}}</span>
                   <span>我的卡劵</span>
@@ -332,7 +332,7 @@
                   <span>图搜有效期</span>
                 </p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="my-order">
@@ -369,7 +369,7 @@
             <span><img src="~jd/images/addressicon.png">收货地址</span>
             <span>快速管理 ></span>
           </p>
-          <p class="about-item" @click= "openSdk">
+          <p class="about-item" @click= "showToast">
             <span><img src="~jd/images/kefuicon.png">在线客服</span>
             <span>有问题找小惠 ></span>
           </p>
