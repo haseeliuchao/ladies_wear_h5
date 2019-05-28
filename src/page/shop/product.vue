@@ -1236,6 +1236,7 @@ wxShareAppMessage () {
             message: '加入购物车成功',
             position: 'bottom'
           })
+          }else if(response.code==20025){
           }else{
             Toast({
             message: response.msg,
@@ -1267,6 +1268,7 @@ wxShareAppMessage () {
             message: '加入购物车成功'
       
           })
+          }else if(response.code==20025){
           }else{
             Toast({
             message: response.msg

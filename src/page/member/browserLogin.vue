@@ -380,6 +380,22 @@
           <div style="height:18px;">
           <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
           </div>
+
+          <div class="code-all">
+             <div class="code-cell">
+                <div class="code-cellimg" @click="focuscodetwoclick">
+                <img src="~jd/images/login-code.png" style="height:17px;" alt="">
+                </div>
+                <input @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState" v-validate="'required'" name="checkCode" type="text" v-model="loginphoneForm.checkCode" placeholder="请输入图形校验码">
+                <i class="clear" v-show="loginphoneForm.checkCode.length>0" @click= "loginphoneForm.checkCode=''" style="right: 10px;top:10px;"></i>
+            </div>
+              <div @click="getImgTokenasync">
+                  <img :src="imgTokensrc" width="70">
+              </div>
+                   
+              </div>
+              <div style="height:18px;"></div>
+
           <div class="code-all">
              <div class="code-cell">
                 <div class="code-cellimg" @click="focuscodeoneclick">
@@ -388,11 +404,11 @@
                 <input @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState" v-validate="'required|loginCode'" name="loginCode" type="num" v-model="loginphoneForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="loginphoneForm.code.length>0" @click= "loginphoneForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
-              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||loginphoneForm.phone.length==0||loginphoneForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
-                    :disabled="errors.has('mobile')||loginphoneForm.phone.length==0||loginphoneForm.resetSendPhoneMessage">{{loginphoneForm.resetSendPhoneMessage ? `${loginphoneForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
+              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||loginphoneForm.checkCode.length==0||loginphoneForm.phone.length==0||loginphoneForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
+                    :disabled="errors.has('mobile')||loginphoneForm.checkCode.length==0||loginphoneForm.phone.length==0||loginphoneForm.resetSendPhoneMessage">{{loginphoneForm.resetSendPhoneMessage ? `${loginphoneForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
               </div>
               <div style="height:18px;">
-          <span v-show="errors.has('loginCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
+              <span v-show="errors.has('loginCode')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入六位数验证码</span>
               </div>
           <div :class="['cell-btn',errors.has('mobile')||errors.has('loginCode')||loginphoneForm.phone.length==0||loginphoneForm.code.length==0?'disabled-btn':'']" @click="loginRes">下一步</div>
           <p class="goPasswrold" @click="()=>{visiblePopup.loginPhone=false;visiblePopup.loginPassworld=true}">密码登录</p>
@@ -676,7 +692,9 @@ import {
           focussetpassState:false,
           focusphoneoneState : false,
           focuscodeoneState : false,
+          focuscodetwoState : false,
           imgToken:'',
+          imgTokensrc:'',
           
         visiblePopup: {
           loginPassworld: false,
@@ -697,7 +715,8 @@ import {
         loginphoneForm: {
            phone: '',
            code: '',
-           imgCode:''
+           imgCode:'',
+           checkCode:''
         },
         registeredForm: {
           phone: '',
@@ -805,10 +824,8 @@ import {
         this.forgetForm.userName = Data.username;
         this.visiblePopup.forgetCode = true
       },
-       async registeredSendPhoneMessage() { //获取验证码
-       let imgToken='' 
-       var htmlstr=''
-       let Data = await getImgToken({});
+      async getImgTokenasync(){
+        let Data = await getImgToken({});
           if(Data.code!=10000){
             Toast({
               message: Data.msg,
@@ -816,27 +833,17 @@ import {
             })
             return
           }
+          this.imgToken=Data.data
+          this.imgTokensrc='http://192.168.8.44:8182/api/captcha/get?token='+Data.data+'';
+      },
+       
 
-          var htmlstr= '<p>请输入校验码</p><p><input type="text" placeholder="校验码" class="imgcode"><img src="http://tencent-ai.com/mop/api/captcha/get?token='+Data.data+'" style="height:27px;width:70px; margin-left:6px;vertical-align: bottom;"><span class="changeImg">换一张</span></p>'
-    
-        MessageBox.confirm('', { 
-            message: htmlstr, 
-            title: '',
-            cancelButtonClass:'cancelButton', 
-            confirmButtonClass:'confirmButton',
-          }).then(action => {
-             if(document.getElementsByClassName('imgcode')[0].value==''){
-                  Toast({
-                    message: '请输入图形验证码',
-                    position: 'bottom'
-                  })
-                  return
-                }
-            if (action == 'confirm') {     //确认的回调
-               
-                this.$store.dispatch('SendLoginMessage', {
-                captcha_code:document.getElementsByClassName('imgcode')[0].value,
-                token:Data.data,
+
+       async registeredSendPhoneMessage() { //获取验证码
+       
+       await this.$store.dispatch('SendLoginMessage', {
+                captcha_code:this.loginphoneForm.checkCode,
+                token:this.imgToken,
                 phone: this.loginphoneForm.phone
                 });
                 this.registeredForm.resetSendPhoneMessage = 60;
@@ -848,13 +855,6 @@ import {
                         this.registeredForm.resetSendPhoneMessage--;
                     }
                 }, 1000)
-          }
-          }).catch(err => { 
-            if (err == 'cancel') {     //取消的回调
-            } 
-          });
-
-         
       },
       async forgetSendPhoneMessage() { //获取验证码
         await this.$store.dispatch('SendPhoneMessage', {
@@ -897,13 +897,17 @@ import {
       focuscodeoneclick () {
       this.focuscodeoneState = true
       },
+      focuscodetwoclick () {
+      this.focuscodetwoState = true
+      },
     gotoView () {
       window.scroll(0,0)
       this.focusphoneState = false;
       this.focuspassState = false;
       this.focussetpassState = false;
       this.focusphoneoneState = false;
-      this.focuscodeoneState = false
+      this.focuscodeoneState = false;
+      this.focuscodetwoState = false;
     }
     },
     directives: {
@@ -921,6 +925,8 @@ import {
         window.onpopstate = () => {
         this.$router.push('/index')  //输入要返回的上一级路由地址
         }
+
+        this.getImgTokenasync();
     }
   }
 </script>
