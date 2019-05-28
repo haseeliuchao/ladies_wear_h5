@@ -120,7 +120,7 @@ class Http {
             data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
-            if(response.data.code==20025){
+            if(response.data.code==20025||response.data.code==20028){
               if(!isWeiXin('code')){
                 router.push('/browserLogin')
               }else{

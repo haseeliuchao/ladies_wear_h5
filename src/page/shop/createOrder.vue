@@ -267,17 +267,17 @@
               .prodskulist-info{
                 width: 100%;
                 border-bottom: 1px solid #e4e4e4;
-                height: 42px;
-                line-height: 42px;
+                // height: 42px;
+                line-height: 22px;
                 color: #666;
                 font-size: 13px;
-                padding: 0 10px;
+                padding: 10px 10px;
                  @include flexbox(space-between,
                 flex-start,
                 row,
                 nowrap);
                 .sku{
-                  width: 45%;
+                  width: 56%;
                 }
                 .price{
                   width: 20%;
@@ -755,7 +755,7 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">{{item.num}}</span></p>
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span></p>
                   </div>
               </div>
 
@@ -765,13 +765,11 @@
             暂无数据
                </p>
               </div>
-
-
-              <!-- <div class="order-product-detail">
+              <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -914,7 +912,7 @@ import {
         let confirmSelectedData={};
         if(this.$route.query.checkout_type==1){
           confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
-          shopping_cart_ids:this.$route.query.ids,
+          shopping_cart_ids:this.$route.query.Selectedstr,
           checkout_type:this.$route.query.checkout_type
         })
         }else{

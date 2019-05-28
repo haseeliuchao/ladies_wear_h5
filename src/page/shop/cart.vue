@@ -163,6 +163,9 @@
         width: 9.4rem;
         margin: 0 .3rem 110px;
         border-radius: 5px;
+        .store-pd-item:last-child {
+            border-bottom: none;
+          }
         .store-pd-item {
           @include flexbox(flex-start, center, row, wrap);
           padding: 10px;
@@ -578,23 +581,32 @@
     },
 
     methods: {
-      selectedAllGoods(item) {
-        this.cartList.map(items => {
-          if (items.item_status === 1) {
-            items.checked = !this.selectedAll
-          }
-        })
+      selectedAllGoods() {
+             this.cartList.map(items => {
+                if (items.item_status === 1) {
+                  items.checked = !this.selectedAll
+                }
+                items.shopping_cart_item_b_o_list.map(itemdetail=>{
+                  if(items.checked){
+                    itemdetail.checked=true
+                  }else{
+                    itemdetail.checked=false
+                  }
+                })
+              })
         this.selectedAll = !this.selectedAll;
-        this.computedTotalFee(item);
+        this.computedTotalFee();
       },
       
       editProductdel(){
          let SelectedList = [];
         let Selectedstr = '';
         this.cartList.map(item => {
-          if (item.item_status === 1 && item.checked) {
-            SelectedList.push(item.shopping_cart_id)
-          }
+           item.shopping_cart_item_b_o_list.map(itemdetail=>{
+                  if (item.item_status === 1 && itemdetail.checked) {
+                    SelectedList.push(itemdetail.id)
+                  }
+                })
         })
         Selectedstr=SelectedList.join(",");
         if (SelectedList == '') return Toast({
@@ -602,7 +614,7 @@
           position: 'bottom'
         });
         this.$store.dispatch('RemoveSelectedProduct', {
-          shopping_cart_ids: Selectedstr
+          shopping_cart_item_ids: Selectedstr
         }).then(response => {
           // this.$router.push('/createOrder');
           this.onRefreshCallback();
@@ -621,7 +633,7 @@
           
           items.shopping_cart_item_b_o_list.map(itemdetail=>{
             if (itemdetail.checked && items.item_status === 1) {
-            
+                 SelectedList.push(itemdetail.id)
             }
           })
         })
@@ -633,14 +645,13 @@
 
         this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
       },
-      computedTotalFee(item) {
-        
+      computedTotalFee() {
           let computedFee = 0,
           selectedCounter = 0,
           selectedCounter1 =0
         if(this.cartList!=null){
         this.cartList.map(items => {
-          item.shopping_cart_item_b_o_list.map(itemdetail=>{
+          items.shopping_cart_item_b_o_list.map(itemdetail=>{
             if (itemdetail.checked && items.item_status === 1) {
             computedFee += parseFloat(itemdetail.num * itemdetail.sales_consumer_price)
             selectedCounter++
@@ -654,7 +665,7 @@
         })
         this.selectedCounter = selectedCounter;
         
-        item.checked = selectedCounter === item.shopping_cart_item_b_o_list.length?true: false;
+        
          this.selectedAll = selectedCounter1 === this.cartList.length ? true : false;
         this.totalFee = computedFee;
         }
@@ -684,7 +695,7 @@
             shopping_cart_item_id: itemdetail.id,
             num:itemdetail.num
         }
-        this.computedTotalFee(item);
+        this.computedTotalFee();
         await this.$store.dispatch('UpdselectProduct', params)
         // this.onRefreshCallback();
       },
@@ -708,8 +719,8 @@
           itemdetail.checked=1
           })
         }
-        if (count === this.cartList.length) return this.selectedAllGoods(item);
-        this.computedTotalFee(item);
+        if (count === this.cartList.length) return this.selectedAllGoods();
+        this.computedTotalFee();
         
       },
 
@@ -724,7 +735,8 @@
         }else{
           item.checked=false;
         }
-        this.computedTotalFee(item);
+        // item.checked = selectedCounter === item.shopping_cart_item_b_o_list.length?true: false;
+        this.computedTotalFee();
       },
 
       async initData() {
@@ -743,7 +755,7 @@
             this.cartList = response.data.data || null;
             this.cartlength=this.cartList?this.cartList.length:0;
             // this.getGoodsdata()
-            this.computedTotalFee(null);
+            this.computedTotalFee();
             this.selectedAll = false;
             this.selectedchrenAll = false;
             this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
