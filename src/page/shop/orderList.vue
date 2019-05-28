@@ -386,7 +386,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click= "$router.push(`/order/${item.order_code}`)"  v-for="(itemall,index) in orderDetail.item_map_list" :key="index"  >
+              <div class="order-product-list" @click= "$router.push(`/order/${item.order_code}`)"  v-for="(itemall,index) in item.item_map_list" :key="index"  >
                 <!-- <div class="order-product-item">
                   <div>
                     <img :src="itemdetail.item_img">
