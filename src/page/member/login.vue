@@ -156,10 +156,10 @@
         </p>
         <div class="cell-box">
           <div class="phone-cell">
-            <div class="phone-cellimg">
+            <div class="phone-cellimg" @click="focusphoneoneclick">
             <img src="~jd/images/login-phone.png" style="height:20px;" alt="">
             </div>
-            <input v-focus v-validate="'required|mobile'" name="mobile" type="tel" v-model="registeredForm.phone" placeholder="请输入手机号">
+            <input @click="focusphoneoneclick" @blur="gotoView" v-focus="focusphoneoneState" v-validate="'required|mobile'" name="mobile" type="tel" v-model="registeredForm.phone" placeholder="请输入手机号">
             <i class="clear" v-show="registeredForm.phone.length>0" @click= "registeredForm.phone=''" style="right: 10px;top:12px;"></i>
           </div>
           <div style="height:18px;">
@@ -169,10 +169,10 @@
          
           <div class="code-all">
              <div class="code-cell">
-                <div class="code-cellimg">
+                <div class="code-cellimg" @click="focuscodetwoclick">
                 <img src="~jd/images/login-msg.png" style="height:13px;" alt="">
                 </div>
-                <input v-focus v-validate="'required|registeredCode'" name="registeredCode" type="num" v-model="registeredForm.code" placeholder="请输入验证码">
+                <input @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState" v-validate="'required|registeredCode'" name="registeredCode" type="num" v-model="registeredForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="registeredForm.code.length>0" @click= "registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
               <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
@@ -183,11 +183,11 @@
               </div>
 
                <div class="cell-item" >
-           <div class="code-cellimg">
+           <div class="code-cellimg" @click="focuscodeoneclick">
                 <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
             </div>
-            <div class="right">
-              <input v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">
+            <div class="right" @click="focuscodeoneclick" >
+              <input @blur="gotoView" v-focus="focuscodeoneState" v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">
             </div>
             <i class="clear" v-show="registeredForm.password.length>0" @click="registeredForm.password=''" style="right: 40px;"></i>
             <i :class="['eye-icon', registeredForm.passwordFormType=='password'?'eye-close-icon':'']" style="position: absolute;right: 10px;"
@@ -232,6 +232,9 @@ getLocalStorage,
         '\ud83d[\udc00-\ude4f]', 
         '\ud83d[\ude80-\udeff]'
                ],
+          focusphoneoneState : false,
+          focuscodeoneState : false,
+          focuscodetwoState : false,
         visiblePopup: {
           login: true,
           registered: false,
@@ -316,7 +319,30 @@ getLocalStorage,
         setSessionStorage('session_token',Data.data.session_token);
         setSessionStorage('access_token',Data.data.access_token);
         this.$router.go(-1);
+      },
+      focusphoneoneclick () {
+      this.focusphoneoneState = true
+      },
+      focuscodeoneclick () {
+      this.focuscodeoneState = true
+      },
+      focuscodetwoclick () {
+      this.focuscodetwoState = true
+      },gotoView () {
+      window.scroll(0,0)
+      this.focusphoneoneState = false;
+      this.focuscodeoneState = false;
+      this.focuscodetwoState = false;
       }
+    },
+    directives: {
+        focus: {
+        update: function (el, {value}) {
+            if (value) {
+            el.focus()
+            }
+        }
+        }
     },
     mounted: function () {
       pushHistory()
