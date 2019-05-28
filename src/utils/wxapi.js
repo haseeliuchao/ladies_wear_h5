@@ -23,9 +23,9 @@ const wxApi = {
         mBasePath = Data.data.url;
         // mBasePath = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
         
-        let Datalink = await goshare({
-          path: BASE64.encoder(location.href.split("#")[1])
-        });
+        // let Datalink = await goshare({
+        //   path: BASE64.encoder(location.href.split("#")[1])
+        // });
 
         // http://tencent-ai.com/m/?code=071FjLBd0QmaRA1rdtCd0VkTBd0FjLB1&state=1
       wx.config({
@@ -58,7 +58,7 @@ const wxApi = {
     wx.onMenuShareTimeline({
       title: option.title, // 分享标题
       desc: option.desc, // 分享描述
-      link: mBasePath.split("state=")[0]+'state='+BASE64.encoder(mBasePath.split("state=")[1]+option.link), // 分享链接
+      link: '/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
@@ -80,7 +80,7 @@ const wxApi = {
     wx.onMenuShareAppMessage({
       title: option.title, // 分享标题
       desc: option.desc, // 分享描述
-      link: mBasePath.split("state=1")[0]+'state='+BASE64.encoder(option.link)+'#wechat_redirect', // 分享链接
+      link: '/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接
       imgUrl: option.imgUrl, // 分享图标
       success () {
         // 用户成功分享后执行的回调函数
