@@ -249,7 +249,7 @@ import {
     computed: {
       goodInfofilter: function () {
           let that=this;
-          return this.orderDetail.item_map_list.map(item => {
+          return JSON.parse(getLocalStorage('salesList')).item_map_list.map(item => {
                return item.item_sku_list.filter(function (itemdetial) {
                 return itemdetial.order_item_id==that.order_item_id
                })
@@ -262,9 +262,7 @@ import {
     methods: {
     async initData() {
         this.orderDetail=JSON.parse(getLocalStorage('salesList'))
-        console.log(JSON.parse(getLocalStorage('salesList')))
-        console.log(this.orderDetail)
-      },
+      }
     },
     mounted: function () {
       this.initData(),
