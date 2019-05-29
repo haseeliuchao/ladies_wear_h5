@@ -103,7 +103,7 @@
 
   .my-order {
     position:relative;
-    top:-53px;
+    top:-60px;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
@@ -197,6 +197,9 @@
           height:20px;
           margin-right:.266rem;
           margin-bottom:-3px;
+        }
+        img:last-child{
+          height:18px;
         }
       }
       span:last-child{
