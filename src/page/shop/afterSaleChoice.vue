@@ -234,7 +234,6 @@ import {
           paymentContainerVisible: false
         },
         orderDetail: {
-            item_map_list:[]
         },
         active: null,
         order_item_id:null
@@ -261,8 +260,10 @@ import {
     },
 
     methods: {
-      initData() {
+    async initData() {
         this.orderDetail=JSON.parse(getLocalStorage('salesList'))
+        console.log(JSON.parse(getLocalStorage('salesList')))
+        console.log(this.orderDetail)
       },
     },
     mounted: function () {
