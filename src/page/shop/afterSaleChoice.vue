@@ -234,6 +234,7 @@ import {
           paymentContainerVisible: false
         },
         orderDetail: {
+            item_info_list:[]
         },
         active: null,
         order_item_id:null
@@ -249,20 +250,16 @@ import {
     computed: {
       goodInfofilter: function () {
           let that=this;
-          return JSON.parse(getLocalStorage('salesList')).item_map_list.map(item => {
-               return item.item_sku_list.filter(function (itemdetial) {
-                return itemdetial.order_item_id==that.order_item_id
-               })
-           })
-              
-          
+          return this.orderDetail.item_info_list.filter(function (item) {
+            return item.order_item_id==that.order_item_id
+          })
       }
     },
 
     methods: {
-    async initData() {
+      async initData() {
         this.orderDetail=JSON.parse(getLocalStorage('salesList'))
-      }
+      },
     },
     mounted: function () {
       this.initData(),
