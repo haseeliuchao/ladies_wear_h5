@@ -248,7 +248,8 @@ getLocalStorage,
           phone: '',
           code: '',
           password:'',
-          passwordFormType: 'password'
+          passwordFormType: 'password',
+          resetSendPhoneMessage: null,
         }
       }
     },
