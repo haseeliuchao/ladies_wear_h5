@@ -216,7 +216,7 @@ import {
 getLocalStorage,
     setLocalStorage,
     setSessionStorage,
-    getSessionStorage
+    getSessionStorage,pushHistory
   } from '@/utils/mixin';
   import {
     Field,
