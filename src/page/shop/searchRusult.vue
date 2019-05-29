@@ -367,7 +367,7 @@
     <!-- 筛选 -->
     <div class="search-filter">
       <ul class="search-filter-list">
-        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(1)">综合排序</li>
+        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>

@@ -314,7 +314,7 @@
           <div class="product-explain">
             <ul>
               <li><img src="~jd/images/zhengpinicon.png">正品保障</li>
-              <li><img src="~jd/images/tuihuanicon.png">7天退换</li>
+              <li><img src="~jd/images/tuihuanicon.png">五星售后</li>
               <li><img src="~jd/images/shipaiicon.png">商品实拍</li>
               <li><img src="~jd/images/kefuicon1.png">专属客服</li>
             </ul>
