@@ -234,7 +234,7 @@ import {
           paymentContainerVisible: false
         },
         orderDetail: {
-            item_info_list:[]
+            item_map_list:[]
         },
         active: null,
         order_item_id:null
@@ -250,11 +250,13 @@ import {
     computed: {
       goodInfofilter: function () {
           let that=this;
+          return this.orderDetail.item_map_list.map(item => {
+               return item.item_sku_list.filter(function (itemdetial) {
+                return itemdetial.order_item_id==that.order_item_id
+               })
+           })
+              
           
-
-          return this.orderDetail.item_map_list.filter(function (item) {
-            return item.order_item_id==that.order_item_id
-          })
       }
     },
 
