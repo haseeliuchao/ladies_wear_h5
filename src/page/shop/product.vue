@@ -1303,6 +1303,7 @@ wxShareAppMessage () {
         this.productInfo.title =Data.data.title;
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
+        this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
         this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
@@ -1582,13 +1583,14 @@ wxShareAppMessage () {
           background: #ff2741
         }
         .productparameter{
-          height: 44px;
-          width: 100%;
-          padding: 0 $padding;
-          border-bottom:1px solid #e4e4e4;
-          line-height: 44px;
-          font-size: 14px;
-          color: #333;
+          // height: 44px;
+              width: 100%;
+    padding: 9px 10px;
+    border-bottom: 1px solid #e4e4e4;
+    line-height: 22px;
+    
+    font-size: 14px;
+    color: #333;
           span{
             margin-left: 15px;
             color: #999
