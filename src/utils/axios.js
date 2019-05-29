@@ -7,6 +7,7 @@ import {
 import router from '@/router';
 import {
 	setSessionStorage,
+	setLocalStorage,
   getSessionStorage,
   getLocalStorage,
   removeSessionStorage,
@@ -129,7 +130,7 @@ class Http {
             }else if(response.data.code==30010){
               if(isWeiXin('code')){
                 setSessionStorage('head_img_url',response.data.data.head_img_url);
-                setSessionStorage('nickname',response.data.data.nickname);
+                setLocalStorage('nickname',response.data.data.nickname);
                 setSessionStorage('open_id',response.data.data.open_id);
               }
             }
