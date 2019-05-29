@@ -1,5 +1,6 @@
 import {
   login,
+  loginpass,
   loginInit,
   loginBind,
   getUserInfo,
@@ -60,6 +61,19 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         login(parameterData).then(response => {
+          setSessionStorage('MemberToken', response.Data);
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    Loginpass({ //登录
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        loginpass(parameterData).then(response => {
           setSessionStorage('MemberToken', response.Data);
           resolve(response)
         }, err => {

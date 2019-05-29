@@ -330,13 +330,23 @@
                 row,
                 nowrap);
                 .sku{
-                  width: 56%;
+                  width: 40%;
                 }
                 .price{
                   width: 20%;
                   color: $red;
                   font-size: 16px;
                   font-weight: bold;
+                }
+                .payment{
+                  margin-left: 50px;
+                  color: #ff5527;
+                  font-size: 12px;
+                  padding: 0px 4px;
+                  border: 1px solid #ff5527;
+                  border-radius: 20px;
+                  line-height: 15px;
+                  margin-top: 2px;
                 }
                 
                 
@@ -393,6 +403,22 @@
 
                 }
               }
+              .order-btn-group {
+            @include flexbox(flex-end,
+            center,
+            row,
+            nowrap);
+            padding: 5px $padding 16px;
+            width: 10rem;
+            >span {
+              padding: 4px 10px;
+              color: $red;
+              font-size: 13px;
+              border: 1px solid $red;
+              border-radius: 3px;
+              margin: 5px 0 5px 15px;
+            }
+          }
             }
           }
           
@@ -487,17 +513,19 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span></p>
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span> 
+                  <span class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
+                  <span class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
+                  <span class="payment" v-if="item.post_sales_status==2">售后成功</span>
+                  <span class="payment" v-if="item.post_sales_status==3">售后驳回</span>
+                  </p>
                 <!-- </div> -->
               
                 <!-- <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index"> -->
                   
-                <!-- <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
-                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
-                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==2">售后成功</span>
-                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==3">售后驳回</span>
-                </div> -->
+                <div class="order-btn-group">
+                <span style="color:#999;border:1px solid #999" class="payment">下载</span>
+                </div>
                 </div>
                 
                 <!-- <div class="order-btn-group">
@@ -552,6 +580,9 @@
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
         orderDetail: {
+          order_shipments_b_o:{
+              consignee_name:null
+          }
         },
         active: null, 
         countDownTime:null,

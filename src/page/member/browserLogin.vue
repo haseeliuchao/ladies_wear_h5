@@ -454,7 +454,7 @@
         <div :class="['cell-btn',loginForm.username.length==0||loginForm.password.length==0||errors.has('mobileuser')||errors.has('password')?'disabled-btn':'']" @click="()=>{loginForm.username.length==0||loginForm.password.length==0||errors.has('username')||errors.has('password')?false:Login()}">登录</div>
         <div class="other-link">
           <span @click="()=>{visiblePopup.loginPhone=true;visiblePopup.loginPassworld=false}">手机快速登录</span>
-          <span @click="()=>visiblePopup.forget=true">忘记密码</span>
+          <!-- <span @click="()=>visiblePopup.forget=true">忘记密码</span> -->
         </div>
       </div>
     </mt-popup>
@@ -834,6 +834,8 @@ import {
             return
           }
           this.imgToken=Data.data
+          // http://192.168.8.44:8182
+          // http://tencent-ai.com/mop
           this.imgTokensrc='http://tencent-ai.com/mop/api/captcha/get?token='+Data.data+'';
       },
        
@@ -871,12 +873,12 @@ import {
         }, 1000)
       },
       async Login() { //登录
-        let Data = await this.$store.dispatch('Login', {
+        let Data = await this.$store.dispatch('Loginpass', {
           username: this.loginForm.username,
           password: this.loginForm.password
         })
-        if (Data.Code !== 0) return Toast({
-          message: Data.Message,
+        if (Data.Code !== 10000) return Toast({
+          message: Data.msg,
           position: 'bottom'
         })
         this.$router.go(-1);

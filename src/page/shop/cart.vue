@@ -470,7 +470,7 @@
                   </div>
                   <div class="right">
                     <div class="cut" @click= "editProductNum({item:item,itemdetail:itemdetail,increment:-1})"></div>
-                    <input type="text" v-model="itemdetail.num" class="num-inp" @change="editProductNum({item:itemdetail,num:itemdetail.num})">
+                    <input type="text" v-model="itemdetail.num" readonly='readonly' class="num-inp" @change="editProductNum({item:itemdetail,num:itemdetail.num})">
                     <div class="add" @click= "editProductNum({item:item,itemdetail:itemdetail,increment:1})"></div>
                   </div>
                </div>

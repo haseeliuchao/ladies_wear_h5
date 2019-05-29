@@ -3,6 +3,8 @@ import Http from '@/utils/axios';
 //member
 export const login = (params) => new Http().require({api: '/api/login/sms',param:params}); //登录
 
+export const loginpass = (params) => new Http().require({api: '/api/login',param:params}); //密码登录
+
 export const loginInit = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
 
 export const loginBind = (params) => new Http().require({api: '/api/bind/phone',param:params}); //登录
