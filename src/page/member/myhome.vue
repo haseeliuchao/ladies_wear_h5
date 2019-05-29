@@ -103,7 +103,7 @@
 
   .my-order {
     position:relative;
-    top:-60px;
+    top:-70px;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
