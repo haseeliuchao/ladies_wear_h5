@@ -7,7 +7,7 @@
   }
 
   .my-header {
-    height: 205px;
+    height: 155px;
     padding: 18px .33rem;
     background: -webkit-linear-gradient(left, #ff5527, #ff2741);
     background: linear-gradient( #ff5527, #ff2741);
@@ -103,7 +103,7 @@
 
   .my-order {
     position:relative;
-    top:-70px;
+    top:-53px;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
