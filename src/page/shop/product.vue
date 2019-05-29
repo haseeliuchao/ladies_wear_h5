@@ -966,6 +966,11 @@
       </div>
       <div class="popupOk" @click= "()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
+    <!-- 分享引导popup -->
+    <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
+       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
+    margin-top: 8px;width:76%;">
+    </mt-popup>
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
@@ -992,7 +997,7 @@
               </div>
               <div class="product-title-textbottom">
               <p class="product-name-text">{{productInfo.title}}</p>
-              <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+              <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
               <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
@@ -1106,6 +1111,7 @@
         visiblePopup: {
           checkSku: false,
           checkInfo: false,
+          shareBoo:false
         },
         cartnum:null,
         colorCur:[],

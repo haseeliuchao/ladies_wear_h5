@@ -116,6 +116,12 @@
 </style>
 
 <template>
+<div>
+  <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
+       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
+    margin-top: 8px;width:76%;">
+    </mt-popup>
+
   <div class="my-order">
     <div class="ordertop-status">
          <p style="line-height:25px;">订单支付成功<br><em @click= "$router.push('/index')">继续购物</em> | <em @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
@@ -126,7 +132,7 @@
         <img src="~jd/images/huiyanlogo.png" style="height:80px;">
         <p>2018-06-15到期<br>同款商品更低价，不花冤枉钱！</p>
         </div>
-        <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+        <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
     </div>
     <p class="product-listTitle">推荐商品</p>
     <load-more style="width:100%;background:#f2f2f2" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
@@ -145,14 +151,18 @@
               </ul>
     </load-more>
   </div>
+  </div>
 </template>
 
 <script>
  import LoadMore from 'common/loadMore';
  import {searchGoods} from '@/service/getData';
-
+ import wxapi from '@/utils/wxapi';
   import {
-    Toast
+    isWeiXin
+  } from '@/utils/mixin';
+  import {
+    Toast,Popup
   } from 'mint-ui'
   export default {
     data() {
@@ -165,6 +175,9 @@
           page_size: 10,
           current_page: 1
         },
+        visiblePopup: {
+          shareBoo:false
+        }
       };
     },
 
@@ -180,6 +193,54 @@
       async initData() {
        
       },
+        wxRegCallback () {
+  // 用于微信JS-SDK回调
+    this.wxShareTimeline()
+    this.wxShareAppMessage()
+},
+wxShareTimeline () {
+  // 微信自定义分享到朋友圈
+  let option = {
+    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+    imgUrl: 'https://laquimage.b0.upaiyun.com/ICON/2019/4/3/xiazai1559133351741.png', // 分享图标, 请自行替换，需要绝对路径
+    success: () => {
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
+    },
+    error: () => {
+      // alert('已取消分享')
+    }
+  }
+  // 将配置注入通用方法
+  wxapi.ShareTimeline(option)
+},
+wxShareAppMessage () {
+  // 微信自定义分享给朋友
+  // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
+    let option = {
+    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+    imgUrl: 'https://laquimage.b0.upaiyun.com/ICON/2019/4/3/xiazai1559133351741.png', // 分享图标, 请自行替换，需要绝对路径
+    success: () => {
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
+    },
+    error: () => {
+      // alert('已取消分享')
+    }
+  }
+  // 将配置注入通用方法
+  wxapi.ShareAppMessage(option)
+},
       async infiniteCallback(response) { //下拉加载
 
         if(response.data.items!=undefined&&response.data.items!=null){
@@ -202,6 +263,9 @@
         }
     },
     mounted: function () {
+      if(isWeiXin('code')){
+        wxapi.wxRegister(this.wxRegCallback)
+        }
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     }
