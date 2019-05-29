@@ -370,14 +370,6 @@
           </div>
         </slot>
       </div>
-      <!-- <div class="homesearch-hot">
-          <p>热搜：</p>
-          <ul class="homesearch-hot-list">
-            <li class="homesearch-hot-item">智能手发</li>
-            <li class="homesearch-hot-item">智能手收</li>
-            <li class="homesearch-hot-item">智能手收</li>
-          </ul>
-      </div> -->
     </div>
     <!-- 文字搜索 -->
     <mt-popup v-model="searchVisiblie" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
@@ -391,10 +383,7 @@
         </slot>
           <div class="searchInput" @click= "$refs.searchInput.focus()">
             <div class="search-box">
-              <!-- <i class="searchIcon searchContentIcon"></i> -->
-              <!-- @keypress="truesearchGoods" -->
-              <input type="search" v-model="title" @keypress="truesearchGoods" placeholder="品质生活必备" ref="searchInput">
-              <!-- <span class="clear" @click= "title=''" v-show="title.length>0">&times;</span> -->
+              <input type="search" @click="focuskeyworldclick" @blur="gotoView" v-focus="focuskeyworldState" v-model="title" @keypress="truesearchGoods" placeholder="品质生活必备" ref="searchInput">
               <i class="searchIcon searchContentIcon" @click= "selectedProd(title)"></i>
             </div>
           </div>
@@ -442,6 +431,7 @@
       return {
         searchVisiblie: false,
         popupVisible:false,
+        focuskeyworldState:false,
         title: '',
         searchHistoryData: [],
         searchHotData: [],
@@ -460,18 +450,6 @@
          this.searchVisiblie=false 
         }
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
-      }
-    },
-    directives: {
-      searchFocus: {
-        inserted: function (el) {
-          // 聚焦元素
-          el.focus();
-        },
-        update: function (el) {
-          // 聚焦元素
-          el.focus();
-        }
       }
     },
     components: {
@@ -520,9 +498,24 @@
           event.preventDefault(); //禁止默认事件（默认是换行） 
           this.selectedProd(this.title)
       } 
+      }, 
+      focuskeyworldclick () {
+      this.focuskeyworldState = true
+      },
+      gotoView () {
+        window.scroll(0,0)
+        this.focuskeyworldState = false;
       }
     },
-
+    directives: {
+        focus: {
+        update: function (el, {value}) {
+            if (value) {
+            el.focus()
+            }
+        }
+        }
+    },
     mounted: function () {
        this.initData();
 

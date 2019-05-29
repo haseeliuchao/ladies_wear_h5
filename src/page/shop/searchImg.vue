@@ -236,7 +236,7 @@
             <!-- <label for="file">图像上传</label> -->
           </div>
         </div>
-        <p class="search-tip">同款商品更低价，不花冤枉钱!</p>
+        <p class="search-tip" style="margin-bottom:18px;">同款商品更低价，不花冤枉钱!</p>
         <!-- <p class="expire-time">
           图搜有效期：<span>2012/01/29</span>到期
         </p>
@@ -431,9 +431,10 @@
     mounted: function () {
       this.HistoryImgData =  JSON.parse(getLocalStorage('searchHistoryImgData'))?JSON.parse(getLocalStorage('searchHistoryImgData')):[];
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-      this.$refs.indexRusultloadMore.onloadMoreScroll();
+      if(this.HistoryImgData==undefined||this.HistoryImgData==''||this.HistoryImgData==null){
+         this.$refs.indexRusultloadMore.onloadMoreScroll();
+      }
       this.initData();
-
     }
   }
 

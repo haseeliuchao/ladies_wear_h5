@@ -939,7 +939,7 @@
                         </div>
                         <div class="right">
                           <div class="cut" @click= "operationnum(index,-1,item,index1)"></div>
-                          <input type="text" ref="dataNum" v-model="item.number" class="num-inp">
+                          <input type="text" ref="dataNum" readonly='readonly' v-model="item.number" class="num-inp">
                           <div class="add" @click= "operationnum(index,1,item,index1)"></div>
                         </div>
             </div>
