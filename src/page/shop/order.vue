@@ -403,6 +403,22 @@
 
                 }
               }
+              .order-btn-group {
+            @include flexbox(flex-end,
+            center,
+            row,
+            nowrap);
+            padding: 5px $padding 16px;
+            width: 10rem;
+            >span {
+              padding: 4px 10px;
+              color: $red;
+              font-size: 13px;
+              border: 1px solid $red;
+              border-radius: 3px;
+              margin: 5px 0 5px 15px;
+            }
+          }
             }
           }
           
