@@ -250,16 +250,16 @@ import {
     computed: {
       goodInfofilter: function () {
           let that=this;
+          
 
-
-          return this.orderDetail.item_map_list[1].filter(function (item) {
+          return this.orderDetail.item_map_list.filter(function (item) {
             return item.order_item_id==that.order_item_id
           })
       }
     },
 
     methods: {
-      async initData() {
+      initData() {
         this.orderDetail=JSON.parse(getLocalStorage('salesList'))
       },
     },
