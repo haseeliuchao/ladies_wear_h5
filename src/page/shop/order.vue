@@ -330,13 +330,21 @@
                 row,
                 nowrap);
                 .sku{
-                  width: 56%;
+                  width: 40%;
                 }
                 .price{
                   width: 20%;
                   color: $red;
                   font-size: 16px;
                   font-weight: bold;
+                }
+                .payment{
+                  margin-left: 50px;
+                  color: #ff5527;
+                  font-size: 12px;
+                  padding: 2px 4px;
+                  border: 1px solid #ff5527;
+                  border-radius: 20px;
                 }
                 
                 
