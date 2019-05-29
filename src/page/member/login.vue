@@ -175,7 +175,7 @@
                 <input @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState" v-validate="'required|registeredCode'" name="registeredCode" type="num" v-model="registeredForm.code" placeholder="请输入验证码">
                 <i class="clear" v-show="registeredForm.code.length>0" @click= "registeredForm.code=''" style="right: 10px;top:10px;"></i>
             </div>
-              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||registeredForm.phone.length==0?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
+              <div style="background:none!important" :class="['registered-getCode',errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage?'disabled-btn':'']" @click= "registeredSendPhoneMessage"
                     :disabled="errors.has('mobile')||registeredForm.phone.length==0||registeredForm.resetSendPhoneMessage">{{registeredForm.resetSendPhoneMessage ? `${registeredForm.resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</div>
               </div>
               <div style="height:18px;">
@@ -216,7 +216,7 @@ import {
 getLocalStorage,
     setLocalStorage,
     setSessionStorage,
-    getSessionStorage
+    getSessionStorage,pushHistory
   } from '@/utils/mixin';
   import {
     Field,
@@ -248,7 +248,8 @@ getLocalStorage,
           phone: '',
           code: '',
           password:'',
-          passwordFormType: 'password'
+          passwordFormType: 'password',
+          resetSendPhoneMessage: null,
         }
       }
     },
@@ -305,12 +306,20 @@ getLocalStorage,
         }, 1000)
       },
       async LoginBind() { //登录
+        var nickName='';
+        var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g; //校验是否包含表情符
+        if(getLocalStorage('nickname').match(regRule)){
+        nickName=getLocalStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), '')
+       }else{
+         nickName=getLocalStorage('nickname')
+       }
+
         let Data = await this.$store.dispatch('LoginBind', {
           phone: this.registeredForm.phone,
           code: this.registeredForm.code,
           password:this.registeredForm.password,
           head_img_url:getSessionStorage('head_img_url'),
-          nickname:getSessionStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), ''),
+          nickname:nickName,
           open_id:getSessionStorage('open_id')
         })
         if (Data.code !== 10000) return Toast({

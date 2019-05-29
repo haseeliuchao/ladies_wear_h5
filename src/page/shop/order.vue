@@ -624,7 +624,10 @@
           }
         }, 1000)
         
+        // for(var i=0;i<this.orderDetail.item_map_list;i++){
 
+        // }
+        
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },

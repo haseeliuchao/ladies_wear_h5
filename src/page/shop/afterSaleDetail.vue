@@ -327,8 +327,8 @@
        <p class="logisticsAddress">浙江省 杭州市 西湖区 蒋村街道 中国五园新村 2幢幢幢302室</p>
     </div>
 
-    <p class="backmyHome" @click= "$router.push('/myhome')">
-      返回我的主页
+    <p class="backmyHome" @click= "$router.push('/orderList/'+orderDetail.order_code+'')">
+      订单详情
     </p>
 
     <div class="sand-data" v-if="orderDetail.post_sales_status==2" @click= "commitMsg">提交</div>
@@ -339,6 +339,9 @@
   import {
     getSaleDetail,logisticsSend
   } from '@/service/getData';
+  import {
+  pushHistory
+} from '@/utils/mixin';
   import {
     Toast
   } from 'mint-ui'
@@ -375,6 +378,7 @@
           return
         }
         this.orderDetail=Data.data
+        
       },
       async commitMsg(){
         let Data =await logisticsSend({
@@ -420,6 +424,11 @@
     },
     mounted: function () {
       this.initData()
+      pushHistory()
+       // 监听历史记录点, 添加返回事件监听
+        window.onpopstate = () => {
+        this.$router.push('/orderList/0')  //输入要返回的上一级路由地址
+        }
     }
   }
 
