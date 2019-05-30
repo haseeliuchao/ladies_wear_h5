@@ -163,9 +163,6 @@
         width: 9.4rem;
         margin: 0 .3rem 110px;
         border-radius: 5px;
-        // .store-pd-item .pd-price :last-child {
-        //     border-bottom: none;
-        //   }
         .store-pd-item {
           @include flexbox(flex-start, center, row, wrap);
           padding: 10px;
@@ -189,10 +186,10 @@
                   color: $red;
                   font-size: 16px;
                   font-weight: bold;
-                }
+                  }
                 }
                 
-              }
+          }
           &:last-child {
             border-bottom: none;
           }
