@@ -363,9 +363,9 @@
         // 自动上传
         if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
                     if (!this.$refs.upload.active) {
-                            var bucketname="laquimage";
-                            var username="laquimage";
-                            var password="laqu@2016";
+                            var bucketname="imagechao";
+                            var username="system";
+                            var password="4u9nXx9IF5SKSqTW44agMGUh8lyLT4se";
                             var ontime=new Date();
                             var datename=ontime.getFullYear()+"/"+ontime.getMonth()+"/"+ontime.getDay();
                             var save_key="/ICON/"+datename+"/{filename}"+new Date().getTime()+"{.suffix}";
@@ -381,7 +381,7 @@
                             formData.append("policy",policy);
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
-                            that.postSalesImg="https://laquimage.b0.upaiyun.com"+response.data.url;
+                            that.postSalesImg="http://imagechao.test.upcdn.net"+response.data.url;
                             that.$router.push({path: '/searchRusult',query: {item_url:that.postSalesImg}})
                             that.HistoryImgData = getLocalStorage('searchHistoryImgData')?getLocalStorage('searchHistoryImgData'):[];
                             if(that.HistoryImgData.length==0)return setLocalStorage('searchHistoryImgData',[{item_url:that.postSalesImg,Date:new Date()}]);
