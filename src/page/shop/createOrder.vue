@@ -997,7 +997,7 @@ import {
         }
         if(payData.code!==10000){
           Toast({
-            message: 'payData.msg'
+            message: payData.msg
           })
           return
         }
