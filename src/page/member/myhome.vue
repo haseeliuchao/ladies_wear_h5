@@ -376,7 +376,7 @@
             <span><img src="~jd/images/kefuicon.png">在线客服</span>
             <span>有问题找小惠 ></span>
           </p>
-          <p class="about-item" @click= "showToast">
+          <p class="about-item" style="border-bottom:none;" @click= "showToast">
             <span><img src="~jd/images/usicon.png">关于我们</span>
             <span>图搜搜索品质生活 ></span>
       
@@ -455,10 +455,12 @@
       async initData() {
           let res = await this.$store.dispatch('GetUserInfo');
           await this.SET_USERINFO_DATA(res.data);
-          this.userData = res.data;
-        // } else {
-        //   this.userData.userInfo = this.userInfo;
-        // }
+          if(res.code==10000){
+            await this.SET_USERINFO_DATA(res.data);
+            this.userData = res.data;
+          }else{
+            this.userData.memberInfo = null;
+          }
       },
       async showToast(){
         Toast({
