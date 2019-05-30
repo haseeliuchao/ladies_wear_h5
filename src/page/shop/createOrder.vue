@@ -995,7 +995,12 @@ import {
           consignee_id:this.consignee_id
           })
         }
-        
+        if(payData.code!==10000){
+          Toast({
+            message: 'payData.msg'
+          })
+          return
+        }
          this.wxPay(payData.data)
       },
       wxPay(data){
