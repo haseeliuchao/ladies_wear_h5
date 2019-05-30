@@ -163,9 +163,9 @@
         width: 9.4rem;
         margin: 0 .3rem 110px;
         border-radius: 5px;
-        .store-pd-item:last-child {
-            border-bottom: none;
-          }
+        // .store-pd-item .pd-price :last-child {
+        //     border-bottom: none;
+        //   }
         .store-pd-item {
           @include flexbox(flex-start, center, row, wrap);
           padding: 10px;
@@ -415,7 +415,9 @@
       // width: 2.8rem;
     }
   }
-
+   .lastfood{
+     border-bottom: none!important;
+   }
   /* 底部计算栏 */
 </style>
 
@@ -453,8 +455,8 @@
             <p class="cartListEdit" v-if="delshow" @click= "editProductdelshow()">完成</p>
           </div>
           <div class="store-pd" v-if="cartList">
-            <div class="store-pd-item" v-for="(item,index) in cartList" :key="index" >
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i>
+            <div class="store-pd-item"  v-for="(item,index) in cartList" :key="index" >
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1 ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images" @click= "()=>$router.push('/product/'+item.item_id)">
                 <img :src="item.index_img_url" alt="">
               </div>
@@ -463,7 +465,7 @@
                   <p>{{item.item_title}}</p>
                 </div>
               </div>
-               <div class="pd-price" style="width:100%" v-for="(itemdetail,index1) in item.shopping_cart_item_b_o_list" :key="index1">
+               <div  style="width:100%" v-for="(itemdetail,index1) in item.shopping_cart_item_b_o_list" :class="['pd-price',index1===item.shopping_cart_item_b_o_list.length-1&&index===cartList.length-1?'lastfood':'']" :key="index1">
                    <i :class="['select-default-icon',itemdetail.checked ? 'select-icon' : '']" @click= "checkeddetail(item,itemdetail)"></i>
                   <div class="left">
                    <span class="sku"><em>颜色 {{itemdetail.color}}   尺寸 {{itemdetail.size}}</em><br><em class="price">￥{{itemdetail.sales_consumer_price/100.00}}</em></span>

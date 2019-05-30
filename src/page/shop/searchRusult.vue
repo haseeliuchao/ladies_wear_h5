@@ -374,7 +374,7 @@
     <!-- 筛选 -->
 
     <!-- 搜索内容 -->
-    <div class="content">
+    <div class="content" v-if="searchRusultData.length>0">
       <load-more style="width:100%;" v-if="$route.name=='searchRusult'" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
           ref="searchRusultloadMore">
         <ul class="product-list" >
@@ -391,7 +391,8 @@
         </ul>
       </load-more>
     </div>
-    
+   
+
     <!-- 搜索内容 -->
   <BackHead/>
   </div>
