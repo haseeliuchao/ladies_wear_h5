@@ -453,7 +453,7 @@
          if(index==1){
            this.active=0
          }else if(index==2){
-           this.active=0;
+           this.active=1;
            this.sort_enum='ASC'
            if(this.sort_enumboo){
              this.sort_enum='ASC'

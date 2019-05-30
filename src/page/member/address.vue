@@ -264,6 +264,7 @@
         };
         if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
           params.consignee_id = this.$route.params.consignee_id
+          params.if_default = this.$route.params.if_default
            this.$store.dispatch('UpdataAddress',params).then(response=>{
           if(response.code != 10000){
             Toast({
