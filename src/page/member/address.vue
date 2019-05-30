@@ -322,7 +322,7 @@
       async deleteAddress() {
         this.$store.dispatch('RemoveAddress', {
           consignee_id: this.$route.params.consignee_id,
-          if_default : this.$route.params.if_default
+          if_default : this.addressForm.selected ? 1 : 0
         }).then(response => {
           if(response.code != 10000){
             Toast({
