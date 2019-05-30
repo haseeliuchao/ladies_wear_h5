@@ -103,7 +103,7 @@
 
   .my-order {
     position:relative;
-    top:-53px;
+    top:-60px;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
@@ -177,7 +177,7 @@
   // 关于我们
   .my-about{
     position:relative;
-    top:-53px;
+    top:-60px;
     margin: 0 .33rem;
     border-radius:5px;
     background:#fff;
@@ -205,6 +205,9 @@
       span:last-child{
         color:#999;
         font-size:13px;
+      }
+      &:last-child{
+        border:none;
       }
     }
   }
