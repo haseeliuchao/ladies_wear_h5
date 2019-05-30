@@ -509,9 +509,9 @@
         if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
             if (newFile && !oldFile) {
                     if (!this.$refs.upload.active) {
-                            var bucketname="laquimage";
-                            var username="laquimage";
-                            var password="laqu@2016";
+                            var bucketname="imagechao";
+                            var username="system";
+                            var password="4u9nXx9IF5SKSqTW44agMGUh8lyLT4se";
                             var ontime=new Date();
                             var datename=ontime.getFullYear()+"/"+ontime.getMonth()+"/"+ontime.getDay();
                             var save_key="/ICON/"+datename+"/{filename}"+new Date().getTime()+"{.suffix}";
@@ -527,7 +527,7 @@
                             formData.append("policy",policy);
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
-                                that.postSalesImgList.push("https://laquimage.b0.upaiyun.com"+response.data.url);
+                                that.postSalesImgList.push("http://imagechao.test.upcdn.net"+response.data.url);
                               that.postSalesImgstr=that.postSalesImgList.join(",");
             }).catch(function (error) {
                         　　alert(error);
