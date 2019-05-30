@@ -259,6 +259,17 @@ body,
   height: 20px;
   background: url('~jd/images/check3.png') no-repeat;
   background-size: 100% 100%;
+  pointer-events: none;
+  cursor: default;
+}
+.select-defaultnone-cheicon{
+  width: 20px;
+  height: 20px;
+  background: url('~jd/images/check3.png') no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+  visibility: hidden;
+  cursor: default;
 }
 
 //眼睛

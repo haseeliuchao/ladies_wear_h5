@@ -716,7 +716,8 @@ import {
            phone: '',
            code: '',
            imgCode:'',
-           checkCode:''
+           checkCode:'',
+           resetSendPhoneMessage:null
         },
         registeredForm: {
           phone: '',
@@ -848,13 +849,13 @@ import {
                 token:this.imgToken,
                 phone: this.loginphoneForm.phone
                 });
-                this.registeredForm.resetSendPhoneMessage = 60;
+                this.loginphoneForm.resetSendPhoneMessage = 60;
                 let times = setInterval(() => {
-                    if (this.registeredForm.resetSendPhoneMessage <= 0) {
-                        this.registeredForm.resetSendPhoneMessage = null;
+                    if (this.loginphoneForm.resetSendPhoneMessage <= 0) {
+                        this.loginphoneForm.resetSendPhoneMessage = null;
                         clearInterval(times);
                     } else {
-                        this.registeredForm.resetSendPhoneMessage--;
+                        this.loginphoneForm.resetSendPhoneMessage--;
                     }
                 }, 1000)
       },
