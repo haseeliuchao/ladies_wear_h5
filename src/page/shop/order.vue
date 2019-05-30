@@ -330,7 +330,7 @@
                 flex-start,
                 row,
                 nowrap);
-                &:last-child{
+                &:last-child {
                   border-bottom: 1px solid #e4e4e4;
                 }
                 .sku{

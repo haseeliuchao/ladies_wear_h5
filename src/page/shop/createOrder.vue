@@ -788,13 +788,8 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-<<<<<<< HEAD
       <span>合计：<strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
-      <div class="payBtn" @click= "payByWallet">支付</div>
-=======
-      <span>合计：<strong><span>&yen;</span><em style="font-size:18px;">{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
       <div :class="['payBtn',wxPaystatus?'':'disabled-btn']"  @click= "payByWallet">支付</div>
->>>>>>> 8e9d2714644f6eb3e273f3e8029942331d77abae
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
       <img src="~jd/images/paymentloading.gif" />
