@@ -136,7 +136,7 @@
               line-height: 30px;
               margin-bottom: 8px;
               span{
-                font-size: $smsub;
+                font-size: 16px;
                 margin-right: 5px;
               }
               strong{
@@ -370,8 +370,8 @@
                   <div class="prod-info">
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
-                      <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:14px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:14px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
+                      <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                      <span style="margin-left:14px;text-decoration: line-through;color:#999;font-size:14px;"><em style="font-size:14px;">&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
                       </p>
                   </div>
                 </li>

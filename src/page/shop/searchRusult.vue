@@ -452,8 +452,8 @@
         this.searchParams.sort_type=index;
          if(index==1){
            this.active=0
-         }else{
-           this.active=1
+         }else if(index==2){
+           this.active=0;
            this.sort_enum='ASC'
            if(this.sort_enumboo){
              this.sort_enum='ASC'
@@ -461,6 +461,8 @@
              this.sort_enum='DESC'
            }
            this.sort_enumboo=!this.sort_enumboo;
+         }else if(index==3){
+           this.active=0;
          }
          this.searchParams.sort_enum=this.sort_enum;
          this.searchRusult()
