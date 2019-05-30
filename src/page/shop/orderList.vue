@@ -407,7 +407,7 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(itemitemalldetail,index1) in itemall.item_sku_bo_list1" :key="index1"><span class="sku">颜色 {{itemitemalldetail.color}}   尺寸 {{itemitemalldetail.size}}</span> <span class="price">￥{{itemitemalldetail.item_total_price/100.00}}</span>  <span class="num">x {{itemitemalldetail.num}}</span></p>
+                  <p class="prodskulist-info" v-for="(itemitemalldetail,index1) in itemall.item_sku_bo_list" :key="index1"><span class="sku">颜色 {{itemitemalldetail.color}}   尺寸 {{itemitemalldetail.size}}</span> <span class="price">￥{{itemitemalldetail.item_total_price/100.00}}</span>  <span class="num">x {{itemitemalldetail.num}}</span></p>
                </div>
 
               </div>

@@ -125,8 +125,8 @@ class Http {
               if(!isWeiXin('code')){
                 router.push('/browserLogin')
               }else{
-                // router.push('/login')
-                window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+                router.push('/login')
+                // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
               }
             }else if(response.data.code==30010){
               if(isWeiXin('code')){

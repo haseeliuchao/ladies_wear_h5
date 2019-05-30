@@ -253,6 +253,7 @@
       border-radius: 5px;
       font-size: 18px;
       margin-top: 110px;
+      text-align: center
     }
   }
 
@@ -327,7 +328,7 @@
        <p class="logisticsAddress">浙江省 杭州市 西湖区 蒋村街道 中国五园新村 2幢幢幢302室</p>
     </div>
 
-    <p class="backmyHome" @click= "$router.push('/orderList/'+orderDetail.order_code+'')">
+    <p class="backmyHome" @click= "$router.push('/order/'+orderDetail.order_code+'')">
       订单详情
     </p>
 
@@ -427,7 +428,7 @@
       pushHistory()
        // 监听历史记录点, 添加返回事件监听
         window.onpopstate = () => {
-        this.$router.push('/orderList/0')  //输入要返回的上一级路由地址
+        this.$router.push('/myhome')  //输入要返回的上一级路由地址
         }
     }
   }

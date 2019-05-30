@@ -250,9 +250,17 @@ body,
   // display: table;
   width: 20px;
   height: 20px;
-  background: url('~jd/images/check0.png') no-repeat;
+  background: url('~jd/images/check2.png') no-repeat;
   background-size: 100% 100%;
 }
+
+.select-defaultnone-icon {
+  width: 20px;
+  height: 20px;
+  background: url('~jd/images/check3.png') no-repeat;
+  background-size: 100% 100%;
+}
+
 //眼睛
 .eye-icon{
   display: block;
