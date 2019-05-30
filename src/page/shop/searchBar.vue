@@ -489,6 +489,14 @@
         try{
           let Data = JSON.parse(HistoryData);
           Data.unshift({keywords:prod,Date:new Date()});
+          var hash = {};
+          Data = Data.reduce(function(arr, current) {
+              hash[current.keywords] ? '' : hash[current.keywords] = true && arr.push(current);
+              return arr
+          }, [])
+
+          
+
           setLocalStorage('searchHistoryData',Data);
         }catch(err){}
       },
