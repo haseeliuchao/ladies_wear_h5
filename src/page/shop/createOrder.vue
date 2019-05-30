@@ -266,7 +266,6 @@
                 }
               .prodskulist-info{
                 width: 100%;
-                border-bottom: 1px solid #e4e4e4;
                 // height: 42px;
                 line-height: 22px;
                 color: #666;
@@ -276,6 +275,9 @@
                 flex-start,
                 row,
                 nowrap);
+                &:last-child{
+                  border-bottom: 1px solid #e4e4e4;
+                }
                 .sku{
                   width: 56%;
                 }
