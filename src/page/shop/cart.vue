@@ -165,11 +165,15 @@
         border-radius: 5px;
         .store-pd-item {
           @include flexbox(flex-start, center, row, wrap);
-          padding: 10px;
-          // border-bottom: 1px solid #eee;
+          padding: 15px;
+          padding-bottom:10px;
+          border-bottom: 1px solid #e4e4e4;
+          &:last-child{
+            border:none;
+          }
           .prodskulist-info{
                 width: 100%;
-                border-bottom: 1px solid #e4e4e4;
+                // border-bottom: 1px solid #e4e4e4;
                 // height: 42px;
                 line-height: 24px;
                 color: #666;
@@ -188,10 +192,9 @@
                   font-weight: bold;
                   }
                 }
-                
-          }
-          &:last-child {
-            border-bottom: none;
+             &:last-child {
+                border-bottom: 1px solid #e4e4e4;
+              }   
           }
           .pd-images {
             // border: 1px solid #eee;
@@ -201,6 +204,7 @@
             img {
               width: 75px;
               height: 75px;
+              border-radius:5px;
             }
             position: relative;
             .pd-imagestip{
@@ -242,6 +246,16 @@
                     }
                   }
                 }
+              }
+              @media all and(max-width:359px){
+                .left{
+                  width:63%;
+                }
+              }
+              @media all and(min-width:360px){
+                .left{
+                  width:66%;
+                } 
               }
               .right {
                 @include flexbox(space-between, center, row, nowrap);
@@ -385,10 +399,11 @@
         width: 66%;
         text-align: right;
         color: #333;
+        line-height:48px;
         @include textoverflow(1);
         span{
           font-weight: bold;
-          font-size: 12px;
+          font-size: 16px;
           color: #ff2741;
           
         }
@@ -529,7 +544,7 @@
         <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click= "selectedAllGoods"></i>
         <em>全选</em>
         <!-- {{totalFee}} -->
-        <strong v-if="!delshow">合计：<span>&yen;</span> <em style="font-size:18px;">{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
+        <strong v-if="!delshow">合计：<span>&yen;</span> <em style="font-size:16px;">{{totalFee/100.00|topriceafter}}</em><em style="font-size:16px;">.{{totalFee/100.00|topricenext}}</em></strong>
       </div>
       <div v-if="!delshow" class="right" @click= "confirmOrder()">
         <strong>结算</strong>

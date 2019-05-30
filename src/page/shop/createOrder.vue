@@ -163,7 +163,7 @@
         font-size: 14px;
         span{
           font-weight:bold;
-          font-size: 12px;
+          font-size: 16px;
           color: #ff2741; 
         }
         em{
@@ -266,7 +266,6 @@
                 }
               .prodskulist-info{
                 width: 100%;
-                border-bottom: 1px solid #e4e4e4;
                 // height: 42px;
                 line-height: 22px;
                 color: #666;
@@ -276,6 +275,9 @@
                 flex-start,
                 row,
                 nowrap);
+                &:last-child{
+                  border-bottom: 1px solid #e4e4e4;
+                }
                 .sku{
                   width: 56%;
                 }
@@ -357,7 +359,7 @@
                       font-size: 14px;
                       span{
                         font-weight:bold;
-                        font-size: 12px;
+                        font-size: 16px;
                         color: $red;
                         
                       }
@@ -766,7 +768,7 @@
                </p>
               </div>
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
               </div>
@@ -786,7 +788,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><span>&yen;</span><em style="font-size:18px;">{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
+      <span>合计：<strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{confirmSelectedProduct.pay_price/100.00|topricenext}}</em></strong></span>
       <div :class="['payBtn',wxPaystatus?'':'disabled-btn']"  @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">

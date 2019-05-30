@@ -183,7 +183,7 @@
       border-bottom: 1px solid #eee;
       .search-filter-list{
         background: #fff;
-        padding: 0 1.5rem;
+        // padding: 0 1.5rem;
         @include flexbox(space-between,center,row,nowrap);
         .search-filter-item{
           width: 25%;
@@ -197,6 +197,9 @@
           }
           @media all and(min-width:376px){
              margin: 15px .9rem;
+          }
+          &:last-child{
+            margin-right:1.2rem;
           }
           &.active{
             color: $red;
@@ -311,7 +314,7 @@
               line-height: 30px;
               margin-bottom: 8px;
               span{
-                font-size: $smsub;
+                font-size: 14px;
                 margin-right: 5px;
               }
               strong{
@@ -367,7 +370,8 @@
     <!-- 筛选 -->
     <div class="search-filter">
       <ul class="search-filter-list">
-        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
+        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
+        <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
@@ -383,8 +387,8 @@
             <div class="prod-info">
               <p class="prod-title">{{item.title}}</p>
               <p class="prod-price">
-                <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:15px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
+                <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:14px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                <span style="margin-left:14px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
                 </p>
             </div>
           </li>
@@ -446,10 +450,10 @@
       },
       sortType(index){
         this.searchParams.sort_type=index;
-         if(index==1){
+         if(index==1&&index==3){
            this.active=0
          }else{
-           this.active=1
+           this.active=0
            this.sort_enum='ASC'
            if(this.sort_enumboo){
              this.sort_enum='ASC'

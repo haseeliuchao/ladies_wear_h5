@@ -1006,7 +1006,7 @@
             <div class="product-sku" >
               <div>
                 <span class="sku-select">服务</span>
-                <span class="sku-info">7天无理由退货</span>
+                <span class="sku-info">正品保障 细节实拍 专属客服</span>
               </div>
               <!-- <span class="right-menu"></span> -->
             </div>
