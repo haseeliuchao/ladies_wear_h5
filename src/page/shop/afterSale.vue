@@ -589,7 +589,7 @@
             }).then(response=>{
                 if(response.code==10000){
                 setTimeout(()=>{
-                  this.$router.push({path: '/afterSaleDetail',query: {post_sales_id:this.$route.query.post_sales_id}})
+                  this.$router.push({path: '/afterSaleDetail',query: {post_sales_id:response.data.post_sales_id}})
                  },1000)
                 }else{
                   Toast({

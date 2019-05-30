@@ -253,6 +253,7 @@
       border-radius: 5px;
       font-size: 18px;
       margin-top: 110px;
+      text-align: center
     }
   }
 
