@@ -319,9 +319,6 @@
             .order-product-item {
               // padding: $padding;
               width: 100%;
-              p:last-child{
-                  border-bottom: none
-                }
               .prodskulist-info{
                 width: 100%;
                 // height: 42px;

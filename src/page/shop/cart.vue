@@ -168,6 +168,9 @@
           padding: 15px;
           padding-bottom:10px;
           border-bottom: 1px solid #e4e4e4;
+          &:last-child{
+            border:none;
+          }
           .prodskulist-info{
                 width: 100%;
                 // border-bottom: 1px solid #e4e4e4;
@@ -230,10 +233,14 @@
                 }
               }
               @media all and(max-width:359px){
-                width:63%;
+                .left{
+                  width:63%;
+                }
               }
               @media all and(min-width:360px){
-                width:66%;
+                .left{
+                  width:66%;
+                } 
               }
               .right {
                 @include flexbox(space-between, center, row, nowrap);
