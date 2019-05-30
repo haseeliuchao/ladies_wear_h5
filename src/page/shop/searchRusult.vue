@@ -199,7 +199,7 @@
              margin: 15px .9rem;
           }
           &:last-child{
-            margin-right:1.2rem;
+            margin-right:1rem;
           }
           &.active{
             color: $red;
