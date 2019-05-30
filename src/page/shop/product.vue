@@ -1507,8 +1507,9 @@ wxShareAppMessage () {
             .left{
               font-size: 16px;
               color: #333;
-              min-width: 46%;
-              text-align: center
+              min-width: 70%;
+              text-align: left;
+              margin-left: 10px;
             }
             .right {
                 @include flexbox(space-between, center, row, nowrap);

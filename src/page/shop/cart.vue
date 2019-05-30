@@ -206,7 +206,7 @@
               @include flexbox(space-between, center, row, nowrap);
               flex: initial;
                   height: 48px;
-               border-bottom: 1px solid #e4e4e4;
+              //  border-bottom: 1px solid #e4e4e4;
               .left {
                 color: #666;
                  width: 60%;
