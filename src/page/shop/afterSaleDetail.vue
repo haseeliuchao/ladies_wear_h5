@@ -328,7 +328,7 @@
        <p class="logisticsAddress">浙江省 杭州市 西湖区 蒋村街道 中国五园新村 2幢幢幢302室</p>
     </div>
 
-    <p class="backmyHome" @click= "$router.push('/orderList/'+orderDetail.order_code+'')">
+    <p class="backmyHome" @click= "$router.push('/order/'+orderDetail.order_code+'')">
       订单详情
     </p>
 
