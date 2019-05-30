@@ -170,7 +170,7 @@
           border-bottom: 1px solid #e4e4e4;
           .prodskulist-info{
                 width: 100%;
-                border-bottom: 1px solid #e4e4e4;
+                // border-bottom: 1px solid #e4e4e4;
                 // height: 42px;
                 line-height: 24px;
                 color: #666;
@@ -189,10 +189,9 @@
                   font-weight: bold;
                   }
                 }
-                
-          }
-          &:last-child {
-            border-bottom: none;
+             &:last-child {
+                border-bottom: 1px solid #e4e4e4;
+              }   
           }
           .pd-images {
             // border: 1px solid #eee;
