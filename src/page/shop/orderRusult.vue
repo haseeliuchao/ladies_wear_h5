@@ -105,7 +105,7 @@
       nowrap);
       p{
          width: 60%;font-size: 16px;
-         margin-left: .6rem;
+         margin-left: 10px;
          color: #fff;
       }
       

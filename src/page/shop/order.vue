@@ -94,7 +94,7 @@
       nowrap);
       p{
          width: 60%;font-size: 16px;
-         margin-left: .6rem;
+         margin-left: 10px;
          color: #fff;
          line-height: 22px;
       }
@@ -143,7 +143,12 @@
               }
            }
            .order-product-detailone{
-             color: #333
+             color: #333;
+             strong{
+                      span{ 
+                        font-size:16px; 
+                      }   
+              }
            }
            .order-product-detailtwo{
              color: #666;
@@ -310,6 +315,9 @@
             flex-start,
             column,
             wrap);
+            &:last-child{
+              border-bottom: 1px solid #e4e4e4;
+            }
             // border-bottom: 1px solid #e4e4e4;
             .order-product-item {
               // padding: $padding;
@@ -539,13 +547,13 @@
         </div>
     </div>
     <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
         </div>
 
         <div class="order-product-detail" style="margin-top:10px;margin-bottom:90px">
-                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         <div class="order-btn-group">
