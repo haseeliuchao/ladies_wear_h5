@@ -196,9 +196,24 @@
           .pd-images {
             // border: 1px solid #eee;
             margin: 0 10px;
+            border-radius: 4px;
+            overflow: hidden;
             img {
               width: 75px;
               height: 75px;
+            }
+            position: relative;
+            .pd-imagestip{
+              height: 75px;
+              width: 75px;
+              background: rgba(0,0,0,.4);
+              position: absolute;z-index: 2;
+              color: #fff;
+              top: 0;
+              left: 0;
+              font-size: 18px;
+              text-align: center;
+              line-height: 75px;
             }
           }
           .pd-price {
@@ -453,9 +468,10 @@
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item"  v-for="(item,index) in cartList" :key="index" >
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1 ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status==2&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images" @click= "()=>$router.push('/product/'+item.item_id)">
                 <img :src="item.index_img_url" alt="">
+                <span v-if="item.item_status==2" class="pd-imagestip">失效</span>
               </div>
               <div class="pd-info" @click= "()=>$router.push('/product/'+item.item_id)">
                 <div class="pd-title">
@@ -463,7 +479,7 @@
                 </div>
               </div>
                <div  style="width:100%" v-for="(itemdetail,index1) in item.shopping_cart_item_b_o_list" :class="['pd-price',index1===item.shopping_cart_item_b_o_list.length-1&&index===cartList.length-1?'lastfood':'']" :key="index1">
-                   <i :class="['select-default-icon',itemdetail.checked ? 'select-icon' : '']" @click= "checkeddetail(item,itemdetail)"></i>
+                   <i :class="['select-default-icon',itemdetail.checked ? 'select-icon' : '',item.item_status==2&&!delshow ? 'select-defaultnone-cheicon' : '']" @click= "checkeddetail(item,itemdetail)"></i>
                   <div class="left">
                    <span class="sku"><em>颜色 {{itemdetail.color}}   尺寸 {{itemdetail.size}}</em><br><em class="price">￥{{itemdetail.sales_consumer_price/100.00}}</em></span>
                   </div>
@@ -576,12 +592,18 @@
       ...mapGetters([
         'cartProductData',
         'userInfo'
-      ])
+      ]),
+       cartListfilter: function () {
+        return this.cartList.filter(function (item) {
+          return item.item_status===1
+        })
+        }
     },
 
     methods: {
       selectedAllGoods() {
-             this.cartList.map(items => {
+            if(!this.delshow){
+               this.cartList.map(items => {
                 if (items.item_status === 1) {
                   items.checked = !this.selectedAll
                 }
@@ -593,6 +615,20 @@
                   }
                 })
               })
+            }else{
+              this.cartList.map(items => {
+                  items.checked = !this.selectedAll
+                items.shopping_cart_item_b_o_list.map(itemdetail=>{
+                  if(items.checked){
+                    itemdetail.checked=true
+                  }else{
+                    itemdetail.checked=false
+                  }
+                })
+              })
+            }
+            
+
         this.selectedAll = !this.selectedAll;
         this.computedTotalFee();
       },
@@ -602,7 +638,7 @@
         let Selectedstr = '';
         this.cartList.map(item => {
            item.shopping_cart_item_b_o_list.map(itemdetail=>{
-                  if (item.item_status === 1 && itemdetail.checked) {
+                  if (itemdetail.checked) {
                     SelectedList.push(itemdetail.id)
                   }
                 })
@@ -647,7 +683,8 @@
       computedTotalFee() {
           let computedFee = 0,
           selectedCounter = 0,
-          selectedCounter1 =0
+          selectedCounter1 =0,
+          selectedCounter2 =0
         if(this.cartList!=null){
         this.cartList.map(items => {
           items.shopping_cart_item_b_o_list.map(itemdetail=>{
@@ -657,15 +694,28 @@
             }
           })
         })
-        this.cartList.map(items => {
+        if(!this.delshow){
+          this.cartList.map(items => {
           if (items.checked && items.item_status === 1){
              selectedCounter1++
           }
-        })
+          })
+        }else{
+          this.cartList.map(items => {
+          if (items.checked){
+             selectedCounter2++
+          }
+          })
+        }
+        
+       
         this.selectedCounter = selectedCounter;
+        if(!this.delshow){
+        this.selectedAll = selectedCounter1 === this.cartListfilter.length ? true : false;
+        }else{
+            this.selectedAll = selectedCounter2 === this.cartList.length ? true : false;
+        }
         
-        
-         this.selectedAll = selectedCounter1 === this.cartList.length ? true : false;
         this.totalFee = computedFee;
         }
         
@@ -700,7 +750,15 @@
       },
       async editProductdelshow() {
        this.delshow=!this.delshow;
+       this.cartList.map(items => {
+                  items.checked = false
+                items.shopping_cart_item_b_o_list.map(itemdetail=>{
+                    itemdetail.checked=false
+                })
+              })
+        this.computedTotalFee();
       },
+
       async checked(item) {
         item.checked = !item.checked;
         let count = 0;
