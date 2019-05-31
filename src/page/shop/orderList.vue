@@ -379,7 +379,7 @@
         <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top" @click= "$router.push(`/order/${item.order_code}`)">
+              <div class="order-top" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>
@@ -389,22 +389,11 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click= "$router.push(`/order/${item.order_code}`)"  v-for="(itemall,index) in item.item_map_list" :key="index"  >
-                <!-- <div class="order-product-item">
-                  <div>
-                    <img :src="itemdetail.item_img">
-                    <div class="product-info">
-                      <p class="prod-name">{{itemdetail.item_title}}</p>
-                      <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
-                      <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{itemdetail.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{itemdetail.item_price/100.00|topricenext}}</em></strong>
-                        <span>x{{itemdetail.num}}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div> -->
+              <!-- {path: '/order/${item.order_code}',query: {order_status:item.order_status}} -->
+              <div class="order-product-list" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})"  v-for="(itemall,index) in item.item_map_list" :key="index"  >
+               
                <div class="order-product-item" >
-                  <div @click= "()=>$router.push('/product/'+itemall.item_bo.item_id)"> 
+                  <div> 
                     <img :src="itemall.item_bo.index_img_url">
                     <div class="product-info">
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
@@ -445,6 +434,9 @@
     getOrderList,
     payDirect
   } from '@/service/getData';
+  import {
+    pushHistory
+  } from '@/utils/mixin';
   import LoadMore from 'common/loadMore';
   import {
     Toast,MessageBox
@@ -631,9 +623,14 @@
         }
     },
     mounted: function () {
-      console.log(this.$route.name)
+      pushHistory()
+        window.onpopstate = () => {
+        this.$router.push('/myhome')  //输入要返回的上一级路由地址
+        }
+
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0)
+      
     }
   }
 

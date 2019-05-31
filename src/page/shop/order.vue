@@ -344,7 +344,7 @@
                   font-weight: bold;
                 }
                 .payment{
-                  margin-left: 50px;
+                  margin-left: 40px;
                   color: #ff5527;
                   font-size: 12px;
                   padding: 0px 4px;
@@ -572,7 +572,8 @@
   } from '@/service/getData';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    pushHistory
   } from '@/utils/mixin';
   import {
     Toast,MessageBox
@@ -626,7 +627,7 @@
         let times = setInterval(() => {
           let that=this;
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
-          if(that.countDown<=0){
+          if(that.countDown<=0&&this.orderDetail.order_status==1){
             clearInterval(times);
             that.$router.push('/orderList/0')
           }
@@ -725,7 +726,11 @@
 
     },
     mounted: function () {
-      this.initData()
+      this.initData();
+      pushHistory()
+        window.onpopstate = () => {
+        this.$router.push('/orderList/'+this.$route.query.order_status+'')  //输入要返回的上一级路由地址
+        }
     }
   }
 
