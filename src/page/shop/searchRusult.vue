@@ -367,6 +367,9 @@
                 margin-right: 5px;
                 &:last-child{
                   font-size: 14px;
+                  em{
+                    font-size:14px;
+                  }
                 }
               }
               strong{
