@@ -14,7 +14,8 @@
     background: #f2f2f2;
     .cell-from-item {
       @include flexbox(flex-start, center, row, nowrap);
-      padding: 15px $padding;
+      padding: 0 $padding;
+      line-height:48px;
       border-bottom: 1px solid #e4e4e4;
       background:#fff;
       .title {
@@ -35,6 +36,12 @@
           text-align: left;
           font-size: 15px;
           color: #333;
+        }
+        input{
+          line-height:46px;
+        }
+        textarea{
+          margin-top:15px;
         }
       }
     }
@@ -145,7 +152,7 @@
           </div>
           <!-- <i class="arrow-right" style="opacity: .4"></i> -->
         </div>
-        <div class="cell-from-item detail-address" style="height:80px;line-height:2;align-items:flex-start">
+        <div class="cell-from-item detail-address" style="align-items:flex-start">
           <span class="title">详细地址</span>
           <div class="content">
             <textarea type="text" placeholder=" 街道、楼牌号" v-model="addressForm.address"></textarea>

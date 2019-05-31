@@ -339,7 +339,7 @@
             center,
             row,
             nowrap);
-            padding: 5px $padding 15px;
+            padding: 0 $padding 15px;
             >span {
               padding: 4px 10px;
               color: $red;
