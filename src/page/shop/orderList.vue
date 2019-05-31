@@ -402,7 +402,7 @@
                </div>
 
               </div>
-              <div class="order-sku" @click= "$router.push(`/order/${item.order_code}`)">
+              <div class="order-sku" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
