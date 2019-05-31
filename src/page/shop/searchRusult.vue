@@ -478,6 +478,7 @@
   export default {
     data() {
       return {
+        
         popupVisible:false,
         searchRusultData: [],
         commad: searchGoods,
