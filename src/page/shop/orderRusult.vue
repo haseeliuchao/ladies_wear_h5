@@ -119,7 +119,7 @@
 <div>
   <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
        <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
-    margin-top: 8px;width:100%;">
+    margin-top: 8px;width:115%;">
     </mt-popup>
 
   <div class="my-order">
