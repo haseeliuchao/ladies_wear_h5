@@ -14,15 +14,19 @@
     background: #f2f2f2;
     .cell-from-item {
       @include flexbox(flex-start, center, row, nowrap);
-      padding: 15px $padding;
+      padding: 0 $padding;
       border-bottom: 1px solid #e4e4e4;
       background:#fff;
-      .title {
-        width:2.4rem;
-        font-size: 15px;
-        color: #999;
-        white-space: nowrap;
+      line-height:48px;
+      label{
+        .title {
+          width:2.4rem;
+          font-size: 15px;
+          color: #999;
+          white-space: nowrap;
+        }
       }
+      
       .content {
         width: 70%;
         @include placeholderColor($gray);
@@ -35,6 +39,10 @@
           text-align: left;
           font-size: 15px;
           color: #333;
+        }
+        input{
+          height:30px;
+          line-height:30px;
         }
       }
     }
@@ -133,22 +141,22 @@
           </div>
         </div>
         <div class="cell-from-item">
-          <span class="title">手机</span>
+          <label for="phone"><span class="title">手机</span></label>
           <div class="content">
-            <input type="text" v-model="addressForm.phone">
+            <input type="text" v-model="addressForm.phone" id="phone">
           </div>
         </div>
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
-          <span class="title">选择城市</span>
+          <label for="city"><span class="title">选择城市</span></label>
           <div class="content">
-            <input type="text" readonly="readonly" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="">
+            <input type="text" readonly="readonly" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="" id="city">
           </div>
           <!-- <i class="arrow-right" style="opacity: .4"></i> -->
         </div>
-        <div class="cell-from-item detail-address" style="height:80px;line-height:2;align-items:flex-start">
-          <span class="title">详细地址</span>
-          <div class="content">
-            <textarea type="text" placeholder=" 街道、楼牌号" v-model="addressForm.address"></textarea>
+        <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
+          <label for="address"><span class="title">详细地址</span></label>
+          <div class="content" style="margin-top:18px;">
+            <textarea type="text" placeholder=" 街道、楼牌号" v-model="addressForm.address" id="address"></textarea>
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
