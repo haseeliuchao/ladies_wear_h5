@@ -282,21 +282,66 @@
         }
       }
     }
+    .imgsearch-no-list{
+      width: 10rem;
+      text-align: center;
+      background: #fff;
+      padding-bottom: 20px;
+      img{
+        width: 30%;
+        margin-bottom: 8px;
+      }
+      .imgsearch-notext{
+        line-height: 42px;
+        color: #999;
+        font-size: 15px;
+      }
+      .imgsearch-text-link{
+        // padding: 6px 20px;
+        border: 1px solid $red;
+        color: $red;
+        width: 4rem;
+        margin-left: 3rem;
+        font-size: 14px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 3px;
+        // margin-bottom: 10px;
+      }
+
+    }
+    .product-list-top{
+      padding: 15px 12px; 
+      @include flexbox(space-between,center,row,nowrap);
+      font-size: 15px;
+      .product-list-topl{
+        color: #333;
+        border-left: 4px solid $red;
+        padding-left: 6px
+      }
+      .product-list-topr{
+        color: #666;
+        em{
+          color: $red
+        }
+      }
+    }
     .content{
       width: 100%;
       .product-list{
         @include flexbox(space-between,center,row,wrap);
-        padding: 0 12px;
+        padding: 0 .3rem;
         .prod-item{
           background: #fff;
-          width: 48.6%;
+          width: 4.58rem;
           margin-bottom: 8px;
           border-radius: 6px;
           overflow: hidden;
+          text-align: center;
           img{
-            width: 100%;
-            height: 162px;
-            border-radius: 6px;
+            // width: 4.58rem;
+            height: 4.58rem;
+            // border-radius: 6px;
           }
           .prod-info{
             // margin-left: 10px;
@@ -374,13 +419,25 @@
     <!-- 搜索框 -->
     
     <!-- 筛选 -->
-    <div class="search-filter">
+    <div class="search-filter" v-if="imgsearchTrue">
       <ul class="search-filter-list">
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
+
+    <div class="imgsearch-no-list" v-if="imgsearchNo">
+       <img src="~jd/images/imgsearchNoimg.png">
+       <p class="imgsearch-notext">sorry, 图片暂未搜到你查找的商品</p>
+       <p class="imgsearch-text-link" @click= "$router.push({path: '/index'})">试试文字搜索</p>
+    </div>
+
+     <p class="product-list-top" v-if="imgsearchNo">
+            <span class="product-list-topl">精选推荐</span>
+            <span class="product-list-topr">去<em @click= "$router.push('/index')">商城首页</em>逛逛</span>
+     </p>
+
     <!-- 筛选 -->
 
     <!-- 搜索内容 -->
@@ -394,7 +451,7 @@
               <p class="prod-title">{{item.title}}</p>
               <p class="prod-price">
                 <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:14px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                <span style="margin-left:14px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
+                <span style="margin-left:8px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
                 </p>
             </div>
           </li>
@@ -429,6 +486,8 @@
           page_size: 10,
           current_page: 1
         },
+        imgsearchNo:false,
+        imgsearchTrue:false,
         active:0,
         sort_enum:null,
         sort_enumboo:true,
@@ -486,6 +545,11 @@
         this.img_url = this.$route.query.img_url;
       },
       async infiniteCallback(response) { //下拉加载
+        if(response.msg=='没有搜索结果'){
+           this.imgsearchNo=true
+        }else if(response.msg=='success'){
+            this.imgsearchTrue=true
+        }
         if(response.data.items!=undefined&&response.data.items!=null){
         if (response.data.items.length > 0) {
           response.data.items.map(i => {

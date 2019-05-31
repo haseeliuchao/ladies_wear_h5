@@ -105,20 +105,18 @@
       width: 100%;
       .product-list{
         @include flexbox(space-between,center,row,wrap);
-        padding: 0 12px;
+        padding: 0 .3rem;
         .prod-item{
           background: #fff;
-          width: 48.6%;
+          width: 4.58rem;
           margin-bottom: 8px;
           border-radius: 6px;
           overflow: hidden;
+          text-align: center;
           img{
-            width: 100%;
-            height: 162px;
-            border-radius: 6px;
+            height: 4.58rem;
           }
           .prod-info{
-            // margin-left: 10px;
             padding: 0px 6px;
             
             @include flexbox(space-between,flex-start,column,wrap);
@@ -371,7 +369,7 @@
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
                       <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:14px;text-decoration: line-through;color:#999;font-size:14px;"><em style="font-size:14px;">&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
+                      <span style="margin-left:8px;text-decoration: line-through;color:#999;font-size:14px;"><em style="font-size:14px;">&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
                       </p>
                   </div>
                 </li>

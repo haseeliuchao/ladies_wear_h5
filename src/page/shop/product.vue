@@ -111,10 +111,7 @@
       .scroll-images {
         height: 10rem;
         img {
-          width: 100%;
-          vertical-align: middle;
-          max-height: 10rem;
-          min-height: 10rem;
+          height: 10rem;
         }
       }
     }
@@ -980,7 +977,7 @@
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
                 <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
-                  <img :src="item">
+                  <img v-lazy="item">
                 </mt-swipe-item>
 
               </mt-swipe>

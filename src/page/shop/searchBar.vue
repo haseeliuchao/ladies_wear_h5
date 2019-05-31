@@ -446,11 +446,15 @@
     },
     watch: {
      $route(to,from){
+        
         if(to.path!='/index'&& to.path!='/searchRusult'){
-         this.searchVisiblie=false 
+         this.searchVisiblie=false;
         }
+        
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
-      }
+      },
+
+      
     },
     components: {
       LoadMore
@@ -526,7 +530,8 @@
     },
     mounted: function () {
        this.initData();
-
+       
+       
       try{
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
       }catch(err){}
