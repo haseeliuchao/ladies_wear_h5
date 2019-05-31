@@ -161,6 +161,7 @@
               height: 40px;
               line-height: 20px;
               margin-top: 4px;
+              text-align: left;
             }
             .prod-price{
               color: $red;
