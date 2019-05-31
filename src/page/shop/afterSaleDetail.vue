@@ -87,7 +87,7 @@
               padding: $padding;
               width: 100%;
               >div {
-                @include flexbox(flex-end,
+                @include flexbox(flex-start,
                 flex-start,
                 row,
                 nowrap);

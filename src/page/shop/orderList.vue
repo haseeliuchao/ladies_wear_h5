@@ -307,6 +307,7 @@
           .order-sku {
             background: #fff;
             padding: 8px $padding;
+            padding-bottom:13px;
             text-align: right;
             font-size: $subtitle;
             // border-bottom: 1px solid #eee;
@@ -338,7 +339,7 @@
             center,
             row,
             nowrap);
-            padding: 5px $padding 16px;
+            padding: 5px $padding 15px;
             >span {
               padding: 4px 10px;
               color: $red;
@@ -406,7 +407,7 @@
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
-              <div class="order-btn-group">
+              <div class="order-btn-group" v-if="item.order_status===1||item.order_status===2||item.order_status===3">
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click= "cancelOrder(item)">取消订单</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click= "tipSend">提醒发货</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:item.order_code}})">查看物流</span>
