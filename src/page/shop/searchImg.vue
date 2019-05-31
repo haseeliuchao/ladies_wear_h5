@@ -136,16 +136,16 @@
       }
       .product-list{
         @include flexbox(space-between,center,row,wrap);
-        padding: 0 12px;
+        padding: 0 .3rem;
         .prod-item{
           background: #fff;
-          width: 48.6%;
+          width: 4.58rem;
           margin-bottom: 8px;
           border-radius: 6px;
           overflow: hidden;
           img{
-            width: 100%;
-            height: 162px;
+            width: 4.58rem;
+            height: 4.58rem;
             border-radius: 6px;
           }
           .prod-info{
