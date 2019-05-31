@@ -452,6 +452,7 @@
         }
         
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
+        console.log('asdfasdf')
       },
 
       

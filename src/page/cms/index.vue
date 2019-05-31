@@ -19,7 +19,7 @@
   /* 产品说明 */
   .product-explain{
     background:#fff;
-    padding:10px .3rem 15px;
+    padding:10px .3rem 10px;
     ul{
       @include flexbox(center, center, row, nowrap);
       li{
@@ -68,7 +68,7 @@
     @include flexbox(space-between,center,row,nowrap);
     height:210px;
     background:#fff;
-    padding:15px .3rem;
+    padding:0px .3rem 15px;
     >div{
       @include flexbox(space-between,center,column,wrap);
       height:100%;
@@ -304,7 +304,7 @@
           <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index" @click= "()=>$router.push(item.http_url)">
-              <img :src="item.img_url" alt="item.title">
+              <img v-lazy="item.img_url" alt="item.title">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->
@@ -321,7 +321,7 @@
           <div class="activity-manage">
             <div class="activity-list" v-for="(item,index) in cmsDataTypeads" :key="index">
               <a :href="item.http_url">
-                <img :src="item.img_url" >
+                <img v-lazy="item.img_url" >
               </a>
             </div>
           </div>
@@ -331,14 +331,14 @@
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
                 <a :href="item.http_url">
-                  <img :src="item.img_url">
+                  <img v-lazy="item.img_url">
                 </a>
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-                <img  :src="item.img_url">
+                <img  v-lazy="item.img_url">
               </div>
             </div>
           </div>
