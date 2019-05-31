@@ -670,7 +670,7 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        that.$router.push({path:'/order/'+data.order_code+''})
+                        that.$router.push({path:'/order/'+data.order_code+'?order_status=1'})
                     }
                 }); 
       },  

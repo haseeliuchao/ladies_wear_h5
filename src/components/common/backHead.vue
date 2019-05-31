@@ -65,7 +65,7 @@
     bottom: 100px;
     right: 9px;
     z-index: 2000;
-    @include wh(38px, 38px);
+    @include wh(42px, 42px);
     @include bg("~jd/images/backHand.png");
   }
 
