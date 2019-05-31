@@ -342,7 +342,7 @@
           </div>
         </div>
         <div class="my-order">
-          <h2 style='font-size:20px;'>我的订单</h2>
+          <h2>我的订单</h2>
           <div>
             <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
               <img src="~jd/images/paymenticon2.png" alt="">

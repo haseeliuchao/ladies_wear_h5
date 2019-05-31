@@ -199,7 +199,7 @@
              margin: 15px .9rem;
           }
           &:last-child{
-            margin-right:1rem;
+            margin-right:.8rem;
           }
           &.active{
             color: $red;
@@ -372,7 +372,7 @@
       <ul class="search-filter-list">
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
-        <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
+        <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
     <!-- 筛选 -->
@@ -451,10 +451,10 @@
       sortType(index){
         this.searchParams.sort_type=index;
          if(index==1){
-           this.active=0
+           this.active=1
          }else if(index==2){
-           this.active=1;
-           this.sort_enum='ASC'
+           this.active=2;
+          //  this.sort_enum='ASC'
            if(this.sort_enumboo){
              this.sort_enum='ASC'
            }else{
