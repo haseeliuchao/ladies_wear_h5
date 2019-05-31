@@ -532,7 +532,10 @@
                 <!-- <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index"> -->
                   
                 <div class="order-btn-group" style="border-bottom: 1px solid #e4e4e4;">
-                <span style="color:#999;border:1px solid #999" @click="opendownload(itemall.item_bo.img_zip_url)" class="payment download">下载</span>
+                  <!-- <input type="text" v-model='itemall.item_bo.img_zip_url' id="input"> -->
+                  <textarea id="textCon1" v-model='itemall.item_bo.img_zip_url' readonly="readonly" cols="40" rows="5">
+</textarea>
+                <span style="color:#999;border:1px solid #999" @click="opendownload()" class="payment download">下载</span>
                 </div>
                 </div>
                 
@@ -640,8 +643,8 @@
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },
-      opendownload(url){
-         window.location.href=url;
+      opendownload(){
+       select_all_and_copy(document.getElementById('textCon1'))
       }
       ,
        async payment(item) {
