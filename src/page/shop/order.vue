@@ -626,7 +626,7 @@
         let times = setInterval(() => {
           let that=this;
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
-          if(that.countDown<=0){
+          if(that.countDown<=0&&orderDetail.order_status==1){
             clearInterval(times);
             that.$router.push('/orderList/0')
           }
