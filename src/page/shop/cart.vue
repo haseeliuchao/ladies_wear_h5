@@ -516,7 +516,7 @@
           </div>
         </div>
         <!-- <p v-if="!cartList || cartList == ''" style="margin-top:50px;padding: 15px 0;text-align:center;font-size:16px;color:#999;">购物车是空的</p> -->
-        <div class="cartListNoneOut" v-if="!cartList || cartList == ''">
+        <div class="cartListNoneOut" v-show="!cartList || cartList == ''">
           <div class="cartListNone">
             <img src="~jd/images/cartnone.png">
             <p>购物车快饿瘪了<br>

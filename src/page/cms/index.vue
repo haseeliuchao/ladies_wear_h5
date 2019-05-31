@@ -578,9 +578,9 @@
       this.$refs.indexRusultloadMore.onloadMoreScroll();
       this.updatedData();
       // this.loginData();
-      showBack(status => {
-        this.Status = status;
-      })
+      // showBack(status => {
+      //   this.Status = status;
+      // })
     }
   }
 
