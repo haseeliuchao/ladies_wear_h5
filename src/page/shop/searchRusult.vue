@@ -372,7 +372,7 @@
       <ul class="search-filter-list">
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
-        <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
+        <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'more-sort':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
 
@@ -428,7 +428,7 @@
         imgsearchNo:false,
         active:0,
         sort_enum:null,
-        sort_enumboo:false,
+        sort_enumboo:true,
         img_url:'',
       };
     },
@@ -454,7 +454,8 @@
       sortType(index){
         this.searchParams.sort_type=index;
          if(index==1){
-           this.active=1
+           this.active=1;
+           sort_enum:null
          }else if(index==2){
            this.active=2;
            this.sort_enum='ASC'
@@ -466,6 +467,7 @@
            this.sort_enumboo=!this.sort_enumboo;
          }else if(index==3){
            this.active=0;
+           sort_enum:null
          }
          this.searchParams.sort_enum=this.sort_enum;
          this.searchRusult()
