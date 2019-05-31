@@ -385,6 +385,8 @@
                font-weight:normal;  
                       span{
                         color: #666;
+                        font-size:13px;
+                        font-weight:normal;
                       }
                       em{
                         color: #666;

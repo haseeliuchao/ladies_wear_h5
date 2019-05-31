@@ -153,11 +153,12 @@
            .order-product-detailtwo{
              color: #666;
              strong{
-                
+                      font-size:13px;
+                      font-weight:normal;
                       span{
-                       
+                       font-size:13px;
+                       font-weight:normal;
                         color: #666;
-                        
                       }
                       em{
                         color: #666;
@@ -412,7 +413,7 @@
             center,
             row,
             nowrap);
-            padding: 5px $padding 16px;
+            padding: 0 $padding 15px;
             width: 10rem;
             >span {
               padding: 4px 10px;
@@ -422,6 +423,9 @@
               border-radius: 3px;
               margin: 5px 0 5px 15px;
             }
+            .download{
+                margin:0;
+              }
           }
             }
           }
@@ -527,8 +531,8 @@
               
                 <!-- <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index"> -->
                   
-                <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment">下载</span>
+                <div class="order-btn-group" style="border-bottom: 1px solid #e4e4e4;">
+                <span style="color:#999;border:1px solid #999" class="payment download">下载</span>
                 </div>
                 </div>
                 
@@ -544,7 +548,7 @@
     </div>
     <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em>.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
         </div>
 

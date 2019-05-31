@@ -450,7 +450,7 @@
             <div class="prod-info">
               <p class="prod-title">{{item.title}}</p>
               <p class="prod-price">
-                <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:14px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
                 <span style="margin-left:8px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
                 </p>
             </div>
