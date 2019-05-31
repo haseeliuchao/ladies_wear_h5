@@ -390,8 +390,8 @@ body,
 //图片懒加载展位图
 img[lazy]{
   opacity: 1;
-  transition: opacity .3s ease-in;
-  -webkit-transition: opacity .3s ease-in;
+  transition: opacity .2s ease-in;
+  -webkit-transition: opacity .2s ease-in;
 }
 img[lazy=loading] {
   opacity: 0;
