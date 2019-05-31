@@ -425,7 +425,7 @@
         },
         active:0,
         sort_enum:null,
-        sort_enumboo:true,
+        sort_enumboo:false,
         img_url:'',
       };
     },
@@ -454,7 +454,7 @@
            this.active=1
          }else if(index==2){
            this.active=2;
-          //  this.sort_enum='ASC'
+           this.sort_enum='ASC'
            if(this.sort_enumboo){
              this.sort_enum='ASC'
            }else{
