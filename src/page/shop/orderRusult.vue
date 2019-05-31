@@ -55,10 +55,11 @@
           margin-bottom: 8px;
           border-radius: 6px;
           overflow: hidden;
+          text-align: center;
           img{
-            width: 4.58rem;
+            // width: 4.58rem;
             height: 4.58rem;
-            border-radius: 6px;
+            // border-radius: 6px;
           }
           .prod-info{
             // margin-left: 10px;
