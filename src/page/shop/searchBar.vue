@@ -450,9 +450,7 @@
         if(to.path!='/index'&& to.path!='/searchRusult'){
          this.searchVisiblie=false;
         }
-        
         this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
-        console.log('asdfasdf')
       },
 
       

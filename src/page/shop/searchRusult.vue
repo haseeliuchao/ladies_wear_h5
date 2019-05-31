@@ -446,7 +446,7 @@
           ref="searchRusultloadMore">
         <ul class="product-list" >
           <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-            <img  v-lazy="item.index_img_url" alt="">
+            <img  v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
             <div class="prod-info">
               <p class="prod-title">{{item.title}}</p>
               <p class="prod-price">
