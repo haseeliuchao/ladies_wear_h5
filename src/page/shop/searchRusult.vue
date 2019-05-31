@@ -368,13 +368,15 @@
     <!-- 搜索框 -->
     
     <!-- 筛选 -->
-    <div class="search-filter">
+    <div class="search-filter" v-if="!imgsearchNo">
       <ul class="search-filter-list">
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
       </ul>
     </div>
+
+    <div v-if="imgsearchNo"></div>
     <!-- 筛选 -->
 
     <!-- 搜索内容 -->
@@ -423,6 +425,7 @@
           page_size: 10,
           current_page: 1
         },
+        imgsearchNo:false,
         active:0,
         sort_enum:null,
         sort_enumboo:false,
@@ -478,6 +481,9 @@
         this.img_url = this.$route.query.img_url;
       },
       async infiniteCallback(response) { //下拉加载
+        if(response.msg=='没有搜索结果'){
+           this.imgsearchNo=true
+        }
         if(response.data.items!=undefined&&response.data.items!=null){
         if (response.data.items.length > 0) {
           response.data.items.map(i => {
