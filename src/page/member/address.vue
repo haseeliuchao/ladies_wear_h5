@@ -127,9 +127,9 @@
       <p class="address-tip"><i>*</i>为了提高发货速度，请填写真实信息</p>
       <div class="address-from" style="transition:1s;transform: scale(1);" :class="addressVisible? 'popupVisible' : ''">
         <div class="cell-from-item">
-          <span class="title">姓名</span>
+          <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" v-focus v-model="addressForm.name">
+            <input type="text" v-focus v-model="addressForm.name" id="name">
           </div>
         </div>
         <div class="cell-from-item">
