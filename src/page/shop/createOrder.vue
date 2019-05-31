@@ -1046,7 +1046,7 @@ import {
                     
                         // alert(2)
                         // alert(res.err_msg)
-                        that.$router.push({path:'/order/'+data.order_code+'+?order_status=1'})
+                        that.$router.push({path:'/order/'+data.order_code+'?order_status=1'})
                     }
                 }); 
       }
