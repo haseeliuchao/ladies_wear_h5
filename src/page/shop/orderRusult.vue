@@ -119,7 +119,7 @@
 <div>
   <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
        <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
-    margin-top: 8px;width:76%;">
+    margin-top: 8px;width:100%;">
     </mt-popup>
 
   <div class="my-order">
@@ -130,7 +130,7 @@
     <div class="searchImgtab">
         <div class="searchImgtableft">
         <img src="~jd/images/huiyanlogo.png" style="height:80px;">
-        <p>2018-06-15到期<br>同款商品更低价，不花冤枉钱！</p>
+        <p>同款商品更低价，不花冤枉钱！</p>
         </div>
         <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
     </div>
