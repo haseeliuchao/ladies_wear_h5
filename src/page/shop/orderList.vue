@@ -507,8 +507,8 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        // that.$router.push({path:'/order/'+data.order_code+''})
-                        that.$router.push({path: '/order/'+data.order_code+',query: {order_status:'+data.order_status+'}'})
+                        that.$router.push({path:'/order/'+data.order_code+'?order_status=1'})
+                        // that.$router.push({path: `/order/'+data.order_code+'`,query: {order_status:'+data.order_status+'}'})
                     }
                 }); 
       },
