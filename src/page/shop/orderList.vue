@@ -402,8 +402,9 @@
                     </div>
                   </div>
                 </div> -->
+                <!-- @click= "()=>$router.push('/product/'+itemall.item_bo.item_id)" -->
                <div class="order-product-item" >
-                  <div @click= "()=>$router.push('/product/'+itemall.item_bo.item_id)"> 
+                  <div> 
                     <img :src="itemall.item_bo.index_img_url">
                     <div class="product-info">
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
