@@ -18,15 +18,12 @@
       border-bottom: 1px solid #e4e4e4;
       background:#fff;
       line-height:48px;
-      label{
-        .title {
+      label,&:last-child .title{
           width:2.4rem;
           font-size: 15px;
           color: #999;
           white-space: nowrap;
-        }
       }
-      
       .content {
         width: 70%;
         @include placeholderColor($gray);
