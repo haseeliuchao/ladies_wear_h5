@@ -93,8 +93,14 @@
               line-height: 30px;
               margin-bottom: 8px;
               span{
-                font-size: $smsub;
+                font-size: 16px;
                 margin-right: 5px;
+                &:last-child{
+                  font-size:14px;
+                  em{
+                    font-size:14px;
+                  }
+                }
               }
               strong{
                 font-size: 19px;
