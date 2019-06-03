@@ -388,14 +388,14 @@
       <!-- </load-more> -->
     </div>
     <FooterView/>
-    <BackHead/>
+    <!-- <BackHead/> -->
   </div>
 </template>
 
 <script>
   import FooterView from 'component/footer/footerView';
   import LoadMore from 'common/loadMore';
-  import BackHead from 'common/backHead';
+  // import BackHead from 'common/backHead';
   import {
     Toast
   } from 'mint-ui';
@@ -430,7 +430,6 @@
     components: {
       FooterView,
       LoadMore,
-      BackHead,
       Toast
     },
 
