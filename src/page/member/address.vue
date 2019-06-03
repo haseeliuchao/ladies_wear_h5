@@ -168,7 +168,7 @@
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
-          <span class="title" style='width:3rem;color:#333'>设为默认地址</span>
+          <span class="title" style='width:3rem;color:#333;font-size:15px;'>设为默认地址</span>
           <div class="content">
             <mt-switch v-model="addressForm.selected" style="justify-content:flex-end"></mt-switch>
           </div>
