@@ -96,7 +96,7 @@
   .disabled-btn{
     margin:0;
     border-radius:0;
-    background-color:rgba(0,0,0,.5)!important;
+    background-color:#b4b4b4!important;
     color:#fff!important;
   }
   .cell-btn{
