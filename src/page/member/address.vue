@@ -24,6 +24,9 @@
           color: #999;
           white-space: nowrap;
       }
+      label:last-child{
+            width:auto;
+      }
       .content {
         width: 70%;
         @include placeholderColor($gray);
@@ -36,10 +39,6 @@
           text-align: left;
           font-size: 15px;
           color: #333;
-        }
-        input{
-          height:30px;
-          line-height:30px;
         }
       }
     }

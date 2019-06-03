@@ -4,7 +4,7 @@
   /* 物流信息 */
   .logisticsContainer{
     @include flexbox(space-between,flex-start,column,wrap);
-    @include wh(100%,100%);
+    
     background:$bg;
     .logistics-top{
       width:100%;
@@ -17,38 +17,49 @@
     }
     .logistics-info{
       width:100%;
-      height:calc(100% - 66px);
       padding:13px .3rem;
       background:#fff;
       .logistics-title{
         font-size:16px;
       }
       .orderFollow-list{
-        @include flexbox(flex-start,flex-start,row,nowrap);
+        @include flexbox(flex-start,flex-start,column,wrap);
         padding-top:25px;
         .orderFollow-item{
-          display:flex;
-          flex:1;
-          align-items:flex-start;
-          height:50px;
+         @include flexbox(flex-start,flex-start,row,nowrap);
           font-size:13px;
-        }
-        .orderFollow-list-left{
-          .orderFollow-item{
-            width:80px;
-            color:#999;
-          }
-        }
-        .orderFollow-list-right{
-          .orderFollow-item{
-            width:7rem;
-            font-size:#333;
-            padding-left:25px;
-            background:url('~jd/images/orderLine1.png') no-repeat left 2px;
-            background-size:10px 50px;
+          li{
+            &:first-child{
+               width:2.2rem;;
+            }
             &:last-child{
-              background:url('~jd/images/orderLine2.png') no-repeat left 2px;
-              background-size:10px 10px;
+              position:relative;
+              width:7rem;
+              min-height:28px;
+              padding-left:20px;
+              padding-bottom:25px;
+              border-left:1px dashed #ff2741;
+              span{
+                position: absolute;
+                left: -5.5px;
+                display:inline-block;
+                border-radius:5px;
+                border:5px solid #ff2741;
+                &:last-child{
+                  display:none;
+                }
+              }
+              
+
+            }
+          }
+          &:last-child{
+            li:last-child{
+              padding-bottom:0;
+              span:last-child{
+                bottom:0;
+                display:block;
+              }
             }
           }
         }
@@ -67,11 +78,9 @@
       <div class="logistics-info">
         <h2 class="logistics-title">订单跟踪</h2>
         <div class="orderFollow-list">
-          <ul class="orderFollow-list-left">
-            <li class="orderFollow-item" v-for="(item,index) in logisticsInfo.data" :key="index">{{item.time}}</li>
-          </ul>
-          <ul class="orderFollow-list-right">
-            <li class="orderFollow-item" v-for="(item,index) in logisticsInfo.data" :key="index">{{item.context}}</li>
+          <ul class="orderFollow-item" v-for="(item,index) in logisticsInfo.data" :key="index">
+            <li>{{item.time}}</li>
+            <li><span></span>{{item.context}}<span></span></li>
           </ul>
         </div>
       </div>
