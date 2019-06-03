@@ -514,7 +514,7 @@
               </div>
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(itemall,index) in orderDetail.item_map_list" :key="index">
-                  <div @click= "()=>$router.push('/product/'+itemall.item_bo.item_id)"> 
+                  <div @click= "()=>$router.push({path:'/product/'+itemall.item_bo.item_id,query: {order_status:$route.query.order_status}})"> 
                     <img :src="itemall.item_bo.index_img_url">
                     <div class="product-info">
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
@@ -523,8 +523,8 @@
                   <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span> 
                   <span class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
                   <span class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
-                  <span class="payment" v-if="item.post_sales_status==2">售后成功</span>
-                  <span class="payment" v-if="item.post_sales_status==3">售后驳回</span>
+                  <span class="payment" v-if="item.post_sales_status==4">售后成功</span>
+                  <span class="payment" v-if="item.post_sales_status==5">售后驳回</span>
                   </p>
                 <!-- </div> -->
               
@@ -561,7 +561,7 @@
         <div class="order-btn-group">
                 <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click= "cancelOrder(orderDetail)">取消订单</span>
                 <span v-if="orderDetail.order_status===1" class="payment" @click= "payment(orderDetail)">立即支付</span>
-                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
+                <span v-if="orderDetail.order_status===3||orderDetail.order_status===4" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
                 <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
         </div>
@@ -742,6 +742,7 @@
       this.initData();
       pushHistory()
         window.onpopstate = () => {
+         console.log(this.$router)
         this.$router.push('/orderList/'+this.$route.query.order_status+'')  //输入要返回的上一级路由地址
         }
     }

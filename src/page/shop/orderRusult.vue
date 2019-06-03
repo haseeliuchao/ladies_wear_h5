@@ -161,7 +161,7 @@
  import {searchGoods} from '@/service/getData';
  import wxapi from '@/utils/wxapi';
   import {
-    isWeiXin
+    isWeiXin,pushHistory
   } from '@/utils/mixin';
   import {
     Toast,Popup
@@ -268,6 +268,11 @@ wxShareAppMessage () {
       if(isWeiXin('code')){
         wxapi.wxRegister(this.wxRegCallback)
         }
+      pushHistory()
+        window.onpopstate = () => {
+        this.$router.push('/orderList/2')
+      }
+
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     }

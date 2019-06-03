@@ -29,12 +29,13 @@
          @include flexbox(flex-start,flex-start,row,nowrap);
           font-size:13px;
           li{
+            line-height: 20px;
             &:first-child{
-               width:2.2rem;;
+               width:2.8rem;;
             }
             &:last-child{
               position:relative;
-              width:7rem;
+              width:6.6rem;
               min-height:28px;
               padding-left:20px;
               padding-bottom:25px;
