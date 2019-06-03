@@ -1071,8 +1071,9 @@
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
-      <div class="right" @click= "addShopCart('directBuy')">立即购买</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('directBuy')">立即购买</div>
+      <div class="right" v-if="productInfo.item_status==2" @click= "addShopCart('directBuy')">商品已下架</div>
     </div>
     <!-- 底部导航栏 -->
 
