@@ -1414,9 +1414,6 @@ wxShareAppMessage () {
     },
     mounted: function () {
        this.initData();
-      
-     
-        
     }
   }
 

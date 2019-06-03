@@ -989,6 +989,7 @@ import {
           })
           return
         }
+        this.wxPaystatus=false;
         let Data = await payToken({});
         let payData={};
         if(this.$route.query.checkout_type==1){
@@ -1010,9 +1011,8 @@ import {
           Toast({
             message: payData.msg
           })
+          this.wxPaystatus=true;
           return
-        }else{
-          this.wxPaystatus=false;
         }
          this.wxPay(payData.data)
       },
