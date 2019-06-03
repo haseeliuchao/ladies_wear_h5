@@ -1073,7 +1073,7 @@
       </div>
       <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
       <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('directBuy')">立即购买</div>
-      <div class="right" v-if="productInfo.item_status==2" @click= "addShopCart('directBuy')">商品已下架</div>
+      <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
     </div>
     <!-- 底部导航栏 -->
 
@@ -1291,6 +1291,11 @@ wxShareAppMessage () {
           this.sizearrrmSome[i].number=0
         }
         this.colorCur=[];
+      },
+      tipSend(){
+        Toast({
+            message: "此商品已下架"
+          })
       },
       async initData() {
         this.cartnum = window.sessionStorage.cartnum!=undefined ? window.sessionStorage.cartnum:0;
