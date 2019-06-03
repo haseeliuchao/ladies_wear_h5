@@ -93,6 +93,16 @@
       }
     }
   }
+  .disabled-btn{
+    margin:0;
+    border-radius:0;
+    background-color:rgba(0,0,0,.5)!important;
+    color:#fff!important;
+  }
+  .cell-btn{
+    margin:0;
+    border-radius:0;
+  }
   // .popupVisible {
   //   transform: scale(0.95) !important;
   // }
@@ -133,19 +143,16 @@
         <div class="cell-from-item">
           <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" name="name" v-focus v-validate.initial="'required'" v-model="addressForm.name" id="name">
-          </div>
-          <div style="height:18px;">
-            <span v-show="errors.has('name')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入收货人姓名</span>
+            <input type="text" name="name" v-focus v-validate.initial="'required'"  v-model="addressForm.name" id="name">
           </div>
         </div>
         <div class="cell-from-item">
           <label for="phone"><span class="title">手机</span></label>
-          <div class="content">
+          <div class="content" style="width:33%;">
             <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone">
           </div>
-          <div style="height:18px;">
-            <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
+          <div>
+            <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
           </div>
         </div>
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
@@ -153,18 +160,11 @@
           <div class="content">
             <input type="text" name="city" readonly="readonly" v-validate.initial="'required'" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="" id="city">
           </div>
-          <!-- <i class="arrow-right" style="opacity: .4"></i> -->
-          <div style="height:18px;">
-            <span v-show="errors.has('city')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请选择城市</span>
-          </div>
         </div>
         <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
           <label for="address"><span class="title">详细地址</span></label>
           <div class="content" style="margin-top:16px;">
             <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate.initial="'required'" v-model="addressForm.address" id="address"></textarea>
-          </div>
-          <div style="height:18px;">
-            <span v-show="errors.has('address')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入详细地址</span>
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
@@ -176,7 +176,7 @@
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
       <div  class="save-address" 
-       :class="['cell-btn',!errors.has('name')||errors.has('mobile')||errors.has('city')||errors.has('address')||addressForm.name.length==0||addressForm.phone.length==0||addressForm.address.length==0||addressForm.province.length==0||addressForm.city.length==0||addressForm.area.length==0?'disabled-btn':'']" 
+       :class="['cell-btn',errors.has('name')||errors.has('mobile')||errors.has('address')||addressForm.name.length==0||addressForm.province.length==0||addressForm.city.length==0||addressForm.area.length==0?'disabled-btn':'']" 
       @click= "saveAddress">保存</div>
     </div>
     <div>
