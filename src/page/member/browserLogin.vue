@@ -837,7 +837,7 @@ import {
           this.imgToken=Data.data
           // http://192.168.8.44:8182
           // http://tencent-ai.com/mop
-          this.imgTokensrc='http://tencent-ai.com/mop/api/captcha/get?token='+Data.data+'';
+          this.imgTokensrc=''+process.env.API_ROOT+'/api/captcha/get?token='+Data.data+'';
       },
        
 
