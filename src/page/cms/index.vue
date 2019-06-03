@@ -79,7 +79,7 @@
     }
     .deploy-floor-l{
       width:46%;
-      margin-right:.3rem;
+      margin-right:.2rem;
       .deploy-item{
         width:100%;
         height:100%;
