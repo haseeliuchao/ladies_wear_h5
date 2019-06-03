@@ -249,6 +249,26 @@
         }
       }
     }
+    .product-shop {
+      margin-top: 8px;
+      background: #fff;
+      padding: 15px 10px;
+      @include flexbox(start,
+      center,
+      row,
+      wrap);
+      .sku-select {
+        font-size: 16px;
+        color: #999;
+        margin-right: 15px;
+      }
+      .sku-info {
+        font-size: 14px;
+        color: #333;
+      }
+      
+      
+    }
     .product-comment {
       margin-top: $margin;
       padding: $padding;
@@ -1008,7 +1028,6 @@
                 <span class="sku-select">服务</span>
                 <span class="sku-info">正品保障 细节实拍 专属客服</span>
               </div>
-              <!-- <span class="right-menu"></span> -->
             </div>
             <!-- 商品规格 -->
              <div class="product-sku" style="margin-top:0;border-top:1px solid #e4e4e4;
@@ -1035,7 +1054,14 @@
               </div>
               <span class="right-menu"></span>
             </div>
-
+             <div class="product-shop" v-if="productInfo.store_b_o">
+               <img src="~jd/images/shop_icon.png" height="44px">
+              <div style="margin-left:10px;">
+                <span class="sku-select" style="color:#333;line-height: 26px;
+    font-size: 15px;">{{productInfo.store_b_o.name}}</span><br>
+                <span class="sku-info" style="font-size: 13px;line-height: 20px;">{{productInfo.store_b_o.address}}</span>
+              </div>
+            </div>
            
             <!-- 商品留言 -->
             <!-- 商家信息 -->

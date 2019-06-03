@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 import Router from 'vue-router'
+import wxapi from '@/utils/wxapi';
 /* cms */
 const Index = () => import ('page/cms/index')
 const Article = () =>   import ('page/cms/article')
@@ -215,6 +216,12 @@ const appRouter = {
         ],
        
             scrollBehavior(to, from, savedPosition) {
+                 console.log(to.path)
+                 
+          
+
+
+
                 if(savedPosition) {
                     return savedPosition
                 } else {
