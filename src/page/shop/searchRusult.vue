@@ -394,7 +394,7 @@
   <div class="search-rusult-container">
     <!-- 搜索框 -->
     <!-- 文字搜索 -->
-    <div class="search-top" v-if="searchParams.title||searchParams.category_id">
+    <div class="search-top" v-if="$route.query.title||searchParams.category_id">
       <div class="searchInput">
           <div class="search-box">
             <!-- <i class="searchIcon searchContentIcon"></i> -->
@@ -478,7 +478,7 @@
   export default {
     data() {
       return {
-        
+
         popupVisible:false,
         searchRusultData: [],
         commad: searchGoods,
