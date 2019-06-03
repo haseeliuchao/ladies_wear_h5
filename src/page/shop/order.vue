@@ -533,9 +533,9 @@
                   
                 <div class="order-btn-group" style="border-bottom: 1px solid #e4e4e4;">
                   <!-- <input type="text" v-model='itemall.item_bo.img_zip_url' id="input"> -->
-                  <textarea id="textCon1" v-model='itemall.item_bo.img_zip_url' readonly="readonly" cols="40" rows="5">
+                  <textarea :id="textCon(index)" v-model='itemall.item_bo.img_zip_url' readonly="readonly" cols="10" rows="1" style="visibility: hidden;">
 </textarea>
-                <span style="color:#999;border:1px solid #999" @click="opendownload()" class="payment download">下载</span>
+                <span style="color:#999;border:1px solid #999" @click="opendownload(index)" class="payment download">下载</span>
                 </div>
                 </div>
                 
@@ -580,7 +580,8 @@
   } from '@/utils/mixin';
   import {
     Toast,MessageBox
-  } from 'mint-ui'
+  } from 'mint-ui';
+  // import {clipboard} from '@/utils/copy';
   export default {
     data() {
       return {
@@ -611,6 +612,9 @@
     computed: {},
 
     methods: {
+      textCon(index){
+          return "textCon" +index
+      },
       async initData() {
         // this.commentParam.ProductNo = this.$route.params.id;
         //  console.log(window.location.href)
@@ -643,8 +647,11 @@
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },
-      opendownload(){
-       select_all_and_copy(document.getElementById('textCon1'))
+      opendownload(index){
+        Toast({
+            message: select_all_and_copy(document.getElementById('textCon'+index+'')),
+            position: 'center'
+          })
       }
       ,
        async payment(item) {
