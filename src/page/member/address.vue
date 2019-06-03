@@ -133,26 +133,38 @@
         <div class="cell-from-item">
           <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" v-focus v-model="addressForm.name" id="name">
+            <input type="text" name="name" v-focus v-validate.initial="'required'" v-model="addressForm.name" id="name">
+          </div>
+          <div style="height:18px;">
+            <span v-show="errors.has('name')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入收货人姓名</span>
           </div>
         </div>
         <div class="cell-from-item">
           <label for="phone"><span class="title">手机</span></label>
           <div class="content">
-            <input type="text" v-model="addressForm.phone" id="phone">
+            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone">
+          </div>
+          <div style="height:18px;">
+            <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确的手机号码</span>
           </div>
         </div>
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
           <label for="city"><span class="title">选择城市</span></label>
           <div class="content">
-            <input type="text" readonly="readonly" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="" id="city">
+            <input type="text" name="city" readonly="readonly" v-validate.initial="'required'" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="" id="city">
           </div>
           <!-- <i class="arrow-right" style="opacity: .4"></i> -->
+          <div style="height:18px;">
+            <span v-show="errors.has('city')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请选择城市</span>
+          </div>
         </div>
         <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
           <label for="address"><span class="title">详细地址</span></label>
-          <div class="content" style="margin-top:18px;">
-            <textarea type="text" placeholder=" 街道、楼牌号" v-model="addressForm.address" id="address"></textarea>
+          <div class="content" style="margin-top:16px;">
+            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate.initial="'required'" v-model="addressForm.address" id="address"></textarea>
+          </div>
+          <div style="height:18px;">
+            <span v-show="errors.has('address')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入详细地址</span>
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
@@ -163,8 +175,11 @@
         </div>
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
-      <div class="save-address" @click= "saveAddress">保存</div>
+      <div  class="save-address" 
+       :class="['cell-btn',!errors.has('name')||errors.has('mobile')||errors.has('city')||errors.has('address')||addressForm.name.length==0||addressForm.phone.length==0||addressForm.address.length==0||addressForm.province.length==0||addressForm.city.length==0||addressForm.area.length==0?'disabled-btn':'']" 
+      @click= "saveAddress">保存</div>
     </div>
+     :class="['cell-btn',(!errors.has('name')&&!errors.has('phone')&&!errors.has('city')?&&!errors.has('address'))?'':'disabled-btn']"
     <div>
       <mt-popup v-model="addressVisible" position="bottom"  class="address-pricker">
         <!-- <div class="address-picker-header">
@@ -266,46 +281,44 @@
           address: this.addressForm.address,
           if_default: this.addressForm.selected ? 1 : 0,
         };
-        if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
-          params.consignee_id = this.$route.params.consignee_id
-           this.$store.dispatch('UpdataAddress',params).then(response=>{
-          if(response.code != 10000){
-            Toast({
-              message: '保存失败',
-            })
-          }else {
-            Toast({
-              message: '保存成功'
-            })
-            // this.$router.push({path: '/addressList'})
-            this.$router.go(-1)
-          }
-        }).catch(error=>{
-            Toast({
-              message: '访问接口失败'
-            })
-        });
-        }else{
-           this.$store.dispatch('SaveAddress',params).then(response=>{
-          if(response.code != 10000){
-            Toast({
-              message: '保存失败',
-            })
-          }else {
-            Toast({
-              message: '保存成功'
-            })
-            // this.$router.push({path: '/addressList'})
-            this.$router.go(-1)
-          }
-        }).catch(error=>{
-            Toast({
-              message: '访问接口失败'
-            })
-        });
-        }
-        
-        
+          if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
+            params.consignee_id = this.$route.params.consignee_id
+            this.$store.dispatch('UpdataAddress',params).then(response=>{
+              if(response.code != 10000){
+                Toast({
+                  message: '保存失败',
+                })
+              }else {
+                Toast({
+                  message: '保存成功'
+                })
+                // this.$router.push({path: '/addressList'})
+                this.$router.go(-1)
+              }
+            }).catch(error=>{
+                Toast({
+                  message: '访问接口失败'
+                })
+            });
+          }else{
+            this.$store.dispatch('SaveAddress',params).then(response=>{
+              if(response.code != 10000){
+                Toast({
+                  message: '保存失败',
+                })
+              }else {
+                Toast({
+                  message: '保存成功'
+                })
+                // this.$router.push({path: '/addressList'})
+                this.$router.go(-1)
+              }
+          }).catch(error=>{
+              Toast({
+                message: '访问接口失败'
+              })
+          });
+        }             
       },
 
       deleteAddresspop(){
