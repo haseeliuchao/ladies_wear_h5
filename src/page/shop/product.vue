@@ -1301,7 +1301,7 @@ wxShareAppMessage () {
             for(var i=0;i<that.sizearrrmSome.length;i++){
                  that.sizearrrmSome[i].number=0
             }
-            that.checkIdnums=[]
+            that.checkIdnums=[];
             that.colorCur=[];
           return Toast({
             message: '加入购物车成功',
@@ -1328,6 +1328,7 @@ wxShareAppMessage () {
           this.sizearrrmSome[i].number=0
         }
         this.colorCur=[];
+        this.checkIdnums=[];
       },
       tipSend(){
         Toast({
