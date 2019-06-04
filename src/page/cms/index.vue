@@ -44,7 +44,8 @@
     background: #fff;
     padding:0 .3rem;
     .activity-list {
-      height:72px;
+      height:82px;
+      padding-bottom:10px;
       // @include flexbox(space-between, center, row, wrap);
       img {
         width: 100%;
