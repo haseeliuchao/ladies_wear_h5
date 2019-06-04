@@ -3,7 +3,7 @@
   
 </style>
 <template>
-  <div>
+  <div style="background:#fff;height:100%">
   </div>
 </template>
 <script>
@@ -31,10 +31,12 @@ getLocalStorage,
     },
     components: {},
     watch:{
-  $route(to,from){
-    console.log(to.path);
-    console.log(from.path);
-  }
+        $route(to,from){
+            console.log(to.path);
+            if(to.path=='/loginBlank'){
+                this.$router.push('/index')
+            }
+        }
 },
     methods: {
       
