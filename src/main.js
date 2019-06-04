@@ -97,7 +97,7 @@ router.beforeEach((to,from,next)=>{
     }else{
       statecur=utils.getUrlKey('state').toString()
     }
-    console.log(unicode=BASE64.decoder(statecur))
+    console.log(BASE64.decoder(statecur))
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({ path: '/index' });
     }else{
