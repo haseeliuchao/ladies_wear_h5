@@ -85,10 +85,10 @@ const config = {
 
  Vue.use(VeeValidate, config); 
 
-
+  var routerindex=0
 router.beforeEach((to,from,next)=>{
-     console.log(to.path)
-    if(to.path=='/loginBlank'){
+    routerindex++;
+    if(to.path=='/loginBlank'&&routerindex>1){
       next({ path: '/index' });
     }else{
       next();
