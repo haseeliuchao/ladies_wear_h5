@@ -91,8 +91,8 @@ router.beforeEach((to,from,next)=>{
 
     routerindex++;
     var statecur=''
-    console.log(utils.getUrlKey('state'))
-    if(utils.getUrlKey('state')==undefined||utils.getUrlKey('state')==''){
+    // console.log(utils.getUrlKey('state'))
+    if(utils.getUrlKey('state')==undefined||utils.getUrlKey('state')=='#/'){
       statecur=1
     }else{
       statecur=utils.getUrlKey('state').toString()
