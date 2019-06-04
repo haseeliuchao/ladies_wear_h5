@@ -10,6 +10,7 @@ const ArticleDetail = () => import ('page/cms/articleDetail')
 
 /* member */
 const Login = () => import ('page/member/login')
+const LoginBlank = () => import ('page/member/loginBlank')
 const BrowserLogin = () => import ('page/member/browserLogin')
 const Myhome = () =>    import ('page/member/myhome')
 const Register = () =>  import ('page/member/register')
@@ -67,6 +68,12 @@ const appRouter = {
                 path: '/login',
                 name: 'login',
                 component: Login,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/loginBlank',
+                name: 'loginBlank',
+                component: LoginBlank,
                 meta: { keepAlive: false }
             },
             {
