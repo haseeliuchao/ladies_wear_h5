@@ -122,7 +122,13 @@ const appRouter = {
                 path: '/category',
                 name: 'category',
                 component: Category,
-                meta: { keepAlive: true }
+                meta: { 
+                    keepAlive: true ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder('/category')+'', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'https://laquimage.b0.upaiyun.com/ICON/2019/4/3/xiazai1559133351741.png',
+                }
             },
             {
                 path: '/review/:OrderNo',

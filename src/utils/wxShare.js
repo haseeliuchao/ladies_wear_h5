@@ -15,7 +15,7 @@ let mBasePath = '';
 // Vue.use(WechatPlugin)
 // Vue.use(AjaxPlugin)
 
-export default function wxShare({ title, desc, link, imgUrl } = {}) {
+export default function wxShare({ title, desc, link, imgUrl} = {}) {
     const foo = async () => {
         let Data = await getSignature({
             url: BASE64.encoder(location.href.split("#")[0])
