@@ -72,7 +72,7 @@
     <!-- 物流信息 -->
     <div class="logisticsContainer">
       <div class="logistics-top">
-        <p class="company">物流公司：<span>{{logisticsInfo.com}}</span></p>
+        <p class="company">物流公司：<span>{{logisticsInfo.name}}</span></p>
         <p class="orderNo">单号：<span>{{logisticsInfo.nu}}</span></p>
       </div>
       <!-- 订单跟踪 -->

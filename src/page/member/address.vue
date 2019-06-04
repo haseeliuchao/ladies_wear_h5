@@ -158,7 +158,7 @@
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
           <label for="city"><span class="title">选择城市</span></label>
           <div class="content">
-            <input type="text" name="city" readonly="readonly" v-validate.initial="'required'" :value="addressForm.province + addressForm.city + addressForm.area" placeholder="" id="city">
+            <input type="text" name="city" readonly="readonly" v-validate.initial="'required'" :value="addressForm.province + addressForm.city + addressForm.area" v-model="addressForm.province" placeholder="" id="city">
           </div>
         </div>
         <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
