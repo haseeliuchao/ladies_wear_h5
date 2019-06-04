@@ -9,7 +9,7 @@
     .logistics-top{
       width:100%;
       height:66px;
-      padding:13px .3rem;
+      padding:0 .3rem 13px;
       font-size:14px;
       p.orderNo{
         margin-top:8px;
@@ -21,10 +21,10 @@
       background:#fff;
       .logistics-title{
         font-size:16px;
+            padding: 13px 0 25px;
       }
       .orderFollow-list{
         @include flexbox(flex-start,flex-start,column,wrap);
-        padding-top:25px;
         .orderFollow-item{
          @include flexbox(flex-start,flex-start,row,nowrap);
           font-size:13px;
@@ -73,7 +73,7 @@
     <div class="logisticsContainer">
       <div class="logistics-top">
         <p class="company">物流公司：<span>{{logisticsInfo.name}}</span></p>
-        <p class="orderNo">单号：<span>{{logisticsInfo.nu}}</span></p>
+        <p class="orderNo">单号：<span>{{logisticsInfo.num}}</span></p>
       </div>
       <!-- 订单跟踪 -->
       <div class="logistics-info">
