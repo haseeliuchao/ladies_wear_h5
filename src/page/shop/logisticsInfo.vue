@@ -9,7 +9,7 @@
     .logistics-top{
       width:100%;
       height:66px;
-      padding:0 .3rem 13px;
+      padding:13px .3rem ;
       font-size:14px;
       p.orderNo{
         margin-top:8px;
@@ -17,7 +17,7 @@
     }
     .logistics-info{
       width:100%;
-      padding:13px .3rem;
+      padding:0 .3rem 13px;
       background:#fff;
       .logistics-title{
         font-size:16px;
@@ -78,14 +78,13 @@
   }
 </style>
 <template>
-    <!-- 物流信息 -->
     <div class="logisticsContainer">
-      <div class="logistics-top">
+      <div class="logistics-top" v-if="!logisticsInfo.num==''">
         <p class="company">物流公司：<span>{{logisticsInfo.name}}</span></p>
         <p class="orderNo">单号：<span>{{logisticsInfo.num}}</span></p>
       </div>
       <!-- 订单跟踪 -->
-      <div class="logistics-info">
+      <div class="logistics-info" v-if="!logisticsInfo.num==''">
         <h2 class="logistics-title">订单跟踪</h2>
         <div class="orderFollow-list">
           <ul class="orderFollow-item" v-for="(item,index) in logisticsInfo.data" :key="index">
@@ -93,6 +92,9 @@
             <li><span></span>{{item.context}}<span></span></li>
           </ul>
         </div>
+      </div>
+      <div style="width:100%;background-color:#fff;" v-if="logisticsInfo.num==''">
+          <p style="margin-top:100px">{{logisticsInfo.message}}</p>
       </div>
     </div>
 </template>
