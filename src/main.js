@@ -109,8 +109,13 @@ router.beforeEach((to,from,next)=>{
       next({path: '/index'});
     }else{
       // this.$router.push({ path:unicodestr})
-      next({path:unicodestr});
+      next();
       // 
+    }
+    if(statecur!=1){
+      next({ path:unicodestr});
+    }else{
+      next();
     }
     
 })
