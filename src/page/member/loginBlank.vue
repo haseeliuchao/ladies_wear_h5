@@ -3,8 +3,7 @@
   
 </style>
 <template>
-  <div class="">
-   
+  <div>
   </div>
 </template>
 <script>
@@ -37,7 +36,7 @@ getLocalStorage,
     },
     
     mounted: function () {
-        
+
     }
   }
 

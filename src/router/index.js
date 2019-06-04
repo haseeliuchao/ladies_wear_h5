@@ -44,7 +44,7 @@ const appRouter = {
         // mode: 'history',
         routes: [{
                 path: '',
-                redirect: '/index'
+                redirect: '/loginBlank'
             },
             {
                 path: '/index',
