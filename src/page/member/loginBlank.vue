@@ -3,7 +3,7 @@
   
 </style>
 <template>
-  <div>
+  <div style="background:#fff;height:100%">
   </div>
 </template>
 <script>
@@ -30,13 +30,14 @@ getLocalStorage,
       }
     },
     components: {},
+  
     methods: {
       
      
     },
     
     mounted: function () {
-
+        
     }
   }
 

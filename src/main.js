@@ -85,10 +85,21 @@ const config = {
 
  Vue.use(VeeValidate, config); 
 
-
+  var routerindex=0
 router.beforeEach((to,from,next)=>{
-  
-    next();
+    routerindex++;
+    var statecur=''
+    if(utils.getUrlKey('state')==undefined){
+      statecur=1
+    }else{
+      statecur=utils.getUrlKey('state').toString()
+    }
+    if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
+      next({ path: '/index' });
+    }else{
+      next();
+    }
+    
 })
 
 Vue.config.productionTip = false

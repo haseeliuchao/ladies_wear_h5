@@ -223,12 +223,7 @@ const appRouter = {
         ],
        
             scrollBehavior(to, from, savedPosition) {
-                 console.log(to.path)
-                 
-          
-
-
-
+                
                 if(savedPosition) {
                     return savedPosition
                 } else {

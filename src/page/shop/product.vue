@@ -1253,6 +1253,7 @@ wxShareAppMessage () {
       },
       checkSkuOk(){
         this.visiblePopup.checkSku=false;
+        var that=this;
         if(this.checkIdnums.length>0){
           if(this.addType==='cart'){
           this.$store.dispatch('SelectProduct', {
@@ -1260,15 +1261,20 @@ wxShareAppMessage () {
           item_sku_info_json: JSON.stringify(this.checkIdnums)
         }).then(response => {
           if(response.code==10000){
+            for(var i=0;i<that.sizearrrmSome.length;i++){
+                 that.sizearrrmSome[i].number=0
+            }
+            that.checkIdnums=[]
+            that.colorCur=[];
           return Toast({
             message: '加入购物车成功',
-            position: 'bottom'
+            position: 'center'
           })
           }else if(response.code==20025){
           }else{
             Toast({
             message: response.msg,
-            position: 'bottom'
+            position: 'center'
             })
             return
           }
@@ -1281,7 +1287,7 @@ wxShareAppMessage () {
       },
       async addShopCart(addType) { //加入购物车
         this.addType=addType;
-
+        var that=this;
         if(this.checkIdnums.length==0){
           this.visiblePopup.checkSku=true
           return
@@ -1292,15 +1298,20 @@ wxShareAppMessage () {
           item_sku_info_json: JSON.stringify(this.checkIdnums)
         }).then(response => {
           if(response.code==10000){
+            for(var i=0;i<that.sizearrrmSome.length;i++){
+                 that.sizearrrmSome[i].number=0
+            }
+            that.checkIdnums=[];
+            that.colorCur=[];
           return Toast({
-            message: '加入购物车成功'
-      
+            message: '加入购物车成功',
+            position: 'center'
           })
           }else if(response.code==20025){
           }else{
             Toast({
-            message: response.msg
-           
+            message: response.msg,
+            position: 'center'
             })
             return
           }
@@ -1317,6 +1328,7 @@ wxShareAppMessage () {
           this.sizearrrmSome[i].number=0
         }
         this.colorCur=[];
+        this.checkIdnums=[];
       },
       tipSend(){
         Toast({

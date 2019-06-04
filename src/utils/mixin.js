@@ -41,11 +41,11 @@ export const isWeiXin = (name) => {
          
         var urlstate= decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
         if (ua.match(/MicroMessenger/i) == 'micromessenger'&&urlstate) {
-          console.log(1)
+          
             return true;
         }
         else {
-          console.log(2)
+         
             return false;
   }
 }
