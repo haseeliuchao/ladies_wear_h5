@@ -87,6 +87,7 @@ const config = {
 
 
 router.beforeEach((to,from,next)=>{
+     console.log(to.path)
     if(to.path=='/loginBlank'){
       next({ path: '/index' });
     }else{
