@@ -14,7 +14,7 @@ import '@/utils/directives'
 import '@/utils/filters'
 // import '@/utils/hash'
 import utils from '@/utils/urlfun'
-
+import wxShare from '@/utils/wxShare'
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import VeeValidate from 'vee-validate';
 // VeeValidate.addLocale(zh_CN);
@@ -87,6 +87,8 @@ const config = {
 
   var routerindex=0
 router.beforeEach((to,from,next)=>{
+  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, logo: to.meta.imgUrl})
+
     routerindex++;
     var statecur=''
     if(utils.getUrlKey('state')==undefined){
@@ -94,6 +96,7 @@ router.beforeEach((to,from,next)=>{
     }else{
       statecur=utils.getUrlKey('state').toString()
     }
+    
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({ path: '/index' });
     }else{
