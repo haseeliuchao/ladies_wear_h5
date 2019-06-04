@@ -225,6 +225,9 @@ const appRouter = {
             scrollBehavior(to, from, savedPosition) {
                  console.log(to.path)
                  console.log(from.path)
+                 if(to.path=='/loginBlank'){
+                    this.$router.push('/index')
+                 }
                 if(savedPosition) {
                     return savedPosition
                 } else {

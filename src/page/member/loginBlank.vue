@@ -30,7 +30,7 @@ getLocalStorage,
       }
     },
     components: {},
-   
+  
     methods: {
       
      
