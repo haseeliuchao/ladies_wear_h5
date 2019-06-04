@@ -393,16 +393,17 @@ img[lazy]{
   transition: opacity .2s ease-in;
   -webkit-transition: opacity .2s ease-in;
 }
+// img[lazy=loaded] {
+//   opacity: 0;
+//   // background: url('~jd/images/lazy_load_loading.png') no-repeat center;
+//   visibility: hidden;
+//   margin: auto;
+// }
 img[lazy=loading] {
-  opacity: 0;
-  background: #fff;
-  visibility: hidden;
-  margin: auto;
-}
-img[lazy=loaded] {
   opacity: 1;
-  background: #fff;
+  background: url('~jd/images/lazy_load_loading.png') no-repeat center;
   visibility: visible;
+  background-size: 2.12rem!important;
 }
 .mint-swipe-items-wrap{
   div{
