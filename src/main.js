@@ -108,9 +108,9 @@ router.beforeEach((to,from,next)=>{
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({path: '/index'});
     }else{
-      this.$router.push({ path:unicodestr})
-      next();
-      // {path:unicodestr}
+      // this.$router.push({ path:unicodestr})
+      next({path:unicodestr});
+      // 
     }
     
 })
