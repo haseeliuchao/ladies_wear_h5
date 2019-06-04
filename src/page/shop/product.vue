@@ -1016,7 +1016,7 @@
                 <span class="freight" style="font-size:13px;font-weight:normal"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em>5</em>.00</span>
               </div>
               <div class="product-title-textbottom">
-              <p class="product-name-text">{{productInfo.title}}</p>
+              <p class="product-name-text">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
               <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
               <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
