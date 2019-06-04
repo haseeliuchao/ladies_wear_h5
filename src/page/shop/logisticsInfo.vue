@@ -39,13 +39,13 @@
               min-height:28px;
               padding-left:20px;
               padding-bottom:25px;
-              border-left:1px dashed #ff2741;
+              border-left:1px dashed #dadada;
               span{
                 position: absolute;
                 left: -5.5px;
                 display:inline-block;
                 border-radius:5px;
-                border:5px solid #ff2741;
+                border:5px solid #dadada;
                 &:last-child{
                   display:none;
                 }
@@ -54,6 +54,7 @@
 
             }
           }
+          
           &:last-child{
             li:last-child{
               padding-bottom:0;

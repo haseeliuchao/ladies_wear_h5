@@ -176,7 +176,7 @@
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
       <div  class="save-address" 
-       :class="['cell-btn',errors.has('name')||errors.has('mobile')||addressForm.address.length==0||addressForm.name.length==0||addressForm.province.length==0||addressForm.city.length==0||addressForm.area.length==0?'disabled-btn':'']" 
+       :class="['cell-btn',errors.has('name')||errors.has('mobile')||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
       @click= "saveAddress">保存</div>
     </div>
     <div>
@@ -213,6 +213,7 @@
   export default {
     data() {
       return {
+        addressFormcur:1,
         addressForm: {
           id: '',
           name: '',
@@ -354,16 +355,20 @@
         });
       },
       onMyAddressChange(picker, values) {
+        this.addressFormcur++;
        if(myaddress[values[0]]){  //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
           picker.setSlotValues(1,Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
           picker.setSlotValues(2,myaddress[values[0]][values[1]]); // 区/县数据就是一个数组
-          this.myAddressProvince = values[0];
-          this.myAddressCity = values[1];
-          this.myAddresscounty = values[2];
-
-          this.addressForm.province=values[0];
-          this.addressForm.city= values[1];
-          this.addressForm.area= values[2];
+         
+           if(this.addressFormcur>6){
+              this.myAddressProvince = values[0];
+              this.myAddressCity = values[1];
+              this.myAddresscounty = values[2];
+             this.addressForm.province=values[0];
+              this.addressForm.city= values[1];
+              this.addressForm.area= values[2];
+           }
+          
         }
       },
       confirm(){
