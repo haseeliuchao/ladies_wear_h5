@@ -28,6 +28,7 @@
         .orderFollow-item{
          @include flexbox(flex-start,flex-start,row,nowrap);
           font-size:13px;
+          color:#999;
           li{
             line-height: 20px;
             &:first-child{
@@ -39,19 +40,27 @@
               min-height:28px;
               padding-left:20px;
               padding-bottom:25px;
-              border-left:1px dashed #ff2741;
+              border-left:1px dashed #dadada;
               span{
                 position: absolute;
                 left: -5.5px;
                 display:inline-block;
                 border-radius:5px;
-                border:5px solid #ff2741;
+                border:5px solid #dadada;
                 &:last-child{
                   display:none;
                 }
               }
               
 
+            }
+          }
+          &:first-child{
+            color:#333;
+            li:last-child{
+              span:first-child{
+                border:5px solid #ff2741;
+              }
             }
           }
           &:last-child{
