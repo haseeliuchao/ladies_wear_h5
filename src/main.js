@@ -90,23 +90,24 @@ router.beforeEach((to,from,next)=>{
   wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, logo: to.meta.imgUrl})
 
     routerindex++;
-    var statecur=''
+    var statecur='';
+    var unicodestr = '';
     // console.log(utils.getUrlKey('state'))
     if(utils.getUrlKey('state')==undefined||utils.getUrlKey('state')=='#/'){
       statecur=1
     }else{
-      statecur=utils.getUrlKey('state').toString()
+      statecur=utils.getUrlKey('state')
+      var unicode=BASE64.decoder(statecur);
+          unicodestr = '';
+          for(var i = 0 , len =  unicode.length ; i < len ;++i){
+              unicodestr += String.fromCharCode(unicode[i]);
+          }
     }
-    console.log(BASE64.decoder(statecur))
+    // console.log(BASE64.decoder(statecur))
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({ path: '/index' });
     }else{
-          // var unicode=BASE64.decoder(statecur);
-          // var unicodestr = '';
-          // for(var i = 0 , len =  unicode.length ; i < len ;++i){
-          //     unicodestr += String.fromCharCode(unicode[i]);
-          // }
-      next();
+      next({path:unicodestr});
     }
     
 })
