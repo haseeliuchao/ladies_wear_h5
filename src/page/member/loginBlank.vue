@@ -30,6 +30,12 @@ getLocalStorage,
       }
     },
     components: {},
+    watch:{
+  $route(to,from){
+    console.log(to.path);
+    console.log(from.path);
+  }
+},
     methods: {
       
      
