@@ -100,18 +100,21 @@
     padding: .33rem;
     .logoIcon{
       width:1.3rem;
-      height:.9rem;
+      // height:.9rem;
       margin-right:.24rem;
-      background:url('~jd/images/logoicon.png') no-repeat;
-      background-size:100% 100%;
+      font-size:15px;
+      font-weight:bold;
+      color:#ff2741;
+      // background:url('~jd/images/logoicon.png') no-repeat;
+      // background-size:100% 100%;
     }
    
     .searchInput {
       width: 100%;
       .search-box {
         background: #fff;
-        height: .86rem;
-        border-radius: .86rem;
+        height: .9rem;
+        border-radius: .9rem;
         box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         @include flexbox(flex-start,
@@ -353,7 +356,7 @@
 
       <div class="searchRusult">
         <slot name="left-icon">
-          <i class="logoIcon logoQrcodeIcon"></i>
+          <i class="logoIcon logoQrcodeIcon">惠眼识货</i>
         </slot>
         <div class="searchInput" @click= "()=>searchVisiblie=true">
           <slot name="title-icon">
