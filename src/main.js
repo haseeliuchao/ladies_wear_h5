@@ -101,7 +101,13 @@ router.beforeEach((to,from,next)=>{
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({ path: '/index' });
     }else{
-      next();
+      var unicode=BASE64.decoder(utils.getUrlKey('state'));
+          var unicodestr = '';
+          var app_keystr=''
+          for(var i = 0 , len =  unicode.length ; i < len ;++i){
+              unicodestr += String.fromCharCode(unicode[i]);
+          }
+      next({ path: unicodestr });
     }
     
 })

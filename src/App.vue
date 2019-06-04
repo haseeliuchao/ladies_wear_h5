@@ -67,9 +67,9 @@ import {
                 }  
               }
              
-                if(unicodestr.indexOf('product')!=-1){
-                  this.$router.push(unicodestr)
-                }
+                // if(unicodestr.indexOf('product')!=-1){
+                //   this.$router.push(unicodestr)
+                // }
               
               
 
