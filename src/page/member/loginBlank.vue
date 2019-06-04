@@ -30,21 +30,14 @@ getLocalStorage,
       }
     },
     components: {},
-    watch:{
-        $route(to,from){
-            console.log(to.path);
-            if(to.path=='/loginBlank'){
-                this.$router.push('/index')
-            }
-        }
-},
+   
     methods: {
       
      
     },
     
     mounted: function () {
-
+        
     }
   }
 
