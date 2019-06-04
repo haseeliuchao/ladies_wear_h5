@@ -28,6 +28,7 @@
         .orderFollow-item{
          @include flexbox(flex-start,flex-start,row,nowrap);
           font-size:13px;
+          color:#999;
           li{
             line-height: 20px;
             &:first-child{
@@ -54,7 +55,14 @@
 
             }
           }
-          
+          &:first-child{
+            color:#333;
+            li:last-child{
+              span:first-child{
+                border:5px solid #ff2741;
+              }
+            }
+          }
           &:last-child{
             li:last-child{
               padding-bottom:0;
