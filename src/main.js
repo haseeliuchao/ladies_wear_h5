@@ -102,12 +102,14 @@ router.beforeEach((to,from,next)=>{
           for(var i = 0 , len =  unicode.length ; i < len ;++i){
               unicodestr += String.fromCharCode(unicode[i]);
           }
+          console.log(unicodestr)
     }
     // console.log(BASE64.decoder(statecur))
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({ path: '/index' });
     }else{
-      next({path:unicodestr});
+      next();
+      // {path:unicodestr}
     }
     
 })
