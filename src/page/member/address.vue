@@ -176,7 +176,7 @@
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
       <div  class="save-address" 
-       :class="['cell-btn',errors.has('name')||errors.has('mobile')||errors.has('address')||addressForm.name.length==0||addressForm.province.length==0||addressForm.city.length==0||addressForm.area.length==0?'disabled-btn':'']" 
+       :class="['cell-btn',errors.has('name')||errors.has('mobile')||addressForm.address.length==0||addressForm.name.length==0||addressForm.province.length==0||addressForm.city.length==0||addressForm.area.length==0?'disabled-btn':'']" 
       @click= "saveAddress">保存</div>
     </div>
     <div>
