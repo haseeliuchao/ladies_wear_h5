@@ -1281,7 +1281,7 @@ wxShareAppMessage () {
       },
       async addShopCart(addType) { //加入购物车
         this.addType=addType;
-
+        var that=this;
         if(this.checkIdnums.length==0){
           this.visiblePopup.checkSku=true
           return
@@ -1292,9 +1292,13 @@ wxShareAppMessage () {
           item_sku_info_json: JSON.stringify(this.checkIdnums)
         }).then(response => {
           if(response.code==10000){
+            for(var i=0;i<that.sizearrrmSome.length;i++){
+                 that.sizearrrmSome[i].number=0
+            }
+            that.checkIdnums=[]
+            that.colorCur=[];
           return Toast({
             message: '加入购物车成功'
-      
           })
           }else if(response.code==20025){
           }else{
