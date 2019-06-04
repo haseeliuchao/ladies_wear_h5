@@ -33,32 +33,16 @@ export default function wxShare({ title, desc, link, imgUrl } = {}) {
     foo();
     wx.ready(() => {
         wx.onMenuShareAppMessage({
-            title: option.title, // 分享标题
-            desc: option.desc, // 分享描述
-            link: option.link, // 分享链接
-            imgUrl: option.imgUrl, // 分享图标
-            success () {
-              // 用户成功分享后执行的回调函数
-              option.success()
-            },
-            cancel () {
-              // 用户取消分享后执行的回调函数
-              option.error()
-            }
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: link, // 分享链接
+            imgUrl:imgUrl, // 分享图标
         })
         wx.onMenuShareTimeline({
-            title: option.title, // 分享标题
-            desc: option.desc, // 分享描述
-            link: option.link, // 分享链接
-            imgUrl: option.imgUrl, // 分享图标
-            success () {
-              // 用户成功分享后执行的回调函数
-              option.success()
-            },
-            cancel () {
-              // 用户取消分享后执行的回调函数
-              option.error()
-            }
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link:link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
         })
     })
     wx.error((res) => {
