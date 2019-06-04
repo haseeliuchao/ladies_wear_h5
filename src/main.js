@@ -89,7 +89,7 @@ const config = {
 router.beforeEach((to,from,next)=>{
     routerindex++;
     console.log(utils.getUrlKey('state'))
-    if((to.path=='/loginBlank'&&routerindex>1)||utils.getUrlKey('state')==1){
+    if(to.path=='/loginBlank'&&routerindex>1){
       next({ path: '/index' });
     }else{
       next();
