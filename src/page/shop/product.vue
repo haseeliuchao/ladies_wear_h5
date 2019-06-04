@@ -997,7 +997,7 @@
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
                 <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
-                  <img v-lazy="item+'_230x230.jpg'">
+                  <img v-lazy="item">
                 </mt-swipe-item>
 
               </mt-swipe>
