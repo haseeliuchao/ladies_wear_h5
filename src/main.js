@@ -97,16 +97,16 @@ router.beforeEach((to,from,next)=>{
     }else{
       statecur=utils.getUrlKey('state').toString()
     }
-    console.log(statecur)
+    console.log(unicode=BASE64.decoder(statecur))
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
       next({ path: '/index' });
     }else{
-          var unicode=BASE64.decoder(statecur);
-          var unicodestr = '';
-          for(var i = 0 , len =  unicode.length ; i < len ;++i){
-              unicodestr += String.fromCharCode(unicode[i]);
-          }
-      next({ path: unicodestr });
+          // var unicode=BASE64.decoder(statecur);
+          // var unicodestr = '';
+          // for(var i = 0 , len =  unicode.length ; i < len ;++i){
+          //     unicodestr += String.fromCharCode(unicode[i]);
+          // }
+      next();
     }
     
 })
