@@ -87,8 +87,12 @@ const config = {
 
 
 router.beforeEach((to,from,next)=>{
-  
-    next();
+    if(to.path=='/loginBlank'){
+      next({ path: '/index' });
+    }else{
+      next();
+    }
+    
 })
 
 Vue.config.productionTip = false
