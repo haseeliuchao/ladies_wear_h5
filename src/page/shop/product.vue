@@ -1072,6 +1072,7 @@
                 <img src="~jd/images/xiangqing.png" alt="">
               </div>
               <div id="prodContent-container" v-html="productInfo.item_detailsimg"></div>
+              <div v-for="(itemlay, index) in laylist" :key="index">{{itemlay}}</div>
             </div>
             <!-- 为你推荐 -->
           </div>
@@ -1140,6 +1141,7 @@
           checkInfo: false,
           shareBoo:false
         },
+        laylist :[1],
         cartnum:null,
         colorCur:[],
         colorarr:[],
@@ -1156,7 +1158,9 @@
         shopnum:[],
         containerTab: 'mainLayout',
         detailTab: 'description',
-        productInfo: {},
+        productInfo: {
+          item_detailsimg:null
+        },
         shopInfo: null,
         // commad: getRecommend,
         // recommendData: [],
@@ -1354,7 +1358,9 @@ wxShareAppMessage () {
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
-        this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
+        setTimeout(_ => {
+            this.laylist = [2]
+        }, 500)
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
@@ -1420,6 +1426,9 @@ wxShareAppMessage () {
           return Object.values(tempObj)
           }
  
+    },
+    updated:function(){
+      this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
     }
     ,
     filters:{

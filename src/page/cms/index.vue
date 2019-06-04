@@ -322,9 +322,9 @@
           <!-- 活动广告位 -->
           <div class="activity-manage">
             <div class="activity-list" v-for="(item,index) in cmsDataTypeads" :key="index">
-              <a :href="item.http_url">
+              <!-- <a :href="item.http_url"> -->
                 <img v-lazy="item.img_url" >
-              </a>
+              <!-- </a> -->
             </div>
           </div>
           <!-- 配置专题 -->
@@ -332,9 +332,9 @@
             <div class="deploy-floor-l" >
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
-                <a :href="item.http_url">
+                <!-- <a :href="item.http_url"> -->
                   <img v-lazy="item.img_url">
-                </a>
+                <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
