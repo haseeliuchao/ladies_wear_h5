@@ -1365,9 +1365,9 @@ methods: {
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
-        if(isWeiXin('code')){
-        wxapi.wxRegister(this.wxRegCallback)
-        }
+        // if(isWeiXin('code')){
+        // wxapi.wxRegister(this.wxRegCallback)
+        // }
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];

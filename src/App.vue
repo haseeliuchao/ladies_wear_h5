@@ -63,10 +63,10 @@ import {
        }
 
         
-        // let wxData = await getSignature({
-        //     url: BASE64.encoder(location.href.split("#")[0])
-        // });
-        // setSessionStorage('wxData',JSON.stringify(wxData.data))
+        let wxData = await getSignature({
+            url: BASE64.encoder(location.href.split("#")[0])
+        });
+        setSessionStorage('wxData',JSON.stringify(wxData.data))
         } 
      },
      mounted: function () {
