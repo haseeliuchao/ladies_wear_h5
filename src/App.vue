@@ -37,6 +37,9 @@ import {
     components: {},
     methods: {
       async loginData() { //更新数据
+      document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
+      });
        if(isWeiXin('code')){
           let that=this;
           var retstr='';
@@ -61,12 +64,6 @@ import {
                 }  
               }
        }
-
-        
-        // let wxData = await getSignature({
-        //     url: BASE64.encoder(location.href.split("#")[0])
-        // });
-        // setSessionStorage('wxData',JSON.stringify(wxData.data))
         } 
      },
      mounted: function () {
