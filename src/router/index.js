@@ -74,7 +74,11 @@ const appRouter = {
                 path: '/login',
                 name: 'login',
                 component: Login,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/loginBlank',
@@ -92,13 +96,21 @@ const appRouter = {
                 path: '/myhome',
                 name: 'myhome',
                 component: Myhome,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/cardCoupon',
                 name: 'cardCoupon',
                 component: CardCoupon,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/register',
@@ -116,7 +128,11 @@ const appRouter = {
                 path: '/cart',
                 name: 'cart',
                 component: Cart,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/category',
@@ -140,31 +156,51 @@ const appRouter = {
                 path: '/order/:OrderNo',
                 name: 'order',
                 component: Order,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/createOrder',
                 name: 'createOrder',
                 component: CreateOrder,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/orderList/:tab?',
                 name: 'orderList',
                 component: OrderList,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/product/:id',
                 name: 'product',
                 component: Product,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/searchImg',
                 name: 'searchImg',
                 component: SearchImg,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/searchRenew',
@@ -176,7 +212,11 @@ const appRouter = {
                 path: '/searchRusult',
                 name: 'searchRusult',
                 component: SearchRusult,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/shop',
@@ -194,43 +234,71 @@ const appRouter = {
                 path: '/addressList',
                 name: 'addresslist',
                 component: AddressList,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/logisticsInfo',
                 name: 'logisticsInfo',
                 component: LogisticsInfo,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/afterSaleChoice',
                 name: 'afterSaleChoice',
                 component: AfterSaleChoice,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/afterSale',
                 name: 'afterSale',
                 component: AfterSale,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/afterSaleDetail',
                 name: 'afterSaleDetail',
                 component: AfterSaleDetail,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/orderRusult',
                 name: 'orderRusult',
                 component: OrderRusult,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
+                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             }
         ],
        

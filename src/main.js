@@ -87,7 +87,13 @@ const config = {
 
   var routerindex=0
 router.beforeEach((to,from,next)=>{
-  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: to.meta.imgUrl})
+  var shareImgurl='';
+  if(to.meta.imgUrl==undefined){
+    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
+  }else{
+    shareImgurl=to.meta.imgUrl
+  }
+  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: shareImgurl})
   console.log(to.meta.imgUrl)
     routerindex++;
     var statecur='';
