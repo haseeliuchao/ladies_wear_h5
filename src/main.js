@@ -16,6 +16,15 @@ import '@/utils/filters'
 import utils from '@/utils/urlfun'
 import wxShare from '@/utils/wxShare'
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
+import {
+  getSignature,
+} from '@/service/getData';
+import {
+  getLocalStorage,
+     setLocalStorage,
+     setSessionStorage,
+     isWeiXin
+   } from '@/utils/mixin';
 import VeeValidate from 'vee-validate';
 // VeeValidate.addLocale(zh_CN);
 VeeValidate.Validator.localize('zh_CN');
@@ -85,10 +94,25 @@ const config = {
 
  Vue.use(VeeValidate, config); 
 
-  var routerindex=0
+var routerindex=0
 router.beforeEach((to,from,next)=>{
-  
-    routerindex++;
+  routerindex++;
+  const foo = async () => { 
+    let wxData = await getSignature({
+      url: BASE64.encoder(location.href.split("#")[0])
+  });
+  setSessionStorage('wxData',JSON.stringify(wxData.data))
+  } 
+  if(routerindex==1){
+    foo()
+  }
+  var shareImgurl='';
+  if(to.meta.imgUrl==undefined){
+    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
+  }else{
+    shareImgurl=to.meta.imgUrl
+  }
+  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: shareImgurl})
     var statecur='';
     var unicodestr = '';
     if(utils.getUrlKey('state')==undefined||utils.getUrlKey('state')=='#/'){
@@ -117,15 +141,6 @@ router.beforeEach((to,from,next)=>{
     
 })
 
-router.afterEach((to,form)=>{
-  var shareImgurl='';
-  if(to.meta.imgUrl==undefined){
-    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
-  }else{
-    shareImgurl=to.meta.imgUrl
-  }
-  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: shareImgurl})
-})
 
 Vue.config.productionTip = false
 /* fundebug */
