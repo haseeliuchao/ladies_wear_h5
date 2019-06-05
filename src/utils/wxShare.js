@@ -3,11 +3,15 @@ import Vue from 'vue'
 import wx from 'weixin-js-sdk'
 import {getSessionStorage} from '@/utils/mixin';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
-   
+   if(getSessionStorage("wxData")!=undefined){
     let wxData = JSON.parse(getSessionStorage("wxData"));
     if(wxData==null||wxData==undefined){
         return
     }
+   }else{
+    return
+   }
+    
         wx.config({
             debug: false, // 开启调试模式
             appId: wxData.app_id, // 必填，公众号的唯一标识

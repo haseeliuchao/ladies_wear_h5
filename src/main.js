@@ -101,7 +101,9 @@ router.beforeEach((to,from,next)=>{
     let wxData = await getSignature({
       url: BASE64.encoder(location.href.split("#")[0])
   });
-  setSessionStorage('wxData',JSON.stringify(wxData.data))
+  if(wxData==10000){
+    setSessionStorage('wxData',JSON.stringify(wxData.data))
+  }
   } 
   if(routerindex==1){
     foo()

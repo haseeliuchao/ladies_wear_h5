@@ -120,6 +120,10 @@
         type: Number,
         default: 0
       },
+      cartListlength:{
+        type:Number,
+        default:0
+      },
       loadMoreIconVisible: {
         type: Boolean,
         default: true
@@ -249,7 +253,7 @@
     },
     methods: {
       async onloadMoreScroll(){
-          if(this.AllLoaded || this.LoadMoreLoading || !this.commad) return;
+          if(this.AllLoaded || this.LoadMoreLoading || !this.commad||this.cartListlength!=0) return;
           this.LoadMoreLoading = true;
           let response = await this.commad(this.param).catch(()=>{
             this.LoadMoreError = true;

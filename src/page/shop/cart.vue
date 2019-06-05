@@ -526,7 +526,7 @@
             <span class="product-list-topl">精选推荐</span>
             <span class="product-list-topr">去<em @click= "$router.push('/index')">商城首页</em>逛逛</span>
           </p>
-          <load-more style="width:100%;" v-if="$route.path=='/cart'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+          <load-more style="width:100%;" v-if="$route.path=='/cart'" @loadMore="infiniteCallback" :cartListlength='cartlength' :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
@@ -584,7 +584,7 @@
   export default {
     data() {
       return {
-        cartList: null,
+        cartList: '',
         totalFee: 0,
         selectedCounter: 0,
         selectedAll: false,
@@ -848,6 +848,7 @@
         });
       },
       async infiniteCallback(response) { //下拉加载
+         
         if(response.data.items!=undefined&&response.data.items!=null){
          if (response.data.items.length > 0) {
           response.data.items.map(i => {

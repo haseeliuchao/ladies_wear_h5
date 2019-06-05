@@ -37,9 +37,9 @@ import {
     components: {},
     methods: {
       async loginData() { //更新数据
-      document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-                WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
-      });
+      // document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+      //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
+      // });
        if(isWeiXin('code')){
           let that=this;
           var retstr='';
