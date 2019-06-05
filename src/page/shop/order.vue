@@ -748,8 +748,9 @@
     mounted: function () {
       this.initData();
       pushHistory()
-        window.onpopstate = () => {
-         console.log(this.$router)
+        window.onpopstate = (state) => {
+          console.log(state)
+        //  console.log(this.$router)
         this.$router.push('/orderList/'+this.$route.query.order_status+'')  //输入要返回的上一级路由地址
         }
     }

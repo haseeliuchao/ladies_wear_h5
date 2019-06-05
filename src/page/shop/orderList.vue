@@ -625,7 +625,8 @@
     },
     mounted: function () {
       pushHistory()
-        window.onpopstate = () => {
+        window.onpopstate = (state) => {
+          console.log(state)
         this.$router.push('/myhome')  //输入要返回的上一级路由地址
         }
 

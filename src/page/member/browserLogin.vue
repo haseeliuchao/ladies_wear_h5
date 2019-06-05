@@ -924,7 +924,8 @@ import {
     },
     mounted: function () {
         pushHistory()
-        window.onpopstate = () => {
+        window.onpopstate = (state) => {
+          console.log(state)
         this.$router.push('/index')  //输入要返回的上一级路由地址
         }
 

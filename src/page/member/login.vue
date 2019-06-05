@@ -356,7 +356,8 @@ getLocalStorage,
     mounted: function () {
       pushHistory()
        // 监听历史记录点, 添加返回事件监听
-        window.onpopstate = () => {
+        window.onpopstate = (state) => {
+          console.log(state)
         this.$router.push('/index')  //输入要返回的上一级路由地址
         }
     }

@@ -222,7 +222,8 @@
       //   wxapi.wxRegister(this.wxRegCallback)
       //   }
       pushHistory()
-        window.onpopstate = () => {
+        window.onpopstate = (state) => {
+          console.log(state)
         this.$router.push('/orderList/2')
       }
 
