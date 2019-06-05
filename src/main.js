@@ -88,7 +88,6 @@ const config = {
   var routerindex=0
 router.beforeEach((to,from,next)=>{
   wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, logo: to.meta.imgUrl})
-
     routerindex++;
     var statecur='';
     var unicodestr = '';
@@ -102,9 +101,7 @@ router.beforeEach((to,from,next)=>{
           for(var i = 0 , len =  unicode.length ; i < len ;++i){
               unicodestr += String.fromCharCode(unicode[i]);
           }
-          console.log(unicodestr)
     }
-    // console.log(BASE64.decoder(statecur))
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
         next({path: '/index'});
     }else{
@@ -122,9 +119,6 @@ router.beforeEach((to,from,next)=>{
 })
 
 Vue.config.productionTip = false
-
-
-
 /* fundebug */
 function formatComponentName(vm)
 {
