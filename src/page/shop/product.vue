@@ -1359,9 +1359,7 @@ methods: {
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
-        setTimeout(_ => {
-            this.laylist = [2]
-        }, 500)
+        setTimeout(_ => {this.laylist = [2]}, 500)
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;

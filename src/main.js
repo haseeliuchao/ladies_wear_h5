@@ -87,13 +87,7 @@ const config = {
 
   var routerindex=0
 router.beforeEach((to,from,next)=>{
-  var shareImgurl='';
-  if(to.meta.imgUrl==undefined){
-    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
-  }else{
-    shareImgurl=to.meta.imgUrl
-  }
-  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: shareImgurl})
+  
     routerindex++;
     var statecur='';
     var unicodestr = '';
@@ -121,6 +115,16 @@ router.beforeEach((to,from,next)=>{
       }
     }
     
+})
+
+router.afterEach((to,form)=>{
+  var shareImgurl='';
+  if(to.meta.imgUrl==undefined){
+    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
+  }else{
+    shareImgurl=to.meta.imgUrl
+  }
+  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: shareImgurl})
 })
 
 Vue.config.productionTip = false
