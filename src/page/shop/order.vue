@@ -532,7 +532,7 @@
                   
                 <div class="order-btn-group" style="border-bottom: 1px solid #e4e4e4;">
                   <!-- <input type="text" v-model='itemall.item_bo.img_zip_url' id="input"> -->
-                  <textarea :id="textCon(index)" v-model='itemall.item_bo.img_zip_url' readonly="readonly" cols="10" rows="1" disabled style="opacity: 0;">
+                  <textarea :id="textCon(index)" v-model='itemall.item_bo.img_zip_url' readonly="readonly" cols="10" rows="1" style="opacity: 0;">
 </textarea>
                 <span style="color:#999;border:1px solid #999" @click="opendownload(index,itemall.item_bo.img_zip_url)" class="payment download">下载</span>
                 </div>
