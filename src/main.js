@@ -105,16 +105,16 @@ router.beforeEach((to,from,next)=>{
           console.log(unicodestr)
     }
     // console.log(BASE64.decoder(statecur))
-    if((to.path=='/loginBlank'&&routerindex>1)){
+    if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
+        next({path: '/index'});
+        return 
+    }else{
       if(statecur!=1){
         next({path:unicodestr});
         return 
       }else{
-        next({path: '/index'});
-        return 
-      }
-    }else{
       next();
+      }
     }
     
     
