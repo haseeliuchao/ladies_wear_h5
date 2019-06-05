@@ -11,33 +11,30 @@
 
 
 
-
-import {
-getLocalStorage,
-    setLocalStorage,
-    setSessionStorage,
-    getSessionStorage,pushHistory
-  } from '@/utils/mixin';
   import {
-    Field,
-    Button,
-    Toast,
-    Popup
-  } from 'mint-ui';
+    getSignature,
+} from '@/service/getData';
+import {
+    setSessionStorage,
+  } from '@/utils/mixin';
+
   export default {
     data() {
       return {
       }
     },
     components: {},
-  
-    methods: {
-      
-     
-    },
     
+    methods: {
+      async loginData() { //更新数据
+        let wxData = await getSignature({
+            url: BASE64.encoder(location.href.split("#")[0])
+        });
+        setSessionStorage('wxData',JSON.stringify(wxData.data))
+        } 
+    },
     mounted: function () {
-        
+        this.loginData()
     }
   }
 
