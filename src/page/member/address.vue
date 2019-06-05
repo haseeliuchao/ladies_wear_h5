@@ -197,7 +197,6 @@
     </div>
   </div>
 </template>
-
 <script>
   import {
     Switch,
