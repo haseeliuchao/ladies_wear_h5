@@ -1,25 +1,25 @@
 // wxShare.js
 import Vue from 'vue'
 import wx from 'weixin-js-sdk'
-import {
-    getSignature,
-} from '@/service/getData';
+import {getSessionStorage} from '@/utils/mixin';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
-    const foo = async () => {
-        let Data = await getSignature({
-            url: BASE64.encoder(location.href.split("#")[0])
-        });
-        let data = Data.data
+    // const foo = async () => {
+    //     let Data = await getSignature({
+    //         url: BASE64.encoder(location.href.split("#")[0])
+    //     });
+    //     let data = Data.data
+    let wxData = JSON.parse(getSessionStorage("wxData"));
+    console.log(wxData)
         wx.config({
             debug: false, // 开启调试模式
-            appId: data.app_id, // 必填，公众号的唯一标识
-            timestamp: data.timestamp, // 必填，生成签名的时间戳
-            nonceStr: data.nonce_str, // 必填，生成签名的随机串
-            signature: data.signature, // 必填，签名，见附录1
+            appId: wxData.app_id, // 必填，公众号的唯一标识
+            timestamp: wxData.timestamp, // 必填，生成签名的时间戳
+            nonceStr: wxData.nonce_str, // 必填，生成签名的随机串
+            signature: wxData.signature, // 必填，签名，见附录1
             jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
-    }
-    foo();
+    // }
+    // foo();
     wx.ready(() => {
         wx.onMenuShareAppMessage({
             title: title, // 分享标题

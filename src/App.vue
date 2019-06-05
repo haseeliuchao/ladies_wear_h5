@@ -23,6 +23,9 @@ import {
     setSessionStorage,
     isWeiXin
   } from '@/utils/mixin';
+  import {
+    getSignature,
+} from '@/service/getData';
   export default {
     name: 'app',
     data() {
@@ -58,8 +61,13 @@ import {
                 }  
               }
        }
+
         
-      }
+        let wxData = await getSignature({
+            url: BASE64.encoder(location.href.split("#")[0])
+        });
+        setSessionStorage('wxData',JSON.stringify(wxData.data))
+        } 
      },
      mounted: function () {
       this.loginData();
