@@ -33,15 +33,6 @@ import {
     },
     components: {},
     methods: {
-      //   isWeiXin() {
-      //   var ua = window.navigator.userAgent.toLowerCase();
-      //   if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-      //       return true;
-      //   }
-      //   else {
-      //       return false;
-      //   }
-      // },
       async loginData() { //更新数据
        if(isWeiXin('code')){
           let that=this;
@@ -66,13 +57,6 @@ import {
                    setLocalStorage('guideindex',2);
                 }  
               }
-             
-                // if(unicodestr.indexOf('product')!=-1){
-                //   this.$router.push(unicodestr)
-                // }
-              
-              
-
        }
         
       }

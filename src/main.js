@@ -94,11 +94,9 @@ router.beforeEach((to,from,next)=>{
     shareImgurl=to.meta.imgUrl
   }
   wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: shareImgurl})
-  console.log(to.meta.imgUrl)
     routerindex++;
     var statecur='';
     var unicodestr = '';
-    // console.log(utils.getUrlKey('state'))
     if(utils.getUrlKey('state')==undefined||utils.getUrlKey('state')=='#/'){
       statecur=1
     }else{

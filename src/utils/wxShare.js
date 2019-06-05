@@ -1,20 +1,9 @@
 // wxShare.js
 import Vue from 'vue'
-
 import wx from 'weixin-js-sdk'
-// import Axios from 'axios'
-import utils from '@/utils/urlfun';
 import {
     getSignature,
-    goshare
 } from '@/service/getData';
-
-let mBasePath = '';
-// 在组件外使用vux集成的微信jssdk
-// import { WechatPlugin, AjaxPlugin } from 'vux'
-// Vue.use(WechatPlugin)
-// Vue.use(AjaxPlugin)
-
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
     const foo = async () => {
         let Data = await getSignature({
