@@ -159,7 +159,7 @@
 <script>
  import LoadMore from 'common/loadMore';
  import {searchGoods} from '@/service/getData';
- import wxapi from '@/utils/wxapi';
+//  import wxapi from '@/utils/wxapi';
   import {
     isWeiXin,pushHistory
   } from '@/utils/mixin';
@@ -195,54 +195,7 @@
       async initData() {
        
       },
-        wxRegCallback () {
-  // 用于微信JS-SDK回调
-    this.wxShareTimeline()
-    this.wxShareAppMessage()
-},
-wxShareTimeline () {
-  // 微信自定义分享到朋友圈
-  let option = {
-    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-    imgUrl: 'https://laquimage.b0.upaiyun.com/ICON/2019/4/3/xiazai1559133351741.png', // 分享图标, 请自行替换，需要绝对路径
-    success: () => {
-      // alert('分享成功')
-      return Toast({
-            message: '分享成功',
-            position: 'center'
-          })
-    },
-    error: () => {
-      // alert('已取消分享')
-    }
-  }
-  // 将配置注入通用方法
-  wxapi.ShareTimeline(option)
-},
-wxShareAppMessage () {
-  // 微信自定义分享给朋友
-  // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
-    let option = {
-    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-    imgUrl: 'https://laquimage.b0.upaiyun.com/ICON/2019/4/3/xiazai1559133351741.png', // 分享图标, 请自行替换，需要绝对路径
-    success: () => {
-      // alert('分享成功')
-      return Toast({
-            message: '分享成功',
-            position: 'center'
-          })
-    },
-    error: () => {
-      // alert('已取消分享')
-    }
-  }
-  // 将配置注入通用方法
-  wxapi.ShareAppMessage(option)
-},
+      
       async infiniteCallback(response) { //下拉加载
 
         if(response.data.items!=undefined&&response.data.items!=null){
@@ -265,9 +218,9 @@ wxShareAppMessage () {
         }
     },
     mounted: function () {
-      if(isWeiXin('code')){
-        wxapi.wxRegister(this.wxRegCallback)
-        }
+      // if(isWeiXin('code')){
+      //   wxapi.wxRegister(this.wxRegCallback)
+      //   }
       pushHistory()
         window.onpopstate = () => {
         this.$router.push('/orderList/2')
