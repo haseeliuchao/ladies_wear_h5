@@ -3,8 +3,9 @@ import Vue from 'vue'
 import wx from 'weixin-js-sdk'
 import {getSessionStorage,isWeiXin} from '@/utils/mixin';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
+    let wxData={};
     if(isWeiXin('code')){
-    let wxData = JSON.parse(getSessionStorage("wxData"));
+    wxData = JSON.parse(getSessionStorage("wxData"));
     if(wxData==null||wxData==undefined){
         return
     }
