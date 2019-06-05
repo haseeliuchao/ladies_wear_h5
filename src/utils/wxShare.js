@@ -9,6 +9,9 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
     //     });
     //     let data = Data.data
     let wxData = JSON.parse(getSessionStorage("wxData"));
+    if(wxData==null||wxData==undefined){
+        return
+    }
     console.log(wxData)
         wx.config({
             debug: false, // 开启调试模式
