@@ -110,13 +110,15 @@ router.beforeEach((to,from,next)=>{
         return 
     }else{
       if(statecur!=1){
-        next({path:unicodestr});
-        return 
+        if (to.path === unicodestr){
+          next()
+        }else{
+          next({path:unicodestr});
+        }
       }else{
       next();
       }
     }
-    
     
 })
 
