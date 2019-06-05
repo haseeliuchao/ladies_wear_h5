@@ -87,7 +87,8 @@ const config = {
 
   var routerindex=0
 router.beforeEach((to,from,next)=>{
-  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, logo: to.meta.imgUrl})
+  wxShare({ title: to.meta.title, desc: to.meta.desc, link: to.meta.link, imgUrl: to.meta.imgUrl})
+  console.log(to.meta.imgUrl)
     routerindex++;
     var statecur='';
     var unicodestr = '';
