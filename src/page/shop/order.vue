@@ -534,7 +534,7 @@
                   <!-- <input type="text" v-model='itemall.item_bo.img_zip_url' id="input"> -->
                   <textarea :id="textCon(index)" v-model='itemall.item_bo.img_zip_url' readonly="readonly" cols="10" rows="1" disabled style="opacity: 0;">
 </textarea>
-                <span style="color:#999;border:1px solid #999" @click="opendownload(index)" class="payment download">下载</span>
+                <span style="color:#999;border:1px solid #999" @click="opendownload(index,itemall.item_bo.img_zip_url)" class="payment download">下载</span>
                 </div>
                 </div>
                 
@@ -646,7 +646,14 @@
         setLocalStorage('salesList',this.orderDetail)
         // this.orderDetail.orderDetailList=Data.data
       },
-      opendownload(index){
+      opendownload(index,value){
+        if(value==null||value==''){
+          Toast({
+            message: '未获取到下载链接',
+            position: 'center'
+          })
+          return
+        }
         Toast({
             message: select_all_and_copy(document.getElementById('textCon'+index+'')),
             position: 'center'

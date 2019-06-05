@@ -105,7 +105,7 @@ router.beforeEach((to,from,next)=>{
     setSessionStorage('wxData',JSON.stringify(wxData.data))
   }
   } 
-  if(routerindex==1){
+  if(routerindex==1&&isWeiXin('code')){
     foo()
   }
   var shareImgurl='';
