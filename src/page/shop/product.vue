@@ -1383,7 +1383,7 @@ methods: {
         var _this =this
           window.addEventListener('scroll',function(){
               var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-              if(scrollTop=10){
+              if(scrollTop==500){
                 _this.laylist = [2]
               }
               },true)
