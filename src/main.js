@@ -106,7 +106,7 @@ router.beforeEach((to,from,next)=>{
   }
   } 
   if(routerindex==1&&isWeiXin('code')){
-    foo()
+    // foo()
   }
   var shareImgurl='';
   if(to.meta.imgUrl==undefined){

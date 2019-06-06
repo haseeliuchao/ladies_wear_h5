@@ -2,16 +2,25 @@
 import Vue from 'vue'
 import wx from 'weixin-js-sdk'
 import {getSessionStorage,isWeiXin} from '@/utils/mixin';
+import {
+    getSignature,
+  } from '@/service/getData';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
-    let wxData={};
-    if(isWeiXin('code')){
-    wxData = JSON.parse(getSessionStorage("wxData"));
-    if(wxData==null||wxData==undefined){
-        return
-    }
-    }else{
-        return
-    }
+    // let wxData={};
+    // if(isWeiXin('code')){
+    // wxData = JSON.parse(getSessionStorage("wxData"));
+    // if(wxData==null||wxData==undefined){
+    //     return
+    // }
+    // }else{
+    //     return
+    // }
+
+    const foo= async () =>{
+        let Data = await getSignature({
+            url: BASE64.encoder(location.href.split("#")[0])
+        });
+        let wxData = Data.data// PS: 这里根据你接口的返回值来使用
    
     
         wx.config({
@@ -22,6 +31,9 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
             signature: wxData.signature, // 必填，签名，见附录1
             jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
+    }
+    foo();
+
     wx.ready(() => {
         wx.onMenuShareAppMessage({
             title: title, // 分享标题
