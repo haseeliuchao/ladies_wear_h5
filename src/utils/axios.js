@@ -40,10 +40,12 @@ class Http {
     if (!options.loadingText) { options.loadingText = '加载中...' };
     console.log(options.param)
     if(options.loadingVisble){
+      if(options.param.url==undefined||options.param.url==null||options.param.url.length==0){
         Indicator.open({
-            text: options.loadingText,
-            spinnerType: 'snake'
+          text: options.loadingText,
+          spinnerType: 'snake'
         })
+      }
     };
     options.param.api_sign=null;
     const postLogin=function(data){
