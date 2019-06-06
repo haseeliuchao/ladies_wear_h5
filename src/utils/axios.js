@@ -38,7 +38,6 @@ class Http {
     if (!options.methods) { options.methods = 'POST' }; //不传递方法默认为POST
     if (!options.loadingVisble) { options.loadingVisble = true }; // 不传递默认开启loading
     if (!options.loadingText) { options.loadingText = '加载中...' };
-    console.log(options.param)
     if(options.loadingVisble){
       if(options.param.url==undefined||options.param.url==null||options.param.url.length==0){
         Indicator.open({
