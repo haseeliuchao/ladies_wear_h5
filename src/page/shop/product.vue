@@ -1041,7 +1041,7 @@
               <span class="right-menu"></span>
               <div class="product-skuimg">
                 <p>
-                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img"></em>
+                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img+'_230x230.jpg'"></em>
                 <span>共{{colorarr.length}}种颜色分类可选</span>
                 </p>
               </div>
@@ -1383,7 +1383,7 @@ methods: {
         var _this =this
           window.addEventListener('scroll',function(){
               var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-              if(scrollTop==500){
+              if(scrollTop>=10){
                 _this.laylist = [2]
               }
               },true)
