@@ -9,6 +9,7 @@ const ArticleDetail = () => import ('page/cms/articleDetail')
     /* cms */
 
 /* member */
+const Pop = () => import ('page/member/pop')
 const Login = () => import ('page/member/login')
 const LoginBlank = () => import ('page/member/loginBlank')
 const BrowserLogin = () => import ('page/member/browserLogin')
@@ -295,6 +296,12 @@ const appRouter = {
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+            },
+            {
+                path: '/pop',
+                name: 'pop',
+                component: Pop,
+                meta: { keepAlive: false }
             }
         ],
        
