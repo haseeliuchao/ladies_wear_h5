@@ -875,7 +875,7 @@ import {
       },
       async Login() { //登录
         let Data = await this.$store.dispatch('Loginpass', {
-          username: this.loginForm.username,
+          phone: this.loginForm.username,
           password: this.loginForm.password
         })
         if (Data.Code !== 10000) return Toast({
