@@ -41,6 +41,15 @@ const AfterSale = () =>    import ('page/shop/afterSale')
 const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
     /* shop */
 
+/* shopToB */
+const MyShop = () => import ('page/shopToB/myShop')
+const ShopApplicate = () => import ('page/shopToB/shopApplicate')
+const ShopCreate = () => import ('page/shopToB/shopCreate')
+const ShopList = () => import ('page/shopToB/shopList')
+const CustomerList = () => import ('page/shopToB/customerList')
+const CustomerOrder = () => import ('page/shopToB/customerOrder')
+/* shopToB */
+
 const appRouter = {
         // mode: 'history',
         routes: [{
@@ -219,6 +228,42 @@ const appRouter = {
                 path: '/shop',
                 name: 'shop',
                 component: Shop,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/myShop',
+                name: 'myShop',
+                component: MyShop,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/shopApplicate',
+                name: 'shopApplicate',
+                component: ShopApplicate,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/shopCreate',
+                name: 'shopCreate',
+                component: ShopCreate,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/shopList',
+                name: 'shopList',
+                component: ShopList,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/customerList',
+                name: 'customerList',
+                component: CustomerList,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/customerOrder',
+                name: 'customerOrder',
+                component: CustomerOrder,
                 meta: { keepAlive: false }
             },
             {

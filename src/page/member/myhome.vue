@@ -5,9 +5,9 @@
     padding-bottom: 1.35rem;
     min-height: 100vh;
   }
-
+  // 头部样式
   .my-header {
-    height: 155px;
+    height: 145px;
     padding: 18px .33rem;
     background: -webkit-linear-gradient(left, #ff5527, #ff2741);
     background: linear-gradient( #ff5527, #ff2741);
@@ -101,9 +101,34 @@
     }
   }
 
+  // 我的小店样式
+  .my-store{
+     position:relative;
+     top:-35px;
+     padding:16px .3rem;
+     margin: 0 .3rem 8px;
+     color:#333;
+     background: #fff url('~jd/images/store_icon.png') no-repeat;
+    background-size: 96px 85%;
+    background-position: 6.3rem 5px;
+     border-radius:5px;
+    h2{
+      font-size:17px;
+      font-weight:bold;
+      span{
+        color:$red;
+        font-weight:bold;
+      }
+    }
+    p{
+      font-size:15px;
+      margin-top:8px;
+    }
+  }
+  // 我的订单样式
   .my-order {
     position:relative;
-    top:-60px;
+    top:-35px;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
@@ -177,7 +202,7 @@
   // 关于我们
   .my-about{
     position:relative;
-    top:-60px;
+    top:-35px;
     margin: 0 .33rem;
     border-radius:5px;
     background:#fff;
@@ -341,8 +366,16 @@
             </div> -->
           </div>
         </div>
+        <div class="my-store"  @click="$router.push('/shopApplicate')">
+          <h2>我的<span>小店</span></h2>
+          <p>送你开店秘籍，还不来取？</p>
+        </div>
+        <!-- <div class="my-store"  @click="$router.push('/myShop')">
+          <h2>我的<span>小店</span></h2>
+          <p>花点小心思，做大生意</p>
+        </div> -->
         <div class="my-order">
-          <h2>我的订单</h2>
+          <h2>我的进货单</h2>
           <div>
             <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
               <img src="~jd/images/paymenticon2.png" alt="">
@@ -376,7 +409,7 @@
             <span>快速管理 ></span>
           </p>
           <p class="about-item" @click= "showToast">
-            <span><img src="~jd/images/kefuicon.png">在线客服</span>
+            <span><img src="~jd/images/kefuicon.png">帮助中心</span>
             <span>有问题找小惠 ></span>
           </p>
           <p class="about-item" style="border-bottom:none;" @click= "showToast">
