@@ -51,15 +51,35 @@
       color:$red;
     }
   }
-  .btns{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    line-height:49px;
-    font-size:18px;
-    color:#fff;
-    background-color:$red;
-    text-align:center;
+  // .btns{
+  //   position:fixed;
+  //   bottom:0;
+  //   width:100%;
+  //   line-height:49px;
+  //   font-size:18px;
+  //   color:#fff;
+  //   background-color:$red;
+  //   text-align:center;
+  // }
+  .save-shop {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 14px 0;
+      background: $red;
+      font-size: 18px;
+      color: #fff;
+  }
+  .disabled-btn{
+    margin:0;
+    border-radius:0;
+    background-color:#b4b4b4!important;
+    color:#fff!important;
+  }
+  .cell-btn{
+    margin:0;
+    border-radius:0;
   }
 </style>
 <template>
@@ -68,33 +88,91 @@
     <div class="storeCreate-con store-con">
       <p>
         <label for="name">店铺名称</label>
-        <input type="text" name="name"  value="" placeholder="店铺为2-10个字符" id="name">
+        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name">
         <span style="display:none;">请输入合格店铺名称</span>
       </p>
       <p>
         <label for="category">主营类目</label>
-        <input type="text" name="category" value="女装" readonly="readonly" id="category">
+        <input type="text" name="category"  value="女装" readonly="readonly" id="category">
       </p>
       <p>
         <label for="markup">商品加价</label>
-        <input type="text" name="markup" value="1" placeholder="" id="markup">
+        <input type="text" name="markup" v-model="shopForm.n_times"  placeholder="" id="markup">
         <span>倍</span>
       </p>
       <p>
         <label for="freight">商品包邮</label>
-        <select id="freight">
-          <option>不包邮</option>
-          <option>包邮</option>
+        <select id="freight" v-model="shopForm.if_free_shipping">
+          <option value="0">不包邮</option>
+          <option value="1">包邮</option>
         </select>
       </p>
     </div>
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
-    <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p>
+    <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
+     <div  class="save-shop" 
+       :class="['cell-btn',errors.has('name')?'disabled-btn':'']" 
+      @click= "saveShop">创建店铺</div>
   </div>
 </div>
 </template>
 
 <script>
+  import {
+    Toast
+  }from 'mint-ui'
+  export default{
+    data(){
+      return{
+        shopForm:{
+          title:'',
+          n_times:'',
+          if_free_shipping:0
+        }
+      }
+    },
+    watch: {},
+    components:{
+    },
+    computed:{},
+    methods:{
+      async saveShop(){
+        let distributor_id='';
+        if(this.$route.params.distributor_id){
+          distributor_id=this.$route.params.distributor_id
+        }else{
+          distributor_id=''
+        }
+        let params = {
+          distributor_id:distributor_id,
+          title:this.shopForm.title,
+          n_times:this.shopForm.n_times,
+          if_free_shipping:this.shopForm.if_free_shipping
+        };
+        //有传Id则是编辑模式 没传是新增
+          this.$store.dispatch('SaveShop',params).then(response=>{
+            if(response.code != 10000){
+              Toast({
+                message: '保存失败',
+              })
+            }else {
+              Toast({
+                message: '保存成功'
+              })
+              this.$router.push({path: '/myShop'})
+            }
+          }).catch(error=>{
+              Toast({
+                message: '访问接口失败'
+              })
+          });
+        }
+                
+    },  
+    mounted: function () {
+    }
+
+  }
 </script>
 <style lang="scss" scoped>
 

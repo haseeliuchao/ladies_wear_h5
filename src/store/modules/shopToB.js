@@ -17,9 +17,12 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
+  
   getShopInfo,
+  saveShop,
+  getShopPd
 } from '@/service/getData';
-const shop = {
+const shopToB = {
   state: {
     categoryData: null, //商品分类数据
     cartProductData: null, //加入的购物车数据
@@ -288,7 +291,31 @@ const shop = {
         })
       })
     },
+    SaveShop({ // 获取店铺信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        saveShop(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetShopPd({ // 获取店铺信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getShopPd(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
   }
 }
 
-export default shop
+export default shopToB

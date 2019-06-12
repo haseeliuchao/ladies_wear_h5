@@ -77,8 +77,8 @@
         <li><span>0</span>支付订单数</li>
         <li><span>0</span>支付金额（元）</li>
         <li><span>0</span>可用余额（元）</li>
-        <li><span>0</span>代发货订单数（元）</li>
-        <li><span>0</span>售后订单数（元）</li>
+        <li><span>0</span>待发货订单数</li>
+        <li><span>0</span>售后订单数</li>
       </ul>
     </div>
     <div class="store-apply">
@@ -87,7 +87,7 @@
           <li @click="$router.push('/product')"><img src="~jd/images/pdManage.png">商品管理
           <span>></span></li>
           <li @click="$router.push('/orderList')"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
-          <li @click="$router.push('/shopList')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
+          <li @click="editShop"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
           <li @click="$router.push('/customerList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
           <li @click="$router.push('/customerList')"><img src="~jd/images/zichanManage.png">资产管理
           <span>></span></li>
@@ -112,7 +112,6 @@ import BackHead from 'common/backHead';
       BackHead,
     },
     methods: {
-
     },
 
     mounted: function () {
