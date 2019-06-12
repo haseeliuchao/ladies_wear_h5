@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 require('es6-promise').polyfill()       
 import Vue from 'vue'
+
 import App from './App'
 import router from './router'
 import 'babel-polyfill'
@@ -15,6 +16,7 @@ import '@/utils/filters'
 // import '@/utils/hash'
 import utils from '@/utils/urlfun'
 import wxShare from '@/utils/wxShare'
+
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import {
   getSignature,
@@ -93,6 +95,8 @@ const config = {
    });
 
  Vue.use(VeeValidate, config); 
+
+
 
 var routerindex=0
 router.beforeEach((to,from,next)=>{
