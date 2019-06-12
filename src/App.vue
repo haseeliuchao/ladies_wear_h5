@@ -68,6 +68,12 @@ import {
      },
      mounted: function () {
       this.loginData();
+      // window.addEventListener('scroll',function(){
+      //          document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+      //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
+      // });
+      //         },true)
+     
     }
   
   }

@@ -39,7 +39,14 @@ const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
 const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
 const AfterSale = () =>    import ('page/shop/afterSale')
 const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
-    /* shop */
+/* shop */
+
+/* shopb */
+const Goodslist = () =>  import ('page/shopb/goodslist')
+const Goodedit = () =>  import ('page/shopb/goodedit')
+/* shopb */
+
+
 
 /* shopToB */
 const MyShop = () => import ('page/shopToB/myShop')
@@ -342,6 +349,20 @@ const appRouter = {
                     link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
+            {
+                path: '/goodslist',
+                name: 'goodslist',
+                component: Goodslist,
+                meta: { keepAlive: false }
+            }
+            ,
+            {
+                path: '/goodedit',
+                name: 'goodedit',
+                component: Goodedit,
+                meta: { keepAlive: false }
+            }
+            ,
             {
                 path: '/pop',
                 name: 'pop',
