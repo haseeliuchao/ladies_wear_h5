@@ -17,7 +17,7 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
-  
+  getShopList,
   getShopInfo,
   saveShop,
   getShopPd
@@ -273,6 +273,18 @@ const shopToB = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         getOrder(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetShopList({ // 获取店铺信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getShopList(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

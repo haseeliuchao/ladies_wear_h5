@@ -366,14 +366,14 @@
             </div> -->
           </div>
         </div>
-        <div class="my-store"  @click="$router.push('/shopApplicate')">
+        <div class="my-store" v-if="!userData.distributorBO" @click="$router.push('/shopApplicate')">
           <h2>我的<span>小店</span></h2>
           <p>送你开店秘籍，还不来取？</p>
         </div>
-        <!-- <div class="my-store"  @click="$router.push('/myShop')">
+        <div class="my-store" v-if="userData.distributorBO" @click="$router.push('/myShop')">
           <h2>我的<span>小店</span></h2>
           <p>花点小心思，做大生意</p>
-        </div> -->
+        </div>
         <div class="my-order">
           <h2>我的进货单</h2>
           <div>
@@ -448,7 +448,8 @@
     data() {
       return {
         userData: {
-          memberInfo:{}
+          memberInfo:{},
+          distributorBO:null
         },
         handlerEvent: false,
         // cmsData: {

@@ -126,9 +126,12 @@ export const getIndexCmsData = (params) => new Http().require({api: '/api/ad/adv
 export const getShop = (params) => new Http().require({api: '/system/GetShop',param:params}); //获取购物车列表
 
 // shopToB
-export const getShopInfo = (params) => new Http().require({api: '/api/distributor/details',param: params}); //B端店铺列表
+export const getShopList = (params) => new Http().require({api: '/api/distributor/stastistics',param: params}); //B端店铺列表
+export const getShopInfo = (params) => new Http().require({api: '/api/distributor/details',param: params}); //B端店铺信息
+
 export const saveShop = (params) => new Http().require({api: '/api/distributor/add',param: params}); //B端店铺创建修改
 export const getShopPd = (params) => new Http().require({api: '/api/distributor/item/page',param: params}); //B端店铺商品列表
+
 export const getCustomerList = (params) => new Http().require({api: '/api/shop/ShopList',param: params}); //B端客户管理
 export const getCustomerOrder = (params) => new Http().require({api: '/api/shop/ShopList',param: params}); //B端客户订单
 

@@ -84,10 +84,10 @@
     <div class="store-apply">
       <h2>我的应用</h2>
       <ul>
-          <li @click="$router.push('/product')"><img src="~jd/images/pdManage.png">商品管理
+          <li @click="$router.push('/goodslist/'+distributor_id+'')"><img src="~jd/images/pdManage.png">商品管理
           <span>></span></li>
           <li @click="$router.push('/orderList')"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
-          <li @click="editShop"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
+          <li @click="$router.push('/shopList/'+distributor_id+'')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
           <li @click="$router.push('/customerList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
           <li @click="$router.push('/customerList')"><img src="~jd/images/zichanManage.png">资产管理
           <span>></span></li>
@@ -105,16 +105,27 @@ import BackHead from 'common/backHead';
   export default {
     data() {
       return {
+          shopList:{ },
+          distributor_id:null
       }
     },
-     components: {
+    components: {
       FooterViewToB,
       BackHead,
     },
     methods: {
+      async initData(){
+        let res = await this.$store.dispatch('GetShopList');
+        if(res.code==10000){
+            this.shopList = res.data;
+            this.distributor_id=this.shopList.distributorBO.distributor_id;
+        }else{
+            this.shopList = null;
+        }
+      }
     },
-
     mounted: function () {
+      this.initData();
     }
   }
 

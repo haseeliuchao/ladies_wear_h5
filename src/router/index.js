@@ -256,7 +256,7 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/shopList',
+                path: '/shopList/:distributor_id',
                 name: 'shopList',
                 component: ShopList,
                 meta: { keepAlive: false }
@@ -350,7 +350,7 @@ const appRouter = {
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
-                path: '/goodslist',
+                path: '/goodslist/:distributor_id',
                 name: 'goodslist',
                 component: Goodslist,
                 meta: { keepAlive: false }
