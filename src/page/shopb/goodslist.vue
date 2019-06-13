@@ -410,12 +410,23 @@
   <div class="my-order" @click="editIndex=null">
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-     <div class="screen_subject" id='newImg'>
+     <!-- <div class="screen_subject" id='newImg'>
                 <img src="https://img.alicdn.com/bao/uploaded/i4/1033573000/O1CN01fEZsxB1Y22jFgxtUZ_!!1033573000.jpg" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
           <p class="screen_subjectprice">¥399</p>
           <p class="screen_subjectname">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
+        </div>
+        <img src="~jd/images/qrcode.png">
+      </div>
+     </div> -->
+
+     <div class="screen_subject" id='newImg'>
+                <img :src="screenImgsrc" class="screen_subjectgoodimg">
+      <div class="screen_subjecttext">
+        <div>
+          <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
+          <p class="screen_subjectname">{{screenTitle}}</p>
         </div>
         <img src="~jd/images/qrcode.png">
       </div>
@@ -457,10 +468,10 @@
               <div class="order-product-list">
                <div class="order-product-item" >
                   <div> 
-                    <img  v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+                    <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="">
                     <div class="product-info">
-                      <p class="prod-name">{{item.title}}</p>
-                      <p class="prod-price">售价：¥9.90&nbsp;&nbsp;&nbsp;&nbsp;成本：¥9.90 起</p>
+                      <p class="prod-name">{{item.item_title}}</p>
+                      <p class="prod-price">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
                       <p class="prod-num"><span>销量：0</span><span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
                           <div style="border-right: 1px solid #949494;" @click= "()=>$router.push('/goodedit')">
@@ -471,7 +482,8 @@
                             <img src="~jd/images/edit-popdel.png" style="width:14px;">
                             <p>删除</p>
                           </div>
-                          <div @click="sheetVisible=true">
+                          <div @click="showactionsheet(item)">
+                            <!-- sheetVisible=true -->
                             <img src="~jd/images/edit-popshare.png" style="width:14px;height:14px;">
                             <p>分享</p>
                           </div>
@@ -499,7 +511,7 @@
 <script>
 import html2canvas from 'html2canvas';
   import {
-    searchGoods,
+    searchshopGoods,
     payDirect
   } from '@/service/getData';
   import {
@@ -514,7 +526,7 @@ Vue.component(Actionsheet.name, Actionsheet);
   export default {
     data() {
       return {
-        commad: searchGoods,
+        commad: searchshopGoods,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false,
@@ -524,11 +536,8 @@ Vue.component(Actionsheet.name, Actionsheet);
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
         params: {
-          title: '',
-          item_url:'',
-          sort_type:1,
-          category_id:'',
-          ad_advertising_id:'',
+          distributor_id:this.$route.params.distributor_id,
+          status:1,
           page_size: 10,
           current_page: 1
         },
@@ -539,6 +548,9 @@ Vue.component(Actionsheet.name, Actionsheet);
         goodListDetailin:[],
         editIndex:null,
         screenUrl: null,
+        screenImgsrc:null,
+        screenTitle:null,
+        screenPrice:null,
         actions: [{
               name: '发送好友',
               method : this.getCamera	// 调用methods中的函数
@@ -559,7 +571,12 @@ Vue.component(Actionsheet.name, Actionsheet);
     computed: {},
 
     methods: {
-     
+      showactionsheet(item){
+        this.sheetVisible=true;
+        this.screenImgsrc=item.item_index_img_url;
+        this.screenTitle=item.item_title;
+        this.screenPrice=item.sales_price;
+      },
       actionSheet: function(){
       this.sheetVisible = true;
       },
@@ -567,6 +584,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
+        this.doScreeenShots();
         this.visiblePopup.shareImg=true;
       },
 
@@ -671,22 +689,22 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.active = Id;
         switch (Number(this.active)) {
           case 0: //全部订单
-            this.params.order_status = null;
+            this.params.status = 1;
             break;
           case 1: //待付款
-            this.params.order_status = 1;
+            this.params.status = 2;
             break;
           case 2: //待发货
-            this.params.order_status = 2;
+            this.params.status = 3;
             break;
           case 3: //待收货
-            this.params.order_status = 3;
+            this.params.status = 4;
             break;
           case 4: //已完成
-            this.params.order_status = 4;
+            this.params.status = 5;
             break;
           case 5: //已关闭
-            this.params.order_status = 5;
+            this.params.status = 6;
             break;
           default: //其他
             throw new Error('未知TabId')
@@ -696,8 +714,8 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       
       async infiniteCallback(response) { //加载更多订单
-        if (response.data.items.length > 0) {
-          response.data.items.map(i => {
+        if (response.data.distributor_item.length > 0) {
+          response.data.distributor_item.map(i => {
             // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
             this.goodList.push(i)
           })
@@ -720,7 +738,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     //     }
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0);
-      this.doScreeenShots();
+      
     }
   }
 
