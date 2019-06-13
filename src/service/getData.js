@@ -60,6 +60,9 @@ export const getSelectedProductList = (params) => new Http().require({api: '/api
 
 export const searchGoods = (params) => new Http().require({api: '/api/items',param:params}); //获取购物车列表
 
+
+export const searchshopGoods = (params) => new Http().require({api: '/api/distributor/item/page',param:params}); //获取购物车列表
+
 export const searchtwoGoods = (params) => new Http().require({api: '/api/ad/appoint/obj/list',param:params}); //获取购物车列表
 
 export const searchhotGoods = (params) => new Http().require({api: '/api/hot/search/word/list',param:params}); //获取购物车列表

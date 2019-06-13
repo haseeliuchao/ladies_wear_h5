@@ -1029,7 +1029,7 @@
     margin-top: 18px;width:66%;">
     <p class="addSuccess-text">上架成功</p>
     <p class="addSuccess-textmin">邀请好友购买，可<br>
-赚 <em>¥28</em> 元起</p>
+赚 <em>¥{{profit/100.00}}</em> 元起</p>
     <div class="addSuccess-share">
       <div>
         <img src="~jd/images/share-app.png" alt="" style="width:50px;">
@@ -1245,7 +1245,8 @@
           nowIndex: 1,
           total: 0
         },
-        addType:null
+        addType:null,
+        profit:0
       };
     },
     created: function () {
@@ -1513,6 +1514,7 @@ methods: {
           })
           return
         }
+        this.profit=Data.data.kezuanshangxian;
         this.visiblePopup.addSuccess=true;
 
        },

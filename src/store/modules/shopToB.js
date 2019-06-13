@@ -1,7 +1,7 @@
 import {
   getCategoryList,
   getSelectedProductList,
-  searchGoods,
+  searchshopGoods,
   searchtwoGoods,
   getProduct,
   getProductList,
@@ -113,12 +113,12 @@ const shopToB = {
         })
       })
     },
-    SearchGoods({ // 搜索商品
+    SearchshopGoods({ // 搜索商品
       commit,
       state
     }, parameterData) {
       return new Promise((resolve, reject) => {
-        searchGoods(parameterData).then(response => {
+        searchshopGoods(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
