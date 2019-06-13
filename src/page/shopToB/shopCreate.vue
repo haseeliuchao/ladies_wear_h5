@@ -51,16 +51,6 @@
       color:$red;
     }
   }
-  // .btns{
-  //   position:fixed;
-  //   bottom:0;
-  //   width:100%;
-  //   line-height:49px;
-  //   font-size:18px;
-  //   color:#fff;
-  //   background-color:$red;
-  //   text-align:center;
-  // }
   .save-shop {
       position: fixed;
       bottom: 0;
@@ -110,9 +100,12 @@
     </div>
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
-     <div  class="save-shop" 
-       :class="['cell-btn',errors.has('name')?'disabled-btn':'']" 
+     <div  class="save-shop" v-if="!shopForm.distributor_id"
+      :class="['cell-btn',errors.has('name')?'disabled-btn':'']" 
       @click= "saveShop">创建店铺</div>
+      <div class="save-shop" v-if="shopForm.distributor_id"
+      :class="['cell-btn',errors.has('name')?'disabled-btn':'']" 
+      @click= "saveShop">修改店铺</div>
   </div>
 </div>
 </template>
@@ -125,6 +118,7 @@
     data(){
       return{
         shopForm:{
+          distributor_id:'',
           title:'',
           n_times:'',
           if_free_shipping:0
@@ -144,12 +138,12 @@
           distributor_id=''
         }
         let params = {
-          distributor_id:distributor_id,
+          distributor_id:this.shopForm.distributor_id,
           title:this.shopForm.title,
           n_times:this.shopForm.n_times,
           if_free_shipping:this.shopForm.if_free_shipping
         };
-        //有传Id则是编辑模式 没传是新增
+        //有传Id则是编辑模式 没传是新增   
           this.$store.dispatch('SaveShop',params).then(response=>{
             if(response.code != 10000){
               Toast({
@@ -166,10 +160,10 @@
                 message: '访问接口失败'
               })
           });
-        }
-                
+        },
     },  
     mounted: function () {
+    
     }
 
   }

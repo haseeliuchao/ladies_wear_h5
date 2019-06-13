@@ -17,10 +17,12 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
-  getShopList,
+
+  getShopStastistics,
   getShopInfo,
   saveShop,
-  getShopPd
+  getMemberList,
+  getMemberOrder
 } from '@/service/getData';
 const shopToB = {
   state: {
@@ -279,12 +281,12 @@ const shopToB = {
         })
       })
     },
-    GetShopList({ // 获取店铺信息
+    GetShopStastistics({ // 获取店铺统计
       commit,
       state
     }, parameterData) {
       return new Promise((resolve, reject) => {
-        getShopList(parameterData).then(response => {
+        getShopStastistics(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
@@ -303,7 +305,7 @@ const shopToB = {
         })
       })
     },
-    SaveShop({ // 获取店铺信息
+    SaveShop({ // 保存店铺信息
       commit,
       state
     }, parameterData) {
@@ -315,12 +317,24 @@ const shopToB = {
         })
       })
     },
-    GetShopPd({ // 获取店铺信息
+    GetMemberList({ // 获取客户列表
       commit,
       state
     }, parameterData) {
       return new Promise((resolve, reject) => {
-        getShopPd(parameterData).then(response => {
+        getMemberList(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetMemberOrder({ // 获取客户详情订单
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getMemberOrder(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

@@ -137,11 +137,7 @@
   export default{
     data(){
       return{
-        shopForm:{
-          title:'',
-          n_times:'',
-          if_free_shipping:''
-        }
+       memberList:{}
       }
     },
     watch: {},
@@ -149,9 +145,13 @@
     },
     computed:{},
     methods:{
-      
+      // initData(){
+      //   let res= await this.$store.dispatch('GetMemberList')
+      //   this.memberList = res.data;
+      // }
     },  
     mounted: function () {
+      this.initData()
     }
 
   }

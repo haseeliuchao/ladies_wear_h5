@@ -74,11 +74,11 @@
     <div class="store-header">
       <h2>今日业绩</h2>
       <ul>
-        <li><span>0</span>支付订单数</li>
-        <li><span>0</span>支付金额（元）</li>
+        <li><span>{{shopStastistics.payOrderCount}}</span>支付订单数</li>
+        <li><span>{{shopStastistics.payOrderPrice}}</span>支付金额（元）</li>
         <li><span>0</span>可用余额（元）</li>
-        <li><span>0</span>待发货订单数</li>
-        <li><span>0</span>售后订单数</li>
+        <li><span>{{shopStastistics.toDeliverCount}}</span>待发货订单数</li>
+        <li><span>{{shopStastistics.toPostSalesCount}}</span>售后订单数</li>
       </ul>
     </div>
     <div class="store-apply">
@@ -87,9 +87,9 @@
           <li @click="$router.push('/goodslist/'+distributor_id+'')"><img src="~jd/images/pdManage.png">商品管理
           <span>></span></li>
           <li @click="$router.push('/orderList')"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
-          <li @click="$router.push('/shopList/'+distributor_id+'')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
-          <li @click="$router.push('/customerList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
-          <li @click="$router.push('/customerList')"><img src="~jd/images/zichanManage.png">资产管理
+          <li @click="$router.push('/shopCreate/'+distributor_id+'')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
+          <li @click="$router.push('/memberList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
+          <li @click="$router.push('/memberList')"><img src="~jd/images/zichanManage.png">资产管理
           <span>></span></li>
       </ul> 
     </div> 
@@ -105,7 +105,7 @@ import BackHead from 'common/backHead';
   export default {
     data() {
       return {
-          shopList:{ },
+          shopStastistics:{ },
           distributor_id:null
       }
     },
@@ -115,12 +115,12 @@ import BackHead from 'common/backHead';
     },
     methods: {
       async initData(){
-        let res = await this.$store.dispatch('GetShopList');
+        let res = await this.$store.dispatch('GetShopStastistics');
         if(res.code==10000){
-            this.shopList = res.data;
-            this.distributor_id=this.shopList.distributorBO.distributor_id;
+            this.shopStastistics = res.data;
+            this.distributor_id=this.shopStastistics.distributorBO.distributor_id;
         }else{
-            this.shopList = null;
+            this.shopStastistics = null;
         }
       }
     },

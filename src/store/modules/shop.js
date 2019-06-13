@@ -17,7 +17,6 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
-  getShopInfo,
 } from '@/service/getData';
 const shop = {
   state: {
