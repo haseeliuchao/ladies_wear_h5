@@ -17,7 +17,7 @@
       line-height:20px;
     }
     ul{
-      @include flexbox(space-between,center,row,wrap);
+      @include flexbox(flex-start,center,row,wrap);
       font-size:14px;
       li{
         // @include flexbox(flex-start,center,column,wrap);
@@ -25,7 +25,7 @@
         justify-content:center;
         align-items:center;
         flex-direction:column;
-        // width:3.1rem;
+        width:3.1rem;
         padding:12px 0 ;
         font-size:15px;
         span{
@@ -79,7 +79,7 @@
         <li><span>{{shopStastistics.payOrderPrice}}</span>支付金额（元）</li>
         <li><span>0</span>可用余额（元）</li>
         <li><span>{{shopStastistics.toDeliverCount}}</span>待发货订单数</li>
-        <li><span>{{shopStastistics.toPostSalesCount}}</span>售后订单数</li>
+        <li><span>{{shopStastistics.toPostSalesCount}}</span>售后中订单数&nbsp;&nbsp;</li>
       </ul>
     </div>
     <div class="store-apply">

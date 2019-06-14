@@ -10,6 +10,7 @@
     height: 50px;
     padding: 0;
     background: #fff;
+    border-top:1px solid #e4e4e4;
     // overflow: hidden;
     -webkit-transform: translateZ(0);
     clear: both;
