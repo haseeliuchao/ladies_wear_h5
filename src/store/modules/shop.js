@@ -17,6 +17,14 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
+
+  getShopStastistics,
+  getShopInfo,
+  saveShop,
+  getMemberList,
+  getMemberDetails,
+  updMemberNick,
+  getOrderCount
 } from '@/service/getData';
 const shop = {
   state: {
@@ -269,6 +277,92 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         getOrder(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+
+    // B端店铺
+    GetShopStastistics({ // 获取B端店铺统计
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getShopStastistics(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetShopInfo({ // 获取店铺信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getShopInfo(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    SaveShop({ // 保存店铺信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        saveShop(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetMemberList({ // 获取客户列表
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getMemberList(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetMemberDetails({ // 获取客户详情
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getMemberDetails(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    UpdMemberNick({ // 更新B端客户昵称
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        updMemberNick(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetOrderCount({ // 查询B端客户订单总数
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getOrderCount(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
