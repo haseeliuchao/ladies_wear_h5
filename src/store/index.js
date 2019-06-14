@@ -14,8 +14,7 @@ const store = new Vuex.Store({
     app,
     shop,
     cms,
-    user,
-    // shopToB
+    user
   },
   getters
 })

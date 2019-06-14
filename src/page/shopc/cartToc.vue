@@ -410,7 +410,7 @@
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
-                <img :src="item.index_img_url" alt="">
+                <img :src="item.item_url" alt="">
               </div>
               <div class="pd-info">
                 <div class="pd-title">

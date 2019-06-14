@@ -2,6 +2,9 @@ import {
   getCategoryList,
   getSelectedProductList,
   searchGoods,
+  searchshopGoods,
+  itemUpd,
+  distributorItemDel,
   searchtwoGoods,
   getProduct,
   getProductList,
@@ -17,6 +20,7 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
+
 
   getShopStastistics,
   getShopInfo,
@@ -58,6 +62,42 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         confirmSelectProduct(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    SearchshopGoods({ // 搜索商品
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        searchshopGoods(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    ItemUpd({ // 获取商品详情
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        itemUpd(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    DistributorItemDel({ // 获取商品详情
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        distributorItemDel(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
