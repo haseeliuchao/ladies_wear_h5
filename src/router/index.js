@@ -8,6 +8,10 @@ const Article = () =>   import ('page/cms/article')
 const ArticleDetail = () => import ('page/cms/articleDetail')
     /* cms */
 
+/* cmsc */
+const IndexToC= () => import ('page/cmsc/indexToC')
+/* cmsc */
+
 /* member */
 const Pop = () => import ('page/member/pop')
 const Login = () => import ('page/member/login')
@@ -64,6 +68,14 @@ const appRouter = {
                 path: '',
                 redirect: '/loginBlank'
             },
+            /*C端店铺首页 */
+            {
+                path: '/index',
+                name: 'index',
+                component: IndexToC,
+                meta: { keepAlive: false }
+            },
+            /*C端店铺首页 */
             {
                 path: '/index',
                 name: 'index',
@@ -75,7 +87,7 @@ const appRouter = {
                     link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png',
                 }
-            },
+            }, 
             {
                 path: '/article',
                 name: 'article',
