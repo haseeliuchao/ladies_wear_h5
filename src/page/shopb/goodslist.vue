@@ -468,17 +468,18 @@
               <div class="order-product-list">
                <div class="order-product-item" >
                   <div> 
-                    <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="">
+                    <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="" @click= "()=>$router.push('/product/'+item.item_id)">
                     <div class="product-info">
-                      <p class="prod-name">{{item.item_title}}</p>
-                      <p class="prod-price">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
+                      <p class="prod-name" @click= "()=>$router.push('/product/'+item.item_id)">{{item.item_title}}</p>
+                      <p class="prod-price" @click= "()=>$router.push('/product/'+item.item_id)">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
                       <p class="prod-num"><span>销量：0</span><span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
-                          <div style="border-right: 1px solid #949494;" @click= "()=>$router.push('/goodedit')">
+                          <div style="border-right: 1px solid #949494;" @click= "()=>$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
+                            
                             <img src="~jd/images/edit-popedit.png" style="width:14px;">
                             <p>编辑</p>
                           </div>
-                          <div style="border-right: 1px solid #949494;" @click="delGood(item.item_id)">
+                          <div style="border-right: 1px solid #949494;" @click="delGood(item.distributor_item_id)">
                             <img src="~jd/images/edit-popdel.png" style="width:14px;">
                             <p>删除</p>
                           </div>
@@ -538,6 +539,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         params: {
           distributor_id:this.$route.params.distributor_id,
           status:1,
+          load_qrcode:1,
           page_size: 10,
           current_page: 1
         },
@@ -630,7 +632,7 @@ Vue.component(Actionsheet.name, Actionsheet);
  
       },
      
-      delGood(item) { //确认收货
+      delGood(id) { //确认删除
          MessageBox.confirm('', { 
             message: '确认要删除该商品吗?', 
             title: '',
@@ -638,17 +640,17 @@ Vue.component(Actionsheet.name, Actionsheet);
             confirmButtonClass:'confirmButton',
           }).then(action => {
             if (action == 'confirm') {     //确认的回调
-              // this.$store.dispatch('FinishOrder', {
-              //   order_code: item.order_code
-              // }).then(response => {
-              //   if(response.code!=10000){
-              //     Toast({
-              //     message: response.msg
-              //     })
-              //   }else{
-              //   this.onRefreshCallback()
-              //   }
-              // })
+              this.$store.dispatch('DistributorItemDel', {
+                distributor_item_id: id
+              }).then(response => {
+                if(response.code!=10000){
+                  Toast({
+                  message: response.msg
+                  })
+                }else{
+                this.onRefreshCallback()
+                }
+              })
               console.log('确认删除')
             }
           }).catch(err => { 
@@ -698,13 +700,7 @@ Vue.component(Actionsheet.name, Actionsheet);
             this.params.status = 3;
             break;
           case 3: //待收货
-            this.params.status = 4;
-            break;
-          case 4: //已完成
-            this.params.status = 5;
-            break;
-          case 5: //已关闭
-            this.params.status = 6;
+            this.params.status = null;
             break;
           default: //其他
             throw new Error('未知TabId')

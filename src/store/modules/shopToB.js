@@ -4,8 +4,9 @@ import {
   searchshopGoods,
   searchtwoGoods,
   getProduct,
+  itemUpd,
+  distributorItemDel,
   getProductList,
-  selectProduct,
   updselectProduct,
   removeSelectedProduct,
   confirmSelectProduct,
@@ -147,6 +148,30 @@ const shopToB = {
         })
       })
     },
+    ItemUpd({ // 获取商品详情
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        itemUpd(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    DistributorItemDel({ // 获取商品详情
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        distributorItemDel(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
     GetProductList({ // 获取商品列表
       commit,
       state
@@ -159,18 +184,7 @@ const shopToB = {
         })
       })
     },
-    SelectProduct({ // 加入购物车
-      commit,
-      state
-    }, parameterData) {
-      return new Promise((resolve, reject) => {
-        selectProduct(parameterData).then(response => {
-          resolve(response)
-        }, err => {
-          reject(err)
-        })
-      })
-    },
+    
     UpdselectProduct({ // 加入购物车
       commit,
       state
