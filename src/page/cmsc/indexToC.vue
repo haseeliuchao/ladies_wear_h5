@@ -115,7 +115,7 @@
     setLocalStorage
   } from '@/utils/mixin';
   import {
-    getGoodsCategoryList,
+    // getGoodsCategoryList,
     searchGoods
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
@@ -123,28 +123,18 @@
     Lazyload
   } from 'mint-ui';
   import {
-  Indicator,
   Toast
 } from 'mint-ui';
   import {
-    mapGetters,
-    mapMutations
+    mapGetters
   } from 'vuex';
   export default {
     data() {
       return {
-        Status: false,
-        // commad: getRecommend,
         recommendParam: {
           page_size: 10,
           current_page: 1
         },
-        
-         code:null,
-         app_key:null,
-      
-        // recommendData: [],
-        // cmsData: [],
         indexRusultData: [],
         commad: searchGoods,
         indexParams: {
@@ -223,11 +213,11 @@
       async initData() { //初始化数据
         this.guideindex=getLocalStorage('guideindex');
         if(this.isWeiXin()){
-        if (!this.indexCmsData) {
-          this.updatedData();
-        } else {
-          this.cmsData = this.indexCmsData.data;
-        }
+          if (!this.indexCmsData) {
+            this.updatedData();
+          } else {
+            this.cmsData = this.indexCmsData.data;
+          }
         }
       },
       
@@ -248,10 +238,6 @@
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
       this.updatedData();
-      // this.loginData();
-      // showBack(status => {
-      //   this.Status = status;
-      // })
     }
   }
 
