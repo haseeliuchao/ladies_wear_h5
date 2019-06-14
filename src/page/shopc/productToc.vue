@@ -1059,8 +1059,7 @@
         </div> -->
         <div class="shopping-cart" @click= "$router.push(`/cartToc/7`)">
         <!-- ${productInfo.distributor_id} -->
-        
-          <em>4</em>
+          <em v-if="productInfo.shopping_cart_num&&productInfo.shopping_cart_num!=0">{{productInfo.shopping_cart_num}}</em>
           <i></i>
           <span>购物车</span>
         </div>
