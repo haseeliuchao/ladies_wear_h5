@@ -17,7 +17,6 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
-  getShopInfo,
 } from '@/service/getData';
 const shop = {
   state: {
@@ -270,18 +269,6 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         getOrder(parameterData).then(response => {
-          resolve(response)
-        }, err => {
-          reject(err)
-        })
-      })
-    },
-    GetShopInfo({ // 获取店铺信息
-      commit,
-      state
-    }, parameterData) {
-      return new Promise((resolve, reject) => {
-        getShopInfo(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

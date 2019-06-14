@@ -53,10 +53,9 @@ const Goodedit = () =>  import ('page/shopb/goodedit')
 /* shopToB */
 const MyShop = () => import ('page/shopToB/myShop')
 const ShopApplicate = () => import ('page/shopToB/shopApplicate')
-const ShopCreate = () => import ('page/shopToB/shopCreate')
-const ShopList = () => import ('page/shopToB/shopList')
-const CustomerList = () => import ('page/shopToB/customerList')
-const CustomerOrder = () => import ('page/shopToB/customerOrder')
+const ShopManage = () => import ('page/shopToB/shopManage')
+const MemberList = () => import ('page/shopToB/memberList')
+const MemberDetails = () => import ('page/shopToB/memberDetails')
 /* shopToB */
 
 const appRouter = {
@@ -261,27 +260,21 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/shopCreate',
-                name: 'shopCreate',
-                component: ShopCreate,
+                path: '/shopManage/:distributor_id',
+                name: 'shopManage',
+                component: ShopManage,
                 meta: { keepAlive: false }
             },
             {
-                path: '/shopList/:distributor_id',
-                name: 'shopList',
-                component: ShopList,
+                path: '/memberList',
+                name: 'memberList',
+                component: MemberList,
                 meta: { keepAlive: false }
             },
             {
-                path: '/customerList',
-                name: 'customerList',
-                component: CustomerList,
-                meta: { keepAlive: false }
-            },
-            {
-                path: '/customerOrder',
-                name: 'customerOrder',
-                component: CustomerOrder,
+                path: '/memberDetails',
+                name: 'memberDetails',
+                component: MemberDetails,
                 meta: { keepAlive: false }
             },
             {

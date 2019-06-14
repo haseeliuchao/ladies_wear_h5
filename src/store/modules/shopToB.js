@@ -18,10 +18,14 @@ import {
   getOrder,
   getCommentList,
   commitMessage,
-  getShopList,
+
+  getShopStastistics,
   getShopInfo,
   saveShop,
-  getShopPd
+  getMemberList,
+  getMemberDetails,
+  updMemberNick,
+  getOrderCount
 } from '@/service/getData';
 const shopToB = {
   state: {
@@ -293,12 +297,12 @@ const shopToB = {
         })
       })
     },
-    GetShopList({ // 获取店铺信息
+    GetShopStastistics({ // 获取店铺统计
       commit,
       state
     }, parameterData) {
       return new Promise((resolve, reject) => {
-        getShopList(parameterData).then(response => {
+        getShopStastistics(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
@@ -317,7 +321,7 @@ const shopToB = {
         })
       })
     },
-    SaveShop({ // 获取店铺信息
+    SaveShop({ // 保存店铺信息
       commit,
       state
     }, parameterData) {
@@ -329,12 +333,48 @@ const shopToB = {
         })
       })
     },
-    GetShopPd({ // 获取店铺信息
+    GetMemberList({ // 获取客户列表
       commit,
       state
     }, parameterData) {
       return new Promise((resolve, reject) => {
-        getShopPd(parameterData).then(response => {
+        getMemberList(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetMemberDetails({ // 获取客户详情
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getMemberDetails(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    UpdMemberNick({ // 更新B端客户昵称
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        updMemberNick(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetOrderCount({ // 查询B端客户订单总数
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getOrderCount(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

@@ -70,6 +70,7 @@
           flex:1;
           justify-content:flex-start;
           &:first-child{
+            height:18px;
             font-size:16px;
             color:#333;
           }
@@ -103,60 +104,85 @@
     <div class="searchInput" @click= "$refs.searchInput.focus()">
       <div class="search-box">
         <i class="searchIcon"></i>
-        <input type="search" placeholder="通过手机号、备注名、昵称等查找" ref="searchInput">
-        <i class="delIcon"></i>
+        <input type="search"  v-model="search_parameter"  @keypress="truesearchRusult" placeholder="通过手机号、备注名、昵称等查找" ref="searchInput">
+        <i class="delIcon" @click="clearSearch"></i>
       </div>
-      <span>取消</span>
+      <span @click="searchRusult">搜索</span>
     </div>
-    <ul class="customer-info">
-      <li @click="$router.push('/customerOrder')">
-        <img src="~jd/images/orderManage.png">
+    <ul class="customer-info" v-if="memberData.memberList" >
+      <li @click="$router.push('/memberDetails')" v-for="(item,index) in memberData.memberList">
+        <img  :src="item.head_img" alt="">
         <div>
-          <p>樱桃小丸子</p>
-          <p>累计消费：<em>￥</em><i>9.90</i></p>
-        </div>
-        <span>></span>
-      </li>
-      <li @click="$router.push('/customerOrder')">
-        <img src="~jd/images/orderManage.png">
-        <div>
-          <p>樱桃小丸子</p>
-          <p>累计消费：<em>￥</em><i>9.90</i></p>
+          <p v-if="!memberData.nick_note">{{item.nick}}</p>
+          <p v-if="memberData.nick_note">{{item.nick_note}}</p>
+          <p>累计消费：<em>￥</em><i>{{item.checkout_amount}}</i></p>
         </div>
         <span>></span>
       </li>
     </ul>
   </div>
+  <BackHead/>
 </div>
 </template>
 
 <script>
+ import BackHead from 'common/backHead';
+ import {
+    getMemberList
+  } from '@/service/getData'
  import {
     Toast
-  }from 'mint-ui'
+  }from 'mint-ui';
   export default{
     data(){
       return{
-        shopForm:{
-          title:'',
-          n_times:'',
-          if_free_shipping:''
-        }
+        memberData:{
+          memberList:{}
+        },
+        search_parameter:''
       }
     },
     watch: {},
     components:{
+      BackHead
     },
     computed:{},
     methods:{
-      
+      async searchRusult() {
+        this.memberData = {};
+        this.search_parameter?this.search_parameter=this.search_parameter:this.search_parameter=''
+        if(this.search_parameter==''){
+           Toast("请输入搜索条件")
+        }
+        let Data = await getMemberList({
+          search_parameter: this.search_parameter,
+          page_size: 10,
+          current_page: 1
+        });
+        Data.code!=10000?Toast({message:'访问接口失败'}):Toast({message:'访问接口成功'});
+        this.memberData = Data.data;
+        this.memberData.memberList = Data.data.data;
+      },
+      async truesearchRusult(event) { 
+        if (event.keyCode == 13) { //如果按的是enter键 13是enter 
+            event.preventDefault(); //禁止默认事件（默认是换行） 
+            this.searchRusult(this.search_parameter)
+        } 
+      }, 
+      async clearSearch(){
+        this.search_parameter='';
+      },
+      async initData(){
+        let res = await this.$store.dispatch('GetMemberList');
+        res.code!=10000?Toast({message:'访问接口失败'}):Toast({message:'访问接口成功'});
+        this.memberData = res.data;
+        this.memberData.memberList = res.data.data;
+      }
     },  
     mounted: function () {
+      this.initData();
     }
-
   }
 </script>
 <style lang="scss" scoped>
-
-
 </style>
