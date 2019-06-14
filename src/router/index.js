@@ -6,11 +6,8 @@ import wxapi from '@/utils/wxapi';
 const Index = () => import ('page/cms/index')
 const Article = () =>   import ('page/cms/article')
 const ArticleDetail = () => import ('page/cms/articleDetail')
-    /* cms */
-
-/* cmsc */
 const IndexToC= () => import ('page/cmsc/indexToC')
-/* cmsc */
+    /* cms */
 
 /* member */
 const Pop = () => import ('page/member/pop')
@@ -71,8 +68,8 @@ const appRouter = {
             },
             /*C端店铺首页 */
             {
-                path: '/index',
-                name: 'index',
+                path: '/indexToC',
+                name: 'indexToC',
                 component: IndexToC,
                 meta: { keepAlive: false }
             },
