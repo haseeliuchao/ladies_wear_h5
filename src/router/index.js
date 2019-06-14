@@ -6,6 +6,7 @@ import wxapi from '@/utils/wxapi';
 const Index = () => import ('page/cms/index')
 const Article = () =>   import ('page/cms/article')
 const ArticleDetail = () => import ('page/cms/articleDetail')
+const IndexToC= () => import ('page/cmsc/indexToC')
     /* cms */
 
 /* member */
@@ -65,6 +66,14 @@ const appRouter = {
                 path: '',
                 redirect: '/loginBlank'
             },
+            /*C端店铺首页 */
+            {
+                path: '/indexToC',
+                name: 'indexToC',
+                component: IndexToC,
+                meta: { keepAlive: false }
+            },
+            /*C端店铺首页 */
             {
                 path: '/index',
                 name: 'index',
@@ -76,7 +85,7 @@ const appRouter = {
                     link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png',
                 }
-            },
+            }, 
             {
                 path: '/article',
                 name: 'article',
