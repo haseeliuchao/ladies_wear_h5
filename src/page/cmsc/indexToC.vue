@@ -100,6 +100,10 @@
                 </li>
               </ul>
             </load-more>
+            <div class="noProduct">
+              <img src="~jd/images/blank.png">
+              <p>暂无商品</p>
+            </div>
           </div>
         </load-more>
         <FooterViewToC/>
