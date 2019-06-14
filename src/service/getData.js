@@ -131,8 +131,13 @@ export const getShop = (params) => new Http().require({api: '/system/GetShop',pa
 // shopToB
 export const getShopStastistics = (params) => new Http().require({api: '/api/distributor/stastistics',param: params}); //B端店铺统计信息
 export const getShopInfo = (params) => new Http().require({api: '/api/distributor/details',param: params}); //B端店铺信息
-export const saveShop = (params) => new Http().require({api: '/api/distributor/add',param: params}); //B端店铺创建
+export const saveShop = (params) => new Http().require({api: '/api/distributor/add',param: params}); //B端店铺创建修改
 
 export const getMemberList = (params) => new Http().require({api: '/api/distributor/member/page',param: params}); //B端客户列表
-export const getMemberOrder = (params) => new Http().require({api: '/api/distributor/member/details',param: params}); //B端客户详情订单
+export const getMemberDetails = (params) => new Http().require({api: '/api/distributor/member/details',param: params}); //B端客户详情（包括订单）
+export const updMemberNick = (params) => new Http().require({api: '/api/distributor/member/upd',param: params}); //B端客户修改备注昵称
+export const getOrderCount = (params) => new Http().require({api: '/api/order/count',param: params}); //B端客户管理查询订单总数
+
+
+
 

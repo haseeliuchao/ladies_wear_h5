@@ -51,10 +51,9 @@ const Goodedit = () =>  import ('page/shopb/goodedit')
 /* shopToB */
 const MyShop = () => import ('page/shopToB/myShop')
 const ShopApplicate = () => import ('page/shopToB/shopApplicate')
-const ShopCreate = () => import ('page/shopToB/shopCreate')
-const ShopInfo = () => import ('page/shopToB/shopInfo')
+const ShopManage = () => import ('page/shopToB/shopManage')
 const MemberList = () => import ('page/shopToB/memberList')
-const MemberOrder = () => import ('page/shopToB/memberOrder')
+const MemberDetails = () => import ('page/shopToB/memberDetails')
 /* shopToB */
 
 const appRouter = {
@@ -250,15 +249,9 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/shopCreate/:distributor_id',
-                name: 'shopCreate',
-                component: ShopCreate,
-                meta: { keepAlive: false }
-            },
-            {
-                path: '/shopInfo/:distributor_id',
-                name: 'shopInfo',
-                component: ShopInfo,
+                path: '/shopManage/:distributor_id',
+                name: 'shopManage',
+                component: ShopManage,
                 meta: { keepAlive: false }
             },
             {
@@ -268,9 +261,9 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/memberOrder',
-                name: 'memberOrder',
-                component: MemberOrder,
+                path: '/memberDetails',
+                name: 'memberDetails',
+                component: MemberDetails,
                 meta: { keepAlive: false }
             },
             {

@@ -132,11 +132,12 @@
     methods:{
       async saveShop(){
         let distributor_id='';
-        if(this.$route.params.distributor_id){
-          distributor_id=this.$route.params.distributor_id
-        }else{
-          distributor_id=''
-        }
+        this.$route.params.distributor_id?distributor_id=this.$route.params.distributor_id:distributor_id='';
+        // if(this.$route.params.distributor_id){
+        //   distributor_id=this.$route.params.distributor_id
+        // }else{
+        //   distributor_id=''
+        // }
         let params = {
           distributor_id:this.shopForm.distributor_id,
           title:this.shopForm.title,
@@ -145,25 +146,37 @@
         };
         //有传Id则是编辑模式 没传是新增   
           this.$store.dispatch('SaveShop',params).then(response=>{
-            if(response.code != 10000){
-              Toast({
-                message: '保存失败',
-              })
-            }else {
-              Toast({
-                message: '保存成功'
-              })
-              this.$router.push({path: '/myShop'})
-            }
+            response.code != 10000?Toast({message: '保存失败'}):Toast({message: '保存成功'});
+            this.$router.push({path: '/myShop'})
+            // if(response.code != 10000){
+            //   Toast({
+            //     message: '保存失败',
+            //   })
+            // }else {
+            //   Toast({
+            //     message: '保存成功'
+            //   })
+            //   this.$router.push({path: '/myShop'})
+            // }
           }).catch(error=>{
               Toast({
                 message: '访问接口失败'
               })
           });
         },
+      async initData(){
+        if(this.$route.params.distributor_id){
+          let res = await this.$store.dispatch('GetShopInfo');
+          res.code != 10000?Toast({message: '访问接口失败'}):Toast({message: '访问接口成功'});
+          this.shopForm.distributor_id = res.data.distributor_id;
+          this.shopForm.title = res.data.title;
+          this.shopForm.n_times = res.data.n_times;
+          this.shopForm.if_free_shipping = res.data.if_free_shipping;
+        }
+      },
     },  
     mounted: function () {
-    
+      this.initData();
     }
 
   }

@@ -29,6 +29,7 @@
         padding:12px 0 ;
         font-size:15px;
         span{
+          height:18px;
           margin-bottom:10px;
         }
       }
@@ -87,7 +88,7 @@
           <li @click="$router.push('/goodslist/'+distributor_id+'')"><img src="~jd/images/pdManage.png">商品管理
           <span>></span></li>
           <li @click="$router.push('/orderList')"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
-          <li @click="$router.push('/shopCreate/'+distributor_id+'')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
+          <li @click="$router.push('/shopManage/'+distributor_id+'')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
           <li @click="$router.push('/memberList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
           <li @click="$router.push('/memberList')"><img src="~jd/images/zichanManage.png">资产管理
           <span>></span></li>
@@ -102,6 +103,7 @@
 <script>
 import FooterViewToB from 'component/footer/footerViewToB';
 import BackHead from 'common/backHead';
+import {Toast} from 'mint-ui';
   export default {
     data() {
       return {
@@ -121,6 +123,9 @@ import BackHead from 'common/backHead';
             this.distributor_id=this.shopStastistics.distributorBO.distributor_id;
         }else{
             this.shopStastistics = null;
+            Toast({
+                message: '访问接口失败'
+            })
         }
       }
     },

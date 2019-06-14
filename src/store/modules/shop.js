@@ -275,18 +275,6 @@ const shop = {
         })
       })
     },
-    GetShopInfo({ // 获取店铺信息
-      commit,
-      state
-    }, parameterData) {
-      return new Promise((resolve, reject) => {
-        getShopInfo(parameterData).then(response => {
-          resolve(response)
-        }, err => {
-          reject(err)
-        })
-      })
-    },
   }
 }
 

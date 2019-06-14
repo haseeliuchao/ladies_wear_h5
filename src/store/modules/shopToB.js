@@ -22,7 +22,9 @@ import {
   getShopInfo,
   saveShop,
   getMemberList,
-  getMemberOrder
+  getMemberDetails,
+  updMemberNick,
+  getOrderCount
 } from '@/service/getData';
 const shopToB = {
   state: {
@@ -329,12 +331,36 @@ const shopToB = {
         })
       })
     },
-    GetMemberOrder({ // 获取客户详情订单
+    GetMemberDetails({ // 获取客户详情
       commit,
       state
     }, parameterData) {
       return new Promise((resolve, reject) => {
-        getMemberOrder(parameterData).then(response => {
+        getMemberDetails(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    UpdMemberNick({ // 更新B端客户昵称
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        updMemberNick(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetOrderCount({ // 查询B端客户订单总数
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getOrderCount(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
