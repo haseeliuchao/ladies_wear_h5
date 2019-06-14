@@ -954,6 +954,16 @@
       </div>
       <div class="popupOk" @click= "()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
+
+
+    <!-- 分享引导popup -->
+    <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
+       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
+    margin-top: 8px;width:76%;">
+    </mt-popup>
+    
+
+
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
@@ -973,14 +983,14 @@
               <div class="product-price">
                 <p class="product-pricep">
                 <span style="font-weight:bold;">&yen;</span>
-                <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.sales_consumer_price/100.00|topricenext}}</span>
-                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.cost_price/100.00|topriceafter}}</em>.{{productInfo.cost_price/100.00|topricenext}}</span>
+                <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100|TwoNum}}</em></span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.cost_price/100|TwoNum}}</em></span>
                 </p>
-                <span class="freight"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
+                <span class="freight"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
               </div>
               <div class="product-title-textbottom">
               <p class="product-name-text">{{productInfo.title}}</p>
-              <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+              <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
               <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
@@ -1047,7 +1057,9 @@
           <i></i>
           <span>关注</span>
         </div> -->
-        <div class="shopping-cart" @click= "$router.push('/cart')">
+        <div class="shopping-cart" @click= "$router.push(`/cartToc/7`)">
+        <!-- ${productInfo.distributor_id} -->
+        
           <em>4</em>
           <i></i>
           <span>购物车</span>
@@ -1093,6 +1105,7 @@
         visiblePopup: {
           checkSku: false,
           checkInfo: false,
+          shareBoo:false
         },
         colorarr:[],
         sizearr:[],
@@ -1106,7 +1119,9 @@
         containerTab: 'mainLayout',
         detailTab: 'description',
         productInfo: {
-          content:''
+          content:'',
+          salesConsumerPrice:null,
+          cost_price:null,
         },
         shopInfo: null,
         // commad: getRecommend,

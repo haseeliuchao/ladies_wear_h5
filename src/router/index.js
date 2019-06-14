@@ -28,6 +28,7 @@ const CardCoupon = () =>   import ('page/member/cardCoupon')
 
 /* shop */
 const Cart = () =>  import ('page/shop/cart')
+const CartToc = () =>  import ('page/shopc/cartToc')
 const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
 const OrderRusult = () => import ('page/shop/orderRusult')
@@ -257,6 +258,12 @@ const appRouter = {
                 path: '/shop',
                 name: 'shop',
                 component: Shop,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/cartToc/:distributor_id',
+                name: 'cartToc',
+                component: CartToc,
                 meta: { keepAlive: false }
             },
             {
