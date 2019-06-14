@@ -87,7 +87,8 @@
       <ul>
           <li @click="$router.push('/goodslist/'+distributor_id+'')"><img src="~jd/images/pdManage.png">商品管理
           <span>></span></li>
-          <li @click="$router.push('/orderList')"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
+          <li @click="$router.push('/goodorderList/'+distributor_id+'')"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
+          
           <li @click="$router.push('/shopManage/'+distributor_id+'')"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
           <li @click="$router.push('/memberList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
           <li @click="$router.push('/memberList')"><img src="~jd/images/zichanManage.png">资产管理

@@ -29,6 +29,7 @@ const Order = () => import ('page/shop/order')
 const OrderRusult = () => import ('page/shop/orderRusult')
 const OrderList = () => import ('page/shop/orderList')
 const Product = () =>   import ('page/shop/product')
+const ProductToc = () =>   import ('page/shopc/productToc')
 const SearchRusult = () =>  import ('page/shop/searchRusult')
 const SearchImg = () =>   import ('page/shop/searchImg')
 const SearchRenew = () =>   import ('page/shop/searchRenew')
@@ -43,6 +44,7 @@ const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
 
 /* shopb */
 const Goodslist = () =>  import ('page/shopb/goodslist')
+const GoodorderList = () =>  import ('page/shopb/goodorderList')
 const Goodedit = () =>  import ('page/shopb/goodedit')
 /* shopb */
 
@@ -197,13 +199,22 @@ const appRouter = {
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
-            },
+            }
+            ,
             {
                 path: '/product/:id',
                 name: 'product',
                 component: Product,
                 meta: { keepAlive: false }
-            },
+            }
+            ,
+            {
+                path: '/productToc/:id',
+                name: 'productToc',
+                component: ProductToc,
+                meta: { keepAlive: false }
+            }
+            ,
             {
                 path: '/searchImg',
                 name: 'searchImg',
@@ -350,9 +361,16 @@ const appRouter = {
             }
             ,
             {
-                path: '/goodedit',
+                path: '/goodedit/:itemId',
                 name: 'goodedit',
                 component: Goodedit,
+                meta: { keepAlive: false }
+            }
+            ,
+            {
+                path: '/goodorderList/:distributor_id',
+                name: 'goodorderList',
+                component: GoodorderList,
                 meta: { keepAlive: false }
             }
             ,

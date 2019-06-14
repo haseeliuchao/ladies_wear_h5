@@ -111,7 +111,10 @@
       .scroll-images {
         height: 10rem;
         img {
-          height: 10rem;
+          width: 100%;
+          vertical-align: middle;
+          max-height: 10rem;
+          min-height: 10rem;
         }
       }
     }
@@ -188,9 +191,6 @@
         center,
         row,
         nowrap);
-        .product-pricep{
-          font-size:16px;
-        }
         .product-price span{
          font-size: 14px;
         }
@@ -248,26 +248,6 @@
           border-radius: 4px;
         }
       }
-    }
-    .product-shop {
-      margin-top: 8px;
-      background: #fff;
-      padding: 15px 10px;
-      @include flexbox(start,
-      center,
-      row,
-      wrap);
-      .sku-select {
-        font-size: 16px;
-        color: #999;
-        margin-right: 15px;
-      }
-      .sku-info {
-        font-size: 14px;
-        color: #333;
-      }
-      
-      
     }
     .product-comment {
       margin-top: $margin;
@@ -574,29 +554,7 @@
   /* 商品 */
 
   /* 底部导航栏 */
-.cart-shop-fixed{
-    position: fixed;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 7px 14px;
-    background: #fff;
-   @include flexbox(space-between,
-    center,
-    row,
-    nowrap);
-        div{
-          width: 2.1rem;
-          height: 34px;
-          line-height: 34px;
-          text-align: center;
-          font-size: 18px;
-          color: $red;
-          border:1px solid $red;
-          border-radius: 6px;
-        }
-  }
+
   .cart-concern-fixed {
     position: fixed;
     bottom: -1px;
@@ -677,9 +635,6 @@
       
     }
   }
-  
-
-
 
   /* 底部导航栏 */
 
@@ -893,9 +848,6 @@
     color: $red!important;
     border: 1px solid $red!important;
   }
-  .productSkuActive{
-    color: $red!important;
-  }
 
   /* 商品评价 */
 
@@ -957,58 +909,38 @@
     color: #000;
     pointer-events: none;
 }
-
 </style>
 
 <template>
   <div style="background:#f8f8f8;">
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
-      <div class="checkSkuInfo">
-            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">
-              <img v-if="item.color_img" :src="item.color_img+'_230x230.jpg'">
-              <img v-else :src="productInfo.index_img_url+'_230x230.jpg'">
-                    <div class="checkSkuInfo-text">
-                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
-                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100.00}}</p>
-                    </div>
-            </div>
-           <span class="closepop" @click= "closepopcheckSku"></span>
-      </div>
       <div class="checkSkuColortitleall">
-        <p class="checkSkuColortitle">请选择颜色：</p>
-        <!-- ()=>{title='';visiblePopup.checkSku=false;} -->
-        <span class="closepop" @click= "closepopcheckSku"></span>
+        <p class="checkSkuColortitle">颜色</p>
+        <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;}"></span>
       </div>
       <ul class="skuColorlist">
-        <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}
-          <span class="itemAllnum" v-if="colorCur[index]">{{colorCur[index]}}</span>
-          </li>
+        <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}</li>
       </ul>
       <div style="border-top:1px solid #e4e4e4;
           border-bottom:1px solid #e4e4e4;">
-      <p class="checkSkuColortitle">请选择尺寸和数量：</p>
-          <div  v-for="(itemall,index) in colorarr" :key="index" v-show="index==checkcolorindex">
-            <div class="skuNum" v-for="(item,index1) in sizearr[index]"  :key="index1">
-                        <div class="left" v-bind:class="[item.number > 0?'productSkuActive':'']">
-                          {{item.size}}
-                        </div>
-                        <div class="right">
-                          <div class="cut" @click= "operationnum(index,-1,item,index1)"></div>
-                          <input type="text" ref="dataNum" readonly='readonly' v-model="item.number" class="num-inp">
-                          <div class="add" @click= "operationnum(index,1,item,index1)"></div>
-                        </div>
-            </div>
-          </div>
+      <p class="checkSkuColortitle">尺寸</p>
+      <ul class="skuSizelist">
+        <li v-for="(item,index) in sizearr" v-on:click="sizecheckBtn(item.size,index)" v-bind:class="[checksizeindex == index?'productActive':'']" :key="index">{{item.size}}</li>
+      </ul>
       </div>
-      <p class="checkSkuColortitle" style="line-height:28px;">已选：</p>
-      <p class="checkSkuColortitle" v-for="(itemall,index) in colorarr" style="color:#ff2741;line-height:18px;" :key="index">
-        <span v-if="colorCur[index]"><em>{{itemall.color}}：</em></span>
-        <span v-for="(item,index1) in sizearr[index]"  :key="index1">
-        <em v-if="item.number!=0">{{item.size}}/{{item.number}}件&nbsp;&nbsp;&nbsp;&nbsp;</em></span>
-        </p>
+      <div class="skuNum">
+                  <div class="left">
+                    选择数量
+                  </div>
+                  <div class="right">
+                    <div class="cut" @click= "operationnum(-1)"></div>
+                    <input type="text" v-model="shopnum" class="num-inp">
+                    <div class="add" @click= "operationnum(1)"></div>
+                  </div>
+      </div>
       <!-- @click= "()=>{title='';visiblePopup.checkSku=false}" -->
-      <div class="popupOk" @click= "checkSkuOk" style="margin-top:16px;">选好了</div>
+      <div class="popupOk" @click= "checkSkuOk">选好了</div>
     </mt-popup>
 
     <!-- 颜色尺码选择popup -->
@@ -1022,46 +954,13 @@
       </div>
       <div class="popupOk" @click= "()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
-
-    <!-- 上架成功popup -->
-    <mt-popup v-model="visiblePopup.addSuccess" :closeOnClickModal='true' style="text-align: center;"  position="bottom" class="checkSkupop">
-      <img src="~jd/images/addSuccess.png" alt="" style="
-    margin-top: 18px;width:66%;">
-    <p class="addSuccess-text">上架成功</p>
-    <p class="addSuccess-textmin">邀请好友购买，可<br>
-赚 <em>¥{{profit/100.00}}</em> 元起</p>
-    <div class="addSuccess-share">
-      <div>
-        <img src="~jd/images/share-app.png" alt="" style="width:50px;">
-        <p>微信好友</p>
-      </div>
-      <div>
-        <img src="~jd/images/share-time.png" alt="" style="width:50px;">
-        <p>朋友圈</p>
-      </div>
-    </div>
-      <div class="popupOk" @click= "()=>{visiblePopup.addSuccess=false}" style="margin-top:8px;">取消</div>
-    </mt-popup>
-
-
-
-    <!-- 分享引导popup -->
-    <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
-       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
-    margin-top: 8px;width:76%;">
-    </mt-popup>
-    
-
-
-
-
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
                 <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
-                  <img v-lazy="item">
+                  <img :src="item">
                 </mt-swipe-item>
 
               </mt-swipe>
@@ -1074,16 +973,14 @@
               <div class="product-price">
                 <p class="product-pricep">
                 <span style="font-weight:bold;">&yen;</span>
-
-                <span style="font-weight:bold;margin-left: -3px;" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">{{item.sales_consumer_price/100.00|topriceafter}}.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                
-                <span style="margin-left:20px;text-decoration: line-through;color:#999;font-size:14px;"><em>原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.sales_price/100.00|topriceafter}}</em>.{{productInfo.sales_price/100.00|topricenext}}</span>
+                <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.sales_consumer_price/100.00|topricenext}}</span>
+                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.cost_price/100.00|topriceafter}}</em>.{{productInfo.cost_price/100.00|topricenext}}</span>
                 </p>
-                <span class="freight" style="font-size:13px;font-weight:normal"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em>5</em>.00</span>
+                <span class="freight"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5</em>.00</span>
               </div>
               <div class="product-title-textbottom">
-              <p class="product-name-text">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
-              <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+              <p class="product-name-text">{{productInfo.title}}</p>
+              <p class="product-share">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
               <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
@@ -1092,24 +989,22 @@
             <div class="product-sku" >
               <div>
                 <span class="sku-select">服务</span>
-                <span class="sku-info">正品保障 细节实拍 专属客服</span>
+                <span class="sku-info">7天无理由退货</span>
               </div>
+              <!-- <span class="right-menu"></span> -->
             </div>
             <!-- 商品规格 -->
              <div class="product-sku" style="margin-top:0;border-top:1px solid #e4e4e4;
           border-bottom:1px solid #e4e4e4;" @click= "()=>visiblePopup.checkSku=true">
               <div>
                 <span class="sku-select">规格</span>
-                <!-- v-if="!curcolorname" -->
-                <span class="sku-info" >选择 颜色分类、尺码</span>
-                <!-- <span class="sku-info" v-else>{{curcolorname}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cursizename}}</span> -->
+                <span class="sku-info" v-if="!curcolorname">选择 颜色分类、尺码</span>
+                <span class="sku-info" v-else>{{curcolorname}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cursizename}}</span>
               </div>
               <span class="right-menu"></span>
               <div class="product-skuimg">
-                <p>
-                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img+'_40x40.jpg'"></em>
+                <img v-for="(item,index) in colorarr" :key="index" :src="item.color_img">
                 <span>共{{colorarr.length}}种颜色分类可选</span>
-                </p>
               </div>
             </div>
             <!-- 商品参数 -->
@@ -1120,16 +1015,11 @@
               </div>
               <span class="right-menu"></span>
             </div>
-             <div class="product-shop" v-if="productInfo.store_b_o">
-               <img src="~jd/images/shop_icon.png" height="44px">
-              <div style="margin-left:10px;">
-                <span class="sku-select" style="color:#333;line-height: 26px;
-    font-size: 15px;">{{productInfo.store_b_o.name}}</span><br>
-                <span class="sku-info" style="font-size: 13px;line-height: 20px;">{{productInfo.store_b_o.address}}</span>
-              </div>
-            </div>
+
            
             <!-- 商品留言 -->
+
+         
             <!-- 商家信息 -->
 
             <!-- 为你推荐 -->
@@ -1138,7 +1028,6 @@
                 <img src="~jd/images/xiangqing.png" alt="">
               </div>
               <div id="prodContent-container" v-html="productInfo.item_detailsimg"></div>
-              <div v-for="(itemlay, index) in laylist" :key="index">{{itemlay}}</div>
             </div>
             <!-- 为你推荐 -->
           </div>
@@ -1150,7 +1039,7 @@
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
       <div class="left">
-        <div class="goods-part" style="padding: 5px 0;border-right: 1px solid #e4e4e4;" @click= "$router.push('/index')">
+        <div class="goods-part" @click= "$router.push('/index')">
           <i></i>
           <span>首页</span>
         </div>
@@ -1159,24 +1048,14 @@
           <span>关注</span>
         </div> -->
         <div class="shopping-cart" @click= "$router.push('/cart')">
-          <em v-if="productInfo.shopping_cart_num&&productInfo.shopping_cart_num!=0">{{productInfo.shopping_cart_num}}</em>
+          <em>4</em>
           <i></i>
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入进货车</div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addGood()">一键铺店</div>
-      <!-- @click= "addShopCart('directBuy')" -->
-      <!-- ()=>{visiblePopup.addSuccess=true} -->
-      <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
+      <div class="right" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" @click= "addShopCart('directBuy')">立即购买</div>
     </div>
-
-    <!-- <div class="cart-shop-fixed">
-        <div>编辑</div>
-        <div>下架</div>
-        <div style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
-        <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
-    </div> -->
     <!-- 底部导航栏 -->
 
     <!-- 返回顶部 -->
@@ -1198,13 +1077,12 @@
   import {
     getProduct,
     getShop,
-    addProduct,
     getCommentList
     // getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
-  // import wxapi from '@/utils/wxapi';
+  import wxapi from '@/utils/wxapi';
   import {
     isWeiXin
   } from '@/utils/mixin';
@@ -1215,28 +1093,20 @@
         visiblePopup: {
           checkSku: false,
           checkInfo: false,
-          shareBoo:false,
-          addSuccess:false
         },
-        laylist :[1],
-        cartnum:null,
-        colorCur:[],
         colorarr:[],
-        sizearrrmSome:[],
         sizearr:[],
-        checkcolorindex:0,
-        colorcheckBtnBoo:[],
-        checksizeBtnBoo:[],
-        checksizeindex:[],
+        checkcolorindex:null,
+        checksizeindex:null,
         curcolorname:null,
         cursizename:null,
         checkId:null,
         checkIdnums:[],
-        shopnum:[],
+        shopnum:1,
         containerTab: 'mainLayout',
         detailTab: 'description',
         productInfo: {
-          item_detailsimg:null
+          content:''
         },
         shopInfo: null,
         // commad: getRecommend,
@@ -1245,11 +1115,11 @@
           nowIndex: 1,
           total: 0
         },
-        addType:null,
-        profit:0
+        addType:null
       };
     },
     created: function () {
+        
     },
     watch: {
       wcvisiblePopup:function(newvs,oldvs){
@@ -1263,7 +1133,7 @@
               // 下面需要这两行代码，兼容不同浏览器
               document.body.scrollTop = this.pageScrollYoffset;
               window.scroll(0, this.pageScrollYoffset);
-            } 
+            }
     },
         
     components: {
@@ -1280,149 +1150,135 @@
         }
     },
 methods: {
-
-      
   
-//   wxRegCallback () {
-//   // 用于微信JS-SDK回调
-//     this.wxShareTimeline()
-//     this.wxShareAppMessage()
-// },
-// wxShareTimeline () {
-//   // 微信自定义分享到朋友圈
-//   let option = {
-//     title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
-//     desc: this.productInfo.title, // 分享描述, 请自行替换
-//     link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接，根据自身项目决定是否需要split
-//     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
-//     success: () => {
-//       // alert('分享成功')
-//       return Toast({
-//             message: '分享成功',
-//             position: 'center'
-//           })
-//     },
-//     error: () => {
-//       // alert('已取消分享')
-//     }
-//   }
-//   // 将配置注入通用方法
-//   wxapi.ShareTimeline(option)
-// },
-// wxShareAppMessage () {
-//   // 微信自定义分享给朋友
-//   // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
-//     let option = {
-//     title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
-//     desc: this.productInfo.title, // 分享描述, 请自行替换
-//     link: 'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接，根据自身项目决定是否需要split
-//     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
-//     success: () => {
-//       // alert('分享成功')
-//       return Toast({
-//             message: '分享成功',
-//             position: 'center'
-//           })
-//     },
-//     error: () => {
-//       // alert('已取消分享')
-//     }
-//   }
-//   // 将配置注入通用方法
-//   wxapi.ShareAppMessage(option)
-// },
+  wxRegCallback () {
+  // 用于微信JS-SDK回调
+  
+    this.wxShareTimeline()
+    this.wxShareAppMessage()
+},
+wxShareTimeline () {
+  // 微信自定义分享到朋友圈
+  let option = {
+    title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
+    desc: this.productInfo.title, // 分享描述, 请自行替换
+    link:'@link='+window.location.href.split('#')[1]+'', // 分享链接，根据自身项目决定是否需要split
+    imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
+    success: () => {
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
+    },
+    error: () => {
+      // alert('已取消分享')
+    }
+  }
+  // 将配置注入通用方法
+  wxapi.ShareTimeline(option)
+},
+wxShareAppMessage () {
+  // 微信自定义分享给朋友
+  // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
+    let option = {
+    title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧', // 分享标题, 请自行替换
+    desc: this.productInfo.title, // 分享描述, 请自行替换
+    link: '@link='+window.location.href.split('#')[1]+'', // 分享链接，根据自身项目决定是否需要split
+    imgUrl: this.productInfo.imgList[1], // 分享图标, 请自行替换，需要绝对路径
+    success: () => {
+      // alert('分享成功')
+      return Toast({
+            message: '分享成功',
+            position: 'center'
+          })
+    },
+    error: () => {
+      // alert('已取消分享')
+    }
+  }
+  // 将配置注入通用方法
+  wxapi.ShareAppMessage(option)
+},
         
       handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
+       
+      async checkSkufun(){
+      
+      },
       checkSkuOk(){
+        
         this.visiblePopup.checkSku=false;
-        var that=this;
-        if(this.checkIdnums.length>0){
+        if(this.checkId){
+            this.checkIdnums=[];
+          let checkIdnumsobj={ "item_sku_id":this.checkId , "number":this.shopnum};
+          this.checkIdnums.push(checkIdnumsobj)
           if(this.addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
-          item_sku_info_json: JSON.stringify(this.checkIdnums)
+          item_sku_info_json: JSON.stringify(this.checkIdnums),
+          distributor_id:7
         }).then(response => {
           if(response.code==10000){
-            for(var i=0;i<that.sizearrrmSome.length;i++){
-                 that.sizearrrmSome[i].number=0
-            }
-            that.checkIdnums=[]
-            that.colorCur=[];
           return Toast({
             message: '加入购物车成功',
-            position: 'center'
+            position: 'bottom'
           })
-          }else if(response.code==20025){
           }else{
             Toast({
             message: response.msg,
-            position: 'center'
+            position: 'bottom'
             })
             return
           }
           
         })
         }else if(this.addType==='directBuy'){
-          this.$router.push({path: '/createOrder',query: {ids:JSON.stringify(this.checkIdnums),checkout_type:2}})
+          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
         }
         }
       },
       async addShopCart(addType) { //加入购物车
         this.addType=addType;
-        var that=this;
-        if(this.checkIdnums.length==0){
+        if(this.checkId==null){
           this.visiblePopup.checkSku=true
           return
          }
+         this.checkIdnums=[];
+         let checkIdnumsobj={ "item_sku_id":this.checkId , "number":this.shopnum};
+          this.checkIdnums.push(checkIdnumsobj)
         if(addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
-          item_sku_info_json: JSON.stringify(this.checkIdnums)
+          item_sku_info_json: JSON.stringify(this.checkIdnums),
+          distributor_id:7
         }).then(response => {
           if(response.code==10000){
-            for(var i=0;i<that.sizearrrmSome.length;i++){
-                 that.sizearrrmSome[i].number=0
-            }
-            that.checkIdnums=[];
-            that.colorCur=[];
           return Toast({
-            message: '加入购物车成功',
-            position: 'center'
+            message: '加入购物车成功'
           })
-          }else if(response.code==20025){
           }else{
             Toast({
-            message: response.msg,
-            position: 'center'
+            message: response.msg
+           
             })
             return
           }
           
         })
         }else{
-          this.$router.push({path: '/createOrder',query: {ids:JSON.stringify(this.checkIdnums),checkout_type:2}})
+          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
         }
        
       },
-      closepopcheckSku(){
-        this.visiblePopup.checkSku=false;
-        for(var i=0;i<this.sizearrrmSome.length;i++){
-          this.sizearrrmSome[i].number=0
-        }
-        this.colorCur=[];
-        this.checkIdnums=[];
-      },
-      tipSend(){
-        Toast({
-            message: "此商品已下架"
-          })
-      },
+      
       async initData() {
-        this.cartnum = window.sessionStorage.cartnum!=undefined ? window.sessionStorage.cartnum:0;
+        // this.commentParam.ProductNo = this.$route.params.id;
         let Data = await getProduct({
-         item_id: this.$route.params.id
+         item_id: this.$route.params.id,
+         distributor_id:7
         });
         if(Data.code!=10000){
           Toast({
@@ -1431,91 +1287,49 @@ methods: {
           return
         }
         this.productInfo = Data.data;
-        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
         this.productInfo.imgList = JSON.parse(Data.data.img_list);
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
+        this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
-        this.sizearrrmSome = this.productInfo.item_sku;
-        for(var i=0;i<this.colorarr.length;i++){
-          this.sizearr[i]=[];    
-          this.shopnum[i]=[];
-          for(var j=0;j<this.sizearrrmSome.length;j++){
-            if(this.colorarr[i].color==this.sizearrrmSome[j].color){
-              this.sizearr[i][this.sizearr[i].length]=this.sizearrrmSome[j];
-               this.shopnum[i][this.sizearr[i].length]=0;
-            }  
-          }
-        } 
-        
-
-        var _this =this
-          window.addEventListener('scroll',function(){
-              var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-              if(scrollTop>=10){
-                _this.laylist = [2]
-              }
-              },true)
-
-
+        this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
       },
       colorcheckBtn(name,index){
+          this.checkcolorindex=index;
           this.curcolorname=name;
           this.cursizename=null;
-          this.checkcolorindex=index;
+          // this.productInfo.item_sku.filter((item)=>{return item.color==name})
+          this.sizearr =this.productInfo.item_sku.filter((item)=>{return item.color==name})
+          this.checksizeindex=null;
+          this.checkId=null;
        },
-       operationnum(index,operation,item,index1){
-          item.number+= operation;
-           if(item.number<0){
-            item.number =0;
-          Toast({
-              message: '宝贝不能再减少了哦'
-            })
-            return;
-          }
-
-          let numall=0
-          for(var i=0;i<this.sizearr[index].length;i++){
-             numall+=this.sizearr[index][i].number
-          }
-          let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
-          let pushBoo=false;
-          for(var i=0;i< this.checkIdnums.length;i++){
-            if(checkIdnumsobj.item_sku_id==this.checkIdnums[i].item_sku_id){
-              this.checkIdnums[i].number=item.number;
-              pushBoo=true;
-            }
-            if(item.number==0&&item.item_sku_id==this.checkIdnums[i].item_sku_id){
-              this.checkIdnums.splice(i, 1);
-              
-            }
-          }
-          if(pushBoo==false){
-            this.checkIdnums.push(checkIdnumsobj)
-          }
-          this.colorCur[index]=numall
-       },
-       async addGood(){
-         let Data = await addProduct({
-         item_id: this.$route.params.id
-        });
-        if(Data.code!=10000){
-          Toast({
-            message: Data.msg
+       sizecheckBtn(size,index){
+         if(this.checkcolorindex==null){
+           Toast({
+            message: '请先选择颜色'
           })
-          return
-        }
-        this.profit=Data.data.kezuanshangxian;
-        this.visiblePopup.addSuccess=true;
-
+          return;
+         }
+          this.checksizeindex=index;
+          this.cursizename=size;
+          let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
+          this.checkId=checkIdarr[0].item_sku_id;
        },
-
-
+       operationnum(operation){
+         this.shopnum += operation;
+         if(this.shopnum<1){
+           this.shopnum =1;
+         Toast({
+            message: '宝贝不能再减少了哦'
+          })
+          return;
+         }
+       },
       rmSome(arr, key) {
           let tempObj = {}
           arr.forEach(item => {
@@ -1528,47 +1342,28 @@ methods: {
           return Object.values(tempObj)
           }
  
-    },
-    updated:function(){
-      this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
     }
     ,
     filters:{
         toafter(value){
-            if(!value){
-              value=0;
-            }else{
-              value=value
-            }
             return value.substring(0, value.indexOf(':'));
         },
         tonext(value){
-          if(!value){
-              value=0;
-            }else{
-              value=value
-            }
             return value.substring(value.indexOf(':')+1);
         },
         topriceafter(value){
-          if(!value){
-              value=0;
-            }else{
-              value=value
-            }
             return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
         },
         topricenext(value){
-          if(!value){
-              value=0;
-            }else{
-              value=value
-            }
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
         }
     },
     mounted: function () {
-       this.initData();
+      if(isWeiXin('state')){
+      wxapi.wxRegister(this.wxRegCallback)
+      }
+      this.initData();
+        
     }
   }
 
@@ -1576,103 +1371,32 @@ methods: {
 <style lang='scss' scoped>
 @import '~assets/common/css/mixin.scss';
 .checkSkupop{
+     
       width: 100%;
-        .addSuccess-text{
-          text-align: center;
-          color: #333;
-          font-size: 18px;
-          line-height: 42px;
-        }
-        .addSuccess-textmin{
-          text-align: center;
-          color: #333;
-          font-size: 15px;
-          line-height: 22px;
-          margin-bottom: 16px;
-          em{
-            font-size: 18px;
-            font-weight: bold;
-          }
-        }
-        .addSuccess-share{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 24px 40px;
-            border-top:1px solid #e4e4e4;
-
-            div{
-              width: 50%;
-              text-align: center
-            }
-        }
-
-        .checkSkuInfo{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 10px;
-            position: relative;
-            height: 90px;
-          span{
-            height: .56rem;
-            width: .56rem;
-            background: url('~jd/images/close.png') no-repeat;
-            background-size: 100%;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-          }
-          .checkSkuInfomain{
-             @include flexbox(start,
-            center,
-            row,
-            nowrap);
-            top: -20px;
-            position: absolute;
-            img{
-              height: 100px;
-              width: 100px;
-              border-radius: 6px;
-            }
-            .checkSkuInfo-text{
-              width: 5.4rem;
-              margin-left: 10px;
-                  margin-top: 18px;
-              .checkSkuInfo-texttitle{
-                 @include textoverflow(2);
-                    font-size: 13px;
-                    color: #333;
-                    line-height: 20px;
-              }
-              .checkSkuInfo-textprice{
-                font-size: 16px;
-                color: $red;
-                font-weight: bold;
-                margin-top: 6px;
-              }
-            }
-          }  
-        }
         .checkSkuColortitleall{
           padding-right: 10px;
          @include flexbox(space-between,
             center,
             row,
             nowrap);
+          span{
+            height: .56rem;
+            width: .56rem;
+            // background-image: url('~jd/images/product-detail-sprites-mjs.png');
+            // background-repeat: no-repeat;
+            // background-size: 100px 100px;
+            // background-position: -24px -12px;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
+          }  
         }
         .checkSkuColortitle{
         width: 100%;
-
+        height: 36px;
         line-height: 36px;
         font-size: 16px;
         color: #333;
         padding:0 $padding;
-        span{
-          font-size: 14px;
-        }
         }
         .skuColorlist{
           padding:0 $padding;
@@ -1681,24 +1405,13 @@ methods: {
             row,
             wrap);
             li{
-              padding: 4px 16px;
+              padding: 5px 17px;
               border: 1px solid #999;
               color: #333;
-              border-radius: 6px;
+              border-radius: 14px;
               font-size: 13px;
               margin-right: 20px;
               margin-bottom: 10px;
-              position: relative;
-              span{
-                position: absolute;
-                right: -10px;
-                top: -10px;
-                padding: 2px 4px;
-                font-size: 12px;
-                background: #ff5527;
-                border-radius: 12px;
-                color: #fff;
-              }
             }
         }
         .skuSizelist{
@@ -1722,14 +1435,11 @@ methods: {
             center,
             row,
             nowrap);
-            padding: 8px 10px;
-            // margin-bottom: 26px;
+            padding: $padding;
+            margin-bottom: 26px;
             .left{
               font-size: 16px;
               color: #333;
-              min-width: 70%;
-              text-align: left;
-              margin-left: 10px;
             }
             .right {
                 @include flexbox(space-between, center, row, nowrap);
@@ -1810,14 +1520,13 @@ methods: {
           background: #ff2741
         }
         .productparameter{
-          // height: 44px;
-              width: 100%;
-    padding: 9px 10px;
-    border-bottom: 1px solid #e4e4e4;
-    line-height: 22px;
-    
-    font-size: 14px;
-    color: #333;
+          height: 44px;
+          width: 100%;
+          padding: 0 $padding;
+          border-bottom:1px solid #e4e4e4;
+          line-height: 44px;
+          font-size: 14px;
+          color: #333;
           span{
             margin-left: 15px;
             color: #999
