@@ -397,15 +397,9 @@
         <button class="login" @click= "$router.push('/login')">登录</button>
         <span>登录后同步电脑与手机购物车中的商品</span>
       </div> -->
-      <load-more :style="{width:'100%',height: '85%',paddingTop: isLogin ? '1.2rem' : '0'}" :topMethod="onRefreshCallback" :loadMoreIconVisible="false"
+      <load-more :style="{width:'100%',height: '85%',paddingTop: isLogin ? '1.2rem' : '0'}"  :loadMoreIconVisible="false"
         ref="cartLoadmore">
-        <div class="goods">
-
-          <!-- 暂时还没做分店铺订单 -->
-          <div class="store" v-if="false">
-            <i class="select-default-icon"></i>
-            <span>Apple旗舰店</span>
-          </div>
+        <div class="goods" v-if="cartList && cartList != ''">
           <!-- 暂时还没做分店铺订单 -->
           <div class="top-edit" v-if="cartlength>0">
             <p class="cartListNum">共{{cartlength}}件宝贝</p>
@@ -448,25 +442,6 @@
             <p>购物车快饿瘪了<br>
               快给我挑点宝贝吧！</p>
           </div>
-          <p class="product-list-top">
-            <span class="product-list-topl">精选推荐</span>
-            <span class="product-list-topr">去<em @click= "$router.push('/index')">商城首页</em>逛逛</span>
-          </p>
-          <load-more style="width:100%;" v-if="$route.path=='/cart'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
-                ref="indexRusultloadMore">
-              <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-                  <img v-lazy="item.index_img_url" alt="">
-                  <div class="prod-info">
-                    <p class="prod-title">{{item.title}}</p>
-                    <p class="prod-price">
-                      <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:12px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:16px;">{{item.cost_price/100.00|topriceafter}}</em>.{{item.cost_price/100.00|topricenext}}</span>
-                      </p>
-                  </div>
-                </li>
-              </ul>
-            </load-more>
 
         </div>
       </load-more>
@@ -517,14 +492,7 @@
         isLogin: false,
         delshow:false,
         cartlength:0,
-        commad: searchGoods,
         indexRusultData:[],
-        indexParams: {
-          title: '',
-          category_id:'',
-          page_size: 10,
-          current_page: 1
-        },
       };
     },
 
@@ -645,7 +613,9 @@
         this.computedTotalFee();
       },
       async initData() {
-        let Data = await this.$store.dispatch('GetSelectedProductList');
+        let Data = await this.$store.dispatch('GetSelectedProductList', {
+          distributor_id:this.$route.params.distributor_id
+        });
         if(Data.data==undefined){
           this.cartList = [];
         }else{
@@ -653,36 +623,8 @@
         }
         
         this.cartlength=this.cartList?this.cartList.length:0
-      },
-      async onRefreshCallback() {
-        this.$store.dispatch('GetSelectedProductList').then(response => {
-          setTimeout(() => {
-            this.cartList = response.data.data || null;
-            this.cartlength=this.cartList?this.cartList.length:0;
-            // this.getGoodsdata()
-            this.computedTotalFee();
-            this.selectedAll = false;
-            this.$refs.cartLoadmore.onTopLoaded(this.$refs.cartLoadmore.uuid);
-          }, 500);
-        }, error => {
-          this.$refs.cartLoadmore.translate = 0;
-          this.$refs.cartLoadmore.topStatus = 'pull';
-          this.$refs.cartLoadmore.AllLoaded = false;
-          return this.$refs.cartLoadmore.LoadMoreLoading = false;
-        });
-      },
-      async infiniteCallback(response) { //下拉加载
-        if(response.data.items!=undefined&&response.data.items!=null){
-         if (response.data.items.length > 0) {
-          response.data.items.map(i => {
-            this.indexRusultData.push(i)
-          })
-        }
-        }else{
-          this.indexRusultData=[];
-        }
-        
-      },
+      }
+      
 
     },
     filters:{
@@ -695,8 +637,6 @@
     },
     mounted: function () {
       this.initData();
-      this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-      this.$refs.indexRusultloadMore.onloadMoreScroll();
     }
   }
 </script>
