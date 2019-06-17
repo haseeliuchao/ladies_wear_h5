@@ -482,6 +482,7 @@
         popupVisible:false,
         searchRusultData: [],
         commad: searchGoods,
+        isFirstEnter:false,
         searchParams: {
           title: '',
           item_url:'',
@@ -499,14 +500,13 @@
         img_url:'',
       };
     },
+
     watch: {
       'searchParams.title': function(val){
         // this.searchRusult()
-      },
-	  
-},
-
-
+      }
+      
+    },
 
     components: {
       BackHead,
@@ -577,9 +577,32 @@
         }
     },
     mounted: function () {
-      this.initData();
-      this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
-      this.$refs.searchRusultloadMore.onloadMoreScroll();
+     
+    },
+    created(){
+     this.isFirstEnter=true;
+    },
+    activated(){
+       if(!this.$route.meta.isBack||this.isFirstEnter){
+          this.initData();
+          this.searchParams.page_size = 10;
+          this.searchParams.current_page = 1;
+          this.searchRusultData=[];
+          this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+          this.$refs.searchRusultloadMore.onloadMoreScroll();
+       }
+       this.$route.meta.isBack=false;
+       this.isFirstEnter=false;
+    }
+    ,
+    beforeRouteEnter(to, from, next) {
+      if (from.name === 'product') {
+        to.meta.isBack = true;
+        next();
+      } else {
+        next();
+      }
+      
     }
   }
 
