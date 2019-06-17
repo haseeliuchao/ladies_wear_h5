@@ -482,6 +482,7 @@
         popupVisible:false,
         searchRusultData: [],
         commad: searchGoods,
+        isFirstEnter:false,
         searchParams: {
           title: '',
           item_url:'',
@@ -576,18 +577,29 @@
         }
     },
     mounted: function () {
-      this.initData();
-      this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
-      this.$refs.searchRusultloadMore.onloadMoreScroll();
+     
+    },
+    created(){
+     this.isFirstEnter=true;
+    },
+    activated(){
+       if(!this.$route.meta.isBack||this.isFirstEnter){
+          this.initData();
+          this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+          this.$refs.searchRusultloadMore.onloadMoreScroll();
+       }
+       this.$route.meta.isBack=false;
+       this.isFirstEnter=false;
     }
     ,
     beforeRouteEnter(to, from, next) {
       if (from.name === 'product') {
-        to.meta.keepAlive = true;
+        to.meta.isBack = true;
+        next();
       } else {
-        to.meta.keepAlive = false;
+        next();
       }
-      next();
+      
     }
   }
 
