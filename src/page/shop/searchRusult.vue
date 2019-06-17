@@ -585,6 +585,9 @@
     activated(){
        if(!this.$route.meta.isBack||this.isFirstEnter){
           this.initData();
+          this.searchParams.page_size = 10;
+          this.searchParams.current_page = 1;
+          this.searchRusultData=[];
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
