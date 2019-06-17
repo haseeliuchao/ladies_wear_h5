@@ -140,6 +140,19 @@ router.beforeEach((to,from,next)=>{
       next();
       }
     }
+
+
+    //判断是否需要缓存
+    // console.log(from.path)
+    // console.log(to.path)
+    // if((to.path === '/searchRusult' && from.name==='category')|| to.path === '/index'|| to.path === '/category'){
+    //   to.meta.keepAlive = true;  // 让 列表页 缓存，即不刷新
+    //   next();
+    // }else {
+    //   to.meta.keepAlive = false;  // 让 列表页 即不缓存，刷新
+    //   next();
+    // }
+
     
 })
 

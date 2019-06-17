@@ -504,6 +504,7 @@
       'searchParams.title': function(val){
         // this.searchRusult()
       }
+      
     },
 
     components: {
@@ -578,6 +579,15 @@
       this.initData();
       this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
       this.$refs.searchRusultloadMore.onloadMoreScroll();
+    }
+    ,
+    beforeRouteEnter(to, from, next) {
+      if (from.name === 'product') {
+        to.meta.keepAlive = true;
+      } else {
+        to.meta.keepAlive = false;
+      }
+      next();
     }
   }
 
