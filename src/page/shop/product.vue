@@ -574,29 +574,7 @@
   /* 商品 */
 
   /* 底部导航栏 */
-.cart-shop-fixed{
-    position: fixed;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 7px 14px;
-    background: #fff;
-   @include flexbox(space-between,
-    center,
-    row,
-    nowrap);
-        div{
-          width: 2.1rem;
-          height: 34px;
-          line-height: 34px;
-          text-align: center;
-          font-size: 18px;
-          color: $red;
-          border:1px solid $red;
-          border-radius: 6px;
-        }
-  }
+
   .cart-concern-fixed {
     position: fixed;
     bottom: -1px;
@@ -677,9 +655,6 @@
       
     }
   }
-  
-
-
 
   /* 底部导航栏 */
 
@@ -964,17 +939,6 @@
   <div style="background:#f8f8f8;">
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
-      <div class="checkSkuInfo">
-            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">
-              <img v-if="item.color_img" :src="item.color_img+'_230x230.jpg'">
-              <img v-else :src="productInfo.index_img_url+'_230x230.jpg'">
-                    <div class="checkSkuInfo-text">
-                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
-                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100.00}}</p>
-                    </div>
-            </div>
-           <span class="closepop" @click= "closepopcheckSku"></span>
-      </div>
       <div class="checkSkuColortitleall">
         <p class="checkSkuColortitle">请选择颜色：</p>
         <!-- ()=>{title='';visiblePopup.checkSku=false;} -->
@@ -1022,46 +986,18 @@
       </div>
       <div class="popupOk" @click= "()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
-
-    <!-- 上架成功popup -->
-    <mt-popup v-model="visiblePopup.addSuccess" :closeOnClickModal='true' style="text-align: center;"  position="bottom" class="checkSkupop">
-      <img src="~jd/images/addSuccess.png" alt="" style="
-    margin-top: 18px;width:66%;">
-    <p class="addSuccess-text">上架成功</p>
-    <p class="addSuccess-textmin">邀请好友购买，可<br>
-赚 <em>¥{{profit/100.00}}</em> 元起</p>
-    <div class="addSuccess-share">
-      <div>
-        <img src="~jd/images/share-app.png" alt="" style="width:50px;">
-        <p>微信好友</p>
-      </div>
-      <div>
-        <img src="~jd/images/share-time.png" alt="" style="width:50px;">
-        <p>朋友圈</p>
-      </div>
-    </div>
-      <div class="popupOk" @click= "()=>{visiblePopup.addSuccess=false}" style="margin-top:8px;">取消</div>
-    </mt-popup>
-
-
-
     <!-- 分享引导popup -->
     <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
        <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
     margin-top: 8px;width:76%;">
     </mt-popup>
-    
-
-
-
-
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
                 <mt-swipe-item v-for="(item,index) in infoImgList" :key="index">
-                  <img v-lazy="item">
+                  <img :src="item">
                 </mt-swipe-item>
 
               </mt-swipe>
@@ -1074,9 +1010,7 @@
               <div class="product-price">
                 <p class="product-pricep">
                 <span style="font-weight:bold;">&yen;</span>
-
-                <span style="font-weight:bold;margin-left: -3px;" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">{{item.sales_consumer_price/100.00|topriceafter}}.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                
+                <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.sales_consumer_price/100.00|topricenext}}</span>
                 <span style="margin-left:20px;text-decoration: line-through;color:#999;font-size:14px;"><em>原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.sales_price/100.00|topriceafter}}</em>.{{productInfo.sales_price/100.00|topricenext}}</span>
                 </p>
                 <span class="freight" style="font-size:13px;font-weight:normal"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em>5</em>.00</span>
@@ -1107,7 +1041,7 @@
               <span class="right-menu"></span>
               <div class="product-skuimg">
                 <p>
-                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img+'_40x40.jpg'"></em>
+                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img|addImgSize"></em>
                 <span>共{{colorarr.length}}种颜色分类可选</span>
                 </p>
               </div>
@@ -1164,19 +1098,10 @@
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入进货车</div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addGood()">一键铺店</div>
-      <!-- @click= "addShopCart('directBuy')" -->
-      <!-- ()=>{visiblePopup.addSuccess=true} -->
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('directBuy')">立即购买</div>
       <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
     </div>
-
-    <!-- <div class="cart-shop-fixed">
-        <div>编辑</div>
-        <div>下架</div>
-        <div style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
-        <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
-    </div> -->
     <!-- 底部导航栏 -->
 
     <!-- 返回顶部 -->
@@ -1198,7 +1123,6 @@
   import {
     getProduct,
     getShop,
-    addProduct,
     getCommentList
     // getRecommend
   } from '@/service/getData'
@@ -1215,8 +1139,7 @@
         visiblePopup: {
           checkSku: false,
           checkInfo: false,
-          shareBoo:false,
-          addSuccess:false
+          shareBoo:false
         },
         laylist :[1],
         cartnum:null,
@@ -1246,8 +1169,7 @@
           nowIndex: 1,
           total: 0
         },
-        addType:null,
-        profit:0
+        addType:null
       };
     },
     created: function () {
@@ -1431,20 +1353,23 @@ methods: {
           })
           return
         }
-        
-        this.productInfo = Data.data;
+        // this.infoImgList.push(Data.data.index_img_url)
         this.infoImgList = JSON.parse(Data.data.img_list);
+        this.productInfo = Data.data;
         this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
-        
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
+        // setTimeout(_ => {this.laylist = [2]}, 500)
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
+        // if(isWeiXin('code')){
+        // wxapi.wxRegister(this.wxRegCallback)
+        // }
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];
@@ -1503,22 +1428,6 @@ methods: {
           }
           this.colorCur[index]=numall
        },
-       async addGood(){
-         let Data = await addProduct({
-         item_id: this.$route.params.id
-        });
-        if(Data.code!=10000){
-          Toast({
-            message: Data.msg
-          })
-          return
-        }
-        this.profit=Data.data.kezuanshangxian;
-        this.visiblePopup.addSuccess=true;
-
-       },
-
-
       rmSome(arr, key) {
           let tempObj = {}
           arr.forEach(item => {
@@ -1533,6 +1442,7 @@ methods: {
  
     },
     updated:function(){
+      // this.infoImgList = JSON.parse( this.productInfo.img_list);
       this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
     }
     ,
@@ -1568,103 +1478,48 @@ methods: {
               value=value
             }
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        },
+        addImgSize(value){
+          if(value==''||value==null){
+            return;
+          }
+          if(value.indexOf("vvic.com")!=-1){
+            return value+'?x-oss-process=image/resize,mfit,h_40,w_40';
+          }
+          if(value.indexOf("alicdn.com")!=-1){
+            return value+'_40x40.jpg';
+          }
         }
     },
     mounted: function () {
        this.initData();
     }
+
+
   }
 
 </script>
 <style lang='scss' scoped>
 @import '~assets/common/css/mixin.scss';
 .checkSkupop{
+     
       width: 100%;
-        .addSuccess-text{
-          text-align: center;
-          color: #333;
-          font-size: 18px;
-          line-height: 42px;
-        }
-        .addSuccess-textmin{
-          text-align: center;
-          color: #333;
-          font-size: 15px;
-          line-height: 22px;
-          margin-bottom: 16px;
-          em{
-            font-size: 18px;
-            font-weight: bold;
-          }
-        }
-        .addSuccess-share{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 24px 40px;
-            border-top:1px solid #e4e4e4;
-
-            div{
-              width: 50%;
-              text-align: center
-            }
-        }
-
-        .checkSkuInfo{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 10px;
-            position: relative;
-            height: 90px;
-          span{
-            height: .56rem;
-            width: .56rem;
-            background: url('~jd/images/close.png') no-repeat;
-            background-size: 100%;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-          }
-          .checkSkuInfomain{
-             @include flexbox(start,
-            center,
-            row,
-            nowrap);
-            top: -20px;
-            position: absolute;
-            img{
-              height: 100px;
-              width: 100px;
-              border-radius: 6px;
-            }
-            .checkSkuInfo-text{
-              width: 5.4rem;
-              margin-left: 10px;
-                  margin-top: 18px;
-              .checkSkuInfo-texttitle{
-                 @include textoverflow(2);
-                    font-size: 13px;
-                    color: #333;
-                    line-height: 20px;
-              }
-              .checkSkuInfo-textprice{
-                font-size: 16px;
-                color: $red;
-                font-weight: bold;
-                margin-top: 6px;
-              }
-            }
-          }  
-        }
         .checkSkuColortitleall{
           padding-right: 10px;
          @include flexbox(space-between,
             center,
             row,
             nowrap);
+          span{
+            height: .56rem;
+            width: .56rem;
+            // background-image: url('~jd/images/product-detail-sprites-mjs.png');
+            // background-repeat: no-repeat;
+            // background-size: 100px 100px;
+            // background-position: -24px -12px;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
+          }  
         }
         .checkSkuColortitle{
         width: 100%;
