@@ -1353,7 +1353,8 @@ methods: {
           })
           return
         }
-        this.infoImgList = JSON.parse(Data.data.img_list);
+        this.infoImgList.push(Data.data.index_img_url)
+        // this.infoImgList = JSON.parse(Data.data.img_list);
         this.productInfo = Data.data;
         this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
@@ -1441,6 +1442,7 @@ methods: {
  
     },
     updated:function(){
+      this.infoImgList = JSON.parse( this.productInfo.img_list);
       this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
     }
     ,
