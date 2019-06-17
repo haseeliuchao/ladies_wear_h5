@@ -1041,7 +1041,7 @@
               <span class="right-menu"></span>
               <div class="product-skuimg">
                 <p>
-                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img+'_40x40.jpg'"></em>
+                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img|addImgSize"></em>
                 <span>共{{colorarr.length}}种颜色分类可选</span>
                 </p>
               </div>
@@ -1478,20 +1478,23 @@ methods: {
               value=value
             }
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        },
+        addImgSize(value){
+          if(value==''||value==null){
+            return;
+          }
+          if(value.indexOf("vvic.com")!=-1){
+            return value+'?x-oss-process=image/resize,mfit,h_40,w_40';
+          }
+          if(value.indexOf("alicdn.com")!=-1){
+            return value+'_40x40.jpg';
+          }
         }
     },
     mounted: function () {
        this.initData();
     }
-    // ,
-    // beforeRouteLeave(to, from, next) {
-    //   if (to.path === '/searchRusult') {
-    //     to.meta.keepAlive = true;
-    //   } else {
-    //     to.meta.keepAlive = false;
-    //   }
-    //   next();
-    // }
+
 
   }
 
