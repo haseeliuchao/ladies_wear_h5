@@ -499,12 +499,14 @@
         img_url:'',
       };
     },
-
     watch: {
       'searchParams.title': function(val){
         // this.searchRusult()
-      }
-    },
+      },
+	  
+},
+
+
 
     components: {
       BackHead,

@@ -461,12 +461,12 @@
       <span class="del" v-if="delshow" @click= "editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
-    <FooterView/>
+    <footerViewToC/>
   </div>
 </template>
 
 <script>
-  import FooterView from 'component/footer/footerView';
+  import footerViewToC from 'component/footer/footerViewToC';
   import SearchBar from 'page/shop/searchBar';
   import {
     Toast
@@ -499,8 +499,7 @@
     watch: {},
 
     components: {
-      FooterView,
-      SearchBar,
+      footerViewToC,
       LoadMore
     },
 

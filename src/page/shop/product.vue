@@ -1060,7 +1060,7 @@
             <div class="prouct-swiper">
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
-                <mt-swipe-item v-for="(item,index) in productInfo.imgList" :key="index">
+                <mt-swipe-item v-for="(item,index) in infoImgList" :key="index">
                   <img v-lazy="item">
                 </mt-swipe-item>
 
@@ -1238,6 +1238,7 @@
         productInfo: {
           item_detailsimg:null
         },
+        infoImgList:[],
         shopInfo: null,
         // commad: getRecommend,
         // recommendData: [],
@@ -1430,9 +1431,11 @@ methods: {
           })
           return
         }
+        
         this.productInfo = Data.data;
+        this.infoImgList = JSON.parse(Data.data.img_list);
         this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
-        this.productInfo.imgList = JSON.parse(Data.data.img_list);
+        
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
