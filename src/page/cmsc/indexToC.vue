@@ -105,7 +105,7 @@
             </div> -->
           </div>
         </load-more>
-        <FooterViewToC :distributorId='$route.query.distributor_id'/>
+        <FooterViewToC :distributorId='$route.params.distributor_id'/>
         <BackHead/>
   </div>
 </template>
