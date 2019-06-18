@@ -132,7 +132,7 @@
     methods:{
       async saveShop(){
         let distributor_id='';
-        this.$route.params.distributor_id?distributor_id=this.$route.params.distributor_id:distributor_id='';
+        this.$route.query.distributor_id?distributor_id=this.$route.query.distributor_id:distributor_id='';
         // if(this.$route.params.distributor_id){
         //   distributor_id=this.$route.params.distributor_id
         // }else{
@@ -165,7 +165,7 @@
           });
         },
       async initData(){
-        if(this.$route.params.distributor_id){
+        if(this.$route.query.distributor_id){
           let res = await this.$store.dispatch('GetShopInfo');
           res.code != 10000?Toast({message: '访问接口失败'}):Toast({message: '访问接口成功'});
           this.shopForm.distributor_id = res.data.distributor_id;

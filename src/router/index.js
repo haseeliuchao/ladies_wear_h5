@@ -276,7 +276,7 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/shopManage/:distributor_id',
+                path: '/shopManage',
                 name: 'shopManage',
                 component: ShopManage,
                 meta: { keepAlive: false }
