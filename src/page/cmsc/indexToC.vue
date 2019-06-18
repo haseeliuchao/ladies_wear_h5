@@ -85,7 +85,7 @@
 
           <!-- 店铺出售中的商品 -->
           <div class="content">
-            <load-more style="width:100%;" v-if="$route.path=='/indexToC'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+            <load-more style="width:100%;" v-if="$route.name=='indexToC'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
@@ -177,14 +177,13 @@
         this.searchBarVisilbe = y>8 ? false : true;
       },
       
-      async getGoodsdata() {
-        this.indexParams.page_size = 10;
-        this.indexParams.current_page = 1;
-        this.indexRusultData=[];
-        this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
-      },
+      // async getGoodsdata() {
+      //   this.indexParams.page_size = 10;
+      //   this.indexParams.current_page = 1;
+      //   this.indexRusultData=[];
+      //   this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
+      // },
       async infiniteCallback(response) { //下拉加载
-        // if(this.$route.path=='/index'){
           if(response.data.distributor_item!=undefined&&response.data.distributor_item!=null){
           if (response.data.distributor_item.length > 0) {
             response.data.distributor_item.map(i => {
@@ -208,7 +207,6 @@
     beforeDestroy() {
     },
     mounted: function () {
-      this.getGoodsdata()
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     }
   }
