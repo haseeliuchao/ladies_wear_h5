@@ -37,6 +37,7 @@ const SearchImg = () =>   import ('page/shop/searchImg')
 const SearchRenew = () =>   import ('page/shop/searchRenew')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
+const CreateOrderToc = () =>   import ('page/shopc/createOrderToc')
 const Review = () =>    import ('page/shop/review')
 const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
 const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
@@ -209,6 +210,13 @@ const appRouter = {
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+            }
+            ,
+            {
+                path: '/createOrderToc',
+                name: 'createOrderToc',
+                component: CreateOrderToc,
+                meta: { keepAlive: false }
             }
             ,
             {

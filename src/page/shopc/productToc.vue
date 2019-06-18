@@ -1057,7 +1057,7 @@
           <i></i>
           <span>关注</span>
         </div> -->
-        <div class="shopping-cart" @click= "$router.push(`/cartToc/7`)">
+        <div class="shopping-cart" @click= "$router.push(`/cartToc/${$route.query.distributor_id}`)">
         <!-- ${productInfo.distributor_id} -->
           <em v-if="productInfo.shopping_cart_num&&productInfo.shopping_cart_num!=0">{{productInfo.shopping_cart_num}}</em>
           <i></i>
@@ -1283,7 +1283,7 @@ wxShareAppMessage () {
           
         })
         }else{
-          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
+          this.$router.push({path: '/createOrderToc',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
        
       },
