@@ -167,7 +167,9 @@
       async initData(){
         if(this.$route.params.distributor_id){
           let res = await this.$store.dispatch('GetShopInfo');
-          res.code != 10000?Toast({message: '访问接口失败'}):Toast({message: '访问接口成功'});
+          if(res.code != 10000){
+            Toast({message: '访问接口失败'})
+          }
           this.shopForm.distributor_id = res.data.distributor_id;
           this.shopForm.title = res.data.title;
           this.shopForm.n_times = res.data.n_times;

@@ -159,7 +159,9 @@
           page_size: 10,
           current_page: 1
         });
-        Data.code!=10000?Toast({message:'访问接口失败'}):Toast({message:'访问接口成功'});
+        if(Data.code!=10000){
+          Toast({message:'访问接口失败'})
+        }
         this.memberData = Data.data;
         this.memberData.memberList = Data.data.data;
       },
