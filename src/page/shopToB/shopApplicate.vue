@@ -94,7 +94,7 @@
       <li><span>5</span>提供一件代发服务</li>
       <li><span>6</span>7x12小时技术支持</li>
     </ul>
-    <p class="applicate-btn btns" @click="$router.push('/shopCreate')">我要开店</p>
+    <p class="applicate-btn btns" @click="$router.push('/shopManage')">我要开店</p>
   </div>
 </div>
 </template>
