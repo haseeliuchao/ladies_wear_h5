@@ -1344,7 +1344,7 @@ methods: {
 //   wxapi.ShareAppMessage(option)
 // },
       shareBooshare(){
-         visiblePopup.shareBoo=true;          
+         this.visiblePopup.shareBoo=true;          
       }, 
       handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
