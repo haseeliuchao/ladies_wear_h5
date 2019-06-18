@@ -1031,11 +1031,11 @@
     <p class="addSuccess-textmin">邀请好友购买，可<br>
 赚 <em>¥{{profit/100.00}}</em> 元起</p>
     <div class="addSuccess-share">
-      <div>
+      <div @click="visiblePopup.shareBoo=true">
         <img src="~jd/images/share-app.png" alt="" style="width:50px;">
         <p>微信好友</p>
       </div>
-      <div>
+      <div @click="visiblePopup.shareBoo=true">
         <img src="~jd/images/share-time.png" alt="" style="width:50px;">
         <p>朋友圈</p>
       </div>
@@ -1218,6 +1218,7 @@
           shareBoo:false,
           addSuccess:false
         },
+       
         laylist :[1],
         cartnum:null,
         colorCur:[],
@@ -1434,7 +1435,11 @@ methods: {
         
         this.productInfo = Data.data;
         this.infoImgList = JSON.parse(Data.data.img_list);
-        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
+        if(this.visiblePopup.addSuccess==false){
+        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
+        }else{
+          this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path=/productToc/'+this.productInfo.item_id+'',imgUrl: this.productInfo.index_img_url})          
+        }
         
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
