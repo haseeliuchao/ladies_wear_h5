@@ -65,15 +65,21 @@
 </style>
 <template>
   <ul class="nav-bar fool">
-    <li :class="['barIcon','home',$route.name==='indexToC'?'active':'']" @click= "$router.push('/indexToC')">首页</li>
-    <li :class="['barIcon','cart',$route.name==='cartToc'?'active':'']" @click= "$router.push('/cartToc')">购物车</li>
-    <li :class="['barIcon','myOrder',$route.name==='orderList'?'active':'']" @click= "$router.push('/orderList')">订单</li>
+    <li :class="['barIcon','home',$route.name==='indexToC'?'active':'']" @click= "$router.push(`/indexToC/${distributorId}`)">首页</li>
+    <li :class="['barIcon','cart',$route.name==='cartToc'?'active':'']" @click= "$router.push(`/cartToc/${distributorId}`)">购物车</li>
+    <li :class="['barIcon','myOrder',$route.name==='orderList'?'active':'']" @click= "$router.push({path: '/orderListToc/0',query: {distributor_id:distributorId}})">订单</li>
   </ul>
 </template>
 <script>
 
 
   export default {
+    props:{
+        distributorId:{
+          type:Number,
+          default: 0
+        }
+    },
     data() {
       return {
 

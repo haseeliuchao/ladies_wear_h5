@@ -30,6 +30,7 @@ const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
 const OrderRusult = () => import ('page/shop/orderRusult')
 const OrderList = () => import ('page/shop/orderList')
+const OrderListToc = () => import ('page/shopc/orderListToc')
 const Product = () =>   import ('page/shop/product')
 const ProductToc = () =>   import ('page/shopc/productToc')
 const SearchRusult = () =>  import ('page/shop/searchRusult')
@@ -210,6 +211,13 @@ const appRouter = {
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+            }
+            ,
+            {
+                path: '/orderListToc/:tab?',
+                name: 'orderListToc',
+                component: OrderListToc,
+                meta: { keepAlive: false}
             }
             ,
             {

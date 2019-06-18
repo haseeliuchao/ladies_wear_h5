@@ -461,7 +461,7 @@
       <span class="del" v-if="delshow" @click= "editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
-    <footerViewToC/>
+    <footerViewToC :distributorId='$route.params.distributor_id'/>
   </div>
 </template>
 
