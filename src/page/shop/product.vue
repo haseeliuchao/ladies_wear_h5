@@ -1471,13 +1471,13 @@ methods: {
         
         let ShopInfoData = await getShopInfo({
         });
-        if(Data.code!=10000){
+        if(ShopInfoData.code!=10000){
           Toast({
-            message: Data.msg
+            message: ShopInfoData.msg
           })
           return
         }
-        this.distributorId=Data.data.distributor_id;
+        this.distributorId=ShopInfoData.data.distributor_id;
 
 
 
