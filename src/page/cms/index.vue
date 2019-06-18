@@ -306,7 +306,7 @@
           <!-- banner -->
           <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
-             :key="index" @click= "()=>$router.push(item.http_url)">
+             :key="index"  @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
               <img v-lazy="item.img_url" alt="item.title">
             </mt-swipe-item>
           </mt-swipe>
@@ -324,7 +324,7 @@
           <div class="activity-manage">
             <div class="activity-list" v-for="(item,index) in cmsDataTypeads" :key="index">
               <!-- <a :href="item.http_url"> -->
-                <img v-lazy="item.img_url" >
+                <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
               <!-- </a> -->
             </div>
           </div>
@@ -334,14 +334,14 @@
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
                 <!-- <a :href="item.http_url"> -->
-                  <img v-lazy="item.img_url">
+                  <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
                 <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-                <img  v-lazy="item.img_url">
+                <img  v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {ad_advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
               </div>
             </div>
           </div>
@@ -476,22 +476,22 @@
       },
       cmsDataTypeads: function () {
       return this.cmsData.filter(function (item) {
-        return item.type==2&&item.postion==1;
+        return item.type==2&&item.position==1;
       })
       },
       cmsDataTypeconfigsone: function () {
       return this.cmsData.filter(function (item) {
-        return item.type==2&&item.postion==2;
+        return item.type==2&&item.position==2;
       })
       },
       cmsDataTypeconfigstwo: function () {
       return this.cmsData.filter(function (item) {
-        return item.type==2&&(item.postion==3||item.postion==4);
+        return item.type==2&&(item.position==3||item.position==4);
       })
       },
       cmsDataTyperecommends: function () {
       return this.cmsData.filter(function (item) {
-        return item.type==2&&(item.postion==5||item.postion==6||item.postion==7||item.postion==8);
+        return item.type==2&&(item.position==5||item.position==6||item.position==7||item.position==8);
       })
       }
 

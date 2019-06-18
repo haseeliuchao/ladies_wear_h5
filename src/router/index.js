@@ -73,7 +73,7 @@ const appRouter = {
                 path: '/indexToC/:distributor_id',
                 name: 'indexToC',
                 component: IndexToC,
-                meta: { keepAlive: false}
+                meta: { keepAlive: true}
             },
             /*C端店铺首页 */
             {
