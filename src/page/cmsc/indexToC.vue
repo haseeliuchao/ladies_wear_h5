@@ -85,7 +85,7 @@
 
           <!-- 店铺出售中的商品 -->
           <div class="content">
-            <load-more style="width:100%;" v-if="$route.path=='/indexToC'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
+            <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
@@ -144,8 +144,8 @@
         indexParams: {
           title: '',
           item_url:'',
-          category_id:'',
-          ad_advertising_id:'',
+          // category_id:'',
+          // ad_advertising_id:'',
           img_url:'',
           page_size: 10,
           current_page: 1

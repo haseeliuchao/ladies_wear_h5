@@ -65,7 +65,7 @@
 </style>
 <template>
   <ul class="nav-bar fool">
-    <li :class="['barIcon','home',$route.name==='indexToC'?'active':'']" @click= "$router.push('/indexToC')">首页</li>
+    <li :class="['barIcon','home',$route.name==='indexToC'?'active':'']" @click= "$router.push('/index')">首页</li>
     <li :class="['barIcon','cart',$route.name==='cartToc'?'active':'']" @click= "$router.push('/cartToc')">购物车</li>
     <li :class="['barIcon','myOrder',$route.name==='orderList'?'active':'']" @click= "$router.push('/orderList')">订单</li>
   </ul>
