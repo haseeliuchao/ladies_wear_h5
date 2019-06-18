@@ -1233,7 +1233,7 @@ wxShareAppMessage () {
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
           item_sku_info_json: JSON.stringify(this.checkIdnums),
-          distributor_id:7
+          distributor_id:this.$route.query.distributor_id
         }).then(response => {
           if(response.code==10000){
           return Toast({
@@ -1267,7 +1267,7 @@ wxShareAppMessage () {
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
           item_sku_info_json: JSON.stringify(this.checkIdnums),
-          distributor_id:7
+          distributor_id:this.$route.query.distributor_id
         }).then(response => {
           if(response.code==10000){
           return Toast({
