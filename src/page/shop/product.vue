@@ -1199,7 +1199,8 @@
     getProduct,
     getShop,
     addProduct,
-    getCommentList
+    getCommentList,
+    getShopInfo
     // getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
@@ -1268,7 +1269,7 @@
             },
             addSuccessvisiblePopup:function(newvs,oldvs){
              if(newvs==true){
-                this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToc/'+this.productInfo.item_id)+'',imgUrl: this.productInfo.index_img_url})
+                this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToc/'+this.productInfo.item_id+'?'+this.productInfo.distributor_id)+'',imgUrl: this.productInfo.index_img_url})
              }else{
                this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
              }
@@ -1444,7 +1445,6 @@ methods: {
           })
           return
         }
-        
         this.productInfo = Data.data;
         this.infoImgList = JSON.parse(Data.data.img_list);
         this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
@@ -1468,7 +1468,15 @@ methods: {
           }
         } 
         
-
+        let ShopInfoData = await getShopInfo({
+        });
+        if(Data.code!=10000){
+          Toast({
+            message: Data.msg
+          })
+          return
+        }
+        
         var _this =this
           window.addEventListener('scroll',function(){
               var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
