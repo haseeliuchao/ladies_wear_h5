@@ -1061,7 +1061,7 @@
               <mt-swipe @change="handleChange" :showIndicators="false" :stopPropagation="true" :prevent="true" :continuous="false" :auto="0"
                 class="scroll-images">
                 <mt-swipe-item v-for="(item,index) in infoImgList" :key="index">
-                  <img v-lazy="item">
+                  <img :src="item">
                 </mt-swipe-item>
 
               </mt-swipe>
@@ -1107,7 +1107,7 @@
               <span class="right-menu"></span>
               <div class="product-skuimg">
                 <p>
-                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img+'_40x40.jpg'"></em>
+                <em v-for="(item,index) in colorarr" :key="index" ><img  v-if="item.color_img" :src="item.color_img|addImgSize"></em>
                 <span>共{{colorarr.length}}种颜色分类可选</span>
                 </p>
               </div>
@@ -1508,10 +1508,14 @@ methods: {
          item_id: this.$route.params.id
         });
         if(Data.code!=10000){
-          Toast({
-            message: Data.msg
-          })
-          return
+          if(Data.code==20025){
+            return
+          }else{
+             Toast({
+             message: Data.msg
+             })
+             return
+          }
         }
         this.profit=Data.data.kezuanshangxian;
         this.visiblePopup.addSuccess=true;
@@ -1568,6 +1572,17 @@ methods: {
               value=value
             }
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        },
+        addImgSize(value){
+          if(value==''||value==null){
+            return;
+          }
+          if(value.indexOf("vvic.com")!=-1){
+            return value+'?x-oss-process=image/resize,mfit,h_40,w_40';
+          }
+          if(value.indexOf("alicdn.com")!=-1){
+            return value+'_40x40.jpg';
+          }
         }
     },
     mounted: function () {
