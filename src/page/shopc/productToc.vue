@@ -1250,7 +1250,7 @@ wxShareAppMessage () {
           
         })
         }else if(this.addType==='directBuy'){
-          this.$router.push({path: '/createOrder',query: {id:this.checkId,number:this.shopnum,checkout_type:2}})
+          this.$router.push({path: '/createOrderToc',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
         }
       },
