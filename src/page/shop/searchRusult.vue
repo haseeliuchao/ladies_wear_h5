@@ -550,6 +550,7 @@
       },
       async initData(){
         this.img_url = this.$route.query.img_url;
+        this.searchParams.advertising_id = this.$route.query.advertising_id;
       },
       async infiniteCallback(response) { //下拉加载
         if(response.msg=='没有搜索结果'){

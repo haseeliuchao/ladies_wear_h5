@@ -441,7 +441,7 @@
           title: '',
           item_url:'',
           category_id:'',
-          ad_advertising_id:'',
+          advertising_id:'',
           img_url:'',
           page_size: 10,
           current_page: 1
@@ -470,29 +470,42 @@
         'indexCmsData'
       ]),
       cmsDataTypeones: function () {
-      return this.cmsData.filter(function (item) {
-        return item.type==1
-      })
+        if(this.cmsData.length>0){
+            return this.cmsData.filter(function (item) {
+              return item.type==1
+            })
+        }
+     
       },
       cmsDataTypeads: function () {
+        if(this.cmsData.length>0){
       return this.cmsData.filter(function (item) {
         return item.type==2&&item.position==1;
       })
+      }
       },
+      
+      
       cmsDataTypeconfigsone: function () {
+        if(this.cmsData.length>0){
       return this.cmsData.filter(function (item) {
         return item.type==2&&item.position==2;
       })
+      }
       },
       cmsDataTypeconfigstwo: function () {
+        if(this.cmsData.length>0){
       return this.cmsData.filter(function (item) {
         return item.type==2&&(item.position==3||item.position==4);
       })
+        }
       },
       cmsDataTyperecommends: function () {
+        if(this.cmsData.length>0){
       return this.cmsData.filter(function (item) {
         return item.type==2&&(item.position==5||item.position==6||item.position==7||item.position==8);
       })
+        }
       }
 
       
