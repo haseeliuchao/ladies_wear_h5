@@ -69,10 +69,10 @@ const appRouter = {
             },
             /*C端店铺首页 */
             {
-                path: '/indexToC',
+                path: '/indexToC/:distributor_id',
                 name: 'indexToC',
                 component: IndexToC,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false}
             },
             /*C端店铺首页 */
             {

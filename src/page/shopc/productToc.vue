@@ -1049,7 +1049,7 @@
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
       <div class="left">
-        <div class="goods-part" @click= "$router.push('/index')">
+        <div class="goods-part" @click= "$router.push(`/indexToC/${$route.query.distributor_id}`)">
           <i></i>
           <span>首页</span>
         </div>

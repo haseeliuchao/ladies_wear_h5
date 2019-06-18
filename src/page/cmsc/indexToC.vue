@@ -89,12 +89,11 @@
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-                  <img v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+                  <img v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="">
                   <div class="prod-info">
-                    <p class="prod-title">{{item.title}}</p>
+                    <p class="prod-title">{{item.item_title}}</p>
                     <p class="prod-price">
-                      <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:8px;text-decoration: line-through;color:#999;font-size:14px;"><em style="font-size:14px;">&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
+                      <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_price/100.00|TwoNum}}</em></span>
                       </p>
                   </div>
                 </li>
@@ -120,7 +119,7 @@
   } from '@/utils/mixin';
   import {
     // getGoodsCategoryList,
-    searchGoods
+    searchshopGoods
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
   import {
@@ -140,13 +139,10 @@
           current_page: 1
         },
         indexRusultData: [],
-        commad: searchGoods,
+        commad: searchshopGoods,
         indexParams: {
-          title: '',
-          item_url:'',
-          // category_id:'',
-          // ad_advertising_id:'',
-          img_url:'',
+          distributor_id:this.$route.params.distributor_id,
+          status:1,
           page_size: 10,
           current_page: 1
         },
@@ -180,50 +176,25 @@
       translateChange(y){ //监听下拉的阈值
         this.searchBarVisilbe = y>8 ? false : true;
       },
-      async onRefreshCallback() { //下拉刷新
-        this.recommendParam.page_size = 10;
-        this.recommendParam.current_page = 1;
-        this.updatedData();
-        setTimeout(() => {
-          this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-        }, 1000); 
-      },
-      async getGoodsdata(advertising_id,index) {
-        this.active = index;
+      
+      async getGoodsdata() {
         this.indexParams.page_size = 10;
         this.indexParams.current_page = 1;
-        this.indexParams.advertising_id = advertising_id;
         this.indexRusultData=[];
-        this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
         this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
       },
       async infiniteCallback(response) { //下拉加载
         // if(this.$route.path=='/index'){
-          if(response.data.items!=undefined&&response.data.items!=null){
-          if (response.data.items.length > 0) {
-            response.data.items.map(i => {
+          if(response.data.distributor_item!=undefined&&response.data.distributor_item!=null){
+          if (response.data.distributor_item.length > 0) {
+            response.data.distributor_item.map(i => {
               this.indexRusultData.push(i)
             })
           }
           }else{
             this.indexRusultData=[];
           }
-      },
-      async updatedData() { //更新数据
-        let Data = await this.$store.dispatch('GetIndexCmsData', {
-        });
-        this.cmsData = Data.data;
-      },
-      async initData() { //初始化数据
-        this.guideindex=getLocalStorage('guideindex');
-        if(this.isWeiXin()){
-          if (!this.indexCmsData) {
-            this.updatedData();
-          } else {
-            this.cmsData = this.indexCmsData.data;
-          }
-        }
-      },
+      }
       
     },
     filters:{
@@ -237,11 +208,8 @@
     beforeDestroy() {
     },
     mounted: function () {
-     
-      this.initData();
-      this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
+      this.getGoodsdata()
       this.$refs.indexRusultloadMore.onloadMoreScroll();
-      this.updatedData();
     }
   }
 
