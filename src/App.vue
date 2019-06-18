@@ -48,8 +48,9 @@ import {
           var app_keystr=''
           for(var i = 0 , len =  unicode.length ; i < len ;++i){
               unicodestr += String.fromCharCode(unicode[i]);
+              console.log(unicodestr)
           }
-          console.log(unicodestr)
+          
             let Data = await this.$store.dispatch('LoginInit', {
                 code:utils.getUrlKey('code')
               })
