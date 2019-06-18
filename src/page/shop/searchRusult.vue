@@ -407,7 +407,7 @@
       <span @click= "changeQuery(searchParams.title)">搜索</span>
     </div>
     <!-- 配置搜索 -->
-    <div class="search-top" v-if="searchParams.ad_advertising_id">
+    <div class="search-top" v-if="searchParams.advertising_id">
       <div class="searchDeploy-box">
         <img :src="this.img_url">
       </div>
@@ -488,7 +488,7 @@
           item_url:'',
           sort_type:1,
           category_id:'',
-          ad_advertising_id:'',
+          advertising_id:'',
           page_size: 10,
           current_page: 1
         },
