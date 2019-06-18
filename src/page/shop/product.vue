@@ -1031,11 +1031,11 @@
     <p class="addSuccess-textmin">邀请好友购买，可<br>
 赚 <em>¥{{profit/100.00}}</em> 元起</p>
     <div class="addSuccess-share">
-      <div>
+      <div @click="shareBooshare">
         <img src="~jd/images/share-app.png" alt="" style="width:50px;">
         <p>微信好友</p>
       </div>
-      <div>
+      <div @click="shareBooshare">
         <img src="~jd/images/share-time.png" alt="" style="width:50px;">
         <p>朋友圈</p>
       </div>
@@ -1199,7 +1199,8 @@
     getProduct,
     getShop,
     addProduct,
-    getCommentList
+    getCommentList,
+    getShopInfo
     // getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';
@@ -1218,6 +1219,7 @@
           shareBoo:false,
           addSuccess:false
         },
+       
         laylist :[1],
         cartnum:null,
         colorCur:[],
@@ -1247,7 +1249,8 @@
           total: 0
         },
         addType:null,
-        profit:0
+        profit:0,
+        distributorId:null
       };
     },
     created: function () {
@@ -1264,7 +1267,14 @@
               // 下面需要这两行代码，兼容不同浏览器
               document.body.scrollTop = this.pageScrollYoffset;
               window.scroll(0, this.pageScrollYoffset);
-            } 
+            },
+            addSuccessvisiblePopup:function(newvs,oldvs){
+             if(newvs==true){
+                this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToc/'+this.productInfo.item_id+'?distributor_id='+this.distributorId)+'',imgUrl: this.productInfo.index_img_url})
+             }else{
+               this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
+             }
+            }
     },
         
     components: {
@@ -1278,6 +1288,9 @@
     computed: {
       wcvisiblePopup(){
           return this.visiblePopup.checkInfo;
+        },
+        addSuccessvisiblePopup(){
+          return this.visiblePopup.addSuccess;
         }
     },
 methods: {
@@ -1332,7 +1345,9 @@ methods: {
 //   // 将配置注入通用方法
 //   wxapi.ShareAppMessage(option)
 // },
-        
+      shareBooshare(){
+         this.visiblePopup.shareBoo=true;          
+      }, 
       handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
@@ -1431,11 +1446,9 @@ methods: {
           })
           return
         }
-        
         this.productInfo = Data.data;
         this.infoImgList = JSON.parse(Data.data.img_list);
-        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
-        
+        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
@@ -1456,6 +1469,17 @@ methods: {
           }
         } 
         
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
+
+
 
         var _this =this
           window.addEventListener('scroll',function(){
