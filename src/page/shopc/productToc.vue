@@ -1292,7 +1292,7 @@ wxShareAppMessage () {
         // this.commentParam.ProductNo = this.$route.params.id;
         let Data = await getProduct({
          item_id: this.$route.params.id,
-         distributor_id:7
+         distributor_id:this.$route.query.distributor_id
         });
         if(Data.code!=10000){
           Toast({
