@@ -144,8 +144,8 @@
         indexParams: {
           title: '',
           item_url:'',
-          category_id:'',
-          ad_advertising_id:'',
+          // category_id:'',
+          // ad_advertising_id:'',
           img_url:'',
           page_size: 10,
           current_page: 1
