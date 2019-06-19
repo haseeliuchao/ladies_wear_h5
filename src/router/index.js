@@ -224,7 +224,7 @@ const appRouter = {
             }
             ,
             {
-                path: '/orderListToc/:tab?',
+                path: '/orderListToc/:tab',
                 name: 'orderListToc',
                 component: OrderListToc,
                 meta: { keepAlive: false}
