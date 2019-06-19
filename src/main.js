@@ -100,10 +100,10 @@ const config = {
 
 var routerindex=0
 router.beforeEach((to,from,next)=>{
-  
+  if (to.meta.Title) {
+    document.title = to.meta.Title
+  }
   routerindex++;
-  
-  
   var shareImgurl='';
   if(to.meta.imgUrl==undefined){
     shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
@@ -130,15 +130,13 @@ router.beforeEach((to,from,next)=>{
     });
       if(ShopInfo.code==10000){
         setSessionStorage('shopInfodata',JSON.stringify(ShopInfo.data))
-        to.meta.Title=ShopInfo.data.title;
+        document.title=ShopInfo.data.title;
       }
     }
     if(routerindex==1&&isWeiXin('code')&&unicodestr.indexOf('distributor_id')!=-1){
       getshop()
     }
-    if (to.meta.Title) {
-      document.title = to.meta.Title
-    }
+    
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
         next({path: '/index'});
     }else{
