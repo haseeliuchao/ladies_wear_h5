@@ -397,7 +397,7 @@
         <!-- 没有订单 -->
       </load-more>
     </div>
-    <footerViewToC :distributorId='10'/>
+    <footerViewToC/>
   </div>
 </template>
 

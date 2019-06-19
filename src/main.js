@@ -129,6 +129,7 @@ router.beforeEach((to,from,next)=>{
         distributor_id: unicodestr.split("=")[1]
     });
       if(ShopInfo.code==10000){
+        setSessionStorage('distributorId',ShopInfo.data.distributor_id)
         document.title=ShopInfo.data.title;
       }
     }
