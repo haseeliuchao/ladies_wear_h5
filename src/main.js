@@ -100,6 +100,9 @@ const config = {
 
 var routerindex=0
 router.beforeEach((to,from,next)=>{
+  if (to.meta.Title) {
+    document.title = to.meta.Title
+  }
   routerindex++;
   const foo = async () => { 
     let wxData = await getSignature({

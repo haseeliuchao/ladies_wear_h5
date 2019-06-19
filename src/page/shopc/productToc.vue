@@ -1336,7 +1336,7 @@ methods: {
     },
     mounted: function () {
       this.initData();
-      this.$route.meta.title="超司令"
+      this.$route.meta.Title="超司令"
     },
     beforeRouteLeave(to, from, next){
       if(to.name ==='loginBlank' ){

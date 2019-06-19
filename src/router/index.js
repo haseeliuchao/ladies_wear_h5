@@ -82,6 +82,7 @@ const appRouter = {
                 component: Index,
                 meta: { 
                     keepAlive: true,
+                    Title:'首页',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -105,6 +106,7 @@ const appRouter = {
                 name: 'login',
                 component: Login,
                 meta: { keepAlive: false ,
+                    Title:'登录',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -120,13 +122,15 @@ const appRouter = {
                 path: '/browserLogin',
                 name: 'browserLogin',
                 component: BrowserLogin,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    Title:'登录/注册',}
             },
             {
                 path: '/myhome',
                 name: 'myhome',
                 component: Myhome,
                 meta: { keepAlive: false ,
+                    Title:'我的',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -137,6 +141,7 @@ const appRouter = {
                 name: 'cardCoupon',
                 component: CardCoupon,
                 meta: { keepAlive: false ,
+                    Title:'优惠券',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -159,6 +164,7 @@ const appRouter = {
                 name: 'cart',
                 component: Cart,
                 meta: { keepAlive: false ,
+                    Title:'购物车',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -170,6 +176,7 @@ const appRouter = {
                 component: Category,
                 meta: { 
                     keepAlive: true ,
+                    Title:'分类',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/category')+'', // 分享链接，根据自身项目决定是否需要split
@@ -187,6 +194,7 @@ const appRouter = {
                 name: 'order',
                 component: Order,
                 meta: { keepAlive: false ,
+                    Title:'订单详情',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -197,6 +205,7 @@ const appRouter = {
                 name: 'createOrder',
                 component: CreateOrder,
                 meta: { keepAlive: false ,
+                    Title:'创建订单',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -207,6 +216,7 @@ const appRouter = {
                 name: 'orderList',
                 component: OrderList,
                 meta: { keepAlive: false ,
+                    Title:'全部订单',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -231,7 +241,8 @@ const appRouter = {
                 path: '/product/:id',
                 name: 'product',
                 component: Product,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false,
+                        Title:'商品详情'}
             }
             ,
             {
@@ -246,6 +257,7 @@ const appRouter = {
                 name: 'searchImg',
                 component: SearchImg,
                 meta: { keepAlive: false ,
+                    Title:'图搜',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -262,6 +274,7 @@ const appRouter = {
                 name: 'searchRusult',
                 component: SearchRusult,
                 meta: { keepAlive: true ,
+                    Title:'搜索',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
