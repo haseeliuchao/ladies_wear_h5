@@ -208,6 +208,13 @@
     },
     mounted: function () {
       this.$refs.indexRusultloadMore.onloadMoreScroll();
+    },
+    beforeRouteLeave(to, from, next){
+      if(to.name ==='loginBlank' ){
+        
+      }else {
+        next();
+      }
     }
   }
 
