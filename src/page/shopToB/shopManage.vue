@@ -57,7 +57,7 @@
       width: 100%;
       text-align: center;
       padding: 14px 0;
-      background: $red;
+      background-color: $red;
       font-size: 18px;
       color: #fff;
   }
@@ -78,8 +78,8 @@
     <div class="storeCreate-con store-con">
       <p>
         <label for="name">店铺名称</label>
-        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name">
-        <span style="display:none;">请输入合格店铺名称</span>
+        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate="'required'">
+        <span v-show="shopForm.title.length>10">请输入合格店铺名称</span>
       </p>
       <p>
         <label for="category">主营类目</label>
@@ -87,7 +87,7 @@
       </p>
       <p>
         <label for="markup">商品加价</label>
-        <input type="text" name="markup" v-model="shopForm.n_times"  placeholder="" id="markup">
+        <input type="text" name="markup" v-model="shopForm.n_times"  placeholder="" id="markup" v-validate="'required'" >
         <span>倍</span>
       </p>
       <p>
@@ -101,10 +101,10 @@
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
      <div  class="save-shop" v-if="!shopForm.distributor_id"
-      :class="['cell-btn',errors.has('name')?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('name')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">创建店铺</div>
       <div class="save-shop" v-if="shopForm.distributor_id"
-      :class="['cell-btn',errors.has('name')?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('name')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
 </div>

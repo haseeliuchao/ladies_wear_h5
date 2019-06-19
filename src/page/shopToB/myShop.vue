@@ -2,7 +2,6 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   .content{
-    min-height:100vh;
     background-color:#fff;
     color:#333;
   }
@@ -28,6 +27,9 @@
         width:3.1rem;
         padding:12px 0 ;
         font-size:15px;
+        &:last-child{
+          width:5rem;
+        }
         span{
           height:18px;
           margin-bottom:10px;
