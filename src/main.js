@@ -19,7 +19,7 @@ import wxShare from '@/utils/wxShare'
 
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import {
-  getSignature,
+  getShopInfo,
 } from '@/service/getData';
 import {
   getLocalStorage,
