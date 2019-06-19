@@ -1339,7 +1339,7 @@ methods: {
       
     },
     beforeRouteLeave(to, from, next){
-      if(to.name ==='index' ){
+      if(to.name ==='loginBlank' ){
         next({name: 'indexToc'});
       }else {
         next(); // 注意：这边next必须要写
