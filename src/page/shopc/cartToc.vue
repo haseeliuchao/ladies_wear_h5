@@ -525,7 +525,7 @@
         let Selectedstr = '';
         this.cartList.map(item => {
           if (item.item_status === 1 && item.checked) {
-            SelectedList.push(item.shopping_cart_id)
+            SelectedList.push(item.id)
           }
         })
         Selectedstr=SelectedList.join(",");
@@ -546,7 +546,7 @@
         let Selectedstr = '';
         this.cartList.map(item => {
           if (item.item_status === 1 && item.checked) {
-            SelectedList.push(item.shopping_cart_id)
+            SelectedList.push(item.id)
           }
         })
         Selectedstr=SelectedList.join(",");
@@ -592,7 +592,7 @@
           return;
         }
         let params = {
-            shopping_cart_id: item.shopping_cart_id,
+            id: item.id,
             num:item.num
         }
         this.computedTotalFee();
