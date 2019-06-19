@@ -896,6 +896,7 @@ import {
         }else{
           confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
           shopping_cart_ids:JSON.stringify({id:this.$route.query.id,number:this.$route.query.number,distributor_id:this.$route.query.distributor_id}),
+          distributor_id:this.$route.query.distributor_id,
           checkout_type:this.$route.query.checkout_type
         })
         }
