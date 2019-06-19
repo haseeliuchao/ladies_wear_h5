@@ -962,13 +962,15 @@ import {
         payData=await payGetData({
           shopping_cart_ids:this.$route.query.Selectedstr,
           checkout_type:this.$route.query.checkout_type,
+          distributor_id:this.$route.query.distributor_id,
           token:Data.data,
           consignee_id:this.consignee_id
         })
         }else{
           payData=await payGetData({
           shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
-          number:this.$route.query.number}),
+          number:this.$route.query.number,distributor_id:this.$route.query.distributor_id}),
+          distributor_id:this.$route.query.distributor_id,
           checkout_type:this.$route.query.checkout_type,
           token:Data.data,
           consignee_id:this.consignee_id
