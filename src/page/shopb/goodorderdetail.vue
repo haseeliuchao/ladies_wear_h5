@@ -455,7 +455,7 @@
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
                   <div @click= "()=>$router.push('/product/'+item.item_id)">
-                    <img :src="item.item_img">
+                    <img v-lazy="item.item_img+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>

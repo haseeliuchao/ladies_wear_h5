@@ -722,7 +722,7 @@
               <div class="order-product-list" v-if="confirmSelectedProduct">
                 <div class="order-product-item" v-for="(item,index) in confirmSelectedProduct.item_info_list" :key="index">
                   <div>
-                    <img :src="item.item_img">
+                    <img v-lazy="item.item_img+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}   尺寸 {{item.size}}</p>
