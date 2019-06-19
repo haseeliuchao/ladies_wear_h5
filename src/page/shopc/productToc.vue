@@ -1340,7 +1340,7 @@ methods: {
     },
     beforeRouteLeave(to, from, next){
       if(to.name ==='loginBlank' ){
-        next({name: 'indexToc'});
+        next({path: 'indexToc/'+this.$route.query.distributor_id+''});
       }else {
         next(); // 注意：这边next必须要写
       }
