@@ -104,17 +104,8 @@ router.beforeEach((to,from,next)=>{
     document.title = to.meta.Title
   }
   routerindex++;
-  const foo = async () => { 
-    let wxData = await getSignature({
-      url: BASE64.encoder(location.href.split("#")[0])
-  });
-  if(wxData==10000){
-    setSessionStorage('wxData',JSON.stringify(wxData.data))
-  }
-  } 
-  if(routerindex==1&&isWeiXin('code')){
-    // foo()
-  }
+  
+  
   var shareImgurl='';
   if(to.meta.imgUrl==undefined){
     shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
@@ -134,6 +125,19 @@ router.beforeEach((to,from,next)=>{
               unicodestr += String.fromCharCode(unicode[i]);
           }
     }
+
+    const getshop = async () => { 
+      let ShopInfo = await getShopInfo({
+        distributor_id: unicodestr.split("=")[1]
+    });
+      if(ShopInfo.code==10000){
+        setSessionStorage('shopInfodata',JSON.stringify(ShopInfo.data))
+      }
+    }
+    if(routerindex==1&&isWeiXin('code')&&unicodestr.indexOf('distributor_id')!=-1){
+      getshop()
+    }
+
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
         next({path: '/index'});
     }else{

@@ -6,16 +6,6 @@ import {
     getSignature,
   } from '@/service/getData';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
-    // let wxData={};
-    // if(isWeiXin('code')){
-    // wxData = JSON.parse(getSessionStorage("wxData"));
-    // if(wxData==null||wxData==undefined){
-    //     return
-    // }
-    // }else{
-    //     return
-    // }
-
     const foo= async () =>{
         let Data = await getSignature({
             url: BASE64.encoder(location.href.split("#")[0])
