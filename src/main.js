@@ -100,9 +100,7 @@ const config = {
 
 var routerindex=0
 router.beforeEach((to,from,next)=>{
-  if (to.meta.Title) {
-    document.title = to.meta.Title
-  }
+  
   routerindex++;
   
   
@@ -132,12 +130,15 @@ router.beforeEach((to,from,next)=>{
     });
       if(ShopInfo.code==10000){
         setSessionStorage('shopInfodata',JSON.stringify(ShopInfo.data))
+        to.meta.Title=ShopInfo.data.title;
       }
     }
     if(routerindex==1&&isWeiXin('code')&&unicodestr.indexOf('distributor_id')!=-1){
       getshop()
     }
-
+    if (to.meta.Title) {
+      document.title = to.meta.Title
+    }
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
         next({path: '/index'});
     }else{
