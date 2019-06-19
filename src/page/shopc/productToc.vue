@@ -1336,7 +1336,14 @@ methods: {
     },
     mounted: function () {
       this.initData();
-        
+      
+    },
+    beforeRouteLeave(to, from, next){
+      if(to.name ==='index' ){
+        next({name: 'indexToc'});
+      }else {
+        next(); // 注意：这边next必须要写
+      }
     }
   }
 
