@@ -727,7 +727,7 @@
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}   尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100|TwoNum}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;" v-if="item.item_price">{{item.item_price/100|TwoNum}}</em></strong>
                         <span>x{{item.num}}</span>
                       </p>
                     </div>
@@ -742,9 +742,9 @@
 
 
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
-                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.total_item_price">{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.post_discount_price&&confirmSelectedProduct.post_fee">{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0&&confirmSelectedProduct.post_discount_price"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100|TwoNum}}</em></strong></p>
               </div>
             </div>
           </div>
@@ -762,7 +762,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><span>&yen;</span><em style="font-size:18px;">{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
+      <span>合计：<strong><span>&yen;</span><em style="font-size:18px;" v-if="confirmSelectedProduct.pay_price">{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
       <div class="payBtn" @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
@@ -840,14 +840,17 @@ import {
         totalFee: 0.00,
         paymentPassword: null,
         PaymentNo: null,
-        confirmSelectedProduct: {},
+        confirmSelectedProduct: {
+
+        },
         addressData: null,
         visiblePopup: {
           paymentContainerVisible: false,
           couponVisible: false,
           selectedAdressVisible: false
         },
-        consignee_id:null
+        consignee_id:null,
+
       };
     },
 
