@@ -28,8 +28,11 @@
             width:auto;
       }
       .content {
-        width: 70%;
+        width: 7rem;
         @include placeholderColor($gray);
+        input{
+          line-height:24px;
+        }
         input,textarea {
           width: 100%;
           border: none;
@@ -143,28 +146,28 @@
         <div class="cell-from-item">
           <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" name="name" v-focus v-validate.initial="'required'"  v-model="addressForm.name" id="name">
+            <input type="text" name="name" v-focus v-validate="'required'"  v-model="addressForm.name" id="name">
           </div>
         </div>
         <div class="cell-from-item">
           <label for="phone"><span class="title">手机</span></label>
-          <div class="content" style="width:33%;">
+          <div class="content">
             <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone">
           </div>
-          <div>
+          <div style="position:absolute;right:.3rem">
             <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
           </div>
         </div>
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
           <label for="city"><span class="title">选择城市</span></label>
           <div class="content">
-            <input type="text" name="city" readonly="readonly" v-validate.initial="'required'" :value="addressForm.province + addressForm.city + addressForm.area"  placeholder="" id="city">
+            <input type="text" name="city" readonly="readonly" v-validate="'required'" :value="addressForm.province + addressForm.city + addressForm.area"  placeholder="" id="city">
           </div>
         </div>
         <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
           <label for="address"><span class="title">详细地址</span></label>
           <div class="content" style="margin-top:16px;">
-            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate.initial="'required'" v-model="addressForm.address" id="address"></textarea>
+            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate="'required'" v-model="addressForm.address" id="address"></textarea>
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
@@ -176,7 +179,7 @@
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
       <div  class="save-address" 
-       :class="['cell-btn',errors.has('name')||errors.has('mobile')||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
+       :class="['cell-btn',errors.has('mobile')||errors.has('name')||addressForm.phone.length==0||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
       @click= "saveAddress">保存</div>
     </div>
     <div>

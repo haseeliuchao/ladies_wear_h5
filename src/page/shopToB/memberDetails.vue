@@ -185,7 +185,7 @@
             <div class="setNick-con">
                 <h2 v-if="!memberData.nick_note">设置备注</h2>
                 <h2 v-if="memberData.nick_note">修改备注</h2>
-                <input type="text" v-model="memberData.nick_note" placeholder="请输入备注">
+                <input type="text" v-model="nick_note" placeholder="请输入备注">
                 <div class="popBtn">
                   <span @click="()=>{popupVisible=false}">取消</span>
                   <span @click="updNick">确认</span>
