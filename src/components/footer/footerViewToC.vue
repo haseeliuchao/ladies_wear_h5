@@ -71,8 +71,9 @@
   </ul>
 </template>
 <script>
-
-
+    import {
+    getSessionStorage,
+  } from '@/utils/mixin';
   export default {
     props:{
         distributorId:{
