@@ -88,7 +88,7 @@
             <load-more style="width:100%;" v-if="$route.name=='indexToC'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push({path: '/productToc/'+item.item_id,query: {distributor_id:$route.params.distributor_id}})">
                   <img v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="">
                   <div class="prod-info">
                     <p class="prod-title">{{item.item_title}}</p>
