@@ -211,7 +211,7 @@
     },
     beforeRouteLeave(to, from, next){
       if(to.name ==='loginBlank' ){
-        
+        next({path: '/indexToc/'+this.$route.params.distributor_id+''});
       }else {
         next();
       }
