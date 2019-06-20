@@ -221,6 +221,7 @@
             .order-product-item {
               padding: $padding;
               width: 100%;
+              border-bottom: 1px solid #e4e4e4;
               >div {
                 @include flexbox(flex-start,
                 flex-start,
@@ -277,10 +278,9 @@
           .order-sku {
             background: #fff;
             padding: 8px $padding;
-            text-align: right;
+
             font-size: $subtitle;
-            // border-bottom: 1px solid #eee;
-            // color: #333;
+          
             span{
               font-size: 15px;
               color: #333;
@@ -348,7 +348,7 @@
         <div class="all-order" v-if="goodorderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in goodorderList" :key="index">
-              <div class="order-top" @click= "$router.push(`/order/${item.order_code}`)">
+              <div class="order-top" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>
@@ -358,7 +358,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click= "$router.push(`/order/${item.order_code}`)"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
+              <div class="order-product-list" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
                 <div class="order-product-item">
                   <div>
                     <img v-lazy="itemdetail.item_img+'_190x190.jpg'">
@@ -366,24 +366,31 @@
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{itemdetail.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{itemdetail.item_price/100.00|topricenext}}</em></strong>
+                        <strong><em style="font-size:16px;">¥{{itemdetail.item_price/100|TwoNum}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="order-sku" @click= "$router.push(`/order/${item.order_code}`)">
-                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
-                <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
+              <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+                <span style="font-size:14px;">共{{totalNum}}件,</span>
+                <strong style="color:#333;font-size:15px;"><em>实付：</em><em>¥{{item.pay_price/100|TwoNum}}</em></strong>
+                <span style="color:#999;font-size:13px;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
               </div>
-              <div class="order-btn-group">
+
+              <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
+                <strong style="font-size:15px;"><em>利润：¥{{item.post_fee/100|TwoNum}}</em></strong>
+              </div>
+
+
+              <!-- <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click= "cancelOrder(item)">取消订单</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click= "tipSend">提醒发货</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:item.order_code}})">查看物流</span>
                 <span class="payment" @click= "payment(item)"   v-if="item.order_status===1">立即支付</span>
                 <span class="payment" @click= "finishOrder(item)"   v-if="item.order_status===3">确认收货</span>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -50,6 +50,7 @@ const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
 /* shopb */
 const Goodslist = () =>  import ('page/shopb/goodslist')
 const GoodorderList = () =>  import ('page/shopb/goodorderList')
+const Goodorderdetail = () =>  import ('page/shopb/goodorderdetail')
 const Goodedit = () =>  import ('page/shopb/goodedit')
 /* shopb */
 
@@ -405,11 +406,19 @@ const appRouter = {
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
-            },
+            }
+            ,
             {
                 path: '/goodslist/:distributor_id',
                 name: 'goodslist',
                 component: Goodslist,
+                meta: { keepAlive: false }
+            }
+            ,
+            {
+                path: '/goodorderdetail/::OrderNo',
+                name: 'goodorderdetail',
+                component: Goodorderdetail,
                 meta: { keepAlive: false }
             }
             ,
@@ -421,7 +430,7 @@ const appRouter = {
             }
             ,
             {
-                path: '/goodorderList/:distributor_id',
+                path: '/goodorderList/:tab',
                 name: 'goodorderList',
                 component: GoodorderList,
                 meta: { keepAlive: false }
