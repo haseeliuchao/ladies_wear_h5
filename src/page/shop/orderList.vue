@@ -379,7 +379,7 @@
         <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
+              <div class="order-top" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status,tab:this.$route.params.tab}})">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>
@@ -390,7 +390,7 @@
                 </div>
               </div>
               <!-- {path: '/order/${item.order_code}',query: {order_status:item.order_status}} -->
-              <div class="order-product-list" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})"  v-for="(itemall,index) in item.item_map_list" :key="index"  >
+              <div class="order-product-list" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status,tab:this.$route.params.tab}})"  v-for="(itemall,index) in item.item_map_list" :key="index"  >
                
                <div class="order-product-item" >
                   <div> 
@@ -403,7 +403,7 @@
                </div>
 
               </div>
-              <div class="order-sku" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
+              <div class="order-sku" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status,tab:this.$route.params.tab}})">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
