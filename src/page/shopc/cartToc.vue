@@ -537,9 +537,15 @@
           shopping_cart_item_ids: Selectedstr,
           distributor_id:this.$route.params.distributor_id
         }).then(response => {
-          // this.$router.push('/createOrder');
-          // this.onRefreshCallback();
-          this.initData();
+         if(response.code==10000){
+           this.initData();
+        }else{
+          Toast({
+                  message: response.msg
+               })
+          return;
+        }
+          
         })
         
       },
