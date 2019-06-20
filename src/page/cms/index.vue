@@ -324,7 +324,7 @@
           <div class="activity-manage">
             <div class="activity-list" v-for="(item,index) in cmsDataTypeads" :key="index">
               <!-- <a :href="item.http_url"> -->
-                <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
+                <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
               <!-- </a> -->
             </div>
           </div>
@@ -334,14 +334,14 @@
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
                 <!-- <a :href="item.http_url"> -->
-                  <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
+                  <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
                 <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-                <img  v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
+                <img  v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
               </div>
             </div>
           </div>
