@@ -28,6 +28,7 @@ const Cart = () =>  import ('page/shop/cart')
 const CartToc = () =>  import ('page/shopc/cartToc')
 const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
+const OrderToc = () => import ('page/shopc/orderToc')
 const OrderRusult = () => import ('page/shop/orderRusult')
 const OrderList = () => import ('page/shop/orderList')
 const OrderListToc = () => import ('page/shopc/orderListToc')
@@ -227,6 +228,13 @@ const appRouter = {
                 path: '/orderListToc/:tab',
                 name: 'orderListToc',
                 component: OrderListToc,
+                meta: { keepAlive: false}
+            }
+            ,
+            {
+                path: '/orderToc/:OrderNo',
+                name: 'orderToc',
+                component: OrderToc,
                 meta: { keepAlive: false}
             }
             ,

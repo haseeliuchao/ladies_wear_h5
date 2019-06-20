@@ -84,6 +84,100 @@
   }
 
   .my-order {
+    .ordertop-status{
+      width: 10rem;
+      height: 100px;
+      background: -webkit-gradient(linear, left 0, right 0, from(#ff2741), to(#ff5527));
+      @include flexbox(start,
+      center,
+      row,
+      nowrap);
+      p{
+         width: 60%;font-size: 16px;
+         margin-left: .6rem;
+         color: #fff;
+         line-height: 22px;
+      }
+      
+    }
+    .ordertop-address{
+      padding: $padding;
+      background: #fff;
+      margin-top: $margin;
+      color: #333;
+      .address-title{
+        font-size: 16px;
+        margin-bottom: $margin
+      }
+      .address-username{
+        font-size: 14px;
+        line-height: 25px;
+      }
+      .address-text{
+        font-size: 13px;
+        line-height: 18px;
+      }
+    }
+    .order-product-detail{
+           padding: 6px 10px 10px;
+           background: #fff;
+           p{
+             @include flexbox(space-between,
+              center,
+              row,
+              nowrap);
+              font-size: 15px;
+             line-height: 26px;
+              strong{
+                      font-size: 14px;
+                      span{
+                        font-weight:bold;
+                        font-size: 12px;
+                        color: $red;
+                        
+                      }
+                      em{
+                        color: $red;
+                        font-style: normal
+                      }
+              }
+           }
+           .order-product-detailone{
+             color: #333
+           }
+           .order-product-detailtwo{
+             color: #666;
+             strong{
+                
+                      span{
+                       
+                        color: #666;
+                        
+                      }
+                      em{
+                        color: #666;
+                      
+                      }
+              }
+           }
+           .order-btn-group {
+            @include flexbox(flex-end,
+            center,
+            row,
+            nowrap);
+            padding: 10px 0 0;
+            
+            >span {
+              padding: 4px 10px;
+              color: $red;
+              font-size: 14px;
+              border: 1px solid $red;
+              border-radius: 3px;
+              margin-left: 15px;
+            }
+          }
+          }
+
     .my-header {
       padding: $padding;
       background: #fff;
@@ -118,7 +212,7 @@
     .topnav {
       display: flex;
       width: 9rem;
-      background: #f2f2f2;
+     
       flex: 1;
       justify-content: space-between;
       align-items: center;
@@ -175,7 +269,7 @@
         }
       }
       .all-order {
-        background: #f5f5f5;
+      
       }
       .order-list {
         // background: #fff;
@@ -183,12 +277,10 @@
         .order-item {
           margin-top: 10px;
           background: #fff;
-          width: 9.4rem;
-          margin-left: .3rem;
-          border-radius: 6px;
+          width: 10rem;
           .order-top {
             padding: $padding;
-            border-bottom: 1px solid #e4e4e4;
+            // border-bottom: 1px solid #e4e4e4;
             @include flexbox(space-between,
             center,
             row,
@@ -201,7 +293,7 @@
                 vertical-align: bottom;
               }
               span {
-                font-size: 14px;
+                font-size: 15px;
                 color: #666;
                 // margin-left: 5px;
               }
@@ -209,7 +301,7 @@
             .right {
               .order-status {
                 color: $red;
-                font-size: 14px;
+                font-size: 15px;
               }
             }
           }
@@ -218,15 +310,17 @@
             flex-start,
             column,
             wrap);
+            border-bottom: 1px solid #e4e4e4;
             .order-product-item {
               padding: $padding;
               width: 100%;
               >div {
-                @include flexbox(flex-start,
+                @include flexbox(flex-end,
                 flex-start,
                 row,
                 nowrap);
                 width: 100%;
+                padding: 0px;
                 img {
                   max-width: 90px;
                   max-height: 90px;
@@ -249,6 +343,7 @@
                         
                       }
                       em{
+                        font-size:16px;
                         color: $red;
                         font-style: normal
                       }
@@ -274,6 +369,7 @@
               }
             }
           }
+          
           .order-sku {
             background: #fff;
             padding: 8px $padding;
@@ -309,13 +405,14 @@
             row,
             nowrap);
             padding: 5px $padding 16px;
+            width: 10rem;
             >span {
               padding: 4px 10px;
               color: $red;
-              font-size: 14px;
+              font-size: 13px;
               border: 1px solid $red;
               border-radius: 3px;
-              margin-left: 15px;
+              margin: 5px 0 5px 15px;
             }
           }
         }
@@ -327,126 +424,154 @@
 
 <template>
   <div class="my-order">
-    <div class="topnav">
-      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">全部</span>
-      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待付款</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">待发货</span>
-      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">待收货</span>
-      <span @click.stop.prevent="switchTabs(4)" :class="{'active':active===4}">已完成</span>
-      <span @click.stop.prevent="switchTabs(5)" :class="{'active':active===5}">已关闭</span>
-      <div id="loadingbar" :style="active===0 ? 'left:-1%' : active===1 ?  'left:14%' : active===2 ?'left:32%' : active===3 ? 'left:51%' : active===4 ? 'left:69%' : 'left: 87%'"></div>
+    <div class="ordertop-status">
+         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">查看订单</em></p>
+         <p v-if="orderDetail.order_status===2">等待卖家发货</p>
+         <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
+         <p v-if="orderDetail.order_status===4">订单已完成</p>
+         <p v-if="orderDetail.order_status===5">订单已关闭</p>
+         <img v-if="orderDetail.order_status===1" src="~jd/images/order_daifu.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===2" src="~jd/images/order_daifa.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===3" src="~jd/images/order_daishou.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===4" src="~jd/images/order_wancheng.png" style="height:48px;">
+         <img v-if="orderDetail.order_status===5" src="~jd/images/order_guanbi.png" style="height:48px;">
     </div>
-    <div class="order-container">
-      <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
-              ref="indexRusultloadMore"> -->
-              <!--  -->
+    <div class="ordertop-address">
+      <p class="address-title">收货地址</p>
+      <p class="address-username">{{orderDetail.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.consignee_phone}}</em></p>
+      <p class="address-text">{{orderDetail.consignee_address}}</p>
+    </div>
 
-      <load-more style="width:100%;" v-if="$route.name=='orderListToc'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
-        :loadMoreIconVisible="false" ref="orderLoadmore">
-        <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
-          slot="refresh-spinner">更新中...</span>
-        <!-- 全部订单 -->
-        <div class="all-order" v-if="orderList!=''">
+
+    <div class="order-container">
+        <div class="all-order">
           <div class="order-list">
-            <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top" @click= "$router.push({path: '/orderToc/${item.order_code}',query: {distributor_id:distributor_id:$route.query.distributor_id}})">
+            <div class="order-item">
+              <div class="order-top">
                 <div class="left">
-                  <span>订单编号：{{item.order_code}}</span>
-                </div>
-                <div class="right">
-                  <div class="order-status">
-                    <span>{{item.order_status_str}}</span>
-                  </div>
+                  <span>商品信息</span>
                 </div>
               </div>
-              <div class="order-product-list" @click= "$router.push({path: '/orderToc/${item.order_code}',query: {distributor_id:distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
-                <div class="order-product-item">
-
-                  <div>
-                    <img v-lazy="itemdetail.item_img+'_190x190.jpg'">
+              <div class="order-product-list">
+                <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
+                  <div @click= "()=>$router.push('/product/'+item.item_id)">
+                    <img :src="item.item_img">
                     <div class="product-info">
-                      <p class="prod-name">{{itemdetail.item_title}}</p>
-                      <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
+                      <p class="prod-name">{{item.item_title}}</p>
+                      <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{itemdetail.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{itemdetail.item_price/100.00|topricenext}}</em></strong>
-                        <span>x{{itemdetail.num}}</span>
+                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
+                        <span>x{{item.num}}</span>
                       </p>
                     </div>
                   </div>
+                <div class="order-btn-group">
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==2">售后成功</span>
+                <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==3">售后驳回</span>
                 </div>
+                </div>
+                
+                <!-- <div class="order-btn-group">
+                <span style="color:#999;border:1px solid #999" class="payment">售后成功</span>
+            
+                </div> -->
               </div>
-              <div class="order-sku" @click= "$router.push(`/order/${item.order_code}`)">
-                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
-                <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
-              </div>
-              <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click= "cancelOrder(item)">取消订单</span>
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click= "tipSend">提醒发货</span>
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:item.order_code}})">查看物流</span>
-                <span class="payment" @click= "payment(item)"   v-if="item.order_status===1">立即支付</span>
-                <span class="payment" @click= "finishOrder(item)"   v-if="item.order_status===3">确认收货</span>
-              </div>
+              
             </div>
           </div>
         </div>
-        
-
-        <!-- 没有订单 -->
-        <div class="order-nomore-tip" v-if="orderList==''">
-          <i></i>
-        </div>
-        <!-- 没有订单 -->
-      </load-more>
     </div>
-    <footerViewToC :distributorId='$route.query.distributor_id'/>
+    <div class="order-product-detail">
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
+        </div>
+
+        <div class="order-product-detail" style="margin-top:10px;margin-bottom:90px">
+                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
+                <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
+        <div class="order-btn-group">
+                <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click= "cancelOrder(orderDetail)">取消订单</span>
+                <span v-if="orderDetail.order_status===1" class="payment" @click= "payment(orderDetail)">立即支付</span>
+                <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
+                <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
+                </div>
+        </div>
   </div>
 </template>
 
 <script>
- import footerViewToC from 'component/footer/footerViewToC';
   import {
-    getOrderList,
-    payDirect
+    getOrderDetail,payDirect
   } from '@/service/getData';
-  import LoadMore from 'common/loadMore';
+  import {
+    getLocalStorage,
+    setLocalStorage
+  } from '@/utils/mixin';
   import {
     Toast,MessageBox
   } from 'mint-ui'
   export default {
     data() {
       return {
-        commad: getOrderList,
+        // commad: getOrderDetail,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false
         },
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
-        params: {
-          page_size: 10,
-          current_page: 1,
-          distributor_id:this.$route.query.distributor_id,
-          order_status:null
+        orderDetail: {
         },
-        orderList: [],
-        active: null,
-        totalNum:null,
-        orderListDetail:[],
-        orderListDetailin:[]
+        active: null, 
+        countDownTime:null,
+        countDown:null
       };
     },
 
     watch: {},
 
     components: {
-      footerViewToC,
-      LoadMore
+      // LoadMore
     },
 
     computed: {},
 
     methods: {
-      async payment(item) {
+      async initData() {
+        // this.commentParam.ProductNo = this.$route.params.id;
+        //  console.log(window.location.href)
+        let Data = await getOrderDetail({
+         order_code: this.$route.params.OrderNo,
+         distributor_id:this.$route.query.distributor_id
+        });
+        if(Data.code!=10000){
+          Toast({
+            message: Data.msg,
+            position: 'bottom'
+          })
+          return
+        }
+        this.orderDetail=Data.data
+        this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime()+86400000);
+        this.countDown=this.countDownTime-parseInt(new Date().getTime());
+        let times = setInterval(() => {
+          let that=this;
+          that.countDown=that.countDownTime-parseInt(new Date().getTime());
+          if(that.countDown<=0){
+            clearInterval(times);
+            that.$router.push('/orderList/0')
+          }
+        }, 1000)
+        
+
+        setLocalStorage('salesList',this.orderDetail)
+        // this.orderDetail.orderDetailList=Data.data
+      },
+       async payment(item) {
         let payData = await payDirect({
           order_code:item.order_code,
           distributor_id:this.$route.query.distributor_id
@@ -480,8 +605,9 @@
                         that.$router.push({path:'/order/'+data.order_code+''})
                     }
                 }); 
-      },
-      finishOrder(item) { //确认收货
+      },  
+
+       finishOrder(item) { //确认收货
          MessageBox.confirm('', { 
             message: '确定已经收到货物了吗?', 
             title: '',
@@ -491,14 +617,14 @@
             if (action == 'confirm') {     //确认的回调
               this.$store.dispatch('FinishOrder', {
                 order_code: item.order_code,
-                distributor_id:this.$route.query.distributor_id,
+                distributor_id:this.$route.query.distributor_id
               }).then(response => {
                 if(response.code!=10000){
                   Toast({
                   message: response.msg
                   })
                 }else{
-                this.onRefreshCallback()
+                 this.initData()
                 }
               })
             }
@@ -506,8 +632,6 @@
             if (err == 'cancel') {     //取消的回调
             } 
           });
-
-        
       },
       cancelOrder(item) { //取消订单
         this.$store.dispatch('CancelOrder', {
@@ -517,73 +641,8 @@
           Toast({
             message: "订单已取消"
           })
-          this.onRefreshCallback()
+          this.initData()
         })
-      },
-      tipSend(){
-        Toast({
-            message: "提醒卖家发货成功"
-          })
-      },
-      // 提醒卖家发货成功
-      async onRefreshCallback() { //下拉刷新
-        this.params.page_size = 10;
-        this.params.current_page = 1;
-        this.orderList = [];
-        this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
-      },
-      switchTabs(Id) {
-        if (this.active === Number(Id)) return;
-        this.active = Id;
-        switch (Number(this.active)) {
-          case 0: //全部订单
-            this.params.order_status = null;
-            break;
-          case 1: //待付款
-            this.params.order_status = 1;
-            break;
-          case 2: //待发货
-            this.params.order_status = 2;
-            break;
-          case 3: //待收货
-            this.params.order_status = 3;
-            break;
-          case 4: //已完成
-            this.params.order_status = 4;
-            break;
-          case 5: //已关闭
-            this.params.order_status = 5;
-            break;
-          default: //其他
-            throw new Error('未知TabId')
-            break
-        }
-        this.onRefreshCallback();
-      },
-      payByWallet() {
-        this.$store.dispatch('PayByWallet', {
-          PaymentNo: this.currentOrder.orderInfo.OrdertNo,
-          PaymentPassword: this.paymentPassword
-        }).then(response => {
-          if (response.Code === 0) {
-            Toast({
-              message: response.Message
-            });
-            this.visiblePopup.paymentContainerVisible = false;
-            this.visiblePopup.paymentLoadingVisible = false;
-            setTimeout(() => {
-              this.onRefreshCallback();
-            }, 1000)
-          }
-        })
-      },
-      async infiniteCallback(response) { //加载更多订单
-        if (response.data.data.length > 0) {
-          response.data.data.map(i => {
-            // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
-            this.orderList.push(i)
-          })
-        }
       },
     },
     filters:{
@@ -592,12 +651,16 @@
         },
         topricenext(value){
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        },
+        countDownfun(mss){
+          let hours = Math.floor(mss / (1000 * 60 * 60));
+          let minutes = Math.floor((mss % (1000 * 60 * 60)) / (1000 * 60));
+          return hours + "小时" + minutes + "分钟";
         }
+
     },
     mounted: function () {
-      console.log(this.$route.name)
-      if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
-      this.switchTabs(0)
+      this.initData()
     }
   }
 

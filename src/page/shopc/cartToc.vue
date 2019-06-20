@@ -538,7 +538,8 @@
           distributor_id:this.$route.params.distributor_id
         }).then(response => {
           // this.$router.push('/createOrder');
-          this.onRefreshCallback();
+          // this.onRefreshCallback();
+          this.initData();
         })
         
       },
