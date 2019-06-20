@@ -366,7 +366,7 @@
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><em style="font-size:16px;">¥{{itemdetail.item_price/100|TwoNum}}</em></strong>
+                        <strong><em style="font-size:16px;">¥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
@@ -380,7 +380,7 @@
               </div>
 
               <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
-                <strong style="font-size:15px;"><em>利润：¥{{item.post_fee/100|TwoNum}}</em></strong>
+                <strong style="font-size:15px;"><em>利润：¥{{item.order_profit/100|TwoNum}}</em></strong>
               </div>
 
 
