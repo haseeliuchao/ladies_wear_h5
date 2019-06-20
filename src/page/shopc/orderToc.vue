@@ -562,9 +562,9 @@
         let times = setInterval(() => {
           let that=this;
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
-          if(that.countDown<=0&&this.orderDetail.order_status==1){
+          if(that.countDown<=0&&that.orderDetail.order_status==1){
             clearInterval(times);
-            this.$router.push({path: '/orderListToc/0',query: {distributor_id:$route.query.distributor_id}})
+            that.$router.push({path: '/orderListToc/0',query: {distributor_id:this.$route.query.distributor_id}})
           }
         }, 1000)
         
@@ -603,7 +603,7 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        that.$router.push({path: '/orderToc/'+data.order_code,query: {distributor_id:$route.query.distributor_id}})
+                        that.$router.push({path: '/orderToc/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
                     }
                 }); 
       },  
