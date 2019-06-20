@@ -425,7 +425,7 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">查看订单</em></p>
+         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push(`/indexToC/${$route.query.distributor_id}`)" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push({path: '/orderListToc/1',query: {distributor_id:$route.query.distributor_id}}):false">查看订单</em></p>
          <p v-if="orderDetail.order_status===2">等待卖家发货</p>
          <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
          <p v-if="orderDetail.order_status===4">订单已完成</p>
@@ -438,8 +438,8 @@
     </div>
     <div class="ordertop-address">
       <p class="address-title">收货地址</p>
-      <p class="address-username">{{orderDetail.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.consignee_phone}}</em></p>
-      <p class="address-text">{{orderDetail.consignee_address}}</p>
+      <p class="address-username">{{orderDetail.order_shipments_b_o.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.order_shipments_b_o.consignee_phone}}</em></p>
+      <p class="address-text">{{orderDetail.order_shipments_b_o.consignee_province}} {{orderDetail.order_shipments_b_o.consignee_city}} {{orderDetail.order_shipments_b_o.consignee_area}} {{orderDetail.order_shipments_b_o.consignee_address}}</p>
     </div>
 
 
@@ -454,7 +454,7 @@
               </div>
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
-                  <div @click= "()=>$router.push('/product/'+item.item_id)">
+                  <div @click= "()=>$router.push({path:'/productToc/'+item.item_id,query: {distributor_id:$route.query.distributor_id}})">
                     <img :src="item.item_img">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
@@ -563,7 +563,7 @@
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
           if(that.countDown<=0){
             clearInterval(times);
-            that.$router.push('/orderList/0')
+            that.$router.push({path: '/orderListToc/0',query: {distributor_id:$route.query.distributor_id}})
           }
         }, 1000)
         
@@ -602,7 +602,7 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        that.$router.push({path:'/order/'+data.order_code+''})
+                        that.$router.push({path: '/orderToc/'+data.order_code,query: {distributor_id:$route.query.distributor_id}})
                     }
                 }); 
       },  

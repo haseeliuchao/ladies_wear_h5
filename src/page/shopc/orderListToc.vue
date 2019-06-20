@@ -477,7 +477,7 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        that.$router.push({path:'/order/'+data.order_code+''})
+                        that.$router.push({path: '/orderToc/'+data.order_code,query: {distributor_id:$route.query.distributor_id}})
                     }
                 }); 
       },
