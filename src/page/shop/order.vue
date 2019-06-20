@@ -747,7 +747,14 @@
     },
     mounted: function () {
       this.initData();
-     
+    }
+    ,
+    beforeRouteLeave(to, from, next){
+      if(to.name ==='orderList' ){
+        next({path: '/orderList/'});
+      }else {
+        next();
+      }
     }
   }
 

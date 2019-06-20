@@ -628,6 +628,14 @@
       this.switchTabs(0)
       
     }
+    ,
+    beforeRouteLeave(to, from, next){
+      if(to.name !=='myhome' ){
+        next({path: '/myhome'});
+      }else {
+        next();
+      }
+    }
   }
 
 </script>
