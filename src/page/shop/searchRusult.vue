@@ -407,9 +407,9 @@
       <span @click= "changeQuery(searchParams.title)">搜索</span>
     </div>
     <!-- 配置搜索 -->
-    <div class="search-top" v-if="searchParams.advertising_id">
+    <div class="search-top" v-if="img_url&&img_url!=''">
       <div class="searchDeploy-box">
-        <img :src="this.img_url">
+        <img :src="img_url">
       </div>
     </div>
     <!-- 图片搜索 -->
