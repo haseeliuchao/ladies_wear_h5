@@ -630,7 +630,7 @@
     }
     ,
     beforeRouteLeave(to, from, next){
-      if(to.name !=='myhome' ){
+      if(to.name !=='myhome'&&to.name !=='order' ){
         next({path: '/myhome'});
       }else {
         next();
