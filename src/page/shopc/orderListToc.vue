@@ -424,7 +424,7 @@
         params: {
           page_size: 10,
           current_page: 1,
-          distributor_id:$route.query.distributor_id,
+          distributor_id:this.$route.query.distributor_id,
           order_status:null
         },
         orderList: [],
