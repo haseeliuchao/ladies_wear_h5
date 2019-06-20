@@ -176,7 +176,9 @@
       },
       async initData(){
         let res = await this.$store.dispatch('GetMemberList');
-        res.code!=10000?Toast({message:'访问接口失败'}):Toast({message:'访问接口成功'});
+        if(res.code!=10000){
+          Toast({message:'访问接口失败'})
+        }
         this.memberData = res.data;
         this.memberData.memberList = res.data.data;
       }

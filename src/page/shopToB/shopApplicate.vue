@@ -15,6 +15,9 @@
     @include flexbox(space-between,center,row,wrap);
     padding:0 .3rem;
     li{
+      display:flex;
+      justify-content:center;
+      align-items:center;
       width:50%;
       font-size:15px;
       color:#333;
@@ -22,10 +25,10 @@
       span{
         display:inline-block;
         text-align:center;
-        width:25px;
-        height:25px;
-        line-height:25px;
-        margin-right:.25rem;
+        width:22px;
+        height:22px;
+        line-height:22px;
+        margin-right:.1rem;
         font-family: "PingFang SC";
         font-size:20px;
         color:#fff;
