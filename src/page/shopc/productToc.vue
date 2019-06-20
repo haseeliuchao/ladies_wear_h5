@@ -1095,7 +1095,8 @@
   import BackHead from 'common/backHead';
   import wxapi from '@/utils/wxapi';
   import {
-    isWeiXin
+    isWeiXin,
+    setSessionStorage
   } from '@/utils/mixin';
 
   export default {
@@ -1336,7 +1337,7 @@ methods: {
     },
     mounted: function () {
       this.initData();
-      
+      setSessionStorage('distributorId',this.$route.query.distributor_id)
     },
     beforeRouteLeave(to, from, next){
       if(to.name ==='loginBlank' ){

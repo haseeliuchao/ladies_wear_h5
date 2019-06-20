@@ -184,7 +184,7 @@
 
 
    <div class="goodinfo">
-     <img v-lazy="goodeditdata.index_img_url+'_230x230.jpg'">
+     <img v-lazy="goodeditdata.index_img_url+'_190x190.jpg'">
      <div class="goodinfo-text">
        <p class="goodinfo-text-name">{{goodeditdata.title}}</p>
        <p class="goodinfo-text-fare">运费：¥5.00</p>

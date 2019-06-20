@@ -410,7 +410,7 @@
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
-                <img :src="item.item_url+'_230x230.jpg'" alt="">
+                <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
               </div>
               <div class="pd-info">
                 <div class="pd-title">
@@ -534,7 +534,8 @@
           position: 'bottom'
         });
         this.$store.dispatch('RemoveSelectedProduct', {
-          shopping_cart_ids: Selectedstr
+          shopping_cart_ids: Selectedstr,
+          distributor_id:this.$route.params.distributor_id
         }).then(response => {
           // this.$router.push('/createOrder');
           this.onRefreshCallback();
@@ -555,7 +556,7 @@
           position: 'center'
         });
 
-        this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
+        this.$router.push({path: '/createOrderToc',query: {Selectedstr:Selectedstr,checkout_type:1,distributor_id:this.$route.params.distributor_id}});
       },
       computedTotalFee() {
         let computedFee = 0,
