@@ -75,6 +75,10 @@ export const distributorItemDel = (params) => new Http().require({api: '/api/dis
 
 export const addProduct = (params) => new Http().require({api: '/api/distributor/spread/item',param:params}); //一键铺店
 
+export const lowerShelfgood = (params) => new Http().require({api: '/api/distributor/item/lowerShelf',param:params}); //商品下架
+
+export const upperShelfgood = (params) => new Http().require({api: '/api/distributor/item/upperShelf',param:params}); //商品上架
+
 export const getProductList = (params) => new Http().require({api: '/api/shop/GetProductList',param: params}); //获取
 
 export const selectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/add',param: params}); //获取

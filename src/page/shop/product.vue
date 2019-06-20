@@ -1148,7 +1148,7 @@
     <!-- 内容区 -->
 
     <!-- 底部导航栏 -->
-    <div class="cart-concern-fixed">
+    <div class="cart-concern-fixed" v-if="!$route.query.distributor_id">
       <div class="left">
         <div class="goods-part" style="padding: 5px 0;border-right: 1px solid #e4e4e4;" @click= "$router.push('/index')">
           <i></i>
@@ -1171,12 +1171,13 @@
       <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
     </div>
 
-    <!-- <div class="cart-shop-fixed">
-        <div>编辑</div>
-        <div>下架</div>
-        <div style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
+    <div class="cart-shop-fixed" v-if="$route.query.distributor_id">
+        <div @click= "()=>$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
+        <div @click= "lowerShelf()" v-if="!uppershow">下架</div>
+        <div @click= "upperShelf()" v-if="uppershow">上架</div>
+        <div @click= "()=>$router.push({path: '/product/'+item.item_id})" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
         <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
-    </div> -->
+    </div>
     <!-- 底部导航栏 -->
 
     <!-- 返回顶部 -->
@@ -1250,7 +1251,8 @@
         },
         addType:null,
         profit:0,
-        distributorId:null
+        distributorId:null,
+        uppershow:false
       };
     },
     created: function () {
@@ -1544,6 +1546,42 @@ methods: {
         this.profit=Data.data.kezuanshangxian;
         this.visiblePopup.addSuccess=true;
 
+       },
+       async lowerShelf(){
+         let Data = await lowerShelfgood({
+         distributor_item_id: this.$route.query.distributor_item_id
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else{
+             Toast({
+             message: Data.msg
+             })
+             return
+          }
+        }
+        Toast({
+             message: '下架成功'
+        })
+       },
+       async upperShelf(){
+         let Data = await upperShelfgood({
+         distributor_item_id: this.$route.query.distributor_item_id
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else{
+             Toast({
+             message: Data.msg
+             })
+             return
+          }
+        }
+        Toast({
+             message: '上架成功'
+        })
        },
 
 
