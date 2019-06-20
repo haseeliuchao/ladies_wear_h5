@@ -268,8 +268,8 @@
                 nowrap);
                 width: 100%;
                 img {
-                  max-width: 90px;
-                  max-height: 90px;
+                  max-width: 2.4rem;
+                  max-height: 2.4rem;
                   // border: 1px solid #eee;
                   border-radius: 6px;
                 }
@@ -308,6 +308,7 @@
                   .prodsku-info{
                     color: #666;
                     font-size: 12px;
+                    width: 6.2rem;
                   }
 
                 }
@@ -727,7 +728,7 @@
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}   尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;" v-if="item.item_price">{{item.item_price/100|TwoNum}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;" v-if="item.item_price>=0">{{item.item_price/100|TwoNum}}</em></strong>
                         <span>x{{item.num}}</span>
                       </p>
                     </div>
