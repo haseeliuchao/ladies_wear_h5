@@ -79,21 +79,29 @@
       height:100%;
     }
     .deploy-floor-l{
-      width:46%;
-      margin-right:.2rem;
+      width:41%;
       .deploy-item{
-        width:100%;
+        width:3.9rem;
         height:100%;
         border-radius: 6px;
         overflow: hidden;
+        border-radius: 6px 0 0 6px;
+        border-right: 1px solid #e4e4e4;
       }
     }
     .deploy-floor-r{
       .deploy-item{
-        width:100%;
+        width:5.5rem;
         height:48%;
-        border-radius: 6px;
         overflow: hidden;
+        &:last-child{
+          border-radius: 0 0 6px 0;
+          border-top: 1px solid #e4e4e4;
+        }
+        &:first-child{
+          border-radius: 0 6px 0 0;
+          border:none;
+        }
       }
      
 
