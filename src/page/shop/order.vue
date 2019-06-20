@@ -751,7 +751,7 @@
     ,
     beforeRouteLeave(to, from, next){
       if(to.name ==='orderList' ){
-        next({path: '/orderList/'});
+        next({path: '/orderList/'+this.$route.query.order_status});
       }else {
         next();
       }
