@@ -425,11 +425,11 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push('/index')" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">查看订单</em></p>
-         <p v-if="orderDetail.order_status===2">等待卖家发货</p>
-         <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
-         <p v-if="orderDetail.order_status===4">订单已完成</p>
-         <p v-if="orderDetail.order_status===5">订单已关闭</p>
+         <p v-if="orderDetail.order_status===1">等待买家付款</p>
+         <p v-if="orderDetail.order_status===2">等待供应商发货</p>
+         <p v-if="orderDetail.order_status===3">等待买家收货</p>
+         <p v-if="orderDetail.order_status===4">交易已完成</p>
+         <p v-if="orderDetail.order_status===5">订单已失效</p>
          <img v-if="orderDetail.order_status===1" src="~jd/images/order_daifu.png" style="height:48px;">
          <img v-if="orderDetail.order_status===2" src="~jd/images/order_daifa.png" style="height:48px;">
          <img v-if="orderDetail.order_status===3" src="~jd/images/order_daishou.png" style="height:48px;">
@@ -438,8 +438,8 @@
     </div>
     <div class="ordertop-address">
       <p class="address-title">收货地址</p>
-      <p class="address-username">{{orderDetail.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.consignee_phone}}</em></p>
-      <p class="address-text">{{orderDetail.consignee_address}}</p>
+      <p class="address-username">{{orderDetail.order_shipments_b_o.consignee_name}}<em style="margin-left:12px;font-size:12px;">{{orderDetail.order_shipments_b_o.consignee_phone}}</em></p>
+      <p class="address-text">{{orderDetail.order_shipments_b_o.consignee_province}} {{orderDetail.order_shipments_b_o.consignee_city}} {{orderDetail.order_shipments_b_o.consignee_area}} {{orderDetail.order_shipments_b_o.consignee_address}}</p>
     </div>
 
 
@@ -484,22 +484,22 @@
         </div>
     </div>
     <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_fee/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100|TwoNum}}</em></strong></p>
         </div>
 
         <div class="order-product-detail" style="margin-top:10px;margin-bottom:90px">
-                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.pay_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100|TwoNum}}</em></strong></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
-        <div class="order-btn-group">
+        <!-- <div class="order-btn-group">
                 <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click= "cancelOrder(orderDetail)">取消订单</span>
                 <span v-if="orderDetail.order_status===1" class="payment" @click= "payment(orderDetail)">立即支付</span>
                 <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
                 <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
-        </div>
+        </div> -->
   </div>
 </template>
 

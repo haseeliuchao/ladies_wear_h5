@@ -67,7 +67,7 @@
   /* 配置专题 */
   .deploy-floor{
     @include flexbox(space-between,center,row,nowrap);
-    height:210px;
+    height:5.4rem;
     background:#fff;
     padding:0px .3rem 15px;
     >div{
