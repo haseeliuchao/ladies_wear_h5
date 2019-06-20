@@ -624,12 +624,6 @@
         }
     },
     mounted: function () {
-      pushHistory()
-        window.onpopstate = (state) => {
-          console.log(state)
-        this.$router.push('/myhome')  //输入要返回的上一级路由地址
-        }
-
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0)
       

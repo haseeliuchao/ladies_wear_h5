@@ -218,14 +218,11 @@
         }
     },
     mounted: function () {
-      // if(isWeiXin('code')){
-      //   wxapi.wxRegister(this.wxRegCallback)
-      //   }
-      pushHistory()
-        window.onpopstate = (state) => {
-          console.log(state)
-        this.$router.push('/orderList/2')
-      }
+      // pushHistory()
+      //   window.onpopstate = (state) => {
+      //     console.log(state)
+      //   this.$router.push('/orderList/2')
+      // }
 
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
