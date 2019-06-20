@@ -1441,9 +1441,16 @@ methods: {
       },
       async initData() {
         this.cartnum = window.sessionStorage.cartnum!=undefined ? window.sessionStorage.cartnum:0;
-        let Data = await getProduct({
-         item_id: this.$route.params.id
-        });
+        let sandObj={}
+        if(this.$route.query.distributor_id){
+            sandObj={
+              item_id: this.$route.params.id,
+              distributor_id: this.$route.query.distributor_id
+            }
+        }else{
+          sandObj={item_id: this.$route.params.id}
+        }
+        let Data = await getProduct(sandObj);
         if(Data.code!=10000){
           Toast({
             message: Data.msg
