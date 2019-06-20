@@ -534,7 +534,8 @@
           position: 'bottom'
         });
         this.$store.dispatch('RemoveSelectedProduct', {
-          shopping_cart_ids: Selectedstr
+          shopping_cart_ids: Selectedstr,
+          distributor_id:this.$route.params.distributor_id
         }).then(response => {
           // this.$router.push('/createOrder');
           this.onRefreshCallback();
