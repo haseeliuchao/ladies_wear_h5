@@ -424,10 +424,7 @@
         params: {
           page_size: 10,
           current_page: 1,
-          // cancel_status: null,
-          // confirm_status: null,
-          // pay_status: null,
-          // finish_status: null
+          distributor_id:$route.query.distributor_id,
           order_status:null
         },
         orderList: [],
