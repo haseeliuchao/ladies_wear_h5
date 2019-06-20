@@ -1201,7 +1201,9 @@
     getShop,
     addProduct,
     getCommentList,
-    getShopInfo
+    getShopInfo,
+    lowerShelfgood,
+    upperShelfgood 
     // getRecommend
   } from '@/service/getData'
   // import LoadMore from 'common/loadMore';

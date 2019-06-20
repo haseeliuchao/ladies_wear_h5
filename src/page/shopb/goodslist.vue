@@ -309,11 +309,11 @@
                      .edit-btn{
                        position: relative;
                         .edit-pop{
-                         width: 3.6rem;
+                         width: 2.1rem;
                          height: 37px;
                          background: #666;
                          position: absolute;
-                         left: -3.9rem;
+                         left: -2.4rem;
                          top: -7px;
                          border-radius: 6px;
                          color: #fff;
