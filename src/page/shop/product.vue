@@ -1173,8 +1173,8 @@
 
     <div class="cart-shop-fixed" v-if="$route.query.distributor_id">
         <div @click= "()=>$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
-        <div @click= "lowerShelf()" v-if="!uppershow">下架</div>
-        <div @click= "upperShelf()" v-if="uppershow">上架</div>
+        <div @click= "lowerShelf(productInfo.item_status)" v-if="productInfo.item_status==1">下架</div>
+        <div @click= "upperShelf(productInfo.item_status)" v-if="productInfo.item_status!=1">上架</div>
         <div @click= "()=>$router.push({path: '/product/'+item.item_id})" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
         <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
     </div>
@@ -1549,7 +1549,7 @@ methods: {
         this.visiblePopup.addSuccess=true;
 
        },
-       async lowerShelf(){
+       async lowerShelf(state){
          let Data = await lowerShelfgood({
          distributor_item_id: this.$route.query.distributor_item_id
         });
@@ -1566,9 +1566,15 @@ methods: {
         Toast({
              message: '下架成功'
         })
-        this.uppershow=true;
+        this.productInfo.item_status=2;
        },
-       async upperShelf(){
+       async upperShelf(state){
+         if(state!=2){
+           Toast({
+             message: '该商品已售罄'
+             })
+             return
+         }
          let Data = await upperShelfgood({
          distributor_item_id: this.$route.query.distributor_item_id
         });
@@ -1585,7 +1591,7 @@ methods: {
         Toast({
              message: '上架成功'
         })
-        this.uppershow=false;
+        this.productInfo.item_status=1;
        },
 
 
