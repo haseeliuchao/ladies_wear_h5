@@ -556,12 +556,13 @@
           return
         }
         this.orderDetail=Data.data
+
         this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime()+86400000);
         this.countDown=this.countDownTime-parseInt(new Date().getTime());
         let times = setInterval(() => {
           let that=this;
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
-          if(that.countDown<=0){
+          if(that.countDown<=0&&this.orderDetail.order_status==1){
             clearInterval(times);
             that.$router.push({path: '/orderListToc/0',query: {distributor_id:$route.query.distributor_id}})
           }
@@ -655,7 +656,12 @@
         countDownfun(mss){
           let hours = Math.floor(mss / (1000 * 60 * 60));
           let minutes = Math.floor((mss % (1000 * 60 * 60)) / (1000 * 60));
-          return hours + "小时" + minutes + "分钟";
+          if(mss>0){
+            return hours + "小时" + minutes + "分钟";
+          }else{
+            return "0小时0分钟";
+          }
+          
         }
 
     },
