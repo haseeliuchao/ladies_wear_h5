@@ -534,7 +534,7 @@
           position: 'bottom'
         });
         this.$store.dispatch('RemoveSelectedProduct', {
-          shopping_cart_ids: Selectedstr,
+          shopping_cart_item_ids: Selectedstr,
           distributor_id:this.$route.params.distributor_id
         }).then(response => {
           // this.$router.push('/createOrder');
@@ -594,7 +594,7 @@
           return;
         }
         let params = {
-            id: item.id,
+            shopping_cart_item_id: item.id,
             num:item.num,
             distributor_id:this.$route.params.distributor_id
         }
