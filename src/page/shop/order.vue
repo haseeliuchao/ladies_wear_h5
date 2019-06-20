@@ -750,10 +750,10 @@
     }
     ,
     beforeRouteLeave(to, from, next){
-      if(to.name ==='orderList' ){
-        next({path: '/orderList/'+this.$route.query.order_status});
-      }else {
+      if(to.name !=='orderList' ){
         next();
+      }else {
+        next({path: '/orderList/'+this.$route.query.order_status});
       }
     }
   }
