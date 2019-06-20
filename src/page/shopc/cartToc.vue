@@ -624,6 +624,12 @@
         let Data = await this.$store.dispatch('GetSelectedProductList', {
           distributor_id:this.$route.params.distributor_id
         });
+        if(Data.code!=10000){
+          Toast({
+            message: Data.msg
+          })
+          return
+        }
         if(Data.data==undefined){
           this.cartList = [];
         }else{
