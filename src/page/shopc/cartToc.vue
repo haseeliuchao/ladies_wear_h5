@@ -595,7 +595,8 @@
         }
         let params = {
             id: item.id,
-            num:item.num
+            num:item.num,
+            distributor_id:this.$route.params.distributor_id
         }
         this.computedTotalFee();
         await this.$store.dispatch('UpdselectProduct', params)
