@@ -1564,6 +1564,7 @@ methods: {
         Toast({
              message: '下架成功'
         })
+        this.uppershow=true;
        },
        async upperShelf(){
          let Data = await upperShelfgood({
@@ -1582,6 +1583,7 @@ methods: {
         Toast({
              message: '上架成功'
         })
+        this.uppershow=false;
        },
 
 
