@@ -743,8 +743,8 @@
 
 
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.total_item_price">{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.post_fee">{{(confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.total_item_price>=0">{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.post_fee>=0">{{(confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0&&confirmSelectedProduct.post_discount_price"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100|TwoNum}}</em></strong></p>
               </div>
             </div>
@@ -763,7 +763,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><span>&yen;</span><em style="font-size:18px;" v-if="confirmSelectedProduct.pay_price">{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
+      <span>合计：<strong><span>&yen;</span><em style="font-size:18px;" v-if="confirmSelectedProduct.pay_price>=0">{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
       <div class="payBtn" @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
