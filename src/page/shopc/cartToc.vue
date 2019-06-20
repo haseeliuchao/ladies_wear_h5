@@ -555,7 +555,7 @@
           position: 'center'
         });
 
-        this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
+        this.$router.push({path: '/createOrderToc',query: {Selectedstr:Selectedstr,checkout_type:1}});
       },
       computedTotalFee() {
         let computedFee = 0,
