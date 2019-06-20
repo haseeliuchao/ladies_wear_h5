@@ -416,7 +416,7 @@ const appRouter = {
             }
             ,
             {
-                path: '/goodorderdetail/::OrderNo',
+                path: '/goodorderdetail/:OrderNo',
                 name: 'goodorderdetail',
                 component: Goodorderdetail,
                 meta: { keepAlive: false }
