@@ -564,7 +564,7 @@
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
           if(that.countDown<=0&&this.orderDetail.order_status==1){
             clearInterval(times);
-            that.$router.push({path: '/orderListToc/0',query: {distributor_id:$route.query.distributor_id}})
+            this.$router.push({path: '/orderListToc/0',query: {distributor_id:$route.query.distributor_id}})
           }
         }, 1000)
         
