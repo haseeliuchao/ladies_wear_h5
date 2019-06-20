@@ -397,7 +397,7 @@
         <!-- 没有订单 -->
       </load-more>
     </div>
-    <footerViewToC/>
+    <footerViewToC :distributorId='$route.query.distributor_id'/>
   </div>
 </template>
 
