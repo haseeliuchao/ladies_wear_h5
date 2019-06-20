@@ -1175,7 +1175,7 @@
         <div @click= "()=>$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
         <div @click= "lowerShelf(productInfo.item_status)" v-if="productInfo.item_status==1">下架</div>
         <div @click= "upperShelf(productInfo.item_status)" v-if="productInfo.item_status!=1">上架</div>
-        <div @click= "()=>$router.push({path: '/product/'+productInfo.item_id})" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
+        <div @click= "selfBuy" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
         <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
     </div>
     <!-- 底部导航栏 -->
@@ -1600,7 +1600,11 @@ methods: {
         })
         this.productInfo.item_status=1;
        },
-
+       selfBuy(){
+         this.$router.push({path: '/product/'+this.productInfo.item_id});
+         this.initData();
+       },
+       
 
       rmSome(arr, key) {
           let tempObj = {}
