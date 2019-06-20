@@ -374,12 +374,12 @@
                 </div>
               </div>
               <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
-                <span style="font-size:14px;">共{{totalNum}}件,</span>
+                <span style="font-size:14px;">共{{item.item_info_list.length}}件,</span>
                 <strong style="color:#333;font-size:15px;">合计：¥{{item.pay_price/100|TwoNum}}</strong>
                 <span style="color:#999;font-size:13px;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
               </div>
 
-              <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
+              <div class="order-sku" style="padding-top: 0px;padding-bottom: 16px;" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
                 <strong style="font-size:15px;"><em>利润：¥{{item.order_profit/100|TwoNum}}</em></strong>
               </div>
 
