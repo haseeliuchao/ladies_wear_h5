@@ -375,7 +375,7 @@
               </div>
               <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
                 <span style="font-size:14px;">共{{totalNum}}件,</span>
-                <strong style="color:#333;font-size:15px;"><em>实付：</em><em>¥{{item.pay_price/100|TwoNum}}</em></strong>
+                <strong style="color:#333;font-size:15px;">合计：¥{{item.pay_price/100|TwoNum}}</strong>
                 <span style="color:#999;font-size:13px;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
               </div>
 
