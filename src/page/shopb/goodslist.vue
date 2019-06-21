@@ -543,6 +543,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         screenTitle:null,
         screenPrice:null,
         screenQrcode:null,
+        screenScrollTop:null,
         actions: [{
               name: '发送好友',
               method : this.getCamera	// 调用methods中的函数
@@ -578,7 +579,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
-        window.scrollTop(0)
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
       },
@@ -620,6 +621,7 @@ Vue.component(Actionsheet.name, Actionsheet);
                   }
                   // canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
                   _this.screenUrl = canvas.toDataURL()
+                  document.documentElement.scrollTop = document.body.scrollTop = _this.screenScrollTop;
               });
           },1000)
  
@@ -703,8 +705,7 @@ Vue.component(Actionsheet.name, Actionsheet);
 
         var _this =this
           window.addEventListener('scroll',function(){
-              var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-              console.log(scrollTop)
+              this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
               },true)
       },
       
