@@ -113,8 +113,8 @@
       <li @click="()=>$router.push({path:'/memberDetails',query:{distributor_id:$route.query.distributor_id}})" v-for="(item,index) in memberData.memberList" :key="index">
         <img  :src="item.head_img" alt="">
         <div>
-          <p v-if="!memberData.nick_note">{{item.nick}}</p>
-          <p v-if="memberData.nick_note">{{item.nick_note}}</p>
+          <p v-if="!item.nick_note">{{item.nick}}</p>
+          <p v-if="item.nick_note">{{item.nick_note}}</p>
           <p>累计消费：<em>￥</em><i>{{item.checkout_amount}}</i></p>
         </div>
         <span>></span>
