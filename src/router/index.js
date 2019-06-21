@@ -11,6 +11,8 @@ const IndexToC= () => import ('page/cmsc/indexToC')
 
 /* member */
 const Pop = () => import ('page/member/pop')
+const Helpcenter = () => import ('page/member/helpcenter')
+const HelpcenterDetail = () => import ('page/member/helpcenterDetail')
 const Login = () => import ('page/member/login')
 const LoginBlank = () => import ('page/member/loginBlank')
 const BrowserLogin = () => import ('page/member/browserLogin')
@@ -433,6 +435,20 @@ const appRouter = {
                 path: '/goodorderList/:tab',
                 name: 'goodorderList',
                 component: GoodorderList,
+                meta: { keepAlive: false }
+            }
+            ,
+            {
+                path: '/helpcenter',
+                name: 'helpcenter',
+                component: Helpcenter,
+                meta: { keepAlive: false }
+            }
+            ,
+            {
+                path: '/helpcenterDetail',
+                name: 'helpcenterDetail',
+                component: HelpcenterDetail,
                 meta: { keepAlive: false }
             }
             ,

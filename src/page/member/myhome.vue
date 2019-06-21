@@ -408,7 +408,7 @@
             <span><img src="~jd/images/addressicon.png">收货地址</span>
             <span>快速管理 ></span>
           </p>
-          <p class="about-item" @click= "showToast">
+          <p class="about-item" @click= "()=>$router.push({path: '/helpcenter'})">
             <span><img src="~jd/images/kefuicon.png">帮助中心</span>
             <span>有问题找小惠 ></span>
           </p>
