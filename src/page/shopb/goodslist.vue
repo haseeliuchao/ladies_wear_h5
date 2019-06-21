@@ -428,7 +428,7 @@
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
           <p class="screen_subjectname">{{screenTitle}}</p>
         </div>
-        <img src="~jd/images/qrcode.png">
+        <img :src="screenQrcode">
       </div>
      </div>
     <!-- 分享引导popup -->
@@ -553,6 +553,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         screenImgsrc:null,
         screenTitle:null,
         screenPrice:null,
+        screenQrcode:null,
         actions: [{
               name: '发送好友',
               method : this.getCamera	// 调用methods中的函数
@@ -578,6 +579,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.screenImgsrc=item.item_index_img_url;
         this.screenTitle=item.item_title;
         this.screenPrice=item.sales_price;
+        this.screenQrcode=item.qrcode;
       },
       actionSheet: function(){
       this.sheetVisible = true;
