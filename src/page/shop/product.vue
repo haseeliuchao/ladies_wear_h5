@@ -1008,7 +1008,8 @@
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
           <p class="screen_subjectname">{{screenTitle}}</p>
         </div>
-        <img :src="'data:image/png;base64,'+screenQrcode">
+        <img :src="screenQrcode">
+        <!-- 'data:image/png;base64,'+ -->
       </div>
      </div>
     <!-- 分享引导popup -->
