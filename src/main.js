@@ -44,7 +44,7 @@ const config = {
   locale: 'zh_CN', 
   strict: true, 
   enableAutoClasses: true,
-  // events: 'blur', 
+  events: 'blur', 
   inject: true
  };
 

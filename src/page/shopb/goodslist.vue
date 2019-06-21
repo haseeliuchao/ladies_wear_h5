@@ -309,11 +309,11 @@
                      .edit-btn{
                        position: relative;
                         .edit-pop{
-                         width: 3.6rem;
+                         width: 2.1rem;
                          height: 37px;
                          background: #666;
                          position: absolute;
-                         left: -3.9rem;
+                         left: -2.4rem;
                          top: -7px;
                          border-radius: 6px;
                          color: #fff;
@@ -428,7 +428,7 @@
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
           <p class="screen_subjectname">{{screenTitle}}</p>
         </div>
-        <img src="~jd/images/qrcode.png">
+        <img :src="'data:image/png;base64,'+screenQrcode">
       </div>
      </div>
     <!-- 分享引导popup -->
@@ -450,9 +450,9 @@
     </mt-popup>
 
     <div class="topnav" @click="editIndex=null">
-      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中（3）</span>
-      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架（5）</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄（2）</span>
+      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中(3)</span>
+      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架(5)</span>
+      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄(2)</span>
       <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span>
     </div>
     <div class="order-container">
@@ -468,10 +468,10 @@
               <div class="order-product-list">
                <div class="order-product-item" >
                   <div> 
-                    <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="" @click= "()=>$router.push('/product/'+item.item_id)">
+                    <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">
                     <div class="product-info">
-                      <p class="prod-name" @click= "()=>$router.push('/product/'+item.item_id)">{{item.item_title}}</p>
-                      <p class="prod-price" @click= "()=>$router.push('/product/'+item.item_id)">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
+                      <p class="prod-name" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">{{item.item_title}}</p>
+                      <p class="prod-price" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
                       <p class="prod-num"><span>销量：0</span><span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
                           <div style="border-right: 1px solid #949494;" @click= "()=>$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
@@ -479,10 +479,10 @@
                             <img src="~jd/images/edit-popedit.png" style="width:14px;">
                             <p>编辑</p>
                           </div>
-                          <div style="border-right: 1px solid #949494;" @click="delGood(item.distributor_item_id)">
+                          <!-- <div style="border-right: 1px solid #949494;" @click="delGood(item.distributor_item_id)">
                             <img src="~jd/images/edit-popdel.png" style="width:14px;">
                             <p>删除</p>
-                          </div>
+                          </div> -->
                           <div @click="showactionsheet(item)">
                             <!-- sheetVisible=true -->
                             <img src="~jd/images/edit-popshare.png" style="width:14px;height:14px;">
@@ -553,6 +553,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         screenImgsrc:null,
         screenTitle:null,
         screenPrice:null,
+        screenQrcode:null,
         actions: [{
               name: '发送好友',
               method : this.getCamera	// 调用methods中的函数
@@ -578,6 +579,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.screenImgsrc=item.item_index_img_url;
         this.screenTitle=item.item_title;
         this.screenPrice=item.sales_price;
+        this.screenQrcode=item.qrcode;
       },
       actionSheet: function(){
       this.sheetVisible = true;
