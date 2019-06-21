@@ -579,6 +579,8 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
+        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        console.log(this.screenScrollTop)
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
@@ -702,11 +704,6 @@ Vue.component(Actionsheet.name, Actionsheet);
             break
         }
         this.onRefreshCallback();
-
-        var _this =this
-          window.addEventListener('scroll',function(){
-              this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-              },true)
       },
       
       async infiniteCallback(response) { //加载更多订单
