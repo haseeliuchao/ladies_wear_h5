@@ -1002,7 +1002,7 @@
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
      <div class="screen_subject" id='newImg'>
-                <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
+                <img :src="screenImgsrc|addImg" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
@@ -1804,6 +1804,20 @@ methods: {
           }
           if(value.indexOf("alicdn.com")!=-1){
             return value+'_40x40.jpg';
+          }
+        },
+        addImg(value){
+          if(value==''||value==null){
+            return;
+          }
+          if(value.indexOf("img1.vvic.com")!=-1){
+            return value.replace('https://img1.vvic.com','http://param.iask.in/vvic/img1');
+          }
+          if(value.indexOf("img.vvic.com")!=-1){
+            return value.replace('https://img.vvic.com','http://param.iask.in/vvic/img');
+          }
+          if(value.indexOf("alicdn.com")!=-1){
+            return value;
           }
         }
     },
