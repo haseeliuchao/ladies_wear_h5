@@ -1492,7 +1492,7 @@ methods: {
 
 
 
-        var _this =this
+          var _this =this
           window.addEventListener('scroll',function(){
               var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
               if(scrollTop>=10){

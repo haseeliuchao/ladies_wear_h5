@@ -984,7 +984,6 @@
                 <p class="product-pricep">
                 <span style="font-weight:bold;">&yen;</span>
                 <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100|TwoNum}}</em></span>
-                <span style="margin-left:20px;text-decoration: line-through;color:#999"><em style="font-size:13px;">原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.cost_price/100|TwoNum}}</em></span>
                 </p>
                 <span class="freight"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
               </div>

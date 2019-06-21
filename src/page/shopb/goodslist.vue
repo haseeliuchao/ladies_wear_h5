@@ -578,6 +578,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
+        window.scrollTop(0)
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
       },
@@ -699,6 +700,12 @@ Vue.component(Actionsheet.name, Actionsheet);
             break
         }
         this.onRefreshCallback();
+
+        var _this =this
+          window.addEventListener('scroll',function(){
+              var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+              console.log(scrollTop)
+              },true)
       },
       
       async infiniteCallback(response) { //加载更多订单
@@ -733,11 +740,6 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
     mounted: function () {
-    //   pushHistory()
-    //     window.onpopstate = (state) => {
-    //       console.log(state)
-    //     this.$router.push('/myhome')  //输入要返回的上一级路由地址
-    //     }
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0);
       
