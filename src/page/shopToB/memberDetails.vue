@@ -534,11 +534,11 @@
     methods: {
       //修改备注昵称
       async updNick(){
-        let nick_note='';
-        this.$route.params.nick_note?nick_note=this.$route.params.nick_note:nick_note='';
+        // let nick_note='';
+        // this.$route.params.nick_note?nick_note=this.$route.params.nick_note:nick_note='';
         let params = {
           distributor_user_id:this.memberData.distributor_user_id,
-          nick_note:nick_note,
+          nick_note:this.memberData.nick_note,
         };
         this.$store.dispatch('UpdMemberNick',params).then(response=>{
           if(response.code != 10000){
@@ -550,7 +550,7 @@
               message: '保存成功'
             });
             this.popupVisible = false;
-            // this.initData()
+            this.initData()
           }
         }).catch(error=>{
               Toast({

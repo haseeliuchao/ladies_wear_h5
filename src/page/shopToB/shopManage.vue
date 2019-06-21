@@ -13,13 +13,16 @@
       border-top:1px solid #e4e4e4;
       font-size:16px;
       color:#999;
-      line-height:38px;
+      line-height:48px;
       input{
         width:7rem;
         color:#333;
+        line-height:24px;
       }
       select{
         width:7.1rem;
+        line-height:24px;
+        background-color:#fff!important;
       }
       span:last-child{
         color:#333;
