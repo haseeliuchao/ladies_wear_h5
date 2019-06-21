@@ -1008,7 +1008,7 @@
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
           <p class="screen_subjectname">{{screenTitle}}</p>
         </div>
-        <img :src="screenQrcode">
+        <img :src="'data:image/png;base64,'+screenQrcode">
         <!-- 'data:image/png;base64,'+ -->
       </div>
      </div>
@@ -1382,7 +1382,7 @@ methods: {
         this.screenImgsrc=this.productInfo.index_img_url;
         this.screenTitle=this.productInfo.title;
         this.screenPrice=this.productInfo.sales_consumer_price;
-        this.screenQrcode='https://img.alicdn.com/bao/uploaded/i4/2396742565/O1CN01NJawto1UooPJYQOJk_!!2396742565.jpg_230x230.jpg'
+        this.screenQrcode=this.productInfo.qrcode;
         this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png"
       },
       actionSheet: function(){
