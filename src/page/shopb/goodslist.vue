@@ -90,7 +90,7 @@
       width: 8.8rem;
       padding: 12px 12px 24px 12px;
       border-radius: 6px;
-      position: absolute;
+      position: fixed;
       z-index: -10;
       background: #fff;
       .screen_subjectgoodimg{
@@ -116,8 +116,8 @@
                     width: 5.6rem;
       }
       img{
-        height: 60px;
-        width: 60px;
+        height: 90px;
+        width: 90px;
       }
       }
 
@@ -410,19 +410,8 @@
   <div class="my-order" @click="editIndex=null">
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-     <!-- <div class="screen_subject" id='newImg'>
-                <img src="https://img.alicdn.com/bao/uploaded/i4/1033573000/O1CN01fEZsxB1Y22jFgxtUZ_!!1033573000.jpg" class="screen_subjectgoodimg">
-      <div class="screen_subjecttext">
-        <div>
-          <p class="screen_subjectprice">¥399</p>
-          <p class="screen_subjectname">LACOSTE L!VE（法国鳄鱼）女士简约通勤条T恤店</p>
-        </div>
-        <img src="~jd/images/qrcode.png">
-      </div>
-     </div> -->
-
      <div class="screen_subject" id='newImg'>
-                <img :src="screenImgsrc" class="screen_subjectgoodimg">
+                <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
@@ -549,7 +538,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         goodListDetail:[],
         goodListDetailin:[],
         editIndex:null,
-        screenUrl: null,
+        screenUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png",
         screenImgsrc:null,
         screenTitle:null,
         screenPrice:null,
@@ -580,6 +569,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.screenTitle=item.item_title;
         this.screenPrice=item.sales_price;
         this.screenQrcode=item.qrcode;
+        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png"
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -726,6 +716,20 @@ Vue.component(Actionsheet.name, Actionsheet);
         },
         topricenext(value){
             return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        },
+        addImgSize(value){
+          if(value==''||value==null){
+            return;
+          }
+          if(value.indexOf("img1.vvic.com")!=-1){
+            return value.replaceFirst('https://img1.vvic.com','http://param.iask.in/vvic/img1');
+          }
+          if(value.indexOf("img.vvic.com")!=-1){
+            return value.replaceFirst('https://img.vvic.com','http://param.iask.in/vvic/img');
+          }
+          if(value.indexOf("alicdn.com")!=-1){
+            return value;
+          }
         }
     },
     mounted: function () {
