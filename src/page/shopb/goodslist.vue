@@ -722,10 +722,10 @@ Vue.component(Actionsheet.name, Actionsheet);
             return;
           }
           if(value.indexOf("img1.vvic.com")!=-1){
-            return value.replaceFirst('https://img1.vvic.com','http://param.iask.in/vvic/img1');
+            return value.replace('https://img1.vvic.com','http://param.iask.in/vvic/img1');
           }
           if(value.indexOf("img.vvic.com")!=-1){
-            return value.replaceFirst('https://img.vvic.com','http://param.iask.in/vvic/img');
+            return value.replace('https://img.vvic.com','http://param.iask.in/vvic/img');
           }
           if(value.indexOf("alicdn.com")!=-1){
             return value;
