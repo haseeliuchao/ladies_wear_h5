@@ -88,7 +88,7 @@
     background: #fff;
     .screen_subject{
       width: 8.8rem;
-      padding: 12px 12px 24px 12px;
+      padding: 12px 12px 4px;
       border-radius: 6px;
       position: fixed;
       z-index: -10;
@@ -580,7 +580,6 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       getLibrary: function(){
         this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        console.log(this.screenScrollTop)
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
