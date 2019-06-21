@@ -91,6 +91,7 @@
       padding: 12px 12px 4px;
       border-radius: 6px;
       position: fixed;
+      bottom: 0;
       z-index: -10;
       background: #fff;
       .screen_subjectgoodimg{
@@ -625,7 +626,6 @@ Vue.component(Actionsheet.name, Actionsheet);
                   document.documentElement.scrollTop = document.body.scrollTop = _this.screenScrollTop;
               });
           },1000)
- 
       },
      
       delGood(id) { //确认删除

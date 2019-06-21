@@ -2,6 +2,43 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   /* 顶部导航栏 */
+  .screen_subject{
+      width: 8.8rem;
+      padding: 12px 12px 4px;
+      border-radius: 6px;
+      position: fixed;
+      bottom: 0;
+      z-index: -10;
+      background: #fff;
+      .screen_subjectgoodimg{
+        width: 100%;
+      }
+      .screen_subjecttext{
+        @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      padding: 10px 0;
+      .screen_subjectprice{
+        font-size: 17px;
+        color: #333;
+        font-weight: bold;
+      }
+      .screen_subjectname{
+        // @include textoverflow(2);
+                    font-size: 14px;
+                    margin-top: 4px;
+                    color: #333;
+                    line-height: 20px;
+                    width: 5.6rem;
+      }
+      img{
+        height: 90px;
+        width: 90px;
+      }
+      }
+    }
+
 
   .product-header {
     position: fixed;
@@ -962,6 +999,33 @@
 
 <template>
   <div style="background:#f8f8f8;">
+    <!-- 分享选择弹窗 -->
+    <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
+     <div class="screen_subject" id='newImg'>
+                <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
+      <div class="screen_subjecttext">
+        <div>
+          <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
+          <p class="screen_subjectname">{{screenTitle}}</p>
+        </div>
+        <img :src="'data:image/png;base64,'+screenQrcode">
+      </div>
+     </div>
+    <!-- 分享引导popup -->
+    <mt-popup v-model="visiblePopup.shareImg" style="background:rgba(0,0,0,.6);height: 100%;
+    width: 100%;"  position="center" class="checkSkupop" >
+    <div style="height: 100%;
+    width: 100%;"  @click="visiblePopup.shareImg=false">
+    <div style="width:8.8rem;position: absolute;left: 50%;margin-left: -4.4rem;top: 50%;margin-top: -6rem;">
+      <img :src="screenUrl" alt="" style="width:8.8rem;" @click.stop="visiblePopup.shareImg=true">
+      <div style="height:30px;width:1px;background:#fff;margin: -3px auto 4px;"></div>
+      <p style="text-align:center;color:#fff;font-size:16px;">长按保存图片</p>
+      </div>
+     </div>
+    </mt-popup>
+
+
+
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
       <div class="checkSkuInfo">
@@ -1176,7 +1240,7 @@
         <div @click= "lowerShelf(productInfo.item_status)" v-if="productInfo.item_status==1">下架</div>
         <div @click= "upperShelf(productInfo.item_status)" v-if="productInfo.item_status!=1">上架</div>
         <div @click= "selfBuy" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
-        <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
+        <div @click="showactionsheet()" style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
     </div>
     <!-- 底部导航栏 -->
 
@@ -1188,13 +1252,14 @@
 </template>
 
 <script>
+import html2canvas from 'html2canvas';
   import {
     // TabContainer,
     // TabContainerItem,
     Swipe,
     Toast,
     SwipeItem,
-    Popup
+    Popup,Actionsheet
   } from 'mint-ui';
   import {
     getProduct,
@@ -1204,15 +1269,13 @@
     getShopInfo,
     lowerShelfgood,
     upperShelfgood 
-    // getRecommend
   } from '@/service/getData'
-  // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
-  // import wxapi from '@/utils/wxapi';
   import {
     isWeiXin
   } from '@/utils/mixin';
-
+  import Vue from 'vue'
+Vue.component(Actionsheet.name, Actionsheet);
   export default {
     data() {
       return {
@@ -1254,7 +1317,21 @@
         addType:null,
         profit:0,
         distributorId:null,
-        uppershow:false
+        uppershow:false,
+        screenUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png",
+        screenImgsrc:null,
+        screenTitle:null,
+        screenPrice:null,
+        screenQrcode:null,
+        screenScrollTop:null,
+        actions: [{
+              name: '发送好友',
+              method : this.getCamera	// 调用methods中的函数
+          }, {
+            name: '生成卡片保存分享', 
+            method : this.getLibrary	// 调用methods中的函数
+          }],
+          sheetVisible: false
       };
     },
     created: function () {
@@ -1298,7 +1375,68 @@
         }
     },
 methods: {
+      showactionsheet(){
+        this.sheetVisible=true;
+        this.screenImgsrc=this.productInfo.index_img_url;
+        this.screenTitle=this.productInfo.title;
+        this.screenPrice=this.productInfo.sales_consumer_price;
+        this.screenQrcode='http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png';
+        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png"
+      },
+      actionSheet: function(){
+      this.sheetVisible = true;
+      },
+      getCamera: function(){
+        this.visiblePopup.shareBoo=true;
+      },
+      getLibrary: function(){
+        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.doScreeenShots();
+        this.visiblePopup.shareImg=true;
+      },
 
+   doScreeenShots() {
+          const _this = this
+          setTimeout(() => {
+               // 创建一个新的canvas
+              // const _canvas = _this.$refs.cutScreen.HTMLElement;
+              const _canvas = document.getElementById('newImg');;
+
+             // 此处用于解决截图不清晰问题，将生成的canvas放大，然后再填充到原有的容器中就会清晰
+              const width = _canvas.offsetWidth; 
+              const height = _canvas.offsetHeight; 
+              const canvas2 = document.createElement('canvas');
+              const scale = 2;
+              canvas2.width = width * scale;
+              canvas2.height = height * scale;
+              const context1 = canvas2.getContext('2d')
+              if(context1) {
+                context1.scale(scale, scale);
+              }
+              const opts = {
+                    scale,
+                    canvas: canvas2,
+                    // logging: true, //日志开关，便于查看html2canvas的内部执行流程
+                    width,
+                    height,
+                    // 【重要】开启跨域配置
+                    useCORS: true 
+                };
+              html2canvas(_canvas,opts).then((canvas) => {
+                  const context = canvas2.getContext('2d');
+                  if(context) {
+                      context.scale(2,2);
+                      context.mozImageSmoothingEnabled = false;
+                      context.webkitImageSmoothingEnabled = false;
+                      context.imageSmoothingEnabled = false;
+                  }
+                  // canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+                  _this.screenUrl = canvas.toDataURL()
+                  document.documentElement.scrollTop = document.body.scrollTop = _this.screenScrollTop;
+              });
+          },1000)
+      },
       
   
 //   wxRegCallback () {
