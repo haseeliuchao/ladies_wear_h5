@@ -125,22 +125,27 @@ class Http {
             data:qs.stringify(postLogin(options.param)) 
         }).then(response => {
             Indicator.close();
-            if(response.data.code==20025||response.data.code==20028||response.data.code==20026){
-              if(!isWeiXin('code')){
-                router.push('/browserLogin')
+            if(response.data.code!=10000){
+              if(response.data.code==20025||response.data.code==20028||response.data.code==20026){
+                if(!isWeiXin('code')){
+                  router.push('/browserLogin')
+                }else{
+                  router.push('/login')
+                  // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+                }
+              }else if(response.data.code==30010){
+                if(isWeiXin('code')){
+                  setSessionStorage('head_img_url',response.data.data.head_img_url);
+                  setLocalStorage('nickname',response.data.data.nickname);
+                  setSessionStorage('open_id',response.data.data.open_id);
+                }
               }else{
-                router.push('/login')
-                // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+                Toast({
+                  message: response.data.msg
+                });
               }
-            }else if(response.data.code==30010){
-              if(isWeiXin('code')){
-                setSessionStorage('head_img_url',response.data.data.head_img_url);
-                setLocalStorage('nickname',response.data.data.nickname);
-                setSessionStorage('open_id',response.data.data.open_id);
-              }
-            }
-            return resolve(response.data)  
-
+           }
+           return resolve(response.data)
         },error => {
             Indicator.close();
             Toast({
