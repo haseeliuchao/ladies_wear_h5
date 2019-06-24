@@ -194,7 +194,7 @@
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
      <p class="size"><span>尺码</span>
      <span style="color:#666;width: 80%;text-align: right;">
-         <em v-for="(itemsize,index1) in sizearr" :key="index1">
+         <em style="display:inline-block"  v-for="(itemsize,index1) in sizearr" :key="index1">
          <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
