@@ -315,7 +315,7 @@
           <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index"  >
-              <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
+              <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->
