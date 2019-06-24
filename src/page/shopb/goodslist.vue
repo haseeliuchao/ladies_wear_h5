@@ -568,7 +568,7 @@ Vue.component(Actionsheet.name, Actionsheet);
             },
             addshareImgvisiblePopup:function(newvs,oldvs){
              if(newvs==false){
-               this.visiblePopup.shareImg=false;
+               this.opcityShow=true;
               }
             }
     },
@@ -582,7 +582,7 @@ Vue.component(Actionsheet.name, Actionsheet);
           return this.visiblePopup.shareBoo;
         },
         addshareImgvisiblePopup(){
-          this.opcityShow=false;
+          return this.visiblePopup.shareImg;
         }
     },
 
