@@ -571,13 +571,15 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.screenTitle=item.item_title;
         this.screenPrice=item.sales_price;
         this.screenQrcode=item.qrcode;
-        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png"
+        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png";
+        this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: item.item_title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToc/'+item.item_id+'?distributor_id='+item.distributor_id)+'',imgUrl: item.item_index_img_url})
       },
       actionSheet: function(){
       this.sheetVisible = true;
       },
       getCamera: function(){
         this.visiblePopup.shareBoo=true;
+        
       },
       getLibrary: function(){
         this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
