@@ -363,25 +363,15 @@ import shopVue from '../shop/shop.vue';
        },
 
        changeSales(item,price){
-         console.log(price)
-         console.log(item)
          item.profit=price*100-item.cost_price;
-
-          // this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
-          // return this.goodeditdata.item_sku.filter(function(item,index1){
-          //   if(index===index1){
-          //     item.sales_consumer_price=price*100;
-          //     return item.profit=item.sales_consumer_price-item.cost_price;
-          //     console.log(item.profit)
-          //   }
-          // })
        },
        
        async save(){
         // let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
+        this.skuInfo=[];
         this.goodeditdata.item_sku.map(itemdetail=>{
           let itemdetailstr=itemdetail.distributor_item_sku_id+':'+itemdetail.sales_consumer_price*100
-           this.skuInfo.push(itemdetailstr)
+          this.skuInfo.push(itemdetailstr)
         })
          let Data = await itemUpd({
          distributor_item_id:this.goodeditdata.distributor_item_id,
