@@ -1903,6 +1903,7 @@ methods: {
                     font-size: 13px;
                     color: #333;
                     line-height: 20px;
+                    height: 40px;
               }
               .checkSkuInfo-textprice{
                 font-size: 16px;
