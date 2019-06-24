@@ -562,7 +562,7 @@
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
           if(that.countDown<=0){
             clearInterval(times);
-            that.$router.push('/orderList/0')
+            that.$router.go(-1);
           }
         }, 1000)
         
