@@ -472,11 +472,6 @@
                 <span style="color:#999;border:1px solid #999" class="payment" v-if="item.post_sales_status==3">售后驳回</span>
                 </div>
                 </div>
-                
-                <!-- <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" class="payment">售后成功</span>
-            
-                </div> -->
               </div>
               
             </div>
@@ -493,12 +488,6 @@
                 <p class="order-product-detailone" style="justify-content:start"><span>实付金额：</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.pay_price/100|TwoNum}}</em></strong></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
-                <!-- <div class="order-btn-group">
-                    <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click= "cancelOrder(orderDetail)">取消订单</span>
-                    <span v-if="orderDetail.order_status===1" class="payment" @click= "payment(orderDetail)">立即支付</span>
-                    <span v-if="orderDetail.order_status===3" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
-                    <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
-                </div> -->
         </div>
   </div>
 </template>
@@ -555,16 +544,16 @@
           return
         }
         this.orderDetail=Data.data
-        this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime()+86400000);
-        this.countDown=this.countDownTime-parseInt(new Date().getTime());
-        let times = setInterval(() => {
-          let that=this;
-          that.countDown=that.countDownTime-parseInt(new Date().getTime());
-          if(that.countDown<=0){
-            clearInterval(times);
-            that.$router.push('/orderList/0')
-          }
-        }, 1000)
+        // this.countDownTime=parseInt(new Date(this.orderDetail.gmt_created).getTime()+86400000);
+        // this.countDown=this.countDownTime-parseInt(new Date().getTime());
+        // let times = setInterval(() => {
+        //   let that=this;
+        //   that.countDown=that.countDownTime-parseInt(new Date().getTime());
+        //   if(that.countDown<=0){
+        //     clearInterval(times);
+        //     that.$router.go(-1);
+        //   }
+        // }, 1000)
         
 
         setLocalStorage('salesList',this.orderDetail)

@@ -49,7 +49,6 @@
       font-size: 15px;
       color: #333;
       line-height: 30px;
-      height: 30px;
       input{
         height: 30px;
         line-height: normal;
@@ -184,7 +183,7 @@
 
 
    <div class="goodinfo">
-     <img v-lazy="goodeditdata.index_img_url+'_190x190.jpg'">
+     <img v-lazy="goodeditdata.index_img_url">
      <div class="goodinfo-text">
        <p class="goodinfo-text-name">{{goodeditdata.title}}</p>
        <p class="goodinfo-text-fare">运费：¥5.00</p>
@@ -193,10 +192,13 @@
    
    <div class="goodskuedit" v-for="(item,index) in goodeditdata.item_sku" :key="index">
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
-     <p class="size"><span>尺码</span><span style="color:#666">
-       <em v-for="(itemsize,index1) in sizearr"  :key="index1">{{itemsize.size}},</em>
+     <p class="size"><span>尺码</span>
+     <span style="color:#666;width: 80%;text-align: right;">
+         <em style="display:inline-block"  v-for="(itemsize,index1) in sizearr" :key="index1">
+         <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
+         </em>
        </span></p>
-     <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item.sales_consumer_price,index)" v-model="item.sales_consumer_price"></p>
+     <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
@@ -298,10 +300,13 @@ import shopVue from '../shop/shop.vue';
         this.goodeditdata.salesConsumerPrice = Data.data.sales_consumer_price;
         this.goodeditdata.salesPrice = Data.data.sales_price;
         this.goodeditdata.title =Data.data.title;
+        this.goodeditdata.index_img_url =Data.data.index_img_url+'_190x190.jpg';
         this.goodeditdata.item_sku = Data.data.item_sku_b_o_list;
+        
         this.goodeditdata.item_skulength =this.goodeditdata.item_sku.length;
         this.colorarr = this.rmSome(this.goodeditdata.item_sku,'color')
-        this.sizearr = this.rmSome(this.goodeditdata.item_sku,'size')
+        this.sizearr = Data.data.item_sku_b_o_list;
+        
         var hash = {};
           this.goodeditdata.item_sku =this.goodeditdata.item_sku.reduce(function(arr, current) {
               hash[current.color] ? '' : hash[current.color] = true && arr.push(current);
@@ -362,22 +367,16 @@ import shopVue from '../shop/shop.vue';
          this.visiblePopup.setProfit=true;
        },
 
-       changeSales(price,index){
-         console.log(index)
-          this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
-          return this.goodeditdata.item_sku.filter(function(item,index1){
-            if(index===index1){
-              console.log(item)
-              return item.profit=item.sales_consumer_price*100-item.cost_price;
-            }
-          })
+       changeSales(item,price){
+         item.profit=price*100-item.cost_price;
        },
        
        async save(){
         // let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
+        this.skuInfo=[];
         this.goodeditdata.item_sku.map(itemdetail=>{
           let itemdetailstr=itemdetail.distributor_item_sku_id+':'+itemdetail.sales_consumer_price*100
-           this.skuInfo.push(itemdetailstr)
+          this.skuInfo.push(itemdetailstr)
         })
          let Data = await itemUpd({
          distributor_item_id:this.goodeditdata.distributor_item_id,

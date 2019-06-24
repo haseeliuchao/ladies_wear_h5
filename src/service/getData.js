@@ -69,6 +69,8 @@ export const searchhotGoods = (params) => new Http().require({api: '/api/hot/sea
 
 export const getProduct = (params) => new Http().require({api: '/api/item/details',param:params}); //获取购物车列表
 
+export const getpageCount = (params) => new Http().require({api: '/api/distributor/item/count',param:params}); //获取购物车列表
+
 export const itemUpd = (params) => new Http().require({api: '/api/distributor/item/upd',param:params}); //获取购物车列表
 
 export const distributorItemDel = (params) => new Http().require({api: '/api/distributor/item/del',param:params}); //获取购物车列表

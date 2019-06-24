@@ -1063,8 +1063,10 @@
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
-      <div class="right" @click= "addShopCart('directBuy')">立即购买</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('directBuy')">立即购买</div>
+      <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend(1)">商品已下架</div>
+      <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==3" @click= "tipSend(2)">商品已售罄</div>
     </div>
     <!-- 底部导航栏 -->
 
@@ -1164,7 +1166,19 @@
         }
     },
 methods: {
-
+      tipSend(type){
+        if(type==1){
+          Toast({
+            message: "此商品已下架"
+          })
+        }else{
+         Toast({
+            message: "此商品已售罄"
+          })
+        }
+        
+        
+      },
         
       handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
@@ -1187,10 +1201,12 @@ methods: {
           distributor_id:this.$route.query.distributor_id
         }).then(response => {
           if(response.code==10000){
+            
           return Toast({
             message: '加入购物车成功',
             position: 'bottom'
           })
+
           }else{
             Toast({
             message: response.msg,
@@ -1221,13 +1237,18 @@ methods: {
           distributor_id:this.$route.query.distributor_id
         }).then(response => {
           if(response.code==10000){
+            this.checkId=null;
+            this.shopnum=1;
+            this.curcolorname=null;
+            this.cursizename=null;
+            this.checkcolorindex=null;
+            this.checksizeindex=null;
           return Toast({
             message: '加入购物车成功'
           })
           }else{
             Toast({
             message: response.msg
-           
             })
             return
           }
@@ -1335,6 +1356,7 @@ methods: {
         }
     },
     mounted: function () {
+      this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.query.distributor_id)+'',imgUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/1/201906241553261561362823561.png"})
       this.initData();
       setSessionStorage('distributorId',this.$route.query.distributor_id)
     },

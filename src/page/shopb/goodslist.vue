@@ -440,9 +440,9 @@
     </mt-popup>
 
     <div class="topnav" @click="editIndex=null">
-      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中(3)</span>
-      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架(5)</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄(2)</span>
+      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中({{pageCount.upper_shelf}})</span>
+      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架({{pageCount.lower_shelf}})</span>
+      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄({{pageCount.sell_out}})</span>
       <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span>
     </div>
     <div class="order-container">
@@ -503,7 +503,7 @@
 import html2canvas from 'html2canvas';
   import {
     searchshopGoods,
-    payDirect
+    getpageCount
   } from '@/service/getData';
   import {
     pushHistory
@@ -518,6 +518,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     data() {
       return {
         commad: searchshopGoods,
+        pageCount:{},
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false,
@@ -554,24 +555,49 @@ Vue.component(Actionsheet.name, Actionsheet);
           }],
           sheetVisible: false
           };
+
     },
 
-    watch: {},
+    watch: {
+      addShareBoovisiblePopup:function(newvs,oldvs){
+             if(newvs==false){
+                this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/1/201906241553261561362823561.png"})
+             }
+            }
+    },
 
     components: {
       LoadMore
     },
 
-    computed: {},
+    computed: {
+        addShareBoovisiblePopup(){
+          return this.visiblePopup.shareBoo;
+        }
+    },
 
     methods: {
+       async getCount(){
+         let Data = await getpageCount({
+         distributor_id: this.$route.params.distributor_id
+        });
+        if(Data.code!=10000){
+             Toast({
+             message: Data.msg
+             })
+             return
+        }
+        this.pageCount=Data.data
+
+       },
       showactionsheet(item){
         this.sheetVisible=true;
         this.screenImgsrc=item.item_index_img_url;
         this.screenTitle=item.item_title;
         this.screenPrice=item.sales_price;
         this.screenQrcode=item.qrcode;
-        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png"
+        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png";
+        this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: item.item_title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToc/'+item.item_id+'?distributor_id='+item.distributor_id)+'',imgUrl: item.item_index_img_url})
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -737,6 +763,8 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
     mounted: function () {
+      this.getCount();
+      this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/1/201906241553261561362823561.png"})
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0);
       
