@@ -55,9 +55,6 @@
         line-height: normal;
         color: #666;
       }
-      em .ishow:last-child{
-          display: none
-      }
     }
     .profit{
       border-top: 1px solid #e4e4e4;
@@ -199,7 +196,7 @@
      <p class="size"><span>尺码</span>
      <span style="color:#666">
          <em v-for="(itemsize,index1) in sizearr" :key="index1">
-         <i v-if="itemsize.color==item.color">{{itemsize.size}}</i><i class="ishow" v-if="itemsize.color==item.color">,</i>
+         <i v-if="itemsize.color==item.color">{{itemsize.size}}</i>&nbsp;
          </em>
        </span></p>
      <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
