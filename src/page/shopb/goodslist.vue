@@ -440,9 +440,9 @@
     </mt-popup>
 
     <div class="topnav" @click="editIndex=null">
-      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中(3)</span>
-      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架(5)</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄(2)</span>
+      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中({{pageCount.upper_shelf}})</span>
+      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架({{pageCount.lower_shelf}})</span>
+      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄({{pageCount.sell_out}})</span>
       <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span>
     </div>
     <div class="order-container">
@@ -518,6 +518,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     data() {
       return {
         commad: searchshopGoods,
+        pageCount:{},
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false,
@@ -554,6 +555,7 @@ Vue.component(Actionsheet.name, Actionsheet);
           }],
           sheetVisible: false
           };
+
     },
 
     watch: {
@@ -585,6 +587,7 @@ Vue.component(Actionsheet.name, Actionsheet);
              })
              return
         }
+        this.pageCount=Data.data
 
        },
       showactionsheet(item){
