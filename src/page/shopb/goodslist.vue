@@ -568,7 +568,7 @@ Vue.component(Actionsheet.name, Actionsheet);
             },
             addshareImgvisiblePopup:function(newvs,oldvs){
              if(newvs==false){
-               this.opcityShow=true;
+               this.opcityShow=false;
               }
             }
     },
