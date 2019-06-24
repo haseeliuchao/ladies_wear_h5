@@ -364,14 +364,16 @@ import shopVue from '../shop/shop.vue';
 
        changeSales(price,index){
          console.log(price)
-          this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
-          return this.goodeditdata.item_sku.filter(function(item,index1){
-            if(index===index1){
-              item.sales_consumer_price=price*100;
-              return item.profit=item.sales_consumer_price-item.cost_price;
-              console.log(item.profit)
-            }
-          })
+         console.log(index)
+
+          // this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
+          // return this.goodeditdata.item_sku.filter(function(item,index1){
+          //   if(index===index1){
+          //     item.sales_consumer_price=price*100;
+          //     return item.profit=item.sales_consumer_price-item.cost_price;
+          //     console.log(item.profit)
+          //   }
+          // })
        },
        
        async save(){
