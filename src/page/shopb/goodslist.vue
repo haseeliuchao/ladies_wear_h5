@@ -412,7 +412,7 @@
   <div class="my-order" @click="editIndex=null">
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-     <div class="screen_subject" id='newImg' :style="{color:(opcityShow?opacity:'1')}">
+     <div class="screen_subject" id='newImg' :style="{opacity:(opcityShow==true?1:0)}">
                 <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
