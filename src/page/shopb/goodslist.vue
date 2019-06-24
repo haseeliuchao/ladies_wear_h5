@@ -565,6 +565,11 @@ Vue.component(Actionsheet.name, Actionsheet);
              if(newvs==false){
                 this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/1/201906241553261561362823561.png"})
              }
+            },
+            addshareImgvisiblePopup:function(newvs,oldvs){
+             if(newvs==false){
+               this.visiblePopup.shareImg=false;
+              }
             }
     },
 
@@ -575,6 +580,9 @@ Vue.component(Actionsheet.name, Actionsheet);
     computed: {
         addShareBoovisiblePopup(){
           return this.visiblePopup.shareBoo;
+        },
+        addshareImgvisiblePopup(){
+          this.opcityShow=false;
         }
     },
 
