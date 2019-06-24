@@ -91,7 +91,7 @@
       padding: 12px 12px 4px;
       border-radius: 6px;
       position: fixed;
-      bottom: 0;
+      bottom: 200px;
       z-index: -10;
       background: #fff;
       .screen_subjectgoodimg{
