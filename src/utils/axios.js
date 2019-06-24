@@ -143,6 +143,7 @@ class Http {
                 Toast({
                   message: response.data.msg
                 });
+                return resolve(response.data)
               }
            }
            return resolve(response.data)
