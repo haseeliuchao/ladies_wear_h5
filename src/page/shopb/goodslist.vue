@@ -91,8 +91,9 @@
       padding: 12px 12px 4px;
       border-radius: 6px;
       position: fixed;
-      bottom: 200px;
+      top: 0;
       z-index: -10;
+      opacity: 0;
       background: #fff;
       .screen_subjectgoodimg{
         width: 100%;
@@ -411,7 +412,7 @@
   <div class="my-order" @click="editIndex=null">
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-     <div class="screen_subject" id='newImg'>
+     <div class="screen_subject" id='newImg' :style="{color:(opcityShow?opacity:'1')}">
                 <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
@@ -546,6 +547,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         screenPrice:null,
         screenQrcode:null,
         screenScrollTop:null,
+        opcityShow:false,
         actions: [{
               name: '发送好友',
               method : this.getCamera	// 调用methods中的函数
@@ -608,6 +610,7 @@ Vue.component(Actionsheet.name, Actionsheet);
       getLibrary: function(){
         this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.opcityShow=true;
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
       },
