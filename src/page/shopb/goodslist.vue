@@ -579,7 +579,6 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       getCamera: function(){
         this.visiblePopup.shareBoo=true;
-        
       },
       getLibrary: function(){
         this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;

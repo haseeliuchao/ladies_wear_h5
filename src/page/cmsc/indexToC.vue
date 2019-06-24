@@ -207,6 +207,7 @@
     beforeDestroy() {
     },
     mounted: function () {
+      
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     },
     beforeRouteLeave(to, from, next){
