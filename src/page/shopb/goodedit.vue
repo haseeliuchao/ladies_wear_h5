@@ -195,7 +195,7 @@
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
      <p class="size"><span>尺码</span><span style="color:#666">
        <em v-for="(itemsize,index1) in sizearr"  :key="index1">
-         {{itemsize.size}},
+         <i v-if="itemsize.color==item.color">{{itemsize.size}},</i>
          </em>
        </span></p>
      <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
