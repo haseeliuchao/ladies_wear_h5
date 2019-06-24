@@ -194,8 +194,9 @@
    <div class="goodskuedit" v-for="(item,index) in goodeditdata.item_sku" :key="index">
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
      <p class="size"><span>尺码</span><span style="color:#666">
-       <em v-for="(itemsize,index1) in goodeditdata.item_sku" v-show="itemsize.color==item.color" :key="index1">
+       <em v-for="(itemsize,index1) in goodeditdata.item_sku"  :key="index1">
          <i>{{itemsize.size}},</i>
+         <i>{{itemsize.color}},</i>
          </em>
        </span></p>
      <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
