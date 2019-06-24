@@ -194,9 +194,8 @@
    <div class="goodskuedit" v-for="(item,index) in goodeditdata.item_sku" :key="index">
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
      <p class="size"><span>尺码</span><span style="color:#666">
-       <em v-for="(itemsize,index1) in goodeditdata.item_sku"  :key="index1">
-         <i>{{itemsize.size}},</i>
-         <i>{{itemsize.color}},</i>
+       <em v-for="(itemsize,index1) in sizearr"  :key="index1">
+         <i v-if="itemsize.color==itemsize.color">{{itemsize.size}},</i>
          </em>
        </span></p>
      <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
@@ -303,10 +302,11 @@ import shopVue from '../shop/shop.vue';
         this.goodeditdata.title =Data.data.title;
         this.goodeditdata.index_img_url =Data.data.index_img_url+'_190x190.jpg';
         this.goodeditdata.item_sku = Data.data.item_sku_b_o_list;
+        
         this.goodeditdata.item_skulength =this.goodeditdata.item_sku.length;
         this.colorarr = this.rmSome(this.goodeditdata.item_sku,'color')
-        this.sizearr = this.rmSome(this.goodeditdata.item_sku,'size')
-        console.log(this.colorarr);
+        this.sizearr = Data.data.item_sku_b_o_list;
+        
         var hash = {};
           this.goodeditdata.item_sku =this.goodeditdata.item_sku.reduce(function(arr, current) {
               hash[current.color] ? '' : hash[current.color] = true && arr.push(current);
