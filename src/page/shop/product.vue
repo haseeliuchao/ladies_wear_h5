@@ -1685,6 +1685,8 @@ methods: {
         if(Data.code!=10000){
           if(Data.code==20025){
             return
+          }else if(Data.code==40003){
+             this.$router.push({path: '/shopApplicate'});
           }else{
              Toast({
              message: Data.msg

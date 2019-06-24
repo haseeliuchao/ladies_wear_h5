@@ -313,8 +313,6 @@ import shopVue from '../shop/shop.vue';
               return arr
           }, []);
         setSessionStorage('defgoodeditdata',defgoodeditdata);
-
-
         this.listMe(null,1,this.goodeditdata.item_sku)
       },
       listMe:function(type,val,list){
@@ -326,7 +324,7 @@ import shopVue from '../shop/shop.vue';
                           return item.sales_consumer_price=(item.cost_price*100+(item.cost_price*100*val))/10000;
                         }
                         if(type=="salesSetProfit"){
-                          return item.sales_consumer_price=(item.sales_consumer_price+(val*100))/100;
+                          return item.sales_consumer_price=(item.cost_price+(val*100))/100;
                         }
                     })
                 },
