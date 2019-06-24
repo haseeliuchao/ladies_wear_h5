@@ -184,7 +184,7 @@
 
 
    <div class="goodinfo">
-     <img :src="goodeditdata.index_img_url+'_190x190.jpg'">
+     <img v-lazy="goodeditdata.index_img_url">
      <div class="goodinfo-text">
        <p class="goodinfo-text-name">{{goodeditdata.title}}</p>
        <p class="goodinfo-text-fare">运费：¥5.00</p>
@@ -235,6 +235,7 @@ import shopVue from '../shop/shop.vue';
         countDownTime:null,
         countDown:null,
         goodeditdata:{
+
           item_sku:[]
         },
         defgoodeditdata:{
@@ -298,6 +299,7 @@ import shopVue from '../shop/shop.vue';
         this.goodeditdata.salesConsumerPrice = Data.data.sales_consumer_price;
         this.goodeditdata.salesPrice = Data.data.sales_price;
         this.goodeditdata.title =Data.data.title;
+        this.goodeditdata.index_img_url =Data.data.index_img_url+'_190x190.jpg';
         this.goodeditdata.item_sku = Data.data.item_sku_b_o_list;
         this.goodeditdata.item_skulength =this.goodeditdata.item_sku.length;
         this.colorarr = this.rmSome(this.goodeditdata.item_sku,'color')
