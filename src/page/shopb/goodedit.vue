@@ -389,6 +389,7 @@ import shopVue from '../shop/shop.vue';
           })
           return
         }
+        this.$router.go(-1)
        },
       rmSome(arr, key) {
           let tempObj = {}
