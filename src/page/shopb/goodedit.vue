@@ -184,7 +184,7 @@
 
 
    <div class="goodinfo">
-     <img v-lazy="goodeditdata.index_img_url+'_190x190.jpg'">
+     <img :src="goodeditdata.index_img_url+'_190x190.jpg'">
      <div class="goodinfo-text">
        <p class="goodinfo-text-name">{{goodeditdata.title}}</p>
        <p class="goodinfo-text-fare">运费：¥5.00</p>
@@ -196,7 +196,7 @@
      <p class="size"><span>尺码</span><span style="color:#666">
        <em v-for="(itemsize,index1) in sizearr"  :key="index1">{{itemsize.size}},</em>
        </span></p>
-     <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item.sales_consumer_price,index)" v-model="item.sales_consumer_price"></p>
+     <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
@@ -362,9 +362,10 @@ import shopVue from '../shop/shop.vue';
          this.visiblePopup.setProfit=true;
        },
 
-       changeSales(price,index){
+       changeSales(item,price){
          console.log(price)
-         console.log(index)
+         console.log(item)
+         item.profit=price*100-item.cost_price;
 
           // this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
           // return this.goodeditdata.item_sku.filter(function(item,index1){
