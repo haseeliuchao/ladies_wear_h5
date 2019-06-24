@@ -235,8 +235,8 @@ import shopVue from '../shop/shop.vue';
         countDownTime:null,
         countDown:null,
         goodeditdata:{
-
-          item_sku:[]
+          item_sku:[],
+          index_img_url:null
         },
         defgoodeditdata:{
           item_sku:[]
