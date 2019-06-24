@@ -49,7 +49,6 @@
       font-size: 15px;
       color: #333;
       line-height: 30px;
-      height: 30px;
       input{
         height: 30px;
         line-height: normal;
@@ -194,9 +193,9 @@
    <div class="goodskuedit" v-for="(item,index) in goodeditdata.item_sku" :key="index">
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
      <p class="size"><span>尺码</span>
-     <span style="color:#666">
+     <span style="color:#666;width: 80%;text-align: right;">
          <em v-for="(itemsize,index1) in sizearr" :key="index1">
-         <i v-if="itemsize.color==item.color">{{itemsize.size}}&nbsp;&nbsp;</i>
+         <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
      <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
