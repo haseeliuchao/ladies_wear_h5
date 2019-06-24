@@ -139,7 +139,7 @@ class Http {
                   setLocalStorage('nickname',response.data.data.nickname);
                   setSessionStorage('open_id',response.data.data.open_id);
                 }
-              }else{
+              }else if(response.data.code!=20018){
                 Toast({
                   message: response.data.msg
                 });
