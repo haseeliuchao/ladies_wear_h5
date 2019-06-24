@@ -194,7 +194,7 @@
    <div class="goodskuedit" v-for="(item,index) in goodeditdata.item_sku" :key="index">
      <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
      <p class="size"><span>尺码</span><span style="color:#666">
-       <em v-for="(itemsize,index1) in sizearr"  :key="index1">
+       <em v-for="(itemsize,index1) in goodeditdata.item_sku"  :key="index1">
          <i v-if="itemsize.color==item.color">{{itemsize.size}},</i>
          </em>
        </span></p>
