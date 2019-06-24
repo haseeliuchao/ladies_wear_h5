@@ -368,7 +368,7 @@ import shopVue from '../shop/shop.vue';
           return this.goodeditdata.item_sku.filter(function(item,index1){
             if(index===index1){
               console.log(item)
-              return item.profit=item.sales_consumer_price*100-item.cost_price;
+              return item.profit=item.sales_consumer_price-item.cost_price;
             }
           })
        },
