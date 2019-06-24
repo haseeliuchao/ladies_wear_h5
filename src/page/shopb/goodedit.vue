@@ -306,7 +306,7 @@ import shopVue from '../shop/shop.vue';
         this.goodeditdata.item_skulength =this.goodeditdata.item_sku.length;
         this.colorarr = this.rmSome(this.goodeditdata.item_sku,'color')
         this.sizearr = this.rmSome(this.goodeditdata.item_sku,'size')
-        console.log(this.goodeditdata.item_sku)
+        console.log(this.colorarr);
         var hash = {};
           this.goodeditdata.item_sku =this.goodeditdata.item_sku.reduce(function(arr, current) {
               hash[current.color] ? '' : hash[current.color] = true && arr.push(current);
