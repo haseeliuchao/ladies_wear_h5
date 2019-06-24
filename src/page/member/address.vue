@@ -146,13 +146,13 @@
         <div class="cell-from-item">
           <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" name="name" v-focus v-validate="'required'"  v-model="addressForm.name" id="name">
+            <input type="text" name="name" v-focus v-validate="'required'"  v-model="addressForm.name" id="name" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
           </div>
         </div>
         <div class="cell-from-item">
           <label for="phone"><span class="title">手机</span></label>
           <div class="content">
-            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone">
+            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone" @click="focusphoneoneclick" @blur="gotoView" v-focus="focusphoneoneState">
           </div>
           <div style="position:absolute;right:.3rem">
             <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
@@ -161,13 +161,13 @@
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
           <label for="city"><span class="title">选择城市</span></label>
           <div class="content">
-            <input type="text" name="city" readonly="readonly" v-validate="'required'" :value="addressForm.province + addressForm.city + addressForm.area"  placeholder="" id="city">
+            <input type="text" name="city" readonly="readonly" v-validate="'required'" :value="addressForm.province + addressForm.city + addressForm.area"  placeholder="" id="city" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
           </div>
         </div>
         <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
           <label for="address"><span class="title">详细地址</span></label>
           <div class="content" style="margin-top:16px;">
-            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate="'required'" v-model="addressForm.address" id="address"></textarea>
+            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate="'required'" v-model="addressForm.address" id="address" @click="focuscodethreeclick" @blur="gotoView" v-focus="focuscodethreeState"></textarea>
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
@@ -227,6 +227,10 @@
           selected: false
         },
         addressVisible: false,
+        focusphoneoneState : false,
+        focuscodeoneState : false,
+        focuscodetwoState : false,
+        focuscodethreeState : false,
         myAddressSlots: [
     
           {
@@ -412,6 +416,24 @@
         })
         }
       },
+       focusphoneoneclick () {
+      this.focusphoneoneState = true
+      },
+       focuscodeoneclick () {
+      this.focuscodeoneState = true
+      },
+      focuscodetwoclick () {
+      this.focuscodetwoState = true
+      },
+      focuscodethreeclick () {
+      this.focuscodethreeState = true
+      },gotoView () {
+      window.scroll(0,0)
+      this.focusphoneoneState = false;
+      this.focuscodeoneState = false;
+      this.focuscodetwoState = false;
+      this.focuscodethreeState = false;
+      }
     },
 
     mounted: function () {

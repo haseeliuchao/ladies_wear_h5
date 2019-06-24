@@ -81,7 +81,7 @@
     <div class="storeCreate-con store-con">
       <p>
         <label for="name">店铺名称</label>
-        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate="'required'">
+        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate="'required'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span v-show="shopForm.title.length>10">请输入合格店铺名称</span>
       </p>
       <p>
@@ -90,7 +90,7 @@
       </p>
       <p>
         <label for="markup">商品加价</label>
-        <input type="text" name="markup" value="1" v-model="shopForm.n_times" placeholder="" id="markup" v-validate="'required'" >
+        <input type="text" name="markup" value="1" v-model="shopForm.n_times" placeholder="" id="markup" v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
         <span>倍</span>
       </p>
       <p>
@@ -125,7 +125,9 @@
           title:'',
           n_times:'',
           if_free_shipping:0
-        }
+        },
+        focuscodeoneState : false,
+        focuscodetwoState : false,
       }
     },
     watch: {},
@@ -179,6 +181,16 @@
           this.shopForm.if_free_shipping = res.data.if_free_shipping;
         }
       },
+      focuscodeoneclick () {
+      this.focuscodeoneState = true
+      },
+      focuscodetwoclick () {
+      this.focuscodetwoState = true
+      },gotoView () {
+      window.scroll(0,0)
+      this.focuscodeoneState = false;
+      this.focuscodetwoState = false;
+      }
     },  
     mounted: function () {
       this.initData();
