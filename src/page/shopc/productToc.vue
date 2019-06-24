@@ -1201,7 +1201,12 @@ methods: {
           distributor_id:this.$route.query.distributor_id
         }).then(response => {
           if(response.code==10000){
-            
+            this.checkId=null;
+            this.shopnum=1;
+            this.curcolorname=null;
+            this.cursizename=null;
+            this.checkcolorindex=null;
+            this.checksizeindex=null;
           return Toast({
             message: '加入购物车成功',
             position: 'bottom'
