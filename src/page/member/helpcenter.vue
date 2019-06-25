@@ -146,6 +146,7 @@
 </template>
 
 <script>
+import wx from 'weixin-js-sdk'
   import {
     getUserInfo
   } from '@/service/getData';
@@ -163,10 +164,28 @@
     computed: {},
 
     methods: {
-     
+     wxpay(){
+        var vm= this;
+        if (typeof wx.WeixinJSBridge == "undefined"){//微信浏览器内置对象。参考微信官方文档
+          if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', vm.onBridgeReady(), false);
+          }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', vm.onBridgeReady());
+            document.attachEvent('onWeixinJSBridgeReady',vm.onBridgeReady());
+          }
+        }else{
+          vm.onBridgeReady();
+        }
+ 
+      },
+      onBridgeReady:function(){
+        wx.WeixinJSBridge.call('hideOptionMenu');
+      },
+
     },
 
     mounted: function () {
+        this.wxpay()
     }
   }
 
