@@ -15,6 +15,9 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
         let jsApiListArr=[];
         if(title!=undefined&&title!=''&&title!=null){
             jsApiListArr=['onMenuShareTimeline', 'onMenuShareAppMessage'];
+        }else{
+            jsApiListArr=['hideOptionMenu'];
+
         }
         wx.config({
             debug: false, // 开启调试模式
