@@ -25,7 +25,7 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
             timestamp: wxData.timestamp, // 必填，生成签名的时间戳
             nonceStr: wxData.nonce_str, // 必填，生成签名的随机串
             signature: wxData.signature, // 必填，签名，见附录1
-            jsApiList: jsApiListArr // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            jsApiList: ['hideOptionMenu'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
     }
     if(isWeiXin('code')){
