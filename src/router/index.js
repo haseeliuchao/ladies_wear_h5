@@ -110,7 +110,7 @@ const appRouter = {
                 name: 'login',
                 component: Login,
                 meta: { keepAlive: false ,
-                    Title:'登录',
+                    Title:'绑定手机号',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -348,32 +348,20 @@ const appRouter = {
                 path: '/addressList',
                 name: 'addresslist',
                 component: AddressList,
-                meta: { keepAlive: false ,Title:'地址管理',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                meta: { keepAlive: false ,Title:'地址管理'}
             },
             {
                 path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
-                meta: { keepAlive: false ,Title:'地址编辑',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                meta: { keepAlive: false ,Title:'地址编辑'}
             },
             {
                 path: '/logisticsInfo',
                 name: 'logisticsInfo',
                 component: LogisticsInfo,
                 meta: { keepAlive: false ,
-                    Title:'物流查询',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'物流查询'}
             },
             {
                 path: '/afterSaleChoice',
@@ -381,43 +369,28 @@ const appRouter = {
                 component: AfterSaleChoice,
                 meta: { keepAlive: false ,
                     Title:'售后选择',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    }
             },
             {
                 path: '/afterSale',
                 name: 'afterSale',
                 component: AfterSale,
                 meta: { keepAlive: false ,
-                    Title:'售后编辑',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'售后编辑'}
             },
             {
                 path: '/afterSaleDetail',
                 name: 'afterSaleDetail',
                 component: AfterSaleDetail,
                 meta: { keepAlive: false ,
-                    Title:'售后详情',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'售后详情'}
             },
             {
                 path: '/orderRusult',
                 name: 'orderRusult',
                 component: OrderRusult,
                 meta: { keepAlive: false ,
-                    Title:'支付结果',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'支付结果'}
             }
             ,
             {
