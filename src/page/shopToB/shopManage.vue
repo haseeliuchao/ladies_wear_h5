@@ -137,12 +137,14 @@
     methods:{
       async saveShop(){
         let distributor_id='';
-        this.$route.query.distributor_id?distributor_id=this.$route.query.distributor_id:distributor_id='';
-        // if(this.$route.params.distributor_id){
-        //   distributor_id=this.$route.params.distributor_id
-        // }else{
-        //   distributor_id=''
-        // }
+        // this.$route.query.distributor_id?distributor_id=this.$route.query.distributor_id:distributor_id='';
+        if(this.$route.params.distributor_id){
+        distributor_id=this.$route.params.distributor_id;
+             this.focuscodeoneState=true;
+             this.focuscodetwoState=true;
+        }else{
+          distributor_id=''
+       }
         let params = {
           distributor_id:this.shopForm.distributor_id,
           title:this.shopForm.title,
