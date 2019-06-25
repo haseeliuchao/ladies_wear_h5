@@ -81,7 +81,7 @@
   <div class="helpTable">
     <table>
         <tr>
-            <td rowspan="3" class="rowspanTd"><img src="~jd/images/help1.png" alt=""><br>购物指南</td>
+            <td rowspan="3" class="rowspanTd"><img src="~jd/images/help1.png" alt="" style="width:22px"><br>购物指南</td>
             <td class="nospanTd" @click= "()=>$router.push({path: '/helpcenterDetail',query: {helpId:1}})"><p><span>7天无理由退货</span><span class="right-menu"></span></p></td>
         </tr>
         <tr>
@@ -91,7 +91,7 @@
             <td class="nospanTd" @click= "()=>$router.push({path: '/helpcenterDetail',query: {helpId:3}})"><p><span>商品选码</span><span class="right-menu"></span></p></td>
         </tr>
         <tr>
-            <td rowspan="2" class="rowspanTd"><img src="~jd/images/help2.png" alt=""><br>订单指南</td>
+            <td rowspan="2" class="rowspanTd"><img src="~jd/images/help2.png" alt="" style="width:20.5px"><br>订单指南</td>
             <td class="nospanTd" @click= "()=>$router.push({path: '/helpcenterDetail',query: {helpId:4}})"><p><span>如何查询订单</span><span class="right-menu"></span></p></td>
         </tr>
         <tr>
@@ -99,7 +99,7 @@
         </tr>
 
         <tr>
-            <td rowspan="3" class="rowspanTd"><img src="~jd/images/help3.png" alt=""><br>支付问题</td>
+            <td rowspan="3" class="rowspanTd"><img src="~jd/images/help3.png" alt="" style="width:24.5px"><br>支付问题</td>
             <td class="nospanTd" @click= "()=>$router.push({path: '/helpcenterDetail',query: {helpId:6}})"><p><span>超时未支付</span><span class="right-menu"></span></p></td>
         </tr>
         <tr>
@@ -110,7 +110,7 @@
         </tr>
 
         <tr>
-            <td rowspan="3" class="rowspanTd"><img src="~jd/images/help4.png" alt=""><br>物流信息</td>
+            <td rowspan="3" class="rowspanTd"><img src="~jd/images/help4.png" alt="" style="width:25.5px"><br>物流信息</td>
             <td class="nospanTd" @click= "()=>$router.push({path: '/helpcenterDetail',query: {helpId:9}})"><p><span>指定物流发货</span><span class="right-menu"></span></p></td>
         </tr>
         <tr>
@@ -122,7 +122,7 @@
 
 
         <tr>
-            <td rowspan="5" class="rowspanTd"><img src="~jd/images/help5.png" alt=""><br>售后问题</td>
+            <td rowspan="5" class="rowspanTd"><img src="~jd/images/help5.png" alt="" style="width:26.5px"><br>售后问题</td>
             <td class="nospanTd" @click= "()=>$router.push({path: '/helpcenterDetail',query: {helpId:12}})"><p><span>如何申请退货</span><span class="right-menu"></span></p></td>
         </tr>
         <tr>

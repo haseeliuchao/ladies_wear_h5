@@ -54,7 +54,7 @@
             text-shadow: none;
             text-align: left;
             font-size: 15px;
-            color: #999;
+            color: #333;
             line-height: normal;
             height: 34px;
           }
@@ -91,7 +91,7 @@
               text-shadow: none;
               text-align: left;
               font-size: 15px;
-              color: #999;
+              color: #333;
               line-height: normal;
               height: 34px;
             }
