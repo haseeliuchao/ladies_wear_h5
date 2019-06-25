@@ -265,13 +265,15 @@
     .banner {
       .mint-swipe-indicators {
         transform: translate(-50%, -50%);
+        bottom: 0;
         .mint-swipe-indicator {
-          width: 10px;
-          height:10px;
-          background: #dfdfdf;
+          width: 15px;
+          height:6px;
+          margin:0 5px;
+          background: #ddd;
           opacity:1;
           &.is-active {
-            background:#ff2741 ;
+            background:#fff ;
           }
         }
       }
