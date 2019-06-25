@@ -27,21 +27,21 @@ const CardCoupon = () =>   import ('page/member/cardCoupon')
 
 /* shop */
 const Cart = () =>  import ('page/shop/cart')
-const CartToc = () =>  import ('page/shopc/cartToc')
+const CartToC = () =>  import ('page/shopc/cartToc')
 const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
-const OrderToc = () => import ('page/shopc/orderToc')
+const OrderToC = () => import ('page/shopc/orderToc')
 const OrderRusult = () => import ('page/shop/orderRusult')
 const OrderList = () => import ('page/shop/orderList')
-const OrderListToc = () => import ('page/shopc/orderListToc')
+const OrderListToC = () => import ('page/shopc/orderListToc')
 const Product = () =>   import ('page/shop/product')
-const ProductToc = () =>   import ('page/shopc/productToc')
+const ProductToC = () =>   import ('page/shopc/productToc')
 const SearchRusult = () =>  import ('page/shop/searchRusult')
 const SearchImg = () =>   import ('page/shop/searchImg')
 const SearchRenew = () =>   import ('page/shop/searchRenew')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
-const CreateOrderToc = () =>   import ('page/shopc/createOrderToc')
+const CreateOrderToC = () =>   import ('page/shopc/createOrderToc')
 const Review = () =>    import ('page/shop/review')
 const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
 const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
@@ -86,7 +86,7 @@ const appRouter = {
                 component: Index,
                 meta: { 
                     keepAlive: true,
-                    Title:'首页',
+                    Title:'惠眼识货',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -111,10 +111,7 @@ const appRouter = {
                 component: Login,
                 meta: { keepAlive: false ,
                     Title:'绑定手机号',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                   }
             },
             {
                 path: '/loginBlank',
@@ -135,10 +132,7 @@ const appRouter = {
                 component: Myhome,
                 meta: { keepAlive: false ,
                     Title:'我的',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    }
             },
             {
                 path: '/cardCoupon',
@@ -146,10 +140,7 @@ const appRouter = {
                 component: CardCoupon,
                 meta: { keepAlive: false ,
                     Title:'优惠券',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                   }
             },
             {
                 path: '/register',
@@ -168,11 +159,8 @@ const appRouter = {
                 name: 'cart',
                 component: Cart,
                 meta: { keepAlive: false ,
-                    Title:'购物车',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'购物车'
+                    }
             },
             {
                 path: '/category',
@@ -180,11 +168,8 @@ const appRouter = {
                 component: Category,
                 meta: { 
                     keepAlive: true ,
-                    Title:'分类',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/category')+'', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png',
+                    Title:'分类'
+                    
                 }
             },
             {
@@ -199,10 +184,7 @@ const appRouter = {
                 component: Order,
                 meta: { keepAlive: false ,
                     Title:'订单详情',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    }
             },
             {
                 path: '/createOrder',
@@ -210,10 +192,7 @@ const appRouter = {
                 component: CreateOrder,
                 meta: { keepAlive: false ,
                     Title:'创建订单',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    }
             },
             {
                 path: '/orderList/:tab?',
@@ -221,30 +200,27 @@ const appRouter = {
                 component: OrderList,
                 meta: { keepAlive: false ,
                     Title:'全部订单',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    }
             }
             ,
             {
-                path: '/orderListToc/:tab',
-                name: 'orderListToc',
-                component: OrderListToc,
+                path: '/orderListToC/:tab',
+                name: 'orderListToC',
+                component: OrderListToC,
                 meta: { keepAlive: false}
             }
             ,
             {
-                path: '/orderToc/:OrderNo',
-                name: 'orderToc',
-                component: OrderToc,
+                path: '/orderToC/:OrderNo',
+                name: 'orderToC',
+                component: OrderToC,
                 meta: { keepAlive: false}
             }
             ,
             {
-                path: '/createOrderToc',
-                name: 'createOrderToc',
-                component: CreateOrderToc,
+                path: '/createOrderToC',
+                name: 'createOrderToC',
+                component: CreateOrderToC,
                 meta: { keepAlive: false }
             }
             ,
@@ -257,9 +233,9 @@ const appRouter = {
             }
             ,
             {
-                path: '/productToc/:id',
-                name: 'productToc',
-                component: ProductToc,
+                path: '/productToC/:id',
+                name: 'productToC',
+                component: ProductToC,
                 meta: { keepAlive: false }
             }
             ,
@@ -298,9 +274,9 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
-                path: '/cartToc/:distributor_id',
-                name: 'cartToc',
-                component: CartToc,
+                path: '/cartToC/:distributor_id',
+                name: 'cartToC',
+                component: CartToC,
                 meta: { keepAlive: false }
             },
             {

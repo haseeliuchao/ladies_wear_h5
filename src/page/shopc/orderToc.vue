@@ -425,7 +425,7 @@
 <template>
   <div class="my-order">
     <div class="ordertop-status">
-         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push(`/indexToC/${$route.query.distributor_id}`)" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push({path: '/orderListToc/1',query: {distributor_id:$route.query.distributor_id}}):false">查看订单</em></p>
+         <p v-if="orderDetail.order_status===1">等待买家付款<br><em style='font-size:14px;'>{{countDown|countDownfun}}后自动取消</em><br><em @click= "$router.push(`/indexToC/${$route.query.distributor_id}`)" style='font-size:14px;'>继续购物</em> | <em style='font-size:14px;' @click.stop.prevent="!handlerEvent ? $router.push({path: '/orderListToC/1',query: {distributor_id:$route.query.distributor_id}}):false">查看订单</em></p>
          <p v-if="orderDetail.order_status===2">等待卖家发货</p>
          <p v-if="orderDetail.order_status===3">小包裹马不停蹄向您赶来</p>
          <p v-if="orderDetail.order_status===4">订单已完成</p>
@@ -454,7 +454,7 @@
               </div>
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in orderDetail.item_info_list" :key="index">
-                  <div @click= "()=>$router.push({path:'/productToc/'+item.item_id,query: {distributor_id:$route.query.distributor_id}})">
+                  <div @click= "()=>$router.push({path:'/productToC/'+item.item_id,query: {distributor_id:$route.query.distributor_id}})">
                     <img :src="item.item_img">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
@@ -564,7 +564,7 @@
           that.countDown=that.countDownTime-parseInt(new Date().getTime());
           if(that.countDown<=0&&that.orderDetail.order_status==1){
             clearInterval(times);
-            that.$router.push({path: '/orderListToc/0',query: {distributor_id:this.$route.query.distributor_id}})
+            that.$router.push({path: '/orderListToC/0',query: {distributor_id:this.$route.query.distributor_id}})
           }
         }, 1000)
         
@@ -603,7 +603,7 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        that.$router.push({path: '/orderToc/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
+                        that.$router.push({path: '/orderToC/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
                     }
                 }); 
       },  

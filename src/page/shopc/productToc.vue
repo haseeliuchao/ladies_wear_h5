@@ -1057,7 +1057,7 @@
           <i></i>
           <span>关注</span>
         </div> -->
-        <div class="shopping-cart" @click= "$router.push(`/cartToc/${$route.query.distributor_id}`)">
+        <div class="shopping-cart" @click= "$router.push(`/cartToC/${$route.query.distributor_id}`)">
         <!-- ${productInfo.distributor_id} -->
           <em v-if="productInfo.shopping_cart_num&&productInfo.shopping_cart_num!=0">{{productInfo.shopping_cart_num}}</em>
           <i></i>
@@ -1225,7 +1225,7 @@ methods: {
           
         })
         }else if(this.addType==='directBuy'){
-          this.$router.push({path: '/createOrderToc',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
+          this.$router.push({path: '/createOrderToC',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
         }
       },
@@ -1264,7 +1264,7 @@ methods: {
           
         })
         }else{
-          this.$router.push({path: '/createOrderToc',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
+          this.$router.push({path: '/createOrderToC',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
        
       },
@@ -1372,7 +1372,7 @@ methods: {
     },
     beforeRouteLeave(to, from, next){
       if(to.name ==='loginBlank' ){
-        next({path: '/indexToc/'+this.$route.query.distributor_id+''});
+        next({path: '/indexToC/'+this.$route.query.distributor_id+''});
       }else {
         next();
       }

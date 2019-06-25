@@ -563,7 +563,7 @@
           position: 'center'
         });
 
-        this.$router.push({path: '/createOrderToc',query: {Selectedstr:Selectedstr,checkout_type:1,distributor_id:this.$route.params.distributor_id}});
+        this.$router.push({path: '/createOrderToC',query: {Selectedstr:Selectedstr,checkout_type:1,distributor_id:this.$route.params.distributor_id}});
       },
       computedTotalFee() {
         let computedFee = 0,

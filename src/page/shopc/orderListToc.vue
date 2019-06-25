@@ -342,7 +342,7 @@
               ref="indexRusultloadMore"> -->
               <!--  -->
 
-      <load-more style="width:100%;" v-if="$route.name=='orderListToc'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+      <load-more style="width:100%;" v-if="$route.name=='orderListToC'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
@@ -350,7 +350,7 @@
         <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top" @click= "()=>$router.push({path: '/orderToc/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+              <div class="order-top" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>
@@ -360,7 +360,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click= "()=>$router.push({path: '/orderToc/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
+              <div class="order-product-list" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
                 <div class="order-product-item">
 
                   <div>
@@ -376,7 +376,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-sku" @click= "()=>$router.push({path: '/orderToc/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+              <div class="order-sku" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><em style="font-size:16px;">￥{{item.pay_price/100|TwoNum}}</em></strong>
               </div>
@@ -478,7 +478,7 @@
                                 path:'/orderRusult' 
                             })
                     } else{
-                        that.$router.push({path: '/orderToc/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
+                        that.$router.push({path: '/orderToC/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
                     }
                 }); 
       },
