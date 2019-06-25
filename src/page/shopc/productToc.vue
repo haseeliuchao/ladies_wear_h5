@@ -1124,9 +1124,7 @@
           content:'',
           salesConsumerPrice:null,
           cost_price:null,
-          distributor_b_o:{
-            if_free_shipping:null
-          }
+          
         },
         shopInfo: null,
         // commad: getRecommend,
@@ -1282,6 +1280,7 @@ methods: {
           return
         }
         this.productInfo = Data.data;
+        alert(this.productInfo)
         this.productInfo.imgList = JSON.parse(Data.data.img_list);
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
