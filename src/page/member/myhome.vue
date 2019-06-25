@@ -434,7 +434,7 @@
     mapMutations
   } from 'vuex';
   import {
-    cardCoupon
+    cardCoupon,getUserInfo
   } from '@/service/getData';
   export default {
     data() {
@@ -460,18 +460,18 @@
     },
 
     computed: {
-      ...mapGetters([
-        'memberInfo',
-      ])
+      // ...mapGetters([
+      //   'memberInfo',
+      // ])
     },
 
     methods: {
       openSdk(){
           window.openSdk()
       },
-      ...mapMutations([
-        'SET_USERINFO_DATA'
-      ]),
+      // ...mapMutations([
+      //   'SET_USERINFO_DATA'
+      // ]),
       // async onRefreshCallback() {
       //   let res = await this.$store.dispatch('GetUserInfo');
       //   this.userData = res.data;
@@ -481,14 +481,20 @@
       //   this.handlerEvent = y>8 ? true : false;
       // },
       async initData() {
-          let res = await this.$store.dispatch('GetUserInfo');
-          await this.SET_USERINFO_DATA(res.data);
-          if(res.code==10000){
-            await this.SET_USERINFO_DATA(res.data);
-            this.userData = res.data;
-          }else{
+          // let res = await this.$store.dispatch('GetUserInfo');
+          // await this.SET_USERINFO_DATA(res.data);
+          // if(res.code==10000){
+          //   await this.SET_USERINFO_DATA(res.data);
+          //   this.userData = res.data;
+          // }else{
+          //   this.userData.memberInfo = null;
+          // }
+          let Data = await getUserInfo();
+           if(Data.code==10000){
+            this.userData = Data.data;
+            }else{
             this.userData.memberInfo = null;
-          }
+           }  
       },
       async showToast(){
         Toast({
