@@ -343,7 +343,7 @@
             <!-- @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/myhome`)" -->
             <div>
               <div class="avatar">
-                <img :src="!userData.memberInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
+                <img :src="!userData? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
               </div>
               <div class="user">
                 <span class="username" v-if="userData.memberInfo">{{userData.memberInfo.nick}}</span>
@@ -440,7 +440,7 @@
     data() {
       return {
         userData: {
-          memberInfo:null,
+          memberInfo:{},
           distributorBO:null
         },
         handlerEvent: false,
