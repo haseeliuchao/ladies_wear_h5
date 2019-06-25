@@ -698,7 +698,7 @@
       async initData(){
         //客户详情
         let res = await this.$store.dispatch('GetMemberDetails',{
-          distributor_user_id:$route.query.distributor_user_id
+          distributor_user_id:this.$route.query.distributor_user_id
         });
         if(res.code!=10000){
           Toast({message: res.msg})
@@ -711,7 +711,7 @@
         //订单计数
         let data = await this.$store.dispatch('GetOrderCount');
          if(data.code!=10000){
-          Toast({message: '访问接口失败'})
+          Toast({message: data.msg})
         }
         this.orderCount= data.data;
         this.orderCount.orderTotalCount= data.data.orderTotalCount;
