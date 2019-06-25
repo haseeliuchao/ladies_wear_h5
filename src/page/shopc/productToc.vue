@@ -1209,6 +1209,7 @@ methods: {
             this.cursizename=null;
             this.checkcolorindex=null;
             this.checksizeindex=null;
+            this.productInfo.shopping_cart_num+=1;
           return Toast({
             message: '加入购物车成功',
             position: 'bottom'
@@ -1250,6 +1251,7 @@ methods: {
             this.cursizename=null;
             this.checkcolorindex=null;
             this.checksizeindex=null;
+            this.productInfo.shopping_cart_num+=1;
           return Toast({
             message: '加入购物车成功'
           })
