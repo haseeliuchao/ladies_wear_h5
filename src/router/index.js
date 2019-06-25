@@ -308,7 +308,7 @@ const appRouter = {
                     Title:'客户列表'}
             },
             {
-                path: '/memberDetails/:distributor_user_id',
+                path: '/memberDetails',
                 name: 'memberDetails',
                 component: MemberDetails,
                 meta: { keepAlive: false ,
