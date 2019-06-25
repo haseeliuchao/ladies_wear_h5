@@ -412,7 +412,7 @@
             <span><img src="~jd/images/kefuicon.png">帮助中心</span>
             <span>有问题找小惠 ></span>
           </p>
-          <p class="about-item" style="border-bottom:none;" @click= "openSdk">
+          <p class="about-item" style="border-bottom:none;" @click= "showToast">
             <span><img src="~jd/images/usicon.png">关于我们</span>
             <span>图搜搜索品质生活 ></span>
       
@@ -480,14 +480,7 @@
       ...mapMutations([
         'SET_USERINFO_DATA'
       ]),
-      async onRefreshCallback() {
-        let res = await this.$store.dispatch('GetUserInfo');
-        this.userData = res.data;
-        this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-      },
-      translateChange(y){ //监听下拉的阈值
-        this.handlerEvent = y>8 ? true : false;
-      },
+     
       async initData() {
           let res = await this.$store.dispatch('GetUserInfo');
           await this.SET_USERINFO_DATA(res.data);
@@ -512,8 +505,6 @@
     }
   }
 </script>
-<script>
 
-</script>
 <style lang='scss' scoped>
 </style>
