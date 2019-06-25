@@ -1599,7 +1599,11 @@ methods: {
         }
         this.productInfo = Data.data;
         this.infoImgList = JSON.parse(Data.data.img_list);
+        if(this.$route.query.distributor_id){
+        this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToc/'+this.productInfo.item_id+'?distributor_id='+this.$route.query.distributor_id)+'',imgUrl: this.productInfo.index_img_url})
+        }else{
         this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
+        }
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
