@@ -124,16 +124,23 @@ router.beforeEach((to,from,next)=>{
           }
     }
 
-    const getshop = async () => { 
+    const getshop = async (dis) => { 
+      let distributorId=''
+      if(unicodestr.indexOf('indexToC')!=-1){
+        distributorId=unicodestr.substr(10)
+      }
+      if(unicodestr.indexOf('productToc')!=-1){
+        distributorId=unicodestr.split('=')[1]
+      }
       let ShopInfo = await getShopInfo({
-        distributor_id: unicodestr.split("=")[1]
+        distributor_id: distributorId
     });
       if(ShopInfo.code==10000){
-        setSessionStorage('distributorId',ShopInfo.data.distributor_id)
+        setSessionStorage('distributorId',distributorId)
         document.title=ShopInfo.data.title;
       }
     }
-    if(routerindex==1&&isWeiXin('code')&&unicodestr.indexOf('distributor_id')!=-1){
+    if(routerindex==1&&isWeiXin('code')&&(unicodestr.indexOf('productToc')!=-1||unicodestr.indexOf('indexToC')!=-1)){
       getshop()
     }
     
