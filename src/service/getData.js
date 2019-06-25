@@ -7,6 +7,8 @@ export const loginpass = (params) => new Http().require({api: '/api/login',param
 
 export const loginInit = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
 
+export const loginUsreInit = (params) => new Http().require({api: '/api/login/token/user/get',param:params}); //登录
+
 export const loginBind = (params) => new Http().require({api: '/api/bind/phone',param:params}); //登录
 
 export const getUserInfo = (params) => new Http().require({api: '/api/member/info',param:params}); //获取个人信息

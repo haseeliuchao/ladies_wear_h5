@@ -2,6 +2,7 @@ import {
   login,
   loginpass,
   loginInit,
+  loginUsreInit,
   loginBind,
   getUserInfo,
   sendPhoneMessage,
@@ -87,6 +88,18 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         loginInit(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    LoginUsreInit({ //登录
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        loginUsreInit(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

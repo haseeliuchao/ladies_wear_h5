@@ -49,7 +49,7 @@ import {
           for(var i = 0 , len =  unicode.length ; i < len ;++i){
               unicodestr += String.fromCharCode(unicode[i]);
           }
-          
+            console.log(unicodestr)
             let Data = await this.$store.dispatch('LoginInit', {
                 code:utils.getUrlKey('code')
               })
@@ -57,15 +57,19 @@ import {
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
                 setSessionStorage('cartnum',Data.data.add_cart_count);
-                that.guideindex=getLocalStorage('guideindex');
-                if(!that.guideindex){
-                   setLocalStorage('guideindex',1);
-                }else{
-                   setLocalStorage('guideindex',2);
-                }  
               }
-       }
-        } 
+            }
+
+            // let Datauser = await this.$store.dispatch('LoginUsreInit', {
+            //     code:utils.getUrlKey('code')
+            //   })
+            //   if(Datauser.code==10000){
+            //     setSessionStorage('session_token',Datauser.data.session_token);
+            //     setSessionStorage('access_token',Datauser.data.access_token);
+            //     setSessionStorage('cartnum',Datauser.data.add_cart_count);
+            //   }
+            }
+        
      },
      mounted: function () {
       this.loginData();
