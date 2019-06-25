@@ -167,7 +167,6 @@
     },
 
     mounted: function () {
-     
     }
   }
 
