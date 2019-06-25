@@ -78,7 +78,7 @@
       <h2>今日业绩</h2>
       <ul>
         <li><span>{{shopStastistics.payOrderCount}}</span>支付订单数</li>
-        <li><span>{{shopStastistics.payOrderPrice}}</span>支付金额(元)</li>
+        <li><span>{{shopStastistics.payOrderPrice/100.00}}</span>支付金额(元)</li>
         <li><span>0</span>可用余额(元)</li>
         <li><span>{{shopStastistics.toDeliverCount}}</span>待发货订单</li>
         <li><span>{{shopStastistics.toPostSalesCount}}</span>售后中订单&nbsp;&nbsp;</li>
