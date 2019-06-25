@@ -1280,7 +1280,7 @@ methods: {
           return
         }
         this.productInfo = Data.data;
-        alert(this.productInfo)
+        alert(this.productInfo.title)
         this.productInfo.imgList = JSON.parse(Data.data.img_list);
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
