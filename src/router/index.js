@@ -307,31 +307,36 @@ const appRouter = {
                 path: '/myShop',
                 name: 'myShop',
                 component: MyShop,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                        Title:'我的小店',}
             },
             {
                 path: '/shopApplicate',
                 name: 'shopApplicate',
                 component: ShopApplicate,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    Title:'申请开店'}
             },
             {
                 path: '/shopManage',
                 name: 'shopManage',
                 component: ShopManage,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    Title:'店铺管理'}
             },
             {
                 path: '/memberList',
                 name: 'memberList',
                 component: MemberList,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    Title:'客户列表'}
             },
             {
                 path: '/memberDetails',
                 name: 'memberDetails',
                 component: MemberDetails,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    Title:'客户订单'}
             },
             {
                 path: '/sttings',
@@ -343,7 +348,7 @@ const appRouter = {
                 path: '/addressList',
                 name: 'addresslist',
                 component: AddressList,
-                meta: { keepAlive: false ,
+                meta: { keepAlive: false ,Title:'地址管理',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -353,7 +358,7 @@ const appRouter = {
                 path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
-                meta: { keepAlive: false ,
+                meta: { keepAlive: false ,Title:'地址编辑',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -364,6 +369,7 @@ const appRouter = {
                 name: 'logisticsInfo',
                 component: LogisticsInfo,
                 meta: { keepAlive: false ,
+                    Title:'物流查询',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -374,6 +380,7 @@ const appRouter = {
                 name: 'afterSaleChoice',
                 component: AfterSaleChoice,
                 meta: { keepAlive: false ,
+                    Title:'售后选择',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -384,6 +391,7 @@ const appRouter = {
                 name: 'afterSale',
                 component: AfterSale,
                 meta: { keepAlive: false ,
+                    Title:'售后编辑',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -394,6 +402,7 @@ const appRouter = {
                 name: 'afterSaleDetail',
                 component: AfterSaleDetail,
                 meta: { keepAlive: false ,
+                    Title:'售后详情',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -404,6 +413,7 @@ const appRouter = {
                 name: 'orderRusult',
                 component: OrderRusult,
                 meta: { keepAlive: false ,
+                    Title:'支付结果',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
@@ -414,42 +424,43 @@ const appRouter = {
                 path: '/goodslist/:distributor_id',
                 name: 'goodslist',
                 component: Goodslist,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,Title:'全部商品',}
+                
             }
             ,
             {
                 path: '/goodorderdetail/:OrderNo',
                 name: 'goodorderdetail',
                 component: Goodorderdetail,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,Title:'订单详情'}
             }
             ,
             {
                 path: '/goodedit/:itemId',
                 name: 'goodedit',
                 component: Goodedit,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,Title:'商品编辑'}
             }
             ,
             {
                 path: '/goodorderList/:tab',
                 name: 'goodorderList',
                 component: GoodorderList,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,Title:'全部订单' }
             }
             ,
             {
                 path: '/helpcenter',
                 name: 'helpcenter',
                 component: Helpcenter,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false , Title:'客服中心'}
             }
             ,
             {
                 path: '/helpcenterDetail',
                 name: 'helpcenterDetail',
                 component: HelpcenterDetail,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false , Title:'客服中心'}
             }
             ,
             {
