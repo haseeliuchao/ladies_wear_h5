@@ -99,7 +99,7 @@ export const finishOrder = (params) => new Http().require({api: '/api/order/rece
 
 export const cancelOrder = (params) => new Http().require({api: '/api/order/cancel',param: params}); //取消订单
 
-export const getOrderList = (params) => new Http().require({api: '/api/order/list',param: params}); //获取
+export const getOrderList = (params) => new Http().require({api: '/api/distributor/order/list',param: params}); //获取
 
 export const getOrderDetail = (params) => new Http().require({api: '/api/order/details',param: params}); //获取
 
