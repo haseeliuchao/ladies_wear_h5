@@ -45,6 +45,7 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
             link:link, // 分享链接
             imgUrl: imgUrl, // 分享图标
         })
+        wx.hideOptionMenu()
     })
     wx.error((res) => {
     })
