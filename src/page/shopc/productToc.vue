@@ -985,7 +985,8 @@
                 <span style="font-weight:bold;">&yen;</span>
                 <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100|TwoNum}}</em></span>
                 </p>
-                <span class="freight"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
+                <span class="freight" v-if="productInfo.freeShipping!=1"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
+                <span class="freight" v-if="productInfo.freeShipping==1"><em style="font-size:13px;font-weight:normal">包邮</em></span>
               </div>
               <div class="product-title-textbottom">
               <p class="product-name-text">{{productInfo.title}}</p>
@@ -1123,6 +1124,7 @@
           content:'',
           salesConsumerPrice:null,
           cost_price:null,
+          
         },
         shopInfo: null,
         // commad: getRecommend,
@@ -1201,7 +1203,13 @@ methods: {
           distributor_id:this.$route.query.distributor_id
         }).then(response => {
           if(response.code==10000){
-            
+            this.checkId=null;
+            this.shopnum=1;
+            this.curcolorname=null;
+            this.cursizename=null;
+            this.checkcolorindex=null;
+            this.checksizeindex=null;
+            this.productInfo.shopping_cart_num+=1;
           return Toast({
             message: '加入购物车成功',
             position: 'bottom'
@@ -1243,6 +1251,7 @@ methods: {
             this.cursizename=null;
             this.checkcolorindex=null;
             this.checksizeindex=null;
+            this.productInfo.shopping_cart_num+=1;
           return Toast({
             message: '加入购物车成功'
           })
@@ -1284,6 +1293,7 @@ methods: {
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
+        this.productInfo.freeShipping=Data.data.distributor_b_o.if_free_shipping;
       },
       colorcheckBtn(name,index){
           this.checkcolorindex=index;

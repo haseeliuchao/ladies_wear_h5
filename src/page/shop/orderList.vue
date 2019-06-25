@@ -454,10 +454,6 @@
         params: {
           page_size: 10,
           current_page: 1,
-          // cancel_status: null,
-          // confirm_status: null,
-          // pay_status: null,
-          // finish_status: null
           order_status:null
         },
         orderList: [],

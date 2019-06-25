@@ -91,8 +91,9 @@
       padding: 12px 12px 4px;
       border-radius: 6px;
       position: fixed;
-      bottom: 0;
+      top: 0;
       z-index: -10;
+      opacity: 0;
       background: #fff;
       .screen_subjectgoodimg{
         width: 100%;
@@ -411,7 +412,7 @@
   <div class="my-order" @click="editIndex=null">
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-     <div class="screen_subject" id='newImg'>
+     <div class="screen_subject" id='newImg' :style="{opacity:(opcityShow==true?1:0)}">
                 <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
@@ -462,7 +463,10 @@
                     <div class="product-info">
                       <p class="prod-name" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">{{item.item_title}}</p>
                       <p class="prod-price" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
-                      <p class="prod-num"><span>销量：0</span><span class="edit-btn" ref="editIndexbox">
+                      <p class="prod-num">
+                        <span v-if="item.sales_volume>=0">销量：{{item.sales_volume}}</span>
+                        <span v-if="!item.sales_volume">销量：0</span>
+                        <span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
                           <div style="border-right: 1px solid #949494;" @click= "()=>$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
                             
@@ -546,6 +550,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         screenPrice:null,
         screenQrcode:null,
         screenScrollTop:null,
+        opcityShow:false,
         actions: [{
               name: '发送好友',
               method : this.getCamera	// 调用methods中的函数
@@ -563,6 +568,11 @@ Vue.component(Actionsheet.name, Actionsheet);
              if(newvs==false){
                 this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/1/201906241553261561362823561.png"})
              }
+            },
+            addshareImgvisiblePopup:function(newvs,oldvs){
+             if(newvs==false){
+               this.opcityShow=false;
+              }
             }
     },
 
@@ -573,6 +583,9 @@ Vue.component(Actionsheet.name, Actionsheet);
     computed: {
         addShareBoovisiblePopup(){
           return this.visiblePopup.shareBoo;
+        },
+        addshareImgvisiblePopup(){
+          return this.visiblePopup.shareImg;
         }
     },
 
@@ -608,6 +621,7 @@ Vue.component(Actionsheet.name, Actionsheet);
       getLibrary: function(){
         this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.opcityShow=true;
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
       },

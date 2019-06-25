@@ -743,8 +743,8 @@
 
 
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.total_item_price>=0">{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;" v-if="confirmSelectedProduct.post_fee>=0">{{(confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><em style="font-size:16px;" v-if="confirmSelectedProduct.total_item_price>=0">￥{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><em style="font-size:16px;" v-if="confirmSelectedProduct.post_fee>=0">￥{{(confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
                 <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0&&confirmSelectedProduct.post_discount_price"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100|TwoNum}}</em></strong></p>
               </div>
             </div>
@@ -896,7 +896,7 @@ import {
         })
         }else{
           confirmSelectedData = await this.$store.dispatch('GetConfirmSelectedProductList', {
-          shopping_cart_ids:JSON.stringify({id:this.$route.query.id,number:this.$route.query.number,distributor_id:this.$route.query.distributor_id}),
+          shopping_cart_ids:JSON.stringify({item_sku_id:this.$route.query.id,number:this.$route.query.number,distributor_id:this.$route.query.distributor_id}),
           distributor_id:this.$route.query.distributor_id,
           checkout_type:this.$route.query.checkout_type
         })
