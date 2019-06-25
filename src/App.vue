@@ -53,6 +53,7 @@ import {
             let Data = await this.$store.dispatch('LoginInit', {
                 code:utils.getUrlKey('code')
               })
+              alert('get')
               if(Data.code==10000){
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
