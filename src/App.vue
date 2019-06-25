@@ -61,7 +61,7 @@ import {
               distributorId=unicodestr.split('=')[1]
             }
 
-            if(unicodestr.indexOf('ToC')!=-1){
+            if(unicodestr.indexOf('productToc')!=-1||unicodestr.indexOf('indexToC')!=-1){
               let Datauser = await this.$store.dispatch('LoginUsreInit', {
                 code:utils.getUrlKey('code'),
                 distributor_id:distributorId
