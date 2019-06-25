@@ -758,8 +758,8 @@
     mounted: function () {
       this.initData();
       //  console.log(this.$route.name)
-      if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
-      this.switchTabs(0)
+      // if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
+      // this.switchTabs(0)
     }
   }
 </script>
