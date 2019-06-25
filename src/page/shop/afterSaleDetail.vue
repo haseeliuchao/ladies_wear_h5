@@ -293,6 +293,7 @@
               </div>
         </div>
     </div>
+    <QiyuKefu/>
     <div class="selectedList" v-if="orderDetail.post_sales_status!=2">
               <div>
               <p class="selectedone">
@@ -337,6 +338,7 @@
 </template>
 
 <script>
+import QiyuKefu from 'common/qiyuKefu';
   import {
     getSaleDetail,logisticsSend
   } from '@/service/getData';
@@ -361,6 +363,7 @@
 
     components: {
       // LoadMore
+      QiyuKefu
     },
 
     computed: {},

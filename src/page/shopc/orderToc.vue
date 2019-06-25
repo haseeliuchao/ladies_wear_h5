@@ -460,7 +460,7 @@
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;">{{item.item_distributor_b_o.distributor_item_sku_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.item_price/100.00|topricenext}}</em></strong>
                         <span>x{{item.num}}</span>
                       </p>
                     </div>
@@ -483,6 +483,7 @@
           </div>
         </div>
     </div>
+     <QiyuKefu/>
     <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong style="font-weight:normal;"><em style="font-size:18px;">+</em><span style="font-weight:normal;">&yen;</span><em style="font-size:16px;">{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em style="font-size:12px;">.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
@@ -504,6 +505,7 @@
 </template>
 
 <script>
+import QiyuKefu from 'common/qiyuKefu';
   import {
     getOrderDetail,payDirect
   } from '@/service/getData';
@@ -536,6 +538,7 @@
 
     components: {
       // LoadMore
+      QiyuKefu
     },
 
     computed: {},
