@@ -1124,6 +1124,9 @@
           content:'',
           salesConsumerPrice:null,
           cost_price:null,
+          distributor_b_o:{
+            if_free_shipping:null
+          }
         },
         shopInfo: null,
         // commad: getRecommend,
