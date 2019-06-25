@@ -165,12 +165,12 @@
         this.memberData = Data.data;
         this.memberData.memberList = Data.data.data;
       },
-      // async truesearchRusult(event) { 
-      //   if (event.keyCode == 13) { //如果按的是enter键 13是enter 
-      //       event.preventDefault(); //禁止默认事件（默认是换行） 
-      //       this.searchRusult(this.search_parameter)
-      //   } 
-      // }, 
+      async truesearchRusult(event) { 
+        if (event.keyCode == 13) { //如果按的是enter键 13是enter 
+            event.preventDefault(); //禁止默认事件（默认是换行） 
+            this.searchRusult(this.search_parameter)
+        } 
+      }, 
       async clearSearch(){
         this.search_parameter='';
       },

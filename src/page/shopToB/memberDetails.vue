@@ -698,7 +698,7 @@
       async initData(){
         //客户详情
         let res = await this.$store.dispatch('GetMemberDetails',{
-          distributor_user_id:$route.query.distributor_user_id
+          distributor_user_id:this.$route.query.distributor_user_id
         });
         if(res.code!=10000){
           Toast({message: res.msg})
