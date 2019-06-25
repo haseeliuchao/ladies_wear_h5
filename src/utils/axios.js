@@ -140,9 +140,11 @@ class Http {
                   setSessionStorage('open_id',response.data.data.open_id);
                 }
               }else if(response.data.code!=20018){
-                Toast({
-                  message: response.data.msg
-                });
+                if(response.data.code!=40003){
+                  Toast({
+                    message: response.data.msg
+                  });
+                }
                 return resolve(response.data)
               }
            }
