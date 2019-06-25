@@ -110,7 +110,7 @@
       <span @click="searchRusult">搜索</span>
     </div>
     <ul class="customer-info" v-if="memberData.memberList" >
-      <li @click="()=>$router.push({path:'/memberDetails',query:{distributor_id:$route.query.distributor_id}})" v-for="(item,index) in memberData.memberList" :key="index">
+      <li @click="()=>$router.push({path:'/memberDetails',query:{distributor_user_id:item.distributor_user_id}})" v-for="(item,index) in memberData.memberList" :key="index">
         <img  :src="item.head_img" alt="">
         <div>
           <p v-if="!item.nick_note">{{item.nick}}</p>
