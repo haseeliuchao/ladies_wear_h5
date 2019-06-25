@@ -12,14 +12,20 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
         });
         let wxData = Data.data// PS: 这里根据你接口的返回值来使用
    
-    
+        let jsApiListArr=[];
+        if(title!=undefined&&title!=''&&title!=null){
+            jsApiListArr=['onMenuShareTimeline', 'onMenuShareAppMessage'];
+        }else{
+            jsApiListArr=['hideOptionMenu'];
+
+        }
         wx.config({
             debug: false, // 开启调试模式
             appId: wxData.app_id, // 必填，公众号的唯一标识
             timestamp: wxData.timestamp, // 必填，生成签名的时间戳
             nonceStr: wxData.nonce_str, // 必填，生成签名的随机串
             signature: wxData.signature, // 必填，签名，见附录1
-            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            jsApiList: jsApiListArr // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
     }
     if(isWeiXin('code')){
