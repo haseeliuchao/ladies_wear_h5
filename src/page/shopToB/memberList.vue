@@ -110,7 +110,7 @@
       <span @click="searchRusult">搜索</span>
     </div>
     <ul class="customer-info" v-if="memberData.memberList" >
-      <li @click="()=>$router.push({path:'/memberDetails',query:{distributor_user_id:item.distributor_user_id}})" v-for="(item,index) in memberData.memberList" :key="index">
+      <li @click="()=>$router.push({path:'/memberDetails',query:{distributor_user_id:item.distributor_user_id,distributor_id:item.distributor_id,member_id:item.member_id,}})" v-for="(item,index) in memberData.memberList" :key="index">
         <img  :src="item.head_img" alt="">
         <div>
           <p v-if="!item.nick_note">{{item.nick}}</p>
@@ -168,7 +168,7 @@
       async truesearchRusult(event) { 
         if (event.keyCode == 13) { //如果按的是enter键 13是enter 
             event.preventDefault(); //禁止默认事件（默认是换行） 
-            this.searchRusult(this.search_parameter)
+            this.searchRusult()
         } 
       }, 
       async clearSearch(){
