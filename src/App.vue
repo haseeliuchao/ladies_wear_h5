@@ -52,12 +52,12 @@ import {
             // console.log(unicodestr)
             // /indexToC/10
             
-            // /productToc/191070?distributor_id=13
+            // /productToC/191070?distributor_id=13
             let distributorId=''
             if(unicodestr.indexOf('indexToC')!=-1){
               distributorId=unicodestr.substr(10)
             }
-            if(unicodestr.indexOf('productToc')!=-1){
+            if(unicodestr.indexOf('productToC')!=-1){
               distributorId=unicodestr.split('=')[1]
             }
 
