@@ -505,8 +505,7 @@
         orderCount:{
            orderTotalCount:''
         },
-        // nick_note:'',
-
+        
         commad: getOrderListB,
         visiblePopup: {
           paymentLoadingVisible: false,
@@ -559,142 +558,142 @@
         });
       },
       //订单
-      //  async payment(item) {
-      //   let payData = await payDirect({
-      //     order_code:item.order_code
-      //   });
-      //   if(payData.code==10000){
-      //      this.wxPay(payData.data)
-      //   }else{
-      //     Toast({
-      //             message: payData.msg
-      //          })
-      //   }
-      // },
-      // wxPay(data){
-      //    let that = this
-      //       WeixinJSBridge.invoke(
-      //       //微信支付的一些认证  需要去网站设置好  然后在这调用
-      //           'getBrandWCPayRequest', {
-      //               "appId":data.app_id,                            //公众号名称，由商户传入     
-      //               "timeStamp":data.time_stamp,         //时间戳，自1970年以来的秒数     
-      //               "nonceStr":data.nonce_str,                //随机串     
-      //               "package":data.package_value,     
-      //               "signType":data.sign_type,         //微信签名方式：     
-      //               "paySign":data.pay_sign             //微信签名 
-      //           },
-      //           function(res){
-      //               if(res.err_msg == "get_brand_wcpay_request:ok" ){
-      //                       that.$router.push({
-      //                           path:'/orderRusult' 
-      //                       })
-      //               } else{
-      //                   that.$router.push({path:'/order/'+data.order_code+''})
-      //               }
-      //           }); 
-      // },
-      // finishOrder(item) { //确认收货
-      //    MessageBox.confirm('', { 
-      //       message: '确定已经收到货物了吗?', 
-      //       title: '',
-      //       cancelButtonClass:'cancelButton', 
-      //       confirmButtonClass:'confirmButton',
-      //     }).then(action => {
-      //       if (action == 'confirm') {     //确认的回调
-      //         this.$store.dispatch('FinishOrder', {
-      //           order_code: item.order_code
-      //         }).then(response => {
-      //           if(response.code!=10000){
-      //             Toast({
-      //             message: response.msg
-      //             })
-      //           }else{
-      //           this.onRefreshCallback()
-      //           }
-      //         })
-      //       }
-      //     }).catch(err => { 
-      //       if (err == 'cancel') {     //取消的回调
-      //       } 
-      //     });
+       async payment(item) {
+        let payData = await payDirect({
+          order_code:item.order_code
+        });
+        if(payData.code==10000){
+           this.wxPay(payData.data)
+        }else{
+          Toast({
+                  message: payData.msg
+               })
+        }
+      },
+      wxPay(data){
+         let that = this
+            WeixinJSBridge.invoke(
+            //微信支付的一些认证  需要去网站设置好  然后在这调用
+                'getBrandWCPayRequest', {
+                    "appId":data.app_id,                            //公众号名称，由商户传入     
+                    "timeStamp":data.time_stamp,         //时间戳，自1970年以来的秒数     
+                    "nonceStr":data.nonce_str,                //随机串     
+                    "package":data.package_value,     
+                    "signType":data.sign_type,         //微信签名方式：     
+                    "paySign":data.pay_sign             //微信签名 
+                },
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                            that.$router.push({
+                                path:'/orderRusult' 
+                            })
+                    } else{
+                        that.$router.push({path:'/order/'+data.order_code+''})
+                    }
+                }); 
+      },
+      finishOrder(item) { //确认收货
+         MessageBox.confirm('', { 
+            message: '确定已经收到货物了吗?', 
+            title: '',
+            cancelButtonClass:'cancelButton', 
+            confirmButtonClass:'confirmButton',
+          }).then(action => {
+            if (action == 'confirm') {     //确认的回调
+              this.$store.dispatch('FinishOrder', {
+                order_code: item.order_code
+              }).then(response => {
+                if(response.code!=10000){
+                  Toast({
+                  message: response.msg
+                  })
+                }else{
+                this.onRefreshCallback()
+                }
+              })
+            }
+          }).catch(err => { 
+            if (err == 'cancel') {     //取消的回调
+            } 
+          });
 
         
-      // },
-      // cancelOrder(item) { //取消订单
-      //   this.$store.dispatch('CancelOrder', {
-      //     order_code: item.order_code
-      //   }).then(response => {
-      //     Toast({
-      //       message: "订单已取消"
-      //     })
-      //     this.onRefreshCallback()
-      //   })
-      // },
-      // tipSend(){
-      //   Toast({
-      //       message: "提醒卖家发货成功"
-      //     })
-      // },
+      },
+      cancelOrder(item) { //取消订单
+        this.$store.dispatch('CancelOrder', {
+          order_code: item.order_code
+        }).then(response => {
+          Toast({
+            message: "订单已取消"
+          })
+          this.onRefreshCallback()
+        })
+      },
+      tipSend(){
+        Toast({
+            message: "提醒卖家发货成功"
+          })
+      },
       // 提醒卖家发货成功
-      // async onRefreshCallback() { //下拉刷新
-      //   this.params.page_size = 10;
-      //   this.params.current_page = 1;
-      //   this.goodorderList = [];
-      //   this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
-      // },
-      // switchTabs(Id) {
-      //   if (this.active === Number(Id)) return;
-      //   this.active = Id;
-      //   switch (Number(this.active)) {
-      //     // case 0: //全部订单
-      //     //   this.params.order_status = null;
-      //     //   break;
-      //     // case 1: //待付款
-      //     //   this.params.order_status = 1;
-      //     //   break;
-      //     case 2: //待发货
-      //       this.params.order_status = 0;
-      //       break;
-      //     case 3: //待收货
-      //       this.params.order_status = 1;
-      //       break;
-      //     case 4: //已完成
-      //       this.params.order_status = 2;
-      //       break;
-      //     case 5: //已关闭
-      //       this.params.order_status = 3;
-      //       break;
-      //     default: //其他
-      //       throw new Error('未知TabId')
-      //       break
-      //   }
-      //   this.onRefreshCallback();
-      // },
-      // payByWallet() {
-      //   this.$store.dispatch('PayByWallet', {
-      //     PaymentNo: this.currentOrder.orderInfo.OrdertNo,
-      //     PaymentPassword: this.paymentPassword
-      //   }).then(response => {
-      //     if (response.Code === 0) {
-      //       Toast({
-      //         message: response.Message
-      //       });
-      //       this.visiblePopup.paymentContainerVisible = false;
-      //       this.visiblePopup.paymentLoadingVisible = false;
-      //       setTimeout(() => {
-      //         this.onRefreshCallback();
-      //       }, 1000)
-      //     }
-      //   })
-      // },
-      // async infiniteCallback(response) { //加载更多订单
-      //   if (response.data.data.length > 0) {
-      //     response.data.data.map(i => {
-      //       // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
-      //       this.goodorderList.push(i)
-      //     })
-      //   }
-      // },
+      async onRefreshCallback() { //下拉刷新
+        this.params.page_size = 10;
+        this.params.current_page = 1;
+        this.goodorderList = [];
+        this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
+      },
+      switchTabs(Id) {
+        if (this.active === Number(Id)) return;
+        this.active = Id;
+        switch (Number(this.active)) {
+          // case 0: //全部订单
+          //   this.params.order_status = null;
+          //   break;
+          // case 1: //待付款
+          //   this.params.order_status = 1;
+          //   break;
+          case 2: //待发货
+            this.params.order_status = 0;
+            break;
+          case 3: //待收货
+            this.params.order_status = 1;
+            break;
+          case 4: //已完成
+            this.params.order_status = 2;
+            break;
+          case 5: //已关闭
+            this.params.order_status = 3;
+            break;
+          default: //其他
+            throw new Error('未知TabId')
+            break
+        }
+        this.onRefreshCallback();
+      },
+      payByWallet() {
+        this.$store.dispatch('PayByWallet', {
+          PaymentNo: this.currentOrder.orderInfo.OrdertNo,
+          PaymentPassword: this.paymentPassword
+        }).then(response => {
+          if (response.Code === 0) {
+            Toast({
+              message: response.Message
+            });
+            this.visiblePopup.paymentContainerVisible = false;
+            this.visiblePopup.paymentLoadingVisible = false;
+            setTimeout(() => {
+              this.onRefreshCallback();
+            }, 1000)
+          }
+        })
+      },
+      async infiniteCallback(response) { //加载更多订单
+        if (response.data.data.length > 0) {
+          response.data.data.map(i => {
+            // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
+            this.goodorderList.push(i)
+          })
+        }
+      },
       async initData(){
         //客户详情
         let res = await this.$store.dispatch('GetMemberDetails',{
@@ -717,19 +716,19 @@
         this.orderCount.orderTotalCount= data.data.orderTotalCount;
       }
     },
-    //  filters:{
-    //     topriceafter(value){
-    //         return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
-    //     },
-    //     topricenext(value){
-    //         return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
-    //     }
-    // },
+     filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
     mounted: function () {
       this.initData();
       //  console.log(this.$route.name)
-      // if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
-      // this.switchTabs(0)
+      if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
+      this.switchTabs(0)
     }
   }
 </script>
