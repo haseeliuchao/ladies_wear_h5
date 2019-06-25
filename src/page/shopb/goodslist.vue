@@ -463,7 +463,7 @@
                     <div class="product-info">
                       <p class="prod-name" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">{{item.item_title}}</p>
                       <p class="prod-price" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
-                      <p class="prod-num"><span>销量：0</span><span class="edit-btn" ref="editIndexbox">
+                      <p class="prod-num"><span>销量：{{item.sales_volume}}</span><span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
                           <div style="border-right: 1px solid #949494;" @click= "()=>$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
                             
