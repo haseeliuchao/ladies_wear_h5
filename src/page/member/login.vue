@@ -90,7 +90,7 @@
             text-shadow: none;
             text-align: left;
             font-size: 15px;
-            color: #999;
+            color: #333;
             line-height: normal;
             height: 34px;
           }
@@ -183,7 +183,7 @@
 
                <div class="cell-item" >
            <div class="code-cellimg" @click="focuscodeoneclick">
-                <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
+                <img src="~jd/images/login-psd.png" style="height:13px;margin-left:6px;" alt="">
             </div>
             <div class="right" @click="focuscodeoneclick" >
               <input @blur="gotoView" v-focus="focuscodeoneState" v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">
