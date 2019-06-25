@@ -1281,7 +1281,6 @@ methods: {
         }
         this.productInfo = Data.data;
         this.productInfo.imgList = JSON.parse(Data.data.img_list);
-        this.productInfo.freeShipping=Data.data.distributor_b_o.if_free_shipping;
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
@@ -1292,6 +1291,7 @@ methods: {
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
+        this.productInfo.freeShipping=Data.data.distributor_b_o.if_free_shipping;
       },
       colorcheckBtn(name,index){
           this.checkcolorindex=index;
