@@ -57,7 +57,7 @@ import {
             if(unicodestr.indexOf('indexToC')!=-1){
               distributorId=unicodestr.substr(10)
             }
-            if(unicodestr.indexOf('productToC')!=-1){
+            if(unicodestr.indexOf('productToc')!=-1){
               distributorId=unicodestr.split('=')[1]
             }
 
