@@ -396,19 +396,20 @@
             <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已关闭({{orderCount.dealClose}})</span>
             <div id="loadingbar" :style="active===0 ? 'left:2.5%' : active===1 ?  'left:29%' : active===2 ?'left:55%' : 'left:82%'"></div>
       </div>
-   <div class="order-container">
+    <div class="order-container">
       <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore"> -->
               <!--  -->
+
       <load-more style="width:100%;" v-if="$route.name=='memberDetails'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <!-- 全部订单 -->
-        <div class="all-order" v-if="goodorderList!=''">
+        <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
-            <div class="order-item" v-for="(item,index) in goodorderList" :key="index">
-              <div class="order-top" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+            <div class="order-item" v-for="(item,index) in orderList" :key="index">
+              <div class="order-top" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>
@@ -418,52 +419,48 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
+              <div class="order-product-list" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
                 <div class="order-product-item">
+
                   <div>
                     <img v-lazy="itemdetail.item_img+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><em style="font-size:16px;">¥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
+                        <strong><em style="font-size:16px;">￥{{itemdetail.item_price/100|TwoNum}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
-                <span style="font-size:14px;">共{{item.item_sum}}件,</span>
-                <strong style="color:#333;font-size:15px;">合计：¥{{item.pay_price/100|TwoNum}}</strong>
-                <span style="color:#999;font-size:13px;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
+              <div class="order-sku" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
+                <strong><em style="font-size:16px;">￥{{item.pay_price/100|TwoNum}}</em></strong>
               </div>
-
-              <div class="order-sku" style="padding-top: 0px;padding-bottom: 16px;" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
-                <strong style="font-size:15px;"><em>利润：¥{{item.order_profit/100|TwoNum}}</em></strong>
-              </div>
-
-
-              <!-- <div class="order-btn-group">
+              <div class="order-btn-group">
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click= "cancelOrder(item)">取消订单</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click= "tipSend">提醒发货</span>
                 <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:item.order_code}})">查看物流</span>
                 <span class="payment" @click= "payment(item)"   v-if="item.order_status===1">立即支付</span>
                 <span class="payment" @click= "finishOrder(item)"   v-if="item.order_status===3">确认收货</span>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
         
 
         <!-- 没有订单 -->
-        <div class="order-nomore-tip" v-if="goodorderList==''">
+        <div class="order-nomore-tip" v-if="orderList==''">
           <i></i>
         </div>
         <!-- 没有订单 -->
       </load-more>
+
     </div>
-  </div>
+    </div>
+    
     <div class="setNickPop" v-if="popupVisible">
       <div class="setNick-con">
           <h2 v-if="!memberData.nick_note">设置备注</h2>
@@ -646,23 +643,17 @@
         if (this.active === Number(Id)) return;
         this.active = Id;
         switch (Number(this.active)) {
-          // case 0: //全部订单
-          //   this.params.order_status = null;
-          //   break;
-          // case 1: //待付款
-          //   this.params.order_status = 1;
-          //   break;
           case 0: //待发货
-            this.params.order_status = 0;
-            break;
-          case 1: //待收货
-            this.params.order_status = 1;
-            break;
-          case 2: //已完成
             this.params.order_status = 2;
             break;
-          case 3: //已关闭
+          case 1: //待收货
             this.params.order_status = 3;
+            break;
+          case 2: //已完成
+            this.params.order_status = 4;
+            break;
+          case 3: //已关闭
+            this.params.order_status = 5;
             break;
           default: //其他
             throw new Error('未知TabId')
