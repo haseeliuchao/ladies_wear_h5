@@ -380,7 +380,7 @@
             <span>累计消费(元)</span>
         </li>
         <li>
-          <em>{{orderCount.orderTotalCount}}</em>
+          <em>{{orderCount.order_total_count}}</em>
           <span>累计订单数</span>
         </li>
       </ul>
