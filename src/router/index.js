@@ -130,8 +130,8 @@ const appRouter = {
                 path: '/myhome',
                 name: 'myhome',
                 component: Myhome,
-                meta: { keepAlive: false ,
-                    Title:'我的',
+                meta: { keepAlive: false,
+                        Title:'我的'
                     }
             },
             {

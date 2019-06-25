@@ -343,7 +343,7 @@
             <!-- @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/myhome`)" -->
             <div>
               <div class="avatar">
-                <img :src="!userData? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
+                <img :src="!userData.memberInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
               </div>
               <div class="user">
                 <span class="username" v-if="userData.memberInfo">{{userData.memberInfo.nick}}</span>
@@ -389,6 +389,14 @@
               <img src="~jd/images/received.png" alt="">
               <span>待收货</span>
             </div>
+            <!-- <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
+              <img src="~jd/images/evaluated.png" alt="">
+              <span>待评价</span>
+            </div> -->
+            <!-- <div class="order-item">
+              <img src="~jd/images/Aftermarket.png" alt="">
+              <span>退换/售后</span>
+            </div> -->
             <div class="order-item myorder" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
               <img src="~jd/images/myordericon.png" alt="">
               <span>全部订单</span>
@@ -434,7 +442,7 @@
     mapMutations
   } from 'vuex';
   import {
-    cardCoupon,getUserInfo
+    cardCoupon
   } from '@/service/getData';
   export default {
     data() {
@@ -460,41 +468,28 @@
     },
 
     computed: {
-      // ...mapGetters([
-      //   'memberInfo',
-      // ])
+      ...mapGetters([
+        'memberInfo',
+      ])
     },
 
     methods: {
       openSdk(){
           window.openSdk()
       },
-      // ...mapMutations([
-      //   'SET_USERINFO_DATA'
-      // ]),
-      // async onRefreshCallback() {
-      //   let res = await this.$store.dispatch('GetUserInfo');
-      //   this.userData = res.data;
-      //   this.$refs.recommendLoadmore.onTopLoaded(this.$refs.recommendLoadmore.uuid);
-      // },
-      // translateChange(y){ //监听下拉的阈值
-      //   this.handlerEvent = y>8 ? true : false;
-      // },
+      ...mapMutations([
+        'SET_USERINFO_DATA'
+      ]),
+     
       async initData() {
-          // let res = await this.$store.dispatch('GetUserInfo');
-          // await this.SET_USERINFO_DATA(res.data);
-          // if(res.code==10000){
-          //   await this.SET_USERINFO_DATA(res.data);
-          //   this.userData = res.data;
-          // }else{
-          //   this.userData.memberInfo = null;
-          // }
-          let Data = await getUserInfo();
-           if(Data.code==10000){
-            this.userData = Data.data;
-            }else{
+          let res = await this.$store.dispatch('GetUserInfo');
+          await this.SET_USERINFO_DATA(res.data);
+          if(res.code==10000){
+            await this.SET_USERINFO_DATA(res.data);
+            this.userData = res.data;
+          }else{
             this.userData.memberInfo = null;
-           }  
+          }
       },
       async showToast(){
         Toast({
@@ -510,8 +505,6 @@
     }
   }
 </script>
-<script>
 
-</script>
 <style lang='scss' scoped>
 </style>
