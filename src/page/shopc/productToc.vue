@@ -985,8 +985,8 @@
                 <span style="font-weight:bold;">&yen;</span>
                 <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100|TwoNum}}</em></span>
                 </p>
-                <span class="freight" v-if="productInfo.distributor_b_o.if_free_shipping==0"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
-                <span class="freight" v-if="productInfo.distributor_b_o.if_free_shipping==1"><em style="font-size:13px;font-weight:normal">包邮</em></span>
+                <!-- <span class="freight" v-if="productInfo.distributor_b_o.if_free_shipping==0"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
+                <span class="freight" v-if="productInfo.distributor_b_o.if_free_shipping==1"><em style="font-size:13px;font-weight:normal">包邮</em></span> -->
               </div>
               <div class="product-title-textbottom">
               <p class="product-name-text">{{productInfo.title}}</p>
@@ -1280,7 +1280,6 @@ methods: {
           return
         }
         this.productInfo = Data.data;
-        alert(this.productInfo.title)
         this.productInfo.imgList = JSON.parse(Data.data.img_list);
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
