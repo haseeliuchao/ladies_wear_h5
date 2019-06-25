@@ -388,12 +388,10 @@
     </div>
     <div class="my-order">
      <div class="topnav">
-            <!-- <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">全部</span> -->
-            <!-- <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待付款</span> -->
             <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">待发货({{orderCount.to_deliver}})</span>
-            <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待收货({{orderCount.toReceipt}})</span>
-            <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">已完成({{orderCount.dealSuccess}})</span>
-            <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已关闭({{orderCount.dealClose}})</span>
+            <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待收货({{orderCount.to_receipt}})</span>
+            <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">已完成({{orderCount.deal_success}})</span>
+            <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已关闭({{orderCount.deal_close}})</span>
             <div id="loadingbar" :style="active===0 ? 'left:2.5%' : active===1 ?  'left:29%' : active===2 ?'left:55%' : 'left:82%'"></div>
       </div>
     <div class="order-container">
@@ -439,13 +437,7 @@
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><em style="font-size:16px;">￥{{item.pay_price/100|TwoNum}}</em></strong>
               </div>
-              <div class="order-btn-group">
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===1" class="payment" @click= "cancelOrder(item)">取消订单</span>
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===2" class="payment" @click= "tipSend">提醒发货</span>
-                <span style="color:#999;border:1px solid #999" v-if="item.order_status===3" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:item.order_code}})">查看物流</span>
-                <span class="payment" @click= "payment(item)"   v-if="item.order_status===1">立即支付</span>
-                <span class="payment" @click= "finishOrder(item)"   v-if="item.order_status===3">确认收货</span>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -556,77 +548,8 @@
         });
       },
       //订单
-      async payment(item) {
-        let payData = await payDirect({
-          order_code:item.order_code
-        });
-        if(payData.code==10000){
-           this.wxPay(payData.data)
-        }else{
-          Toast({
-                  message: payData.msg
-               })
-        }
-      },
-      wxPay(data){
-         let that = this
-            WeixinJSBridge.invoke(
-            //微信支付的一些认证  需要去网站设置好  然后在这调用
-                'getBrandWCPayRequest', {
-                    "appId":data.app_id,                            //公众号名称，由商户传入     
-                    "timeStamp":data.time_stamp,         //时间戳，自1970年以来的秒数     
-                    "nonceStr":data.nonce_str,                //随机串     
-                    "package":data.package_value,     
-                    "signType":data.sign_type,         //微信签名方式：     
-                    "paySign":data.pay_sign             //微信签名 
-                },
-                function(res){
-                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
-                            that.$router.push({
-                                path:'/orderRusult' 
-                            })
-                    } else{
-                        that.$router.push({path:'/order/'+data.order_code+''})
-                    }
-                }); 
-      },
-      finishOrder(item) { //确认收货
-         MessageBox.confirm('', { 
-            message: '确定已经收到货物了吗?', 
-            title: '',
-            cancelButtonClass:'cancelButton', 
-            confirmButtonClass:'confirmButton',
-          }).then(action => {
-            if (action == 'confirm') {     //确认的回调
-              this.$store.dispatch('FinishOrder', {
-                order_code: item.order_code
-              }).then(response => {
-                if(response.code!=10000){
-                  Toast({
-                  message: response.msg
-                  })
-                }else{
-                this.onRefreshCallback()
-                }
-              })
-            }
-          }).catch(err => { 
-            if (err == 'cancel') {     //取消的回调
-            } 
-          });
-
-        
-      },
-      cancelOrder(item) { //取消订单
-        this.$store.dispatch('CancelOrder', {
-          order_code: item.order_code
-        }).then(response => {
-          Toast({
-            message: "订单已取消"
-          })
-          this.onRefreshCallback()
-        })
-      },
+    
+    
       tipSend(){
         Toast({
             message: "提醒卖家发货成功"
@@ -661,23 +584,7 @@
         }
         this.onRefreshCallback();
       },
-      payByWallet() {
-        this.$store.dispatch('PayByWallet', {
-          PaymentNo: this.currentOrder.orderInfo.OrdertNo,
-          PaymentPassword: this.paymentPassword
-        }).then(response => {
-          if (response.Code === 0) {
-            Toast({
-              message: response.Message
-            });
-            this.visiblePopup.paymentContainerVisible = false;
-            this.visiblePopup.paymentLoadingVisible = false;
-            setTimeout(() => {
-              this.onRefreshCallback();
-            }, 1000)
-          }
-        })
-      },
+    
       async infiniteCallback(response) { //加载更多订单
         if (response.data.data.length > 0) {
           response.data.data.map(i => {
@@ -700,7 +607,10 @@
         this.memberData.nick_note = res.data.nick_note;
         this.memberData.checkout_amount= res.data.checkout_amount;
         //订单计数
-        let data = await this.$store.dispatch('GetOrderCount');
+        let data = await this.$store.dispatch('GetOrderCount',{
+          member_id:this.$route.query.member_id,
+          distributor_id:this.$route.query.distributor_id
+        });
          if(data.code!=10000){
           Toast({message: data.msg})
         }
@@ -719,7 +629,7 @@
     mounted: function () {
       this.initData();
       //  console.log(this.$route.name)
-      if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
+
       this.switchTabs(0)
     }
   }
