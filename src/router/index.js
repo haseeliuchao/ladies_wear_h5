@@ -332,7 +332,7 @@ const appRouter = {
                     Title:'客户列表'}
             },
             {
-                path: '/memberDetails',
+                path: '/memberDetails/:distributor_user_id',
                 name: 'memberDetails',
                 component: MemberDetails,
                 meta: { keepAlive: false ,
