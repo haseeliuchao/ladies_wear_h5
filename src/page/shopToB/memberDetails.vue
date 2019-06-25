@@ -396,12 +396,12 @@
             <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已关闭({{orderCount.dealClose}})</span>
             <div id="loadingbar" :style="active===0 ? 'left:2.5%' : active===1 ?  'left:29%' : active===2 ?'left:55%' : 'left:82%'"></div>
       </div>
-    <div class="order-container">
+   <div class="order-container">
       <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore"> -->
               <!--  -->
-      <load-more style="width:100%;" v-if="$route.name=='memberDetails'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
-        :loadMoreIconVisible="false" >
+      <load-more style="width:100%;" v-if="$route.name=='goodorderList'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+        :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <!-- 全部订单 -->
@@ -434,7 +434,7 @@
                 </div>
               </div>
               <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
-                <span style="font-size:14px;">共{{item.item_info_list.length}}件,</span>
+                <span style="font-size:14px;">共{{item.item_sum}}件,</span>
                 <strong style="color:#333;font-size:15px;">合计：¥{{item.pay_price/100|TwoNum}}</strong>
                 <span style="color:#999;font-size:13px;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
               </div>
@@ -558,7 +558,7 @@
         });
       },
       //订单
-       async payment(item) {
+      async payment(item) {
         let payData = await payDirect({
           order_code:item.order_code
         });
@@ -651,16 +651,16 @@
           // case 1: //待付款
           //   this.params.order_status = 1;
           //   break;
-          case 2: //待发货
+          case 0: //待发货
             this.params.order_status = 0;
             break;
-          case 3: //待收货
+          case 1: //待收货
             this.params.order_status = 1;
             break;
-          case 4: //已完成
+          case 2: //已完成
             this.params.order_status = 2;
             break;
-          case 5: //已关闭
+          case 3: //已关闭
             this.params.order_status = 3;
             break;
           default: //其他
@@ -716,7 +716,7 @@
         this.orderCount.orderTotalCount= data.data.orderTotalCount;
       }
     },
-     filters:{
+    filters:{
         topriceafter(value){
             return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
         },
