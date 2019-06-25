@@ -483,7 +483,7 @@
 <script>
   import BackHead from 'common/backHead';
   import {
-    getOrderList,
+    getOrderListB,
     payDirect
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
@@ -507,7 +507,7 @@
         },
         // nick_note:'',
 
-        commad: getOrderList,
+        commad: getOrderListB,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false
