@@ -516,6 +516,7 @@
         params: {
           page_size: 10,
           current_page: 1,
+          member_id:this.$route.query.member_id,
           distributor_id:this.$route.query.distributor_id,
           order_status:null
         },
