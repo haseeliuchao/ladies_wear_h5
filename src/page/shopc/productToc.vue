@@ -1226,7 +1226,7 @@ methods: {
           
         })
         }else if(this.addType==='directBuy'){
-          this.$router.push({path: '/createOrderToc',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
+          this.$router.push({path: '/createOrderToc',query: {item_sku_id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
         }
       },
@@ -1264,7 +1264,7 @@ methods: {
           
         })
         }else{
-          this.$router.push({path: '/createOrderToc',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
+          this.$router.push({path: '/createOrderToc',query: {item_sku_id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
        
       },
