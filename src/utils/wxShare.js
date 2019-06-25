@@ -6,19 +6,20 @@ import {
     getSignature,
   } from '@/service/getData';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
+    let jsApiListArr=[];
+    if(title!=undefined&&title!=''&&title!=null){
+        jsApiListArr=['onMenuShareTimeline', 'onMenuShareAppMessage'];
+    }else{
+        jsApiListArr=['hideOptionMenu'];
+    }
     const foo= async () =>{
         let Data = await getSignature({
             url: BASE64.encoder(location.href.split("#")[0])
         });
         let wxData = Data.data// PS: 这里根据你接口的返回值来使用
    
-        let jsApiListArr=[];
-        if(title!=undefined&&title!=''&&title!=null){
-            jsApiListArr=['onMenuShareTimeline', 'onMenuShareAppMessage'];
-        }else{
-            jsApiListArr=['hideOptionMenu'];
-
-        }
+        
+        
         wx.config({
             debug: false, // 开启调试模式
             appId: wxData.app_id, // 必填，公众号的唯一标识
@@ -45,7 +46,10 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
             link:link, // 分享链接
             imgUrl: imgUrl, // 分享图标
         })
-        wx.hideOptionMenu()
+        if(title==undefined||title==''||title==null){
+            wx.hideOptionMenu()
+        }
+        
     })
     wx.error((res) => {
     })
