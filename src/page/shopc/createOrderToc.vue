@@ -345,9 +345,10 @@
            }
            .order-product-detailtwo{
              color: #666;
-             strong{       
+             strong{  
+                font-weight:normal;    
                       span{
-                        font-weight:bold;
+                        font-weight:normal;
                         color: #666;
                         
                       }

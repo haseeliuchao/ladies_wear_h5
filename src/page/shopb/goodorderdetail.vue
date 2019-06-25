@@ -148,9 +148,9 @@
            .order-product-detailtwo{
              color: #666;
              strong{
-                
+                font-weight:normal;
                       span{
-                       
+                        font-weight:normal;
                         color: #666;
                         
                       }
