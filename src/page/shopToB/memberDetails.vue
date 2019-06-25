@@ -517,11 +517,11 @@
           distributor_id:this.$route.query.distributor_id,
           order_status:null
         },
-        goodorderList: [],
+        orderList: [],
         active: null,
         totalNum:null,
-        goodorderListDetail:[],
-        goodorderListDetailin:[]
+        orderListDetail:[],
+        orderListDetailin:[]
       }
     },
     components:{
@@ -636,7 +636,7 @@
       async onRefreshCallback() { //下拉刷新
         this.params.page_size = 10;
         this.params.current_page = 1;
-        this.goodorderList = [];
+        this.orderList = [];
         this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
       },
       switchTabs(Id) {
@@ -682,7 +682,7 @@
         if (response.data.data.length > 0) {
           response.data.data.map(i => {
             // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
-            this.goodorderList.push(i)
+            this.orderList.push(i)
           })
         }
       },
