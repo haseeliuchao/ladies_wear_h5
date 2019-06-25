@@ -408,7 +408,7 @@
 
 <script>
   import {
-    getOrderList,
+    getOrderListB,
     payDirect
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
@@ -418,7 +418,7 @@
   export default {
     data() {
       return {
-        commad: getOrderList,
+        commad: getOrderListB,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false
