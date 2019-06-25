@@ -412,10 +412,9 @@
             <span><img src="~jd/images/kefuicon.png">帮助中心</span>
             <span>有问题找小惠 ></span>
           </p>
-          <p class="about-item" style="border-bottom:none;" @click= "showToast">
+          <p class="about-item" style="border-bottom:none;" @click= "openSdk">
             <span><img src="~jd/images/usicon.png">关于我们</span>
             <span>图搜搜索品质生活 ></span>
-      
           </p>
         </div>
       <!-- </load-more> -->
