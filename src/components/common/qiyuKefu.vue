@@ -52,7 +52,12 @@
 
     methods: {
         openSdk(){
-          window.openSdk()
+          window.openSdk();
+          // window.openSdk({
+          //   uid:getSessionStorage('user_id'),
+          //   name:getSessionStorage('nickname')
+          // });
+          
         }
     },
 

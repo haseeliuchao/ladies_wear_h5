@@ -38,37 +38,37 @@
       &:first-child{
         span{
           background:-webkit-linear-gradient(top, #e9176c,#f26a94);
-          background:linear-gradient(top, #e9176c,#f26a94);
+          background:linear-gradient(180deg, #e9176c,#f26a94);
         }
       }
       &:nth-child(2){
         span{
           background:-webkit-linear-gradient(top, #5c76f8,#74aafc);
-          background:linear-gradient(top, #5c76f8,#74aafc);
+          background:linear-gradient(180deg, #5c76f8,#74aafc);
         }
       }
       &:nth-child(3){
         span{
           background:-webkit-linear-gradient(top, #4eaef1,#6ec8ef);
-          background:linear-gradient(top, #4eaef1,#6ec8ef);
+          background:linear-gradient(180deg, #4eaef1,#6ec8ef);
         }
       }
       &:nth-child(4){
         span{
           background:-webkit-linear-gradient(top, #e92a3c,#f5a0a4);
-          background:linear-gradient(top, #e92a3c,#f5a0a4);
+          background:linear-gradient(180deg, #e92a3c,#f5a0a4);
         }
       }
       &:nth-child(5){
         span{
           background:-webkit-linear-gradient(top, #fa952e,#f8c979);
-          background:linear-gradient(top, #fa952e,#f8c979);
+          background:linear-gradient(180deg, #fa952e,#f8c979);
         }
       }
       &:last-child{
         span{
           background:-webkit-linear-gradient(top, #b60fbe,#d06cc4);
-          background:linear-gradient(top, #b60fbe,#d06cc4);
+          background:linear-gradient(180deg, #b60fbe,#d06cc4);
         }
       }
     }

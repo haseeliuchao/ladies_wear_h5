@@ -69,7 +69,8 @@ import {
               if(Datauser.code==10000){
                 setSessionStorage('session_token',Datauser.data.session_token);
                 setSessionStorage('access_token',Datauser.data.access_token);
-                setSessionStorage('cartnum',Datauser.data.add_cart_count);
+                setSessionStorage('nickname',Datauser.data.nick);
+                setSessionStorage('user_id',Datauser.data.user_id);
               }
             }else{
               let Data = await this.$store.dispatch('LoginInit', {
@@ -78,7 +79,8 @@ import {
               if(Data.code==10000){
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
-                setSessionStorage('cartnum',Data.data.add_cart_count);
+                setSessionStorage('nickname',Data.data.nick);
+                setSessionStorage('user_id',Data.data.user_id);
               }
             }
             
