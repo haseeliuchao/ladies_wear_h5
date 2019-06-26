@@ -494,7 +494,7 @@
         },
         imgsearchNo:false,
         imgsearchTrue:false,
-        active:0,
+        active:1,
         sort_enum:null,
         sort_enumboo:true,
         img_url:'',
