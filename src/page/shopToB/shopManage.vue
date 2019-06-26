@@ -89,8 +89,8 @@
         <input type="text" name="category"  v-model="shopForm.category" readonly="readonly">
       </p>
       <p>
-        <label for="markup">商品加价</label>
-        <input type="text" name="number" v-model="shopForm.n_times"  v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
+        <label for="nTimes">商品加价</label>
+        <input type="text" name="nTimes" v-model="shopForm.n_times"  id="nTimes" v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
         <span>倍</span>
       </p>
       <p>
