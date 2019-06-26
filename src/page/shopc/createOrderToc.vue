@@ -970,7 +970,7 @@ import {
         })
         }else{
           payData=await payGetData({
-          shopping_cart_ids:JSON.stringify({id:this.$route.query.id,
+          shopping_cart_ids:JSON.stringify({item_sku_id:this.$route.query.id,
           number:this.$route.query.number,distributor_id:this.$route.query.distributor_id}),
           distributor_id:this.$route.query.distributor_id,
           checkout_type:this.$route.query.checkout_type,
