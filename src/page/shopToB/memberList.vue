@@ -118,8 +118,8 @@
     <div class="searchInput" @click= "$refs.searchInput.focus()">
       <div class="search-box">
         <i class="searchIcon"></i>
-        <input type="search"  v-model="search_parameter"  @keypress="truesearchRusult" placeholder="通过手机号、备注名、昵称等查找" ref="searchInput">
-        <i class="delIcon" @click="clearSearch"></i>
+        <input type="search"  v-model="search_parameter"  @keypress="truesearchRusult" placeholder="通过手机号、备注名、昵称等查找" ref="searchInput" @input="inputSearch">
+        <i class="delIcon" @click="clearSearch" v-show="clearVisible"></i>
       </div>
       <span @click="searchRusult">搜索</span>
     </div>
@@ -156,6 +156,7 @@
   export default{
     data(){
       return{
+        clearVisible:false,
         memberData:{
           memberList:{}
         },
@@ -170,7 +171,6 @@
     methods:{
       async searchRusult() {
         this.memberData = {};
-        this.search_parameter?this.search_parameter=this.search_parameter:this.search_parameter=''
         if(this.search_parameter==''){
            Toast("请输入搜索条件")
         }
@@ -194,13 +194,20 @@
       async clearSearch(){
         this.search_parameter='';
       },
+      async inputSearch(){
+        if(this.search_parameter.length>0){
+          this.clearVisible=true;
+        }
+      },
       async initData(){
+        
         let res = await this.$store.dispatch('GetMemberList');
         if(res.code!=10000){
           Toast({duration: 2000,message:'访问接口失败'})
         }
         this.memberData = res.data;
         this.memberData.memberList = res.data.data;
+        
       }
     },  
     mounted: function () {
