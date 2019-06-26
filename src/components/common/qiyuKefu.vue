@@ -52,16 +52,12 @@
 
     methods: {
         openSdk(){
+          window.openSdk();
           // window.openSdk({
           //   uid:getSessionStorage('user_id'),
-          //   name:getSessionStorage('nick')
+          //   name:getSessionStorage('nickname')
           // });
-          window.openSdk(
-            ysf('config',{
-              uid:getSessionStorage('user_id'),
-              name:getSessionStorage('nickname')
-            })
-          )
+          
         }
     },
 
