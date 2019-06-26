@@ -160,7 +160,7 @@
           current_page: 1
         });
         if(Data.code!=10000){
-          Toast({message:'访问接口失败'})
+          Toast({duration: 2000,message:'访问接口失败'})
         }
         this.memberData = Data.data;
         this.memberData.memberList = Data.data.data;
@@ -177,7 +177,7 @@
       async initData(){
         let res = await this.$store.dispatch('GetMemberList');
         if(res.code!=10000){
-          Toast({message:'访问接口失败'})
+          Toast({duration: 2000,message:'访问接口失败'})
         }
         this.memberData = res.data;
         this.memberData.memberList = res.data.data;

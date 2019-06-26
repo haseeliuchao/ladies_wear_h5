@@ -114,7 +114,7 @@
     },
 
     mounted: function () {
-      if (!this.$route.params.Id) return Toast({
+      if (!this.$route.params.Id) return Toast({duration: 2000,
         message: '无效的Id'
       })
       this.initData()

@@ -291,36 +291,36 @@
             params.consignee_id = this.$route.params.consignee_id
             this.$store.dispatch('UpdataAddress',params).then(response=>{
               if(response.code != 10000){
-                Toast({
+                Toast({duration: 2000,
                   message: '保存失败',
                 })
               }else {
-                Toast({
+                Toast({duration: 2000,
                   message: '保存成功'
                 })
                 // this.$router.push({path: '/addressList'})
                 this.$router.go(-1)
               }
             }).catch(error=>{
-                Toast({
+                Toast({duration: 2000,
                   message: '访问接口失败'
                 })
             });
           }else{
             this.$store.dispatch('SaveAddress',params).then(response=>{
               if(response.code != 10000){
-                Toast({
+                Toast({duration: 2000,
                   message: '保存失败',
                 })
               }else {
-                Toast({
+                Toast({duration: 2000,
                   message: '保存成功'
                 })
                 // this.$router.push({path: '/addressList'})
                 this.$router.go(-1)
               }
           }).catch(error=>{
-              Toast({
+              Toast({duration: 2000,
                 message: '访问接口失败'
               })
           });
@@ -348,11 +348,11 @@
           if_default: this.addressForm.selected ? 1 : 0
         }).then(response => {
           if(response.code != 10000){
-            Toast({
+            Toast({duration: 2000,
               message: '删除失败',
             })
           }else {
-            Toast({
+            Toast({duration: 2000,
               message: '删除成功'
             })
             // this.$router.push({path: '/addressList'})

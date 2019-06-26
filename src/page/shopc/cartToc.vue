@@ -529,7 +529,7 @@
           }
         })
         Selectedstr=SelectedList.join(",");
-        if (SelectedList == '') return Toast({
+        if (SelectedList == '') return Toast({duration: 2000,
           message: '请选择商品',
           position: 'bottom'
         });
@@ -540,7 +540,7 @@
          if(response.code==10000){
            this.initData();
         }else{
-          Toast({
+          Toast({duration: 2000,
                   message: response.msg
                })
           return;
@@ -558,7 +558,7 @@
           }
         })
         Selectedstr=SelectedList.join(",");
-        if (SelectedList == '') return Toast({
+        if (SelectedList == '') return Toast({duration: 2000,
           message: '请选择商品',
           position: 'center'
         });
@@ -593,7 +593,7 @@
         }
         if(item.num<1){
           item.num=1;
-          Toast({
+          Toast({duration: 2000,
             message: '宝贝不能再减少了哦',
             position: 'center'
           })
@@ -625,7 +625,7 @@
           distributor_id:this.$route.params.distributor_id
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg
           })
           return

@@ -268,7 +268,7 @@ getLocalStorage,
           challengecode: this.registeredForm.code,
         }
         this.$store.dispatch('Registered', formData).then(response => {
-          Toast({
+          Toast({duration: 2000,
             message: '注册成功',
             position: 'bottom'
           })
@@ -276,7 +276,7 @@ getLocalStorage,
           this.visiblePopup.registeredCode = false;
           this.visiblePopup.registeredFormId = false;
         }, err => {
-          return Toast({
+          return Toast({duration: 2000,
             message: err.message,
             position: 'bottom'
           })
@@ -288,10 +288,10 @@ getLocalStorage,
           open_id:getSessionStorage('open_id')
         });
         this.registeredForm.resetSendPhoneMessage = 60;
-        if (Data.code !== 10000) return Toast({
+        if (Data.code !== 10000) return Toast({duration: 2000,
           message: Data.msg
         })
-        Toast({
+        Toast({duration: 2000,
             message: '发送成功',
             position: 'center'
           })
@@ -321,7 +321,7 @@ getLocalStorage,
           nickname:nickName,
           open_id:getSessionStorage('open_id')
         })
-        if (Data.code !== 10000) return Toast({
+        if (Data.code !== 10000) return Toast({duration: 2000,
           message: Data.msg
         })
         setSessionStorage('session_token',Data.data.session_token);

@@ -1455,7 +1455,7 @@ methods: {
 //     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
 //     success: () => {
 //       // alert('分享成功')
-//       return Toast({
+//       return Toast({duration: 2000,
 //             message: '分享成功',
 //             position: 'center'
 //           })
@@ -1477,7 +1477,7 @@ methods: {
 //     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
 //     success: () => {
 //       // alert('分享成功')
-//       return Toast({
+//       return Toast({duration: 2000,
 //             message: '分享成功',
 //             position: 'center'
 //           })
@@ -1511,13 +1511,13 @@ methods: {
             that.checkIdnums=[]
             that.colorCur=[];
             this.productInfo.shopping_cart_num+=1;
-          return Toast({
+          return Toast({duration: 2000,
             message: '加入购物车成功',
             position: 'center'
           })
           }else if(response.code==20025){
           }else{
-            Toast({
+            Toast({duration: 2000,
             message: response.msg,
             position: 'center'
             })
@@ -1549,13 +1549,13 @@ methods: {
             that.checkIdnums=[];
             that.colorCur=[];
             this.productInfo.shopping_cart_num+=1;
-          return Toast({
+          return Toast({duration: 2000,
             message: '加入购物车成功',
             position: 'center'
           })
           }else if(response.code==20025){
           }else{
-            Toast({
+            Toast({duration: 2000,
             message: response.msg,
             position: 'center'
             })
@@ -1577,7 +1577,7 @@ methods: {
         this.checkIdnums=[];
       },
       tipSend(){
-        Toast({
+        Toast({duration: 2000,
             message: "此商品已下架"
           })
       },
@@ -1594,12 +1594,13 @@ methods: {
         }
         let Data = await getProduct(sandObj);
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg
           })
           return
         }
         this.productInfo = Data.data;
+        this.distributorId=Data.data.distributor_b_o.distributor_id;
         this.infoImgList = JSON.parse(Data.data.img_list);
         if(this.$route.query.distributor_id){
         this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+this.productInfo.item_id+'?distributor_id='+this.$route.query.distributor_id)+'',imgUrl: this.productInfo.index_img_url})
@@ -1626,15 +1627,15 @@ methods: {
           }
         } 
         
-        let ShopInfoData = await getShopInfo({
-        });
-        if(ShopInfoData.code!=10000){
-          Toast({
-            message: ShopInfoData.msg
-          })
-          return
-        }
-        this.distributorId=ShopInfoData.data.distributor_id;
+        // let ShopInfoData = await getShopInfo({
+        // });
+        // if(ShopInfoData.code!=10000){
+        //   Toast({duration: 2000,
+        //     message: ShopInfoData.msg
+        //   })
+        //   return
+        // }
+        // this.distributorId=ShopInfoData.data.distributor_id;
 
 
 
@@ -1657,7 +1658,7 @@ methods: {
           item.number+= operation;
            if(item.number<0){
             item.number =0;
-          Toast({
+          Toast({duration: 2000,
               message: '宝贝不能再减少了哦'
             })
             return;
@@ -1694,7 +1695,7 @@ methods: {
           }else if(Data.code==40003){
              this.$router.push({path: '/shopApplicate'});
           }else{
-             Toast({
+             Toast({duration: 2000,
              message: Data.msg
              })
              return
@@ -1712,20 +1713,20 @@ methods: {
           if(Data.code==20025){
             return
           }else{
-             Toast({
+             Toast({duration: 2000,
              message: Data.msg
              })
              return
           }
         }
-        Toast({
+        Toast({duration: 2000,
              message: '下架成功'
         })
         this.productInfo.item_status=2;
        },
        async upperShelf(state){
          if(state!=2){
-           Toast({
+           Toast({duration: 2000,
              message: '该商品已售罄'
              })
              return
@@ -1737,13 +1738,13 @@ methods: {
           if(Data.code==20025){
             return
           }else{
-             Toast({
+             Toast({duration: 2000,
              message: Data.msg
              })
              return
           }
         }
-        Toast({
+        Toast({duration: 2000,
              message: '上架成功'
         })
         this.productInfo.item_status=1;

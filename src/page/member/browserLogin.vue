@@ -754,7 +754,7 @@ import {
           phone: this.loginphoneForm.phone,
           code: this.loginphoneForm.code
         })
-        if (Data.code !== 10000&&Data.code !== 30031) return Toast({
+        if (Data.code !== 10000&&Data.code !== 30031) return Toast({duration: 2000,
           message: Data.msg
         })
         if(Data.code==30031){
@@ -770,7 +770,7 @@ import {
         let Data = await this.$store.dispatch('SetPassword', {
           password: this.registeredForm.password,
         })
-        if (Data.code !== 10000) return Toast({
+        if (Data.code !== 10000) return Toast({duration: 2000,
           message: Data.msg
         })
         this.$router.go(-1);
@@ -784,7 +784,7 @@ import {
           challengecode: this.registeredForm.code,
         }
         this.$store.dispatch('Registered', formData).then(response => {
-          Toast({
+          Toast({duration: 2000,
             message: '注册成功',
             position: 'bottom'
           })
@@ -792,7 +792,7 @@ import {
           this.visiblePopup.registeredCode = false;
           this.visiblePopup.registeredFormId = false;
         }, err => {
-          return Toast({
+          return Toast({duration: 2000,
             message: err.message,
             position: 'bottom'
           })
@@ -802,7 +802,7 @@ import {
         this.$store.dispatch('GetUserInfo', {
           MemberToken: this.registeredForm.phone
         }).then(response => {
-          if (response.Code === 0) return Toast({
+          if (response.Code === 0) return Toast({duration: 2000,
             message: '该手机已被注册',
             position: 'bottom'
           })
@@ -818,7 +818,7 @@ import {
         } = await this.$store.dispatch('GetUserInfo', {
           MemberToken: this.forgetForm.phone
         });
-        if (Code !== 0) return Toast({
+        if (Code !== 0) return Toast({duration: 2000,
           message: Message,
           position: 'bottom'
         })
@@ -828,7 +828,7 @@ import {
       async getImgTokenasync(){
         let Data = await getImgToken({});
           if(Data.code!=10000){
-            Toast({
+            Toast({duration: 2000,
               message: Data.msg,
               position: 'bottom'
             })
@@ -878,7 +878,7 @@ import {
           phone: this.loginForm.username,
           password: this.loginForm.password
         })
-        if (Data.code !== 10000) return Toast({
+        if (Data.code !== 10000) return Toast({duration: 2000,
           message: Data.msg,
           position: 'bottom'
         })

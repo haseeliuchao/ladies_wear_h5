@@ -667,7 +667,7 @@
                 })
         })
         Selectedstr=SelectedList.join(",");
-        if (SelectedList == '') return Toast({
+        if (SelectedList == '') return Toast({duration: 2000,
           message: '请选择商品',
           position: 'bottom'
         });
@@ -696,7 +696,7 @@
           })
         })
         Selectedstr=SelectedList.join(",");
-        if (SelectedList == '') return Toast({
+        if (SelectedList == '') return Toast({duration: 2000,
           message: '请选择商品',
           position: 'center'
         });
@@ -757,7 +757,7 @@
         }
         if(itemdetail.num<1){
           itemdetail.num=1;
-          Toast({
+          Toast({duration: 2000,
             message: '宝贝不能再减少了哦',
             position: 'center'
           })

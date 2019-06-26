@@ -167,13 +167,13 @@
         <li :class="{'active':activeIndex===1}" @click="activeIndexchange(1)">按利润值</li>
       </ul>
       <div class="setProfitone" v-if="activeIndex==0">
-      <p class="setProfitone-entry"><input type="text" v-model="salesMultiple"><span>倍</span></p>
+      <label><p class="setProfitone-entry"><input type="text" @blur="gotoView" v-model="salesMultiple"><span>倍</span></p></label>
       <p class="setProfitone-text">售价=进价+进价*倍数</p>
       <p class="setProfitone-choose"><span @click="setProfitClose" style="border-right:1px solid #e4e4e4;color:#333">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
       </div>
 
       <div class="setProfitone" v-if="activeIndex==1">
-      <p class="setProfitone-entry"><input type="text" v-model="salesSetProfit"><span>元</span></p>
+      <label><p class="setProfitone-entry"><input type="text" @blur="gotoView" v-model="salesSetProfit"><span>元</span></p></label>
       <p class="setProfitone-text">售价=进价+利润值</p>
       <p class="setProfitone-choose"><span style="border-right:1px solid #e4e4e4;color:#333" @click="setProfitClose">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
       </div>
@@ -198,7 +198,7 @@
          <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
-     <p class="setprice" @click="focusprofitclick"><span>设置售价</span><input @blur="gotoView" v-focus="focusprofitState" style="text-align:right;"  type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
+     <label><p class="setprice"><span>设置售价</span><input @blur="gotoView" style="text-align:right;"  type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p></label>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
@@ -290,7 +290,7 @@ import shopVue from '../shop/shop.vue';
          distributor_id:this.$route.query.shopId
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg
           })
           return
@@ -368,7 +368,7 @@ import shopVue from '../shop/shop.vue';
        },
 
        changeSales(item,price){
-         
+
          item.profit=price*100-item.cost_price;
        },
        
@@ -384,7 +384,7 @@ import shopVue from '../shop/shop.vue';
          distributor_item_sku_info:JSON.stringify(this.skuInfo)
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg
           })
           return
@@ -403,12 +403,9 @@ import shopVue from '../shop/shop.vue';
           return Object.values(tempObj)
           },
 
-       focusprofitclick () {
-       this.focusprofitState = true
-      },
+      
       gotoView () {
       window.scroll(0,0)
-      this.focusprofitState = false;
       }
 
     },

@@ -528,18 +528,18 @@
         };
         this.$store.dispatch('UpdMemberNick',params).then(response=>{
           if(response.code != 10000){
-            Toast({
+            Toast({duration: 2000,
               message: '保存失败',
             })
           }else{
-            Toast({
+            Toast({duration: 2000,
               message: '保存成功'
             });
             this.popupVisible = false;
             this.initData()
           }
         }).catch(error=>{
-              Toast({
+              Toast({duration: 2000,
                 message: '访问接口失败'
               })
         });
@@ -548,7 +548,7 @@
     
     
       tipSend(){
-        Toast({
+        Toast({duration: 2000,
             message: "提醒卖家发货成功"
           })
       },
@@ -596,7 +596,7 @@
           distributor_user_id:this.$route.query.distributor_user_id
         });
         if(res.code!=10000){
-          Toast({message: res.msg})
+          Toast({duration: 2000,message: res.msg})
         }
         this.memberData= res.data;
         this.memberData.distributor_id = res.data.distributor_id;
@@ -609,7 +609,7 @@
           distributor_id:this.$route.query.distributor_id
         });
          if(data.code!=10000){
-          Toast({message: data.msg})
+          Toast({duration: 2000,message: data.msg})
         }
         this.orderCount= data.data;
         this.orderCount.orderTotalCount= data.data.orderTotalCount;

@@ -947,7 +947,7 @@ import {
           }
         });
         if(confirmSelectedData.data==''){
-          Toast({
+          Toast({duration: 2000,
             message: '暂无订单信息'
           })
           return this.$router.go(-1);
@@ -958,7 +958,7 @@ import {
         }else if(confirmSelectedData.code==30029){
           this.$router.push('/login');
         }else{
-          Toast({
+          Toast({duration: 2000,
             message: confirmSelectedData.msg
           })
         }
@@ -984,7 +984,7 @@ import {
       // /order/generate/token
       async payByWallet(){
         if(!this.consignee_id){
-          Toast({
+          Toast({duration: 2000,
             message: '请先添加收货地址'
           })
           return
@@ -1008,7 +1008,7 @@ import {
           })
         }
         if(payData.code!==10000){
-          Toast({
+          Toast({duration: 2000,
             message: payData.msg
           })
           this.wxPaystatus=true;
