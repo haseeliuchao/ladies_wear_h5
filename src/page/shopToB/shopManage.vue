@@ -86,11 +86,11 @@
       </p>
       <p>
         <label for="category">主营类目</label>
-        <input type="text" name="category"  value="女装" readonly="readonly" id="category">
+        <input type="text" name="category"  value="女装" readonly="readonly">
       </p>
       <p>
         <label for="markup">商品加价</label>
-        <input type="text" name="markup" value="1" v-model="shopForm.n_times" placeholder="1" id="markup" v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
+        <input type="text" name="nTimes" v-model="shopForm.n_times"  v-validate="'required|number'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
         <span>倍</span>
       </p>
       <p>
@@ -104,10 +104,10 @@
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
      <div  class="save-shop" v-if="!shopForm.distributor_id"
-      :class="['cell-btn',errors.has('name')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('name')||errors.has('nTimes')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">创建店铺</div>
       <div class="save-shop" v-if="shopForm.distributor_id"
-      :class="['cell-btn',errors.has('name')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('name')||errors.has('nTimes')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
 </div>
@@ -123,7 +123,7 @@
         shopForm:{
           distributor_id:'',
           title:'',
-          n_times:'',
+          n_times:1,
           if_free_shipping:0
         },
         focuscodeoneState : false,

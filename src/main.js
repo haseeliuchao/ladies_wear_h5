@@ -93,6 +93,15 @@ const config = {
         return value.length ==6 && /^\d{6}$/.test(value)
       }
    });
+   VeeValidate.Validator.extend('number', {
+      messages: {
+        zh_CN:field => field + '必须是数字',
+      },
+      validate: value => {
+        return /^[1-9][0-9]*$/.test(value)
+      }
+   });
+   
 
  Vue.use(VeeValidate, config); 
 
