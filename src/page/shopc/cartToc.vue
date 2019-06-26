@@ -173,9 +173,24 @@
           .pd-images {
             // border: 1px solid #eee;
             margin: 0 10px;
+            overflow: hidden;
             img {
               width: 89px;
               height: 89px;
+              border-radius:5px;
+            }
+             position: relative;
+            .pd-imagestip{
+              height: 89px;
+              width: 89px;
+              background: rgba(0,0,0,.4);
+              position: absolute;z-index: 2;
+              color: #fff;
+              top: 0;
+              left: 0;
+              font-size: 18px;
+              text-align: center;
+              line-height: 89px;
             }
           }
           .pd-info {
@@ -408,9 +423,10 @@
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status==2&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
+                <span v-if="item.item_status==2" class="pd-imagestip">失效</span>
               </div>
               <div class="pd-info">
                 <div class="pd-title">
@@ -512,13 +528,20 @@
 
     methods: {
       selectedAllGoods() {
+        if(!this.delshow){
         this.cartList.map(item => {
           if (item.item_status === 1) {
             item.checked = !this.selectedAll
           }
         })
+        }else{
+          this.cartList.map(item => {
+            item.checked = !this.selectedAll
+          })
+        }
         this.selectedAll = !this.selectedAll;
         this.computedTotalFee();
+
       },
       editProductdel(){
          let SelectedList = [];
@@ -575,6 +598,8 @@
             selectedCounter++
           }
         })
+       
+
         this.selectedCounter = selectedCounter;
         this.selectedAll = selectedCounter === this.cartList.length ? true : false;
         this.totalFee = computedFee;
