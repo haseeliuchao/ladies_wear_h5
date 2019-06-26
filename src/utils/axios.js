@@ -136,7 +136,7 @@ class Http {
               }else if(response.data.code==30010){
                 if(isWeiXin('code')){
                   setSessionStorage('head_img_url',response.data.data.head_img_url);
-                  setLocalStorage('nickname',response.data.data.nickname);
+                  setSessionStorage('nickname',response.data.data.nickname);
                   setSessionStorage('open_id',response.data.data.open_id);
                 }
               }else if(response.data.code!=20018){

@@ -1320,7 +1320,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         profit:0,
         distributorId:null,
         uppershow:false,
-        screenUrl: "http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png",
+        screenUrl: "http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png",
         screenImgsrc:null,
         screenTitle:null,
         screenPrice:null,
@@ -1383,7 +1383,7 @@ methods: {
         this.screenTitle=this.productInfo.title;
         this.screenPrice=this.productInfo.sales_consumer_price;
         this.screenQrcode=this.productInfo.qrcode;
-        this.screenUrl="http://imagechao.test.upcdn.net/ICON/2019/5/5/share1561097371087.png"
+        this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png"
       },
       actionSheet: function(){
       this.sheetVisible = true;

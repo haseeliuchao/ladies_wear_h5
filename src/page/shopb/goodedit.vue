@@ -198,7 +198,7 @@
          <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
-     <p class="setprice"><span>设置售价</span><input style="text-align:right;" type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
+     <p class="setprice" @click="focusprofitclick"><span>设置售价</span><input @blur="gotoView" v-focus="focusprofitState" style="text-align:right;"  type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
@@ -246,7 +246,7 @@ import shopVue from '../shop/shop.vue';
         sizearr:[],
         
         skuInfo:[],
-          
+        focusprofitState:false
        
       };
     },
@@ -368,6 +368,7 @@ import shopVue from '../shop/shop.vue';
        },
 
        changeSales(item,price){
+         
          item.profit=price*100-item.cost_price;
        },
        
@@ -400,8 +401,15 @@ import shopVue from '../shop/shop.vue';
               }
           })
           return Object.values(tempObj)
-          }
- 
+          },
+
+       focusprofitclick () {
+       this.focusprofitState = true
+      },
+      gotoView () {
+      window.scroll(0,0)
+      this.focusprofitState = false;
+      }
 
     },
     filters:{
