@@ -115,7 +115,7 @@ router.beforeEach((to,from,next)=>{
   routerindex++;
   var shareImgurl='';
   if(to.meta.imgUrl==undefined){
-    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
+    shareImgurl='http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'
   }else{
     shareImgurl=to.meta.imgUrl
   }

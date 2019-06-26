@@ -90,7 +90,7 @@ const appRouter = {
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png',
+                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png',
                 }
             }, 
             {
@@ -248,7 +248,7 @@ const appRouter = {
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/searchRenew',
@@ -265,7 +265,7 @@ const appRouter = {
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/shop',
