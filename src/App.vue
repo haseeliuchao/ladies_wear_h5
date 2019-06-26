@@ -57,11 +57,11 @@ import {
             if(unicodestr.indexOf('indexToC')!=-1){
               distributorId=unicodestr.substr(10)
             }
-            if(unicodestr.indexOf('productToc')!=-1){
+            if(unicodestr.indexOf('productToC')!=-1){
               distributorId=unicodestr.split('=')[1]
             }
 
-            if(unicodestr.indexOf('productToc')!=-1||unicodestr.indexOf('indexToC')!=-1){
+            if(unicodestr.indexOf('productToC')!=-1||unicodestr.indexOf('indexToC')!=-1){
               let Datauser = await this.$store.dispatch('LoginUsreInit', {
                 code:utils.getUrlKey('code'),
                 distributor_id:distributorId

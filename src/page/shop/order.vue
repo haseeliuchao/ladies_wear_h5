@@ -548,6 +548,7 @@
           </div>
         </div>
     </div>
+    <QiyuKefu/>
     <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
                 <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em>.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
@@ -569,6 +570,7 @@
 </template>
 
 <script>
+import QiyuKefu from 'common/qiyuKefu';
   import {
     getOrderDetail,payDirect
   } from '@/service/getData';
@@ -606,6 +608,7 @@
 
     components: {
       // LoadMore
+      QiyuKefu
     },
 
     computed: {},
