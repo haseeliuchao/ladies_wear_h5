@@ -366,7 +366,7 @@
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><em style="font-size:16px;">¥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
+                        <strong><em style="font-size:16px;">¥{{itemdetail.item_price/100|TwoNum}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
