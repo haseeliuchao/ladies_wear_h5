@@ -554,7 +554,7 @@ import QiyuKefu from 'common/qiyuKefu';
          distributor_id:this.$route.query.distributor_id
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -585,7 +585,7 @@ import QiyuKefu from 'common/qiyuKefu';
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({duration: 2000,
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -626,7 +626,7 @@ import QiyuKefu from 'common/qiyuKefu';
                 distributor_id:this.$route.query.distributor_id
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -644,7 +644,7 @@ import QiyuKefu from 'common/qiyuKefu';
           order_code: item.order_code,
           distributor_id:this.$route.query.distributor_id
         }).then(response => {
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.initData()

@@ -154,20 +154,20 @@
         };
         //有传Id则是编辑模式 没传是新增   
           this.$store.dispatch('SaveShop',params).then(response=>{
-            response.code != 10000?Toast({duration: 2000,message: '保存失败'}):Toast({duration: 2000,message: '保存成功'});
+            response.code != 10000?Toast({duration: 1000,message: '保存失败'}):Toast({duration: 1000,message: '保存成功'});
             this.$router.push({path: '/myShop'})
             // if(response.code != 10000){
-            //   Toast({duration: 2000,
+            //   Toast({duration: 1000,
             //     message: '保存失败',
             //   })
             // }else {
-            //   Toast({duration: 2000,
+            //   Toast({duration: 1000,
             //     message: '保存成功'
             //   })
             //   this.$router.push({path: '/myShop'})
             // }
           }).catch(error=>{
-              Toast({duration: 2000,
+              Toast({duration: 1000,
                 message: '访问接口失败'
               })
           });
@@ -176,7 +176,7 @@
         if(this.$route.query.distributor_id){
           let res = await this.$store.dispatch('GetShopInfo');
           if(res.code != 10000){
-            Toast({duration: 2000,message: '访问接口失败'})
+            Toast({duration: 1000,message: '访问接口失败'})
           }
           this.shopForm.distributor_id = res.data.distributor_id;
           this.shopForm.title = res.data.title;

@@ -126,13 +126,13 @@ import {Toast} from 'mint-ui';
             this.distributor_id=this.shopStastistics.distributorBO.distributor_id;
         }else{
             this.shopStastistics = null;
-            Toast({duration: 2000,
+            Toast({duration: 1000,
                 message: '访问接口失败'
             })
         }
       },
       async showToast(){
-        Toast({duration: 2000,
+        Toast({duration: 1000,
           message:'该应用暂未开放',
           duration:1000,
         })

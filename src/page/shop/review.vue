@@ -233,7 +233,7 @@
               CommentList: commentList,
               OrderNo: this.$route.params.OrderNo
             }).then(response=>{
-              Toast({duration: 2000,
+              Toast({duration: 1000,
                 message: response.Message
               })
               setTimeout(()=>{
@@ -245,7 +245,7 @@
       }
     },
     mounted: function () {
-      if (!this.$route.params.OrderNo) return Toast({duration: 2000,
+      if (!this.$route.params.OrderNo) return Toast({duration: 1000,
         message: '订单号不能为空'
       })
       this.initData()

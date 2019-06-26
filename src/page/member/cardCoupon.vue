@@ -165,7 +165,7 @@
           user_coupon_status:this.user_coupon_status
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg,
           })
           return

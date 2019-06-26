@@ -537,7 +537,7 @@
          order_code: this.$route.params.OrderNo
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -566,7 +566,7 @@
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({duration: 2000,
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -606,7 +606,7 @@
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -623,7 +623,7 @@
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.initData()

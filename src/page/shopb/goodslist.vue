@@ -595,7 +595,7 @@ Vue.component(Actionsheet.name, Actionsheet);
          distributor_id: this.$route.params.distributor_id
         });
         if(Data.code!=10000){
-             Toast({duration: 2000,
+             Toast({duration: 1000,
              message: Data.msg
              })
              return
@@ -680,7 +680,7 @@ Vue.component(Actionsheet.name, Actionsheet);
                 distributor_item_id: id
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -700,14 +700,14 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.onRefreshCallback()
         })
       },
       tipSend(){
-        Toast({duration: 2000,
+        Toast({duration: 1000,
             message: "提醒卖家发货成功"
           })
       },

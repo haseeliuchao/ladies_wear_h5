@@ -626,7 +626,7 @@ import QiyuKefu from 'common/qiyuKefu';
          order_code: this.$route.params.OrderNo
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -653,13 +653,13 @@ import QiyuKefu from 'common/qiyuKefu';
       },
       opendownload(index,value){
         if(value==null||value==''){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: '未获取到下载链接',
             position: 'center'
           })
           return
         }
-        Toast({duration: 2000,
+        Toast({duration: 1000,
             message: select_all_and_copy(document.getElementById('textCon'+index+'')),
             position: 'center'
           })
@@ -672,7 +672,7 @@ import QiyuKefu from 'common/qiyuKefu';
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({duration: 2000,
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -712,7 +712,7 @@ import QiyuKefu from 'common/qiyuKefu';
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -729,7 +729,7 @@ import QiyuKefu from 'common/qiyuKefu';
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.initData()

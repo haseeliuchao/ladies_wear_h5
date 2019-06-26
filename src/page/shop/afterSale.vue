@@ -572,11 +572,11 @@
       },
       commitMsg(){
           if(!this.item_status){
-              Toast({duration: 2000,message: '请选择商品状态'})
+              Toast({duration: 1000,message: '请选择商品状态'})
               return;
           }
           if(!this.reason){
-              Toast({duration: 2000,message: '请选择退款原因'})
+              Toast({duration: 1000,message: '请选择退款原因'})
               return;
           }
         this.$store.dispatch('CommitMessage',{
@@ -592,7 +592,7 @@
                   this.$router.push({path: '/afterSaleDetail',query: {post_sales_id:response.data.post_sales_id}})
                  },1000)
                 }else{
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }
