@@ -90,8 +90,9 @@
       </p>
       <p>
         <label for="nTimes">商品加价</label>
-        <input type="tel" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required'"  @input="handleInput($event)" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+        <input type="tel" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required|number'"   @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span>倍</span>
+        <!-- @input="handleInput($event)" -->
       </p>
       <p>
         <label for="freight">商品包邮</label>
@@ -104,10 +105,10 @@
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
      <div  class="save-shop" v-if="!shopForm.distributor_id"
-      :class="['cell-btn',(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('number')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">创建店铺</div>
       <div class="save-shop" v-if="shopForm.distributor_id"
-      :class="['cell-btn',(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('number')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
 </div>

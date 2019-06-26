@@ -288,10 +288,6 @@
           if_default: this.addressForm.selected ? 1 : 0,
         };
           if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
-            // this.focusphoneoneState=true;
-            // this.focuscodeoneState=true;
-            // this.focuscodetwoState=true;
-            // this.focuscodethreeState=true;
             params.consignee_id = this.$route.params.consignee_id
             this.$store.dispatch('UpdataAddress',params).then(response=>{
               if(response.code != 10000){

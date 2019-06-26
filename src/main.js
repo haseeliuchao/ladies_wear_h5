@@ -98,7 +98,7 @@ const config = {
         zh_CN:field => field + '必须是数字',
       },
       validate: value => {
-        return /[^\d]/g.test(value)
+        return /^[1-9]\d*$/.test(value)
       }
    });
    
