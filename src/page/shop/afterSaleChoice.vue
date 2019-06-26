@@ -190,7 +190,7 @@
                   <!-- v-if="item.order_item_id==order_item_id" -->
                 <div class="order-product-item" v-for="(item,index) in goodInfofilter"  :key="index">
                   <div>
-                    <img :src="item.item_img">
+                    <img :src="item.index_img_url">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
