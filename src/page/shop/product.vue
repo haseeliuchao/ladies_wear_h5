@@ -1377,13 +1377,14 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
 methods: {
-      showactionsheet(){
+       async showactionsheet(){
         this.sheetVisible=true;
         this.screenImgsrc=this.productInfo.index_img_url;
         this.screenTitle=this.productInfo.title;
         this.screenPrice=this.productInfo.sales_consumer_price;
         this.screenQrcode=this.productInfo.qrcode;
-        this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png"
+        this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
+        
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -1600,9 +1601,18 @@ methods: {
           return
         }
         this.productInfo = Data.data;
-        this.distributorId=Data.data.distributor_b_o.distributor_id;
+        
         this.infoImgList = JSON.parse(Data.data.img_list);
         if(this.$route.query.distributor_id){
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({duration: 1000,
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
         this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+this.productInfo.item_id+'?distributor_id='+this.$route.query.distributor_id)+'',imgUrl: this.productInfo.index_img_url})
         }else{
         this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
@@ -1616,6 +1626,7 @@ methods: {
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
+        // this.distributorId=Data.data.distributor_b_o.distributor_id;
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];
@@ -1627,17 +1638,7 @@ methods: {
           }
         } 
         
-        // let ShopInfoData = await getShopInfo({
-        // });
-        // if(ShopInfoData.code!=10000){
-        //   Toast({duration: 1000,
-        //     message: ShopInfoData.msg
-        //   })
-        //   return
-        // }
-        // this.distributorId=ShopInfoData.data.distributor_id;
-
-
+       
 
           var _this =this
           window.addEventListener('scroll',function(){
@@ -1702,8 +1703,17 @@ methods: {
           }
         }
         this.profit=Data.data.kezuanshangxian;
-        this.visiblePopup.addSuccess=true;
 
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({duration: 1000,
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
+        this.visiblePopup.addSuccess=true;
        },
        async lowerShelf(state){
          let Data = await lowerShelfgood({
