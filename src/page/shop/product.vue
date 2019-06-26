@@ -1600,7 +1600,7 @@ methods: {
           return
         }
         this.productInfo = Data.data;
-        this.distributorId=Data.data.distributor_b_o.distributor_id;
+        
         this.infoImgList = JSON.parse(Data.data.img_list);
         if(this.$route.query.distributor_id){
         this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+this.productInfo.item_id+'?distributor_id='+this.$route.query.distributor_id)+'',imgUrl: this.productInfo.index_img_url})
@@ -1616,6 +1616,7 @@ methods: {
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
+        this.distributorId=Data.data.distributor_b_o.distributor_id;
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];
