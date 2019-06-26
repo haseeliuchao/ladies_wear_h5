@@ -545,7 +545,7 @@
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
         this.searchRusultData=[];
-        this.searchParams.sort_type = 1;
+        
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
         
@@ -590,10 +590,11 @@
           this.searchParams.page_size = 10;
           this.searchParams.current_page = 1;
           this.searchRusultData=[];
+          this.active=1;
+          this.searchParams.sort_enum=null;
           this.searchParams.sort_type = 1;
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
-          
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
 

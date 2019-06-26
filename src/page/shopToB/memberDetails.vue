@@ -407,7 +407,8 @@
         <div class="all-order" v-if="orderList!=''">
           <div class="order-list">
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
-              <div class="order-top" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+               <!-- @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})" -->
+              <div class="order-top">
                 <div class="left">
                   <span>订单编号：{{item.order_code}}</span>
                 </div>

@@ -755,7 +755,7 @@ import QiyuKefu from 'common/qiyuKefu';
     }
     ,
     beforeRouteLeave(to, from, next){
-      if(to.path==='/orderList/'+this.$route.query.order_status+''||to.name==='product'||to.name==='order'||to.name==='orderRusult'||to.name==='logisticsInfo'||to.name==='afterSaleChoice'||to.name==='afterSaleDetail'){
+      if(to.path==='/orderList/'+this.$route.query.order_status+''||to.name==='product'||to.name==='order'||to.name==='orderRusult'||to.name==='logisticsInfo'||to.name==='afterSaleChoice'||to.name==='afterSaleDetail'||to.name==='index'){
         next();
       }else {
         next({path: '/orderList/'+this.$route.query.order_status});
