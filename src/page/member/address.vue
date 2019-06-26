@@ -146,7 +146,7 @@
         <div class="cell-from-item">
           <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" name="name" v-focus v-validate="'required'"  v-model="addressForm.name" id="name" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+            <input type="text" name="name"  v-validate="'required'"  v-model="addressForm.name" id="name" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
           </div>
         </div>
         <div class="cell-from-item">
@@ -179,7 +179,7 @@
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
       <div  class="save-address" 
-       :class="['cell-btn',errors.has('mobile')||errors.has('name')||addressForm.phone.length==0||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
+       :class="['cell-btn',errors.has('mobile')||addressForm.phone.length==0||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
       @click= "saveAddress">保存</div>
     </div>
     <div>
@@ -288,10 +288,10 @@
           if_default: this.addressForm.selected ? 1 : 0,
         };
           if(this.$route.params.consignee_id){ //有传Id则是编辑模式 没传是新增
-            this.focusphoneoneState=true;
-            this.focuscodeoneState=true;
-            this.focuscodetwoState=true;
-            this.focuscodethreeState=true;
+            // this.focusphoneoneState=true;
+            // this.focuscodeoneState=true;
+            // this.focuscodetwoState=true;
+            // this.focuscodethreeState=true;
             params.consignee_id = this.$route.params.consignee_id
             this.$store.dispatch('UpdataAddress',params).then(response=>{
               if(response.code != 10000){
