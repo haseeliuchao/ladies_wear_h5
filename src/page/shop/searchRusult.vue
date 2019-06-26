@@ -524,7 +524,7 @@
         this.searchParams.sort_type=index;
          if(index==1){
            this.active=1;
-           this.sort_enum=null
+           this.sort_enum=null;
          }else if(index==2){
            this.active=2;
            this.sort_enum='ASC'
@@ -545,8 +545,10 @@
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
         this.searchRusultData=[];
+        this.searchParams.sort_type = 1;
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
+        
       },
       async initData(){
         this.img_url = this.$route.query.img_url;
@@ -588,9 +590,13 @@
           this.searchParams.page_size = 10;
           this.searchParams.current_page = 1;
           this.searchRusultData=[];
-          this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+          this.searchParams.sort_type = 1;
+          this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
+          ));
+          
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
+
        this.$route.meta.isBack=false;
        this.isFirstEnter=false;
     }
