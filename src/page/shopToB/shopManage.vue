@@ -81,7 +81,7 @@
     <div class="storeCreate-con store-con">
       <p>
         <label for="name">店铺名称</label>
-        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate="'required'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate.initial="'required'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span v-show="shopForm.title.length>10">请输入合格店铺名称</span>
       </p>
       <p>
@@ -90,7 +90,7 @@
       </p>
       <p>
         <label for="nTimes">商品加价</label>
-        <input type="text" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required|number'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+        <input type="text" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate.initial="'require'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span>倍</span>
       </p>
       <p>
