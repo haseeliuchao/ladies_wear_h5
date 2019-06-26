@@ -101,8 +101,18 @@ export const finishOrder = (params) => new Http().require({api: '/api/order/rece
 
 export const cancelOrder = (params) => new Http().require({api: '/api/order/cancel',param: params}); //取消订单
 
-export const getOrderList = (params) => new Http().require({api: '/api/order/list',param: params}); //获取
+export const getOrderList = (params) => new Http().require({api: '/api/b/order/my',param: params}); //b端订单列表、
+
+
+export const getOrderListC = (params) => new Http().require({api: '/api/c/order/my',param: params}); //c端订单列表
+
+
 export const getOrderListB = (params) => new Http().require({api: '/api/distributor/order/list',param: params}); //获取B端店铺订单
+
+
+export const getOrderListMemberC = (params) => new Http().require({api: '/api/distributor/client/order/list',param: params}); //获取B端某个用户订单
+
+
 
 export const getOrderDetail = (params) => new Http().require({api: '/api/order/details',param: params}); //获取
 

@@ -17,6 +17,7 @@ import {
   getConfirmSelectedProductList,
   createOrder,
   getOrderList,
+  getOrderListC,
   getOrder,
   getCommentList,
   commitMessage,
@@ -305,6 +306,18 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         getOrderList(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetOrderListC({ // 获取订单列表信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getOrderListC(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
