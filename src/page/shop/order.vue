@@ -520,7 +520,7 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span> 
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_price/100.00}}</span>  <span class="num">x {{item.num}}</span> 
                   <span class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
                   <span class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
                   <span class="payment" v-if="item.post_sales_status==4">售后成功</span>
@@ -626,7 +626,7 @@ import QiyuKefu from 'common/qiyuKefu';
          order_code: this.$route.params.OrderNo
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -653,13 +653,13 @@ import QiyuKefu from 'common/qiyuKefu';
       },
       opendownload(index,value){
         if(value==null||value==''){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: '未获取到下载链接',
             position: 'center'
           })
           return
         }
-        Toast({duration: 2000,
+        Toast({duration: 1000,
             message: select_all_and_copy(document.getElementById('textCon'+index+'')),
             position: 'center'
           })
@@ -672,7 +672,7 @@ import QiyuKefu from 'common/qiyuKefu';
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({duration: 2000,
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -712,7 +712,7 @@ import QiyuKefu from 'common/qiyuKefu';
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -729,7 +729,7 @@ import QiyuKefu from 'common/qiyuKefu';
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.initData()

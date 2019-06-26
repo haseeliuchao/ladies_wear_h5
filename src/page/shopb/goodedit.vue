@@ -290,7 +290,7 @@ import shopVue from '../shop/shop.vue';
          distributor_id:this.$route.query.shopId
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg
           })
           return
@@ -384,7 +384,7 @@ import shopVue from '../shop/shop.vue';
          distributor_item_sku_info:JSON.stringify(this.skuInfo)
         });
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg
           })
           return

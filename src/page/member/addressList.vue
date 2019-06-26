@@ -170,7 +170,7 @@
       //     Id: item.consignee_id
       //   }).then(response => {
       //     this.onRefreshCallback();
-      //     Toast({duration: 2000,
+      //     Toast({duration: 1000,
       //       message: response.message
       //     })
       //   });
@@ -193,7 +193,7 @@
       async initData() {
         let Data = await getAddressList({});
         if(Data.code!=10000){
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })

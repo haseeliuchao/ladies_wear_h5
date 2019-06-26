@@ -399,12 +399,12 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(itemitemalldetail,index1) in itemall.item_sku_bo_list" :key="index1"><span class="sku">颜色 {{itemitemalldetail.color}}   尺寸 {{itemitemalldetail.size}}</span> <span class="price">￥{{itemitemalldetail.item_total_price/100.00}}</span>  <span class="num">x {{itemitemalldetail.num}}</span></p>
+                  <p class="prodskulist-info" v-for="(itemitemalldetail,index1) in itemall.item_sku_bo_list" :key="index1"><span class="sku">颜色 {{itemitemalldetail.color}}   尺寸 {{itemitemalldetail.size}}</span> <span class="price">￥{{itemitemalldetail.item_price/100.00}}</span>  <span class="num">x {{itemitemalldetail.num}}</span></p>
                </div>
 
               </div>
               <div class="order-sku" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
-                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
+                <span>共{{item.item_sum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group" v-if="item.order_status===1||item.order_status===2||item.order_status===3">
@@ -480,7 +480,7 @@
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({duration: 2000,
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -520,7 +520,7 @@
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({duration: 2000,
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -539,14 +539,14 @@
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({duration: 2000,
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.onRefreshCallback()
         })
       },
       tipSend(){
-        Toast({duration: 2000,
+        Toast({duration: 1000,
             message: "提醒卖家发货成功"
           })
       },
@@ -591,7 +591,7 @@
           PaymentPassword: this.paymentPassword
         }).then(response => {
           if (response.Code === 0) {
-            Toast({duration: 2000,
+            Toast({duration: 1000,
               message: response.Message
             });
             this.visiblePopup.paymentContainerVisible = false;

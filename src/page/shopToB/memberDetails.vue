@@ -426,7 +426,7 @@
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><em style="font-size:16px;">￥{{itemdetail.item_price/100|TwoNum}}</em></strong>
+                        <strong><em style="font-size:16px;">￥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
@@ -528,18 +528,18 @@
         };
         this.$store.dispatch('UpdMemberNick',params).then(response=>{
           if(response.code != 10000){
-            Toast({duration: 2000,
+            Toast({duration: 1000,
               message: '保存失败',
             })
           }else{
-            Toast({duration: 2000,
+            Toast({duration: 1000,
               message: '保存成功'
             });
             this.popupVisible = false;
             this.initData()
           }
         }).catch(error=>{
-              Toast({duration: 2000,
+              Toast({duration: 1000,
                 message: '访问接口失败'
               })
         });
@@ -548,7 +548,7 @@
     
     
       tipSend(){
-        Toast({duration: 2000,
+        Toast({duration: 1000,
             message: "提醒卖家发货成功"
           })
       },
@@ -596,7 +596,7 @@
           distributor_user_id:this.$route.query.distributor_user_id
         });
         if(res.code!=10000){
-          Toast({duration: 2000,message: res.msg})
+          Toast({duration: 1000,message: res.msg})
         }
         this.memberData= res.data;
         this.memberData.distributor_id = res.data.distributor_id;
@@ -609,7 +609,7 @@
           distributor_id:this.$route.query.distributor_id
         });
          if(data.code!=10000){
-          Toast({duration: 2000,message: data.msg})
+          Toast({duration: 1000,message: data.msg})
         }
         this.orderCount= data.data;
         this.orderCount.orderTotalCount= data.data.orderTotalCount;
