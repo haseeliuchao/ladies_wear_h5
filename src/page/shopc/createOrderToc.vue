@@ -729,7 +729,7 @@
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">商品规格：{{item.color}}；{{item.size}}</p>
                       <p class="prod-price">
-                        <strong><span>&yen;</span><em style="font-size:16px;" v-if="item.item_price>=0">{{item.item_price/100|TwoNum}}</em></strong>
+                        <strong><span>&yen;</span><em style="font-size:16px;" v-if="item.item_price>=0">{{item.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
                         <span>x{{item.num}}</span>
                       </p>
                     </div>
