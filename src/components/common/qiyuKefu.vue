@@ -5,7 +5,7 @@
       text-align: center;
       padding: 16px 0;
       background: #fff;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       .contact-severtop{
           line-height: 24px;
           
