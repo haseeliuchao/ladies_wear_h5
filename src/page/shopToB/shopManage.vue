@@ -89,8 +89,8 @@
         <input type="text" name="category"  v-model="shopForm.category" readonly="readonly">
       </p>
       <p>
-        <label for="markup">商品加价</label>
-        <input type="text" name="number" v-model="shopForm.n_times"  v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
+        <label for="nTimes">商品加价</label>
+        <input type="tel" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required'" @input="handleInput($event)"  @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span>倍</span>
       </p>
       <p>
@@ -104,10 +104,10 @@
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
      <div  class="save-shop" v-if="!shopForm.distributor_id"
-      :class="['cell-btn',errors.has('name')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">创建店铺</div>
       <div class="save-shop" v-if="shopForm.distributor_id"
-      :class="['cell-btn',errors.has('name')||(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
 </div>
@@ -141,8 +141,8 @@
         // this.$route.query.distributor_id?distributor_id=this.$route.query.distributor_id:distributor_id='';
         if(this.$route.params.distributor_id){
         distributor_id=this.$route.params.distributor_id;
-             this.focuscodeoneState=true;
-             this.focuscodetwoState=true;
+            //  this.focuscodeoneState=true;
+            //  this.focuscodetwoState=true;
         }else{
           distributor_id=''
        }
@@ -193,6 +193,9 @@
       window.scroll(0,0)
       this.focuscodeoneState = false;
       this.focuscodetwoState = false;
+      },
+      handleInput(e){
+        this.shopForm.n_times = e.target.value.replace(/[^\d]/g,'')
       }
     },  
     mounted: function () {
