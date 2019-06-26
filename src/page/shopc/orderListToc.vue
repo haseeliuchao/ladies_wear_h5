@@ -406,7 +406,7 @@
 <script>
  import footerViewToC from 'component/footer/footerViewToC';
   import {
-    getOrderList,
+    getOrderListC,
     payDirect
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
@@ -416,7 +416,7 @@
   export default {
     data() {
       return {
-        commad: getOrderList,
+        commad: getOrderListC,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false

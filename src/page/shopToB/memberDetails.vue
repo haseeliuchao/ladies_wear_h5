@@ -472,7 +472,7 @@
 <script>
   import BackHead from 'common/backHead';
   import {
-    getOrderListB,
+    getOrderListMemberC,
     payDirect
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
@@ -495,7 +495,7 @@
            orderTotalCount:''
         },
         
-        commad: getOrderListB,
+        commad: getOrderListMemberC,
         visiblePopup: {
           paymentLoadingVisible: false,
           paymentContainerVisible: false
@@ -506,7 +506,6 @@
           page_size: 10,
           current_page: 1,
           member_id:this.$route.query.member_id,
-          distributor_id:this.$route.query.distributor_id,
           order_status:null
         },
         orderList: [],
