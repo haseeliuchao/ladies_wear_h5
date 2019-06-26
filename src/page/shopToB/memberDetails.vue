@@ -392,7 +392,7 @@
             <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待收货({{orderCount.to_receipt}})</span>
             <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">已完成({{orderCount.deal_success}})</span>
             <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已关闭({{orderCount.deal_close}})</span>
-            <div id="loadingbar" :style="active===0 ? 'left:2.5%' : active===1 ?  'left:29%' : active===2 ?'left:55%' : 'left:82%'"></div>
+            <div id="loadingbar" :style="active===0 ? 'left:2.5%' : active===1 ?  'left:29%' : active===2 ?'left:56%' : 'left:83%'"></div>
       </div>
     <div class="order-container">
       <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"

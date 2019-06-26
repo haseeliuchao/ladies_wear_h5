@@ -97,6 +97,20 @@
       }
     }
   }
+  .customer-no{
+     @include wh(100%,100%);
+        @include flexbox(flex-start,center,column,wrap);
+        img{
+          height:90px;
+          margin-top:180px;
+          margin-bottom:24px;
+        }
+        >p{
+          font-size:15px;
+          color:#999;
+        }
+  }
+  
 </style>
 <template>
 <div>
@@ -120,6 +134,12 @@
         <span>></span>
       </li>
     </ul>
+    <div class="customer-info" v-if="!memberData.memberList">
+      <div class="customer-no">
+        <img src="~jd/images/blank.png">
+        <p>暂无相关客户</p>
+      </div> 
+    </div>
   </div>
   <BackHead/>
 </div>
