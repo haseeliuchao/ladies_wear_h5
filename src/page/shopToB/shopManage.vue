@@ -86,11 +86,11 @@
       </p>
       <p>
         <label for="category">主营类目</label>
-        <input type="text" name="category"  value="女装" readonly="readonly" id="category">
+        <input type="text" name="category"  v-model="shopForm.category" readonly="readonly">
       </p>
       <p>
         <label for="markup">商品加价</label>
-        <input type="text" name="markup" value="1" v-model="shopForm.n_times" placeholder="1" id="markup" v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
+        <input type="text" name="number" v-model="shopForm.n_times"  v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
         <span>倍</span>
       </p>
       <p>
@@ -123,7 +123,8 @@
         shopForm:{
           distributor_id:'',
           title:'',
-          n_times:'',
+          category:'女装',
+          n_times:1,
           if_free_shipping:0
         },
         focuscodeoneState : false,

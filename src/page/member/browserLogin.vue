@@ -437,7 +437,7 @@
           </div>
           <div class="cell-item" >
            <div class="code-cellimg" @click="focuspassclick">
-                <img src="~jd/images/login-psd.png" style="height:13px;margin-left:6px;" alt="">
+                <img src="~jd/images/login-psd.png" style="height:20px;margin-left:6px;" alt="">
             </div>
             <div class="right" @click="focuspassclick">
               <input @blur="gotoView" v-focus="focuspassState" v-validate="'required|password'" name="password" :type="loginForm.passwordFormType" v-model="loginForm.password" placeholder="请输入密码">
@@ -469,7 +469,7 @@
         <div class="cell-list">
           <div class="cell-item" style="margin-top:30px;" >
            <div class="code-cellimg" @click="focussetpassclick">
-                <img src="~jd/images/login-psd.png" style="height:13px;margin-left:6px;" alt="">
+                <img src="~jd/images/login-psd.png" style="height:20px;margin-left:6px;" alt="">
             </div>
             <div class="right" @click="focussetpassclick">
               <input @blur="gotoView" v-focus="focussetpassState" v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">

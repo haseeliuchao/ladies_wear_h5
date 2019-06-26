@@ -522,8 +522,6 @@
     methods: {
       //修改备注昵称
       async updNick(){
-        // let nick_note='';
-        // this.$route.params.nick_note?nick_note=this.$route.params.nick_note:nick_note='';
         let params = {
           distributor_user_id:this.memberData.distributor_user_id,
           nick_note:this.memberData.nick_note,
