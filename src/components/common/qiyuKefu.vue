@@ -50,7 +50,6 @@
     watch: {},
 
     components: {},
-
     computed: {},
     methods: {
         openSdk(){
