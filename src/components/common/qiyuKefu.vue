@@ -50,7 +50,16 @@
 
     methods: {
         openSdk(){
-          window.openSdk()
+          // window.openSdk({
+          //   uid:getSessionStorage('user_id'),
+          //   name:getSessionStorage('nick')
+          // });
+          window.openSdk(
+            ysf('config',{
+              uid:getSessionStorage('user_id'),
+              name:getSessionStorage('nick')
+            })
+          )
         }
     },
 
