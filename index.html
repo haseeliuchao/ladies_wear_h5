@@ -25,8 +25,13 @@
   })
   window.openSdk = function (obj) {
     if (isSdkReady) {
-	  ysf('config', obj)      
-      ysf('open');
+      ysf('config', {
+        user_id:obj.user_id,
+        nickname:obj.nickname,
+        success(){
+          ysf('open');
+        }
+      })      
     } else {
       alert('sdk尚未加载成功，请稍后再试');
     }

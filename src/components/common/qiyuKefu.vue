@@ -35,8 +35,11 @@
   </div>
 </template>
 <script>
+  import {
 
-
+    getSessionStorage,
+ 
+  } from '@/utils/mixin';
   export default {
     data() {
       return {
@@ -49,11 +52,10 @@
     components: {},
 
     computed: {},
-
     methods: {
         openSdk(){
           // window.openSdk();
-          window.openSdk({uid: "123456789",name: '21212',email: 'test@163.com', mobile: '138823288888'}); 
+          window.openSdk({user_id: getSessionStorage.user_id,nickname: getSessionStorage.nickname}); 
         }
     },
 
