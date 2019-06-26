@@ -52,12 +52,8 @@
 
     methods: {
         openSdk(){
-          window.openSdk();
-          // window.openSdk({
-          //   uid:getSessionStorage('user_id'),
-          //   name:getSessionStorage('nickname')
-          // });
-          
+          // window.openSdk();
+          window.openSdk({uid: "123456789",name: '21212',email: 'test@163.com', mobile: '138823288888'}); 
         }
     },
 

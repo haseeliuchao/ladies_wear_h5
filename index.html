@@ -7,7 +7,32 @@
     <script src="https://js.fundebug.cn/fundebug.0.3.4.min.js" apikey="4ff49c050ed0ead32da68d9e21f5923f31cc33c5cae1dcec93b14e03f84505e4"></script>
     <script src="https://s0.laqu.com/ICON/2019/4/2/hash1557803070707.js"></script>
     <script src="https://s0.laqu.com/ICON/2019/4/3/jbase641557930847707.js"></script>
-    <script src="https://s0.laqu.com/ICON/2019/4/4/qiyu21557936260306.js"></script>
+    <!-- <script src="https://s0.laqu.com/ICON/2019/4/4/qiyu21557936260306.js"></script> -->
+    <script>
+      (function (w, d, n, a, j) {
+    w[n] = w[n] || function (){ 
+      (w[n].a = w[n].a || []).push(arguments);
+    };
+    j = d.createElement('script');
+    j.async = true;
+    j.src ='https://qiyukf.com/script/43c880891a4096d21928cd3db4db00b0.js';
+    d.children[0].appendChild(j);
+  })(window, document, 'ysf');
+
+  var isSdkReady = false;
+  ysf('onLayerload', function () {
+    isSdkReady = true;
+  })
+  window.openSdk = function (obj) {
+    if (isSdkReady) {
+	  ysf('config', obj)      
+      ysf('open');
+    } else {
+      alert('sdk尚未加载成功，请稍后再试');
+    }
+  }
+  
+    </script>
     <script src="https://s0.laqu.com/ICON/2019/5/1/copy2clipboard1559530183077.js"></script>
     <!-- <script src="/src/utils/hash.js" ></script> -->
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
