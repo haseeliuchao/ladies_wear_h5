@@ -57,7 +57,7 @@
           window.openSdk(
             ysf('config',{
               uid:getSessionStorage('user_id'),
-              name:getSessionStorage('nick')
+              name:getSessionStorage('nickname')
             })
           )
         }

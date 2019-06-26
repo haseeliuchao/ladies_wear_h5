@@ -69,7 +69,7 @@ import {
               if(Datauser.code==10000){
                 setSessionStorage('session_token',Datauser.data.session_token);
                 setSessionStorage('access_token',Datauser.data.access_token);
-                setSessionStorage('nick',Datauser.data.nick);
+                setSessionStorage('nickname',Datauser.data.nick);
                 setSessionStorage('user_id',Datauser.data.user_id);
               }
             }else{
@@ -79,7 +79,7 @@ import {
               if(Data.code==10000){
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
-                setSessionStorage('nick',Data.data.nick);
+                setSessionStorage('nickname',Data.data.nick);
                 setSessionStorage('user_id',Data.data.user_id);
               }
             }
