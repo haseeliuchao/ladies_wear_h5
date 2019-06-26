@@ -1377,13 +1377,22 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
 methods: {
-      showactionsheet(){
+       async showactionsheet(){
         this.sheetVisible=true;
         this.screenImgsrc=this.productInfo.index_img_url;
         this.screenTitle=this.productInfo.title;
         this.screenPrice=this.productInfo.sales_consumer_price;
         this.screenQrcode=this.productInfo.qrcode;
-        this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png"
+        this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({duration: 1000,
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -1616,7 +1625,7 @@ methods: {
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
-        this.distributorId=Data.data.distributor_b_o.distributor_id;
+        // this.distributorId=Data.data.distributor_b_o.distributor_id;
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];
@@ -1704,6 +1713,15 @@ methods: {
         }
         this.profit=Data.data.kezuanshangxian;
         this.visiblePopup.addSuccess=true;
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({duration: 1000,
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
 
        },
        async lowerShelf(state){
