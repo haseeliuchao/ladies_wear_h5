@@ -118,8 +118,8 @@
     <div class="searchInput" @click= "$refs.searchInput.focus()">
       <div class="search-box">
         <i class="searchIcon"></i>
-        <input type="search"  v-model="search_parameter"  @keypress="truesearchRusult" placeholder="通过手机号、备注名、昵称等查找" ref="searchInput" @input="inputSearch">
-        <i class="delIcon" @click="clearSearch" v-show="clearVisible"></i>
+        <input type="search"  v-model="search_parameter"  @keypress="truesearchRusult" placeholder="通过手机号、备注名、昵称等查找" ref="searchInput" >
+        <i class="delIcon" @click="search_parameter=''" v-show="search_parameter.length>0"></i>
       </div>
       <span @click="searchRusult">搜索</span>
     </div>
@@ -156,7 +156,6 @@
   export default{
     data(){
       return{
-        clearVisible:false,
         memberData:{
           memberList:{}
         },
@@ -190,14 +189,6 @@
             event.preventDefault(); //禁止默认事件（默认是换行） 
             this.searchRusult()
         } 
-      }, 
-      async clearSearch(){
-        this.search_parameter='';
-      },
-      async inputSearch(){
-        if(this.search_parameter.length>0){
-          this.clearVisible=true;
-        }
       },
       async initData(){
         
