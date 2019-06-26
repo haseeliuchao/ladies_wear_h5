@@ -745,7 +745,9 @@
 
               <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><em style="font-size:16px;" v-if="confirmSelectedProduct.total_item_price>=0">￥{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><em style="font-size:16px;" v-if="confirmSelectedProduct.post_fee>=0">￥{{(confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.pay_post_fee!=0"><span >运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_fee/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.pay_post_fee==0"><span >运费</span><span >包邮</span></p>
+                <!-- <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><em style="font-size:16px;" v-if="confirmSelectedProduct.post_fee>=0">￥{{(confirmSelectedProduct.post_fee)/100|TwoNum}}</em></strong></p> -->
                 <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0&&confirmSelectedProduct.post_discount_price"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100|TwoNum}}</em></strong></p>
               </div>
             </div>
