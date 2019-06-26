@@ -86,7 +86,7 @@
       </p>
       <p>
         <label for="category">主营类目</label>
-        <input type="text" name="category"  value="女装" readonly="readonly">
+        <input type="text" name="category"  v-model="shopForm.category" readonly="readonly">
       </p>
       <p>
         <label for="markup">商品加价</label>
@@ -123,6 +123,7 @@
         shopForm:{
           distributor_id:'',
           title:'',
+          category:'女装',
           n_times:1,
           if_free_shipping:0
         },
