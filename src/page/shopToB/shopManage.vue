@@ -90,7 +90,7 @@
       </p>
       <p>
         <label for="markup">商品加价</label>
-        <input type="text" name="number" v-model="shopForm.n_times"  v-validate="'required|number'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
+        <input type="text" name="number" v-model="shopForm.n_times"  v-validate="'required'" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
         <span>倍</span>
       </p>
       <p>
