@@ -417,7 +417,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-product-list" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"  v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
+              <div class="order-product-list" v-for="(itemdetail,index) in item.item_info_list" :key="index"  >
                 <div class="order-product-item">
 
                   <div>
@@ -433,7 +433,7 @@
                   </div>
                 </div>
               </div>
-              <div class="order-sku" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
+              <div class="order-sku">
                 <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><em style="font-size:16px;">￥{{item.pay_price/100|TwoNum}}</em></strong>
               </div>
