@@ -404,7 +404,7 @@
 
               </div>
               <div class="order-sku" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
-                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
+                <span>共{{item.item_sum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group" v-if="item.order_status===1||item.order_status===2||item.order_status===3">

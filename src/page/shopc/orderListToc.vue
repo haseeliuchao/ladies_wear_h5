@@ -377,7 +377,7 @@
                 </div>
               </div>
               <div class="order-sku" @click= "()=>$router.push({path: '/orderToC/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
-                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
+                <span>共{{item.item_sum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><em style="font-size:16px;">￥{{item.pay_price/100|TwoNum}}</em></strong>
               </div>
               <div class="order-btn-group">
