@@ -141,8 +141,8 @@
         // this.$route.query.distributor_id?distributor_id=this.$route.query.distributor_id:distributor_id='';
         if(this.$route.params.distributor_id){
         distributor_id=this.$route.params.distributor_id;
-             this.focuscodeoneState=true;
-             this.focuscodetwoState=true;
+            //  this.focuscodeoneState=true;
+            //  this.focuscodetwoState=true;
         }else{
           distributor_id=''
        }
