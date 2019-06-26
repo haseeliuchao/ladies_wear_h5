@@ -375,7 +375,7 @@ import QiyuKefu from 'common/qiyuKefu';
          post_sales_id: this.$route.query.post_sales_id
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -391,7 +391,7 @@ import QiyuKefu from 'common/qiyuKefu';
          logistics_code:this.logisticsForm.logistics_code
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -412,7 +412,7 @@ import QiyuKefu from 'common/qiyuKefu';
         this.$store.dispatch('FinishOrder', {
           OrderNo: item.orderInfo.OrdertNo
         }).then(response => {
-          Toast({
+          Toast({duration: 2000,
             message: response.Message
           })
         })

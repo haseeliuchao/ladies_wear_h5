@@ -122,7 +122,7 @@
        async initData() {
         let Data = await logisticsInfo({order_code : this.$route.query.order_code});
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message:Data.msg
           })
           return

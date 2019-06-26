@@ -271,7 +271,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.code !== 10000) return Toast({
+          if (response.code !== 10000) return Toast({duration: 2000,
             message: response.msg
           })
           return resolve(response)
@@ -286,7 +286,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendLoginMessage(parameterData).then(response => {
-          if (response.code !== 10000) return Toast({
+          if (response.code !== 10000) return Toast({duration: 2000,
             message: response.msg
           })
           return resolve(response)
@@ -302,7 +302,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.Code !== 0) return Toast({
+          if (response.Code !== 0) return Toast({duration: 2000,
             message: response.Message,
             position: 'bottom'
           })
@@ -319,7 +319,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.Code !== 0) return Toast({
+          if (response.Code !== 0) return Toast({duration: 2000,
             message: response.Message,
             position: 'bottom'
           })

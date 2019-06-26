@@ -491,7 +491,7 @@
           }
       },
       async showToast(){
-        Toast({
+        Toast({duration: 2000,
           message:'该模块暂未开放，请尽情期待!',
           duration:1000,
           className:'tipToast'

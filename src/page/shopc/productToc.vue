@@ -1170,11 +1170,11 @@
 methods: {
       tipSend(type){
         if(type==1){
-          Toast({
+          Toast({duration: 2000,
             message: "此商品已下架"
           })
         }else{
-         Toast({
+         Toast({duration: 2000,
             message: "此商品已售罄"
           })
         }
@@ -1210,13 +1210,13 @@ methods: {
             this.checkcolorindex=null;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
-          return Toast({
+          return Toast({duration: 2000,
             message: '加入购物车成功',
             position: 'bottom'
           })
 
           }else{
-            Toast({
+            Toast({duration: 2000,
             message: response.msg,
             position: 'bottom'
             })
@@ -1252,11 +1252,11 @@ methods: {
             this.checkcolorindex=null;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
-          return Toast({
+          return Toast({duration: 2000,
             message: '加入购物车成功'
           })
           }else{
-            Toast({
+            Toast({duration: 2000,
             message: response.msg
             })
             return
@@ -1276,7 +1276,7 @@ methods: {
          distributor_id:this.$route.query.distributor_id
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 2000,
             message: Data.msg
           })
           return
@@ -1306,7 +1306,7 @@ methods: {
        },
        sizecheckBtn(size,index){
          if(this.checkcolorindex==null){
-           Toast({
+           Toast({duration: 2000,
             message: '请先选择颜色'
           })
           return;
@@ -1320,7 +1320,7 @@ methods: {
          this.shopnum += operation;
          if(this.shopnum<1){
            this.shopnum =1;
-         Toast({
+         Toast({duration: 2000,
             message: '宝贝不能再减少了哦'
           })
           return;

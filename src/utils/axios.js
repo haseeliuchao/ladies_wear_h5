@@ -141,7 +141,7 @@ class Http {
                 }
               }else if(response.data.code!=20018){
                 if(response.data.code!=40003){
-                  Toast({
+                  Toast({duration: 2000,
                     message: response.data.msg
                   });
                 }
@@ -151,7 +151,7 @@ class Http {
            return resolve(response.data)
         },error => {
             Indicator.close();
-            Toast({
+            Toast({duration: 2000,
                 message: error,
                 position: 'bottom'
             });

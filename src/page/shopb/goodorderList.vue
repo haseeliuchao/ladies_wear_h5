@@ -455,7 +455,7 @@
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({
+          Toast({duration: 2000,
                   message: payData.msg
                })
         }
@@ -494,7 +494,7 @@
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({
+                  Toast({duration: 2000,
                   message: response.msg
                   })
                 }else{
@@ -513,14 +513,14 @@
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({
+          Toast({duration: 2000,
             message: "订单已取消"
           })
           this.onRefreshCallback()
         })
       },
       tipSend(){
-        Toast({
+        Toast({duration: 2000,
             message: "提醒卖家发货成功"
           })
       },
@@ -565,7 +565,7 @@
           PaymentPassword: this.paymentPassword
         }).then(response => {
           if (response.Code === 0) {
-            Toast({
+            Toast({duration: 2000,
               message: response.Message
             });
             this.visiblePopup.paymentContainerVisible = false;
