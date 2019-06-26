@@ -90,7 +90,7 @@
       </p>
       <p>
         <label for="nTimes">商品加价</label>
-        <input type="text" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate.initial="'require'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+        <input type="text" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate.initial="'require|number'"  @keyup="trim" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span>倍</span>
       </p>
       <p>
@@ -193,6 +193,9 @@
       window.scroll(0,0)
       this.focuscodeoneState = false;
       this.focuscodetwoState = false;
+      },
+      trim(){
+        this.shopForm.n_times = this.shopForm.n_times.replace(/[^\w]/g,'')
       }
     },  
     mounted: function () {
