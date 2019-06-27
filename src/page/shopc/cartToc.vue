@@ -606,7 +606,11 @@
           }
         })
         this.selectedCounter = selectedCounter;
-        this.selectedAll = selectedCounter === this.cartListfilter.length ? true : false;
+        if(this.cartListfilter.length==0){
+          this.selectedAll=false;
+        }else{
+         this.selectedAll = selectedCounter === this.cartListfilter.length ? true : false;
+        }
         this.totalFee = computedFee;
         }else{
           this.cartList.map(item => {
