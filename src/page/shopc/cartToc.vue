@@ -424,10 +424,10 @@
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status==2&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
-                <span v-if="item.item_status==2" class="pd-imagestip">失效</span>
+                <span v-if="item.item_status!=1" class="pd-imagestip">失效</span>
               </div>
               <div class="pd-info">
                 <div class="pd-title">
