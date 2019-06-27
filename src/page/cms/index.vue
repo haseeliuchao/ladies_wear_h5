@@ -18,7 +18,7 @@
   /* banner */
   /* 产品说明 */
   .product-explain{
-    background:#fff;
+    // background:#fff;
     padding:10px .3rem 10px;
     ul{
       @include flexbox(center, center, row, nowrap);
@@ -41,7 +41,7 @@
 
   /* 广告位专区 */
   .activity-manage {
-    background: #fff;
+    // background: #fff;
     padding:0 .3rem;
     .activity-list {
       height:82px;
@@ -67,9 +67,9 @@
   /* 配置专题 */
   .deploy-floor{
     @include flexbox(space-between,center,row,nowrap);
-    height:5.4rem;
-    background:#fff;
-    padding:0px .3rem 15px;
+    height:5rem;
+    // background:#fff;
+    padding:0px .3rem;
     >div{
       @include flexbox(space-between,center,column,wrap);
       height:100%;
@@ -81,25 +81,25 @@
     .deploy-floor-l{
       width:41%;
       .deploy-item{
-        width:3.9rem;
+        width:4.7rem;
         height:100%;
-        border-radius: 6px;
+        border-radius: 5px;
         overflow: hidden;
-        border-radius: 6px 0 0 6px;
-        border-right: 1px solid #e4e4e4;
+        border-radius: 5px 0 0 5px;
+        border-right: 1px solid #f5f5f5;
       }
     }
     .deploy-floor-r{
       .deploy-item{
-        width:5.5rem;
-        height:48%;
+        width:4.7rem;
+        height:50%;
         overflow: hidden;
         &:last-child{
-          border-radius: 0 0 6px 0;
-          border-top: 1px solid #e4e4e4;
+          border-radius: 0 0 5px 0;
+          border-top: 1px solid #f5f5f5;
         }
         &:first-child{
-          border-radius: 0 6px 0 0;
+          border-radius: 0 5px 0 0;
           border:none;
         }
       }
