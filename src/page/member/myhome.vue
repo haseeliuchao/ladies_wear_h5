@@ -368,7 +368,7 @@
         </div>
         <div class="my-store" v-if="!userData.distributorBO" @click="$router.push('/shopApplicate')">
           <h2>我的<span>小店</span></h2>
-          <p>送你开店秘籍，还不来取？</p>
+          <p>每天上新千款好货 快来开店赚钱</p>
         </div>
         <div class="my-store" v-if="userData.distributorBO" @click="$router.push('/myShop')">
           <h2>我的<span>小店</span></h2>
