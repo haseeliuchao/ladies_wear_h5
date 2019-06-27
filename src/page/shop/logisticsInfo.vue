@@ -132,7 +132,7 @@
       },
     },
     mounted: function () {
-      if(getSessionStorage('distributorId')){
+      if(getSessionStorage('distributorTitle')){
          document.title=getSessionStorage('distributorTitle');
       }
       this.initData();
