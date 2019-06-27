@@ -110,7 +110,9 @@ import {Toast} from 'mint-ui';
   export default {
     data() {
       return {
-          shopStastistics:{ },
+          shopStastistics:{
+            pay_order_price:0
+          },
           distributor_id:null
       }
     },
