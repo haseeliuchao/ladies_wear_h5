@@ -376,7 +376,7 @@
     <div class="customerOrder-con">
       <ul class="orderCount">
         <li>
-            <em>{{memberData.checkout_amount}}</em>
+            <em>{{memberData.checkout_amount/100|TwoNum}}</em>
             <span>累计消费(元)</span>
         </li>
         <li>
@@ -490,7 +490,7 @@
           distributor_user_id:'',
           member_id:'',
           nick_note:'',
-          checkout_amount:'',
+          checkout_amount:0,
         },
         orderCount:{
            orderTotalCount:''
