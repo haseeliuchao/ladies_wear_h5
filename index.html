@@ -26,8 +26,8 @@
   window.openSdk = function (obj) {
     if (isSdkReady) {
       ysf('config', {
-        user_id:obj.user_id,
-        nickname:obj.nickname,
+        uid:obj.user_id,
+        name:obj.nickname,
         success(){
           ysf('open');
         }
