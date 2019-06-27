@@ -359,12 +359,12 @@
 <template>
   <div class="my-order">
     <div class="topnav">
-      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">全部</span>
-      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待付款</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">待发货</span>
-      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">待收货</span>
-      <span @click.stop.prevent="switchTabs(4)" :class="{'active':active===4}">已完成</span>
-      <span @click.stop.prevent="switchTabs(5)" :class="{'active':active===5}">已关闭</span>
+      <span @click="switchTabs(0)" :class="{'active':active===0}">全部</span>
+      <span @click="switchTabs(1)" :class="{'active':active===1}">待付款</span>
+      <span @click="switchTabs(2)" :class="{'active':active===2}">待发货</span>
+      <span @click="switchTabs(3)" :class="{'active':active===3}">待收货</span>
+      <span @click="switchTabs(4)" :class="{'active':active===4}">已完成</span>
+      <span @click="switchTabs(5)" :class="{'active':active===5}">已关闭</span>
       <div id="loadingbar" :style="active===0 ? 'left:-1%' : active===1 ?  'left:14%' : active===2 ?'left:32%' : active===3 ? 'left:51%' : active===4 ? 'left:69%' : 'left: 87%'"></div>
     </div>
     <div class="order-container">
