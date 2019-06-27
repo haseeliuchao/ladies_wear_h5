@@ -191,6 +191,7 @@
               font-size: 18px;
               text-align: center;
               line-height: 89px;
+              border-radius:5px;
             }
           }
           .pd-info {

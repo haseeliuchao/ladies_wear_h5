@@ -394,7 +394,7 @@
                
                <div class="order-product-item" >
                   <div> 
-                    <img :src="itemall.item_bo.index_img_url">
+                    <img :src="itemall.item_bo.index_img_url+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
