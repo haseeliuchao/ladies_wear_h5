@@ -523,7 +523,12 @@
       ...mapGetters([
         'cartProductData',
         'userInfo'
-      ])
+      ]),
+      cartListfilter: function () {
+        return this.cartList.filter(function (item) {
+          return item.item_status===1
+        })
+        }
     },
 
     methods: {
@@ -599,6 +604,9 @@
             selectedCounter++
           }
         })
+        this.selectedCounter = selectedCounter;
+        this.selectedAll = selectedCounter === this.cartListfilter.length ? true : false;
+        this.totalFee = computedFee;
         }else{
           this.cartList.map(item => {
           if (item.checked) {
@@ -606,12 +614,10 @@
             selectedCounter++
           }
           })
-        }
         this.selectedCounter = selectedCounter;
         this.selectedAll = selectedCounter === this.cartList.length ? true : false;
-        this.totalFee = computedFee;
         }
-        
+        }
       },
       async editProductNum({
         item,
