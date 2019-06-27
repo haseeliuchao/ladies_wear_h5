@@ -552,7 +552,7 @@
          let SelectedList = [];
         let Selectedstr = '';
         this.cartList.map(item => {
-          if (item.item_status === 1 && item.checked) {
+          if (item.checked) {
             SelectedList.push(item.id)
           }
         })
@@ -663,6 +663,7 @@
         this.computedTotalFee();
       },
       async initData() {
+        this.selectedAll=false;
         let Data = await this.$store.dispatch('GetSelectedProductList', {
           distributor_id:this.$route.params.distributor_id
         });
