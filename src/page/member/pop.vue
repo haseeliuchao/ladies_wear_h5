@@ -7,7 +7,7 @@
 <div>
   
 
- <div class="screen_subject" id='newImg' ref="cutScreen">
+           <div class="screen_subject" id='newImg' ref="cutScreen">
             <div class="screen_header">
                 <div class="title">
                     <div class="real_time">
@@ -28,9 +28,7 @@
             </div>
             
             <div class="editor">
-                <div class="editor_tools left">
-                    <img src="" alt="">
-                </div>
+                
                 <span class="input_line"></span>
                 <div class="editor_tools right">
                     <img src="~jd/images/photo.png" alt="">
@@ -38,7 +36,6 @@
             </div>
  
         </div>
-        <!-- <a :href="screenUrl" class="down" download="下载">下载</a> -->
         <img :src="screenUrl" alt="">
 </div>
 </template>
@@ -51,7 +48,7 @@ import html2canvas from 'html2canvas';
   export default {
     data() {
       return {
-        screenUrl: ''
+        screenUrl: null
       }
     },
     methods: {

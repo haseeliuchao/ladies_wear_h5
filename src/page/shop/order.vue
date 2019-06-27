@@ -520,7 +520,7 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span> 
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_price/100.00}}</span>  <span class="num">x {{item.num}}</span> 
                   <span class="payment" v-if="item.post_sales_status==0&&orderDetail.order_status>1&&orderDetail.order_status<5" @click= "$router.push({path: '/afterSaleChoice',query: {order_item_id:item.order_item_id}})">退款</span>
                   <span class="payment" v-if="item.post_sales_status==1" @click= "$router.push({path: '/afterSaleDetail',query: {post_sales_id:item.post_sales_id}})">售后中</span>
                   <span class="payment" v-if="item.post_sales_status==4">售后成功</span>
@@ -548,9 +548,12 @@
           </div>
         </div>
     </div>
+    <QiyuKefu/>
     <div class="order-product-detail">
                 <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{orderDetail.total_item_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{orderDetail.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em>.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p>
+                <!-- <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topriceafter}}</em><em>.{{(orderDetail.post_discount_price+orderDetail.post_fee)/100.00|topricenext}}</em></strong></p> -->
+                <p class="order-product-detailtwo" v-if="orderDetail.pay_post_fee!=0"><span >运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_fee/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo" v-if="orderDetail.pay_post_fee==0"><span >运费</span><span >包邮</span></p>
                 <p class="order-product-detailtwo" v-if="orderDetail.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{orderDetail.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{orderDetail.post_discount_price/100.00|topricenext}}</em></strong></p>
         </div>
 
@@ -569,6 +572,7 @@
 </template>
 
 <script>
+import QiyuKefu from 'common/qiyuKefu';
   import {
     getOrderDetail,payDirect
   } from '@/service/getData';
@@ -606,6 +610,7 @@
 
     components: {
       // LoadMore
+      QiyuKefu
     },
 
     computed: {},
@@ -621,7 +626,7 @@
          order_code: this.$route.params.OrderNo
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -648,13 +653,13 @@
       },
       opendownload(index,value){
         if(value==null||value==''){
-          Toast({
+          Toast({duration: 1000,
             message: '未获取到下载链接',
             position: 'center'
           })
           return
         }
-        Toast({
+        Toast({duration: 1000,
             message: select_all_and_copy(document.getElementById('textCon'+index+'')),
             position: 'center'
           })
@@ -667,7 +672,7 @@
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -707,7 +712,7 @@
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -724,7 +729,7 @@
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.initData()
@@ -747,12 +752,14 @@
     },
     mounted: function () {
       this.initData();
-      pushHistory()
-        window.onpopstate = (state) => {
-          console.log(state)
-        //  console.log(this.$router)
-        this.$router.push('/orderList/'+this.$route.query.order_status+'')  //输入要返回的上一级路由地址
-        }
+    }
+    ,
+    beforeRouteLeave(to, from, next){
+      if(to.path==='/orderList/'+this.$route.query.order_status+''||to.name==='product'||to.name==='order'||to.name==='orderRusult'||to.name==='logisticsInfo'||to.name==='afterSaleChoice'||to.name==='afterSaleDetail'||to.name==='index'){
+        next();
+      }else {
+        next({path: '/orderList/'+this.$route.query.order_status});
+      }
     }
   }
 

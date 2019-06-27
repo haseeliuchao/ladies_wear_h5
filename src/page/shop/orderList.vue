@@ -394,17 +394,17 @@
                
                <div class="order-product-item" >
                   <div> 
-                    <img :src="itemall.item_bo.index_img_url">
+                    <img :src="itemall.item_bo.index_img_url+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(itemitemalldetail,index1) in itemall.item_sku_bo_list" :key="index1"><span class="sku">颜色 {{itemitemalldetail.color}}   尺寸 {{itemitemalldetail.size}}</span> <span class="price">￥{{itemitemalldetail.item_total_price/100.00}}</span>  <span class="num">x {{itemitemalldetail.num}}</span></p>
+                  <p class="prodskulist-info" v-for="(itemitemalldetail,index1) in itemall.item_sku_bo_list" :key="index1"><span class="sku">颜色 {{itemitemalldetail.color}}   尺寸 {{itemitemalldetail.size}}</span> <span class="price">￥{{itemitemalldetail.item_price/100.00}}</span>  <span class="num">x {{itemitemalldetail.num}}</span></p>
                </div>
 
               </div>
               <div class="order-sku" @click= "$router.push({path: `/order/${item.order_code}`,query: {order_status:item.order_status}})">
-                <span>共{{totalNum}}件商品&nbsp;<em>实付：</em></span>
+                <span>共{{item.item_sum}}件商品&nbsp;<em>实付：</em></span>
                 <strong><span>&yen;</span><em style="font-size:16px;">{{item.pay_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{item.pay_price/100.00|topricenext}}</em></strong>
               </div>
               <div class="order-btn-group" v-if="item.order_status===1||item.order_status===2||item.order_status===3">
@@ -454,10 +454,6 @@
         params: {
           page_size: 10,
           current_page: 1,
-          // cancel_status: null,
-          // confirm_status: null,
-          // pay_status: null,
-          // finish_status: null
           order_status:null
         },
         orderList: [],
@@ -484,7 +480,7 @@
         if(payData.code==10000){
            this.wxPay(payData.data)
         }else{
-          Toast({
+          Toast({duration: 1000,
                   message: payData.msg
                })
         }
@@ -524,7 +520,7 @@
                 order_code: item.order_code
               }).then(response => {
                 if(response.code!=10000){
-                  Toast({
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }else{
@@ -543,14 +539,14 @@
         this.$store.dispatch('CancelOrder', {
           order_code: item.order_code
         }).then(response => {
-          Toast({
+          Toast({duration: 1000,
             message: "订单已取消"
           })
           this.onRefreshCallback()
         })
       },
       tipSend(){
-        Toast({
+        Toast({duration: 1000,
             message: "提醒卖家发货成功"
           })
       },
@@ -595,7 +591,7 @@
           PaymentPassword: this.paymentPassword
         }).then(response => {
           if (response.Code === 0) {
-            Toast({
+            Toast({duration: 1000,
               message: response.Message
             });
             this.visiblePopup.paymentContainerVisible = false;
@@ -624,15 +620,17 @@
         }
     },
     mounted: function () {
-      pushHistory()
-        window.onpopstate = (state) => {
-          console.log(state)
-        this.$router.push('/myhome')  //输入要返回的上一级路由地址
-        }
-
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0)
       
+    }
+    ,
+    beforeRouteLeave(to, from, next){
+      if(to.name !=='myhome'&&to.name !=='order' ){
+        next({path: '/myhome'});
+      }else {
+        next();
+      }
     }
   }
 

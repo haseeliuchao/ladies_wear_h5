@@ -2,6 +2,7 @@ import {
   login,
   loginpass,
   loginInit,
+  loginUsreInit,
   loginBind,
   getUserInfo,
   sendPhoneMessage,
@@ -87,6 +88,18 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         loginInit(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    LoginUsreInit({ //登录
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        loginUsreInit(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)
@@ -258,7 +271,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.code !== 10000) return Toast({
+          if (response.code !== 10000) return Toast({duration: 1000,
             message: response.msg
           })
           return resolve(response)
@@ -273,7 +286,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendLoginMessage(parameterData).then(response => {
-          if (response.code !== 10000) return Toast({
+          if (response.code !== 10000) return Toast({duration: 1000,
             message: response.msg
           })
           return resolve(response)
@@ -289,7 +302,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.Code !== 0) return Toast({
+          if (response.Code !== 0) return Toast({duration: 1000,
             message: response.Message,
             position: 'bottom'
           })
@@ -306,7 +319,7 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         sendPhoneMessage(parameterData).then(response => {
-          if (response.Code !== 0) return Toast({
+          if (response.Code !== 0) return Toast({duration: 1000,
             message: response.Message,
             position: 'bottom'
           })

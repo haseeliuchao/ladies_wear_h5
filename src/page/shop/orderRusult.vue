@@ -126,7 +126,8 @@
 
   <div class="my-order">
     <div class="ordertop-status">
-         <p style="line-height:25px;">订单支付成功<br><em @click= "$router.push('/index')">继续购物</em> | <em @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
+         <p style="line-height:25px;" v-if="!distributorId">订单支付成功<br><em  @click= "$router.push('/index')">继续购物</em> | <em @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
+         <p style="line-height:25px;" v-if="distributorId">订单支付成功<br> <em  @click= "$router.push(`/indexToC/${distributorId}`)">继续购物</em> | <em @click= "$router.push({path: '/orderListToC/2',query: {distributor_id:distributorId}})">查看订单</em></p>
          <img src="~jd/images/zhifuchenggong.png" style="height:48px;">
     </div>
     <div class="searchImgtab">
@@ -179,7 +180,8 @@
         },
         visiblePopup: {
           shareBoo:false
-        }
+        },
+        distributorId:null
       };
     },
 
@@ -218,15 +220,10 @@
         }
     },
     mounted: function () {
-      // if(isWeiXin('code')){
-      //   wxapi.wxRegister(this.wxRegCallback)
-      //   }
-      pushHistory()
-        window.onpopstate = (state) => {
-          console.log(state)
-        this.$router.push('/orderList/2')
+      this.distributorId=getSessionStorage('distributorId')
+      if(this.distributorId){
+        document.title=getSessionStorage('distributorTitle');
       }
-
       this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     }

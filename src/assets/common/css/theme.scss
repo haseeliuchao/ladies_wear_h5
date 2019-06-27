@@ -380,6 +380,12 @@ body,
     background-size: 100%;
   }
 }
+.confirmButton{
+  color: $red
+}
+.mint-msgbox{
+  width: 60%;
+}
 
 //图片懒加载展位图
 img[lazy]{

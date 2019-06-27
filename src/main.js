@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 require('es6-promise').polyfill()       
 import Vue from 'vue'
+
 import App from './App'
 import router from './router'
 import 'babel-polyfill'
@@ -15,9 +16,10 @@ import '@/utils/filters'
 // import '@/utils/hash'
 import utils from '@/utils/urlfun'
 import wxShare from '@/utils/wxShare'
+
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import {
-  getSignature,
+  getShopInfo,
 } from '@/service/getData';
 import {
   getLocalStorage,
@@ -42,7 +44,7 @@ const config = {
   locale: 'zh_CN', 
   strict: true, 
   enableAutoClasses: true,
-  // events: 'blur', 
+  events: 'blur', 
   inject: true
  };
 
@@ -91,26 +93,29 @@ const config = {
         return value.length ==6 && /^\d{6}$/.test(value)
       }
    });
+   VeeValidate.Validator.extend('number', {
+      messages: {
+        zh_CN:field => field + '必须是数字',
+      },
+      validate: value => {
+        return /^[1-9][0-9]\d*$/.test(value)
+      }
+   });
+   
 
  Vue.use(VeeValidate, config); 
 
+
+
 var routerindex=0
 router.beforeEach((to,from,next)=>{
+  if (to.meta.Title) {
+    document.title = to.meta.Title
+  }
   routerindex++;
-  const foo = async () => { 
-    let wxData = await getSignature({
-      url: BASE64.encoder(location.href.split("#")[0])
-  });
-  if(wxData==10000){
-    setSessionStorage('wxData',JSON.stringify(wxData.data))
-  }
-  } 
-  if(routerindex==1&&isWeiXin('code')){
-    // foo()
-  }
   var shareImgurl='';
   if(to.meta.imgUrl==undefined){
-    shareImgurl='http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'
+    shareImgurl='http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'
   }else{
     shareImgurl=to.meta.imgUrl
   }
@@ -127,6 +132,28 @@ router.beforeEach((to,from,next)=>{
               unicodestr += String.fromCharCode(unicode[i]);
           }
     }
+
+    const getshop = async (dis) => { 
+      let distributorId=''
+      if(unicodestr.indexOf('indexToC')!=-1){
+        distributorId=unicodestr.substr(10)
+      }
+      if(unicodestr.indexOf('productToC')!=-1){
+        distributorId=unicodestr.split('=')[1]
+      }
+      let ShopInfo = await getShopInfo({
+        distributor_id: distributorId
+    });
+      if(ShopInfo.code==10000){
+        setSessionStorage('distributorId',distributorId)
+        setSessionStorage('distributorTitle',ShopInfo.data.title)
+        document.title=ShopInfo.data.title;
+      }
+    }
+    if(routerindex==1&&isWeiXin('code')&&(unicodestr.indexOf('productToC')!=-1||unicodestr.indexOf('indexToC')!=-1)){
+      getshop()
+    }
+    
     if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
         next({path: '/index'});
     }else{

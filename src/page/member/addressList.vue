@@ -142,7 +142,8 @@
   import LoadMore from 'common/loadMore';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   import {Toast} from 'mint-ui'
   export default {
@@ -170,7 +171,7 @@
       //     Id: item.consignee_id
       //   }).then(response => {
       //     this.onRefreshCallback();
-      //     Toast({
+      //     Toast({duration: 1000,
       //       message: response.message
       //     })
       //   });
@@ -193,7 +194,7 @@
       async initData() {
         let Data = await getAddressList({});
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -209,6 +210,9 @@
     },
 
     mounted: function () {
+      if(getSessionStorage('distributorTitle')){
+         document.title=getSessionStorage('distributorTitle');
+      }
           this.initData()
     }
   }

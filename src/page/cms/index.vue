@@ -67,7 +67,7 @@
   /* 配置专题 */
   .deploy-floor{
     @include flexbox(space-between,center,row,nowrap);
-    height:210px;
+    height:5.4rem;
     background:#fff;
     padding:0px .3rem 15px;
     >div{
@@ -79,21 +79,29 @@
       height:100%;
     }
     .deploy-floor-l{
-      width:46%;
-      margin-right:.2rem;
+      width:41%;
       .deploy-item{
-        width:100%;
+        width:3.9rem;
         height:100%;
         border-radius: 6px;
         overflow: hidden;
+        border-radius: 6px 0 0 6px;
+        border-right: 1px solid #e4e4e4;
       }
     }
     .deploy-floor-r{
       .deploy-item{
-        width:100%;
+        width:5.5rem;
         height:48%;
-        border-radius: 6px;
         overflow: hidden;
+        &:last-child{
+          border-radius: 0 0 6px 0;
+          border-top: 1px solid #e4e4e4;
+        }
+        &:first-child{
+          border-radius: 0 6px 0 0;
+          border:none;
+        }
       }
      
 
@@ -257,13 +265,15 @@
     .banner {
       .mint-swipe-indicators {
         transform: translate(-50%, -50%);
+        bottom: 0;
         .mint-swipe-indicator {
-          width: 10px;
-          height:10px;
-          background: #dfdfdf;
+          width: 15px;
+          height:6px;
+          margin:0 5px;
+          background: #ddd;
           opacity:1;
           &.is-active {
-            background:#ff2741 ;
+            background:#fff ;
           }
         }
       }
@@ -288,12 +298,12 @@
 <template>
   <div id="jd">
     <!-- 遮罩层 -->
-      <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
+      <!-- <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
           <img src="~jd/images/popup-con.png">
           <div class="jump-btn" @click= "()=>{$router.push('/searchImg');popupVisible=false}"></div>
         </div>
-      </mt-popup>
+      </mt-popup> -->
         <!-- 搜索栏 -->
         <search-bar :Status="Status"  v-if="searchBarVisilbe" />
         <!-- 搜索栏 -->
@@ -307,7 +317,7 @@
           <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index"  >
-              <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})">
+              <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->

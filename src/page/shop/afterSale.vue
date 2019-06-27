@@ -309,7 +309,7 @@
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in goodInfofilter" :key="index">
                   <div>
-                    <img :src="item.item_img">
+                    <img :src="item.item_img+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
@@ -399,7 +399,8 @@
   } from '@/service/getData';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   import axios from 'axios';
   import VueUploadComponent from 'vue-upload-component';
@@ -527,7 +528,7 @@
                             formData.append("policy",policy);
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
-                                that.postSalesImgList.push("http://imagechao.test.upcdn.net"+response.data.url);
+                                that.postSalesImgList.push("http://img.chaochujue.cn"+response.data.url);
                               that.postSalesImgstr=that.postSalesImgList.join(",");
             }).catch(function (error) {
                         　　alert(error);
@@ -572,11 +573,11 @@
       },
       commitMsg(){
           if(!this.item_status){
-              Toast({message: '请选择商品状态'})
+              Toast({duration: 1000,message: '请选择商品状态'})
               return;
           }
           if(!this.reason){
-              Toast({message: '请选择退款原因'})
+              Toast({duration: 1000,message: '请选择退款原因'})
               return;
           }
         this.$store.dispatch('CommitMessage',{
@@ -592,7 +593,7 @@
                   this.$router.push({path: '/afterSaleDetail',query: {post_sales_id:response.data.post_sales_id}})
                  },1000)
                 }else{
-                  Toast({
+                  Toast({duration: 1000,
                   message: response.msg
                   })
                 }
@@ -609,6 +610,9 @@
         }
     },
     mounted: function () {
+      if(getSessionStorage('distributorTitle')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
       this.order_item_id=this.$route.query.order_item_id
     }

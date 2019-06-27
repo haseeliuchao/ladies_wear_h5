@@ -101,7 +101,7 @@
 <script>
   import LoadMore from 'common/loadMore';
   import {logisticsInfo} from '@/service/getData'
-  // import {searchtwoGoods} from '@/service/getData';
+  import {getSessionStorage} from '@/utils/mixin';
   import {Toast} from 'mint-ui';
   export default {
     data() {
@@ -122,7 +122,7 @@
        async initData() {
         let Data = await logisticsInfo({order_code : this.$route.query.order_code});
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 1000,
             message:Data.msg
           })
           return
@@ -132,6 +132,9 @@
       },
     },
     mounted: function () {
+      if(getSessionStorage('distributorTitle')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
     }
 

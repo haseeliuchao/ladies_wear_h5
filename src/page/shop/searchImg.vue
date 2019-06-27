@@ -389,7 +389,7 @@
                             formData.append("policy",policy);
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
-                            that.postSalesImg="http://imagechao.test.upcdn.net"+response.data.url;
+                            that.postSalesImg="http://img.chaochujue.cn"+response.data.url;
                             that.$router.push({path: '/searchRusult',query: {item_url:that.postSalesImg}})
                             that.HistoryImgData = getLocalStorage('searchHistoryImgData')?getLocalStorage('searchHistoryImgData'):[];
                             if(that.HistoryImgData.length==0)return setLocalStorage('searchHistoryImgData',[{item_url:that.postSalesImg,Date:new Date()}]);

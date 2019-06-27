@@ -765,7 +765,7 @@
                       <p class="prod-name">{{itemall.item_bo.title}}</p>
                     </div>
                   </div>
-                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_total_price/100.00}}</span>  <span class="num">x {{item.num}}</span></p>
+                  <p class="prodskulist-info" v-for="(item,index1) in itemall.item_sku_list" :key="index1"><span class="sku">颜色 {{item.color}}   尺寸 {{item.size}}</span> <span class="price">￥{{item.item_price/100.00}}</span>  <span class="num">x {{item.num}}</span></p>
                   </div>
               </div>
 
@@ -776,9 +776,9 @@
                </p>
               </div>
               <div class="order-product-detail">
-                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100.00|topriceafter}}</em><em style="font-size:16px;">.{{confirmSelectedProduct.total_item_price/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topriceafter}}</em><em>.{{(confirmSelectedProduct.post_discount_price+confirmSelectedProduct.post_fee)/100.00|topricenext}}</em></strong></p>
-                <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p>
+                <p class="order-product-detailone"><span>商品金额</span> <strong><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.total_item_price/100|TwoNum}}</em></strong></p>
+                <p class="order-product-detailtwo"><span>运费</span> <strong><em style="font-size:18px;">+</em><span>&yen;</span><em>{{confirmSelectedProduct.post_fee/100|TwoNum}}</em></strong></p>
+                <!-- <p class="order-product-detailtwo" v-if="confirmSelectedProduct.post_discount_price!=0"><span>运费券</span> <strong><em style="font-size:18px;">-</em><span>&yen;</span><em style="font-size:16px;">{{confirmSelectedProduct.post_discount_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{confirmSelectedProduct.post_discount_price/100.00|topricenext}}</em></strong></p> -->
               </div>
             </div>
           </div>
@@ -947,7 +947,7 @@ import {
           }
         });
         if(confirmSelectedData.data==''){
-          Toast({
+          Toast({duration: 1000,
             message: '暂无订单信息'
           })
           return this.$router.go(-1);
@@ -958,7 +958,7 @@ import {
         }else if(confirmSelectedData.code==30029){
           this.$router.push('/login');
         }else{
-          Toast({
+          Toast({duration: 1000,
             message: confirmSelectedData.msg
           })
         }
@@ -984,7 +984,7 @@ import {
       // /order/generate/token
       async payByWallet(){
         if(!this.consignee_id){
-          Toast({
+          Toast({duration: 1000,
             message: '请先添加收货地址'
           })
           return
@@ -1008,7 +1008,7 @@ import {
           })
         }
         if(payData.code!==10000){
-          Toast({
+          Toast({duration: 1000,
             message: payData.msg
           })
           this.wxPaystatus=true;

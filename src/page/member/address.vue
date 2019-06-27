@@ -28,8 +28,11 @@
             width:auto;
       }
       .content {
-        width: 70%;
+        width: 7rem;
         @include placeholderColor($gray);
+        input{
+          line-height:24px;
+        }
         input,textarea {
           width: 100%;
           border: none;
@@ -143,28 +146,28 @@
         <div class="cell-from-item">
           <label for="name"><span class="title">姓名</span></label>
           <div class="content">
-            <input type="text" name="name" v-focus v-validate.initial="'required'"  v-model="addressForm.name" id="name">
+            <input type="text" name="name"  v-validate="'required'"  v-model="addressForm.name" id="name" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
           </div>
         </div>
         <div class="cell-from-item">
-          <label for="phone"><span class="title">手机</span></label>
-          <div class="content" style="width:33%;">
-            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone">
+          <label for="phone"><span  class="title">手机</span></label>
+          <div class="content" @click="focusphoneoneclick">
+            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone"  @blur="gotoView" v-focus="focusphoneoneState">
           </div>
-          <div>
-            <span v-show="errors.has('mobile')" style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
+          <div style="position:absolute;right:.3rem">
+            <span v-show="errors.has('mobile')"   style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
           </div>
         </div>
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
           <label for="city"><span class="title">选择城市</span></label>
           <div class="content">
-            <input type="text" name="city" readonly="readonly" v-validate.initial="'required'" :value="addressForm.province + addressForm.city + addressForm.area"  placeholder="" id="city">
+            <input type="text" name="city" readonly="readonly" placeholder="请选择" v-validate="'required'" :value="addressForm.province + addressForm.city + addressForm.area"   id="city" @click="focuscodetwoclick" @blur="gotoView" v-focus="focuscodetwoState">
           </div>
         </div>
         <div class="cell-from-item detail-address" style="height:80px;align-items:flex-start">
           <label for="address"><span class="title">详细地址</span></label>
           <div class="content" style="margin-top:16px;">
-            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate.initial="'required'" v-model="addressForm.address" id="address"></textarea>
+            <textarea type="text" name="address" placeholder="街道、楼牌号" v-validate="'required'" v-model="addressForm.address" id="address" @click="focuscodethreeclick" @blur="gotoView" v-focus="focuscodethreeState"></textarea>
           </div>
         </div>
         <div class="cell-from-item default-address" style="margin:8px 0">
@@ -176,7 +179,7 @@
         <div class="cell-from-item del-address" v-if="$route.params.consignee_id" @click= "deleteAddresspop">删除收货地址</div>
       </div>
       <div  class="save-address" 
-       :class="['cell-btn',errors.has('name')||errors.has('mobile')||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
+       :class="['cell-btn',errors.has('mobile')||addressForm.phone.length==0||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']" 
       @click= "saveAddress">保存</div>
     </div>
     <div>
@@ -207,11 +210,13 @@
   import myaddress from '@/utils/address3.json'
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   export default {
     data() {
       return {
+        blurVisible:false,
         addressFormcur:1,
         addressForm: {
           id: '',
@@ -224,6 +229,10 @@
           selected: false
         },
         addressVisible: false,
+        focusphoneoneState : false,
+        focuscodeoneState : false,
+        focuscodetwoState : false,
+        focuscodethreeState : false,
         myAddressSlots: [
     
           {
@@ -284,36 +293,36 @@
             params.consignee_id = this.$route.params.consignee_id
             this.$store.dispatch('UpdataAddress',params).then(response=>{
               if(response.code != 10000){
-                Toast({
+                Toast({duration: 1000,
                   message: '保存失败',
                 })
               }else {
-                Toast({
+                Toast({duration: 1000,
                   message: '保存成功'
                 })
                 // this.$router.push({path: '/addressList'})
                 this.$router.go(-1)
               }
             }).catch(error=>{
-                Toast({
+                Toast({duration: 1000,
                   message: '访问接口失败'
                 })
             });
           }else{
             this.$store.dispatch('SaveAddress',params).then(response=>{
               if(response.code != 10000){
-                Toast({
+                Toast({duration: 1000,
                   message: '保存失败',
                 })
               }else {
-                Toast({
+                Toast({duration: 1000,
                   message: '保存成功'
                 })
                 // this.$router.push({path: '/addressList'})
                 this.$router.go(-1)
               }
           }).catch(error=>{
-              Toast({
+              Toast({duration: 1000,
                 message: '访问接口失败'
               })
           });
@@ -341,11 +350,11 @@
           if_default: this.addressForm.selected ? 1 : 0
         }).then(response => {
           if(response.code != 10000){
-            Toast({
+            Toast({duration: 1000,
               message: '删除失败',
             })
           }else {
-            Toast({
+            Toast({duration: 1000,
               message: '删除成功'
             })
             // this.$router.push({path: '/addressList'})
@@ -409,9 +418,35 @@
         })
         }
       },
+       focusphoneoneclick () {
+      this.focusphoneoneState = true
+      },
+       focuscodeoneclick () {
+      this.focuscodeoneState = true
+      },
+      focuscodetwoclick () {
+      this.focuscodetwoState = true
+      },
+      focuscodethreeclick () {
+      this.focuscodethreeState = true
+      },gotoView () {
+      window.scroll(0,0)
+      this.focusphoneoneState = false;
+      this.focuscodeoneState = false;
+      this.focuscodetwoState = false;
+      this.focuscodethreeState = false;
+      },
+      blur(){
+        if(errors.has('mobile')){
+          blurVisible = true;
+        }
+      }
     },
 
     mounted: function () {
+      if(getSessionStorage('distributorTitle')) {
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
       this.$nextTick(() => { //vue里面全部加载好了再执行的函数  （类似于setTimeout）
         this.myAddressSlots[0].defaultIndex = 0    

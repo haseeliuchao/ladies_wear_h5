@@ -293,6 +293,7 @@
               </div>
         </div>
     </div>
+    <QiyuKefu/>
     <div class="selectedList" v-if="orderDetail.post_sales_status!=2">
               <div>
               <p class="selectedone">
@@ -328,20 +329,20 @@
        <p class="logisticsAddress">浙江省 杭州市 西湖区 蒋村街道 中国五园新村 2幢幢幢302室</p>
     </div>
 
-    <p class="backmyHome" @click= "$router.push('/order/'+orderDetail.order_code+'')">
+    <!-- <p class="backmyHome" @click= "$router.push('/order/'+orderDetail.order_code+'')">
       订单详情
-    </p>
+    </p> -->
 
     <div class="sand-data" v-if="orderDetail.post_sales_status==2" @click= "commitMsg">提交</div>
     </div>
 </template>
 
 <script>
+import QiyuKefu from 'common/qiyuKefu';
   import {
     getSaleDetail,logisticsSend
   } from '@/service/getData';
-  import {
-  pushHistory
+  import {getSessionStorage
 } from '@/utils/mixin';
   import {
     Toast
@@ -361,6 +362,7 @@
 
     components: {
       // LoadMore
+      QiyuKefu
     },
 
     computed: {},
@@ -372,7 +374,7 @@
          post_sales_id: this.$route.query.post_sales_id
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -388,7 +390,7 @@
          logistics_code:this.logisticsForm.logistics_code
         });
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 1000,
             message: Data.msg,
             position: 'bottom'
           })
@@ -409,7 +411,7 @@
         this.$store.dispatch('FinishOrder', {
           OrderNo: item.orderInfo.OrdertNo
         }).then(response => {
-          Toast({
+          Toast({duration: 1000,
             message: response.Message
           })
         })
@@ -424,13 +426,10 @@
         }
     },
     mounted: function () {
+      if(getSessionStorage('distributorTitle')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData()
-      pushHistory()
-       // 监听历史记录点, 添加返回事件监听
-        window.onpopstate = (state) => {
-          console.log(state)
-        this.$router.push('/myhome')  //输入要返回的上一级路由地址
-        }
     }
   }
 

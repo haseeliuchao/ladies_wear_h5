@@ -90,7 +90,7 @@
             text-shadow: none;
             text-align: left;
             font-size: 15px;
-            color: #999;
+            color: #333;
             line-height: normal;
             height: 34px;
           }
@@ -137,9 +137,8 @@
             color: #333;
             font-size: 15px;
             text-align: right;
-            
             width: 44%;
-    padding: 7px 10px 7px 0;
+            padding: 7px 10px 7px 0;
           }
         }
       }
@@ -184,7 +183,7 @@
 
                <div class="cell-item" >
            <div class="code-cellimg" @click="focuscodeoneclick">
-                <img src="~jd/images/login-msg.png" style="height:13px;margin-left:6px;" alt="">
+                <img src="~jd/images/login-psd.png" style="height:20px;margin-left:6px;" alt="">
             </div>
             <div class="right" @click="focuscodeoneclick" >
               <input @blur="gotoView" v-focus="focuscodeoneState" v-validate="'required|password'" name="password" :type="registeredForm.passwordFormType" v-model="registeredForm.password" placeholder="请输入密码">
@@ -269,7 +268,7 @@ getLocalStorage,
           challengecode: this.registeredForm.code,
         }
         this.$store.dispatch('Registered', formData).then(response => {
-          Toast({
+          Toast({duration: 1000,
             message: '注册成功',
             position: 'bottom'
           })
@@ -277,7 +276,7 @@ getLocalStorage,
           this.visiblePopup.registeredCode = false;
           this.visiblePopup.registeredFormId = false;
         }, err => {
-          return Toast({
+          return Toast({duration: 1000,
             message: err.message,
             position: 'bottom'
           })
@@ -289,10 +288,10 @@ getLocalStorage,
           open_id:getSessionStorage('open_id')
         });
         this.registeredForm.resetSendPhoneMessage = 60;
-        if (Data.code !== 10000) return Toast({
+        if (Data.code !== 10000) return Toast({duration: 1000,
           message: Data.msg
         })
-        Toast({
+        Toast({duration: 1000,
             message: '发送成功',
             position: 'center'
           })
@@ -308,10 +307,10 @@ getLocalStorage,
       async LoginBind() { //登录
         var nickName='';
         var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g; //校验是否包含表情符
-        if(getLocalStorage('nickname').match(regRule)){
-        nickName=getLocalStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), '')
+        if(getSessionStorage('nickname').match(regRule)){
+        nickName=getSessionStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), '')
        }else{
-         nickName=getLocalStorage('nickname')
+         nickName=getSessionStorage('nickname')
        }
 
         let Data = await this.$store.dispatch('LoginBind', {
@@ -322,7 +321,7 @@ getLocalStorage,
           nickname:nickName,
           open_id:getSessionStorage('open_id')
         })
-        if (Data.code !== 10000) return Toast({
+        if (Data.code !== 10000) return Toast({duration: 1000,
           message: Data.msg
         })
         setSessionStorage('session_token',Data.data.session_token);
@@ -337,7 +336,8 @@ getLocalStorage,
       },
       focuscodetwoclick () {
       this.focuscodetwoState = true
-      },gotoView () {
+      },
+      gotoView () {
       window.scroll(0,0)
       this.focusphoneoneState = false;
       this.focuscodeoneState = false;

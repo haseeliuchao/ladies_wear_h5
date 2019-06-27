@@ -2,6 +2,43 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   /* 顶部导航栏 */
+  .screen_subject{
+      width: 8.8rem;
+      padding: 12px 12px 4px;
+      border-radius: 6px;
+      position: fixed;
+      bottom: 0;
+      z-index: -10;
+      background: #fff;
+      .screen_subjectgoodimg{
+        width: 100%;
+      }
+      .screen_subjecttext{
+        @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      padding: 10px 0;
+      .screen_subjectprice{
+        font-size: 17px;
+        color: #333;
+        font-weight: bold;
+      }
+      .screen_subjectname{
+        // @include textoverflow(2);
+                    font-size: 14px;
+                    margin-top: 4px;
+                    color: #333;
+                    line-height: 20px;
+                    width: 5.6rem;
+      }
+      img{
+        height: 90px;
+        width: 90px;
+      }
+      }
+    }
+
 
   .product-header {
     position: fixed;
@@ -574,7 +611,29 @@
   /* 商品 */
 
   /* 底部导航栏 */
-
+.cart-shop-fixed{
+    position: fixed;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 7px 14px;
+    background: #fff;
+   @include flexbox(space-between,
+    center,
+    row,
+    nowrap);
+        div{
+          width: 2.1rem;
+          height: 34px;
+          line-height: 34px;
+          text-align: center;
+          font-size: 18px;
+          color: $red;
+          border:1px solid $red;
+          border-radius: 6px;
+        }
+  }
   .cart-concern-fixed {
     position: fixed;
     bottom: -1px;
@@ -655,6 +714,9 @@
       
     }
   }
+  
+
+
 
   /* 底部导航栏 */
 
@@ -937,8 +999,47 @@
 
 <template>
   <div style="background:#f8f8f8;">
+    <!-- 分享选择弹窗 -->
+    <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
+     <div class="screen_subject" id='newImg'>
+                <img :src="screenImgsrc|addImg" class="screen_subjectgoodimg">
+      <div class="screen_subjecttext">
+        <div>
+          <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
+          <p class="screen_subjectname">{{screenTitle}}</p>
+        </div>
+        <img :src="'data:image/png;base64,'+screenQrcode">
+        <!-- 'data:image/png;base64,'+ -->
+      </div>
+     </div>
+    <!-- 分享引导popup -->
+    <mt-popup v-model="visiblePopup.shareImg" style="background:rgba(0,0,0,.6);height: 100%;
+    width: 100%;"  position="center" class="checkSkupop" >
+    <div style="height: 100%;
+    width: 100%;"  @click="visiblePopup.shareImg=false">
+    <div style="width:8.8rem;position: absolute;left: 50%;margin-left: -4.4rem;top: 50%;margin-top: -6rem;">
+      <img :src="screenUrl" alt="" style="width:8.8rem;" @click.stop="visiblePopup.shareImg=true">
+      <div style="height:30px;width:1px;background:#fff;margin: -3px auto 4px;"></div>
+      <p style="text-align:center;color:#fff;font-size:16px;">长按保存图片</p>
+      </div>
+     </div>
+    </mt-popup>
+
+
+
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
+      <div class="checkSkuInfo">
+            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">
+              <img v-if="item.color_img" :src="item.color_img+'_230x230.jpg'">
+              <img v-else :src="productInfo.index_img_url+'_230x230.jpg'">
+                    <div class="checkSkuInfo-text">
+                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
+                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100.00}}</p>
+                    </div>
+            </div>
+           <span class="closepop" @click= "closepopcheckSku"></span>
+      </div>
       <div class="checkSkuColortitleall">
         <p class="checkSkuColortitle">请选择颜色：</p>
         <!-- ()=>{title='';visiblePopup.checkSku=false;} -->
@@ -986,11 +1087,39 @@
       </div>
       <div class="popupOk" @click= "()=>{visiblePopup.checkInfo=false}" style="margin-top:29px;">知道了</div>
     </mt-popup>
+
+    <!-- 上架成功popup -->
+    <mt-popup v-model="visiblePopup.addSuccess" :closeOnClickModal='true' style="text-align: center;"  position="bottom" class="checkSkupop">
+      <img src="~jd/images/addSuccess.png" alt="" style="
+    margin-top: 18px;width:66%;">
+    <p class="addSuccess-text">上架成功</p>
+    <p class="addSuccess-textmin">邀请好友购买，可<br>
+赚 <em>¥{{profit/100.00}}</em> 元起</p>
+    <div class="addSuccess-share">
+      <div @click="shareBooshare">
+        <img src="~jd/images/share-app.png" alt="" style="width:50px;">
+        <p>微信好友</p>
+      </div>
+      <div @click="shareBooshare">
+        <img src="~jd/images/share-time.png" alt="" style="width:50px;">
+        <p>朋友圈</p>
+      </div>
+    </div>
+      <div class="popupOk" @click= "()=>{visiblePopup.addSuccess=false}" style="margin-top:8px;">取消</div>
+    </mt-popup>
+
+
+
     <!-- 分享引导popup -->
     <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
        <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
     margin-top: 8px;width:76%;">
     </mt-popup>
+    
+
+
+
+
           <div id="mainLayout">
             <!-- 商品轮播图 -->
             <div class="prouct-swiper">
@@ -1010,7 +1139,9 @@
               <div class="product-price">
                 <p class="product-pricep">
                 <span style="font-weight:bold;">&yen;</span>
-                <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100.00|topriceafter}}</em>.{{productInfo.sales_consumer_price/100.00|topricenext}}</span>
+
+                <span style="font-weight:bold;margin-left: -3px;" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">{{item.sales_consumer_price/100.00|topriceafter}}.{{item.sales_consumer_price/100.00|topricenext}}</span>
+                
                 <span style="margin-left:20px;text-decoration: line-through;color:#999;font-size:14px;"><em>原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.sales_price/100.00|topriceafter}}</em>.{{productInfo.sales_price/100.00|topricenext}}</span>
                 </p>
                 <span class="freight" style="font-size:13px;font-weight:normal"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em>5</em>.00</span>
@@ -1082,7 +1213,7 @@
     <!-- 内容区 -->
 
     <!-- 底部导航栏 -->
-    <div class="cart-concern-fixed">
+    <div class="cart-concern-fixed" v-if="!$route.query.distributor_id">
       <div class="left">
         <div class="goods-part" style="padding: 5px 0;border-right: 1px solid #e4e4e4;" @click= "$router.push('/index')">
           <i></i>
@@ -1098,9 +1229,19 @@
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('directBuy')">立即购买</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入进货车</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addGood()">一键铺店</div>
+      <!-- @click= "addShopCart('directBuy')" -->
+      <!-- ()=>{visiblePopup.addSuccess=true} -->
       <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
+    </div>
+
+    <div class="cart-shop-fixed" v-if="$route.query.distributor_id">
+        <div @click= "()=>$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
+        <div @click= "lowerShelf(productInfo.item_status)" v-if="productInfo.item_status==1">下架</div>
+        <div @click= "upperShelf(productInfo.item_status)" v-if="productInfo.item_status!=1">上架</div>
+        <div @click= "selfBuy" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
+        <div @click="showactionsheet()" style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
     </div>
     <!-- 底部导航栏 -->
 
@@ -1112,35 +1253,41 @@
 </template>
 
 <script>
+import html2canvas from 'html2canvas';
   import {
     // TabContainer,
     // TabContainerItem,
     Swipe,
     Toast,
     SwipeItem,
-    Popup
+    Popup,Actionsheet
   } from 'mint-ui';
   import {
     getProduct,
     getShop,
-    getCommentList
-    // getRecommend
+    addProduct,
+    getCommentList,
+    getShopInfo,
+    lowerShelfgood,
+    upperShelfgood 
   } from '@/service/getData'
-  // import LoadMore from 'common/loadMore';
   import BackHead from 'common/backHead';
-  // import wxapi from '@/utils/wxapi';
   import {
     isWeiXin
   } from '@/utils/mixin';
-
+  import Vue from 'vue'
+Vue.component(Actionsheet.name, Actionsheet);
   export default {
     data() {
       return {
         visiblePopup: {
           checkSku: false,
           checkInfo: false,
-          shareBoo:false
+          shareBoo:false,
+          addSuccess:false,
+          shareImg:false,
         },
+       
         laylist :[1],
         cartnum:null,
         colorCur:[],
@@ -1169,7 +1316,24 @@
           nowIndex: 1,
           total: 0
         },
-        addType:null
+        addType:null,
+        profit:0,
+        distributorId:null,
+        uppershow:false,
+        screenUrl: "http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png",
+        screenImgsrc:null,
+        screenTitle:null,
+        screenPrice:null,
+        screenQrcode:null,
+        screenScrollTop:null,
+        actions: [{
+              name: '发送好友',
+              method : this.getCamera	// 调用methods中的函数
+          }, {
+            name: '生成卡片保存分享', 
+            method : this.getLibrary	// 调用methods中的函数
+          }],
+          sheetVisible: false
       };
     },
     created: function () {
@@ -1186,7 +1350,14 @@
               // 下面需要这两行代码，兼容不同浏览器
               document.body.scrollTop = this.pageScrollYoffset;
               window.scroll(0, this.pageScrollYoffset);
-            } 
+            },
+            addSuccessvisiblePopup:function(newvs,oldvs){
+             if(newvs==true){
+                this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+this.productInfo.item_id+'?distributor_id='+this.distributorId)+'',imgUrl: this.productInfo.index_img_url})
+             }else{
+               this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
+             }
+            }
     },
         
     components: {
@@ -1200,10 +1371,75 @@
     computed: {
       wcvisiblePopup(){
           return this.visiblePopup.checkInfo;
+        },
+        addSuccessvisiblePopup(){
+          return this.visiblePopup.addSuccess;
         }
     },
 methods: {
+       async showactionsheet(){
+        this.sheetVisible=true;
+        this.screenImgsrc=this.productInfo.index_img_url;
+        this.screenTitle=this.productInfo.title;
+        this.screenPrice=this.productInfo.sales_consumer_price;
+        this.screenQrcode=this.productInfo.qrcode;
+        this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
+        
+      },
+      actionSheet: function(){
+      this.sheetVisible = true;
+      },
+      getCamera: function(){
+        this.visiblePopup.shareBoo=true;
+      },
+      getLibrary: function(){
+        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.doScreeenShots();
+        this.visiblePopup.shareImg=true;
+      },
 
+   doScreeenShots() {
+          const _this = this
+          setTimeout(() => {
+               // 创建一个新的canvas
+              // const _canvas = _this.$refs.cutScreen.HTMLElement;
+              const _canvas = document.getElementById('newImg');;
+
+             // 此处用于解决截图不清晰问题，将生成的canvas放大，然后再填充到原有的容器中就会清晰
+              const width = _canvas.offsetWidth; 
+              const height = _canvas.offsetHeight; 
+              const canvas2 = document.createElement('canvas');
+              const scale = 2;
+              canvas2.width = width * scale;
+              canvas2.height = height * scale;
+              const context1 = canvas2.getContext('2d')
+              if(context1) {
+                context1.scale(scale, scale);
+              }
+              const opts = {
+                    scale,
+                    canvas: canvas2,
+                    // logging: true, //日志开关，便于查看html2canvas的内部执行流程
+                    width,
+                    height,
+                    // 【重要】开启跨域配置
+                    useCORS: true 
+                };
+              html2canvas(_canvas,opts).then((canvas) => {
+                  const context = canvas2.getContext('2d');
+                  if(context) {
+                      context.scale(2,2);
+                      context.mozImageSmoothingEnabled = false;
+                      context.webkitImageSmoothingEnabled = false;
+                      context.imageSmoothingEnabled = false;
+                  }
+                  // canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+                  _this.screenUrl = canvas.toDataURL()
+                  document.documentElement.scrollTop = document.body.scrollTop = _this.screenScrollTop;
+              });
+          },1000)
+      },
       
   
 //   wxRegCallback () {
@@ -1220,7 +1456,7 @@ methods: {
 //     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
 //     success: () => {
 //       // alert('分享成功')
-//       return Toast({
+//       return Toast({duration: 1000,
 //             message: '分享成功',
 //             position: 'center'
 //           })
@@ -1242,7 +1478,7 @@ methods: {
 //     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
 //     success: () => {
 //       // alert('分享成功')
-//       return Toast({
+//       return Toast({duration: 1000,
 //             message: '分享成功',
 //             position: 'center'
 //           })
@@ -1254,7 +1490,9 @@ methods: {
 //   // 将配置注入通用方法
 //   wxapi.ShareAppMessage(option)
 // },
-        
+      shareBooshare(){
+         this.visiblePopup.shareBoo=true;          
+      }, 
       handleChange(index) {
         this.swipeIndex.nowIndex = index + 1;
       },
@@ -1273,13 +1511,14 @@ methods: {
             }
             that.checkIdnums=[]
             that.colorCur=[];
-          return Toast({
+            this.productInfo.shopping_cart_num+=1;
+          return Toast({duration: 1000,
             message: '加入购物车成功',
             position: 'center'
           })
           }else if(response.code==20025){
           }else{
-            Toast({
+            Toast({duration: 1000,
             message: response.msg,
             position: 'center'
             })
@@ -1310,13 +1549,14 @@ methods: {
             }
             that.checkIdnums=[];
             that.colorCur=[];
-          return Toast({
+            this.productInfo.shopping_cart_num+=1;
+          return Toast({duration: 1000,
             message: '加入购物车成功',
             position: 'center'
           })
           }else if(response.code==20025){
           }else{
-            Toast({
+            Toast({duration: 1000,
             message: response.msg,
             position: 'center'
             })
@@ -1338,17 +1578,24 @@ methods: {
         this.checkIdnums=[];
       },
       tipSend(){
-        Toast({
+        Toast({duration: 1000,
             message: "此商品已下架"
           })
       },
       async initData() {
         this.cartnum = window.sessionStorage.cartnum!=undefined ? window.sessionStorage.cartnum:0;
-        let Data = await getProduct({
-         item_id: this.$route.params.id
-        });
+        let sandObj={}
+        if(this.$route.query.distributor_id){
+            sandObj={
+              item_id: this.$route.params.id,
+              distributor_id: this.$route.query.distributor_id
+            }
+        }else{
+          sandObj={item_id: this.$route.params.id}
+        }
+        let Data = await getProduct(sandObj);
         if(Data.code!=10000){
-          Toast({
+          Toast({duration: 1000,
             message: Data.msg
           })
           return
@@ -1356,20 +1603,32 @@ methods: {
         // this.infoImgList.push(Data.data.index_img_url)
         this.infoImgList = JSON.parse(Data.data.img_list);
         this.productInfo = Data.data;
-        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})
+        
+        this.infoImgList = JSON.parse(Data.data.img_list);
+        if(this.$route.query.distributor_id){
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({duration: 1000,
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
+        this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+this.productInfo.item_id+'?distributor_id='+this.$route.query.distributor_id)+'',imgUrl: this.productInfo.index_img_url})
+        }else{
+        this.$wxShare({title: '惠眼识货的这件商品还不错哦！赶紧过来下单吧',desc: this.productInfo.title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl: this.productInfo.index_img_url})          
+        }
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;
         this.productInfo.salesPrice = Data.data.sales_price;
         this.productInfo.title =Data.data.title;
         this.productInfo.item_sku = Data.data.item_sku_b_o_list;
         this.productInfo.item_skulength =this.productInfo.item_sku.length;
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
-        // setTimeout(_ => {this.laylist = [2]}, 500)
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
         this.sizearrrmSome = this.productInfo.item_sku;
-        // if(isWeiXin('code')){
-        // wxapi.wxRegister(this.wxRegCallback)
-        // }
+        // this.distributorId=Data.data.distributor_b_o.distributor_id;
         for(var i=0;i<this.colorarr.length;i++){
           this.sizearr[i]=[];    
           this.shopnum[i]=[];
@@ -1381,8 +1640,9 @@ methods: {
           }
         } 
         
+       
 
-        var _this =this
+          var _this =this
           window.addEventListener('scroll',function(){
               var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
               if(scrollTop>=10){
@@ -1401,7 +1661,7 @@ methods: {
           item.number+= operation;
            if(item.number<0){
             item.number =0;
-          Toast({
+          Toast({duration: 1000,
               message: '宝贝不能再减少了哦'
             })
             return;
@@ -1428,6 +1688,85 @@ methods: {
           }
           this.colorCur[index]=numall
        },
+       async addGood(){
+         let Data = await addProduct({
+         item_id: this.$route.params.id
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else if(Data.code==40003){
+             this.$router.push({path: '/shopApplicate'});
+          }else{
+             Toast({duration: 1000,
+             message: Data.msg
+             })
+             return
+          }
+        }
+        this.profit=Data.data.kezuanshangxian;
+
+        let ShopInfoData = await getShopInfo({
+        });
+        if(ShopInfoData.code!=10000){
+          Toast({duration: 1000,
+            message: ShopInfoData.msg
+          })
+          return
+        }
+        this.distributorId=ShopInfoData.data.distributor_id;
+        this.visiblePopup.addSuccess=true;
+       },
+       async lowerShelf(state){
+         let Data = await lowerShelfgood({
+         distributor_item_id: this.$route.query.distributor_item_id
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else{
+             Toast({duration: 1000,
+             message: Data.msg
+             })
+             return
+          }
+        }
+        Toast({duration: 1000,
+             message: '下架成功'
+        })
+        this.productInfo.item_status=2;
+       },
+       async upperShelf(state){
+         if(state!=2){
+           Toast({duration: 1000,
+             message: '该商品已售罄'
+             })
+             return
+         }
+         let Data = await upperShelfgood({
+         distributor_item_id: this.$route.query.distributor_item_id
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else{
+             Toast({duration: 1000,
+             message: Data.msg
+             })
+             return
+          }
+        }
+        Toast({duration: 1000,
+             message: '上架成功'
+        })
+        this.productInfo.item_status=1;
+       },
+       selfBuy(){
+         this.$router.push({path: '/product/'+this.productInfo.item_id});
+         this.initData();
+       },
+       
+
       rmSome(arr, key) {
           let tempObj = {}
           arr.forEach(item => {
@@ -1489,6 +1828,20 @@ methods: {
           if(value.indexOf("alicdn.com")!=-1){
             return value+'_40x40.jpg';
           }
+        },
+        addImg(value){
+          if(value==''||value==null){
+            return;
+          }
+          if(value.indexOf("img1.vvic.com")!=-1){
+            return value.replace('https://img1.vvic.com','http://param.iask.in/vvic/img1');
+          }
+          if(value.indexOf("img.vvic.com")!=-1){
+            return value.replace('https://img.vvic.com','http://param.iask.in/vvic/img');
+          }
+          if(value.indexOf("alicdn.com")!=-1){
+            return value;
+          }
         }
     },
     mounted: function () {
@@ -1502,24 +1855,93 @@ methods: {
 <style lang='scss' scoped>
 @import '~assets/common/css/mixin.scss';
 .checkSkupop{
-     
       width: 100%;
+        .addSuccess-text{
+          text-align: center;
+          color: #333;
+          font-size: 18px;
+          line-height: 42px;
+        }
+        .addSuccess-textmin{
+          text-align: center;
+          color: #333;
+          font-size: 15px;
+          line-height: 22px;
+          margin-bottom: 16px;
+          em{
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+        .addSuccess-share{
+          @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            padding: 24px 40px;
+            border-top:1px solid #e4e4e4;
+
+            div{
+              width: 50%;
+              text-align: center
+            }
+        }
+
+        .checkSkuInfo{
+          @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            padding: 10px;
+            position: relative;
+            height: 90px;
+          span{
+            height: .56rem;
+            width: .56rem;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+          }
+          .checkSkuInfomain{
+             @include flexbox(start,
+            center,
+            row,
+            nowrap);
+            top: -20px;
+            position: absolute;
+            img{
+              height: 100px;
+              width: 100px;
+              border-radius: 6px;
+            }
+            .checkSkuInfo-text{
+              width: 5.4rem;
+              margin-left: 10px;
+                  margin-top: 18px;
+              .checkSkuInfo-texttitle{
+                 @include textoverflow(2);
+                    font-size: 13px;
+                    color: #333;
+                    line-height: 20px;
+                    height: 40px;
+              }
+              .checkSkuInfo-textprice{
+                font-size: 16px;
+                color: $red;
+                font-weight: bold;
+                margin-top: 6px;
+              }
+            }
+          }  
+        }
         .checkSkuColortitleall{
           padding-right: 10px;
          @include flexbox(space-between,
             center,
             row,
             nowrap);
-          span{
-            height: .56rem;
-            width: .56rem;
-            // background-image: url('~jd/images/product-detail-sprites-mjs.png');
-            // background-repeat: no-repeat;
-            // background-size: 100px 100px;
-            // background-position: -24px -12px;
-            background: url('~jd/images/close.png') no-repeat;
-            background-size: 100%;
-          }  
         }
         .checkSkuColortitle{
         width: 100%;

@@ -6,7 +6,7 @@ import getters from './getters'
 import shop from './modules/shop'
 import cms from './modules/cms'
 import user from './modules/user'
-
+// import shopToB from './modules/shopToB'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({

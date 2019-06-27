@@ -6,10 +6,13 @@ import wxapi from '@/utils/wxapi';
 const Index = () => import ('page/cms/index')
 const Article = () =>   import ('page/cms/article')
 const ArticleDetail = () => import ('page/cms/articleDetail')
+const IndexToC= () => import ('page/cmsc/indexToC')
     /* cms */
 
 /* member */
 const Pop = () => import ('page/member/pop')
+const Helpcenter = () => import ('page/member/helpcenter')
+const HelpcenterDetail = () => import ('page/member/helpcenterDetail')
 const Login = () => import ('page/member/login')
 const LoginBlank = () => import ('page/member/loginBlank')
 const BrowserLogin = () => import ('page/member/browserLogin')
@@ -24,22 +27,44 @@ const CardCoupon = () =>   import ('page/member/cardCoupon')
 
 /* shop */
 const Cart = () =>  import ('page/shop/cart')
+const CartToC = () =>  import ('page/shopc/cartToc')
 const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
+const OrderToC = () => import ('page/shopc/orderToc')
 const OrderRusult = () => import ('page/shop/orderRusult')
 const OrderList = () => import ('page/shop/orderList')
+const OrderListToC = () => import ('page/shopc/orderListToc')
 const Product = () =>   import ('page/shop/product')
+const ProductToC = () =>   import ('page/shopc/productToc')
 const SearchRusult = () =>  import ('page/shop/searchRusult')
 const SearchImg = () =>   import ('page/shop/searchImg')
 const SearchRenew = () =>   import ('page/shop/searchRenew')
 const Shop = () =>  import ('page/shop/shop')
 const CreateOrder = () =>   import ('page/shop/createOrder')
+const CreateOrderToC = () =>   import ('page/shopc/createOrderToc')
 const Review = () =>    import ('page/shop/review')
 const LogisticsInfo = () =>    import ('page/shop/logisticsInfo')
 const AfterSaleChoice = () =>    import ('page/shop/afterSaleChoice')
 const AfterSale = () =>    import ('page/shop/afterSale')
 const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
-    /* shop */
+/* shop */
+
+/* shopb */
+const Goodslist = () =>  import ('page/shopb/goodslist')
+const GoodorderList = () =>  import ('page/shopb/goodorderList')
+const Goodorderdetail = () =>  import ('page/shopb/goodorderdetail')
+const Goodedit = () =>  import ('page/shopb/goodedit')
+/* shopb */
+
+
+
+/* shopToB */
+const MyShop = () => import ('page/shopToB/myShop')
+const ShopApplicate = () => import ('page/shopToB/shopApplicate')
+const ShopManage = () => import ('page/shopToB/shopManage')
+const MemberList = () => import ('page/shopToB/memberList')
+const MemberDetails = () => import ('page/shopToB/memberDetails')
+/* shopToB */
 
 const appRouter = {
         // mode: 'history',
@@ -47,18 +72,27 @@ const appRouter = {
                 path: '',
                 redirect: '/loginBlank'
             },
+            /*C端店铺首页 */
+            {
+                path: '/indexToC/:distributor_id',
+                name: 'indexToC',
+                component: IndexToC,
+                meta: { keepAlive: false}
+            },
+            /*C端店铺首页 */
             {
                 path: '/index',
                 name: 'index',
                 component: Index,
                 meta: { 
                     keepAlive: true,
+                    Title:'惠眼识货',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png',
+                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png',
                 }
-            },
+            }, 
             {
                 path: '/article',
                 name: 'article',
@@ -76,10 +110,8 @@ const appRouter = {
                 name: 'login',
                 component: Login,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'绑定手机号',
+                   }
             },
             {
                 path: '/loginBlank',
@@ -91,27 +123,24 @@ const appRouter = {
                 path: '/browserLogin',
                 name: 'browserLogin',
                 component: BrowserLogin,
-                meta: { keepAlive: false }
+                meta: { keepAlive: false ,
+                    Title:'登录/注册',}
             },
             {
                 path: '/myhome',
                 name: 'myhome',
                 component: Myhome,
-                meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                meta: { keepAlive: false,
+                        Title:'我的'
+                    }
             },
             {
                 path: '/cardCoupon',
                 name: 'cardCoupon',
                 component: CardCoupon,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'优惠券',
+                   }
             },
             {
                 path: '/register',
@@ -130,10 +159,8 @@ const appRouter = {
                 name: 'cart',
                 component: Cart,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'购物车'
+                    }
             },
             {
                 path: '/category',
@@ -141,10 +168,8 @@ const appRouter = {
                 component: Category,
                 meta: { 
                     keepAlive: true ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder('/category')+'', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png',
+                    Title:'分类'
+                    
                 }
             },
             {
@@ -158,46 +183,72 @@ const appRouter = {
                 name: 'order',
                 component: Order,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'订单详情',
+                    }
             },
             {
                 path: '/createOrder',
                 name: 'createOrder',
                 component: CreateOrder,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'创建订单',
+                    }
             },
             {
                 path: '/orderList/:tab?',
                 name: 'orderList',
                 component: OrderList,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
-            },
+                    Title:'全部订单',
+                    }
+            }
+            ,
+            {
+                path: '/orderListToC/:tab',
+                name: 'orderListToC',
+                component: OrderListToC,
+                meta: { keepAlive: false}
+            }
+            ,
+            {
+                path: '/orderToC/:OrderNo',
+                name: 'orderToC',
+                component: OrderToC,
+                meta: { keepAlive: false}
+            }
+            ,
+            {
+                path: '/createOrderToC',
+                name: 'createOrderToC',
+                component: CreateOrderToC,
+                meta: { keepAlive: false }
+            }
+            ,
             {
                 path: '/product/:id',
                 name: 'product',
                 component: Product,
+                meta: { keepAlive: false,
+                        Title:'商品详情'}
+            }
+            ,
+            {
+                path: '/productToC/:id',
+                name: 'productToC',
+                component: ProductToC,
                 meta: { keepAlive: false }
-            },
+            }
+            ,
             {
                 path: '/searchImg',
                 name: 'searchImg',
                 component: SearchImg,
                 meta: { keepAlive: false ,
+                    Title:'图搜',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/searchRenew',
@@ -209,17 +260,59 @@ const appRouter = {
                 path: '/searchRusult',
                 name: 'searchRusult',
                 component: SearchRusult,
-                meta: { keepAlive: true,
+                meta: { keepAlive: true ,
+                    Title:'搜索',
                     title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
                     desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/shop',
                 name: 'shop',
                 component: Shop,
                 meta: { keepAlive: false }
+            },
+            {
+                path: '/cartToC/:distributor_id',
+                name: 'cartToC',
+                component: CartToC,
+                meta: { keepAlive: false }
+            },
+            {
+                path: '/myShop',
+                name: 'myShop',
+                component: MyShop,
+                meta: { keepAlive: false ,
+                        Title:'我的小店',}
+            },
+            {
+                path: '/shopApplicate',
+                name: 'shopApplicate',
+                component: ShopApplicate,
+                meta: { keepAlive: false ,
+                    Title:'申请开店'}
+            },
+            {
+                path: '/shopManage',
+                name: 'shopManage',
+                component: ShopManage,
+                meta: { keepAlive: false ,
+                    Title:'店铺管理'}
+            },
+            {
+                path: '/memberList',
+                name: 'memberList',
+                component: MemberList,
+                meta: { keepAlive: false ,
+                    Title:'客户列表'}
+            },
+            {
+                path: '/memberDetails',
+                name: 'memberDetails',
+                component: MemberDetails,
+                meta: { keepAlive: false ,
+                    Title:'客户订单'}
             },
             {
                 path: '/sttings',
@@ -231,72 +324,94 @@ const appRouter = {
                 path: '/addressList',
                 name: 'addresslist',
                 component: AddressList,
-                meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                meta: { keepAlive: false ,Title:'地址管理'}
             },
             {
                 path: '/address/:consignee_id?',
                 name: 'address',
                 component: Address,
-                meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                meta: { keepAlive: false ,Title:'地址编辑'}
             },
             {
                 path: '/logisticsInfo',
                 name: 'logisticsInfo',
                 component: LogisticsInfo,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'物流查询'}
             },
             {
                 path: '/afterSaleChoice',
                 name: 'afterSaleChoice',
                 component: AfterSaleChoice,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'售后选择',
+                    }
             },
             {
                 path: '/afterSale',
                 name: 'afterSale',
                 component: AfterSale,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'售后编辑'}
             },
             {
                 path: '/afterSaleDetail',
                 name: 'afterSaleDetail',
                 component: AfterSaleDetail,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    Title:'售后详情'}
             },
             {
                 path: '/orderRusult',
                 name: 'orderRusult',
                 component: OrderRusult,
                 meta: { keepAlive: false ,
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
-                    link: 'http://tencent-ai.com/mop/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://imagechao.test.upcdn.net/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
-            },
+                    Title:'支付结果'}
+            }
+            ,
+            {
+                path: '/goodslist/:distributor_id',
+                name: 'goodslist',
+                component: Goodslist,
+                meta: { keepAlive: false ,Title:'全部商品',}
+                
+            }
+            ,
+            {
+                path: '/goodorderdetail/:OrderNo',
+                name: 'goodorderdetail',
+                component: Goodorderdetail,
+                meta: { keepAlive: false ,Title:'订单详情'}
+            }
+            ,
+            {
+                path: '/goodedit/:itemId',
+                name: 'goodedit',
+                component: Goodedit,
+                meta: { keepAlive: false ,Title:'商品编辑'}
+            }
+            ,
+            {
+                path: '/goodorderList/:tab',
+                name: 'goodorderList',
+                component: GoodorderList,
+                meta: { keepAlive: false ,Title:'全部订单' }
+            }
+            ,
+            {
+                path: '/helpcenter',
+                name: 'helpcenter',
+                component: Helpcenter,
+                meta: { keepAlive: false , Title:'客服中心'}
+            }
+            ,
+            {
+                path: '/helpcenterDetail',
+                name: 'helpcenterDetail',
+                component: HelpcenterDetail,
+                meta: { keepAlive: false , Title:'客服中心'}
+            }
+            ,
             {
                 path: '/pop',
                 name: 'pop',

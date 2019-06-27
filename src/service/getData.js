@@ -7,6 +7,8 @@ export const loginpass = (params) => new Http().require({api: '/api/login',param
 
 export const loginInit = (params) => new Http().require({api: '/api/login/token/get',param:params}); //登录
 
+export const loginUsreInit = (params) => new Http().require({api: '/api/login/token/user/get',param:params}); //登录
+
 export const loginBind = (params) => new Http().require({api: '/api/bind/phone',param:params}); //登录
 
 export const getUserInfo = (params) => new Http().require({api: '/api/member/info',param:params}); //获取个人信息
@@ -60,11 +62,26 @@ export const getSelectedProductList = (params) => new Http().require({api: '/api
 
 export const searchGoods = (params) => new Http().require({api: '/api/items',param:params}); //获取购物车列表
 
+
+export const searchshopGoods = (params) => new Http().require({api: '/api/distributor/item/page',param:params}); //获取购物车列表
+
 export const searchtwoGoods = (params) => new Http().require({api: '/api/ad/appoint/obj/list',param:params}); //获取购物车列表
 
 export const searchhotGoods = (params) => new Http().require({api: '/api/hot/search/word/list',param:params}); //获取购物车列表
 
 export const getProduct = (params) => new Http().require({api: '/api/item/details',param:params}); //获取购物车列表
+
+export const getpageCount = (params) => new Http().require({api: '/api/distributor/item/count',param:params}); //获取购物车列表
+
+export const itemUpd = (params) => new Http().require({api: '/api/distributor/item/upd',param:params}); //获取购物车列表
+
+export const distributorItemDel = (params) => new Http().require({api: '/api/distributor/item/del',param:params}); //获取购物车列表
+
+export const addProduct = (params) => new Http().require({api: '/api/distributor/spread/item',param:params}); //一键铺店
+
+export const lowerShelfgood = (params) => new Http().require({api: '/api/distributor/item/lowerShelf',param:params}); //商品下架
+
+export const upperShelfgood = (params) => new Http().require({api: '/api/distributor/item/upperShelf',param:params}); //商品上架
 
 export const getProductList = (params) => new Http().require({api: '/api/shop/GetProductList',param: params}); //获取
 
@@ -84,7 +101,18 @@ export const finishOrder = (params) => new Http().require({api: '/api/order/rece
 
 export const cancelOrder = (params) => new Http().require({api: '/api/order/cancel',param: params}); //取消订单
 
-export const getOrderList = (params) => new Http().require({api: '/api/order/list',param: params}); //获取
+export const getOrderList = (params) => new Http().require({api: '/api/b/order/my',param: params}); //b端订单列表、
+
+
+export const getOrderListC = (params) => new Http().require({api: '/api/c/order/my',param: params}); //c端订单列表
+
+
+export const getOrderListB = (params) => new Http().require({api: '/api/distributor/order/list',param: params}); //获取B端店铺订单
+
+
+export const getOrderListMemberC = (params) => new Http().require({api: '/api/distributor/client/order/list',param: params}); //获取B端某个用户订单
+
+
 
 export const getOrderDetail = (params) => new Http().require({api: '/api/order/details',param: params}); //获取
 
@@ -94,7 +122,7 @@ export const logisticsSend = (params) => new Http().require({api: '/api/post/sal
 
 export const getOrder = (params) => new Http().require({api: '/api/items',param: params}); //获取
 
-export const getShopInfo = (params) => new Http().require({api: '/api/shop/GetShopInfo',param: params}); //获取
+// export const getShopInfo = (params) => new Http().require({api: '/api/shop/GetShopInfo',param: params}); //获取
 
 export const getCommentList = (params) => new Http().require({api: '/api/shop/GetCommentList',param: params}); //获取
 
@@ -122,5 +150,17 @@ export const getRecommend = (params) => new Http().require({api: '/api/cms/GetRe
 export const getIndexCmsData = (params) => new Http().require({api: '/api/ad/advertising/list',param:params}); //获取首页的全部资讯
 
 export const getShop = (params) => new Http().require({api: '/system/GetShop',param:params}); //获取购物车列表
+
+// shopToB
+export const getShopStastistics = (params) => new Http().require({api: '/api/distributor/stastistics',param: params}); //B端店铺统计信息
+export const getShopInfo = (params) => new Http().require({api: '/api/distributor/details',param: params}); //B端店铺信息
+export const saveShop = (params) => new Http().require({api: '/api/distributor/add',param: params}); //B端店铺创建修改
+
+export const getMemberList = (params) => new Http().require({api: '/api/distributor/member/page',param: params}); //B端客户列表
+export const getMemberDetails = (params) => new Http().require({api: '/api/distributor/member/details',param: params}); //B端客户详情（包括订单）
+export const updMemberNick = (params) => new Http().require({api: '/api/distributor/member/upd',param: params}); //B端客户修改备注昵称
+export const getOrderCount = (params) => new Http().require({api: '/api/order/count',param: params}); //B端客户管理查询订单总数
+
+
 
 
