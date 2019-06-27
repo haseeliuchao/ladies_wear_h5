@@ -267,13 +267,15 @@
         transform: translate(-50%, -50%);
         bottom: 0;
         .mint-swipe-indicator {
-          width: 15px;
-          height:6px;
-          margin:0 5px;
+          width: 7px;
+          height:7px;
           background: #ddd;
           opacity:1;
           &.is-active {
+            width: 15px;
+            height:6px;
             background:#fff ;
+            border-radius:4px;
           }
         }
       }
