@@ -69,7 +69,7 @@ import {
               if(Datauser.code==10000){
                 setSessionStorage('session_token',Datauser.data.session_token);
                 setSessionStorage('access_token',Datauser.data.access_token);
-                setSessionStorage('nickname',Datauser.data.membetInfo.nick);
+                setSessionStorage('nickname',Datauser.data.nick);
                 setSessionStorage('user_id',Datauser.data.user_id);
               }
             }else{
