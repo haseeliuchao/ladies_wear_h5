@@ -142,7 +142,8 @@
   import LoadMore from 'common/loadMore';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   import {Toast} from 'mint-ui'
   export default {
@@ -209,6 +210,9 @@
     },
 
     mounted: function () {
+      if(getSessionStorage('distributorId')){
+         document.title=getSessionStorage('distributorTitle');
+      }
           this.initData()
     }
   }

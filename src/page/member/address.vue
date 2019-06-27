@@ -210,7 +210,8 @@
   import myaddress from '@/utils/address3.json'
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   export default {
     data() {
@@ -443,6 +444,9 @@
     },
 
     mounted: function () {
+      if(getSessionStorage('distributorId')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
       this.$nextTick(() => { //vue里面全部加载好了再执行的函数  （类似于setTimeout）
         this.myAddressSlots[0].defaultIndex = 0    

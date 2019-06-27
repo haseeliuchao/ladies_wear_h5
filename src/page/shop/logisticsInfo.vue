@@ -101,7 +101,7 @@
 <script>
   import LoadMore from 'common/loadMore';
   import {logisticsInfo} from '@/service/getData'
-  // import {searchtwoGoods} from '@/service/getData';
+  import {getSessionStorage} from '@/utils/mixin';
   import {Toast} from 'mint-ui';
   export default {
     data() {
@@ -132,6 +132,9 @@
       },
     },
     mounted: function () {
+      if(getSessionStorage('distributorId')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
     }
 

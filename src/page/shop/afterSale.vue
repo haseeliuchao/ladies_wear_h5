@@ -309,7 +309,7 @@
               <div class="order-product-list">
                 <div class="order-product-item" v-for="(item,index) in goodInfofilter" :key="index">
                   <div>
-                    <img :src="item.index_img_url">
+                    <img :src="item.item_img+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{item.item_title}}</p>
                       <p class="prodsku-info">颜色 {{item.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{item.size}}</p>
@@ -399,7 +399,8 @@
   } from '@/service/getData';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   import axios from 'axios';
   import VueUploadComponent from 'vue-upload-component';
@@ -609,6 +610,9 @@
         }
     },
     mounted: function () {
+      if(getSessionStorage('distributorId')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
       this.order_item_id=this.$route.query.order_item_id
     }
