@@ -130,7 +130,7 @@
          <p style="line-height:25px;" v-if="distributorId">订单支付成功<br> <em  @click= "$router.push(`/indexToC/${distributorId}`)">继续购物</em> | <em @click= "$router.push({path: '/orderListToC/2',query: {distributor_id:distributorId}})">查看订单</em></p>
          <img src="~jd/images/zhifuchenggong.png" style="height:48px;">
     </div>
-    <div class="searchImgtab">
+    <!-- <div class="searchImgtab">
         <div class="searchImgtableft">
         <img src="~jd/images/huiyanlogo.png" style="height:80px;">
         <p>同款商品更低价，不花冤枉钱！</p>
@@ -152,7 +152,7 @@
                   </div>
                 </li>
               </ul>
-    </load-more>
+    </load-more> -->
   </div>
   </div>
 </template>
@@ -162,7 +162,7 @@
  import {searchGoods} from '@/service/getData';
 //  import wxapi from '@/utils/wxapi';
   import {
-    isWeiXin,pushHistory
+    isWeiXin,pushHistory,getSessionStorage
   } from '@/utils/mixin';
   import {
     Toast,Popup
@@ -198,18 +198,7 @@
        
       },
       
-      async infiniteCallback(response) { //下拉加载
-
-        if(response.data.items!=undefined&&response.data.items!=null){
-         if (response.data.items.length > 0) {
-          response.data.items.map(i => {
-            this.indexRusultData.push(i)
-          })
-        }
-        }else{
-          this.indexRusultData=[];
-        }
-      },
+    
     },
     filters:{
         topriceafter(value){
@@ -224,8 +213,6 @@
       if(this.distributorId){
         document.title=getSessionStorage('distributorTitle');
       }
-      this.indexParams = JSON.parse(JSON.stringify(Object.assign(this.indexParams,this.$route.query)))
-      this.$refs.indexRusultloadMore.onloadMoreScroll();
     }
   }
 
