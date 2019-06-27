@@ -342,8 +342,7 @@ import QiyuKefu from 'common/qiyuKefu';
   import {
     getSaleDetail,logisticsSend
   } from '@/service/getData';
-  import {
-  pushHistory
+  import {getSessionStorage
 } from '@/utils/mixin';
   import {
     Toast
@@ -427,6 +426,9 @@ import QiyuKefu from 'common/qiyuKefu';
         }
     },
     mounted: function () {
+      if(getSessionStorage('distributorId')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData()
     }
   }

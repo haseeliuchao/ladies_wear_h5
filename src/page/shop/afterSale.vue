@@ -399,7 +399,8 @@
   } from '@/service/getData';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage
   } from '@/utils/mixin';
   import axios from 'axios';
   import VueUploadComponent from 'vue-upload-component';
@@ -609,6 +610,9 @@
         }
     },
     mounted: function () {
+      if(getSessionStorage('distributorId')){
+         document.title=getSessionStorage('distributorTitle');
+      }
       this.initData();
       this.order_item_id=this.$route.query.order_item_id
     }

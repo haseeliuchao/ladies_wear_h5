@@ -35,11 +35,7 @@
   </div>
 </template>
 <script>
-  import {
-
-    getSessionStorage,
- 
-  } from '@/utils/mixin';
+  import {getSessionStorage} from '@/utils/mixin';
   export default {
     data() {
       return {
