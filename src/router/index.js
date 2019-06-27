@@ -87,8 +87,8 @@ const appRouter = {
                 meta: { 
                     keepAlive: true,
                     Title:'惠眼识货',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    title: '每天上新千款好货 快来开店赚钱', // 分享标题, 请自行替换
+                    desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png',
                 }
@@ -245,8 +245,8 @@ const appRouter = {
                 component: SearchImg,
                 meta: { keepAlive: false ,
                     Title:'图搜',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    title: '每天上新千款好货 快来开店赚钱', // 分享标题, 请自行替换
+                    desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
@@ -262,8 +262,8 @@ const appRouter = {
                 component: SearchRusult,
                 meta: { keepAlive: true ,
                     Title:'搜索',
-                    title: '送你开店秘籍，还不来取？', // 分享标题, 请自行替换
-                    desc: '开店就用惠眼识货，7*12小时技术支持，专业客服全天候答疑解问', // 分享描述, 请自行替换
+                    title: '每天上新千款好货 快来开店赚钱', // 分享标题, 请自行替换
+                    desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
                     imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
