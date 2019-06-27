@@ -592,14 +592,21 @@
         let computedFee = 0,
           selectedCounter = 0;
         if(this.cartList!=null){
+        if(!this.delshow){  
         this.cartList.map(item => {
           if (item.checked && item.item_status === 1) {
             computedFee += parseFloat(item.num * item.sales_consumer_price)
             selectedCounter++
           }
         })
-       
-
+        }else{
+          this.cartList.map(item => {
+          if (item.checked) {
+            computedFee += parseFloat(item.num * item.sales_consumer_price)
+            selectedCounter++
+          }
+          })
+        }
         this.selectedCounter = selectedCounter;
         this.selectedAll = selectedCounter === this.cartList.length ? true : false;
         this.totalFee = computedFee;
@@ -635,6 +642,10 @@
       },
       async editProductdelshow() {
        this.delshow=!this.delshow;
+       this.cartList.map(items => {
+                  items.checked = false
+              })
+        this.computedTotalFee();
       },
       async checked(item) {
         item.checked = !item.checked;
