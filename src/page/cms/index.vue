@@ -81,22 +81,22 @@
     .deploy-floor-l{
       width:41%;
       .deploy-item{
-        width:3.9rem;
+        width:4.7rem;
         height:100%;
         border-radius: 5px;
         overflow: hidden;
         border-radius: 5px 0 0 5px;
-        border-right: 1px solid #e4e4e4;
+        border-right: 1px solid #f5f5f5;
       }
     }
     .deploy-floor-r{
       .deploy-item{
-        width:5.5rem;
+        width:4.7rem;
         height:50%;
         overflow: hidden;
         &:last-child{
           border-radius: 0 0 5px 0;
-          border-top: 1px solid #efefef;
+          border-top: 1px solid #f5f5f5;
         }
         &:first-child{
           border-radius: 0 5px 0 0;
