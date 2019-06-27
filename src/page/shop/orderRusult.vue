@@ -1,160 +1,59 @@
 <!-- orderList -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
-  
-  .my-order {
-      min-height: 100%;
-      background: #fff;
-      .searchImgtab{
-          padding: 15px 12px;
-          width: 10rem;
-          background: #fff;
-          margin-top: 10px;
-          @include flexbox(space-between,center,row,nowrap);
-          .searchImgtableft{
-              @include flexbox(start,center,row,nowrap);
-              width: 82%;
-              p{
-                  color: #333;font-size: 14px;line-height: 28px;
-                  margin-left: 10px;
-              }
-          }
-          .product-share{
-           width: 18%;
-           display: block;
-           height: 22px;
-           line-height: 22px;
-           border-top-left-radius: 11px;
-           border-bottom-left-radius: 11px;
-           font-size: 13px;
-           color: #666;
-           position: relative;
-           left: 12px;
-
-           text-align: center;
-           background:#e8e8e8 url('~jd/images/sharelink.png') no-repeat 9px center;
-           background-size: 16%
-        }
-      }
-      .product-listTitle{
-
-          height: 50px;
-          line-height: 50px;
-          color: #333;
-          font-size: 16px;
-          background:#f2f2f2 url('~jd/images/title-linebg.png') no-repeat center;
-          background-size:60%;
-          text-align: center
-      }
-      .product-list{
-        @include flexbox(space-between,center,row,wrap);
-        padding: 0 .3rem;
-        .prod-item{
-          background: #fff;
-          width: 4.58rem;
-          margin-bottom: 8px;
-          border-radius: 6px;
-          overflow: hidden;
-          text-align: center;
-          img{
-            // width: 4.58rem;
-            height: 4.58rem;
-            // border-radius: 6px;
-          }
-          .prod-info{
-            // margin-left: 10px;
-            padding: 0px 6px;
-            
-            @include flexbox(space-between,flex-start,column,wrap);
-            .prod-title{
-              font-size: 14px;
-              color: #333;
-              @include textoverflow(2);
-              height: 40px;
-              line-height: 20px;
-              margin-top: 4px;
-              text-align: left;
-            }
-            .prod-price{
-              color: $red;
-              text-align:left;
-              line-height: 30px;
-              margin-bottom: 8px;
-              span{
-                font-size: $title;
-                margin-right: 5px;
-              }
-              strong{
-                font-size: 19px;
-              }
-            }
-            .prod-pro{
-              padding: 5px 0;
-              text-align: left;
-              color: $gray;
-              font-size: $subtitle;
-            }
-          }
-        }
-      }
-    .ordertop-status{
-      width: 10rem;
-      height: 100px;
-      background: -webkit-gradient(linear, left 0, right 0, from(#ff2741), to(#ff5527));
-      @include flexbox(start,
-      center,
-      row,
-      nowrap);
-      p{
-         width: 60%;font-size: 16px;
-         margin-left: 10px;
-         color: #fff;
-      }
-      
-    }
-
-  }
-
+.pay-status{
+  width: 10rem;
+  height: 100%;
+  text-align: center;
+  background: #fff;
+  padding-top: 45px;
+     .status{
+       font-size: 18px;
+       color: #333;
+       line-height: 46px;
+     }
+     .status-text{
+       color: #666;
+       font-size: 13px;
+       margin-bottom: 26px;
+     }
+     .status-link{
+       height: 1.18rem;
+       width: 9.4rem;
+       margin: 0 auto 15px;
+       background: -webkit-gradient(linear, 0 top, 0 bottom, from(#ff2741), to(#ff5527));
+       border-radius: 6px;
+       line-height: 1.18rem;
+       color: #fff;
+       font-size: 17px;
+     }
+     .status-linka{
+        height: 1.18rem;
+       width: 9.4rem;
+       margin: 0 auto 15px;
+       background: #f9f9f9;
+       border-radius: 6px;
+       line-height: 1.18rem;
+       color: #333;
+       font-size: 17px;
+       border:1px solid #dadada;
+     }
+}
 </style>
 
 <template>
-<div>
-  <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
-       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 12%;
-    margin-top: 8px;width:130%;">
-    </mt-popup>
+    
+    <div class="pay-status">
+          <img src="~jd/images/payOk.png" height="50">
+          <p class="status">支付成功</p>
+          <p class="status-text">本次支付已成功，详细信息请进入我的订单查看</p>
+          <p class="status-link" v-if="!distributorId" @click= "$router.push('/index')">返回主页</p>
+          <p class="status-linka" v-if="!distributorId" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">我的订单</p>
+          <p class="status-link" v-if="distributorId" @click= "$router.push(`/indexToC/${distributorId}`)">返回主页</p>
+          <p class="status-linka" v-if="distributorId" @click= "$router.push({path: '/orderListToC/2',query: {distributor_id:distributorId}})">我的订单</p>
+    </div>
 
-  <div class="my-order">
-    <div class="ordertop-status">
-         <p style="line-height:25px;" v-if="!distributorId">订单支付成功<br><em  @click= "$router.push('/index')">继续购物</em> | <em @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">查看订单</em></p>
-         <p style="line-height:25px;" v-if="distributorId">订单支付成功<br> <em  @click= "$router.push(`/indexToC/${distributorId}`)">继续购物</em> | <em @click= "$router.push({path: '/orderListToC/2',query: {distributor_id:distributorId}})">查看订单</em></p>
-         <img src="~jd/images/zhifuchenggong.png" style="height:48px;">
-    </div>
-    <!-- <div class="searchImgtab">
-        <div class="searchImgtableft">
-        <img src="~jd/images/huiyanlogo.png" style="height:80px;">
-        <p>同款商品更低价，不花冤枉钱！</p>
-        </div>
-        <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
-    </div>
-    <p class="product-listTitle">推荐商品</p>
-    <load-more style="width:100%;background:#f2f2f2" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
-                ref="indexRusultloadMore">
-              <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-                  <img v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-                  <div class="prod-info">
-                    <p class="prod-title">{{item.title}}</p>
-                    <p class="prod-price">
-                      <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold;font-size:16px;"><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:8px;text-decoration: line-through;color:#999;font-size:14px;"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
-                      </p>
-                  </div>
-                </li>
-              </ul>
-    </load-more> -->
-  </div>
-  </div>
+ 
 </template>
 
 <script>
@@ -209,9 +108,23 @@
         }
     },
     mounted: function () {
+
+
       this.distributorId=getSessionStorage('distributorId')
       if(this.distributorId){
         document.title=getSessionStorage('distributorTitle');
+      }
+
+
+    }
+    ,
+    beforeRouteLeave(to, from, next){
+      if(to.name==='createOrderToc'||to.name==='orderToc'){
+        next({path: '/orderListToC/2',query: {distributor_id:getSessionStorage('distributorId')}});
+      }else if(to.name==='createOrder'||to.name==='order'){
+       next({path: '/orderList/2'});
+      }else {
+        next();
       }
     }
   }
