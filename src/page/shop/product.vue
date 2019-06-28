@@ -1440,56 +1440,6 @@ methods: {
               });
           },1000)
       },
-      
-  
-//   wxRegCallback () {
-//   // 用于微信JS-SDK回调
-//     this.wxShareTimeline()
-//     this.wxShareAppMessage()
-// },
-// wxShareTimeline () {
-//   // 微信自定义分享到朋友圈
-//   let option = {
-//     title: '这款衣服我觉得非常适合你，快来看看吧', // 分享标题, 请自行替换
-//     desc: this.productInfo.title, // 分享描述, 请自行替换
-//     link:'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接，根据自身项目决定是否需要split
-//     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
-//     success: () => {
-//       // alert('分享成功')
-//       return Toast({duration: 1000,
-//             message: '分享成功',
-//             position: 'center'
-//           })
-//     },
-//     error: () => {
-//       // alert('已取消分享')
-//     }
-//   }
-//   // 将配置注入通用方法
-//   wxapi.ShareTimeline(option)
-// },
-// wxShareAppMessage () {
-//   // 微信自定义分享给朋友
-//   // var shareWxLink = window.location.href.split('#')[0] + 'static/html/redirect.html?app3Redirect=' + encodeURIComponent(window.location.href);
-//     let option = {
-//     title: '这款衣服我觉得非常适合你，快来看看吧', // 分享标题, 请自行替换
-//     desc: this.productInfo.title, // 分享描述, 请自行替换
-//     link: 'http://tencent-ai.com/mop/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'', // 分享链接，根据自身项目决定是否需要split
-//     imgUrl: this.productInfo.index_img_url, // 分享图标, 请自行替换，需要绝对路径
-//     success: () => {
-//       // alert('分享成功')
-//       return Toast({duration: 1000,
-//             message: '分享成功',
-//             position: 'center'
-//           })
-//     },
-//     error: () => {
-//       // alert('已取消分享')
-//     }
-//   }
-//   // 将配置注入通用方法
-//   wxapi.ShareAppMessage(option)
-// },
       shareBooshare(){
          this.visiblePopup.shareBoo=true;          
       }, 
