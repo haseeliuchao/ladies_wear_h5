@@ -985,7 +985,7 @@
                 <span style="font-weight:bold;">&yen;</span>
                 <span style="font-weight:bold;margin-left: -3px;"><em style="font-size:16px;">{{productInfo.salesConsumerPrice/100|TwoNum}}</em></span>
                 </p>
-                <span class="freight" v-if="productInfo.freeShipping!=1"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em style="font-size:16px;">5.00</em></span>
+                <span class="freight" v-if="productInfo.freeShipping!=1" style="font-size:13px;font-weight:normal"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em>5.00</em></span>
                 <span class="freight" v-if="productInfo.freeShipping==1"><em style="font-size:13px;font-weight:normal">包邮</em></span>
               </div>
               <div class="product-title-textbottom">
@@ -1049,7 +1049,7 @@
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed">
       <div class="left">
-        <div class="goods-part" @click= "$router.push(`/indexToC/${$route.query.distributor_id}`)">
+        <div class="goods-part" style="padding: 5px 0;border-right: 1px solid #e4e4e4;"  @click= "$router.push(`/indexToC/${$route.query.distributor_id}`)">
           <i></i>
           <span>首页</span>
         </div>
