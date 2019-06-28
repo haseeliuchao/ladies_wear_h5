@@ -222,6 +222,7 @@
             .order-product-item {
               padding: $padding;
               width: 100%;
+              border-bottom: #e4e4e4;
               >div {
                 @include flexbox(flex-start,
                 flex-start,
