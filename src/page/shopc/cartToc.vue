@@ -438,8 +438,8 @@
                 </div>
                 <div class="pd-price">
                   <div class="left">
-                    <span>&yen;</span>
-                    <strong><em style="font-size:16px;">{{item.sales_consumer_price/100.00|topriceafter}}</em><em style="font-size:12px;">.{{item.sales_consumer_price/100.00|topricenext}}</em></strong>
+                    <!-- <span>&yen;</span> -->
+                    <strong><em style="font-size:16px;">￥{{item.sales_consumer_price/100.00}}</em></strong>
                     
                   </div>
                   <div class="right">
@@ -470,7 +470,7 @@
         <i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click= "selectedAllGoods"></i>
         <em>全选</em>
         <!-- {{totalFee}} -->
-        <strong v-if="!delshow">合计：<span>&yen;</span> <em style="font-size:18px;">{{totalFee/100.00|topriceafter}}</em><em style="font-size:12px;">.{{totalFee/100.00|topricenext}}</em></strong>
+        <strong v-if="!delshow">合计：<em style="font-size:18px;">{{totalFee/100|TwoNum}}</em></strong>
       </div>
       <div v-if="!delshow" class="right" @click= "confirmOrder()">
         <strong>结算</strong>
