@@ -546,12 +546,12 @@
         this.searchParams.current_page = 1;
         this.searchRusultData=[];
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
-        this.searchParams.img_url=null;
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
         
       },
       async initData(){
         this.img_url = this.$route.query.img_url;
+        this.$route.query.img_url=null;
         this.searchParams.advertising_id = this.$route.query.advertising_id;
       },
       async infiniteCallback(response) { //下拉加载
