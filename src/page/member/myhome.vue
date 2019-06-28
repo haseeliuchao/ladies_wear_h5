@@ -377,9 +377,9 @@
         <div class="my-order">
           <h2>我的进货单</h2>
           <div>
-            <div class="order-item">
-              <router-link :to="{ path: '/orderList/1' }"><img src="~jd/images/paymenticon2.png" alt="">
-              <span>待付款</span></router-link>
+            <div class="order-item" @click="$router.push('/orderList/1')">
+              <img src="~jd/images/paymenticon2.png" alt="">
+              <span>待付款</span>
             </div>
             <div class="order-item" @click="$router.push('/orderList/2')">
               <img src="~jd/images/send.png" alt="">
