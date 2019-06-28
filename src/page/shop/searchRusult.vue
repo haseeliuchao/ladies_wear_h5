@@ -545,7 +545,7 @@
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
         this.searchRusultData=[];
-        
+        this.searchParams.img_url=null;
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
         this.searchParams.img_url=null;
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
