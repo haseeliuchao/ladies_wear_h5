@@ -151,11 +151,11 @@
         </div>
         <div class="cell-from-item">
           <label for="phone"><span  class="title">手机</span></label>
-          <div class="content" >
-            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone"  @click="focusphoneoneclick" @blur="gotoView" v-focus="focusphoneoneState">
+          <div class="content" @click="focusphoneoneclick">
+            <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone"   @blur="gotoView" v-focus="focusphoneoneState">
           </div>
           <div style="position:absolute;right:.3rem">
-            <span v-show="errors.has('mobile')"   style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
+            <span v-show="errors.has('mobile')&&addressForm.phone!=''"   style="color: #ff2741;margin-left:6px;font-size: 13px;" >请输入正确手机号码</span>
           </div>
         </div>
         <div class="cell-from-item" @click= "()=>addressVisible=true" >
