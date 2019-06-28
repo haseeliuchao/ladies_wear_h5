@@ -150,7 +150,7 @@
           </div>
         </div>
         <div class="cell-from-item">
-          <label for="phone"><span  class="title">手机</span></label>
+          <label for="phone"><span class="title">手机</span></label>
           <div class="content"  @click="focusphoneoneclick">
             <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone"  @blur="gotoView" v-focus="focusphoneoneState">
           </div>
@@ -436,11 +436,6 @@
       this.focuscodetwoState = false;
       this.focuscodethreeState = false;
       },
-      blur(){
-        if(errors.has('mobile')){
-          blurVisible = true;
-        }
-      }
     },
 
     mounted: function () {
