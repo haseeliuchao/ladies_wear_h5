@@ -149,9 +149,9 @@
             <input type="text" name="name"  v-validate="'required'"  v-model="addressForm.name" id="name" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
           </div>
         </div>
-        <div class="cell-from-item"  @click="focusphoneoneclick">
+        <div class="cell-from-item">
           <label for="phone"><span  class="title">手机</span></label>
-          <div class="content" >
+          <div class="content"  @click="focusphoneoneclick">
             <input type="tel" name="mobile" v-validate="'required|mobile'" v-model="addressForm.phone" id="phone"  @blur="gotoView" v-focus="focusphoneoneState">
           </div>
           <div style="position:absolute;right:.3rem">
