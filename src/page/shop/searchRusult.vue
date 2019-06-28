@@ -545,13 +545,13 @@
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
         this.searchRusultData=[];
-        
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
         
       },
       async initData(){
         this.img_url = this.$route.query.img_url;
+        this.$route.query.img_url=null;
         this.searchParams.advertising_id = this.$route.query.advertising_id;
       },
       async infiniteCallback(response) { //下拉加载
@@ -590,6 +590,19 @@
           this.initData();
           this.searchParams.page_size = 10;
           this.searchParams.current_page = 1;
+          if(!this.$route.query.title||this.$route.query.title==undefined){
+            this.searchParams.title='';
+          }
+          if(!this.$route.query.item_url||this.$route.query.item_url==undefined){
+            this.searchParams.item_url=null;
+          }
+          if(!this.$route.query.advertising_id||this.$route.query.advertising_id==undefined){
+            this.searchParams.advertising_id='';
+          }
+          if(!this.$route.query.category_id||this.$route.query.category_id==undefined){
+            this.searchParams.category_id='';
+          }
+          this.searchParams.category_id='';
           this.searchRusultData=[];
           this.active=1;
           this.sort_enum=null;
@@ -597,6 +610,7 @@
           this.searchParams.sort_type = 1;
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
+          this.searchParams.img_url=null;
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
 

@@ -110,7 +110,6 @@
           color:#999;
         }
   }
-  
 </style>
 <template>
 <div>

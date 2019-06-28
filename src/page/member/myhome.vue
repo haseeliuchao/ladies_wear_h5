@@ -389,14 +389,6 @@
               <img src="~jd/images/received.png" alt="">
               <span>待收货</span>
             </div>
-            <!-- <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
-              <img src="~jd/images/evaluated.png" alt="">
-              <span>待评价</span>
-            </div> -->
-            <!-- <div class="order-item">
-              <img src="~jd/images/Aftermarket.png" alt="">
-              <span>退换/售后</span>
-            </div> -->
             <div class="order-item myorder" @click="$router.push('/orderList/0')">
               <img src="~jd/images/myordericon.png" alt="">
               <span>全部订单</span>
