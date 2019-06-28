@@ -594,7 +594,7 @@
             this.searchParams.title='';
           }
           if(!this.$route.query.item_url||this.$route.query.item_url==undefined){
-            this.searchParams.item_url='';
+            this.searchParams.item_url=null;
           }
           if(!this.$route.query.advertising_id||this.$route.query.advertising_id==undefined){
             this.searchParams.advertising_id='';
