@@ -173,7 +173,7 @@
       </div>
 
       <div class="setProfitone" v-if="activeIndex==1">
-      <label><p class="setProfitone-entry"><input type="text" @blur="gotoView" v-model="salesSetProfit"><span>元</span></p></label>
+      <label><p class="setProfitone-entry"><input type="number" @keydown="handleInput2" @blur="gotoView" v-model="salesSetProfit"><span>元</span></p></label>
       <p class="setProfitone-text">售价=进价+利润值</p>
       <p class="setProfitone-choose"><span style="border-right:1px solid #e4e4e4;color:#333" @click="setProfitClose">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
       </div>
@@ -198,7 +198,7 @@
          <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
-     <label><p class="setprice"><span>设置售价</span><input @blur="gotoView" style="text-align:right;"  type="text" @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p></label>
+     <label><p class="setprice"><span>设置售价</span><input type="number" @keydown="handleInput2" @blur="gotoView" style="text-align:right;"  @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p></label>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
@@ -284,6 +284,10 @@ import shopVue from '../shop/shop.vue';
     },
 
     methods: {
+      handleInput2(e) {
+            // 通过正则过滤小数点后两位
+            e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
+        },
       async initData() {
         let Data = await getProduct({
          item_id: this.$route.params.itemId,
@@ -335,9 +339,9 @@ import shopVue from '../shop/shop.vue';
                 },
       listMeprofit:function(type,val,list){
                      return list.filter(function(item){
-                       if(!type){
-                         return item.profit=item.sales_consumer_price*100-item.cost_price;
-                       }
+                        if(!type){
+                          return item.profit=item.sales_consumer_price*100-item.cost_price;
+                        }
                         if(type=="salesMultiple"){
                           return item.profit=item.sales_consumer_price*100-item.cost_price;
                         }
@@ -368,8 +372,7 @@ import shopVue from '../shop/shop.vue';
        },
 
        changeSales(item,price){
-
-         item.profit=price*100-item.cost_price;
+         return item.profit=price*100-item.cost_price;
        },
        
        async save(){
