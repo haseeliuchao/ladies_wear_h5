@@ -42,6 +42,12 @@
           position:absolute;
           right: .4rem;
         }
+        // span:last-child{
+        //   position:absolute;
+        //   right: .8rem;
+        //   color:$red;
+        //   font-size:14px;
+        // }   
       }
     }
   }
@@ -81,17 +87,18 @@
     <div class="storeCreate-con store-con">
       <p>
         <label for="name">店铺名称</label>
-        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate="'required'" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
-        <span v-show="shopForm.title.length>10">请输入合格店铺名称</span>
+        <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate.initial="'required'" @input="handleInput2($event)" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+        <span v-show="shopForm.title.length>20">请输入合格店铺名称</span>
       </p>
       <p>
         <label for="category">主营类目</label>
         <input type="text" name="category"  v-model="shopForm.category" readonly="readonly">
       </p>
-      <p>
+      <p >
         <label for="nTimes">商品加价</label>
-        <input type="tel" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required'" @input="handleInput($event)"  @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
+        <input type="text" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required|number'"  @input="handleInput($event)" @click="focuscodeoneclick"  @blur="gotoView" v-focus="focuscodetwoState">
         <span>倍</span>
+        <!-- <span v-show="errors.has('number')">请输入一位小数的正实数</span> -->
       </p>
       <p>
         <label for="freight">商品包邮</label>
@@ -104,10 +111,10 @@
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
      <div  class="save-shop" v-if="!shopForm.distributor_id"
-      :class="['cell-btn',(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('number')||(shopForm.title.length==0||shopForm.title.length>20)||shopForm.n_times.length==0||shopForm.n_times==0?'disabled-btn':'']" 
       @click= "saveShop">创建店铺</div>
       <div class="save-shop" v-if="shopForm.distributor_id"
-      :class="['cell-btn',(shopForm.title.length==0||shopForm.title.length>10)||shopForm.n_times.length==0?'disabled-btn':'']" 
+      :class="['cell-btn',errors.has('number')||(shopForm.title.length==0||shopForm.title.length>20)||shopForm.n_times.length==0||shopForm.n_times==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
 </div>
@@ -138,11 +145,8 @@
     methods:{
       async saveShop(){
         let distributor_id='';
-        // this.$route.query.distributor_id?distributor_id=this.$route.query.distributor_id:distributor_id='';
         if(this.$route.params.distributor_id){
         distributor_id=this.$route.params.distributor_id;
-            //  this.focuscodeoneState=true;
-            //  this.focuscodetwoState=true;
         }else{
           distributor_id=''
        }
@@ -194,8 +198,12 @@
       this.focuscodeoneState = false;
       this.focuscodetwoState = false;
       },
-      handleInput(e){
-        this.shopForm.n_times = e.target.value.replace(/[^\d]/g,'')
+       handleInput(e){
+        this.shopForm.n_times = e.target.value.replace(/[^\d|\.]/g,'')
+      },
+      handleInput2(e){
+        let reg = /[^\u0020-\u007E\u00A0-\u00BE\u2E80-\uA4CF\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFFEF\u0080-\u009F\u2000-\u201f\u2026\u2022\u20ac\r\n]/g;
+        this.shopForm.title = e.target.value.replace(reg,'');
       }
     },  
     mounted: function () {

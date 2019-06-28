@@ -4,8 +4,8 @@
 
   @import '~assets/common/css/mixin.scss';
   .banner {
-    // height: 4.88rem;
-    height:175px;
+    height: 4.7rem;
+    // height:175px;
     margin-top:1.56rem;
     img {
       min-width: 100%;
