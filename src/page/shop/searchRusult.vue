@@ -590,6 +590,18 @@
           this.initData();
           this.searchParams.page_size = 10;
           this.searchParams.current_page = 1;
+          if(!this.$route.query.title||this.$route.query.title==undefined){
+            this.searchParams.title='';
+          }
+          if(!this.$route.query.img_url||this.$route.query.img_url==undefined){
+            this.searchParams.img_url='';
+          }
+          if(!this.$route.query.advertising_id||this.$route.query.advertising_id==undefined){
+            this.searchParams.advertising_id='';
+          }
+          if(!this.$route.query.category_id||this.$route.query.category_id==undefined){
+            this.searchParams.category_id='';
+          }
           this.searchRusultData=[];
           this.active=1;
           this.sort_enum=null;
