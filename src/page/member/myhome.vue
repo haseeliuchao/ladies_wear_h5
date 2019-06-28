@@ -377,15 +377,15 @@
         <div class="my-order">
           <h2>我的进货单</h2>
           <div>
-            <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/1'):false">
+            <div class="order-item" @click="$router.push('/orderList/1')">
               <img src="~jd/images/paymenticon2.png" alt="">
               <span>待付款</span>
             </div>
-            <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">
+            <div class="order-item" @click="$router.push('/orderList/2')">
               <img src="~jd/images/send.png" alt="">
               <span>待发货</span>
             </div>
-            <div class="order-item" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/3'):false">
+            <div class="order-item" @click="$router.push('/orderList/3')">
               <img src="~jd/images/received.png" alt="">
               <span>待收货</span>
             </div>
@@ -397,7 +397,7 @@
               <img src="~jd/images/Aftermarket.png" alt="">
               <span>退换/售后</span>
             </div> -->
-            <div class="order-item myorder" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/0'):false">
+            <div class="order-item myorder" @click="$router.push('/orderList/0')">
               <img src="~jd/images/myordericon.png" alt="">
               <span>全部订单</span>
             </div>

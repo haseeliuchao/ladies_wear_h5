@@ -167,7 +167,7 @@
         <li :class="{'active':activeIndex===1}" @click="activeIndexchange(1)">按利润值</li>
       </ul>
       <div class="setProfitone" v-if="activeIndex==0">
-      <label><p class="setProfitone-entry"><input type="text" @blur="gotoView" v-model="salesMultiple"><span>倍</span></p></label>
+      <label><p class="setProfitone-entry"><input type="number" @blur="gotoView" v-model="salesMultiple"><span>倍</span></p></label>
       <p class="setProfitone-text">售价=进价+进价*倍数</p>
       <p class="setProfitone-choose"><span @click="setProfitClose" style="border-right:1px solid #e4e4e4;color:#333">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
       </div>

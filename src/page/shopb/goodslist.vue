@@ -566,7 +566,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     watch: {
       addShareBoovisiblePopup:function(newvs,oldvs){
              if(newvs==false){
-                this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
+                this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
              }
             },
             addshareImgvisiblePopup:function(newvs,oldvs){
@@ -610,7 +610,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.screenPrice=item.sales_price;
         this.screenQrcode=item.qrcode;
         this.screenUrl="http://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
-        this.$wxShare({title: '这件商品还不错哦！赶紧过来下单吧',desc: item.item_title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+item.item_id+'?distributor_id='+item.distributor_id)+'',imgUrl: item.item_index_img_url})
+        this.$wxShare({title: '这款衣服我觉得非常适合你，快来看看吧',desc: item.item_title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+item.item_id+'?distributor_id='+item.distributor_id)+'',imgUrl: item.item_index_img_url})
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -778,7 +778,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     },
     mounted: function () {
       this.getCount();
-      this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
+      this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
       this.switchTabs(0);
       

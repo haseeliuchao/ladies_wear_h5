@@ -129,7 +129,7 @@
         <div>
           <p v-if="!item.nick_note">{{item.nick}}</p>
           <p v-if="item.nick_note">{{item.nick_note}}</p>
-          <p>累计消费：<em>￥</em><i>{{item.checkout_amount}}</i></p>
+          <p>累计消费：<em>￥</em><i>{{item.checkout_amount/100|TwoNum}}</i></p>
         </div>
         <span>></span>
       </li>

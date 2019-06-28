@@ -424,10 +424,10 @@
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
-              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status==2&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
+              <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
-                <span v-if="item.item_status==2" class="pd-imagestip">失效</span>
+                <span v-if="item.item_status!=1" class="pd-imagestip">失效</span>
               </div>
               <div class="pd-info">
                 <div class="pd-title">
@@ -606,7 +606,11 @@
           }
         })
         this.selectedCounter = selectedCounter;
-        this.selectedAll = selectedCounter === this.cartListfilter.length ? true : false;
+        if(this.cartListfilter.length==0){
+          this.selectedAll=false;
+        }else{
+         this.selectedAll = selectedCounter === this.cartListfilter.length ? true : false;
+        }
         this.totalFee = computedFee;
         }else{
           this.cartList.map(item => {
@@ -694,7 +698,7 @@
         }
     },
     mounted: function () {
-      this.$wxShare({title: '来逛逛我的店铺~',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
+      this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
       this.initData();
     }
   }
