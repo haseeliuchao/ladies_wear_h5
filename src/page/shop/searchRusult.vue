@@ -545,8 +545,9 @@
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
         this.searchRusultData=[];
-        this.img_url=null;
+        
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+        this.searchParams.img_url=null;
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
         
       },
@@ -606,11 +607,12 @@
           this.searchRusultData=[];
           this.active=1;
           this.sort_enum=null;
-          this.img_url=null;
-          this.searchParams.sort_enum=null;
+          this.searchParams.img_url=null;
+          this.searchParams.searchParams.sort_enum=null;
           this.searchParams.sort_type = 1;
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
+          this.searchParams.img_url=null;
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
 
