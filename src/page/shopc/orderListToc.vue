@@ -580,11 +580,13 @@
         })
       },
       async infiniteCallback(response) { //加载更多订单
+      if (response.data.data){
         if (response.data.data.length > 0) {
           response.data.data.map(i => {
             this.orderList.push(i)
           })
         }
+      }
       },
     },
     filters:{

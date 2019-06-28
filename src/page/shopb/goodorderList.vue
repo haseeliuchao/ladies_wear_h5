@@ -577,12 +577,14 @@
         })
       },
       async infiniteCallback(response) { //加载更多订单
-        if (response.data.data.length > 0) {
-          response.data.data.map(i => {
-            // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
-            this.goodorderList.push(i)
-          })
-        }
+          if(response.data.data){
+            if (response.data.data.length > 0) {
+              response.data.data.map(i => {
+                // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
+                this.goodorderList.push(i)
+              })
+            }
+          }
       },
     },
     filters:{
