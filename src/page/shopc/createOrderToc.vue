@@ -767,7 +767,7 @@
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
       <span>合计：<strong><em style="font-size:18px;" v-if="confirmSelectedProduct.pay_price>=0">￥{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
-      <div class="payBtn" @click= "payByWallet">支付</div>
+      <div :class="['payBtn',wxPaystatus?'':'disabled-btn']" @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
       <img src="~jd/images/paymentloading.gif" />
@@ -854,6 +854,7 @@ import {
           selectedAdressVisible: false
         },
         consignee_id:null,
+        wxPaystatus:true
 
       };
     },
@@ -965,6 +966,7 @@ import {
           })
           return
         }
+        this.wxPaystatus=false;
         let Data = await payToken({});
         let payData={};
         if(this.$route.query.checkout_type==1){
@@ -985,8 +987,13 @@ import {
           consignee_id:this.consignee_id
           })
         }
-        
-         this.wxPay(payData.data)
+        if(payData.code!=10000){
+           Toast({duration: 1000,
+            message: payData.msg
+           })
+          return this.$router.push({path: '/orderToC/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
+        }
+        this.wxPay(payData.data)
       },
       wxPay(data){
          let that = this

@@ -1021,6 +1021,12 @@ import {
           this.wxPaystatus=true;
           return
         }
+         if(payData.code!=10000){
+           Toast({duration: 1000,
+            message: payData.msg
+           })
+         return this.$router.push({path:'/order/'+data.order_code+'?order_status=1'})
+        }
          this.wxPay(payData.data)
       },
       wxPay(data){
