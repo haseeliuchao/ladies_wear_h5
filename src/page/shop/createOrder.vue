@@ -959,7 +959,7 @@ import {
           console.log(this.confirmSelectedProduct)
         }else if(confirmSelectedData.code==30029){
           this.$router.push('/login');
-        }else if(confirmSelectedData.code==50004){
+        }else if(confirmSelectedData.code==50002){
           Toast({duration: 1000,
             message: '商品已下架'
           })
