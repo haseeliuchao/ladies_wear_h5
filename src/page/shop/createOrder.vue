@@ -875,8 +875,10 @@ import {
         paymentPassword: null,
         PaymentNo: null,
         confirmSelectedProduct: {
-          item_map_list:[]
+          item_map_list:[],
+          post_fee:0
           },
+          
         addressData: null,
         visiblePopup: {
           paymentContainerVisible: false,

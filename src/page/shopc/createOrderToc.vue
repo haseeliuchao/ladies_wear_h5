@@ -845,7 +845,7 @@ import {
         paymentPassword: null,
         PaymentNo: null,
         confirmSelectedProduct: {
-
+         post_fee:0
         },
         addressData: null,
         visiblePopup: {
