@@ -315,10 +315,10 @@
           <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
             slot="refresh-spinner">更新中...</span>
           <!-- banner -->
-          <mt-swipe :stopPropagation="true" :prevent="true" :auto="5000" class="banner">
+          <mt-swipe :stopPropagation="true" :prevent="false" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index"  >
-              <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+              <img v-lazy="item.img_url"  @click="golink(item.http_url)">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->
@@ -523,6 +523,9 @@
       
     },
     methods: {
+      async golink(link){
+        window.location.href = link
+      },
       isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
         //mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
