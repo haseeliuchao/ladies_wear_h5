@@ -1025,7 +1025,7 @@ import {
                     
                         // alert(2)
                         // alert(res.err_msg)
-                        that.$router.push({path: '/orderToC/'+data.order_code,query: {distributor_id:this.$route.query.distributor_id}})
+                        that.$router.push({path: '/orderToC/'+data.order_code,query: {distributor_id:that.$route.query.distributor_id}})
                     }
                 }); 
       }
