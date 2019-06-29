@@ -1687,12 +1687,12 @@ methods: {
         this.productInfo.item_status=2;
        },
        async upperShelf(state){
-         if(state!=2){
-           Toast({duration: 1000,
-             message: '该商品已售罄'
-             })
-             return
-         }
+        //  if(state!=2){
+        //    Toast({duration: 1000,
+        //      message: '该商品已售罄'
+        //      })
+        //      return
+        //  }
          let Data = await upperShelfgood({
          distributor_item_id: this.$route.query.distributor_item_id
         });
