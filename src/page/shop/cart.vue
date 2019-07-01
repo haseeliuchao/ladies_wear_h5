@@ -491,6 +491,14 @@
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item"  v-for="(item,index) in cartList" :key="index" >
+               <!-- <mt-cell-swipe
+              :right="[
+                  {
+                      content: '删除',
+                      style: { background: '#ff7900', color: '#fff'},
+                      handler: () => deleteSection()
+                  }
+              ]"> -->
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status==2&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images" @click= "()=>$router.push('/product/'+item.item_id)">
                 <img :src="item.index_img_url" alt="">
@@ -512,6 +520,7 @@
                     <div class="add" @click= "editProductNum({item:item,itemdetail:itemdetail,increment:1})"></div>
                   </div>
                </div>
+               <!-- </mt-cell-swipe> -->
             </div>
           </div>
         </div>
@@ -570,6 +579,9 @@
   import {
     Toast
   } from 'mint-ui'
+  import { CellSwipe } from 'mint-ui';
+    import Vue from 'vue'
+  Vue.component(CellSwipe.name, CellSwipe);
   import {
     setSessionStorage,
     getSessionStorage,
@@ -624,6 +636,9 @@
     },
 
     methods: {
+      deleteSection(){
+        console.log('a')
+      },
       selectedAllGoods() {
             if(!this.delshow){
                this.cartList.map(items => {

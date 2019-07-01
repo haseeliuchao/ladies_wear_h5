@@ -424,6 +424,7 @@
           </div>
           <div class="store-pd" v-if="cartList">
             <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
+             
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
@@ -449,6 +450,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
