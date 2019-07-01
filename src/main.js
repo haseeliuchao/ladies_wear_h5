@@ -226,6 +226,20 @@ router.beforeEach((to,from,next)=>{
 
     if(routerindex==1&&isWeiXin('code')){
       loginget()
+    }else{
+      if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
+        next({path: '/index'});
+        }else{
+          if(statecur!=1){
+            if (to.path === unicodestr||routerindex>1){
+              next()
+            }else{
+              next({path:unicodestr});
+            }
+          }else{
+          next();
+          }
+        }
     }
 
     // if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
