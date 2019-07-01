@@ -19,7 +19,7 @@ import wxShare from '@/utils/wxShare'
 
 import zh_CN from 'vee-validate/dist/locale/zh_CN';
 import {
-  getShopInfo,
+  getShopInfo,loginUsreInit,loginInit
 } from '@/service/getData';
 import {
   getLocalStorage,
@@ -173,7 +173,7 @@ router.beforeEach((to,from,next)=>{
           }
 
           if(unicodestr.indexOf('productToC')!=-1||unicodestr.indexOf('indexToC')!=-1){
-            let Datauser = await this.$store.dispatch('LoginUsreInit', {
+            let Datauser = await loginUsreInit({
               code:utils.getUrlKey('code'),
               distributor_id:distributorId
             })
@@ -199,7 +199,7 @@ router.beforeEach((to,from,next)=>{
 
             }
           }else{
-            let Data = await this.$store.dispatch('LoginInit', {
+            let Data =await loginInit({ 
               code:utils.getUrlKey('code')
             })
             if(Data.code==10000){
