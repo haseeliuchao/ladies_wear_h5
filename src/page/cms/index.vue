@@ -129,11 +129,11 @@
             
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
-              font-size: 14px;
+              font-size: 13px;
               color: #333;
               @include textoverflow(2);
-              height: 40px;
-              line-height: 20px;
+              height: 36px;
+              line-height: 18px;
               margin-top: 4px;
               text-align: left;
             }
