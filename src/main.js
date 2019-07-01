@@ -126,11 +126,11 @@ router.beforeEach((to,from,next)=>{
       statecur=1
     }else{
       statecur=utils.getUrlKey('state')
-      var unicode=BASE64.decoder(statecur);
-          unicodestr = '';
-          for(var i = 0 , len =  unicode.length ; i < len ;++i){
-              unicodestr += String.fromCharCode(unicode[i]);
-          }
+      // var unicode=BASE64.decoder(statecur);
+      //     unicodestr = '';
+      //     for(var i = 0 , len =  unicode.length ; i < len ;++i){
+      //         unicodestr += String.fromCharCode(unicode[i]);
+      //     }
     }
 
     const getshop = async (dis) => { 
@@ -154,19 +154,93 @@ router.beforeEach((to,from,next)=>{
       getshop()
     }
     
-    if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
-        next({path: '/index'});
-    }else{
-      if(statecur!=1){
-        if (to.path === unicodestr||routerindex>1){
-          next()
-        }else{
-          next({path:unicodestr});
+    const loginget=async()=>{
+      
+        let that=this;
+        var retstr='';
+        var unicode=BASE64.decoder(utils.getUrlKey('state'));
+        var unicodestr = '';
+        var app_keystr=''
+        for(var i = 0 , len =  unicode.length ; i < len ;++i){
+            unicodestr += String.fromCharCode(unicode[i]);
         }
-      }else{
-      next();
-      }
+          let distributorId=''
+          if(unicodestr.indexOf('indexToC')!=-1){
+            distributorId=unicodestr.substr(10)
+          }
+          if(unicodestr.indexOf('productToC')!=-1){
+            distributorId=unicodestr.split('=')[1]
+          }
+
+          if(unicodestr.indexOf('productToC')!=-1||unicodestr.indexOf('indexToC')!=-1){
+            let Datauser = await this.$store.dispatch('LoginUsreInit', {
+              code:utils.getUrlKey('code'),
+              distributor_id:distributorId
+            })
+            if(Datauser.code==10000){
+              setSessionStorage('session_token',Datauser.data.session_token);
+              setSessionStorage('access_token',Datauser.data.access_token);
+              setSessionStorage('nickname',Datauser.data.nick);
+              setSessionStorage('user_id',Datauser.data.user_id);
+
+                  if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
+                    next({path: '/index'});
+                }else{
+                  if(statecur!=1){
+                    if (to.path === unicodestr||routerindex>1){
+                      next()
+                    }else{
+                      next({path:unicodestr});
+                    }
+                  }else{
+                  next();
+                  }
+                }
+
+            }
+          }else{
+            let Data = await this.$store.dispatch('LoginInit', {
+              code:utils.getUrlKey('code')
+            })
+            if(Data.code==10000){
+              setSessionStorage('session_token',Data.data.session_token);
+              setSessionStorage('access_token',Data.data.access_token);
+              setSessionStorage('nickname',Data.data.nick);
+              setSessionStorage('user_id',Data.data.user_id);
+                  if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
+                    next({path: '/index'});
+                }else{
+                  if(statecur!=1){
+                    if (to.path === unicodestr||routerindex>1){
+                      next()
+                    }else{
+                      next({path:unicodestr});
+                    }
+                  }else{
+                  next();
+                  }
+                }
+            }
+          }
     }
+
+    if(routerindex==1&&isWeiXin('code')){
+      loginget()
+    }
+
+    // if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
+    //     next({path: '/index'});
+    // }else{
+    //   if(statecur!=1){
+    //     if (to.path === unicodestr||routerindex>1){
+    //       next()
+    //     }else{
+    //       next({path:unicodestr});
+    //     }
+    //   }else{
+    //   next();
+    //   }
+    // }
 
 
     //判断是否需要缓存
