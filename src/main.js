@@ -109,7 +109,6 @@ const config = {
 
 var routerindex=0
 router.beforeEach((to,from,next)=>{
-  console.log('2')
   if (to.meta.Title) {
     document.title = to.meta.Title
   }
@@ -157,7 +156,7 @@ router.beforeEach((to,from,next)=>{
     }
     
     const loginget=async()=>{
-      console.log('1')
+      
         let that=this;
         var retstr='';
         var unicode=BASE64.decoder(utils.getUrlKey('state'));
@@ -181,6 +180,7 @@ router.beforeEach((to,from,next)=>{
             })
             if(Datauser.code==10000||Datauser.code==20018){
               if(Datauser.code==10000){
+                console.log('1')
                 setSessionStorage('session_token',Datauser.data.session_token);
                 setSessionStorage('access_token',Datauser.data.access_token);
                 setSessionStorage('nickname',Datauser.data.nick);
