@@ -126,11 +126,11 @@ router.beforeEach((to,from,next)=>{
       statecur=1
     }else{
       statecur=utils.getUrlKey('state')
-      // var unicode=BASE64.decoder(statecur);
-      //     unicodestr = '';
-      //     for(var i = 0 , len =  unicode.length ; i < len ;++i){
-      //         unicodestr += String.fromCharCode(unicode[i]);
-      //     }
+      var unicode=BASE64.decoder(statecur);
+          unicodestr = '';
+          for(var i = 0 , len =  unicode.length ; i < len ;++i){
+              unicodestr += String.fromCharCode(unicode[i]);
+          }
     }
 
     const getshop = async (dis) => { 
@@ -155,7 +155,7 @@ router.beforeEach((to,from,next)=>{
     }
     
     const loginget=async()=>{
-      
+         console.log('1')
         let that=this;
         var retstr='';
         var unicode=BASE64.decoder(utils.getUrlKey('state'));
