@@ -179,12 +179,12 @@ router.beforeEach((to,from,next)=>{
               code:utils.getUrlKey('code'),
               distributor_id:distributorId
             })
-            if(Data.code==10000||Data.code==20018){
-              if(Data.code==10000){
-                setSessionStorage('session_token',Data.data.session_token);
-                setSessionStorage('access_token',Data.data.access_token);
-                setSessionStorage('nickname',Data.data.nick);
-                setSessionStorage('user_id',Data.data.user_id);
+            if(Datauser.code==10000||Datauser.code==20018){
+              if(Datauser.code==10000){
+                setSessionStorage('session_token',Datauser.data.session_token);
+                setSessionStorage('access_token',Datauser.data.access_token);
+                setSessionStorage('nickname',Datauser.data.nick);
+                setSessionStorage('user_id',Datauser.data.user_id);
               }
                   if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
                     next({path: '/index'});
