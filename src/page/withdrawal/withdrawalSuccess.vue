@@ -1,0 +1,120 @@
+<!-- orderList -->
+<style lang="scss" scoped>
+  @import '~assets/common/css/mixin.scss';
+  .withdrawal-success{
+      width: 10rem;
+                .pay-status{
+            width: 100%;
+            
+            text-align: center;
+            background: #fff;
+            padding-top: 45px;
+            padding-bottom: 25px;
+                .status{
+                font-size: 18px;
+                color: #333;
+                line-height: 46px;
+                }
+                .status-text{
+                color: #666;
+                font-size: 15px;
+                line-height: 22px;
+                }
+                
+            }
+            .withdrawal-list{
+          width: 10rem;
+          padding: 0 .3rem;
+          height: 50px;
+          background: #fff;
+          border-bottom: 1px solid #e4e4e4;
+          @include flexbox(space-between, center, row, nowrap);
+          .withdrawal-listleft{
+              font-size: 15px;
+              color: #333;
+          }
+          .withdrawal-listright{
+              @include flexbox(flex-end, center, row, nowrap);
+              font-size: 14px;
+              color: #333;  
+              
+          }
+      }
+
+      .withdrawal-back{
+          color: $red;
+          width: 100%;
+          text-align: center;
+          font-size: 18px;
+          margin-top: 100px;
+      }
+  }
+
+</style>
+
+<template>
+    <div class="withdrawal-success">
+        <div class="pay-status">
+            <img src="~jd/images/payOk.png" height="50">
+            <p class="status">提交成功</p>
+            <p class="status-text">已提交申请，等待财务审核<br>预计1-3个工作日到账</p>
+        </div>
+        
+        <div class="withdrawal-list" style="margin-top:8px;padding-top: 8px;border-bottom:none;height:40px;">
+            <div class="withdrawal-listleft">提现信息：<em style="font-size:14px;">提现金额</em></div>
+            <div class="withdrawal-listright"><span>￥240.00</span></div>
+        </div>
+        <div class="withdrawal-list" style="height:40px;padding-bottom: 14px;">
+            <div class="withdrawal-listleft"><em style="visibility: hidden;">提现信息：</em><em style="font-size:14px;">提现时间</em></div>
+            <div class="withdrawal-listright"><span>2018.09.11 18:36</span></div>
+        </div>
+        <div class="withdrawal-list" style="border-bottom:none;">
+            <div class="withdrawal-listleft">收款信息：<em style="font-size:14px;">招商银行借记卡(3145)</em></div>
+            <div class="withdrawal-listright"></div>
+        </div>
+
+        <p class="withdrawal-back">资产中心>></p>
+    </div>
+
+ 
+</template>
+
+<script>
+  import {
+    isWeiXin,pushHistory,getSessionStorage
+  } from '@/utils/mixin';
+  import {
+    Toast
+  } from 'mint-ui'
+  export default {
+    data() {
+      return {
+         emShow:false
+      };
+    },
+
+    watch: {},
+
+    components: {
+    },
+
+    computed: {},
+
+    methods: {
+    
+    },
+    filters:{
+        topriceafter(value){
+            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
+        },
+        topricenext(value){
+            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
+        }
+    },
+    mounted: function () {
+
+    }
+   
+  }
+
+</script>

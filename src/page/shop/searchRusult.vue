@@ -180,36 +180,59 @@
     
     .search-filter{
       // border-top: 1px solid $border;
-      border-bottom: 1px solid #eee;
+       position: relative;
+      
       .search-filter-list{
         background: #fff;
+         border-bottom: 1px solid #eee;
+         padding: 0 .3rem;
         // padding: 0 1.5rem;
         @include flexbox(space-between,center,row,nowrap);
         .search-filter-item{
-          width: 25%;
-          @include flexbox(center,center,row,nowrap);
+          // width: 25%;
+          // @include flexbox(center,center,row,nowrap);
           color: #333;
           font-size: 15px;
-          margin: 15px .8rem;
-          padding-bottom:5px;
-          @media all and(max-width:374px){
-             margin: 15px .6rem;
-          }
-          @media all and(min-width:376px){
-             margin: 15px .9rem;
-          }
+          margin: 15px 0;
+          // padding-bottom:5px;
+          // @media all and(max-width:374px){
+          //    margin: 15px .6rem;
+          // }
+          // @media all and(min-width:376px){
+          //    margin: 15px .9rem;
+          // }
           &:last-child{
-            margin-right:.8rem;
+            margin-left:.4rem;
+          }
+          .more-sortImg{
+            width: 14px;
+            height: 14px;
+            background: url('~jd/images/sorttypenocheck.png') no-repeat center;
+            background-size: 100%;
+            margin-left: 5px;
+             display: inline-block;
+             vertical-align: top;
+             margin-top: 2px;
           }
           &.active{
             color: $red;
             // border-bottom: 2px solid $red
+            .more-sortImg{
+              background: url('~jd/images/sorttypecheck.png') no-repeat center;
+              background-size: 100%;
+              
+             
+            }
           }
-          span{
-            position:relative;
-          }
+          // span{
+          //   position:relative;
+          //   display: inline-block;
+          // }
           .more-sort{
-              // display: none;
+                
+                position:relative;
+                top: -5px;
+              display: inline-block;
                &:before{
                   content: '';
                   position: absolute;
@@ -279,6 +302,78 @@
             }
           }
           
+          
+
+
+        }
+      }
+
+      .sortother{
+        position: absolute;
+        top: 48px;
+        left: 0;
+        background: #fff;
+        width: 10rem;
+        padding: 0 .3rem 20px;
+        z-index: 2;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        .price-othertip{
+            font-size: 15px;
+            color: #333;
+            line-height: 40px;
+        }
+        .price-otherinput{
+          font-size: 14px;
+          width: 7.8rem;
+          @include flexbox(space-between,center,row,nowrap);
+          input{
+            height: 28px;
+            width: 2.6rem;
+            border-radius: 6px;
+            background: #f2f2f2;
+            color: #333;
+            line-height: normal;
+            text-align: center
+          }
+          span{
+            height: 1px;
+            width: 1.8rem;
+            background: #707070;
+          }
+        }
+
+        ul{
+          @include flexbox(space-between,center,row,wrap);
+          li{
+            width: 2.6rem;
+            height: 28px;
+            border-radius: 28px;
+            text-align: center;
+            background: #f2f2f2;
+            color: #333;
+            line-height: 28px;
+            margin-top: 15px;
+            text-align: center
+            
+          }
+        }
+        .sortother-btn{
+              
+          @include flexbox(flex-end,center,row,nowrap);
+          span{
+            height: 34px;
+            line-height: 34px;
+            margin-left: 10px;
+            width: 2.1rem;
+            text-align: center;
+            font-size: 17px;
+            margin-top: 20px;
+            border-radius: 6px;
+            border: 1px solid $red;
+            color: #fff;
+            background: $red;
+          }
         }
       }
     }
@@ -428,7 +523,21 @@
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
+        <li :class="['search-filter-item',active==3 ? 'active' : '']" @click= "sortotherType()">筛选<span class="more-sortImg"></span></li>
       </ul>
+      <div v-if="sortotherTypeBoo" class="sortother">
+         <p class="price-othertip">价格区间：</p>
+         <p class="price-otherinput"><input type="number" placeholder="最低价"><span></span><input type="number" placeholder="最高价"></p>
+         <ul>
+           <li>¥20元以下</li>
+           <li>¥20-40</li>
+           <li>¥40-60</li>
+           <li>¥60-80</li>
+           <li>¥100-150</li>
+           <li>¥150元以上</li>
+         </ul>
+         <p class="sortother-btn"><span style="background:#fff;color:#ff2741">重置</span><span>确定</span></p>
+      </div>
     </div>
 
     <div class="imgsearch-no-list" v-if="imgsearchNo">
@@ -483,6 +592,7 @@
         searchRusultData: [],
         commad: searchGoods,
         isFirstEnter:false,
+        sortotherTypeBoo:false,
         searchParams: {
           title: '',
           item_url:'',
@@ -520,7 +630,11 @@
          this.$router.push({path:'/searchRusult',query:{title:title}})
          this.searchRusult()
       },
+      sortotherType(){
+       this.sortotherTypeBoo=true;
+      },
       sortType(index){
+        this.sortotherTypeBoo=false;
         this.searchParams.sort_type=index;
          if(index==1){
            this.active=1;

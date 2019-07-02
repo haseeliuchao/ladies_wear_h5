@@ -129,11 +129,11 @@
             
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
-              font-size: 13px;
+              font-size: 14px;
               color: #333;
               @include textoverflow(2);
-              height: 36px;
-              line-height: 18px;
+              height: 40px;
+              line-height: 20px;
               margin-top: 4px;
               text-align: left;
             }
@@ -325,10 +325,11 @@
           <!-- 产品说明 -->
           <div class="product-explain">
             <ul>
-              <li><img src="~jd/images/zhengpinicon.png">正品保障</li>
-              <li><img src="~jd/images/tuihuanicon.png">五星售后</li>
-              <li><img src="~jd/images/shipaiicon.png">商品实拍</li>
-              <li><img src="~jd/images/kefuicon1.png">专属客服</li>
+              <li @click= "()=>$router.push({path: '/withdrawalSuccess'})"><img src="~jd/images/zhengpinicon.png">正品保障</li>
+              <li @click= "()=>$router.push({path: '/withdrawalInfo'})"><img src="~jd/images/tuihuanicon.png">五星售后</li>
+              <li @click= "()=>$router.push({path: '/withdrawalAccount'})"><img src="~jd/images/shipaiicon.png">商品实拍</li>
+              <li @click= "()=>$router.push({path: '/withdrawalEdit'})"><img src="~jd/images/kefuicon1.png">专属客服</li>
+              
             </ul>
           </div>
           <!-- 活动广告位 -->
