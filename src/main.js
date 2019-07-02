@@ -126,6 +126,7 @@ router.beforeEach((to,from,next)=>{
     if(utils.getUrlKey('state')==undefined||utils.getUrlKey('state')=='#/'){
       statecur=1
     }else{
+      
       statecur=utils.getUrlKey('state')
       var unicode=BASE64.decoder(statecur);
           unicodestr = '';
@@ -228,8 +229,7 @@ router.beforeEach((to,from,next)=>{
     }
 
     if(routerindex==1&&isWeiXin('code')){
-      // loginget()
-      
+      loginget()
     }else{
       if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
         next({path: '/index'});

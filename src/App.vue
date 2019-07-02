@@ -91,6 +91,7 @@ import {
         
      },
      mounted: function () {
+       console.log('33')
       // this.loginData();
       // window.addEventListener('scroll',function(){
       //          document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
