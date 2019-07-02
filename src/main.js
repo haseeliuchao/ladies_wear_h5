@@ -109,6 +109,7 @@ const config = {
 
 var routerindex=0
 router.beforeEach((to,from,next)=>{
+  console.log('2')
   if (to.meta.Title) {
     document.title = to.meta.Title
   }
@@ -155,7 +156,7 @@ router.beforeEach((to,from,next)=>{
     }
     
     const loginget=async()=>{
-         console.log('1')
+      console.log('1')
         let that=this;
         var retstr='';
         var unicode=BASE64.decoder(utils.getUrlKey('state'));
