@@ -92,7 +92,7 @@ import {
      },
      mounted: function () {
        console.log('33')
-      // this.loginData();
+      this.loginData();
       // window.addEventListener('scroll',function(){
       //          document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
       //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
