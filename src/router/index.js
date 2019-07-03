@@ -73,6 +73,7 @@ const WithdrawalAccount = () => import ('page/withdrawal/withdrawalAccount')
 const WithdrawalEdit = () => import ('page/withdrawal/withdrawalEdit')
 const WithdrawalSuccess = () => import ('page/withdrawal/withdrawalSuccess')
 const WithdrawalAccountBook = () => import ('page/withdrawal/withdrawalAccountBook')
+const WithdrawalRecord = () => import ('page/withdrawal/withdrawalRecord')
 /* withdrawal */
 
 const appRouter = {
@@ -461,6 +462,13 @@ const appRouter = {
                 name: 'withdrawalAccountBook',
                 component: WithdrawalAccountBook,
                 meta: { keepAlive: false , Title:'我的账本'}
+            }
+            ,
+            {
+                path: '/withdrawalRecord',
+                name: 'withdrawalRecord',
+                component: WithdrawalRecord,
+                meta: { keepAlive: false , Title:'提现记录'}
             }
             ,
             {

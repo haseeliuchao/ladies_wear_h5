@@ -96,7 +96,7 @@
       // 配置搜索结果
       .searchDeploy-box{
         width:100%;
-        height:175px;
+        height:4.6rem;
         img{
           @include wh(100%,100%);
         }
@@ -220,8 +220,6 @@
             .more-sortImg{
               background: url('~jd/images/sorttypecheck.png') no-repeat center;
               background-size: 100%;
-              
-             
             }
           }
           // span{
@@ -309,6 +307,7 @@
       }
 
       .sortother{
+        
         position: absolute;
         top: 48px;
         left: 0;
@@ -345,6 +344,7 @@
 
         ul{
           @include flexbox(space-between,center,row,wrap);
+          
           li{
             width: 2.6rem;
             height: 28px;
@@ -355,11 +355,13 @@
             line-height: 28px;
             margin-top: 15px;
             text-align: center
-            
+          }
+          .activeone{
+            color: #fff;
+            background: $red
           }
         }
-        .sortother-btn{
-              
+        .sortother-btn{ 
           @include flexbox(flex-end,center,row,nowrap);
           span{
             height: 34px;
@@ -375,6 +377,8 @@
             background: $red;
           }
         }
+
+
       }
     }
     .imgsearch-no-list{
@@ -527,16 +531,16 @@
       </ul>
       <div v-if="sortotherTypeBoo" class="sortother">
          <p class="price-othertip">价格区间：</p>
-         <p class="price-otherinput"><input type="number" @keydown="handleInput2" v-model="lowPrice" placeholder="最低价"><span></span><input type="number" @keydown="handleInput2" v-model="highPrice" placeholder="最高价"></p>
+         <p class="price-otherinput"><input type="number" @keydown="handleInput2" v-model="minPrice" placeholder="最低价"><span></span><input type="number" @keydown="handleInput2" v-model="maxPrice" placeholder="最高价"></p>
          <ul>
-           <li>¥20元以下</li>
-           <li>¥20-40</li>
-           <li>¥40-60</li>
-           <li>¥60-80</li>
-           <li>¥100-150</li>
-           <li>¥150元以上</li>
+           <li :class="[activeone==0 ? 'activeone' : '']" @click= "sortTypeone(0)">¥20元以下</li>
+           <li :class="[activeone==1 ? 'activeone' : '']" @click= "sortTypeone(1)">¥20-40</li>
+           <li :class="[activeone==2 ? 'activeone' : '']" @click= "sortTypeone(2)">¥40-60</li>
+           <li :class="[activeone==3 ? 'activeone' : '']" @click= "sortTypeone(3)">¥60-80</li>
+           <li :class="[activeone==4 ? 'activeone' : '']" @click= "sortTypeone(4)">¥100-150</li>
+           <li :class="[activeone==5 ? 'activeone' : '']" @click= "sortTypeone(5)">¥150元以上</li>
          </ul>
-         <p class="sortother-btn"><span style="background:#fff;color:#ff2741" @click="resetPrice">重置</span><span>确定</span></p>
+         <p class="sortother-btn"><span style="background:#fff;color:#ff2741" @click="resetPrice">重置</span><span @click="truePrice">确定</span></p>
       </div>
     </div>
 
@@ -584,6 +588,9 @@
   import {
     searchGoods
   } from '@/service/getData'
+  import {
+    Toast
+  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -593,8 +600,8 @@
         commad: searchGoods,
         isFirstEnter:false,
         sortotherTypeBoo:false,
-        lowPrice:null,
-        highPrice:null,
+        minPrice:null,
+        maxPrice:null,
         searchParams: {
           title: '',
           item_url:'',
@@ -602,11 +609,14 @@
           category_id:'',
           advertising_id:'',
           page_size: 10,
-          current_page: 1
+          current_page: 1,
+          min_price:null,
+          max_price:null
         },
         imgsearchNo:false,
         imgsearchTrue:false,
         active:1,
+        activeone:null,
         sort_enum:null,
         sort_enumboo:true,
         img_url:'',
@@ -628,13 +638,75 @@
     computed: {},
 
     methods: {
+      sortTypeone(type){
+          this.activeone=type; 
+          switch (Number(type)) {
+          case 0:
+            this.searchParams.min_price=0;
+            this.searchParams.max_price=2000;
+            this.minPrice=0;
+            this.maxPrice=20;
+            break;
+          case 1:
+            this.searchParams.min_price=2000;
+            this.searchParams.max_price=4000;
+            this.minPrice=20;
+            this.maxPrice=40;
+            break;
+          case 2:
+            this.searchParams.min_price=4000;
+            this.searchParams.max_price=6000;
+            this.minPrice=40;
+            this.maxPrice=60;
+            break;
+          case 3:
+            this.searchParams.min_price=6000;
+            this.searchParams.max_price=8000;
+            this.minPrice=60;
+            this.maxPrice=80;
+            break;
+          case 4:
+            this.searchParams.min_price=10000;
+            this.searchParams.max_price=15000;
+            this.minPrice=100;
+            this.maxPrice=150;
+            break;
+          case 5:
+            this.searchParams.min_price=15000;
+            this.searchParams.max_price=null;
+            this.minPrice=150;
+            this.maxPrice=null;
+            break;
+          default: //其他
+            throw new Error('未知TabId')
+            break
+        }
+      },
       resetPrice(){
-        this.lowPrice=null;
-        this.highPrice=null;
+        this.searchParams.min_price=null;
+        this.searchParams.max_price=null;
+        this.minPrice=null;
+        this.maxPrice=null;
+        this.activeone=null;
+      },
+      truePrice(){
+        
+        this.searchParams.min_price=this.minPrice?parseFloat(this.minPrice*100).toFixed(0):null;
+        this.searchParams.max_price=this.maxPrice?parseFloat(this.maxPrice*100).toFixed(0):null;
+        if(this.searchParams.min_price&&this.searchParams.max_price){
+          if(this.searchParams.min_price>this.searchParams.max_price){
+                return Toast({duration: 1000,
+                  message: '最高价不能小于最低价'
+                })
+          }
+        }
+        this.sortotherTypeBoo=false;
+        this.searchRusult()
       },
       handleInput2(e) {
             // 通过正则过滤小数点后两位
             e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
+            this.activeone=null;
         },
       changeQuery(title){
          this.$router.push({path:'/searchRusult',query:{title:title}})
