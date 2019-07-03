@@ -523,11 +523,11 @@
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
-        <li :class="['search-filter-item',active==3 ? 'active' : '']" @click= "sortotherType()">筛选<span class="more-sortImg"></span></li>
+        <li :class="['search-filter-item',sortotherTypeBoo ? 'active' : '']" @click= "sortotherType()">筛选<span class="more-sortImg"></span></li>
       </ul>
       <div v-if="sortotherTypeBoo" class="sortother">
          <p class="price-othertip">价格区间：</p>
-         <p class="price-otherinput"><input type="number" placeholder="最低价"><span></span><input type="number" placeholder="最高价"></p>
+         <p class="price-otherinput"><input type="number" @keydown="handleInput2" v-model="lowPrice" placeholder="最低价"><span></span><input type="number" @keydown="handleInput2" v-model="highPrice" placeholder="最高价"></p>
          <ul>
            <li>¥20元以下</li>
            <li>¥20-40</li>
@@ -536,7 +536,7 @@
            <li>¥100-150</li>
            <li>¥150元以上</li>
          </ul>
-         <p class="sortother-btn"><span style="background:#fff;color:#ff2741">重置</span><span>确定</span></p>
+         <p class="sortother-btn"><span style="background:#fff;color:#ff2741" @click="resetPrice">重置</span><span>确定</span></p>
       </div>
     </div>
 
@@ -593,6 +593,8 @@
         commad: searchGoods,
         isFirstEnter:false,
         sortotherTypeBoo:false,
+        lowPrice:null,
+        highPrice:null,
         searchParams: {
           title: '',
           item_url:'',
@@ -626,6 +628,14 @@
     computed: {},
 
     methods: {
+      resetPrice(){
+        this.lowPrice=null;
+        this.highPrice=null;
+      },
+      handleInput2(e) {
+            // 通过正则过滤小数点后两位
+            e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
+        },
       changeQuery(title){
          this.$router.push({path:'/searchRusult',query:{title:title}})
          this.searchRusult()

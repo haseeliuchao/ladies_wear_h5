@@ -5,68 +5,105 @@
     min-height:100vh;
     background-color:#f2f2f2;
   }
-  //会员信息
-  .customerOrder-header{
-    width:100%;
-    height:126px;
-    padding:24px .3rem;
-    background-color: #ff5527;
-    .customerInfo{
-      @include flexbox(flex-start,center,row,nowrap);
-      .avatar {
-        img {
-          width: 56px;
-          height: 56px;
-          border: 1px solid hsla(0, 0%, 100%, .4);
-          border-radius: 5px;
-        }
-      }
-      .customer{
-        @include flexbox(center,flex-start,column,wrap);
-        height:64px;
-        margin-left:.4rem;
-        .customerName,.setRemark {
-          color:#fff;
-        }
-        .customerName{
-          font-size:16px;
-        }
-        .setRemark{
-          font-size:12px;
-          margin-top:8px;
-          padding:3px 7px;
-          border:1px solid #fff;
-          border-radius:2px;
-        }
-      }
-    }
-  }
   //会员订单内容
   .customerOrder-con{
-    position:relative;
-    top:-25px;
-    padding:0 .3rem;
     .orderCount{
       @include flexbox(center,center,row,nowrap);
       background:#fff;
-      border-radius:5px;
+     
       li{
         @include flexbox(center,center,column,wrap);
-        padding:10px 0;
+        margin:28px 0;
         color:#333;
         em{
-          height:16px;
-          font-size:15px;
+          height:18px;
+          font-size:18px;
+          font-weight: bold;
+          color: $red
         }
         span{
-          font-size:14px;
-          margin-top:4px;
+          font-size:16px;
+          margin-bottom:4px;
         }
       }
     }
   }
+  .bookTopnav{
+      height: 46px;
+      position: relative;
+      @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      width: 10rem;
+      padding: 0 .3rem;
+      position: relative;
+      .bookTopnav-change{
+          
+          p{
+              height: 25px;
+              line-height: 25px;
+              font-size: 14px;
+              color: #333;
+              padding: 0 24px 0 16px;
+              border-radius: 25px;
+              border: 1px solid #e4e4e4;
+              background: #fff;
+              .bookTopnav-changemore{
+                  position:relative;
+                top: -10px;
+              display: inline-block;
+               &:before{
+                  content: '';
+                  position: absolute;
+                  right: -14px;
+                  top: 2px;
+                  width: 0;
+                  height: 0;
+                  border: 4px solid transparent;
+                  border-top-color: #333;
+                  }
+                 
+              }
+          }
+          
+      }
+      .bookTopnav-tip{
+          font-size: 14px;
+          color: #666;
+      }
+       img{
+           position: absolute;
+           z-index: 3;
+           top: 40px;
+           left: 24px;
+       }
+      .bookTopnav-changeBox{
+          position: absolute;
+          background: #fff;
+          top: 46px;
+          left: 0;
+          width: 10rem;
+          padding: 28px .3rem;
+          z-index: 2;
+          box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+          -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+          ul{
+               @include flexbox(space-between,center,row,nowrap);
+            li{
+                height: 27px;
+                line-height: 27px;
+                width: 2.2rem;
+                background: #e7e7e7;
+                color: #333;
+                text-align: center;
+                font-size: 15px;
+                border-radius: 6px;
+            }
+          }
+      }
+  }
   .my-order {
-    margin-top:-25px;
     .my-header {
       padding: $padding;
       background: #fff;
@@ -163,13 +200,13 @@
       }
       .order-list {
         // background: #fff;
-        margin-top: $margin;
+        // margin-top: $margin;
         .order-item {
-          margin-top: 10px;
+        //   margin-top: 10px;
           background: #fff;
-          width: 9.4rem;
-          margin-left: .3rem;
-          border-radius: 6px;
+          width: 10rem;
+        //   margin-left: .3rem;
+        //   border-radius: 6px;
           .order-top {
             padding: $padding;
             border-bottom: 1px solid #e4e4e4;
@@ -359,47 +396,49 @@
 <template>
 <div>
   <div class="content">
-    <div class="customerOrder-header">
-      <div class="customerInfo">
-          <div class="avatar">
-            <img :src="!memberData? 'https://static.hdslb.com/images/akari.jpg' : memberData.head_img"/>
-          </div>
-          <div class="customer">
-             <!-- v-if="userData.memberInfo" -->
-            <span class="customerName" v-if="!memberData.nick_note">{{memberData.nick}}</span>
-            <span class="customerName" v-if="memberData.nick_note">{{memberData.nick_note}}</span>
-            <em class="setRemark" v-if="!memberData.nick_note" @click="()=>{popupVisible=true}">设置备注</em>
-            <em class="setRemark" v-if="memberData.nick_note" @click="()=>{popupVisible=true}">修改备注</em>
-          </div>
-      </div>
-    </div>
+    
     <div class="customerOrder-con">
       <ul class="orderCount">
-        <li>
-            <em>{{memberData.checkout_amount/100|TwoNum}}</em>
-            <span>累计消费(元)</span>
+        <li style="border-right:1px solid #e4e4e4">
+            <span>已结算利润</span>
+            <em>￥{{memberData.checkout_amount/100|TwoNum}}</em>
         </li>
         <li>
-          <em>{{orderCount.order_total_count}}</em>
-          <span>累计订单数</span>
+          <span>待结算利润</span>
+          <em style="color:#ff5527">￥{{memberData.checkout_amount/100|TwoNum}}</em>
         </li>
       </ul>
-      
     </div>
+    <div class="bookTopnav">
+         <div class="bookTopnav-change">
+             <p><span>全部</span><span class="bookTopnav-changemore"></span></p>
+         </div>
+         <p class="bookTopnav-tip">展示近3个月明细</p>
+         <img src="~jd/images/changeBoxjiao.png">
+         <div class="bookTopnav-changeBox">
+            <ul>
+                <li>全部</li>
+                <li>已结算</li>
+                <li>待结算</li>
+            </ul>
+         </div>
+    </div>
+
+
     <div class="my-order">
-     <div class="topnav">
+     <!-- <div class="topnav">
             <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">待发货({{orderCount.to_deliver}})</span>
             <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">待收货({{orderCount.to_receipt}})</span>
             <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">已完成({{orderCount.deal_success}})</span>
             <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">已关闭({{orderCount.deal_close}})</span>
             <div id="loadingbar" :style="active===0 ? 'left:2.5%' : active===1 ?  'left:29%' : active===2 ?'left:56%' : 'left:83%'"></div>
-      </div>
+      </div> -->
     <div class="order-container">
       <!-- <load-more style="width:100%;" v-if="$route.path=='/searchImg'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
               ref="indexRusultloadMore"> -->
               <!--  -->
-
-      <load-more style="width:100%;" v-if="$route.name=='memberDetails'" @loadMore="infiniteCallback" :commad="commad" :param="params" :topMethod="onRefreshCallback"
+<!-- :topMethod="onRefreshCallback" -->
+      <load-more style="width:100%;" v-if="$route.name=='withdrawalAccountBook'"  @loadMore="infiniteCallback" :commad="commad" :param="params" 
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>

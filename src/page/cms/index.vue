@@ -329,7 +329,7 @@
               <li @click= "()=>$router.push({path: '/withdrawalInfo'})"><img src="~jd/images/tuihuanicon.png">五星售后</li>
               <li @click= "()=>$router.push({path: '/withdrawalAccount'})"><img src="~jd/images/shipaiicon.png">商品实拍</li>
               <li @click= "()=>$router.push({path: '/withdrawalEdit'})"><img src="~jd/images/kefuicon1.png">专属客服</li>
-              
+              <!-- <li><a href="tel:13622178579">13622178579</a></li> -->
             </ul>
           </div>
           <!-- 活动广告位 -->

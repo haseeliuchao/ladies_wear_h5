@@ -393,7 +393,7 @@
           <span @click= "()=>{title='';searchVisiblie=false}">取消</span>
         </div>
         <load-more style="width:100%;height:100%;background:#fff;" >
-          <div class="search-history" v-if="searchHistoryData">
+          <div class="search-history" v-if="searchHistoryData.length>0">
             <p>历史记录 <span @click= "clearProd"></span></p>
             <ul class="search-history-list">
               <li class="search-history-item"  v-for="(item,index) in searchHistoryData" @click= "selectedProd(item.keywords)" :key="index">{{item.keywords}}</li>
@@ -426,7 +426,7 @@
   } from '@/utils/mixin'
   import LoadMore from 'common/loadMore';
   import {
-    
+    MessageBox,
     Toast
   } from 'mint-ui'
   export default {
@@ -453,7 +453,7 @@
         if(to.path!='/index'&& to.path!='/searchRusult'){
          this.searchVisiblie=false;
         }
-        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
+        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData')) ? JSON.parse(getLocalStorage('searchHistoryData')) : [];
       },
 
       
@@ -477,8 +477,23 @@
         this.searchRusultData = Data;
       },
       clearProd(){
-         this.searchHistoryData=[];
-         localStorage.removeItem("searchHistoryData")
+         MessageBox.confirm('', { 
+            message: '确认删除全部历史记录吗?', 
+            title: '',
+            cancelButtonClass:'cancelButton', 
+            confirmButtonClass:'confirmButton',
+          }).then(action => {
+            if (action == 'confirm') {     //确认的回调
+               this.searchHistoryData=[];
+               localStorage.removeItem("searchHistoryData")
+            }
+          }).catch(err => { 
+            if (err == 'cancel') {     //取消的回调
+            } 
+          });
+
+
+        
       },
       async initData() {
         let Data= await searchhotGoods({});
@@ -535,7 +550,7 @@
        
        
       try{
-        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'));
+        this.searchHistoryData = JSON.parse(getLocalStorage('searchHistoryData'))?JSON.parse(getLocalStorage('searchHistoryData')):[];
       }catch(err){}
     }
   }
