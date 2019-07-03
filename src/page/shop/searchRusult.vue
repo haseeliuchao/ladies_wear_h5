@@ -96,7 +96,7 @@
       // 配置搜索结果
       .searchDeploy-box{
         width:100%;
-        height:175px;
+        height:4.6rem;
         img{
           @include wh(100%,100%);
         }
