@@ -804,6 +804,12 @@
           this.sort_enum=null;
           this.searchParams.sort_enum=null;
           this.searchParams.sort_type = 1;
+          this.searchParams.min_price=null;
+          this.searchParams.max_price=null;
+          this.minPrice=null;
+          this.maxPrice=null;
+          this.activeone=null;
+
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
           this.searchParams.img_url=null;

@@ -93,7 +93,9 @@
           
           <li @click="$router.push({path: '/shopManage',query: {distributor_id:distributor_id}})"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
           <li @click="$router.push('/memberList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
-          <li @click="()=>$router.push({path:'/withdrawalAccountBook',query:{distributor_user_id:6,distributor_id:distributor_id,member_id:member_id}})"><img src="~jd/images/zichanManage.png">资产管理
+          <li @click= "()=>$router.push({path: '/withdrawalEntrance'})"><img src="~jd/images/zichanManage.png">资产管理
+          
+          <!-- @click="()=>$router.push({path:'/withdrawalAccountBook',query:{distributor_user_id:6,distributor_id:distributor_id,member_id:member_id}})" -->
           <span>></span></li>
       </ul> 
     </div> 

@@ -80,7 +80,7 @@
 <template>
   <div class="withdrawal">
       <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;">
-            <div class="withdrawal-listleft"><p><img src="http://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png"><span>6214830107403155(招商)</span></p></div>
+            <div class="withdrawal-listleft"><p><img src="http://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png"><span>{{accountRevenue.bank_card_name}}</span></p></div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
       </div>
 
@@ -90,17 +90,16 @@
             <div class="withdrawal-listright"></div>
         </div>
         <div class="withdrawal-list" style="height: 30px;width:9.4rem;padding:0;margin:0 auto;">
-            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥<input type="number" style="font-weight: bold;width:8rem;height: 29px;line-height: normal;" v-model="withdrawalPrice"></div>
+            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥<input type="number" @keyup="handleInput3" @keydown="handleInput2" style="font-weight: bold;width:8rem;height: 29px;line-height: normal;" v-model="withdrawalPrice"></div>
             <div class="withdrawal-listright"><span class="right-menuclose">x</span></div>
         </div>
         <div class="withdrawal-list" style="border-bottom:none;height:43px;line-height:43px;">
-            <div class="withdrawal-listleft" style="font-size:14px;"><em style="color:#666">可提现金额240.30元，</em><em style="color:#ff2741">全部提现</em></div>
+            <div class="withdrawal-listleft" style="font-size:14px;"><em style="color:#666">可提现金额{{accountRevenue.balance_amount/100|TwoNum}}元，</em><em style="color:#ff2741" @click="allWithdrawal">全部提现</em></div>
             <div class="withdrawal-listright"></div>
         </div>
        </div>
         <p class="withdrawal-tip"><em>* </em>每个月5日、25日统一进行打款</p>
-
-        <div class="bottom-btn">确认提现</div>
+        <div :class="['bottom-btn',showBtnapply?'disabled-btnapply':'']"  @click="applyWithdraw">确认提现</div>
   </div>
 </template>
 
@@ -111,12 +110,21 @@ import {
     getSessionStorage
   } from '@/utils/mixin';
   import {
+    accountRevenue,
+    applyWithdrawsend
+  } from '@/service/getData';
+  import {
     Toast
   } from 'mint-ui'
   export default {
     data() {
       return {
-        withdrawalPrice:260
+        withdrawalPrice:0,
+        showBtnapply:true,
+        accountRevenue:{
+           balance_amount:0,
+           bank_card_name:''
+        }
       };
     },
 
@@ -131,10 +139,41 @@ import {
     },
 
     methods: {
-      
+        // /apply/withdraw
+         handleInput2(e) {
+            // 通过正则过滤小数点后两位
+            
+            e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
+        },
+        handleInput3(e) {
+          if(e.target.value>10000){
+            this.showBtnapply=true
+            return Toast({duration: 1000,
+              message: '单次最大可提现1万元',
+              position: 'center'
+            })
+            }else if(e.target.value<=0){
+               this.showBtnapply=true
+            }else{
+               this.showBtnapply=false
+            }
+        },
+        allWithdrawal(){
+          this.withdrawalPrice
+        },
+        async applyWithdraw() {
+        let Data = await applyWithdrawsend({
+            change_amount:parseFloat(this.withdrawalPrice*100).toFixed(0)
+        });
+        },
+
+        async initData() {
+        let Data = await accountRevenue();
+        this.accountRevenue=Data.data
+        }
     },
     mounted: function () {
-     
+     this.initData()
     }
   }
 

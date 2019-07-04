@@ -12,6 +12,7 @@ import {
   setPassword,
   saveAddress,
   updataAddress,
+  saveBankCard,
   getAddressList,
   getDefaultAddress,
   removeAddress,
@@ -198,6 +199,18 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         updataAddress(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    SaveBankCard({ //编辑地址
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        saveBankCard(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

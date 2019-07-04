@@ -44,26 +44,26 @@
   <div class="withdrawal">
         <div class="withdrawal-list" style="border-top: 8px solid #f2f2f2;">
             <div class="withdrawal-listleft">户名</div>
-            <div class="withdrawal-listright">张三三</div>
+            <div class="withdrawal-listright">{{withdrawalForm.bank_card_holder}}</div>
         </div>
         <div class="withdrawal-list">
             <div class="withdrawal-listleft">账户</div>
-            <div class="withdrawal-listright">6214830107403155</div>
+            <div class="withdrawal-listright">{{withdrawalForm.bank_card_number}}</div>
         </div>
         <div class="withdrawal-list">
             <div class="withdrawal-listleft">开户行</div>
-            <div class="withdrawal-listright">招商银行</div>
+            <div class="withdrawal-listright">{{withdrawalForm.bank_name}}</div>
         </div>
         <div class="withdrawal-list">
             <div class="withdrawal-listleft">开户支行</div>
-            <div class="withdrawal-listright">北京海淀大街支行</div>
+            <div class="withdrawal-listright">{{withdrawalForm.bank_card_branch_name}}</div>
         </div>
         <div class="withdrawal-list">
             <div class="withdrawal-listleft">开户省份</div>
-            <div class="withdrawal-listright">北京市海淀区</div>
+            <div class="withdrawal-listright">{{withdrawalForm.bank_card_province}} {{withdrawalForm.bank_card_city}}</div>
         </div>
 
-        <div class="fixed-btn">修改提现账户</div>
+        <div class="fixed-btn" @click= "()=>$router.push({path: '/withdrawalEdit'})">修改提现账户</div>
   </div>
 </template>
 
@@ -73,13 +73,16 @@ import {
     setLocalStorage,
     getSessionStorage
   } from '@/utils/mixin';
+import {
+    accountRevenueDetail
+  } from '@/service/getData';
   import {
     Toast
   } from 'mint-ui'
   export default {
     data() {
       return {
-        
+        withdrawalForm:{}
       };
     },
 
@@ -94,10 +97,14 @@ import {
     },
 
     methods: {
-      
+      async initData() {
+        let Data = await accountRevenueDetail();
+        if(Data.code==10000)
+        this.withdrawalForm=Data.data.member_bank_bo
+        }
     },
     mounted: function () {
-     
+        this.initData()
     }
   }
 

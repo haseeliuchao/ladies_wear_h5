@@ -49,19 +49,27 @@
             <div class="withdrawal-listleft">可提现金额</div>
             <div class="withdrawal-listright"></div>
         </div>
-        <div class="withdrawal-list" style="height: 30px;">
-            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥260</div>
+        <div class="withdrawal-list" style="height: 30px;" v-if="accountRevenue.balance_amount>0" @click= "()=>$router.push({path: '/withdrawalAccount'})">
+            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥{{accountRevenue.balance_amount/100|TwoNum}}</div>
             <div class="withdrawal-listright">提现<span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list" style="border-bottom:none;">
-            <div class="withdrawal-listleft">提现账户</div>
-            <div class="withdrawal-listright">招商银行(4364)<span class="right-menu"></span></div>
+        <div class="withdrawal-list" style="height: 30px;" v-else>
+            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥{{accountRevenue.balance_amount/100|TwoNum}}</div>
+            <div class="withdrawal-listright">提现<span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list" style="margin-top:8px;">
+        <div class="withdrawal-list"  v-if="accountRevenue.bank_card_number==-1" style="border-bottom:none;" @click= "()=>$router.push({path: '/withdrawalEdit'})">
+            <div class="withdrawal-listleft">提现账户</div>
+            <div class="withdrawal-listright">请设置提现账户<span class="right-menu"></span></div>
+        </div>
+        <div class="withdrawal-list"  v-if="accountRevenue.bank_card_number!=-1" style="border-bottom:none;" @click= "()=>$router.push({path: '/withdrawalInfo'})">
+            <div class="withdrawal-listleft">提现账户</div>
+            <div class="withdrawal-listright">{{accountRevenue.bank_card_number}}<span class="right-menu"></span></div>
+        </div>
+        <div class="withdrawal-list" style="margin-top:8px;" @click="()=>$router.push({path:'/withdrawalAccountBook',query:{distributor_user_id:6,distributor_id:10,member_id:24}})">
             <div class="withdrawal-listleft">结算对账</div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list" style="border-bottom:none;">
+        <div class="withdrawal-list" style="border-bottom:none;"  @click="()=>$router.push({path:'/withdrawalRecord',query:{distributor_user_id:6,distributor_id:10,member_id:24}})">
             <div class="withdrawal-listleft">提现记录</div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
         </div>
@@ -76,13 +84,19 @@ import {
     setLocalStorage,
     getSessionStorage
   } from '@/utils/mixin';
+import {
+    accountRevenue
+  } from '@/service/getData';
   import {
     Toast
   } from 'mint-ui'
   export default {
     data() {
       return {
-        
+        accountRevenue:{
+            balance_amount:0,
+            bank_card_number:-1
+        }
       };
     },
 
@@ -97,10 +111,13 @@ import {
     },
 
     methods: {
-      
+        async initData() {
+        let Data = await accountRevenue();
+        this.accountRevenue=Data.data
+        }
     },
     mounted: function () {
-     
+     this.initData()
     }
   }
 

@@ -64,6 +64,7 @@
       @include flexbox(start, center, row, nowrap);
       span {
         color: $red;
+        font-size: 13px;
       }
     }
   }
@@ -174,33 +175,33 @@
     <div class="withdrawal-list" >
       <div class="withdrawal-listleft">户名</div>
       <div class="withdrawal-listright">
-        <input type="text" placeholder="请输入户名">
+        <input type="text" v-model="withdrawalForm.bank_card_holder" @blur="gotoView(1)" placeholder="请输入户名">
       </div>
     </div>
     <div class="withdrawal-list">
       <div class="withdrawal-listleft">账户</div>
       <div class="withdrawal-listright">
-        <input type="number" placeholder="请输入银行卡卡号">
+        <input type="number" v-model="withdrawalForm.bank_card_number" placeholder="请输入银行卡卡号">
       </div>
     </div>
     <div class="withdrawal-list">
       <div class="withdrawal-listleft">开户行</div>
       <div class="withdrawal-listright">
-        <span>选择银行</span>
+        <span>{{withdrawalForm.bank_name}}</span>
         <span class="right-menu"></span>
       </div>
     </div>
     <div class="withdrawal-list">
       <div class="withdrawal-listleft">开户支行</div>
       <div class="withdrawal-listright">
-        <input type="text" placeholder="请输入开户支行">
+        <input type="text" v-model="withdrawalForm.bank_card_branch_name" placeholder="请输入开户支行">
       </div>
     </div>
 
     <div class="withdrawal-list" style="border-bottom:none;">
       <div class="withdrawal-listleft">开户省份</div>
       <div class="withdrawal-listright" @click="()=>addressVisible=true">
-        <span>{{addressForm.province}} {{addressForm.city}}</span>
+        <span>{{withdrawalForm.bank_card_province}} {{withdrawalForm.bank_card_city}}</span>
         <span class="right-menu"></span>
       </div>
     </div>
@@ -208,8 +209,9 @@
     <div class="withdrawal-list" style="margin-top:8px;border-bottom:none;">
       <div class="withdrawal-listleft">手机验证码</div>
       <div class="withdrawal-listright withdrawal-listright1">
-        <input type="text" class="msgcode" placeholder="请输入短信验证码">
-        <span>获取验证码</span>
+        <input type="text" v-model="withdrawalForm.sms_code" class="msgcode" placeholder="请输入短信验证码">
+        <span :class="[resetSendPhoneMessage?'disabled-btnspan':'']" @click= "registeredSendPhoneMessage"
+                    :disabled="resetSendPhoneMessage">{{resetSendPhoneMessage ? `${resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</span>
       </div>
     </div>
     <p class="withdrawal-tip" style="line-height: 20px;padding: 6px .3rem 0;">
@@ -219,8 +221,8 @@
     <!-- <div class="fixed-btn">保存</div> -->
     <div
       class="save-address"
-      :class="['cell-btn',errors.has('mobile')||addressForm.phone.length==0||addressForm.address.length==0||addressForm.name.length==0?'disabled-btn':'']"
-      @click="saveAddress"
+      :class="['cell-btn']"
+      @click="saveBankCard"
     >保存</div>
 
     <mt-popup v-model="addressVisible"  position="bottom" class="address-pricker">
@@ -252,21 +254,26 @@ import {
   setLocalStorage,
   getSessionStorage
 } from "@/utils/mixin";
+
+import {
+    accountRevenueDetail
+  } from '@/service/getData';
 export default {
   data() {
     return {
       blurVisible: false,
       addressFormcur: 1,
-      addressForm: {
-        id: "",
-        name: "",
-        phone: "",
-        province: "请选择开户省份",
-        city: "",
-        area: "",
-        address: "",
-        selected: false
+      withdrawalForm: {
+        bank_card_province: '请选择开户省份',
+        bank_card_number: null,
+        bank_card_holder: null,
+        bank_name: '招商银行',
+        bank_card_branch_name: null,
+        bank_card_city: null,
+        sms_code: null,
+        phone: null,
       },
+      resetSendPhoneMessage:null,
       addressVisible: false,
       errorVisible: false,
       focusphoneoneState: false,
@@ -314,110 +321,77 @@ export default {
   computed: {},
 
   methods: {
-    async saveAddress() {
+      async registeredSendPhoneMessage() { //获取验证码
+        let Data= await this.$store.dispatch('SendPhoneMessage', {
+          phone: this.withdrawalForm.phone,
+          open_id:getSessionStorage('open_id')
+        });
+        this.resetSendPhoneMessage = 60;
+        if (Data.code !== 10000) return Toast({duration: 1000,
+          message: Data.msg
+        })
+        Toast({duration: 1000,
+            message: '发送成功',
+            position: 'center'
+          })
+        let times = setInterval(() => {
+          if (this.resetSendPhoneMessage <= 0) {
+            this.resetSendPhoneMessage = null;
+            clearInterval(times);
+          } else {
+            this.resetSendPhoneMessage--;
+          }
+        }, 1000)
+      },
+
+
+
+    //   绑定银行卡：/bind/bank/card
+    async saveBankCard() {
+        console.log(this.withdrawalForm)
       let params = {
-        consignee_id: this.addressForm.id,
-        name: this.addressForm.name,
-        phone: this.addressForm.phone,
-        province: this.addressForm.province,
-        city: this.addressForm.city,
-        area: this.addressForm.area,
-        address: this.addressForm.address,
-        if_default: this.addressForm.selected ? 1 : 0
+        bank_card_number: this.withdrawalForm.bank_card_number,
+        bank_card_holder: this.withdrawalForm.bank_card_holder,
+        bank_name: this.withdrawalForm.bank_name,
+        bank_card_branch_name: this.withdrawalForm.bank_card_branch_name,
+        bank_card_province: this.withdrawalForm.bank_card_province,
+        bank_card_city: this.withdrawalForm.bank_card_city,
+        sms_code: this.withdrawalForm.sms_code,
       };
-      if (this.$route.params.consignee_id) {
-        //有传Id则是编辑模式 没传是新增
-        params.consignee_id = this.$route.params.consignee_id;
-        this.$store
-          .dispatch("UpdataAddress", params)
-          .then(response => {
+      
+        this.$store.dispatch("SaveBankCard", params).then(response => {
             if (response.code != 10000) {
-              Toast({ duration: 1000, message: "保存失败" });
+            //   Toast({ duration: 1000, message: "保存失败" });
             } else {
-              Toast({ duration: 1000, message: "保存成功" });
-              // this.$router.push({path: '/addressList'})
+            //   Toast({ duration: 1000, message: "保存成功" });
               this.$router.go(-1);
             }
           })
           .catch(error => {
             Toast({ duration: 1000, message: "访问接口失败" });
           });
-      } else {
-        this.$store
-          .dispatch("SaveAddress", params)
-          .then(response => {
-            if (response.code != 10000) {
-              Toast({ duration: 1000, message: "保存失败" });
-            } else {
-              Toast({ duration: 1000, message: "保存成功" });
-              // this.$router.push({path: '/addressList'})
-              this.$router.go(-1);
-            }
-          })
-          .catch(error => {
-            Toast({ duration: 1000, message: "访问接口失败" });
-          });
-      }
     },
 
-    deleteAddresspop() {
-      MessageBox.confirm("", {
-        message: "确定要删除该地址吗？",
-        title: "",
-        cancelButtonClass: "cancelButton",
-        confirmButtonClass: "confirmButton"
-      })
-        .then(action => {
-          if (action == "confirm") {
-            //确认的回调
-            this.deleteAddress();
-          }
-        })
-        .catch(err => {
-          if (err == "cancel") {
-            //取消的回调
-          }
-        });
-    },
-    async deleteAddress() {
-      this.$store
-        .dispatch("RemoveAddress", {
-          consignee_id: this.$route.params.consignee_id,
-          if_default: this.addressForm.selected ? 1 : 0
-        })
-        .then(response => {
-          if (response.code != 10000) {
-            Toast({ duration: 1000, message: "删除失败" });
-          } else {
-            Toast({ duration: 1000, message: "删除成功" });
-            // this.$router.push({path: '/addressList'})
-            this.$router.go(-1);
-          }
-        });
-    },
+   
+   
     onMyAddressChange(picker, values) {
-      this.addressFormcur++;
-      if (myaddress[values[0]]) {
-        //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
-        picker.setSlotValues(1, Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
-        //   picker.setSlotValues(2,myaddress[values[0]][values[1]]); // 区/县数据就是一个数组
-        if (this.addressFormcur > 6) {
-          this.myAddressProvince = values[0];
-          this.myAddressCity = values[1];
-          this.myAddresscounty = values[2];
-          this.addressForm.province = values[0];
-          this.addressForm.city = values[1];
-          this.addressForm.area = values[2];
+        this.addressFormcur++;
+       if(myaddress[values[0]]){  //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
+          picker.setSlotValues(1,Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
+          picker.setSlotValues(2,myaddress[values[0]][values[1]]); // 区/县数据就是一个数组
+           if(this.addressFormcur>4){
+             this.withdrawalForm.bank_card_province=values[0];
+              this.withdrawalForm.bank_card_city= values[1];
+           }
         }
-      }
-    },
+      },
     confirm() {
       this.addressVisible = false;
       // 获取变换后的城市数据
       var valueArr = this.$refs.picker.getValues();
       this.oldSlots = valueArr.concat();
-      this.myAddressCity = this.$refs.picker.getSlotValues(1);
-      this.myAddresscounty = this.$refs.picker.getSlotValues(2);
+    //   this.myAddressCity = this.$refs.picker.getSlotValues(1);
+    //   this.myAddresscounty = this.$refs.picker.getSlotValues(2);
     },
     cancle() {
       this.addressVisible = false;
@@ -428,52 +402,34 @@ export default {
     },
     onSelected(data) {
       this.addressVisible = false;
-      this.addressForm.province = data.province.value;
-      this.addressForm.city = data.city.value;
-      this.addressForm.area = data.area.value;
+      this.withdrawalForm.bank_card_province = data.bank_card_province.value;
+      this.withdrawalForm.bank_card_city = data.bank_card_city.value;
+    //   this.withdrawalForm.area = data.area.value;
     },
     async initData() {
-      if (this.$route.params.consignee_id) {
-        let that = this;
-        let Data = JSON.parse(getLocalStorage("addressList"));
-        Data.map(item => {
-          if (item.consignee_id === parseInt(that.$route.params.consignee_id)) {
-            that.addressForm.name = item.name;
-            that.addressForm.phone = item.phone;
-            that.addressForm.province = item.province;
-            that.addressForm.city = item.city;
-            that.addressForm.area = item.area;
-            that.addressForm.address = item.address;
-            that.addressForm.selected = item.if_default === 1 ? true : false;
-          }
-        });
-      }
+        let Data = await accountRevenueDetail();
+        if(Data.data.member_bank_bo){
+          this.withdrawalForm=Data.data.member_bank_bo
+        }
+        if(Data.data.phone){
+            this.withdrawalForm.phone=Data.data.phone
+        }
+        
     },
-    focusphoneoneclick() {
-      this.focusphoneoneState = true;
-    },
-    focuscodeoneclick() {
-      this.focuscodeoneState = true;
-    },
-    focuscodetwoclick() {
-      this.focuscodetwoState = true;
-    },
-    focuscodethreeclick() {
-      this.focuscodethreeState = true;
-    },
-    gotoView() {
+    gotoView(type) {
       window.scroll(0, 0);
-      this.focusphoneoneState = false;
-      this.focuscodeoneState = false;
-      this.focuscodetwoState = false;
-      this.focuscodethreeState = false;
+
+      let reg1 = /^[\u4e00-\u9fa5]{2,4}$/;
+        if(reg.test(a)){
+            alert("true");
+        }else{
+            alert("false");
+        }
+      
     }
   },
 
   mounted: function() {
-    if (getSessionStorage("distributorTitle")) {
-      document.title = getSessionStorage("distributorTitle");
-    }
     this.initData();
     this.$nextTick(() => {
       //vue里面全部加载好了再执行的函数  （类似于setTimeout）
