@@ -327,13 +327,13 @@ import shopVue from '../shop/shop.vue';
       listMe:function(type,val,list){
                      return list.filter(function(item){
                        if(!type){
-                         return item.sales_consumer_price=item.sales_consumer_price/100*val;
+                         return item.sales_consumer_price=Math.ceil(item.sales_consumer_price/100*val);
                        }
                         if(type=="salesMultiple"){
-                          return item.sales_consumer_price=(item.cost_price*100+(item.cost_price*100*val))/10000;
+                          return item.sales_consumer_price=Math.ceil((item.cost_price*100+(item.cost_price*100*val))/10000);
                         }
                         if(type=="salesSetProfit"){
-                          return item.sales_consumer_price=(item.cost_price+(val*100))/100;
+                          return item.sales_consumer_price=Math.ceil((item.cost_price+(val*100))/100);
                         }
                     })
                 },
@@ -379,7 +379,7 @@ import shopVue from '../shop/shop.vue';
         // let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
         this.skuInfo=[];
         this.goodeditdata.item_sku.map(itemdetail=>{
-          let itemdetailstr=itemdetail.distributor_item_sku_id+':'+itemdetail.sales_consumer_price*100
+          let itemdetailstr=itemdetail.distributor_item_sku_id+':'+Math.ceil(itemdetail.sales_consumer_price*100)
           this.skuInfo.push(itemdetailstr)
         })
          let Data = await itemUpd({
