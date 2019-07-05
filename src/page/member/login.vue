@@ -319,7 +319,8 @@ getLocalStorage,
           password:this.registeredForm.password,
           head_img_url:getSessionStorage('head_img_url'),
           nickname:nickName,
-          open_id:getSessionStorage('open_id')
+          open_id:getSessionStorage('open_id'),
+          session_token:getSessionStorage('session_token')
         })
         if (Data.code !== 10000) return Toast({duration: 1000,
           message: Data.msg

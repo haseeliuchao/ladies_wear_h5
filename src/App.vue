@@ -81,6 +81,7 @@ import {
                 setSessionStorage('access_token',Data.data.access_token);
                 setSessionStorage('nickname',Data.data.nick);
                 setSessionStorage('user_id',Data.data.user_id);
+                setSessionStorage('open_id',Data.data.open_id);
               }
             }
             
