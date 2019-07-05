@@ -167,5 +167,8 @@ export const accountRevenue = (params) => new Http().require({api: '/api/distrib
 export const accountRevenueDetail = (params) => new Http().require({api: '/api/search/bind/bank/card',param: params}); //提现账号详情
 export const applyWithdrawsend = (params) => new Http().require({api: '/api/apply/withdraw',param: params}); //提现账号详情
 export const saveBankCard = (params) => new Http().require({api: '/api/bind/bank/card',param: params}); //提现管理
+export const withdrawBillList = (params) => new Http().require({api: '/api/withdraw/bill/list',param: params}); //提现管理
+export const withdrawBillDetails = (params) => new Http().require({api: '/api/withdraw/bill/details',param: params}); //提现管理
+export const settlementOrderB = (params) => new Http().require({api: '/api/b/distributor/settlement/order/list',param: params}); //提现管理
 
 

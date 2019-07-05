@@ -113,7 +113,9 @@ import {
     methods: {
         async initData() {
         let Data = await accountRevenue();
-        this.accountRevenue=Data.data
+            if(Data.code=10000){
+            this.accountRevenue=Data.data
+            }
         }
     },
     mounted: function () {

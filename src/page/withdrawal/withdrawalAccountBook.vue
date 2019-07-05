@@ -208,6 +208,7 @@
         // margin-top: $margin;
         .order-item {
         //   margin-top: 10px;
+          margin-bottom: 10px;
           background: #fff;
           width: 10rem;
         //   margin-left: .3rem;
@@ -420,11 +421,11 @@
       <ul class="orderCount">
         <li style="border-right:1px solid #e4e4e4">
             <span>已结算利润</span>
-            <em>￥{{memberData.checkout_amount/100|TwoNum}}</em>
+            <em>￥{{}}</em>
         </li>
         <li>
           <span>待结算利润</span>
-          <em style="color:#ff5527">￥{{memberData.checkout_amount/100|TwoNum}}</em>
+          <em style="color:#ff5527">￥{{}}</em>
         </li>
       </ul>
     </div>
@@ -467,7 +468,8 @@
                 </div>
                 <div class="right">
                   <div class="order-status">
-                    <span>{{item.order_status_str}}</span>
+                    <span v-if="item.order_status==6">已结算</span>
+                    <span v-else>待结算</span>
                   </div>
                 </div>
               </div>
@@ -478,7 +480,7 @@
                     <img v-lazy="itemdetail.item_img+'_190x190.jpg'">
                     <div class="product-info">
                       <p class="prod-name">{{itemdetail.item_title}}</p>
-                      <p class="prodsku-info">售价：￥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}&nbsp;&nbsp;&nbsp;&nbsp;成本：￥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</p>
+                      <p class="prodsku-info">售价：￥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}&nbsp;&nbsp;&nbsp;&nbsp;成本：￥{{itemdetail.item_price/100|TwoNum}}</p>
                     </div>
                   </div>
                 </div>
@@ -490,8 +492,8 @@
 
               <div class="order-product-info">
                 <p class="order-product-infocode">订单编号：{{item.order_code}}</p>
-                <p class="order-product-infopostfree">实收运费: ￥0.00<em>（应收运费￥5.00）</em></p>
-                <p class="order-product-infoprice" style="color:#ff2741">利润：-¥10.00</p>
+                <p class="order-product-infopostfree">实收运费: ￥{{item.pay_post_fee/100|TwoNum}}<em>（应收运费￥{{item.post_fee/100|TwoNum}}）</em></p>
+                <p class="order-product-infoprice" style="color:#ff2741">利润：{{item.order_profit/100|TwoNum}}元</p>
               </div>
              
             </div>
@@ -517,8 +519,8 @@
 <script>
   import BackHead from 'common/backHead';
   import {
-    getOrderListMemberC,
-    payDirect
+    settlementOrderB,
+    accountRevenue
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
   import {
@@ -529,25 +531,27 @@
     data() {
       return {
         popupVisible:false,
-        memberData:{
-          distributor_id:'',
-          distributor_user_id:'',
-          member_id:'',
-          nick_note:'',
-          checkout_amount:0,
+        // memberData:{
+        //   distributor_id:'',
+        //   distributor_user_id:'',
+        //   member_id:'',
+        //   nick_note:'',
+        //   checkout_amount:0,
+        // },
+        accountRevenue:{
         },
         orderCount:{
            orderTotalCount:''
         },
         
-        commad: getOrderListMemberC,
+        // /b/distributor/settlement/order/list
+        commad: settlementOrderB,
         
         currentOrder: {}, //当前订单
         params: {
           page_size: 10,
           current_page: 1,
-          member_id:this.$route.query.member_id,
-          order_status:null
+          settlement_status:null
         },
         orderList: [],
         active: null,
@@ -585,16 +589,13 @@
         this.active = Id;
         switch (Number(this.active)) {
           case 0: //待发货
-            this.params.order_status = 2;
+            this.params.settlement_status = 0;
             break;
           case 1: //待收货
-            this.params.order_status = 3;
+            this.params.settlement_status = 1;
             break;
           case 2: //已完成
-            this.params.order_status = 4;
-            break;
-          case 3: //已关闭
-            this.params.order_status = 5;
+            this.params.settlement_status = 2;
             break;
           default: //其他
             throw new Error('未知TabId')
@@ -613,28 +614,11 @@
       }
       },
       async initData(){
-        //客户详情
-        let res = await this.$store.dispatch('GetMemberDetails',{
-          distributor_user_id:this.$route.query.distributor_user_id
-        });
-        if(res.code!=10000){
-          Toast({duration: 1000,message: res.msg})
-        }
-        this.memberData= res.data;
-        this.memberData.distributor_id = res.data.distributor_id;
-        this.memberData.distributor_user_id = res.data.distributor_user_id;
-        this.memberData.nick_note = res.data.nick_note;
-        this.memberData.checkout_amount= res.data.checkout_amount;
-        //订单计数
-        let data = await this.$store.dispatch('GetOrderCount',{
-          member_id:this.$route.query.member_id,
-          distributor_id:this.$route.query.distributor_id
-        });
-         if(data.code!=10000){
-          Toast({duration: 1000,message: data.msg})
-        }
-        this.orderCount= data.data;
-        this.orderCount.orderTotalCount= data.data.orderTotalCount;
+        let Data = await accountRevenue();
+            if(Data.code=10000){
+            this.accountRevenue=Data.data
+            }
+        
       }
     },
     filters:{

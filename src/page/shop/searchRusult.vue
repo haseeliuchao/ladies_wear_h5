@@ -809,6 +809,7 @@
           this.minPrice=null;
           this.maxPrice=null;
           this.activeone=null;
+          this.imgsearchNo=false;
 
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));

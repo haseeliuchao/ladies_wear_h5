@@ -91,7 +91,7 @@
         </div>
         <div class="withdrawal-list" style="height: 30px;width:9.4rem;padding:0;margin:0 auto;">
             <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥<input type="number" @keyup="handleInput3" @keydown="handleInput2" style="font-weight: bold;width:8rem;height: 29px;line-height: normal;" v-model="withdrawalPrice"></div>
-            <div class="withdrawal-listright"><span class="right-menuclose">x</span></div>
+            <div class="withdrawal-listright"><span class="right-menuclose" @click="clearWithdrawalPrice">x</span></div>
         </div>
         <div class="withdrawal-list" style="border-bottom:none;height:43px;line-height:43px;">
             <div class="withdrawal-listleft" style="font-size:14px;"><em style="color:#666">可提现金额{{accountRevenue.balance_amount/100|TwoNum}}元，</em><em style="color:#ff2741" @click="allWithdrawal">全部提现</em></div>
@@ -164,10 +164,19 @@ import {
             this.showBtnapply=false
           }
         },
+        clearWithdrawalPrice(){
+            this.withdrawalPrice=null;
+            this.showBtnapply=true
+        },
+
         async applyWithdraw() {
         let Data = await applyWithdrawsend({
             change_amount:parseFloat(this.withdrawalPrice*100).toFixed(0)
         });
+
+        if(Data.code=10000){
+          this.$router.push({path: '/withdrawalSuccess',query:{withdraw_code:Data.data.business_id}})
+        }
         },
 
         async initData() {

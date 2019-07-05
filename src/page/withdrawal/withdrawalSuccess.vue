@@ -62,18 +62,18 @@
         
         <div class="withdrawal-list" style="margin-top:8px;padding-top: 8px;border-bottom:none;height:40px;">
             <div class="withdrawal-listleft">提现信息：<em style="font-size:14px;">提现金额</em></div>
-            <div class="withdrawal-listright"><span>￥240.00</span></div>
+            <div class="withdrawal-listright"><span>￥{{accountRevenue.withdraw_amount/100|TwoNum}}</span></div>
         </div>
         <div class="withdrawal-list" style="height:40px;padding-bottom: 14px;">
             <div class="withdrawal-listleft"><em style="visibility: hidden;">提现信息：</em><em style="font-size:14px;">提现时间</em></div>
-            <div class="withdrawal-listright"><span>2018.09.11 18:36</span></div>
+            <div class="withdrawal-listright"><span>{{accountRevenue.gmt_created | DateFormat('yyyy-MM-dd hh:mm:ss')}}</span></div>
         </div>
         <div class="withdrawal-list" style="border-bottom:none;">
-            <div class="withdrawal-listleft">收款信息：<em style="font-size:14px;">招商银行借记卡(3145)</em></div>
+            <div class="withdrawal-listleft">收款信息：<em style="font-size:14px;">{{accountRevenue.bank_name}}借记卡({{bank_namesilce}})</em></div>
             <div class="withdrawal-listright"></div>
         </div>
 
-        <p class="withdrawal-back">资产中心>></p>
+        <p class="withdrawal-back" @click= "()=>$router.push({path: '/myShop'})">资产中心>></p>
     </div>
 
  
@@ -83,13 +83,20 @@
   import {
     isWeiXin,pushHistory,getSessionStorage
   } from '@/utils/mixin';
+    import {
+    withdrawBillDetails
+  } from '@/service/getData';
   import {
     Toast
   } from 'mint-ui'
   export default {
     data() {
       return {
-         emShow:false
+         emShow:false,
+         accountRevenue:{
+             withdraw_amount:0,
+         },
+         bank_namesilce:''
       };
     },
 
@@ -101,7 +108,16 @@
     computed: {},
 
     methods: {
-    
+      async initData(){
+          let Data = await withdrawBillDetails({
+              withdraw_code:this.$route.query.withdraw_code
+          });
+            if(Data.code=10000){
+            this.accountRevenue=Data.data
+            this.bank_namesilce=this.accountRevenue.bank_card_number.substring(this.accountRevenue.bank_card_number.length-4);
+            }
+        
+      }
     },
     filters:{
         topriceafter(value){
@@ -112,7 +128,7 @@
         }
     },
     mounted: function () {
-
+         this.initData();
     }
    
   }

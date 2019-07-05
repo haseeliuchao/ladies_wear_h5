@@ -247,11 +247,11 @@
       <ul class="orderCount">
         <li style="border-right:1px solid #e4e4e4">
             <span>已提现金额</span>
-            <em>￥{{memberData.checkout_amount/100|TwoNum}}</em>
+            <em>￥{{accountRevenue.expense/100|TwoNum}}</em>
         </li>
         <li>
           <span>提现中金额</span>
-          <em style="color:#ff5527">￥{{memberData.checkout_amount/100|TwoNum}}</em>
+          <em style="color:#ff5527">￥{{accountRevenue.withdraw_amount/100|TwoNum}}</em>
         </li>
       </ul>
     </div>
@@ -271,18 +271,20 @@
             <div class="order-item" v-for="(item,index) in orderList" :key="index">
               <div class="order-top">
                 <div class="left">
-                  <span>2019年05月</span>
+                  <span>{{item.mon}}</span>
                 </div>
               </div>
-              <div class="order-product-list" v-for="(itemdetail,index1) in item.item_info_list" :key="index1"  >
-                <div  :class="['order-product-item',item.item_info_list.length==index1+1 ? 'noborder' : '']">
+              <div class="order-product-list" v-for="(itemdetail,index1) in item.orderListBo" :key="index1"  >
+                <div  :class="['order-product-item',item.orderListBo.length==index1+1 ? 'noborder' : '']">
                   <p class="record-top">
                       <span>提现</span>
-                      <span class='record-topprice'>¥0.20</span>
+                      <span class='record-topprice'>¥{{itemdetail.withdraw_amount/100|TwoNum}}</span>
                   </p>
                   <p class="record-bottom">
-                      <span>时间：2018.12.13 18:26</span>
-                      <span>提现中</span>
+                      <span>时间：{{itemdetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm:ss')}}</span>
+                      <span v-if="itemdetail.withdraw_status==1">待打款</span>
+                      <span v-if="itemdetail.withdraw_status==2">已打款</span>
+                      <span v-if="itemdetail.withdraw_status==3">已驳回</span>
                   </p>
                 </div>
               </div>
@@ -309,8 +311,9 @@
 <script>
   import BackHead from 'common/backHead';
   import {
-    getOrderListMemberC,
-    payDirect
+    withdrawBillList,
+    payDirect,
+    accountRevenue
   } from '@/service/getData';
   import LoadMore from 'common/loadMore';
   import {
@@ -321,25 +324,21 @@
     data() {
       return {
         popupVisible:false,
-        memberData:{
-          distributor_id:'',
-          distributor_user_id:'',
-          member_id:'',
-          nick_note:'',
-          checkout_amount:0,
+        accountRevenue:{
+             withdraw_amount:0,
+             expense:0
         },
         orderCount:{
            orderTotalCount:''
         },
         
-        commad: getOrderListMemberC,
+        commad: withdrawBillList,
         
         currentOrder: {}, //当前订单
         params: {
-          page_size: 10,
-          current_page: 1,
-          member_id:this.$route.query.member_id,
-          order_status:null
+        //   page_size: 10,
+        //   current_page: 1,
+          
         },
         orderList: [],
         active: null,
@@ -392,41 +391,28 @@
             throw new Error('未知TabId')
             break
         }
-        this.onRefreshCallback();
+        
       },
     
       async infiniteCallback(response) { //加载更多订单
+    //   console.log(response.data.data.key)
+
+     
       if (response.data.data){
-        if (response.data.data.length > 0) {
-          response.data.data.map(i => {
-            this.orderList.push(i)
-          })
-        }
+            for(var st in response.data.data) {
+               
+                let orderListObj={mon:st.substring(0, 4)+'年'+st.substring(4, 6)+'月',orderListBo:response.data.data[st]}
+                console.log(orderListObj)
+                this.orderList.push(orderListObj)
+            }
       }
       },
       async initData(){
-        //客户详情
-        let res = await this.$store.dispatch('GetMemberDetails',{
-          distributor_user_id:this.$route.query.distributor_user_id
-        });
-        if(res.code!=10000){
-          Toast({duration: 1000,message: res.msg})
-        }
-        this.memberData= res.data;
-        this.memberData.distributor_id = res.data.distributor_id;
-        this.memberData.distributor_user_id = res.data.distributor_user_id;
-        this.memberData.nick_note = res.data.nick_note;
-        this.memberData.checkout_amount= res.data.checkout_amount;
-        //订单计数
-        let data = await this.$store.dispatch('GetOrderCount',{
-          member_id:this.$route.query.member_id,
-          distributor_id:this.$route.query.distributor_id
-        });
-         if(data.code!=10000){
-          Toast({duration: 1000,message: data.msg})
-        }
-        this.orderCount= data.data;
-        this.orderCount.orderTotalCount= data.data.orderTotalCount;
+          let Data = await accountRevenue();
+            if(Data.code=10000){
+            this.accountRevenue=Data.data
+            }
+        
       }
     },
     filters:{
@@ -440,8 +426,8 @@
     mounted: function () {
       this.initData();
       //  console.log(this.$route.name)
-
-      this.switchTabs(0)
+this.onRefreshCallback();
+    //   this.switchTabs(0)
     }
   }
 </script>
