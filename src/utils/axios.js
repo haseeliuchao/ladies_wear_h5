@@ -143,10 +143,8 @@ class Http {
               }
               else if(response.data.code==30029){
                 if(isWeiXin('code')){
-                  setSessionStorage('head_img_url',response.data.data.head_img_url);
-                  setSessionStorage('nickname',response.data.data.nickname);
-                  setSessionStorage('session_token',response.data.session_token);
-                  setSessionStorage('access_token',response.data.access_token);
+                  setSessionStorage('session_token',response.data.data.session_token);
+                  setSessionStorage('access_token',response.data.data.access_token);
                   setSessionStorage('open_id',response.data.data.open_id);
                   router.push('/login')
                 }
