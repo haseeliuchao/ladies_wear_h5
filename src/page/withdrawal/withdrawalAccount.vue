@@ -79,7 +79,7 @@
 
 <template>
   <div class="withdrawal">
-      <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;">
+      <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;" v-if="accountRevenue.bank_card_name!=''">
             <div class="withdrawal-listleft"><p><img src="http://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png"><span>{{accountRevenue.bank_card_name}}</span></p></div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
       </div>
@@ -159,7 +159,10 @@ import {
             }
         },
         allWithdrawal(){
-          this.withdrawalPrice
+          this.withdrawalPrice=this.accountRevenue.balance_amount/100<=10000? this.accountRevenue.balance_amount:10000;
+          if(this.withdrawalPrice<=10000&&this.withdrawalPrice>0){
+            this.showBtnapply=false
+          }
         },
         async applyWithdraw() {
         let Data = await applyWithdrawsend({
