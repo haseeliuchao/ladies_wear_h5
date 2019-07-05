@@ -421,11 +421,11 @@
       <ul class="orderCount">
         <li style="border-right:1px solid #e4e4e4">
             <span>已结算利润</span>
-            <em>￥{{}}</em>
+            <em>￥{{accountRevenue.expense/100|TwoNum}}</em>
         </li>
         <li>
           <span>待结算利润</span>
-          <em style="color:#ff5527">￥{{}}</em>
+          <em style="color:#ff5527">￥{{accountRevenue.stay_settlement_amount/100|TwoNum}}</em>
         </li>
       </ul>
     </div>
@@ -539,6 +539,8 @@
         //   checkout_amount:0,
         // },
         accountRevenue:{
+          expense:0,
+          stay_settlement_amount:0
         },
         orderCount:{
            orderTotalCount:''

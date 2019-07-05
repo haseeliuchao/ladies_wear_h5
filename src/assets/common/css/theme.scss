@@ -297,6 +297,9 @@ body,
   pointer-events: none;
   cursor: default;
 }
+.bankname-active{
+  color: #333!important
+}
 //单选框
 //switch 颜色
 .mint-switch-input:checked+.mint-switch-core {

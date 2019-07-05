@@ -5,7 +5,7 @@
        width: 10rem;
        height: 100%;
        background: #fff;
-       position: relative;
+    //    position: relative;
       .withdrawal-list{
           width: 10rem;
           padding: 0 .3rem;
@@ -26,7 +26,7 @@
       }
    }
    .fixed-btn{
-       position: absolute;
+       position: fixed;
        bottom: 0;
        left: 0;
        width:10rem;

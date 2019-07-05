@@ -80,7 +80,11 @@
 <template>
   <div class="withdrawal">
       <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;" v-if="accountRevenue.bank_card_name!=''">
-            <div class="withdrawal-listleft"><p><img src="http://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png"><span>{{accountRevenue.bank_card_name}}</span></p></div>
+            <div class="withdrawal-listleft"><p><img :src="accountRevenue.bank_icon"><span>{{accountRevenue.bank_card_name}}</span></p></div>
+            <div class="withdrawal-listright"><span class="right-menu"></span></div>
+      </div>
+      <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;" v-else  @click= "()=>$router.push({path: '/withdrawalEdit'})">
+            <div class="withdrawal-listleft"><p><img src="~jd/images/nobindCard.png"><span style="color:#999">请设置提现账户</span></p></div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
       </div>
 
