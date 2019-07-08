@@ -456,7 +456,14 @@
     <!-- <div class="fixed-btn">保存</div> -->
     <div
       class="save-address"
-      :class="['cell-btn']"
+      :class="['cell-btn',
+         withdrawalForm.bank_card_province=='请选择开户省份'||
+         withdrawalForm.bank_card_province=='请选择'||
+         withdrawalForm.bank_name=='请选择银行'||
+        !withdrawalForm.bank_card_number||
+        !withdrawalForm.bank_card_holder||
+        !withdrawalForm.bank_card_branch_name||
+        !withdrawalForm.sms_code?'disabled-btn':'']"
       @click="saveBankCard"
     >保存</div>
 
@@ -475,6 +482,8 @@
         @touchmove.native.stop.prevent
       ></mt-picker>
     </mt-popup>
+
+
 
     <mt-popup v-model="errorVisible" position="top" closeOnClickModal='false' class="error-pop" :modal="false">
     <p>请输入户名</p>
@@ -886,7 +895,7 @@ export default {
     },
     gotoView(type) {
       window.scroll(0, 0);
-
+      
       let reg1 = /^[\u4e00-\u9fa5]{2,4}$/;
         if(reg.test(a)){
             alert("true");
@@ -894,6 +903,8 @@ export default {
             alert("false");
         }
       
+
+
     }
   },
 
