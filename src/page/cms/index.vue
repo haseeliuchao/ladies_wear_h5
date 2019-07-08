@@ -455,7 +455,8 @@
           advertising_id:'',
           img_url:'',
           page_size: 10,
-          current_page: 1
+          current_page: 1,
+          sort_type:1
         },
         active:0,
         guideindex:null
@@ -549,6 +550,9 @@
       },
       async getGoodsdata(advertising_id,index) {
         this.active = index;
+        // if(index!=0){
+        //   this.indexParams.sort_type=1;
+        // }
         this.indexParams.page_size = 10;
         this.indexParams.current_page = 1;
         this.indexParams.advertising_id = advertising_id;
