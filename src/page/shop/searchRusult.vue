@@ -608,6 +608,7 @@
           this.sort_enum=null;
           this.searchParams.sort_enum=null;
           this.searchParams.sort_type = 1;
+          this.imgsearchNo=false;
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
           this.searchParams.img_url=null;

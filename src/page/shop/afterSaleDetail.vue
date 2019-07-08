@@ -326,7 +326,7 @@
        <p class="logisticsInput">快递公司：<input type="text" v-focus v-model="logisticsForm.logistics_name" placeholder=""></p>
        <p class="logisticsInput">物流单号：<input type="number" v-model="logisticsForm.logistics_code" placeholder=""></p>
        <p class="logisticsTitle">请将商品邮寄至以下地址：</p>
-       <p class="logisticsAddress">浙江省 杭州市 西湖区 蒋村街道 中国五园新村 2幢幢幢302室</p>
+       <p class="logisticsAddress">广东省 广州市 天河区 凤凰街道渔北路189号1楼  收件人：孟君凡  15989136923</p>
     </div>
 
     <!-- <p class="backmyHome" @click= "$router.push('/order/'+orderDetail.order_code+'')">
