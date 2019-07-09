@@ -139,6 +139,13 @@ class Http {
                   setSessionStorage('nickname',response.data.data.nickname);
                   setSessionStorage('open_id',response.data.data.open_id);
                 }
+              }else if(response.data.code==30029){
+                if(isWeiXin('code')){
+                  setSessionStorage('session_token',response.data.data.session_token);
+                  setSessionStorage('access_token',response.data.data.access_token);
+                  setSessionStorage('open_id',response.data.data.open_id);
+                  router.push('/login')
+                }
               }else if(response.data.code!=20018){
                 if(response.data.code!=40003){
                   Toast({duration: 1000,
