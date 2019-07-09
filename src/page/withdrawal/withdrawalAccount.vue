@@ -163,7 +163,7 @@ import {
             }
         },
         allWithdrawal(){
-          this.withdrawalPrice=this.accountRevenue.balance_amount/100<=10000? parseFloat(this.accountRevenue.balance_amount/100).toFixed(0):10000;
+          this.withdrawalPrice=this.accountRevenue.balance_amount/100<=10000? this.accountRevenue.balance_amount/100:10000;
           if(this.withdrawalPrice<=10000&&this.withdrawalPrice>0){
             this.showBtnapply=false
           }
