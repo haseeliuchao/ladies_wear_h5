@@ -1018,7 +1018,7 @@ import {
           Toast({duration: 1000,
             message: payData.msg
           })
-          this.wxPaystatus=true;
+          // this.wxPaystatus=true;
           return
         }
          if(payData.code!=10000){
