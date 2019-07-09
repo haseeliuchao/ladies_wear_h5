@@ -307,11 +307,16 @@ getLocalStorage,
       async LoginBind() { //登录
         var nickName='';
         var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g; //校验是否包含表情符
-        if(getSessionStorage('nickname').match(regRule)){
-        nickName=getSessionStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), '')
-       }else{
-         nickName=getSessionStorage('nickname')
-       }
+        if(getSessionStorage('nickname')){
+          if(getSessionStorage('nickname').match(regRule)){
+            nickName=getSessionStorage('nickname').replace(new RegExp(this.ranges.join('|'), 'g'), '')
+          }else{
+            nickName=getSessionStorage('nickname')
+          }
+        }else{
+          nickName=null;
+        }
+        
 
         let Data = await this.$store.dispatch('LoginBind', {
           phone: this.registeredForm.phone,
