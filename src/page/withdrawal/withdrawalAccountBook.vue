@@ -421,7 +421,7 @@
       <ul class="orderCount">
         <li style="border-right:1px solid #e4e4e4">
             <span>已结算利润</span>
-            <em>￥{{accountRevenue.balance_amount/100|TwoNum}}</em>
+            <em>￥{{accountRevenue.total_amount/100|TwoNum}}</em>
         </li>
         <li>
           <span>待结算利润</span>
