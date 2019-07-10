@@ -247,7 +247,7 @@
       <ul class="orderCount">
         <li style="border-right:1px solid #e4e4e4">
             <span>已提现金额</span>
-            <em>￥{{accountRevenue.expense/100|TwoNum}}</em>
+            <em>￥{{accountRevenue.this_withdraw_amount/100|TwoNum}}</em>
         </li>
         <li>
           <span>提现中金额</span>
