@@ -79,7 +79,7 @@
 
 <template>
   <div class="withdrawal">
-      <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;" v-if="accountRevenue.bank_card_name!=''&&accountRevenue.bank_card_name!='-1'">
+      <div class="withdrawal-list" style="border-bottom:none;margin-bottom:8px;" v-if="accountRevenue.bank_card_name!=''&&accountRevenue.bank_card_name!='-1'" @click= "()=>$router.push({path: '/withdrawalInfo'})">
             <div class="withdrawal-listleft"><p><img :src="accountRevenue.bank_icon"><span>{{accountRevenue.bank_card_name}}</span></p></div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
       </div>
