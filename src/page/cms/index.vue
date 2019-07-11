@@ -132,7 +132,7 @@
               font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 0.48rem;
+              height: 0.96rem;
               line-height: 0.48rem;
               margin-top: 4px;
               text-align: left;
