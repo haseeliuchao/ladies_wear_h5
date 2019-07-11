@@ -93,8 +93,8 @@
             <div class="withdrawal-listleft">提现金额</div>
             <div class="withdrawal-listright"></div>
         </div>
-        <div class="withdrawal-list" style="height: 30px;width:9.4rem;padding:0;margin:0 auto;">
-            <div class="withdrawal-listleft" style="font-size:25px;font-weight: bold">￥<input type="number" @blur="gotoView()" @keyup="handleInput3" @keydown="handleInput2" style="font-weight: bold;width:8rem;height: 29px;font-size:28px; line-height: normal;" v-model="withdrawalPrice"></div>
+        <div class="withdrawal-list" style="height: 40px;width:9.4rem;padding:0;margin:0 auto;">
+            <div class="withdrawal-listleft" style="font-size:25px;font-weight: bold">￥<input type="number" @blur="gotoView()" @keyup="handleInput3" @keydown="handleInput2" style="font-weight: bold;width:8rem;height: 39px;font-size:28px; line-height: normal;" v-model="withdrawalPrice"></div>
             <div class="withdrawal-listright"><span class="right-menuclose" @click="clearWithdrawalPrice">x</span></div>
         </div>
         <div class="withdrawal-list" style="border-bottom:none;height:43px;line-height:43px;">
