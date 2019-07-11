@@ -627,7 +627,7 @@
     }
     ,
     beforeRouteLeave(to, from, next){
-      if(to.name !=='myhome'&&to.name !=='order' ){
+      if(to.name !=='myhome'&&to.name !=='order'&&to.name !=='logisticsInfo' ){
         next({path: '/myhome'});
       }else {
         next();

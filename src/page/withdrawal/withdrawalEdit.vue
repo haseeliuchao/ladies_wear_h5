@@ -44,7 +44,7 @@
     .withdrawal-listright {
       @include flexbox(space-between, center, row, nowrap);
       font-size: 15px;
-      color: #888;
+      color: #999;
       width: 6.6rem;
       height: 49px;
       input {
@@ -405,7 +405,7 @@
 <template>
   <div class="withdrawal">
     <p class="withdrawal-tip">
-      <em>*</em>提现请填写银行预留信息
+      <em>* </em> 提现请填写银行预留信息
     </p>
     <!-- @click="errorVisible=true" -->
     <div class="withdrawal-list" >
@@ -451,8 +451,7 @@
       </div>
     </div>
     <p class="withdrawal-tip" style="line-height: 20px;padding: 6px .3rem 0;">
-      <em>*</em>提现需要1-3个工作日的人工审核，审核通过后，相应款
-      项会进入你的提现账户。
+      <em>* </em> 提现需要1-3个工作日的人工审核，审核通过后，相应款项会进入你的提现账户。
     </p>
     <!-- <div class="fixed-btn">保存</div> -->
     <div

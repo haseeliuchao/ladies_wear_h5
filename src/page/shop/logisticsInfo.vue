@@ -39,7 +39,7 @@
               width:6.6rem;
               min-height:28px;
               padding-left:20px;
-              padding-bottom:25px;
+              padding-bottom:38px;
               border-left:1px dashed #dadada;
               span{
                 position: absolute;

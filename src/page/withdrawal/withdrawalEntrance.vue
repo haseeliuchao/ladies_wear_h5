@@ -73,8 +73,7 @@
             <div class="withdrawal-listleft">提现记录</div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
         </div>
-        <p class="withdrawal-tip"><em>* </em>提现需要1-3个工作日的人工审核，审核通过后，相应款
-项会进入你的提现账户。</p>
+        <p class="withdrawal-tip"><em>* </em> 提现需要1-3个工作日的人工审核，审核通过后，相应款项会进入你的提现账户。</p>
   </div>
 </template>
 
