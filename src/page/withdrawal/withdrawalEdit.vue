@@ -43,14 +43,15 @@
     }
     .withdrawal-listright {
       @include flexbox(space-between, center, row, nowrap);
-      font-size: 14px;
-      color: #666;
+      font-size: 15px;
+      color: #888;
       width: 6.6rem;
       height: 49px;
       input {
         height: 49px;
         line-height: normal;
         width: 100%;
+        font-size: 15px;
       }
       .msgcode {
         height: 28px;
