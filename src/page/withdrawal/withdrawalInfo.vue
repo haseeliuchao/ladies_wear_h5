@@ -42,7 +42,7 @@
 
 <template>
   <div class="withdrawal">
-        <div class="withdrawal-list" style="border-top: 8px solid #f2f2f2;">
+        <div class="withdrawal-list">
             <div class="withdrawal-listleft">户名</div>
             <div class="withdrawal-listright">{{withdrawalForm.bank_card_holder}}</div>
         </div>
