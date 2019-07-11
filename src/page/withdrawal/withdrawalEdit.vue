@@ -416,7 +416,7 @@
     <div class="withdrawal-list">
       <div class="withdrawal-listleft">账户</div>
       <div class="withdrawal-listright">
-        <input type="number" v-model="withdrawalForm.bank_card_number" placeholder="请输入银行卡卡号">
+        <input type="number" v-model="withdrawalForm.bank_card_number" @blur="gotoView(2)" placeholder="请输入银行卡卡号">
       </div>
     </div>
     <div class="withdrawal-list" @click="visiblePopup.selectedBankVisible=true">
@@ -429,7 +429,7 @@
     <div class="withdrawal-list">
       <div class="withdrawal-listleft">开户支行</div>
       <div class="withdrawal-listright">
-        <input type="text" v-model="withdrawalForm.bank_card_branch_name" placeholder="请输入开户支行">
+        <input type="text" @blur="gotoView(3)" v-model="withdrawalForm.bank_card_branch_name" placeholder="请输入开户支行">
       </div>
     </div>
 
@@ -444,7 +444,7 @@
     <div class="withdrawal-list" style="margin-top:8px;border-bottom:none;">
       <div class="withdrawal-listleft">手机验证码</div>
       <div class="withdrawal-listright withdrawal-listright1">
-        <input type="text" v-model="withdrawalForm.sms_code" class="msgcode" placeholder="请输入短信验证码">
+        <input type="number" @blur="gotoView(4)" v-model="withdrawalForm.sms_code" class="msgcode" placeholder="请输入短信验证码">
         <span :class="[resetSendPhoneMessage?'disabled-btnspan':'']" @click= "registeredSendPhoneMessage"
                     :disabled="resetSendPhoneMessage">{{resetSendPhoneMessage ? `${resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</span>
       </div>
@@ -463,6 +463,9 @@
         !withdrawalForm.bank_card_number||
         !withdrawalForm.bank_card_holder||
         !withdrawalForm.bank_card_branch_name||
+        !flog1||
+        !flog2||
+        !flog3||
         !withdrawalForm.sms_code?'disabled-btn':'']"
       @click="saveBankCard"
     >保存</div>
@@ -486,7 +489,7 @@
 
 
     <mt-popup v-model="errorVisible" position="top" closeOnClickModal='false' class="error-pop" :modal="false">
-    <p>请输入户名</p>
+    <p>{{errorText}}</p>
     </mt-popup>
     <mt-popup v-model="visiblePopup.selectedBankVisible" :closeOnClickModal="true" :modal="true" position="bottom" class="modal-popup" style="height:380px;" >
       <div class="my-header">
@@ -672,10 +675,14 @@ export default {
       visiblePopup:{
           selectedBankVisible:false
       },
+      flog1:false,
+      flog2:false,
+      flog3:false,
       bankCheckicon:null,
       resetSendPhoneMessage:null,
       addressVisible: false,
       errorVisible: false,
+      errorText:'',
       focusphoneoneState: false,
       focuscodeoneState: false,
       focuscodetwoState: false,
@@ -895,14 +902,37 @@ export default {
     },
     gotoView(type) {
       window.scroll(0, 0);
-      
-      let reg1 = /^[\u4e00-\u9fa5]{2,4}$/;
-        if(reg.test(a)){
-            alert("true");
+      if(type==1){
+        let reg1 = /^[\u4e00-\u9fa5]{2,10}$/;
+        if(!reg1.test(this.withdrawalForm.bank_card_holder)){
+           this.flog1=false;
+           this.errorText='请输入正确的户名';
+           this.errorVisible=true;
         }else{
-            alert("false");
+           this.flog1=true;
         }
-      
+      }
+
+      if(type==2){
+        let reg2 = /^([1-9]{1})(\d{15,18})$/;
+        if(!reg2.test(this.withdrawalForm.bank_card_number)){
+           this.flog2=false;
+           this.errorText='请输入正确的银行卡号';
+           this.errorVisible=true;
+        }else{
+           this.flog2=true;
+        }
+      }
+      if(type==3){
+        let reg1 = /^[\u4e00-\u9fa5]{2,20}$/;
+        if(!reg1.test(this.withdrawalForm.bank_card_branch_name)){
+           this.flog3=false;
+           this.errorText='请输入正确的开户支行';
+           this.errorVisible=true;
+        }else{
+           this.flog3=true;
+        }
+      }
 
 
     }
