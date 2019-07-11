@@ -129,7 +129,7 @@
             
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
-              font-size: 0.373rem;
+              font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
               height: 40px;
