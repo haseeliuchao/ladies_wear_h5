@@ -19,7 +19,7 @@
               width: 2.4rem;
           }
           .withdrawal-listright{
-              font-size: 14px;
+              font-size: 15px;
               color: #333;
               width: 6.4rem;  
           }
