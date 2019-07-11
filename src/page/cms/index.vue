@@ -125,8 +125,7 @@
             height: 4.58rem;
           }
           .prod-info{
-            padding: 0px 6px;
-            
+            padding: 0px 10px;
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
               font-size: 0.343rem;
@@ -135,7 +134,7 @@
               height: 0.9rem;
               line-height: 0.45rem;
               margin-top: 4px;
-              text-align: left;
+              text-align: justify;
             }
             .prod-price{
               color: $red;
