@@ -94,7 +94,7 @@
             <div class="withdrawal-listright"></div>
         </div>
         <div class="withdrawal-list" style="height: 30px;width:9.4rem;padding:0;margin:0 auto;">
-            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥<input type="number" @keyup="handleInput3" @keydown="handleInput2" style="font-weight: bold;width:8rem;height: 29px;line-height: normal;" v-model="withdrawalPrice"></div>
+            <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥<input type="tel" @keyup="handleInput3" @keydown="handleInput2" style="font-weight: bold;width:8rem;height: 29px;line-height: normal;" v-model="withdrawalPrice"></div>
             <div class="withdrawal-listright"><span class="right-menuclose" @click="clearWithdrawalPrice">x</span></div>
         </div>
         <div class="withdrawal-list" style="border-bottom:none;height:43px;line-height:43px;">
@@ -145,8 +145,7 @@ import {
     methods: {
         // /apply/withdraw
          handleInput2(e) {
-            // 通过正则过滤小数点后两位
-            
+            // // 通过正则过滤小数点后两位
             e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
         },
         handleInput3(e) {

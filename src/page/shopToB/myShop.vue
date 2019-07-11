@@ -72,7 +72,7 @@
   }
 </style>
 <template>
-<div>
+<div style="padding-bottom:50px;">
   <div class="content">  
     <div class="store-header">
       <h2>今日业绩</h2>
