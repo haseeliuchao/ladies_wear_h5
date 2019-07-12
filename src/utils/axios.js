@@ -139,7 +139,7 @@ class Http {
                   setSessionStorage('head_img_url',response.data.data.head_img_url);
                   setSessionStorage('nickname',response.data.data.nickname);
                   setSessionStorage('open_id',response.data.data.open_id);
-                  router.push('/login')
+                  router.push('/index')
                 }
               }else if(response.data.code==30029){
                 if(isWeiXin('code')){
