@@ -1447,9 +1447,9 @@ methods: {
         this.swipeIndex.nowIndex = index + 1;
       },
       checkSkuOk(){
-        this.visiblePopup.checkSku=false;
         var that=this;
         if(this.checkIdnums.length>0){
+          this.visiblePopup.checkSku=false;
           if(this.addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
@@ -1479,6 +1479,11 @@ methods: {
         }else if(this.addType==='directBuy'){
           this.$router.push({path: '/createOrder',query: {ids:JSON.stringify(this.checkIdnums),checkout_type:2}})
         }
+        }else{
+            return Toast({duration: 1000,
+            message: '请先选择商品规格',
+            position: 'center'
+            })
         }
       },
       async addShopCart(addType) { //加入购物车
