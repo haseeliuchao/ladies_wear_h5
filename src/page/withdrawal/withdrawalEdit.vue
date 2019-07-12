@@ -445,7 +445,7 @@
     <div class="withdrawal-list" style="margin-top:8px;border-bottom:none;">
       <div class="withdrawal-listleft">手机验证码</div>
       <div class="withdrawal-listright withdrawal-listright1" @click= "$refs.codeInput.focus()">
-        <input type="number" @blur="gotoView(4)" v-model="withdrawalForm.sms_code" class="msgcode" placeholder="请输入短信验证码" ref="codeInput">
+        <input type="tel" @blur="gotoView(4)" v-model="withdrawalForm.sms_code" maxlength="6" class="msgcode" placeholder="请输入短信验证码" ref="codeInput">
         <span :class="[resetSendPhoneMessage?'disabled-btnspan':'']" @click= "registeredSendPhoneMessage"
                     :disabled="resetSendPhoneMessage">{{resetSendPhoneMessage ? `${resetSendPhoneMessage}S后重新获取` : '获取验证码'}}</span>
       </div>
