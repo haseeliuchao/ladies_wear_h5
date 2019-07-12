@@ -1281,6 +1281,7 @@ methods: {
           })
           return
         }
+        console.log('3')
         this.productInfo = Data.data;
         this.productInfo.imgList = JSON.parse(Data.data.img_list);
         this.productInfo.salesConsumerPrice = Data.data.sales_consumer_price;

@@ -297,6 +297,9 @@ body,
   pointer-events: none;
   cursor: default;
 }
+.bankname-active{
+  color: #333!important
+}
 //单选框
 //switch 颜色
 .mint-switch-input:checked+.mint-switch-core {
@@ -385,6 +388,19 @@ body,
 }
 .mint-msgbox{
   width: 60%;
+}
+.disabled-btnspan{
+  color: #999!important;
+  pointer-events: none;
+  cursor: default;
+}
+
+
+.disabled-btnapply{
+  color: #fff!important;
+  background: #999!important;
+  pointer-events: none;
+  cursor: default;
 }
 
 //图片懒加载展位图

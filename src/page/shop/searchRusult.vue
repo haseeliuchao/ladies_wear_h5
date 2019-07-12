@@ -180,36 +180,57 @@
     
     .search-filter{
       // border-top: 1px solid $border;
-      border-bottom: 1px solid #eee;
+       position: relative;
+      
       .search-filter-list{
         background: #fff;
+         border-bottom: 1px solid #eee;
+         padding: 0 .3rem;
         // padding: 0 1.5rem;
         @include flexbox(space-between,center,row,nowrap);
         .search-filter-item{
-          width: 25%;
-          @include flexbox(center,center,row,nowrap);
+          // width: 25%;
+          // @include flexbox(center,center,row,nowrap);
           color: #333;
           font-size: 15px;
-          margin: 15px .8rem;
-          padding-bottom:5px;
-          @media all and(max-width:374px){
-             margin: 15px .6rem;
-          }
-          @media all and(min-width:376px){
-             margin: 15px .9rem;
-          }
+          margin: 15px 0;
+          // padding-bottom:5px;
+          // @media all and(max-width:374px){
+          //    margin: 15px .6rem;
+          // }
+          // @media all and(min-width:376px){
+          //    margin: 15px .9rem;
+          // }
           &:last-child{
-            margin-right:.8rem;
+            margin-left:.4rem;
+          }
+          .more-sortImg{
+            width: 14px;
+            height: 14px;
+            background: url('~jd/images/sorttypenocheck.png') no-repeat center;
+            background-size: 100%;
+            margin-left: 5px;
+             display: inline-block;
+             vertical-align: top;
+             margin-top: 2px;
           }
           &.active{
             color: $red;
             // border-bottom: 2px solid $red
+            .more-sortImg{
+              background: url('~jd/images/sorttypecheck.png') no-repeat center;
+              background-size: 100%;
+            }
           }
-          span{
-            position:relative;
-          }
+          // span{
+          //   position:relative;
+          //   display: inline-block;
+          // }
           .more-sort{
-              // display: none;
+                
+                position:relative;
+                top: -5px;
+              display: inline-block;
                &:before{
                   content: '';
                   position: absolute;
@@ -279,7 +300,85 @@
             }
           }
           
+          
+
+
         }
+      }
+
+      .sortother{
+        
+        position: absolute;
+        top: 48px;
+        left: 0;
+        background: #fff;
+        width: 10rem;
+        padding: 0 .3rem 20px;
+        z-index: 2;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        .price-othertip{
+            font-size: 15px;
+            color: #333;
+            line-height: 40px;
+        }
+        .price-otherinput{
+          font-size: 14px;
+          width: 7.8rem;
+          @include flexbox(space-between,center,row,nowrap);
+          input{
+            height: 28px;
+            width: 2.6rem;
+            border-radius: 6px;
+            background: #f2f2f2;
+            color: #333;
+            line-height: normal;
+            text-align: center
+          }
+          span{
+            height: 1px;
+            width: 1.8rem;
+            background: #707070;
+          }
+        }
+
+        ul{
+          @include flexbox(space-between,center,row,wrap);
+          
+          li{
+            width: 2.6rem;
+            height: 28px;
+            border-radius: 28px;
+            text-align: center;
+            background: #f2f2f2;
+            color: #333;
+            line-height: 28px;
+            margin-top: 15px;
+            text-align: center
+          }
+          .activeone{
+            color: #fff;
+            background: $red
+          }
+        }
+        .sortother-btn{ 
+          @include flexbox(flex-end,center,row,nowrap);
+          span{
+            height: 34px;
+            line-height: 34px;
+            margin-left: 10px;
+            width: 2.1rem;
+            text-align: center;
+            font-size: 17px;
+            margin-top: 20px;
+            border-radius: 6px;
+            border: 1px solid $red;
+            color: #fff;
+            background: $red;
+          }
+        }
+
+
       }
     }
     .imgsearch-no-list{
@@ -345,17 +444,17 @@
           }
           .prod-info{
             // margin-left: 10px;
-            padding: 0px 6px;
+            padding: 0px 10px;
             
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
-              font-size: 14px;
+              font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 40px;
-              line-height: 20px;
+              height: 0.9rem;
+              line-height: 0.45rem;
               margin-top: 4px;
-              text-align: left;
+              text-align: justify;
             }
             .prod-price{
               color: $red;
@@ -428,7 +527,21 @@
         <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
+        <li :class="['search-filter-item',sortotherTypeBoo ? 'active' : '']" @click= "sortotherType()">筛选<span class="more-sortImg"></span></li>
       </ul>
+      <div v-if="sortotherTypeBoo" class="sortother">
+         <p class="price-othertip">价格区间：</p>
+         <p class="price-otherinput"><input type="number" @keydown="handleInput2" v-model="minPrice" placeholder="最低价"><span></span><input type="number" @keydown="handleInput2" v-model="maxPrice" placeholder="最高价"></p>
+         <ul>
+           <li :class="[activeone==0 ? 'activeone' : '']" @click= "sortTypeone(0)">¥20元以下</li>
+           <li :class="[activeone==1 ? 'activeone' : '']" @click= "sortTypeone(1)">¥20-40</li>
+           <li :class="[activeone==2 ? 'activeone' : '']" @click= "sortTypeone(2)">¥40-60</li>
+           <li :class="[activeone==3 ? 'activeone' : '']" @click= "sortTypeone(3)">¥60-80</li>
+           <li :class="[activeone==4 ? 'activeone' : '']" @click= "sortTypeone(4)">¥100-150</li>
+           <li :class="[activeone==5 ? 'activeone' : '']" @click= "sortTypeone(5)">¥150元以上</li>
+         </ul>
+         <p class="sortother-btn"><span style="background:#fff;color:#ff2741" @click="resetPrice">重置</span><span @click="truePrice">确定</span></p>
+      </div>
     </div>
 
     <div class="imgsearch-no-list" v-if="imgsearchNo">
@@ -475,6 +588,9 @@
   import {
     searchGoods
   } from '@/service/getData'
+  import {
+    Toast
+  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -483,6 +599,9 @@
         searchRusultData: [],
         commad: searchGoods,
         isFirstEnter:false,
+        sortotherTypeBoo:false,
+        minPrice:null,
+        maxPrice:null,
         searchParams: {
           title: '',
           item_url:'',
@@ -490,11 +609,14 @@
           category_id:'',
           advertising_id:'',
           page_size: 10,
-          current_page: 1
+          current_page: 1,
+          min_price:null,
+          max_price:null
         },
         imgsearchNo:false,
         imgsearchTrue:false,
         active:1,
+        activeone:null,
         sort_enum:null,
         sort_enumboo:true,
         img_url:'',
@@ -516,12 +638,90 @@
     computed: {},
 
     methods: {
+      sortTypeone(type){
+          this.activeone=type; 
+          switch (Number(type)) {
+          case 0:
+            this.searchParams.min_price=0;
+            this.searchParams.max_price=2000;
+            this.minPrice=0;
+            this.maxPrice=20;
+            break;
+          case 1:
+            this.searchParams.min_price=2000;
+            this.searchParams.max_price=4000;
+            this.minPrice=20;
+            this.maxPrice=40;
+            break;
+          case 2:
+            this.searchParams.min_price=4000;
+            this.searchParams.max_price=6000;
+            this.minPrice=40;
+            this.maxPrice=60;
+            break;
+          case 3:
+            this.searchParams.min_price=6000;
+            this.searchParams.max_price=8000;
+            this.minPrice=60;
+            this.maxPrice=80;
+            break;
+          case 4:
+            this.searchParams.min_price=10000;
+            this.searchParams.max_price=15000;
+            this.minPrice=100;
+            this.maxPrice=150;
+            break;
+          case 5:
+            this.searchParams.min_price=15000;
+            this.searchParams.max_price=null;
+            this.minPrice=150;
+            this.maxPrice=null;
+            break;
+          default: //其他
+            throw new Error('未知TabId')
+            break
+        }
+      },
+      resetPrice(){
+        this.searchParams.min_price=null;
+        this.searchParams.max_price=null;
+        this.minPrice=null;
+        this.maxPrice=null;
+        this.activeone=null;
+      },
+      truePrice(){
+        
+        this.searchParams.min_price=this.minPrice?parseFloat(this.minPrice*100).toFixed(0):null;
+        this.searchParams.max_price=this.maxPrice?parseFloat(this.maxPrice*100).toFixed(0):null;
+        if(this.searchParams.min_price&&this.searchParams.max_price){
+          if(this.searchParams.min_price>this.searchParams.max_price){
+                return Toast({duration: 1000,
+                  message: '最高价不能小于最低价'
+                })
+          }
+        }
+        this.sortotherTypeBoo=false;
+        this.searchRusult()
+      },
+      handleInput2(e) {
+            // 通过正则过滤小数点后两位
+            e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
+            this.activeone=null;
+        },
       changeQuery(title){
          this.$router.push({path:'/searchRusult',query:{title:title}})
          this.searchRusult()
       },
+      sortotherType(){
+       this.sortotherTypeBoo=true;
+      },
       sortType(index){
+        this.sortotherTypeBoo=false;
         this.searchParams.sort_type=index;
+        this.minPrice=null;
+        this.maxPrice=null;
+        this.searchParams.min_price=null;
+        this.searchParams.max_price=null;
          if(index==1){
            this.active=1;
            this.sort_enum=null;
@@ -608,7 +808,13 @@
           this.sort_enum=null;
           this.searchParams.sort_enum=null;
           this.searchParams.sort_type = 1;
+          this.searchParams.min_price=null;
+          this.searchParams.max_price=null;
+          this.minPrice=null;
+          this.maxPrice=null;
+          this.activeone=null;
           this.imgsearchNo=false;
+
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
           this.searchParams.img_url=null;

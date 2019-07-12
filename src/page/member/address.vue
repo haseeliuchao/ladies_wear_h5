@@ -184,12 +184,6 @@
     </div>
     <div>
       <mt-popup v-model="addressVisible" position="bottom"  class="address-pricker">
-        <!-- <div class="address-picker-header">
-          <p>配送至</p>
-          <span class="picker-close">&times;</span>
-        </div>
-        <v-distpicker :placeholders="{ province: '请选择', city: '请选择', area: '请选择' }" wrapper="address-pricker-wrapper" type="mobile"
-          @selected="onSelected"></v-distpicker> -->
           <div class="pop-btn clearfix">
             <p class="cancle" @click= "cancle">取消</p>
             <p class="confirm" @click= "confirm">完成</p>
@@ -206,7 +200,6 @@
     Toast,Picker,
     MessageBox 
   } from 'mint-ui'
-  // import VDistpicker from 'v-distpicker'
   import myaddress from '@/utils/address3.json'
   import {
     getLocalStorage,
@@ -367,7 +360,6 @@
        if(myaddress[values[0]]){  //这个判断类似于v-if的效果（可以不加，但是vue会报错，很不爽）
           picker.setSlotValues(1,Object.keys(myaddress[values[0]])); // Object.keys()会返回一个数组，当前省的数组
           picker.setSlotValues(2,myaddress[values[0]][values[1]]); // 区/县数据就是一个数组
-         
            if(this.addressFormcur>6){
               this.myAddressProvince = values[0];
               this.myAddressCity = values[1];

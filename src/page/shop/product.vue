@@ -1533,6 +1533,7 @@ methods: {
           })
       },
       async initData() {
+        console.log('2')
         this.cartnum = window.sessionStorage.cartnum!=undefined ? window.sessionStorage.cartnum:0;
         let sandObj={}
         if(this.$route.query.distributor_id){

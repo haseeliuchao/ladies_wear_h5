@@ -151,17 +151,17 @@
           }
           .prod-info{
             // margin-left: 10px;
-            padding: 0px 6px;
+            padding: 0px 10px;
             
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
-              font-size: 14px;
+              font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 40px;
-              line-height: 20px;
+              height: 0.9rem;
+              line-height: 0.45rem;
               margin-top: 4px;
-              text-align: left;
+              text-align: justify;
             }
             .prod-price{
               color: $red;

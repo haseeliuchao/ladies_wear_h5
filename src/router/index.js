@@ -65,6 +65,17 @@ const MemberList = () => import ('page/shopToB/memberList')
 const MemberDetails = () => import ('page/shopToB/memberDetails')
 /* shopToB */
 
+
+/* withdrawal */
+const WithdrawalEntrance = () => import ('page/withdrawal/withdrawalEntrance')
+const WithdrawalInfo = () => import ('page/withdrawal/withdrawalInfo')
+const WithdrawalAccount = () => import ('page/withdrawal/withdrawalAccount')
+const WithdrawalEdit = () => import ('page/withdrawal/withdrawalEdit')
+const WithdrawalSuccess = () => import ('page/withdrawal/withdrawalSuccess')
+const WithdrawalAccountBook = () => import ('page/withdrawal/withdrawalAccountBook')
+const WithdrawalRecord = () => import ('page/withdrawal/withdrawalRecord')
+/* withdrawal */
+
 const appRouter = {
         // mode: 'history',
         routes: [{
@@ -409,6 +420,55 @@ const appRouter = {
                 name: 'helpcenterDetail',
                 component: HelpcenterDetail,
                 meta: { keepAlive: false , Title:'客服中心'}
+            }
+            ,
+            {
+                path: '/withdrawalEntrance',
+                name: 'withdrawalEntrance',
+                component: WithdrawalEntrance,
+                meta: { keepAlive: false , Title:'小店营收'}
+            }
+            ,
+            {
+                path: '/withdrawalInfo',
+                name: 'withdrawalInfo',
+                component: WithdrawalInfo,
+                meta: { keepAlive: false , Title:'提现账户'}
+            }
+            ,
+            {
+                path: '/withdrawalAccount',
+                name: 'withdrawalAccount',
+                component: WithdrawalAccount,
+                meta: { keepAlive: false , Title:'提现账户'}
+            }
+            ,
+            {
+                path: '/withdrawalEdit',
+                name: 'withdrawalEdit',
+                component: WithdrawalEdit,
+                meta: { keepAlive: false , Title:'提现账户'}
+            }
+            ,
+            {
+                path: '/withdrawalSuccess',
+                name: 'withdrawalSuccess',
+                component: WithdrawalSuccess,
+                meta: { keepAlive: false , Title:'提现账户'}
+            }
+            ,
+            {
+                path: '/withdrawalAccountBook',
+                name: 'withdrawalAccountBook',
+                component: WithdrawalAccountBook,
+                meta: { keepAlive: false , Title:'我的账本'}
+            }
+            ,
+            {
+                path: '/withdrawalRecord',
+                name: 'withdrawalRecord',
+                component: WithdrawalRecord,
+                meta: { keepAlive: false , Title:'提现记录'}
             }
             ,
             {

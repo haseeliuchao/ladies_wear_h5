@@ -24,7 +24,7 @@ import {
 class Http {
   constructor(){
     // this.Domain = 'http://tencent-ai.com/mop/';
-    // this.Domain = 'http://192.168.8.44:8182';
+    // this.Domain = 'http://192.168.9.250:8182';
     // this.Domain = 'http://192.168.11.242:8080';
     // this.Domain = 'http://param.iask.in/mop/';
     this.Domain = root;
@@ -140,16 +140,14 @@ class Http {
                   setSessionStorage('nickname',response.data.data.nickname);
                   setSessionStorage('open_id',response.data.data.open_id);
                 }
-              }
-              else if(response.data.code==30029){
+              }else if(response.data.code==30029){
                 if(isWeiXin('code')){
                   setSessionStorage('session_token',response.data.data.session_token);
                   setSessionStorage('access_token',response.data.data.access_token);
                   setSessionStorage('open_id',response.data.data.open_id);
                   router.push('/login')
                 }
-              }
-              else if(response.data.code!=20018){
+              }else if(response.data.code!=20018){
                 if(response.data.code!=40003){
                   Toast({duration: 1000,
                     message: response.data.msg
