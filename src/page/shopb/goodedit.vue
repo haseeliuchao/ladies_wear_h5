@@ -198,7 +198,7 @@
          <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
-     <p class="setprice" @click= "$refs.consumerInput`{{index}}`.focus()"><span>设置售价</span><input type="number" @keydown="handleInput2" @blur="gotoView" style="text-align:right;"  @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price" ref="consumerInput`{{index}}`"></p>
+     <p class="setprice"><span>设置售价</span><input type="number" @keydown="handleInput2" @blur="gotoView" style="text-align:right;"  @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
