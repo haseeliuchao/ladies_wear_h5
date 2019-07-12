@@ -718,6 +718,7 @@
       sortType(index){
         this.sortotherTypeBoo=false;
         this.searchParams.sort_type=index;
+        this.activeone=null;
         this.minPrice=null;
         this.maxPrice=null;
         this.searchParams.min_price=null;
