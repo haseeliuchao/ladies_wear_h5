@@ -753,7 +753,7 @@ export default {
       async registeredSendPhoneMessage() { //获取验证码
         let Data= await this.$store.dispatch('SendPhoneMessage', {
           phone: this.withdrawalForm.phone,
-          open_id:getSessionStorage('open_id')
+          open_id:this.withdrawalForm.phone
         });
         this.resetSendPhoneMessage = 60;
         if (Data.code !== 10000) return Toast({duration: 1000,
