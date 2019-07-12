@@ -408,10 +408,10 @@
       <em>* </em> 提现请填写银行预留信息
     </p>
     <!-- @click="errorVisible=true" -->
-    <div class="withdrawal-list" >
+    <div class="withdrawal-list" @click= "$refs.holderInput.focus()">
       <div class="withdrawal-listleft">户名</div>
       <div class="withdrawal-listright">
-        <input type="text" v-model="withdrawalForm.bank_card_holder" @blur="gotoView(1)" placeholder="请输入户名">
+        <input type="text" v-model="withdrawalForm.bank_card_holder" @blur="gotoView(1)" placeholder="请输入户名" ref="holderInput">
       </div>
     </div>
     <div class="withdrawal-list">
@@ -937,7 +937,15 @@ export default {
 
     }
   },
-
+   directives: {
+        focus: {
+        update: function (el, {value}) {
+            if (value) {
+            el.focus()
+            }
+        }
+        }
+    },
   mounted: function() {
     this.initData();
     this.$nextTick(() => {
