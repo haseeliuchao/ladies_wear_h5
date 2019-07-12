@@ -1481,7 +1481,7 @@ methods: {
         }
         }else{
             return Toast({duration: 1000,
-            message: '请先选择商品规格',
+            message: '请先选择规格、数量',
             position: 'center'
             })
         }
