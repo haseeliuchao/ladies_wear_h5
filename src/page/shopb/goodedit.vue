@@ -167,13 +167,13 @@
         <li :class="{'active':activeIndex===1}" @click="activeIndexchange(1)">按利润值</li>
       </ul>
       <div class="setProfitone" v-if="activeIndex==0">
-      <label><p class="setProfitone-entry"><input type="number" @blur="gotoView" v-model="salesMultiple"><span>倍</span></p></label>
+      <p class="setProfitone-entry" @click= "$refs.salesMultipleInput.focus()"><input type="number" @blur="gotoView" v-model="salesMultiple" ref="salesMultipleInput"><span>倍</span></p>
       <p class="setProfitone-text">售价=进价+进价*倍数</p>
       <p class="setProfitone-choose"><span @click="setProfitClose" style="border-right:1px solid #e4e4e4;color:#333">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
       </div>
 
       <div class="setProfitone" v-if="activeIndex==1">
-      <label><p class="setProfitone-entry"><input type="number" @keydown="handleInput2" @blur="gotoView" v-model="salesSetProfit"><span>元</span></p></label>
+      <p class="setProfitone-entry" @click= "$refs.salesSetProfitInput.focus()"><input type="number" @keydown="handleInput2" @blur="gotoView" v-model="salesSetProfit" ref="salesSetProfitInput"><span>元</span></p>
       <p class="setProfitone-text">售价=进价+利润值</p>
       <p class="setProfitone-choose"><span style="border-right:1px solid #e4e4e4;color:#333" @click="setProfitClose">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
       </div>
@@ -198,7 +198,7 @@
          <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
          </em>
        </span></p>
-     <label><p class="setprice"><span>设置售价</span><input type="number" @keydown="handleInput2" @blur="gotoView" style="text-align:right;"  @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p></label>
+     <p class="setprice" @click= "$refs.consumerInput.focus()">><span>设置售价</span><input type="number" @keydown="handleInput2" @blur="gotoView" style="text-align:right;"  @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price" ref="consumerInput"></p>
      <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
    </div>
    
@@ -425,6 +425,15 @@ import shopVue from '../shop/shop.vue';
           return hours + "小时" + minutes + "分钟";
         }
 
+    },
+    directives: {
+        focus: {
+        update: function (el, {value}) {
+            if (value) {
+            el.focus()
+            }
+        }
+        }
     },
     mounted: function () {
       this.initData();
