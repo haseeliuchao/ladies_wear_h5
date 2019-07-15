@@ -134,14 +134,7 @@ class Http {
                   // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx920d461e1d3ba79b&redirect_uri=http%3A%2F%2Ftencent-ai.com%2Fm%2F&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
                 }
               }
-              else if(response.data.code==30010){
-                if(isWeiXin('code')){
-                  setSessionStorage('head_img_url',response.data.data.head_img_url);
-                  setSessionStorage('nickname',response.data.data.nickname);
-                  setSessionStorage('open_id',response.data.data.open_id);
-                  router.push('/index')
-                }
-              }else if(response.data.code==30029){
+              else if(response.data.code==30029){
                 if(isWeiXin('code')){
                   setSessionStorage('session_token',response.data.data.session_token);
                   setSessionStorage('access_token',response.data.data.access_token);

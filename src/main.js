@@ -204,12 +204,16 @@ router.beforeEach((to,from,next)=>{
             let Data =await loginInit({ 
               code:utils.getUrlKey('code')
             })
-            if(Data.code==10000||Data.code==20018){
+            if(Data.code==10000||Data.code==20018||Data.code==30010||Data.code==30029){
               if(Data.code==10000){
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
                 setSessionStorage('nickname',Data.data.nick);
                 setSessionStorage('user_id',Data.data.user_id);
+              }else if(Data.code==30010){
+                  setSessionStorage('head_img_url',response.data.data.head_img_url);
+                  setSessionStorage('nickname',response.data.data.nickname);
+                  setSessionStorage('open_id',response.data.data.open_id);
               }
                   if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
                     next({path: '/index'});
