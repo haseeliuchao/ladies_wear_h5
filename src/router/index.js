@@ -61,6 +61,7 @@ const Goodedit = () =>  import ('page/shopb/goodedit')
 const MyShop = () => import ('page/shopToB/myShop')
 const ShopApplicate = () => import ('page/shopToB/shopApplicate')
 const ShopManage = () => import ('page/shopToB/shopManage')
+const ShopManageTransition = () => import ('page/shopToB/shopManageTransition')
 const MemberList = () => import ('page/shopToB/memberList')
 const MemberDetails = () => import ('page/shopToB/memberDetails')
 /* shopToB */
@@ -307,6 +308,13 @@ const appRouter = {
                 path: '/shopManage',
                 name: 'shopManage',
                 component: ShopManage,
+                meta: { keepAlive: false ,
+                    Title:'店铺管理'}
+            },
+            {
+                path: '/shopManageTransition',
+                name: 'shopManageTransition',
+                component: ShopManageTransition,
                 meta: { keepAlive: false ,
                     Title:'店铺管理'}
             },
