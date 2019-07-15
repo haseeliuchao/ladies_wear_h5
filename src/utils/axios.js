@@ -141,7 +141,7 @@ class Http {
                   setSessionStorage('open_id',response.data.data.open_id);
                   router.push('/login')
                 }
-              }else if(response.data.code!=20018){
+              }else if(response.data.code!=20018&&response.data.code!=30010){
                 if(response.data.code!=40003){
                   Toast({duration: 1000,
                     message: response.data.msg
