@@ -211,9 +211,9 @@ router.beforeEach((to,from,next)=>{
                 setSessionStorage('nickname',Data.data.nick);
                 setSessionStorage('user_id',Data.data.user_id);
               }else if(Data.code==30010){
-                  setSessionStorage('head_img_url',response.data.data.head_img_url);
-                  setSessionStorage('nickname',response.data.data.nickname);
-                  setSessionStorage('open_id',response.data.data.open_id);
+                  setSessionStorage('head_img_url',Data.data.head_img_url);
+                  setSessionStorage('nickname',Data.data.nickname);
+                  setSessionStorage('open_id',Data.data.open_id);
               }
                   if((to.path=='/loginBlank'&&routerindex>1)||(to.path=='/loginBlank'&&statecur==1)){
                     next({path: '/index'});
