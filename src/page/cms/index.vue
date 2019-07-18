@@ -139,14 +139,17 @@
             .prod-price{
               color: $red;
               text-align:left;
-              line-height: 30px;
-              margin-bottom: 8px;
-              span{
-                font-size: 16px;
-                margin-right: 5px;
+              line-height: .8rem;
+              .prod-nowprice{
+               font-weight:bold;
+               margin-right:1px;
+               font-size:.426667rem
               }
-              strong{
-                font-size: 19px;
+              .prod-oldprice{
+               margin-left:.213333rem;
+               text-decoration: line-through;
+               color:#999;
+               font-size:.373333rem;
               }
             }
             .prod-pro{
@@ -155,6 +158,18 @@
               color: $gray;
               font-size: $subtitle;
             }
+          }
+          .add-store{
+            @include flexbox(flex-end,center,row,wrap);
+             padding: 0 10px;
+             margin-bottom: 10px;
+             span{
+               font-size: .293333rem;
+               color: $red;
+               padding: 0 4px;
+               border: 1px solid $red;
+               border-radius: 3px;
+             }
           }
         }
       }
@@ -377,15 +392,16 @@
             <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-                  <img v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-                  <div class="prod-info">
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" >
+                  <img @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+                  <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
-                      <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:8px;text-decoration: line-through;color:#999;font-size:14px;"><em style="font-size:14px;">&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
-                      </p>
+                      <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
+                      <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
+                    </p>
                   </div>
+                  <p class="add-store"><span @click="addGood(item.item_id)">铺店</span></p>
                 </li>
               </ul>
             </load-more>
@@ -408,7 +424,7 @@
     setLocalStorage
   } from '@/utils/mixin';
   import {
-
+    addProduct,
     getArticle,
     getArticleList,
     getGoodsCategoryList,
@@ -527,6 +543,29 @@
       
     },
     methods: {
+      async addGood(itemId){
+         let Data = await addProduct({
+         item_id: itemId
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else if(Data.code==40003){
+             this.$router.push({path: '/shopApplicate'});
+          }else{
+             Toast({duration: 1000,
+             message: Data.msg
+             })
+             return
+          }
+        }else{
+          Toast({duration: 1000,
+             message: '铺店成功'
+             })
+        }
+       },
+
+
       async golink(link){
         window.location.href = link
       },

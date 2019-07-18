@@ -915,8 +915,21 @@
   <div style="background:#f8f8f8;">
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
+       <div class="checkSkuInfo">
+            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">
+              <img v-if="item.color_img" :src="item.color_img+'_230x230.jpg'">
+              <img v-else :src="productInfo.index_img_url+'_230x230.jpg'">
+                    <div class="checkSkuInfo-text">
+                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
+                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
+                    </div>
+            </div>
+           <span class="closepop" @click= "closepopcheckSku"></span>
+      </div>
+      
       <div class="checkSkuColortitleall">
-        <p class="checkSkuColortitle">颜色</p>
+        <!-- <p class="checkSkuColortitle">颜色</p> -->
+        <p class="checkSkuColortitle">请选择颜色：</p>
         <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span>
       </div>
       <ul class="skuColorlist">
@@ -924,14 +937,14 @@
       </ul>
       <div style="border-top:1px solid #e4e4e4;
           border-bottom:1px solid #e4e4e4;">
-      <p class="checkSkuColortitle">尺寸</p>
+      <p class="checkSkuColortitle">请选择尺码：</p>
       <ul class="skuSizelist">
         <li v-for="(item,index) in sizearr" v-on:click="sizecheckBtn(item.size,index)" v-bind:class="[checksizeindex == index?'productActive':'']" :key="index">{{item.size}}</li>
       </ul>
       </div>
       <div class="skuNum">
                   <div class="left">
-                    选择数量
+                    请选择数量：
                   </div>
                   <div class="right">
                     <div class="cut" @click= "operationnum(-1)"></div>
@@ -1387,6 +1400,56 @@ methods: {
 .checkSkupop{
      
       width: 100%;
+          .checkSkuInfo{
+          @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            padding: 10px;
+            position: relative;
+            height: 90px;
+          span{
+            height: .56rem;
+            width: .56rem;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+          }
+          .checkSkuInfomain{
+             @include flexbox(start,
+            center,
+            row,
+            nowrap);
+            top: -20px;
+            position: absolute;
+            img{
+              height: 100px;
+              width: 100px;
+              border-radius: 6px;
+            }
+            .checkSkuInfo-text{
+              width: 5.4rem;
+              margin-left: 10px;
+                  margin-top: 18px;
+              .checkSkuInfo-texttitle{
+                 @include textoverflow(2);
+                    font-size: 13px;
+                    color: #333;
+                    line-height: 20px;
+                    height: 40px;
+              }
+              .checkSkuInfo-textprice{
+                font-size: 16px;
+                color: $red;
+                font-weight: bold;
+                margin-top: 6px;
+              }
+            }
+          }  
+        }
+
         .checkSkuColortitleall{
           padding-right: 10px;
          @include flexbox(space-between,
