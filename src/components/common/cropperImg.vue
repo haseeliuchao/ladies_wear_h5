@@ -7,13 +7,9 @@
       </div>
       <button type="button" id="button" @click="crop">确定</button>
     </div>
-    <div style="padding:20px;">
-      <div class="show">
-        <div class="picture" :style="'backgroundImage:url('+headerImage+')'"></div>
-      </div>
-      <img :src="headerImage" width="375">
-      
-      <div style="margin-top:20px;">
+    <div class="postSalesImgflex">
+      <img :src="postSalesImg" width="375">
+      <div class="postSalesImgflex-btn">
         <input type="file" id="change" accept="image" @change="change" />
         <label for="change"></label>
       </div>
@@ -26,6 +22,12 @@ import Cropper from "cropperjs";
   import axios from 'axios';
 export default {
   components: {},
+   props:{
+        defaltImg:{
+          type:String,
+          default: ''
+        }
+    },
   data() {
     return {
       headerImage: "",
@@ -34,7 +36,7 @@ export default {
       croppable: false,
       panel: false,
       url: "",
-      postSalesImg:''
+      postSalesImg:this.defaltImg
     };
   },
   mounted() {
@@ -143,7 +145,7 @@ export default {
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
                             that.postSalesImg="http://img.chaochujue.cn"+response.data.url;
-                            console.log(that.postSalesImg)
+                            that.$emit('sent-postSalesImg',that.postSalesImg);
                             }).catch(function (error) {
                         　　alert(error);
                             })
@@ -457,4 +459,19 @@ export default {
 .cropper-disabled .cropper-point {
   cursor: not-allowed;
 }
+.postSalesImgflex{
+  position: relative;
+}
+.postSalesImgflex-btn{
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: url('http://img.chaochujue.cn/ICON/2019/6/1/change1563175558664.png') no-repeat center;
+  background-size: 100%;
+}
+.postSalesImgflex-btn input{
+  opacity: 0;
+  width: 2.5rem;height: 26px;
+}
+
 </style>

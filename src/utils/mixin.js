@@ -110,3 +110,47 @@ export const showBack = callback => {
         }
     }
 }
+
+
+export const showsearchBar = callback => {
+  let requestFram;
+  let oldScrollTop;
+
+  document.addEventListener('scroll',() => {
+    showsearchBarFun();
+  }, false)
+  document.addEventListener('touchstart',() => {
+    showsearchBarFun();
+  },{passive: true})
+
+  document.addEventListener('touchmove',() => {
+    showsearchBarFun();
+  },{passive: true})
+
+  document.addEventListener('touchend',() => {
+      oldScrollTop = document.body.scrollTop | document.documentElement.scrollTop;
+      showsearchBarEnd();
+  },{passive: true})
+  
+  const showsearchBarEnd = () => {
+      requestFram = requestAnimationFrame(() => {
+          if (document.body.scrollTop | document.documentElement.scrollTop != oldScrollTop) {
+              oldScrollTop = document.body.scrollTop | document.documentElement.scrollTop;
+              showsearchBarEnd();
+          }else{
+              cancelAnimationFrame(requestFram);
+          }
+          showsearchBarFun();
+      })
+  }
+
+  //判断是否达到目标点
+  const showsearchBarFun = () => {
+      if (document.body.scrollTop | document.documentElement.scrollTop > 80) {
+          callback(true);
+      }else{
+          callback(false);
+      }
+  }
+}
+

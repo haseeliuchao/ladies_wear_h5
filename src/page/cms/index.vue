@@ -6,7 +6,7 @@
   .banner {
     height: 4.7rem;
     // height:175px;
-    margin-top:1.56rem;
+    // margin-top:1.56rem;
     img {
       min-width: 100%;
       max-width: 100%;
@@ -401,6 +401,9 @@
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
+    showsearchBar
+  } from '@/utils/mixin';
+  import {
     getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
@@ -539,6 +542,7 @@
       },
       translateChange(y){ //监听下拉的阈值
         this.searchBarVisilbe = y>8 ? false : true;
+        console.log(y)
       },
       async onRefreshCallback() { //下拉刷新
         this.recommendParam.page_size = 10;
@@ -611,9 +615,9 @@
       this.$refs.indexRusultloadMore.onloadMoreScroll();
       this.updatedData();
       // this.loginData();
-      // showBack(status => {
-      //   this.Status = status;
-      // })
+      showsearchBar(status => {
+        this.Status = status;
+      })
     }
   }
 

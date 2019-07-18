@@ -1,24 +1,50 @@
 <!-- myhome -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
+  .right-menu {
+        width: 10px;
+        height: 12px;
+        background-image: url('~jd/images/whilte_more.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block
+      }
+  .right-menublack {
+        width: 10px;
+        height: 12px;
+        background-image: url('~jd/images/black_more.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        margin-left: 10px;
+      }
   .content {
     padding-bottom: 1.35rem;
     min-height: 100vh;
   }
   // 头部样式
   .my-header {
-    height: 145px;
-    padding: 18px .33rem;
+    height: 136px;
+    padding: 25px .33rem;
     background: -webkit-linear-gradient(left, #ff5527, #ff2741);
     background: linear-gradient( #ff5527, #ff2741);
     box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
     position: relative;
     &:after {
       content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 0px;
       width: 100%;
+     left: 0;
+     top: 95px;
+    height: 50px;
+    position: absolute;
+    background: -webkit-linear-gradient(left, #ff2741, #ff2741);
+    background: linear-gradient( #ff2741, #ff2741);
+    // background: #333;
+    -webkit-border-radius: 100px / 10px;
+
+    -moz-border-radius: 100px / 10px;
+
+    border-radius: 100px / 10px;
     }
     @include flexbox(flex-start, space-between, column, wrap);
     .my-settings {
@@ -104,31 +130,126 @@
   // 我的小店样式
   .my-store{
      position:relative;
-     top:-35px;
-     padding:16px .3rem;
-     margin: 0 .3rem 8px;
+     top:-26px;
+     width: 9.4rem;
+     margin: 0 auto 8px;
      color:#333;
-     background: #fff url('~jd/images/store_icon.png') no-repeat;
-    background-size: 96px 85%;
-    background-position: 6.3rem 5px;
+     background: #f3b251;
      border-radius:5px;
-    h2{
-      font-size:17px;
-      font-weight:bold;
-      span{
-        color:$red;
-        font-weight:bold;
+     .my-store-title{
+       @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      padding: 0 10px;
+      font-size: 0.42rem;
+      color: #fff;
+      line-height: 0.98rem;
+      border-bottom: 1px solid #fff;
+      .my-store-titleleft{
+        @include flexbox(flex-start,
+      center,
+      row,
+      nowrap);
+        img{
+          width: 22px;
+          margin-right: 6px;
+        }
       }
+     }
+
+     .my-store-main{
+       padding: 15px 10px;
+       p{
+         color: #fff;
+         font-size: 0.42rem;
+         line-height: 22px;
+        
+       }
+       .my-store-mainbottom{
+         @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      .my-store-mainbottomright{
+        padding: 0 14px; border-radius: 12px;
+        border: 1px solid #fff;
+      }
+       }
+     }
+  }
+  // 我的今日收益
+  .card-title{
+    padding: 0 10px;
+    line-height: 0.98rem;
+    font-size: 0.42rem;
+    color: #333;
+    border-bottom:1px solid #e4e4e4;
+    width: 100%;
+    @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+    .look-more{
+      @include flexbox(flex-end,
+      center,
+      row,
+      nowrap);
+      font-size: 0.346rem;
+      color: #999
     }
-    p{
-      font-size:15px;
-      margin-top:8px;
+  }
+  .my-todayProfit {
+    position:relative;
+    top:-26px;
+    clear: both;
+    background: #fff;
+    margin: 0 .33rem 8px;
+    border-radius:5px;
+    
+    .my-todayProfit-top{
+      width: 100%;
+       @include flexbox(flex-start,
+      center,
+      row,
+      nowrap);
+      padding: 8px 0;
+      border-bottom: 1px solid #efefef;
+      font-size: 0.37rem;
+      color: #333;
+      div{
+        width: 33.333%;
+        p{
+        text-align: center;
+        line-height: 0.67rem
+       }
+      }
+      
+    }
+    .my-todayProfit-bottom{
+      width: 100%;
+       @include flexbox(flex-start,
+      center,
+      row,
+      nowrap);
+      padding: 8px 0;
+      font-size: 0.37rem;
+      color: #333;
+      div{
+        width: 33.333%;
+        p{
+        text-align: center;
+        line-height: 0.67rem
+        
+       }
+      }
+      
     }
   }
   // 我的订单样式
   .my-order {
     position:relative;
-    top:-35px;
+    top:-26px;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
@@ -155,84 +276,81 @@
 
     .order-item {
       width: 20%;
+      position: relative;
       @include flexbox(space-between,
       center,
       column,
       wrap);
       img {
-        height: 25px;
+        height: 0.61rem;
       }
-      &:first-child{
-        img{
-          height:24px;
-        }
+      // &:first-child{
+      //   img{
+      //     height:24px;
+      //   }
+      // }
+      em{
+        position: absolute;
+        display: inline-block;
+        color: $red;
+        padding: 0 3px;
+        border: 1px solid $red;
+        border-radius: 10px;
+        font-size: 0.32rem;
+        top: -7px;
+        left: 48px;
+        background: #fff;
       }
       span {
         margin: 10px 0 0;
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #333;
       }
       &.myorder {
         position: relative;
-        // border-left: 1px solid #eee;
-        // &:before {
-        //   content: '';
-        //   position: absolute;
-        //   left: -2px;
-        //   z-index: 999;
-        //   top: calc(100%/2 - 10px);
-        //   width: 0;
-        //   height: 0;
-        //   border: 8px solid transparent;
-        //   border-left-color: #fff;
-        // }
-        // &:after {
-        //   content: '';
-        //   position: absolute;
-        //   left: 0;
-        //   top: calc(100%/2 - 10px);
-        //   width: 0;
-        //   height: 0;
-        //   border: 8px solid transparent;
-        //   border-left-color: #eee;
-        // }
       }
     }
   }
   // 关于我们
   .my-about{
     position:relative;
-    top:-35px;
+    top:-26px;
     margin: 0 .33rem;
     border-radius:5px;
     background:#fff;
-    .about-item{
-      @include flexbox(space-between,
+    .my-about-tools{
+      width:100%;
+      padding:15px 0;
+      @include flexbox(flex-start,
       center,
       row,
       wrap);
-      padding:0 .266rem;
-      border-bottom:1px solid #e4e4e4;
-      height:48px;
-      span{
-        color:#333;
-        font-size:15px;
-        img{
-          width:20px;
-          height:20px;
-          margin-right:.266rem;
-          margin-bottom:-3px;
-        }
-        img:last-child{
-          height:18px;
-        }
+      .my-about-tools-item{
+            width: 25% ;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+      img {
+        height: 0.61rem;
       }
-      span:last-child{
-        color:#999;
-        font-size:13px;
+      span {
+        margin: 10px 0 0;
+        font-size: 0.373rem;
+        color: #333;
       }
-      &:last-child{
-        border:none;
       }
     }
   }
@@ -367,36 +485,100 @@
           </div>
         </div>
         <div class="my-store" v-if="!userData.distributorBO" @click="$router.push('/shopApplicate')">
-          <h2>我的<span>小店</span></h2>
-          <p>每天上新千款好货 快来开店赚钱</p>
+          <!-- <h2>我的<span>小店</span></h2>
+          <p>每天上新千款好货 快来开店赚钱</p> -->
+          <p><span><img>您已累计赚取60000.00元</span><span class="right-menu"></span></p>
         </div>
         <div class="my-store" v-if="userData.distributorBO" @click="$router.push('/myShop')">
-          <h2>我的<span>小店</span></h2>
-          <p>花点小心思，做大生意</p>
+          <p class="my-store-title"><span class="my-store-titleleft"><img src="~jd/images/money_icon.png" width="22">您已累计赚取60000.00元</span><span class="right-menu"></span></p>
+          <div class="my-store-main">
+            <p class="my-store-maintop">123.00</p>
+            <p class="my-store-mainbottom"><span>可提现余额(元)</span><span style="font-size:0.37rem" class="my-store-mainbottomright">提现</span></p>
+          </div>
         </div>
+
+
+        <div class="my-todayProfit">
+          <p class="card-title"><span>今日业绩</span><span class="look-more"><em>查看详情</em><em class="right-menublack"></em></span></p>
+          <div style="padding:0 10px;">
+            <div class="my-todayProfit-top">
+              <div>
+                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p>支付订单数</p>
+              </div>
+              <div>
+                <p style="font-size:0.48rem;font-weight: bold">0.00</p>
+                <p>支付金额(元）</p>
+              </div>
+            </div>
+            <div class="my-todayProfit-bottom">
+              <div>
+                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p>待发货订单</p>
+              </div>
+              <div>
+                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p>待收货订单</p>
+              </div>
+              <div>
+                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p>售后中订单</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div class="my-order">
-          <h2>我的进货单</h2>
+          <p class="card-title"><span>我的进货单</span></p>
           <div>
             <div class="order-item" @click="$router.push('/orderList/1')">
-              <img src="~jd/images/paymenticon2.png" alt="">
+              <img src="~jd/images/order-itemicon1.png" alt="">
               <span>待付款</span>
+              <em>1</em>
             </div>
             <div class="order-item" @click="$router.push('/orderList/2')">
-              <img src="~jd/images/send.png" alt="">
+              <img src="~jd/images/order-itemicon2.png" alt="">
               <span>待发货</span>
+              <em>10</em>
             </div>
             <div class="order-item" @click="$router.push('/orderList/3')">
-              <img src="~jd/images/received.png" alt="">
+              <img src="~jd/images/order-itemicon3.png" alt="">
               <span>待收货</span>
+              <em>6</em>
             </div>
             <div class="order-item myorder" @click="$router.push('/orderList/0')">
-              <img src="~jd/images/myordericon.png" alt="">
+              <img src="~jd/images/order-itemicon4.png" alt="">
               <span>全部订单</span>
             </div>
           </div>
         </div>
         <div class="my-about">
-          <p class="about-item" @click= "$router.push('/addressList')">
+          <p class="card-title"><span>必备工具</span></p>
+          <div class="my-about-tools">
+              <div class="my-about-tools-item" @click= "()=>$router.push({path: '/helpcenter'})">
+                <img src="~jd/images/tools_icon1.png" alt="">
+                <span>常见问题</span>
+              </div>
+              <div class="my-about-tools-item" @click= "$router.push('/addressList')">
+                <img src="~jd/images/tools_icon2.png" alt="">
+                <span>收货地址</span>
+              </div>
+              <div class="my-about-tools-item">
+                <img src="~jd/images/tools_icon3.png" alt="">
+                <span>资产对账</span>
+              </div>
+              <div class="my-about-tools-item">
+                <img src="~jd/images/tools_icon4.png" alt="">
+                <span>提现记录</span>
+              </div>
+              <div class="my-about-tools-item" @click= "$router.push('/customerSever')" style="margin-bottom:0">
+                <img src="~jd/images/tools_icon5.png" alt="">
+                <span>客服中心</span>
+              </div>
+          </div>
+          
+          <!-- <p class="about-item" @click= "$router.push('/addressList')">
             <span><img src="~jd/images/addressicon.png">收货地址</span>
             <span>快速管理 ></span>
           </p>
@@ -407,12 +589,10 @@
           <p class="about-item" style="border-bottom:none;" @click="showToast">
             <span><img src="~jd/images/usicon.png">关于我们</span>
             <span>图搜搜索品质生活 ></span>
-          </p>
+          </p> -->
         </div>
-      <!-- </load-more> -->
     </div>
     <FooterView/>
-    <!-- <BackHead/> -->
   </div>
 </template>
 

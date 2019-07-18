@@ -12,6 +12,7 @@ const IndexToC= () => import ('page/cmsc/indexToC')
 const Pop = () => import ('page/member/pop')
 const Helpcenter = () => import ('page/member/helpcenter')
 const HelpcenterDetail = () => import ('page/member/helpcenterDetail')
+const CustomerSever = () => import ('page/member/customerSever')
 const Login = () => import ('page/member/login')
 const LoginBlank = () => import ('page/member/loginBlank')
 const BrowserLogin = () => import ('page/member/browserLogin')
@@ -428,6 +429,13 @@ const appRouter = {
                 name: 'helpcenterDetail',
                 component: HelpcenterDetail,
                 meta: { keepAlive: false , Title:'客服中心'}
+            }
+            ,
+            {
+                path: '/customerSever',
+                name: 'customerSever',
+                component: CustomerSever,
+                meta: { keepAlive: false , Title:'客服服务'}
             }
             ,
             {

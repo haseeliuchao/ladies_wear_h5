@@ -2,53 +2,33 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   .content{
-    min-height:100vh;
     background-color:#f2f2f2;
+    margin-top: -2px;
   }
   .store-con{
     background:#fff;
     p{
-      @include flexbox(space-between,center,row,nowrap);
+      @include flexbox(flex-start,
+            center,
+            row,
+            nowrap);
       padding:0 .3rem;
       border-top:1px solid #e4e4e4;
       font-size:16px;
       color:#999;
       line-height:48px;
-      input{
-        width:7rem;
-        color:#333;
-        line-height:24px;
+      .store-con-left{
+          width: 24%;
+          
       }
-      select{
-        width:7.1rem;
-        line-height:24px;
-        background-color:#fff!important;
+      .store-con-right{
+          color: #333;
+           @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
       }
-      span:last-child{
-        color:#333;
-      }
-      &:first-child{
-        position:relative;
-        span:last-child{
-          position:absolute;
-          right: .4rem;
-          color:$red;
-          font-size:14px;
-        }
-      }
-      &:nth-child(3){
-        position:relative;
-        span:last-child{
-          position:absolute;
-          right: .4rem;
-        }
-        // span:last-child{
-        //   position:absolute;
-        //   right: .8rem;
-        //   color:$red;
-        //   font-size:14px;
-        // }   
-      }
+     
     }
   }
   .tip{
@@ -83,35 +63,36 @@
 </style>
 <template>
 <div>
+     <img :src="shopForm.img_url" style="width:10rem">
   <div class="content">
     <div class="storeCreate-con store-con">
-      <p>
-         <span>店铺名称</span>
-        <span>{{shopForm.title}}</span>
+      <p style="border-top:none">
+         <span class="store-con-left">店铺名称</span>
+        <span class="store-con-right">{{shopForm.title}}</span>
       </p>
       <p>
-        <label for="category">主营类目</label>
-        <input type="text" name="category"  v-model="shopForm.category" readonly="readonly">
+        <span class="store-con-left">主营类目</span>
+        <span class="store-con-right">{{shopForm.category}}</span>
       </p>
       <p >
-        <label for="nTimes">商品加价</label>
-        <input type="text" name="number" v-model="shopForm.n_times"  id="nTimes" v-validate="'required|number'"  @input="handleInput($event)" @click="focuscodeoneclick"  @blur="gotoView" v-focus="focuscodetwoState">
-        <span>倍</span>
+        <span class="store-con-left">商品加价</span>
+        
+        <span class="store-con-right"><em>{{shopForm.n_times}}</em><em>倍</em></span>
+        
         <!-- <span v-show="errors.has('number')">请输入一位小数的正实数</span> -->
       </p>
       <p>
-        <label for="freight">商品包邮</label>
-        <select id="freight" v-model="shopForm.if_free_shipping">
-          <option value="0">不包邮</option>
-          <option value="1">包邮</option>
-        </select>
+        <span class="store-con-left">商品包邮</span>
+        <span class="store-con-right" v-if="shopForm.if_free_shipping==0">不包邮</span>
+        <span class="store-con-right" v-else>包邮</span>
+
       </p>
     </div>
     <p class="tip"><span>*</span>包邮产生的退货运费由您承担</p>
     <!-- <p class="create-btn btns" @click="$router.push('/myShop')">创建店铺</p> -->
       <div class="save-shop"
       :class="['cell-btn']" 
-      @click="$router.push({path: '/shopManage',query: {distributor_id:distributor_id}})">修改店铺信息</div>
+      @click="$router.push({path: '/shopManage',query: {distributor_id:$route.query.distributor_id}})">修改店铺信息</div>
   </div>
 </div>
 </template>
@@ -128,7 +109,8 @@
           title:'',
           category:'女装',
           n_times:1,
-          if_free_shipping:0
+          if_free_shipping:0,
+          img_url:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png'
         },
         focuscodeoneState : false,
         focuscodetwoState : false,
@@ -139,39 +121,6 @@
     },
     computed:{},
     methods:{
-      async saveShop(){
-        let distributor_id='';
-        if(this.$route.params.distributor_id){
-        distributor_id=this.$route.params.distributor_id;
-        }else{
-          distributor_id=''
-       }
-        let params = {
-          distributor_id:this.shopForm.distributor_id,
-          title:this.shopForm.title,
-          n_times:this.shopForm.n_times,
-          if_free_shipping:this.shopForm.if_free_shipping
-        };
-        //有传Id则是编辑模式 没传是新增   
-          this.$store.dispatch('SaveShop',params).then(response=>{
-            response.code != 10000?Toast({duration: 1000,message: '保存失败'}):Toast({duration: 1000,message: '保存成功'});
-            this.$router.push({path: '/myShop'})
-            // if(response.code != 10000){
-            //   Toast({duration: 1000,
-            //     message: '保存失败',
-            //   })
-            // }else {
-            //   Toast({duration: 1000,
-            //     message: '保存成功'
-            //   })
-            //   this.$router.push({path: '/myShop'})
-            // }
-          }).catch(error=>{
-              Toast({duration: 1000,
-                message: '访问接口失败'
-              })
-          });
-        },
       async initData(){
         if(this.$route.query.distributor_id){
           let res = await this.$store.dispatch('GetShopInfo');
@@ -180,26 +129,10 @@
           }
           this.shopForm.distributor_id = res.data.distributor_id;
           this.shopForm.title = res.data.title;
+          this.shopForm.img_url = res.data.img_url?res.data.img_url:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png';
           this.shopForm.n_times = res.data.n_times;
           this.shopForm.if_free_shipping = res.data.if_free_shipping;
         }
-      },
-      focuscodeoneclick () {
-      this.focuscodeoneState = true
-      },
-      focuscodetwoclick () {
-      this.focuscodetwoState = true
-      },gotoView () {
-      window.scroll(0,0)
-      this.focuscodeoneState = false;
-      this.focuscodetwoState = false;
-      },
-       handleInput(e){
-        this.shopForm.n_times = e.target.value.replace(/[^\d|\.]/g,'')
-      },
-      handleInput2(e){
-        let reg = /[^\u0020-\u007E\u00A0-\u00BE\u2E80-\uA4CF\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFFEF\u0080-\u009F\u2000-\u201f\u2026\u2022\u20ac\r\n]/g;
-        this.shopForm.title = e.target.value.replace(reg,'');
       }
     },  
     mounted: function () {
