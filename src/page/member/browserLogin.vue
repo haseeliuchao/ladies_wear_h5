@@ -878,13 +878,12 @@ import {
           phone: this.loginForm.username,
           password: this.loginForm.password
         })
-        if (Data.code !== 10000) return Toast({duration: 1000,
-          message: Data.msg,
-          position: 'bottom'
-        })
+        if (Data.code == 10000) {
         setSessionStorage('session_token',Data.data.session_token);
         setSessionStorage('access_token',Data.data.access_token);
         this.$router.go(-1);
+        }
+        
       },
       focusphoneclick () {
       this.focusphoneState = true
