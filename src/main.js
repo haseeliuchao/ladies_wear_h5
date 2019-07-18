@@ -204,7 +204,7 @@ router.beforeEach((to,from,next)=>{
             let Data =await loginInit({ 
               code:utils.getUrlKey('code')
             })
-            if(Data.code==10000||Data.code==20018||Data.code==30010||Data.code==30029){
+            if(Data.code==10000||Data.code==20018||Data.code==30010){
               if(Data.code==10000){
                 setSessionStorage('session_token',Data.data.session_token);
                 setSessionStorage('access_token',Data.data.access_token);
