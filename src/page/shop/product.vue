@@ -1,6 +1,15 @@
 <!-- product -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
+  .right-menu {
+        width: 10px;
+        height: 10px;
+        background-image: url('~jd/images/product-detail-sprites-mjs.png');
+        background-repeat: no-repeat;
+        background-size: 100px 100px;
+        background-position: 5px -20px;
+        display: inline-block;
+      }
   /* 顶部导航栏 */
   .screen_subject{
       width: 8.8rem;
@@ -255,14 +264,7 @@
         font-size: 14px;
         color: #333;
       }
-      .right-menu {
-        width: 10px;
-        height: 10px;
-        background-image: url('~jd/images/product-detail-sprites-mjs.png');
-        background-repeat: no-repeat;
-        background-size: 100px 100px;
-        background-position: 5px -20px;
-      }
+      
       .product-skuimg{
         width: 8rem;
         margin-left: 1.36rem;
@@ -290,19 +292,37 @@
       margin-top: 8px;
       background: #fff;
       padding: 15px 10px;
-      @include flexbox(start,
+      @include flexbox(space-between,
       center,
       row,
-      wrap);
-      .sku-select {
+      nowrap);
+      .product-shop-left{
+         @include flexbox(flex-start,
+          center,
+          row,
+          nowrap);
+           .sku-select {
         font-size: 16px;
         color: #999;
         margin-right: 15px;
+         }
+          .sku-info {
+            font-size: 14px;
+            color: #333;
+          }
       }
-      .sku-info {
-        font-size: 14px;
-        color: #333;
+      .product-shop-right{
+        @include flexbox(flex-end,
+          center,
+          row,
+          nowrap);
+        .product-shop-righttext{
+          font-size: .346667rem;
+          color: #999;
+          margin-right: 3px;
+        }
       }
+     
       
       
     }
@@ -1186,12 +1206,15 @@
               <span class="right-menu"></span>
             </div>
              <div class="product-shop" v-if="productInfo.store_b_o">
+               <div class="product-shop-left">
                <img src="~jd/images/shop_icon.png" height="44px">
               <div style="margin-left:10px;">
                 <span class="sku-select" style="color:#333;line-height: 26px;
     font-size: 15px;">{{productInfo.store_b_o.name}}</span><br>
                 <span class="sku-info" style="font-size: 13px;line-height: 20px;">{{productInfo.store_b_o.address}}</span>
               </div>
+              </div>
+              <div class="product-shop-right" @click= "()=>$router.push({path: '/searchRusult',query: {store_id:productInfo.store_id,store_name:productInfo.store_b_o.name}})"><span class="product-shop-righttext">进入店铺</span><span class="right-menu"></span></div>
             </div>
            
             <!-- 商品留言 -->

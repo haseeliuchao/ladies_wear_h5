@@ -133,7 +133,32 @@
         color: $gray;
       }
     }
-    
+    .store-top{
+       width: 10rem;
+       height: 4.666667rem;
+       background: url('http://img.chaochujue.cn/ICON/2019/6/5/store-bg1563520399880.png') no-repeat center;
+       background-size: contain;
+       overflow: hidden;
+       .store-top-name{
+         color: #333;
+         text-align: center;
+         font-size: .56rem;
+         font-weight: bold;
+         margin-top: 1.226667rem;
+       }
+       .store-top-btn{
+         display: block;
+         margin: 1.12rem auto 0;
+         height: .666667rem;
+         line-height: .666667rem;
+         width: 2.826667rem;
+         text-align: center;
+         color: #fff;
+         background: $red;
+         font-size: .426667rem;
+         border-radius: 50px;
+       }
+    }
     .search-rusult-content {
       .search-rusult-goods {
         @include flexbox(flex-start,
@@ -528,10 +553,18 @@
     </div>
     <!-- 搜索框 -->
     
+
+    <!-- 店铺一键铺店 -->
+      <div class="store-top" v-if="$route.query.store_id">
+         <p class="store-top-name">{{$route.query.store_name}}</p>
+         <p class="store-top-btn" @click="addGoodAll($route.query.store_id)">一键铺店</p>
+      </div>  
+
+
     <!-- 筛选 -->
     <div class="search-filter" v-if="imgsearchTrue">
       <ul class="search-filter-list">
-        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
+        <li v-if="!$route.query.store_id" :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
         <li :class="['search-filter-item',sortotherTypeBoo ? 'active' : '']" @click= "sortotherType()">筛选<span class="more-sortImg"></span></li>
@@ -594,7 +627,7 @@
   import BackHead from 'common/backHead';
   import LoadMore  from 'common/loadMore';
   import {
-    searchGoods,addProduct
+    searchGoods,addProduct,addProductAll
   } from '@/service/getData'
   import {
     Toast
@@ -664,6 +697,40 @@
         }else{
           Toast({duration: 1000,
              message: '铺店成功'
+             })
+        }
+       },
+      async addGoodAll(storeId){
+         let Data = await addProductAll({
+         store_id: storeId
+        });
+        // if(Data.code!=10000){
+        //   if(Data.code==20025){
+        //     return
+        //   }else if(Data.code==40003){
+        //      this.$router.push({path: '/shopApplicate'});
+        //   }else{
+        //      Toast({duration: 1000,
+        //      message: Data.msg
+        //      })
+        //      return
+        //   }
+        // }else{
+        //   Toast({duration: 1000,
+        //      message: '铺店成功'
+        //      })
+        // }
+        if(Data.code==20025){
+          return
+        }else if(Data.code==40003){
+             return this.$router.push({path: '/shopApplicate'});
+        }else if(Data.code==40004){
+             return Toast({duration: 1000,
+             message: '该店铺商品今日已铺店'
+             })
+        }else{
+          Toast({duration: 1000,
+             message: '正在铺店，你可以先浏览商品'
              })
         }
        },
@@ -774,8 +841,10 @@
       async searchRusult() {
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
+        
         this.searchRusultData=[];
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+        
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
         
       },
@@ -840,14 +909,16 @@
           this.searchParams.sort_type = 1;
           this.searchParams.min_price=null;
           this.searchParams.max_price=null;
+          this.searchParams.store_id=null;
+          this.searchParams.store_name=null;
           this.minPrice=null;
           this.maxPrice=null;
           this.activeone=null;
           this.imgsearchNo=false;
-
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
           this.searchParams.img_url=null;
+          this.searchParams.store_name = null;
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
 
@@ -856,13 +927,13 @@
     }
     ,
     beforeRouteEnter(to, from, next) {
-      if (from.name === 'product') {
+      
+      if (from.name === 'product'&&!to.query.store_id) {
         to.meta.isBack = true;
         next();
       } else {
         next();
       }
-      
     }
   }
 
