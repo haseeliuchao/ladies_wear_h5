@@ -1204,17 +1204,17 @@ methods: {
       },
       checkSkuOk(){
         
-        this.visiblePopup.checkSku=false;
+        
         if(this.checkId){
-            this.checkIdnums=[];
+          this.visiblePopup.checkSku=false;
+          this.checkIdnums=[];
           let checkIdnumsobj={ "item_sku_id":this.checkId , "number":this.shopnum};
           this.checkIdnums.push(checkIdnumsobj)
           if(this.addType==='cart'){
           this.$store.dispatch('SelectProduct', {
           item_id:this.$route.params.id,
           item_sku_info_json: JSON.stringify(this.checkIdnums),
-          distributor_id:this.$route.query.distributor_id
-        }).then(response => {
+          distributor_id:this.$route.query.distributor_id}).then(response => {
           if(response.code==10000){
             this.checkId=null;
             this.shopnum=1;
@@ -1223,11 +1223,10 @@ methods: {
             this.checkcolorindex=0;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
-          return Toast({duration: 1000,
-            message: '加入购物车成功',
-            position: 'bottom'
-          })
-
+            return Toast({duration: 1000,
+              message: '加入购物车成功',
+              position: 'bottom'
+            })
           }else{
             Toast({duration: 1000,
             message: response.msg,
@@ -1235,11 +1234,15 @@ methods: {
             })
             return
           }
-          
-        })
+          })
         }else if(this.addType==='directBuy'){
           this.$router.push({path: '/createOrderToC',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
+        }else{
+            return Toast({duration: 1000,
+            message: '请先选择尺码',
+            position: 'center'
+            })
         }
       },
       async addShopCart(addType) { //加入购物车
