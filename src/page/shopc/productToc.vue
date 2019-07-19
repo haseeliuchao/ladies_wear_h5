@@ -924,7 +924,14 @@
                     <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
                     </div>
             </div>
-           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=0;checksizeindex=null;checkId=null}"></span>
+            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="!checkcolorindex">
+              <img :src="productInfo.index_img_url+'_230x230.jpg'">
+                    <div class="checkSkuInfo-text">
+                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
+                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
+                    </div>
+            </div>
+           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span>
       </div>
       
       <div class="checkSkuColortitleall">
@@ -1124,7 +1131,7 @@
         },
         colorarr:[],
         sizearr:[],
-        checkcolorindex:0,
+        checkcolorindex:null,
         checksizeindex:null,
         curcolorname:null,
         cursizename:null,
@@ -1203,8 +1210,6 @@ methods: {
       
       },
       checkSkuOk(){
-        
-        
         if(this.checkId){
           this.visiblePopup.checkSku=false;
           this.checkIdnums=[];
@@ -1220,7 +1225,7 @@ methods: {
             this.shopnum=1;
             this.curcolorname=null;
             this.cursizename=null;
-            this.checkcolorindex=0;
+            this.checkcolorindex=null;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
             return Toast({duration: 1000,
@@ -1240,7 +1245,7 @@ methods: {
         }
         }else{
             return Toast({duration: 1000,
-            message: '请先选择尺码',
+            message: '请选择规格',
             position: 'center'
             })
         }
@@ -1265,7 +1270,7 @@ methods: {
             this.shopnum=1;
             this.curcolorname=null;
             this.cursizename=null;
-            this.checkcolorindex=0;
+            this.checkcolorindex=null;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
           return Toast({duration: 1000,
