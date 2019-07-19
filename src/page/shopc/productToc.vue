@@ -915,7 +915,17 @@
   <div style="background:#f8f8f8;">
     <!-- 颜色尺码选择popup -->
     <mt-popup v-model="visiblePopup.checkSku" :closeOnClickModal='true'  position="bottom" class="checkSkupop">
-      
+       <div class="checkSkuInfo">
+            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">
+              <img v-if="item.color_img" :src="item.color_img+'_230x230.jpg'">
+              <img v-else :src="productInfo.index_img_url+'_230x230.jpg'">
+                    <div class="checkSkuInfo-text">
+                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
+                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
+                    </div>
+            </div>
+           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span>
+      </div>
       
       <div class="checkSkuColortitleall">
         <!-- <p class="checkSkuColortitle">颜色</p> -->
