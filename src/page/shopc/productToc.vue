@@ -924,13 +924,13 @@
                     <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
                     </div>
             </div>
-           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span>
+           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=0;checksizeindex=null;checkId=null}"></span>
       </div>
       
       <div class="checkSkuColortitleall">
         <!-- <p class="checkSkuColortitle">颜色</p> -->
         <p class="checkSkuColortitle">请选择颜色：</p>
-        <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span>
+        <!-- <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span> -->
       </div>
       <ul class="skuColorlist">
         <li  v-for="(item,index) in colorarr" v-on:click="colorcheckBtn(item.color,index)" v-bind:class="[checkcolorindex == index?'productActive':'']" :key="index">{{item.color}}</li>
@@ -1124,7 +1124,7 @@
         },
         colorarr:[],
         sizearr:[],
-        checkcolorindex:null,
+        checkcolorindex:0,
         checksizeindex:null,
         curcolorname:null,
         cursizename:null,
@@ -1220,7 +1220,7 @@ methods: {
             this.shopnum=1;
             this.curcolorname=null;
             this.cursizename=null;
-            this.checkcolorindex=null;
+            this.checkcolorindex=0;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
           return Toast({duration: 1000,
@@ -1262,7 +1262,7 @@ methods: {
             this.shopnum=1;
             this.curcolorname=null;
             this.cursizename=null;
-            this.checkcolorindex=null;
+            this.checkcolorindex=0;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
           return Toast({duration: 1000,
