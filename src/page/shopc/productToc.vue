@@ -924,7 +924,7 @@
                     <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
                     </div>
             </div>
-            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="!checkcolorindex">
+            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex===null">
               <img :src="productInfo.index_img_url+'_230x230.jpg'">
                     <div class="checkSkuInfo-text">
                     <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
