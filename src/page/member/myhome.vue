@@ -484,11 +484,6 @@
             </div> -->
           </div>
         </div>
-        <div class="my-store" v-if="!userData.distributorBO" @click="$router.push('/shopApplicate')">
-          <!-- <h2>我的<span>小店</span></h2>
-          <p>每天上新千款好货 快来开店赚钱</p> -->
-          <p><span><img>您已累计赚取60000.00元</span><span class="right-menu"></span></p>
-        </div>
         <div class="my-store" v-if="userData.distributorBO" @click="$router.push('/myShop')">
           <p class="my-store-title"><span class="my-store-titleleft"><img src="~jd/images/money_icon.png" width="22">您已累计赚取60000.00元</span><span class="right-menu"></span></p>
           <div class="my-store-main">
@@ -499,7 +494,7 @@
 
 
         <div class="my-todayProfit">
-          <p class="card-title"><span>今日业绩</span><span class="look-more"><em>查看详情</em><em class="right-menublack"></em></span></p>
+          <p class="card-title"><span>今日业绩</span><span class="look-more" @click= "()=>$router.push({path: '/withdrawalEntrance'})"><em>查看详情</em><em class="right-menublack"></em></span></p>
           <div style="padding:0 10px;">
             <div class="my-todayProfit-top">
               <div>
