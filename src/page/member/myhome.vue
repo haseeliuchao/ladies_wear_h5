@@ -484,39 +484,42 @@
             </div> -->
           </div>
         </div>
-        <div class="my-store" v-if="userData.distributorBO" @click="$router.push('/myShop')">
-          <p class="my-store-title"><span class="my-store-titleleft"><img src="~jd/images/money_icon.png" width="22">您已累计赚取60000.00元</span><span class="right-menu"></span></p>
+        <div class="my-store" @click= "()=>$router.push({path: '/withdrawalEntrance'})">
+          <p class="my-store-title"><span class="my-store-titleleft"><img src="~jd/images/money_icon.png" width="22">您已累计赚取{{todayPoit.total_amount/100.00|TwoNum}}元</span><span class="right-menu"></span></p>
           <div class="my-store-main">
-            <p class="my-store-maintop">123.00</p>
-            <p class="my-store-mainbottom"><span>可提现余额(元)</span><span style="font-size:0.37rem" class="my-store-mainbottomright">提现</span></p>
+            <p class="my-store-maintop">{{todayPoit.balance_amount/100.00|TwoNum}}</p>
+            <p class="my-store-mainbottom" ><span>可提现余额(元)</span>
+            <span style="font-size:0.37rem" class="my-store-mainbottomright" v-if="todayPoit.balance_amount>0" @click= "()=>$router.push({path: '/withdrawalAccount'})">提现</span>
+            <span style="font-size:0.37rem" class="my-store-mainbottomright" v-else>提现</span>
+            </p>
           </div>
         </div>
 
 
         <div class="my-todayProfit">
-          <p class="card-title"><span>今日业绩</span><span class="look-more" @click= "()=>$router.push({path: '/withdrawalEntrance'})"><em>查看详情</em><em class="right-menublack"></em></span></p>
+          <p class="card-title"><span>今日业绩</span><span class="look-more" @click="$router.push({path: '/goodorderList/0',query: {distributor_id:userData.distributorBO.distributor_id}})"><em>查看详情</em><em class="right-menublack"></em></span></p>
           <div style="padding:0 10px;">
             <div class="my-todayProfit-top">
               <div>
-                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p style="font-size:0.48rem;font-weight: bold">{{todayPoit.distributor_day_pay_order_count}}</p>
                 <p>支付订单数</p>
               </div>
               <div>
-                <p style="font-size:0.48rem;font-weight: bold">0.00</p>
+                <p style="font-size:0.48rem;font-weight: bold">{{todayPoit.distributor_day_pay_order_amount/100.00|TwoNum}}</p>
                 <p>支付金额(元）</p>
               </div>
             </div>
             <div class="my-todayProfit-bottom">
               <div>
-                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p style="font-size:0.48rem;font-weight: bold">{{todayPoit.distributor_order_to_deliver_count}}</p>
                 <p>待发货订单</p>
               </div>
               <div>
-                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p style="font-size:0.48rem;font-weight: bold">{{todayPoit.distributor_order_to_receipt_count}}</p>
                 <p>待收货订单</p>
               </div>
               <div>
-                <p style="font-size:0.48rem;font-weight: bold">0</p>
+                <p style="font-size:0.48rem;font-weight: bold">{{todayPoit.distributor_post_sales_order_count}}</p>
                 <p>售后中订单</p>
               </div>
             </div>
@@ -530,17 +533,17 @@
             <div class="order-item" @click="$router.push('/orderList/1')">
               <img src="~jd/images/order-itemicon1.png" alt="">
               <span>待付款</span>
-              <em>1</em>
+              <em>{{todayPoit.order_to_pay}}</em>
             </div>
             <div class="order-item" @click="$router.push('/orderList/2')">
               <img src="~jd/images/order-itemicon2.png" alt="">
               <span>待发货</span>
-              <em>10</em>
+              <em>{{todayPoit.order_to_deliver}}</em>
             </div>
             <div class="order-item" @click="$router.push('/orderList/3')">
               <img src="~jd/images/order-itemicon3.png" alt="">
               <span>待收货</span>
-              <em>6</em>
+              <em>{{todayPoit.order_to_receipt}}</em>
             </div>
             <div class="order-item myorder" @click="$router.push('/orderList/0')">
               <img src="~jd/images/order-itemicon4.png" alt="">
@@ -559,11 +562,11 @@
                 <img src="~jd/images/tools_icon2.png" alt="">
                 <span>收货地址</span>
               </div>
-              <div class="my-about-tools-item">
+              <div class="my-about-tools-item" @click="()=>$router.push({path:'/withdrawalAccountBook'})">
                 <img src="~jd/images/tools_icon3.png" alt="">
                 <span>资产对账</span>
               </div>
-              <div class="my-about-tools-item">
+              <div class="my-about-tools-item" @click="()=>$router.push({path:'/withdrawalRecord'})">
                 <img src="~jd/images/tools_icon4.png" alt="">
                 <span>提现记录</span>
               </div>
@@ -608,7 +611,7 @@
     mapMutations
   } from 'vuex';
   import {
-    cardCoupon
+    cardCoupon,accountRevenue
   } from '@/service/getData';
   export default {
     data() {
@@ -617,10 +620,11 @@
           memberInfo:{},
           distributorBO:null
         },
+        todayPoit:{
+            balance_amount:0,
+            distributor_day_pay_order_amount:0
+        },
         handlerEvent: false,
-        // cmsData: {
-        //   recommendData: []
-        // },
         isSdkReady:false
       };
     },
@@ -656,6 +660,11 @@
           }else{
             this.userData.memberInfo = null;
           }
+
+          let Data = await accountRevenue();
+            if(Data.code=10000){
+            this.todayPoit=Data.data
+            }
       },
       async showToast(){
         Toast({duration: 1000,

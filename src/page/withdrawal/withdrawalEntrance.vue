@@ -65,11 +65,11 @@
             <div class="withdrawal-listleft">提现账户</div>
             <div class="withdrawal-listright">{{accountRevenue.bank_card_number}}<span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list" style="margin-top:8px;" @click="()=>$router.push({path:'/withdrawalAccountBook',query:{distributor_user_id:6,distributor_id:10,member_id:24}})">
+        <div class="withdrawal-list" style="margin-top:8px;" @click="()=>$router.push({path:'/withdrawalAccountBook'})">
             <div class="withdrawal-listleft">结算对账</div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list" style="border-bottom:none;"  @click="()=>$router.push({path:'/withdrawalRecord',query:{distributor_user_id:6,distributor_id:10,member_id:24}})">
+        <div class="withdrawal-list" style="border-bottom:none;"  @click="()=>$router.push({path:'/withdrawalRecord'})">
             <div class="withdrawal-listleft">提现记录</div>
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
         </div>
