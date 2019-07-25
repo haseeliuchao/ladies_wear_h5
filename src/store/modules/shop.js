@@ -9,10 +9,12 @@ import {
   getProduct,
   getProductList,
   selectProduct,
+  editCart,
   updselectProduct,
   removeSelectedProduct,
   confirmSelectProduct,
   finishOrder,
+  clearOldcartDate,
   cancelOrder,
   getConfirmSelectedProductList,
   createOrder,
@@ -216,6 +218,18 @@ const shop = {
         })
       })
     },
+    EditCart({ // 加入购物车
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        editCart(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
     UpdselectProduct({ // 加入购物车
       commit,
       state
@@ -282,6 +296,18 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         finishOrder(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    ClearOldcartDate({ // 确认收货
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        clearOldcartDate(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

@@ -178,12 +178,12 @@
       .product-summary-text {
         font-size: $subtitle;
         padding: 5px 0;
-        color: #ff2741;
+        color: $red;
         line-height: 1.6;
         @include textoverflow(2);
       }
       .product-price {
-        color: #ff2741;
+        color: $red;
         text-align: left;
         width: 100%;
         margin-bottom: .2rem;
@@ -609,8 +609,8 @@
           font-size: 12px;
           padding: 0px 3px;
           border-radius: 16px;
-          border: 1px solid #ff2741;
-          color: #ff2741;
+          border: 1px solid $red;
+          color: $red;
           right: 10px;
           top: -3px;
         }
@@ -624,7 +624,7 @@
     .right {
       
       height: 100%;
-      background: #ff2741;
+      background: $red;
       
       color: #fff;
       font-size: $title;
@@ -1602,7 +1602,7 @@ methods: {
           text-align: center;
           color: #fff;
           font-size: 18px;
-          background: #ff2741
+          background: $red
         }
         .productparameter{
           height: 44px;

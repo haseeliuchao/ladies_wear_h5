@@ -81,6 +81,12 @@ export const addProduct = (params) => new Http().require({api: '/api/distributor
 
 export const addProductAll = (params) => new Http().require({api: '/api/distributor/put/store/item',param:params}); //一键铺店
 
+
+export const clearOldcartDate = (params) => new Http().require({api: '/api/member/shopping/cart/clean',param:params}); //清除失效购物车商品
+
+export const clearOlditemDate = (params) => new Http().require({api: '/api/distributor/item/clean',param:params}); //一键铺店
+
+
 export const lowerShelfgood = (params) => new Http().require({api: '/api/distributor/item/lowerShelf',param:params}); //商品下架
 
 export const upperShelfgood = (params) => new Http().require({api: '/api/distributor/item/upperShelf',param:params}); //商品上架
@@ -88,6 +94,9 @@ export const upperShelfgood = (params) => new Http().require({api: '/api/distrib
 export const getProductList = (params) => new Http().require({api: '/api/shop/GetProductList',param: params}); //获取
 
 export const selectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/add',param: params}); //获取
+
+
+export const editCart = (params) => new Http().require({api: '/api/b/shopping/cart/add',param: params}); //获取
 
 export const updselectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/upd',param: params}); //获取
 

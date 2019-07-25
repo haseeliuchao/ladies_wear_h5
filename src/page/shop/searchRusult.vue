@@ -288,7 +288,7 @@
                   width: 0;
                   height: 0;
                   border: 4px solid transparent;
-                  border-top-color: #ff2741;
+                  border-top-color: $red;
             }
             &:after{
               content: '';
@@ -321,7 +321,7 @@
               width: 0;
               height: 0;
               border: 4px solid transparent;
-              border-bottom-color: #ff2741;
+              border-bottom-color: $red;
             }
           }
           

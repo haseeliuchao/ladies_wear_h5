@@ -176,15 +176,8 @@
       translateChange(y){ //监听下拉的阈值
         this.searchBarVisilbe = y>8 ? false : true;
       },
-      
-      // async getGoodsdata() {
-      //   this.indexParams.page_size = 10;
-      //   this.indexParams.current_page = 1;
-      //   this.indexRusultData=[];
-      //   this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
-      // },
       async infiniteCallback(response) { //下拉加载
-          if(response.data.distributor_item!=undefined&&response.data.distributor_item!=null){
+          if(response.data.distributor_item){
           if (response.data.distributor_item.length > 0) {
             response.data.distributor_item.map(i => {
               this.indexRusultData.push(i)

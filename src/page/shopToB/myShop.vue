@@ -27,7 +27,7 @@
         }
       }
       .order-nomore-tip{
-        margin-top: 40%;
+        padding-top: 40%;
         @include flexbox(space-between,
         center,
         column,
@@ -320,7 +320,7 @@
     </div> 
   </div>
   <div class="order-container">
-      <p class="order-container-title" v-if="goodList!=''"><span class="order-container-title-tip">以下商品已失效，请及时处理</span><span class="order-container-title-adit">清空失效商品</span></p>
+      <p class="order-container-title" v-if="goodList!=''"><span class="order-container-title-tip">以下商品已失效，请及时处理</span><span class="order-container-title-adit" @click="clearOlditem">清空失效商品</span></p>
       <load-more style="width:100%;" v-if="$route.name=='myShop'" @loadMore="infiniteCallback" :commad="commad" :param="params"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
@@ -370,7 +370,7 @@
 <script>
 import FooterViewToB from 'component/footer/footerViewToB';
 import BackHead from 'common/backHead';
-import {searchshopGoods,getpageCount} from '@/service/getData';
+import {searchshopGoods,getpageCount,clearOlditemDate} from '@/service/getData';
 import LoadMore from 'common/loadMore';
 import {Toast} from 'mint-ui';
   export default {
@@ -402,6 +402,23 @@ import {Toast} from 'mint-ui';
       LoadMore
     },
     methods: {
+      async clearOlditem(){
+         let clearData = await clearOlditemDate();
+        if(clearData.code!=10000){
+           Toast({duration: 1000,
+             message: clearData.msg
+             })
+        }else{
+         Toast({duration: 1000,
+             message: '清除成功'
+             })
+            //  let _this=this;
+            //  setTimeout(function(){
+            //     _this.onRefreshCallback();
+            //  },1000)
+            this.onRefreshCallback();
+        }
+       },
       async initData(){
         let res = await this.$store.dispatch('GetShopStastistics');
         if(res.code==10000){
@@ -424,12 +441,14 @@ import {Toast} from 'mint-ui';
       },
       
       async infiniteCallback(response) { //加载更多订单
-        if (response.data.distributor_item.length > 0) {
-          response.data.distributor_item.map(i => {
-            // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
-            this.goodList.push(i)
-          })
+        if(response.data.distributor_item){
+            if (response.data.distributor_item.length > 0) {
+            response.data.distributor_item.map(i => {
+              this.goodList.push(i)
+            })
+          }
         }
+        
       },
 
 
@@ -448,4 +467,7 @@ import {Toast} from 'mint-ui';
 
 </script>
 <style lang="css">
+.AllLoaded{
+  display: none!important;
+}
 </style>

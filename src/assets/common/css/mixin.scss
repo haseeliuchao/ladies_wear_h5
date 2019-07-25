@@ -10,9 +10,9 @@ $padding: 10px;
 $fontfamily: 'Microsoft Yahei';
 $bg:#f2f2f2;
 //flex box
-@mixin flexbox($jc:space-between, $ai:center, $fd:row, $fw:nowrap) {
+@mixin flexbox($jc:space-between, $ai:center, $fd:row, $fw:nowrap,$fl:1) {
   display: flex;
-  flex: 1;
+  flex: $fl;
   justify-content: $jc;
   align-items: $ai;
   flex-direction: $fd;

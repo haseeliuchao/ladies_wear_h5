@@ -210,8 +210,8 @@
         justify-content:center;
         padding-bottom:4px;
         &.active{
-          color:#ff2741;
-          border-bottom:2px solid #ff2741;
+          color:$red;
+          border-bottom:2px solid $red;
         }
       }
     }
@@ -237,7 +237,7 @@
           @include textoverflow(2);
         }
         .item-product-info {
-          color: #ff2741;
+          color: $red;
           padding: 15px .26rem;
           font-size: 15px;
           del{

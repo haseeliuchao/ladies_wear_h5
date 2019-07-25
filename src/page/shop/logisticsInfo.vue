@@ -59,7 +59,7 @@
             color:#333;
             li:last-child{
               span:first-child{
-                border:5px solid #ff2741;
+                border:5px solid $red;
               }
             }
           }

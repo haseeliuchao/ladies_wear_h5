@@ -222,7 +222,7 @@
               @include flexbox(space-between, center, row, nowrap);
               flex: initial;
               .left {
-                color: #ff2741;
+                color: $red;
                 font-weight:bold;
                 span {
                   font-size: 12px;
@@ -354,12 +354,12 @@
         span{
           font-weight: bold;
           font-size: 12px;
-          color: #ff2741;
+          color: $red;
           
         }
         em{
           font-weight: bold;
-          color: #ff2741;
+          color: $red;
           &:first-child{
             margin-left:-3px;
           }
@@ -369,7 +369,7 @@
     .right {
       width: 34%;
       height: 100%;
-      background: #ff2741;
+      background: $red;
       color: #fff;
       @include flexbox(center, center, row, nowrap);
       strong {

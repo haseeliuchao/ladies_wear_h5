@@ -94,7 +94,7 @@
     margin-right: 0.24rem;
     font-size: 15px;
     font-weight: bold;
-    color: #ff2741;
+    color: $red;
     // background:url('~jd/images/logoicon.png') no-repeat;
     // background-size:100% 100%;
   }

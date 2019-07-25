@@ -164,10 +164,10 @@
         span{
           font-weight:bold;
           font-size: 16px;
-          color: #ff2741; 
+          color: $red; 
         }
         em{
-          color: #ff2741;
+          color: $red;
         }
       }
       .payBtn {

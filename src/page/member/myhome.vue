@@ -298,7 +298,7 @@
         border-radius: 10px;
         font-size: 0.32rem;
         top: -7px;
-        left: 48px;
+        left: 1.28rem;
         background: #fff;
       }
       span {
@@ -622,7 +622,8 @@
         },
         todayPoit:{
             balance_amount:0,
-            distributor_day_pay_order_amount:0
+            distributor_day_pay_order_amount:0,
+            total_amount:0
         },
         handlerEvent: false,
         isSdkReady:false
