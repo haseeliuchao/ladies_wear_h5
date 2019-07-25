@@ -1094,11 +1094,12 @@
     <!-- 返回顶部 -->
     <BackHead/>
     <!-- 返回顶部 -->
-  
+  <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     // TabContainer,
     // TabContainerItem,
@@ -1179,7 +1180,8 @@
       // TabContainerItem,
       Swipe,
       SwipeItem,
-      BackHead
+      BackHead,
+      BackRouter
     },
 
     computed: {

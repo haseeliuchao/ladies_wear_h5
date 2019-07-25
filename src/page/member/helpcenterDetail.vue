@@ -193,10 +193,12 @@
                    订单退款，款项将由原路返回支付账户。微信月退款会在24小时内退还至余额；微信绑定银行卡支付退款会在1-7个工作日退还对应银行卡
                    </p>
          </div>
+         <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 
   export default {
     data() {
@@ -207,7 +209,7 @@
 
     watch: {},
 
-    components: {},
+    components: {BackRouter},
 
     computed: {},
 

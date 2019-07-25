@@ -51,12 +51,14 @@
           <p class="status-linka" v-if="!distributorId" @click.stop.prevent="!handlerEvent ? $router.push('/orderList/2'):false">我的订单</p>
           <p class="status-link" v-if="distributorId" @click= "$router.push(`/indexToC/${distributorId}`)">返回主页</p>
           <p class="status-linka" v-if="distributorId" @click= "$router.push({path: '/orderListToC/2',query: {distributor_id:distributorId}})">我的订单</p>
+    <BackRouter/>
     </div>
 
  
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
  import LoadMore from 'common/loadMore';
  import {searchGoods} from '@/service/getData';
 //  import wxapi from '@/utils/wxapi';
@@ -87,7 +89,7 @@
     watch: {},
 
     components: {
-      LoadMore
+      LoadMore,BackRouter
     },
 
     computed: {},

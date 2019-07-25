@@ -96,9 +96,11 @@
       <div style="width:100%;background-color:#fff;" v-if="logisticsInfo.num==''">
           <p style="margin-top:100px">{{logisticsInfo.message}}</p>
       </div>
+      <BackRouter/>
     </div>
 </template>
 <script>
+import BackRouter from 'common/backRouter';
   import LoadMore from 'common/loadMore';
   import {logisticsInfo} from '@/service/getData'
   import {getSessionStorage} from '@/utils/mixin';
@@ -116,7 +118,7 @@
     components: {
       LoadMore
     },
-    computed: {},
+    computed: {BackRouter},
 
     methods: {
        async initData() {

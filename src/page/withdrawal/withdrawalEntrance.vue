@@ -74,10 +74,12 @@
             <div class="withdrawal-listright"><span class="right-menu"></span></div>
         </div>
         <p class="withdrawal-tip"><em>* </em> 提现需要1-3个工作日的人工审核，审核通过后，相应款项会进入你的提现账户。</p>
+  <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getLocalStorage,
     setLocalStorage,
@@ -103,6 +105,7 @@ import {
 
     components: {
       // LoadMore
+      BackRouter
     },
 
     computed: {

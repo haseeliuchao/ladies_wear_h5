@@ -104,10 +104,12 @@
        </div>
         <p class="withdrawal-tip"><em>* </em>每个月5日、25日统一进行打款</p>
         <div :class="['bottom-btn',showBtnapply?'disabled-btnapply':'']"  @click="applyWithdraw">确认提现</div>
+  <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getLocalStorage,
     setLocalStorage,
@@ -136,6 +138,7 @@ import {
 
     components: {
       // LoadMore
+      BackRouter
     },
 
     computed: {

@@ -819,10 +819,12 @@
         <div class="addNewAddressbtn" @click= "()=>visiblePopup.couponVisible=false">确定</div>
       </div>
     </mt-popup>
+    <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getLocalStorage,
     setLocalStorage
@@ -874,7 +876,7 @@ import {
             }
     },
 
-    components: {},
+    components: {BackRouter},
     computed: {
       ...mapGetters(["addressList"]),
       ...{

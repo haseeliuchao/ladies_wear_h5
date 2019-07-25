@@ -292,11 +292,12 @@
         </div>
   
     </div>
-
+<BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     searchGoods,addProduct
   } from '@/service/getData'
@@ -349,6 +350,7 @@
     },
     components: {
       LoadMore,
+      BackRouter,
       FileUpload: VueUploadComponent
     },
 

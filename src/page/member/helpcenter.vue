@@ -116,10 +116,12 @@
         </tr>
     </table>
     <QiyuKefu/>
+    <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import QiyuKefu from 'common/qiyuKefu';
 
   export default {
@@ -132,7 +134,7 @@ import QiyuKefu from 'common/qiyuKefu';
     watch: {},
 
     components: {
-        QiyuKefu
+        QiyuKefu,BackRouter
     },
 
     computed: {},

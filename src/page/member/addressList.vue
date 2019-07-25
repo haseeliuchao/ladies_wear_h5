@@ -132,10 +132,12 @@
        
       </div>
       <div class="addNewAddressbtn" @click= "$router.push('/address')">添加新地址</div>
+      <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
 <script>
+  import BackRouter from 'common/backRouter';
   import {
     getAddressList
   } from '@/service/getData';
@@ -160,7 +162,8 @@
     watch: {},
 
     components: {
-      LoadMore
+      LoadMore,
+      BackRouter
     },
 
     computed: {},

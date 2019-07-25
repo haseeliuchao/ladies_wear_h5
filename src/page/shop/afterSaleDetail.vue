@@ -334,10 +334,12 @@
     </p> -->
 
     <div class="sand-data" v-if="orderDetail.post_sales_status==2" @click= "commitMsg">提交</div>
+    <BackRouter :fixePosition='2'/>
     </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import QiyuKefu from 'common/qiyuKefu';
   import {
     getSaleDetail,logisticsSend
@@ -362,7 +364,7 @@ import QiyuKefu from 'common/qiyuKefu';
 
     components: {
       // LoadMore
-      QiyuKefu
+      QiyuKefu,BackRouter
     },
 
     computed: {},

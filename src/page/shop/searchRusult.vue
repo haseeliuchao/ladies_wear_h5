@@ -620,10 +620,12 @@
 
     <!-- 搜索内容 -->
   <BackHead/>
+  <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import BackHead from 'common/backHead';
   import LoadMore  from 'common/loadMore';
   import {
@@ -673,7 +675,8 @@
 
     components: {
       BackHead,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
 
     computed: {},

@@ -203,14 +203,11 @@
       </div>
     </mt-popup>
     <!-- 登录 -->
+    <BackRouter/>
   </div>
 </template>
 <script>
-
-
-
-
-
+import BackRouter from 'common/backRouter';
 import {
 getLocalStorage,
     setLocalStorage,
@@ -252,7 +249,7 @@ getLocalStorage,
         }
       }
     },
-    components: {},
+    components: {BackRouter},
     methods: {
       closeOpen() {
         this.visiblePopup.login = false;

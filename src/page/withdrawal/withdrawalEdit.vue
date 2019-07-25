@@ -642,10 +642,11 @@
       </div>
     </mt-popup>
 
-
+  <BackRouter :fixePosition='2'/>
   </div>
 </template>
 <script>
+import BackRouter from 'common/backRouter';
 import { Switch, Toast, Picker, MessageBox, Popup } from "mint-ui";
 import myaddress from "@/utils/address3.json";
 import {
@@ -734,7 +735,8 @@ export default {
 
   components: {
     // VDistpicker
-    "mt-picker": Picker
+    "mt-picker": Picker,
+    BackRouter
   },
 
   computed: {

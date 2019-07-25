@@ -901,6 +901,7 @@
 </template>
 
 <script>
+
   import FooterView from 'component/footer/footerView';
   import SearchBar from 'page/shop/searchBar';
   import {

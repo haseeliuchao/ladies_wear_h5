@@ -101,10 +101,12 @@
              <img src="http://img.chaochujue.cn/ICON/2019/6/3/qr1563344451761.png" alt="" >
          </div>
      </div>
+     <BackRouter/>
    </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import QiyuKefu from 'common/qiyuKefu';
 
   export default {
@@ -117,7 +119,8 @@ import QiyuKefu from 'common/qiyuKefu';
     watch: {},
 
     components: {
-        QiyuKefu
+        QiyuKefu,
+        BackRouter
     },
 
     computed: {},

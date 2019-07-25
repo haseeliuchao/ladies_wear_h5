@@ -94,10 +94,12 @@
       :class="['cell-btn']" 
       @click="$router.push({path: '/shopManage',query: {distributor_id:$route.query.distributor_id}})">修改店铺信息</div>
   </div>
+  <BackRouter :fixePosition='2'/>
 </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     Toast
   }from 'mint-ui'
@@ -118,6 +120,7 @@
     },
     watch: {},
     components:{
+      BackRouter
     },
     computed:{},
     methods:{

@@ -1270,6 +1270,8 @@
 
     <!-- 返回顶部 -->
     <BackHead/>
+
+    <BackRouter :fixePosition='2'/>
     <!-- 返回顶部 -->
   
   </div>
@@ -1295,6 +1297,7 @@ import html2canvas from 'html2canvas';
     upperShelfgood 
   } from '@/service/getData'
   import BackHead from 'common/backHead';
+  import BackRouter from 'common/backRouter';
   import {
     isWeiXin
   } from '@/utils/mixin';
@@ -1388,7 +1391,8 @@ Vue.component(Actionsheet.name, Actionsheet);
       // TabContainerItem,
       Swipe,
       SwipeItem,
-      BackHead
+      BackHead,
+      BackRouter
     },
 
     computed: {

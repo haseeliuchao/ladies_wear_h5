@@ -127,9 +127,11 @@
       <img src="~jd/images/couponUse.png">
       暂无优惠券
     </div>
+    <BackRouter/>
   </div>
 </template>
 <script>
+  import BackRouter from 'common/backRouter';
   import BackHead from 'common/backHead';
   import LoadMore from 'common/loadMore';
   import {cardCoupon} from '@/service/getData';
@@ -154,7 +156,7 @@
     watch: {},
 
     components: {
-      LoadMore,
+      LoadMore,BackRouter
     },
 
     computed: {},

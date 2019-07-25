@@ -74,12 +74,14 @@
         </div>
 
         <p class="withdrawal-back" @click= "()=>$router.push({path: '/myShop'})">资产中心>></p>
+        <BackRouter/>
     </div>
 
  
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     isWeiXin,pushHistory,getSessionStorage
   } from '@/utils/mixin';
@@ -103,6 +105,7 @@
     watch: {},
 
     components: {
+      BackRouter
     },
 
     computed: {},

@@ -403,10 +403,12 @@
         <!-- 没有订单 -->
       </load-more>
     </div>
+    <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     getOrderListB,
     payDirect
@@ -442,7 +444,8 @@
     watch: {},
 
     components: {
-      LoadMore
+      LoadMore,
+      BackRouter
     },
 
     computed: {},

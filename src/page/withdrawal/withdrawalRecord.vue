@@ -306,9 +306,11 @@
   </div>
   
   <BackHead/>
+  <BackRouter/>
 </div>
 </template>
 <script>
+import BackRouter from 'common/backRouter';
   import BackHead from 'common/backHead';
   import {
     withdrawBillList,
@@ -350,7 +352,8 @@
     },
     components:{
       BackHead,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
     methods: {
       closeMsg:function(event){

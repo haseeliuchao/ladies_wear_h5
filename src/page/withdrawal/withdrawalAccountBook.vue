@@ -512,11 +512,12 @@
     </div>
     
   </div>
-  
+  <BackRouter/>
   <BackHead/>
 </div>
 </template>
 <script>
+import BackRouter from 'common/backRouter';
   import BackHead from 'common/backHead';
   import {
     settlementOrderB,
@@ -565,7 +566,8 @@
     },
     components:{
       BackHead,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
     methods: {
       closeMsg:function(event){

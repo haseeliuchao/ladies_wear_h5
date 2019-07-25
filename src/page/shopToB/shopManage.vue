@@ -127,10 +127,12 @@
       :class="['cell-btn',errors.has('number')||(shopForm.title.length==0||shopForm.title.length>20)||shopForm.n_times.length==0||shopForm.n_times==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
+  <BackRouter :fixePosition='2'/>
 </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     Toast
   }from 'mint-ui'
@@ -154,7 +156,7 @@
     },
     watch: {},
     components:{
-      RopperImg
+      RopperImg,BackRouter
     },
     computed:{},
     created(){

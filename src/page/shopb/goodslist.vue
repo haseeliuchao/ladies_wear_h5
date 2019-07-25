@@ -500,10 +500,12 @@
         <!-- 没有订单 -->
       </load-more>
     </div>
+    <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import html2canvas from 'html2canvas';
   import {
     searchshopGoods,
@@ -577,7 +579,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     },
 
     components: {
-      LoadMore
+      LoadMore,BackRouter
     },
 
     computed: {

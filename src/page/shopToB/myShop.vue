@@ -368,6 +368,7 @@
 </template>
 
 <script>
+
 import FooterViewToB from 'component/footer/footerViewToB';
 import BackHead from 'common/backHead';
 import {searchshopGoods,getpageCount,clearOlditemDate} from '@/service/getData';

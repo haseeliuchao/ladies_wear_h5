@@ -568,10 +568,12 @@
                 <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
         </div>
+        <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import QiyuKefu from 'common/qiyuKefu';
   import {
     getOrderDetail,payDirect
@@ -610,7 +612,7 @@ import QiyuKefu from 'common/qiyuKefu';
 
     components: {
       // LoadMore
-      QiyuKefu
+      QiyuKefu,BackRouter
     },
 
     computed: {},
