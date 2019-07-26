@@ -42,7 +42,7 @@ import {
           let contentUrl = location.hash;//自定义当前url，可带上路由以此区分每个页面
           // console.log(contentUrl);
           let refererUrl = '/';
-          window._czc.push(["_setAutoPageview", false]);
+          
           window._czc.push(["_trackPageview", contentUrl, refererUrl])
  
         }
@@ -108,10 +108,10 @@ import {
      mounted: function () {
 
      
-      const script = document.createElement('script')  
-      script.src = `http://s4.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167`  
-      script.language = 'JavaScript'  
-      document.body.appendChild(script)  
+      // const script = document.createElement('script')  
+      // script.src = `http://s4.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167`  
+      // script.language = 'JavaScript'  
+      // document.body.appendChild(script)  
       //  console.log('33')
       // this.loginData();
       // window.addEventListener('scroll',function(){
