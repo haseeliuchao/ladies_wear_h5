@@ -104,7 +104,7 @@ const config = {
    
 
  Vue.use(VeeValidate, config); 
- Vue.use(uweb,{siteId:'1277859167',debug:'true',src:'http://s11.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167'})
+ Vue.use(uweb,{siteId:'1277859167',debug:'true',src:'http://s11.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167',autoPageview:false})
 var routerindex=0
 router.beforeEach((to,from,next)=>{
   let _this=this;
@@ -112,11 +112,11 @@ router.beforeEach((to,from,next)=>{
     if (window._czc) {  
       let location = window.location; 
       let contentUrl = location.pathname + location.hash;  
-      let refererUrl = '/';  
+     
       console.log(contentUrl)
 
       // 用于发送某个URL的PV统计请求，
-      window._czc.push(['_trackPageview', contentUrl, refererUrl])  
+      window._czc.push(['_trackPageview', contentUrl])  
       // _this.$uweb.trackPageview(contentUrl, contentUrl)
       // _this.$uweb.trackPageview(contentUrl[refererUrl])
     }
