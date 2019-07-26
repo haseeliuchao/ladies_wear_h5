@@ -35,21 +35,18 @@ import {
       }
     },
     watch: {  
-    '$route': {
-      handler(to, from) {
-        setTimeout(() => { //避免首次获取不到window._czc
-          if (window._czc) {  
-            let location = window.location; 
-            let contentUrl = location.pathname + location.hash;  
-            console.log(contentUrl)
-            let refererUrl = '/';  
-            // 用于发送某个URL的PV统计请求，
-            window._czc.push(['_trackPageview', contentUrl, refererUrl])  
-          }
-        }, 300) 
-      },
-      immediate: true  // 首次进入页面即执行
-    }  
+    '$route' () {
+        if (window._czc) {
+          // window._czc.push(["_setAutoPageview", false]);
+          let location = window.location;//路由变化
+          let contentUrl = location.hash;//自定义当前url，可带上路由以此区分每个页面
+          // console.log(contentUrl);
+          let refererUrl = '/';
+          window._czc.push(["_setAutoPageview", false]);
+          window._czc.push(["_trackPageview", contentUrl, refererUrl])
+ 
+        }
+    }
   },
     components: {},
     methods: {
