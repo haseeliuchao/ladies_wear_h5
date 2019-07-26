@@ -104,7 +104,7 @@ const config = {
    
 
  Vue.use(VeeValidate, config); 
- Vue.use(uweb,{siteId:'1277859167',debug:'true',src:'http://s11.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167',autoPageview:false})
+//  Vue.use(uweb,{siteId:'1277859167',debug:'true',src:'http://s11.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167',autoPageview:false})
 var routerindex=0
 router.beforeEach((to,from,next)=>{
   if (to.meta.Title) {
