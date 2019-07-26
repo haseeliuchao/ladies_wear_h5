@@ -43,7 +43,7 @@ import {
           console.log(contentUrl);
           let refererUrl = '/';
           
-          window._czc.push(["_trackPageview", contentUrl, refererUrl])
+          window._czc.push(["_trackPageview", "/"+contentUrl, refererUrl])
  
         }
     }
