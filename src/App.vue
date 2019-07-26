@@ -34,6 +34,21 @@ import {
         guideindex:null
       }
     },
+    watch: {  
+    '$route': {
+      handler(to, from) {
+        
+          if (window._czc) {  
+            // console.log(to.path)
+            let location = window.location; 
+            let contentUrl = location.pathname + location.hash;  
+            // 用于发送某个URL的PV统计请求，
+            window._czc.push(['_trackPageview', contentUrl])  
+          }
+      },
+      immediate: true  // 首次进入页面即执行
+    }  
+  },
     components: {},
     methods: {
       async loginData() { //更新数据
