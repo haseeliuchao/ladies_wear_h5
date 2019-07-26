@@ -41,7 +41,12 @@ Vue.filter('DateFormat', function (date, fmt) { //格式化时间   DateFormat('
   return fmt
 })
 Vue.filter('TwoNum', function (value) { //保留两位小数
-  value=Number(value);
+  if(value){
+    value=Number(value);
+  }else{
+    value=0;
+  }
+  
   return value.toFixed(2)
 })
 

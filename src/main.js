@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 require('es6-promise').polyfill()       
 import Vue from 'vue'
-
+import uweb from 'vue-uweb'
 import App from './App'
 import router from './router'
 import 'babel-polyfill'
@@ -104,9 +104,7 @@ const config = {
    
 
  Vue.use(VeeValidate, config); 
-
-
-
+ Vue.use(uweb,{siteId:'1277784674',debug:'true',src:'http://s11.cnzz.com/z_stat.php?id=1277784674&web_id=1277784674'})
 var routerindex=0
 router.beforeEach((to,from,next)=>{
   if (to.meta.Title) {

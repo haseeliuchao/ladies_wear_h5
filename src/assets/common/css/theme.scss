@@ -387,8 +387,25 @@ body,
   color: $red
 }
 .mint-msgbox{
-  width: 70%;
+  width: 7rem
 }
+.mint-msgbox-content{
+  padding: .266667rem .533333rem .4rem;
+  min-height: .96rem;
+}
+.mint-msgbox-message{
+  font-size: .426667rem;
+  color: #333;
+}
+.mint-msgbox-btn{
+  font-size: .426667rem;
+  line-height: 1rem;
+}
+.mint-msgbox-cancel{
+  color: #333;
+}
+
+
 .disabled-btnspan{
   color: #999!important;
   pointer-events: none;

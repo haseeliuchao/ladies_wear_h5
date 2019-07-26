@@ -1,6 +1,265 @@
 <!-- product -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
+  .checkSkupop{
+      width: 100%;
+        .addSuccess-text{
+          text-align: center;
+          color: #333;
+          font-size: .48rem;
+          line-height: 1.12rem;
+        }
+        .addSuccess-textmin{
+          text-align: center;
+          color: #333;
+          font-size: .4rem;
+          line-height: .586667rem;
+          margin-bottom: .426667rem;
+          em{
+            font-size: .48rem;
+            font-weight: bold;
+          }
+        }
+        .addSuccess-share{
+          @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            padding: .64rem 1.066667rem;
+            border-top:1px solid #e4e4e4;
+            div{
+              width: 50%;
+              text-align: center
+            }
+        }
+
+        .checkSkuInfo{
+          @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            padding: 10px;
+            position: relative;
+            height: 2.4rem;
+          span{
+            height: .56rem;
+            width: .56rem;
+            background: url('~jd/images/close.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+          }
+          .checkSkuInfomain{
+             @include flexbox(start,
+            center,
+            row,
+            nowrap);
+            top: -0.533333rem;
+            position: absolute;
+            img{
+              height: 2.666667rem;
+              width: 2.666667rem;
+              border-radius: 6px;
+            }
+            .checkSkuInfo-text{
+              width: 5.4rem;
+              margin-left: 10px;
+                  margin-top: .48rem;
+              .checkSkuInfo-texttitle{
+                 @include textoverflow(2);
+                    font-size: .346667rem;
+                    color: #333;
+                    line-height: .533333rem;
+                    height: 1.066667rem;
+              }
+              .checkSkuInfo-textprice{
+                font-size: .426667rem;
+                color: $red;
+                font-weight: bold;
+                margin-top: 6px;
+              }
+            }
+          }  
+        }
+        .checkSkuColortitleall{
+          padding-right: 10px;
+         @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+        }
+        .checkSkuColortitle{
+        width: 100%;
+        line-height: .96rem;
+        font-size: .426667rem;
+        color: #333;
+        padding:0 $padding;
+        span{
+          font-size: .373333rem;
+        }
+        }
+        .checkSkuColortitle-box{
+          overflow-y: scroll;
+          -webkit-overflow-scrolling: touch;
+          max-height: 1.44rem;
+          margin-bottom: .426667rem;
+          .checkSkuColortitle{
+            line-height: .48rem;
+            color: $red;
+          }
+        }
+
+        .skuColorlist{
+          padding:0 $padding;
+          @include flexbox(start,
+            center,
+            row,
+            wrap);
+            li{
+              padding: 4px 16px;
+              border: 1px solid #999;
+              color: #333;
+              border-radius: 6px;
+              font-size: .346667rem;
+              margin-right: 20px;
+              margin-bottom: 10px;
+              position: relative;
+              span{
+                position: absolute;
+                right: -0.266667rem;
+                top: -0.266667rem;
+                padding: 2px 4px;
+                font-size: .32rem;
+                background: #ff5527;
+                border-radius: 12px;
+                color: #fff;
+              }
+            }
+        }
+        .skuSizelist{
+          padding:0 $padding;
+          @include flexbox(start,
+            center,
+            row,
+            wrap);
+            li{
+              padding: .133333rem .453333rem;
+              border: 1px solid #999;
+              color: #333;
+              border-radius: 14px;
+              font-size: .346667rem;
+              margin-right: .266667rem;
+              margin-bottom: .266667rem;
+            }
+        }
+        .skuNum{
+          @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            padding: .213333rem .266667rem;
+            // margin-bottom: 26px;
+            .left{
+              font-size: .426667rem;
+              color: #333;
+              min-width: 70%;
+              text-align: left;
+              margin-left: .266667rem;
+            }
+            .right {
+                @include flexbox(space-between, center, row, nowrap);
+                flex: initial;
+                border-radius: 2px;
+                border: 1px solid #999999;
+                width: 2rem;
+                .cut {
+                  padding: 2px 0;
+                  font-size: .373333rem;
+                  text-align: center;
+                  width: 30%;
+                  height: .6rem;
+                  position: relative;
+                  cursor: pointer;
+                  &:before {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    background: #999999;
+                    width: 1px;
+                    height: 100%;
+                  }
+                  &:after {
+                    content: '';
+                    position: absolute;
+                    left: calc(100%/2 - 5px);
+                    top: 50%;
+                    background: #999;
+                    width: 40%;
+                    height: 1px;
+                  }
+                }
+                .add {
+                  padding: 2px 0;
+                  width: 30%;
+                  height: .6rem;
+                  font-size: .373333rem;
+                  text-align: center;
+                  position: relative;
+                  cursor: pointer;
+                  &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    background: #999999;
+                    width: 1px;
+                    height: 100%;
+                  }
+                  &:after {
+                    content: '+';
+                    position: absolute;
+                    left: calc(100%/2 - 2px);
+                    top: calc(100%/2 - 8px);
+                    font-size: .373333rem;
+                    color: #999; // width: 50%;
+                  }
+                }
+                .num-inp {
+                  border: none;
+                  outline: none;
+                  text-align: center;
+                  padding: 0 5px;
+                  width: 40%;
+                  font-size: .32rem;
+                }
+              }
+        }
+        .popupOk{
+          height: 1.333333rem;
+          line-height: 1.333333rem;
+          width: 100%;
+          text-align: center;
+          color: #fff;
+          font-size: .48rem;
+          background: $red
+        }
+        .productparameter{
+          width: 100%;
+          padding: .24rem .266667rem;
+          border-bottom: 1px solid #e4e4e4;
+          line-height: .586667rem;
+          
+          font-size: .373333rem;
+          color: #333;
+          span{
+            margin-left: .4rem;
+            color: #999
+          }
+        }
+    }
+
   .right-menu {
         width: 10px;
         height: 10px;
@@ -10,10 +269,10 @@
         background-position: 5px -20px;
         display: inline-block;
       }
-  /* 顶部导航栏 */
+  /* 分享图片生成 */
   .screen_subject{
       width: 8.8rem;
-      padding: 12px 12px 4px;
+      padding: .32rem .32rem .106667rem;
       border-radius: 6px;
       position: fixed;
       bottom: 0;
@@ -27,110 +286,28 @@
       center,
       row,
       nowrap);
-      padding: 10px 0;
+      padding: .266667rem 0;
       .screen_subjectprice{
-        font-size: 17px;
+        font-size: .453333rem;
         color: #333;
         font-weight: bold;
       }
       .screen_subjectname{
-        // @include textoverflow(2);
-                    font-size: 14px;
-                    margin-top: 4px;
+                    font-size: .32rem;
+                    margin-top: .106667rem;
                     color: #333;
-                    line-height: 20px;
+                    line-height: .533333rem;
                     width: 5.6rem;
       }
       img{
-        height: 90px;
-        width: 90px;
+        height: 2.4rem;
+        width: 2.4rem;
       }
       }
     }
 
 
-  .product-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-    height: 1.25rem;
-    background: #fff;
-    border-bottom: 1px solid $border;
-    .product-header-container {
-      height: 100%;
-      padding: 0px $padding;
-      @include flexbox(space-between, center, row, nowrap);
-      .goback {
-        i {
-          display: block;
-          width: .65rem;
-          height: .65rem;
-          background: url('~jd/images/arrow-left.png') no-repeat;
-          background-size: 100%;
-        }
-      }
-      .product-tabs {
-        max-width: 4.5rem;
-        margin-left: 30px;
-        height: 100%;
-        @include flexbox(space-between,
-        center,
-        row,
-        nowrap);
-        position: relative;
-        #loadingbar {
-          position: absolute;
-          transition: .4s;
-          width: calc((100%/4));
-          background: #000;
-          bottom: -1px;
-          height: 2px;
-        }
-        .product-tabs-item {
-          width: 33.33%;
-          @include flexbox(center,
-          center,
-          row,
-          nowrap);
-          flex: initial;
-          text-align: center;
-          color: #333;
-          font-size: $subtitle;
-          height: 100%;
-          &.active {
-            font-size: $title;
-          }
-        }
-      }
-      .other {
-        max-width: 1.5rem;
-        @include flexbox(space-between,
-        center,
-        row,
-        nowrap);
-        .share {
-          display: block;
-          width: .65rem;
-          height: .65rem;
-          background: url('~jd/images/shares.png') no-repeat;
-          background-size: 100%;
-        }
-        .menu {
-          display: block;
-          width: .65rem;
-          margin-left: .2rem;
-          height: .65rem;
-          background: url('~jd/images/menu.png') no-repeat;
-          background-size: 100%;
-        }
-      }
-    }
-  }
-
-  /* 顶部导航栏 */
-
+  
   /* 商品 */
 
   #mainLayout {
@@ -139,18 +316,18 @@
       // box-shadow: 0px 0px 6px 1px #eee;
       position: relative;
       .swiper-indicators {
-        font-size: $title;
+        font-size: .426667rem;
         z-index: 666;
         position: absolute;
-        width: 50px;
-        height: 22px;
-        border-radius: 11px;
-        -webkit-border-radius: 11px;
+        width: 1.333333rem;
+        height: .586667rem;
+        border-radius: 16px;
+        -webkit-border-radius: 16px;
         background: rgba(0, 0, 0, .3);
-        right: 15px;
-        bottom: 11px;
+        right: .4rem;
+        bottom: .293333rem;
         text-align: center;
-        line-height: 22px;
+        line-height: .586667rem;
         color: #fff;
         overflow: hidden;
       }
@@ -174,57 +351,49 @@
         row,
         nowrap);
         .product-name-text {
-        font-size: 13px;
-        line-height: 20px;
+        font-size: .346667rem;
+        line-height: .533333rem;
         color: #333;
         flex: 4;
         @include textoverflow(2);
-        width: 8.1rem;
+        width: 8rem;
       }
       .product-share{
            flex: 1;
            display: block;
-           height: 22px;
-           line-height: 22px;
-           border-top-left-radius: 11px;
-           border-bottom-left-radius: 11px;
-           font-size: 13px;
+           height: .586667rem;
+           line-height: .586667rem;
+           border-top-left-radius: 13px;
+           border-bottom-left-radius: 13px;
+           font-size: .346667rem;
            color: #666;
            position: relative;
-           left: 10px;
-           margin-left: 10px;
+           left: .3rem;
+           margin-left: .266667rem;
            text-align: center;
            background:#e8e8e8 url('~jd/images/sharelink.png') no-repeat 9px center;
            background-size: 16%
       }
       @media all and(min-width:321px) and(max-width:374px){
         .product-share{
-          left:16px;
+          left:.426667rem;
           text-indent: -5px;
         }
       }
       @media all and(min-width:375px) and(max-width:375px){
         .product-share{
-          left:23px;
+          left:.613333rem;
           text-indent: -6px;
         }
       }
       @media all and(min-width:376px){
         .product-share{
-          left:40px;
+          left:.8rem;
           text-indent: -10px;
         }
       }
       }
       
-
-      .product-summary-text {
-        font-size: $subtitle;
-        padding: 5px 0;
-        color: $red;
-        line-height: 1.6;
-        @include textoverflow(2);
-      }
       .product-price {
         color: $red;
         text-align: left;
@@ -235,54 +404,59 @@
         row,
         nowrap);
         .product-pricep{
-          font-size:16px;
+          font-size:.426667rem;
         }
         .product-price span{
-         font-size: 14px;
+         font-size: .373333rem;
         }
-        
+         .old-price{
+          margin-left:.533333rem;
+          text-decoration: line-through;
+          color:#999;
+          font-size:.373333rem;
+         }
         .freight{
           color: #999;
-          font-weight:bold;
+          font-size: .373333rem;
         }
       }
     }
     .product-sku {
-      margin-top: 8px;
+      margin-top: .213333rem;
       background: #fff;
-      padding: 15px 10px;
+      padding: .4rem 10px;
       @include flexbox(space-between,
       center,
       row,
       wrap);
       .sku-select {
-        font-size: 16px;
+        font-size: .426667rem;
         color: #999;
-        margin-right: 15px;
+        margin-right: .4rem;
       }
       .sku-info {
-        font-size: 14px;
+        font-size: .373333rem;
         color: #333;
       }
       
       .product-skuimg{
         width: 8rem;
         margin-left: 1.36rem;
-        margin-top: 10px;
+        margin-top: .266667rem;
         img{
-          margin-right: 10px;
+          margin-right: .266667rem;
           border-radius: 4px;
-          height: 40px;
-          width: 40px;
+          height: 1.066667rem;
+          width: 1.066667rem;
         }
         span{
-          padding: 5px 8px;
-          font-size: 12px;
+          padding: .133333rem 8px;
+          font-size: .32rem;
           color: #999999;
           border:1px solid #999999;
           
           vertical-align: top;
-          margin-top: 8px;
+          margin-top: .213333rem;
           display: inline-block;
           border-radius: 4px;
         }
@@ -291,7 +465,7 @@
     .product-shop {
       margin-top: 8px;
       background: #fff;
-      padding: 15px 10px;
+      padding: .4rem 10px;
       @include flexbox(space-between,
       center,
       row,
@@ -301,13 +475,21 @@
           center,
           row,
           nowrap,2);
+          div{
+            margin-left: .266667rem;
+          }
+          img{
+            width: 1.173333rem;
+          }
            .sku-select {
-        font-size: 16px;
-        color: #999;
-        margin-right: 15px;
+        margin-right: .4rem;
+        color:#333;
+        line-height: .693333rem;
+        font-size: .4rem;
          }
           .sku-info {
-            font-size: 14px;
+            font-size: .346667rem;
+            line-height: .533333rem;
             color: #333;
           }
       }
@@ -319,147 +501,14 @@
         .product-shop-righttext{
           font-size: .346667rem;
           color: #999;
-          margin-right: 3px;
+          margin-right: .08rem;
         }
       }
      
       
       
     }
-    .product-comment {
-      margin-top: $margin;
-      padding: $padding;
-      background: #fff;
-      @include flexbox(space-between,
-      center,
-      column,
-      wrap);
-      .comment-info {
-        width: 100%;
-        padding: 0 0 $padding;
-        border-bottom: 1px solid $border;
-        @include flexbox(space-between,
-        center,
-        row,
-        nowrap);
-        flex: initial;
-        .comment-num {
-          font-size: $subtitle;
-          color: $gray;
-        }
-        .comment-percentage {
-          strong {
-            color: $red;
-            font-size: $subtitle;
-            margin-left: 5px;
-            font-weight: normal;
-          }
-        }
-      }
-      .comment-list {
-        padding: $padding 0;
-        width: 100%;
-        .comment-item {
-          .comment-more {
-            @include flexbox(center,
-            center,
-            row,
-            nowrap);
-            font-size: $subtitle;
-            color: $gray;
-            width: 100%;
-            padding: $padding 0;
-            border-radius: 5px;
-            border: 1px solid #eeeeee;
-          }
-          @include flexbox(space-between,
-          flex-start,
-          column,
-          wrap);
-          flex: initial;
-          width: 100%;
-          border-bottom: 1px solid $gray;
-          &:last-child {
-            border-bottom: none;
-          }
-          .comment-userinfo {
-            width: 100%;
-            @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            display: inline-flex;
-            padding: 5px 0;
-            img {
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-              overflow: hidden;
-            }
-            .avatar {
-              @include flexbox(flex-satrt,
-              center,
-              row,
-              nowrap);
-              flex: initial;
-              span {
-                font-size: $smsub;
-                color: #333;
-                vertical-align: text-top;
-                margin-left: 5px;
-              }
-            }
-            .comment-star {
-              @include flexbox(flex-end,
-              center,
-              row,
-              nowrap);
-              .star-item {
-                display: block;
-                width: 14px;
-                height: 14px;
-                background: url('~jd/images/star-h.png') no-repeat;
-                background-size: 100%;
-              }
-            }
-          }
-          .comment-content {
-            @include flexbox(space-between,
-            flex-start,
-            column,
-            wrap);
-            width: 100%;
-            .content {
-              font-size: $subtitle;
-              color: #333;
-              @include textoverflow(2);
-              padding: $padding 0;
-            }
-            .comment-images-list {
-              @include flexbox(space-between,
-              center,
-              row,
-              nowrap);
-              margin-bottom: $margin;
-              img {
-                width: 84px;
-                margin-right: 5px;
-                height: 84px;
-                &:last-child {
-                  margin-right: 0;
-                }
-              }
-            }
-          }
-          .comment-sku {
-            text-align: left;
-            color: $gray;
-            font-size: $smsub;
-            margin-bottom: $margin;
-          }
-        }
-      }
-    }
+    
     .goods-part {
       margin-top: $margin;
       background: #fff;
@@ -585,45 +634,6 @@
           height: 15px;
         }
       }
-      .recommend-list {
-        background: #fff;
-        @include flexbox(flex-start,
-        center,
-        row,
-        wrap);
-        overflow: hidden;
-        clear: both;
-        .recommend-item {
-          background: #fff;
-          width: 4.935rem;
-          margin-bottom: .15rem;
-          .item-posre {
-            img {
-              max-height: 185px;
-              width: 100%;
-            }
-          }
-          .item-product-text {
-            padding: .1rem 0 0 .1rem;
-            font-size: 14px;
-            @include textoverflow(2);
-          }
-          .item-product-info {
-            color: #f23030;
-            padding: .2rem .1rem;
-            font-size: 16px;
-            span {
-              font-size: 12px;
-              margin-right: .1rem;
-            }
-          }
-          .item-product-praise {
-            padding: 0 0 .2rem .1rem;
-            font-size: 12px;
-            color: #999;
-          }
-        }
-      }
     }
     /* 为您推荐 */
   }
@@ -724,7 +734,6 @@
       
       height: 100%;
       background: $red;
-      
       color: #fff;
       font-size: $title;
       @include flexbox(center,
@@ -740,59 +749,6 @@
 
   /* 底部导航栏 */
 
-  /* 商品详情 */
-
-  #goodDetail {
-    .detail-tab {
-      @include flexbox(space-between,
-      center,
-      row,
-      nowrap);
-      background: #fff;
-      padding: $padding 20px;
-      li {
-        width: 33.33%;
-        color: #333;
-        text-align: center;
-        font-size: $subtitle;
-        border-right: 1px solid $border;
-        &:last-child {
-          border-right: none;
-        }
-        &.active {
-          color: $red;
-        }
-      }
-    }
-    .good-detail-content {
-      padding: $padding;
-      background: #fff;
-      .top-tip {
-        background: #fff;
-        text-align: center;
-        position: relative;
-        span {
-          text-align: center;
-          font-size: $subtitle;
-          color: $gray;
-          position: relative;
-          z-index: 222;
-          padding: 0 $padding;
-          background: #fff;
-        }
-        &:after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 1px;
-          background: $border;
-          top: 50%;
-          left: 0;
-        }
-      }
-      .content {}
-    }
-  }
 
   /* 商品详情 */
 
@@ -806,146 +762,6 @@
 
 
   /* 商品评价 */
-
-  #goodcommentList {
-    background: #fff;
-    padding: $padding 0; // margin-top: $margin;
-    .goodcomment-item {
-      background: #fff;
-      @include flexbox(space-between,
-      center,
-      column,
-      wrap);
-      width: 100%;
-      padding: $padding;
-      border-bottom: 1px solid $border;
-      &:last-child {
-        border-bottom: none;
-      }
-      .comment-userinfo {
-        width: 100%;
-        @include flexbox(space-between,
-        center,
-        row,
-        nowrap);
-        >div {
-          @include flexbox(flex-start,
-          center,
-          row,
-          nowrap);
-          .avatar {
-            margin-right: 5px;
-            img {
-              width: 27px;
-              height: 27px;
-              border-radius: 50%;
-              overflow: hidden;
-            }
-          }
-          .comment-username {
-            @include flexbox(space-between,
-            flex-start,
-            column,
-            wrap);
-            .name {
-              font-size: $subtitle;
-              color: #333;
-            }
-          }
-        }
-        .comment-date {
-          color: $gray;
-          font-size: smsub;
-        }
-      }
-      .comment-content {
-        padding-left: .9rem;
-        p {
-          font-size: $subtitle;
-          color: #333;
-          padding: $padding 0;
-          @include textoverflow(6);
-        }
-        .comment-imageslist {
-          @include flexbox(space-between,
-          flex-start,
-          column,
-          wrap);
-          img {
-            width: 33.33%;
-            height: 100px;
-            margin-right: $margin;
-          }
-        }
-      }
-      .comment-sku {
-        text-align: left;
-        width: 100%;
-        padding: $padding 0 $padding .9rem;
-        p {
-          color: $gray;
-          font-size: smsub;
-          @include textoverflow(1);
-        }
-      }
-      .comment-other {
-        @include flexbox(space-between,
-        center,
-        row,
-        nowrap);
-        width: 100%;
-        padding: $padding 0 $padding .9rem;
-        font-size: $smsub;
-        .createDate {
-          color: $gray;
-        }
-        >div {
-          @include flexbox(flex-end,
-          center,
-          row,
-          nowrap);
-          flex: initial;
-          div {
-            @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            margin-right: 5px;
-            &:last-child {
-              margin-right: 0;
-            }
-            i {
-              display: block;
-              width: 22px;
-              height: 22px;
-            }
-            span {
-              color: #333;
-              margin-left: 5px;
-              vertical-align: middle;
-            }
-          }
-          .like-icon {
-            i {
-              background: url('~jd/images/cart_sprits_all.png') no-repeat;
-              background-position: -50px 0;
-              background-size: 100px 100px;
-              &.active {
-                background-size: -50px -21px;
-              }
-            }
-          }
-          .sendcomment {
-            i {
-              background: url('~jd/images/evaluated.png') no-repeat;
-              background-size: 100%;
-            }
-          }
-        }
-      }
-    }
-  }
-
   .productActive{
     color: $red!important;
     border: 1px solid $red!important;
@@ -973,49 +789,8 @@
     width: 100% !important;
     height: auto !important;
   }
-
 </style>
-<style lang="scss" scoped>
-  @import '~assets/common/css/mixin.scss';
-.productConten {
-    margin-bottom: 1rem;
-}
-.product-delcom {
-    padding: 0.24rem 7%;
-    color: #323232;
-    font-size: 0.26rem;
-    border-bottom: 1px solid #EEEEEE;
-}
-.product-footerlist {
-    margin-top: 0.1rem;
-@include flexbox(start,
-            center,
-            row,
-            nowrap);
-}
-.product-footerlist li {
-    border: 1px solid #606060;
-    border-radius: 0.08rem;
-    color: #606060;
-    text-align: center;
-    padding: 0.04rem 0.16rem;
-    margin-right: 0.16rem;
-    min-width: 0.96rem;
-    margin-bottom: 0.16rem;
-}
-.product-footerlist li.productActive {
-    background-color: #1A1A29;
-    color: #fff;
-    border: 1px solid #1A1A29;
-}
-.product-footerlist li.noneActive {
-    background-color: #ccc;
-    opacity: 0.4;
-    color: #000;
-    pointer-events: none;
-}
 
-</style>
 
 <template>
   <div style="background:#f8f8f8;">
@@ -1087,13 +862,14 @@
           </div>
       </div>
       <p class="checkSkuColortitle" style="line-height:28px;">已选：</p>
-      <p class="checkSkuColortitle" v-for="(itemall,index) in colorarr" style="color:#ff2741;line-height:18px;" :key="index">
+      <div class="checkSkuColortitle-box">
+      <p class="checkSkuColortitle" v-for="(itemall,index) in colorarr" :key="index">
         <span v-if="colorCur[index]"><em>{{itemall.color}}：</em></span>
         <span v-for="(item,index1) in sizearr[index]"  :key="index1">
         <em v-if="item.number!=0">{{item.size}}/{{item.number}}件&nbsp;&nbsp;&nbsp;&nbsp;</em></span>
         </p>
-      <!-- @click= "()=>{title='';visiblePopup.checkSku=false}" -->
-      <div class="popupOk" @click= "checkSkuOk" style="margin-top:16px;">选好了</div>
+      </div>
+      <div class="popupOk" @click= "checkSkuOk">选好了</div>
     </mt-popup>
 
     <!-- 颜色尺码选择popup -->
@@ -1135,10 +911,6 @@
        <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
     margin-top: 8px;width:76%;">
     </mt-popup>
-    
-
-
-
 
           <div id="mainLayout">
             <!-- 商品轮播图 -->
@@ -1158,19 +930,15 @@
 
               <div class="product-price">
                 <p class="product-pricep">
-                <span style="font-weight:bold;">&yen;</span>
-
-                <span style="font-weight:bold;margin-left: -3px;" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">{{item.sales_consumer_price/100.00|topriceafter}}.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                
-                <span style="margin-left:20px;text-decoration: line-through;color:#999;font-size:14px;"><em>原价</em> <em>&yen;</em><em style="font-size:15px;">{{productInfo.sales_price/100.00|topriceafter}}</em>.{{productInfo.sales_price/100.00|topricenext}}</span>
+                <span style="font-weight:bold;margin-left: -3px;" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex == index">￥{{item.sales_consumer_price/100|TwoNum}}</span>
+                <span class="old-price">原价 ￥{{productInfo.sales_price/100|TwoNum}}</span>
                 </p>
-                <span class="freight" style="font-size:13px;font-weight:normal"><em style="font-size:13px;font-weight:normal">运费</em> <em>&yen;</em><em>5</em>.00</span>
+                <span class="freight">运费 ￥5.00</span>
               </div>
               <div class="product-title-textbottom">
               <p class="product-name-text">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
               <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
               </div>
-              <!-- <p class="product-summary-text">{{productInfo.summary}}</p> -->
             </div>
             <!-- 商品信息 -->
             <!-- 商品服务 -->
@@ -1207,18 +975,14 @@
             </div>
              <div class="product-shop" v-if="productInfo.store_b_o">
                <div class="product-shop-left">
-               <img src="~jd/images/shop_icon.png" height="44px">
-              <div style="margin-left:10px;">
-                <span class="sku-select" style="color:#333;line-height: 26px;
-    font-size: 15px;">{{productInfo.store_b_o.name}}</span><br>
-                <span class="sku-info" style="font-size: 13px;line-height: 20px;">{{productInfo.store_b_o.address}}</span>
-              </div>
+               <img src="~jd/images/shop_icon.png">
+                <div>
+                  <span class="sku-select">{{productInfo.store_b_o.name}}</span><br>
+                  <span class="sku-info" >{{productInfo.store_b_o.address}}</span>
+                </div>
               </div>
               <div class="product-shop-right" @click= "()=>$router.push({path: '/searchRusult',query: {store_id:productInfo.store_id,store_name:productInfo.store_b_o.name}})"><span class="product-shop-righttext">进入店铺</span><span class="right-menu"></span></div>
             </div>
-           
-            <!-- 商品留言 -->
-            <!-- 商家信息 -->
 
             <!-- 为你推荐 -->
             <div class="my-recommend">
@@ -1230,11 +994,6 @@
             </div>
             <!-- 为你推荐 -->
           </div>
-      <!-- 商品 -->
-      <!-- 评价 -->
-    <!-- </mt-tab-container> -->
-    <!-- 内容区 -->
-
     <!-- 底部导航栏 -->
     <div class="cart-concern-fixed" v-if="!$route.query.distributor_id">
       <div class="left">
@@ -1242,10 +1001,6 @@
           <i></i>
           <span>首页</span>
         </div>
-        <!-- <div class="like-icon" @click= "favShop">
-          <i></i>
-          <span>关注</span>
-        </div> -->
         <div class="shopping-cart" @click= "$router.push('/cart')">
           <em v-if="productInfo.shopping_cart_num&&productInfo.shopping_cart_num!=0">{{productInfo.shopping_cart_num}}</em>
           <i></i>
@@ -1254,11 +1009,8 @@
       </div>
       <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入进货车</div>
       <div class="right" v-if="productInfo.item_status==1" @click= "addGood()">一键铺店</div>
-      <!-- @click= "addShopCart('directBuy')" -->
-      <!-- ()=>{visiblePopup.addSuccess=true} -->
       <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
     </div>
-
     <div class="cart-shop-fixed" v-if="$route.query.distributor_id">
         <div @click= "()=>$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
         <div @click= "lowerShelf(productInfo.item_status)" v-if="productInfo.item_status==1">下架</div>
@@ -1267,13 +1019,9 @@
         <div @click="showactionsheet()" style="background: #ff2741;border:1px solid #ff2741;color:#fff">去推广</div>
     </div>
     <!-- 底部导航栏 -->
-
     <!-- 返回顶部 -->
     <BackHead/>
-
     <BackRouter :fixePosition='2'/>
-    <!-- 返回顶部 -->
-  
   </div>
 </template>
 
@@ -1721,12 +1469,6 @@ methods: {
         this.productInfo.item_status=2;
        },
        async upperShelf(state){
-        //  if(state!=2){
-        //    Toast({duration: 1000,
-        //      message: '该商品已售罄'
-        //      })
-        //      return
-        //  }
          let Data = await upperShelfgood({
          distributor_item_id: this.$route.query.distributor_item_id
         });
@@ -1765,43 +1507,11 @@ methods: {
  
     },
     updated:function(){
-      // this.infoImgList = JSON.parse( this.productInfo.img_list);
       this.productInfo.item_detailsimg =this.productInfo.item_details_b_o.item_desc;
     }
     ,
     filters:{
-        toafter(value){
-            if(!value){
-              value=0;
-            }else{
-              value=value
-            }
-            return value.substring(0, value.indexOf(':'));
-        },
-        tonext(value){
-          if(!value){
-              value=0;
-            }else{
-              value=value
-            }
-            return value.substring(value.indexOf(':')+1);
-        },
-        topriceafter(value){
-          if(!value){
-              value=0;
-            }else{
-              value=value
-            }
-            return value.toFixed(2).substring(0, value.toFixed(2).indexOf('.'));
-        },
-        topricenext(value){
-          if(!value){
-              value=0;
-            }else{
-              value=value
-            }
-            return value.toFixed(2).substring(value.toFixed(2).indexOf('.')+1);
-        },
+        
         addImgSize(value){
           if(value==''||value==null){
             return;
@@ -1837,255 +1547,4 @@ methods: {
 
 </script>
 <style lang='scss' scoped>
-@import '~assets/common/css/mixin.scss';
-.checkSkupop{
-      width: 100%;
-        .addSuccess-text{
-          text-align: center;
-          color: #333;
-          font-size: 18px;
-          line-height: 42px;
-        }
-        .addSuccess-textmin{
-          text-align: center;
-          color: #333;
-          font-size: 15px;
-          line-height: 22px;
-          margin-bottom: 16px;
-          em{
-            font-size: 18px;
-            font-weight: bold;
-          }
-        }
-        .addSuccess-share{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 24px 40px;
-            border-top:1px solid #e4e4e4;
-
-            div{
-              width: 50%;
-              text-align: center
-            }
-        }
-
-        .checkSkuInfo{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 10px;
-            position: relative;
-            height: 90px;
-          span{
-            height: .56rem;
-            width: .56rem;
-            background: url('~jd/images/close.png') no-repeat;
-            background-size: 100%;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-          }
-          .checkSkuInfomain{
-             @include flexbox(start,
-            center,
-            row,
-            nowrap);
-            top: -20px;
-            position: absolute;
-            img{
-              height: 100px;
-              width: 100px;
-              border-radius: 6px;
-            }
-            .checkSkuInfo-text{
-              width: 5.4rem;
-              margin-left: 10px;
-                  margin-top: 18px;
-              .checkSkuInfo-texttitle{
-                 @include textoverflow(2);
-                    font-size: 13px;
-                    color: #333;
-                    line-height: 20px;
-                    height: 40px;
-              }
-              .checkSkuInfo-textprice{
-                font-size: 16px;
-                color: $red;
-                font-weight: bold;
-                margin-top: 6px;
-              }
-            }
-          }  
-        }
-        .checkSkuColortitleall{
-          padding-right: 10px;
-         @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-        }
-        .checkSkuColortitle{
-        width: 100%;
-
-        line-height: 36px;
-        font-size: 16px;
-        color: #333;
-        padding:0 $padding;
-        span{
-          font-size: 14px;
-        }
-        }
-        .skuColorlist{
-          padding:0 $padding;
-          @include flexbox(start,
-            center,
-            row,
-            wrap);
-            li{
-              padding: 4px 16px;
-              border: 1px solid #999;
-              color: #333;
-              border-radius: 6px;
-              font-size: 13px;
-              margin-right: 20px;
-              margin-bottom: 10px;
-              position: relative;
-              span{
-                position: absolute;
-                right: -10px;
-                top: -10px;
-                padding: 2px 4px;
-                font-size: 12px;
-                background: #ff5527;
-                border-radius: 12px;
-                color: #fff;
-              }
-            }
-        }
-        .skuSizelist{
-          padding:0 $padding;
-          @include flexbox(start,
-            center,
-            row,
-            wrap);
-            li{
-              padding: 5px 17px;
-              border: 1px solid #999;
-              color: #333;
-              border-radius: 14px;
-              font-size: 13px;
-              margin-right: 10px;
-              margin-bottom: 10px;
-            }
-        }
-        .skuNum{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 8px 10px;
-            // margin-bottom: 26px;
-            .left{
-              font-size: 16px;
-              color: #333;
-              min-width: 70%;
-              text-align: left;
-              margin-left: 10px;
-            }
-            .right {
-                @include flexbox(space-between, center, row, nowrap);
-                flex: initial;
-                border-radius: 2px;
-                border: 1px solid #999999;
-                width: 2rem;
-                .cut {
-                  padding: 2px 0;
-                  font-size: 14px;
-                  text-align: center;
-                  width: 30%;
-                  height: .6rem;
-                  position: relative;
-                  cursor: pointer;
-                  &:before {
-                    content: '';
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    background: #999999;
-                    width: 1px;
-                    height: 100%;
-                  }
-                  &:after {
-                    content: '';
-                    position: absolute;
-                    left: calc(100%/2 - 5px);
-                    top: 50%;
-                    background: #999;
-                    width: 40%;
-                    height: 1px;
-                  }
-                }
-                .add {
-                  padding: 2px 0;
-                  width: 30%;
-                  height: .6rem;
-                  font-size: 14px;
-                  text-align: center;
-                  position: relative;
-                  cursor: pointer;
-                  &:before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    background: #999999;
-                    width: 1px;
-                    height: 100%;
-                  }
-                  &:after {
-                    content: '+';
-                    position: absolute;
-                    left: calc(100%/2 - 2px);
-                    top: calc(100%/2 - 8px);
-                    font-size: 14px;
-                    color: #999; // width: 50%;
-                  }
-                }
-                .num-inp {
-                  border: none;
-                  outline: none;
-                  text-align: center;
-                  padding: 0 5px;
-                  width: 40%;
-                  font-size: 12px;
-                }
-              }
-        }
-        .popupOk{
-          height: 50px;
-          line-height: 50px;
-          width: 100%;
-          text-align: center;
-          color: #fff;
-          font-size: 18px;
-          background: $red
-        }
-        .productparameter{
-          // height: 44px;
-              width: 100%;
-    padding: 9px 10px;
-    border-bottom: 1px solid #e4e4e4;
-    line-height: 22px;
-    
-    font-size: 14px;
-    color: #333;
-          span{
-            margin-left: 15px;
-            color: #999
-          }
-        }
-    }
 </style>

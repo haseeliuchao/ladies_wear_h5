@@ -3,37 +3,9 @@
   @import '~assets/common/css/mixin.scss';
 .checkSkupop{
       width: 100%;
-        .addSuccess-text{
-          text-align: center;
-          color: #333;
-          font-size: 18px;
-          line-height: 42px;
-        }
-        .addSuccess-textmin{
-          text-align: center;
-          color: #333;
-          font-size: 15px;
-          line-height: 22px;
-          margin-bottom: 16px;
-          em{
-            font-size: 18px;
-            font-weight: bold;
-          }
-        }
-        .addSuccess-share{
-          @include flexbox(space-between,
-            center,
-            row,
-            nowrap);
-            padding: 24px 40px;
-            border-top:1px solid #e4e4e4;
-
-            div{
-              width: 50%;
-              text-align: center
-            }
-        }
-
+       
+        
+        
         .checkSkuInfo{
           @include flexbox(space-between,
             center,
@@ -41,7 +13,7 @@
             nowrap);
             padding: 10px;
             position: relative;
-            height: 90px;
+            height: 2.4rem;
           span{
             height: .56rem;
             width: .56rem;
@@ -56,26 +28,26 @@
             center,
             row,
             nowrap);
-            top: -20px;
+            top: -0.533333rem;
             position: absolute;
             img{
-              height: 100px;
-              width: 100px;
+              height: 2.666667rem;
+              width: 2.666667rem;
               border-radius: 6px;
             }
             .checkSkuInfo-text{
               width: 5.4rem;
               margin-left: 10px;
-                  margin-top: 18px;
+                  margin-top: .48rem;
               .checkSkuInfo-texttitle{
                  @include textoverflow(2);
-                    font-size: 13px;
+                    font-size: .346667rem;
                     color: #333;
-                    line-height: 20px;
-                    height: 40px;
+                    line-height: .533333rem;
+                    height: 1.066667rem;
               }
               .checkSkuInfo-textprice{
-                font-size: 16px;
+                font-size: .426667rem;
                 color: $red;
                 font-weight: bold;
                 margin-top: 6px;
@@ -90,17 +62,29 @@
             row,
             nowrap);
         }
+        
         .checkSkuColortitle{
         width: 100%;
-
-        line-height: 36px;
-        font-size: 16px;
+        line-height: .96rem;
+        font-size: .426667rem;
         color: #333;
         padding:0 $padding;
         span{
-          font-size: 14px;
+          font-size: .373333rem;
         }
         }
+
+        .checkSkuColortitle-box{
+          overflow-y: scroll;
+          -webkit-overflow-scrolling: touch;
+          max-height: 1.44rem;
+          margin-bottom: .426667rem;
+          .checkSkuColortitle{
+            line-height: .48rem;
+            color: $red;
+          }
+        }
+
         .skuColorlist{
           padding:0 $padding;
           @include flexbox(start,
@@ -112,16 +96,16 @@
               border: 1px solid #999;
               color: #333;
               border-radius: 6px;
-              font-size: 13px;
-              margin-right: 20px;
-              margin-bottom: 10px;
+              font-size: .346667rem;
+              margin-right: .533333rem;
+              margin-bottom: .266667rem;
               position: relative;
               span{
                 position: absolute;
                 right: -10px;
                 top: -10px;
                 padding: 2px 4px;
-                font-size: 12px;
+                font-size: .32rem;
                 background: #ff5527;
                 border-radius: 12px;
                 color: #fff;
@@ -139,7 +123,7 @@
               border: 1px solid #999;
               color: #333;
               border-radius: 14px;
-              font-size: 13px;
+              font-size: .346667rem;
               margin-right: 10px;
               margin-bottom: 10px;
             }
@@ -149,10 +133,9 @@
             center,
             row,
             nowrap);
-            padding: 8px 10px;
-            // margin-bottom: 26px;
+            padding: .213333rem 10px;
             .left{
-              font-size: 16px;
+              font-size: .426667rem;
               color: #333;
               min-width: 70%;
               text-align: left;
@@ -166,7 +149,7 @@
                 width: 2rem;
                 .cut {
                   padding: 2px 0;
-                  font-size: 14px;
+                  font-size: .373333rem;
                   text-align: center;
                   width: 30%;
                   height: .6rem;
@@ -195,7 +178,7 @@
                   padding: 2px 0;
                   width: 30%;
                   height: .6rem;
-                  font-size: 14px;
+                  font-size: .373333rem;
                   text-align: center;
                   position: relative;
                   cursor: pointer;
@@ -213,7 +196,7 @@
                     position: absolute;
                     left: calc(100%/2 - 2px);
                     top: calc(100%/2 - 8px);
-                    font-size: 14px;
+                    font-size: .373333rem;
                     color: #999; // width: 50%;
                   }
                 }
@@ -223,30 +206,28 @@
                   text-align: center;
                   padding: 0 5px;
                   width: 40%;
-                  font-size: 12px;
+                  font-size: .32rem;
                 }
               }
         }
         .popupOk{
-          height: 50px;
-          line-height: 50px;
-          width: 100%;
-          text-align: center;
-          color: #fff;
-          font-size: 18px;
-          background: $red
+            height: 1.333333rem;
+            line-height: 1.333333rem;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-size: .48rem;
+            background: $red;
         }
         .productparameter{
-          // height: 44px;
-              width: 100%;
-    padding: 9px 10px;
-    border-bottom: 1px solid #e4e4e4;
-    line-height: 22px;
-    
-    font-size: 14px;
-    color: #333;
+            width: 100%;
+            padding: 9px 10px;
+            border-bottom: 1px solid #e4e4e4;
+            line-height: .586667rem;
+            font-size: .373333rem;
+            color: #333;
           span{
-            margin-left: 15px;
+            margin-left: .4rem;
             color: #999
           }
         }
@@ -757,12 +738,14 @@
           </div>
       </div>
       <p class="checkSkuColortitle" style="line-height:28px;">已选：</p>
-      <p class="checkSkuColortitle" v-for="(itemall,index) in colorarr" style="color:#ff2741;line-height:18px;" :key="index">
+      <div class="checkSkuColortitle-box">
+      <p class="checkSkuColortitle" v-for="(itemall,index) in colorarr" :key="index">
         <span v-if="colorCur[index]"><em>{{itemall.color}}：</em></span>
         <span v-for="(item,index1) in sizearr[index]"  :key="index1">
         <em v-if="item.number!=0">{{item.size}}/{{item.number}}件&nbsp;&nbsp;&nbsp;&nbsp;</em></span>
         </p>
-      <div class="popupOk" @click= "checkSkuOk" style="margin-top:16px;">确定</div>
+      </div>
+      <div class="popupOk" @click= "checkSkuOk">确定</div>
     </mt-popup>
     <!-- 购物车列表 -->
     <div class="Section">
@@ -901,7 +884,6 @@
 </template>
 
 <script>
-
   import FooterView from 'component/footer/footerView';
   import SearchBar from 'page/shop/searchBar';
   import {
