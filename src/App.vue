@@ -109,7 +109,7 @@ import {
 
      
       const script = document.createElement('script')  
-      script.src = `http://s95.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167`  
+      script.src = `http://s4.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167`  
       script.language = 'JavaScript'  
       document.body.appendChild(script)  
       //  console.log('33')
