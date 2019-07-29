@@ -146,7 +146,8 @@ export const showsearchBar = callback => {
 
   //判断是否达到目标点
   const showsearchBarFun = () => {
-      if (document.body.scrollTop | document.documentElement.scrollTop > 80) {
+      if (document.body.scrollTop | document.documentElement.scrollTop > 120) {
+        alert(document.body.scrollTop | document.documentElement.scrollTop)
           callback(true);
       }else{
           callback(false);
