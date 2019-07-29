@@ -439,7 +439,7 @@ export default {
   props: {
     Status: {
       type: Boolean,
-      default: false
+      required: true
     }
   },
   watch: {
