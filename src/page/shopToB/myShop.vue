@@ -277,28 +277,16 @@
 </style>
 <template>
 <div style="padding-bottom:50px;">
-  <div class="content">  
-    <!-- <div class="store-header">
-      <h2>今日业绩</h2>
-      <ul>
-        <li><span>{{shopStastistics.pay_order_count}}</span>支付订单数</li>
-        <li><span>{{shopStastistics.pay_order_price/100.00}}</span>支付金额(元)</li>
-        <li><span>0</span>可用余额(元)</li>
-        <li><span>{{shopStastistics.to_deliver_count}}</span>待发货订单</li>
-        <li><span>{{shopStastistics.to_post_sales_count}}</span>售后中订单&nbsp;&nbsp;</li>
-      </ul>
-    </div> -->
-    <div class="store-apply">
-      <!-- <h2>我的应用</h2> -->
-      <!-- <ul>
-          <li @click="$router.push('/goodslist/'+distributor_id+'')"><img src="~jd/images/pdManage.png">商品管理<span>></span></li>
-          <li @click="$router.push({path: '/goodorderList/1',query: {distributor_id:distributor_id}})"><img src="~jd/images/orderManage.png">订单管理<span>></span></li>
-          <li @click="$router.push({path: '/shopManage',query: {distributor_id:distributor_id}})"><img src="~jd/images/shopManage.png">店铺管理<span>></span></li>
-          <li @click="$router.push('/memberList')"><img src="~jd/images/kehuManage.png">客户管理<span>></span></li>
-          <li @click= "()=>$router.push({path: '/withdrawalEntrance'})"><img src="~jd/images/zichanManage.png">资产管理<span>></span></li>
-      </ul>  -->
+    <!-- 分享引导popup -->
+    <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
+       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 1.4rem;
+    margin-top: 8px;width:7.6rem;">
+    </mt-popup>
 
-      <div class="store-title"><p><img src="~jd/images/store_on.png" height="16">{{distributor_title}}</p><span class="share-shop">分享我的小店</span></div>
+
+  <div class="content">  
+    <div class="store-apply">
+      <div class="store-title"><p><img src="~jd/images/store_on.png" height="16">{{distributor_title}}</p><span class="share-shop" @click="visiblePopup.shareBoo=true">分享我的小店</span></div>
       <div class="store-tab">
         <div class="store-tab-item" @click="$router.push('/goodslist/'+distributor_id+'')">
               <img src="~jd/images/store-tab1.png" alt="">
@@ -394,6 +382,9 @@ import {Toast} from 'mint-ui';
             page_size: 10,
             current_page: 1
           },
+          visiblePopup:{
+            shareBoo:false
+          },
           goodList: []
       }
     },
@@ -429,6 +420,7 @@ import {Toast} from 'mint-ui';
             this.params.distributor_id=this.distributor_id;
             this.distributor_title=this.shopStastistics.distributorBO.title;
             this.member_id=this.shopStastistics.distributorBO.member_id;
+            this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
             }
             
             this.onRefreshCallback();

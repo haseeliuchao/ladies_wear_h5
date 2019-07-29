@@ -908,8 +908,8 @@
 
     <!-- 分享引导popup -->
     <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
-       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 18%;
-    margin-top: 8px;width:76%;">
+       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 2rem;
+    margin-top: 8px;width:7.6rem;">
     </mt-popup>
 
           <div id="mainLayout">
