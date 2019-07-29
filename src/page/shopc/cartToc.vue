@@ -474,7 +474,7 @@
                     <strong><em style="font-size:16px;">￥{{item.sales_consumer_price/100.00}}</em></strong>
                     
                   </div>
-                  <div class="right">
+                  <div class="right" v-if="item.item_status==1">
                     <div class="cut" @click= "editProductNum({item:item,increment:-1})"></div>
                     <input type="text" v-model="item.num" class="num-inp" @change="editProductNum({item:item,num:item.num})">
                     <div class="add" @click= "editProductNum({item:item,increment:1})"></div>
