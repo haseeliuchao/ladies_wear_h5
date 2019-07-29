@@ -770,8 +770,8 @@
                       <div class="pd-images" @click= "()=>$router.push('/product/'+itemDetail.item_id)">
                         <img :src="itemDetail.index_img_url" alt="">
                       </div>
-                      <div class="pd-info" @click= "()=>$router.push('/product/'+itemDetail.item_id)">
-                        <div class="pd-title">
+                      <div class="pd-info">
+                        <div class="pd-title" @click= "()=>$router.push('/product/'+itemDetail.item_id)">
                           <p class="pd-title-left">{{itemDetail.item_title}}</p>
                           <p class="pd-title-right">x{{itemDetail.total_items}}</p>
                         </div>
