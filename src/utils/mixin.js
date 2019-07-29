@@ -115,7 +115,7 @@ export const showBack = callback => {
 export const showsearchBar = callback => {
   let requestFram;
   let oldScrollTop;
-
+  
   document.addEventListener('scroll',() => {
     showsearchBarFun();
   }, false)
