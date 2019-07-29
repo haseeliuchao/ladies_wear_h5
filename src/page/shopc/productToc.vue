@@ -1296,7 +1296,8 @@ methods: {
         // this.commentParam.ProductNo = this.$route.params.id;
         let Data = await getProduct({
          item_id: this.$route.params.id,
-         distributor_id:this.$route.query.distributor_id
+         distributor_id:this.$route.query.distributor_id,
+         is_load_detail:1
         });
         if(Data.code!=10000){
           Toast({duration: 1000,
