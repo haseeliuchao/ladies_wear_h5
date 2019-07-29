@@ -115,7 +115,8 @@
   import BackHead from 'common/backHead';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage 
   } from '@/utils/mixin';
   import {
     // getGoodsCategoryList,
