@@ -31,7 +31,7 @@
                  height: 0.56rem;
                  line-height: 0.56rem;
                  color: #666;
-                 border: 1px solid #666;
+                 border: 1px solid #999;
                  margin: 5px 0;
                  border-radius: 3px;
               }

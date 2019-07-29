@@ -146,6 +146,9 @@ router.beforeEach((to,from,next)=>{
       if(ShopInfo.code==10000){
         setSessionStorage('distributorId',distributorId)
         setSessionStorage('distributorTitle',ShopInfo.data.title)
+        if(ShopInfo.data.img_url){
+          setSessionStorage('shopImgUrl',ShopInfo.data.img_url)
+        }
         document.title=ShopInfo.data.title;
       }
     }

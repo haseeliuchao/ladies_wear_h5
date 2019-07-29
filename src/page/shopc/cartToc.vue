@@ -544,6 +544,7 @@
         delshow:false,
         cartlength:0,
         indexRusultData:[],
+        shopImgUrl:''
       };
     },
 
