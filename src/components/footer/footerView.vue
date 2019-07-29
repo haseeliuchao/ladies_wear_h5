@@ -142,7 +142,7 @@ import {
           if(ShopInfo.data.distributorBO){
             this.$router.push('/myShop')
           }else{
-            this.$router.push('/shopApplicat')
+            this.$router.push('/shopApplicate')
           }
         }
          
