@@ -654,7 +654,12 @@
       this.updatedData();
       // this.loginData();
       showsearchBar(status => {
-        this.Status = status;
+        if(status===''){
+          this.Status=true
+        }else{
+          this.Status = status;
+        }
+        
       })
     }
   }
