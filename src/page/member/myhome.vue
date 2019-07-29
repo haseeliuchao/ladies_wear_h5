@@ -496,7 +496,7 @@
         </div>
 
 
-        <div class="my-todayProfit">
+        <div class="my-todayProfit" v-if="userData.distributorBO">
           <p class="card-title"><span>今日业绩</span><span class="look-more" @click="$router.push({path: '/goodorderList/0',query: {distributor_id:userData.distributorBO.distributor_id}})"><em>查看详情</em><em class="right-menublack"></em></span></p>
           <div style="padding:0 10px;">
             <div class="my-todayProfit-top">
