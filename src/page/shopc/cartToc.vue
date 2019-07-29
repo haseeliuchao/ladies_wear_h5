@@ -164,6 +164,27 @@
         width: 9.4rem;
         margin: 0 .3rem 110px;
         border-radius: 5px;
+        .delall-old-cart{
+            @include flexbox(space-between,
+                center,
+                row,
+                nowrap);
+                height: 1.333333rem;
+                padding: 0 15px;
+                border-top: 8px solid #f2f2f2;
+            .delall-old-cartleft{
+              color: #333;
+              font-size: .426667rem;
+              
+            }   
+            .delall-old-cartright{
+              font-size: .373333rem;
+          color: $red;
+          border: 1px solid $red;
+          padding: 2px 10px;
+          border-radius: 20px;
+            } 
+          }
         .store-pd-item {
           @include flexbox(flex-start, center, row, nowrap);
           padding: 10px;
@@ -307,6 +328,14 @@
             }
           }
         }
+
+        .store-pd-itemnopadding{
+            border-bottom:none;
+            padding: 0 15px 15px;
+          }
+        .store-pd-itemnoborder{
+            border-bottom:none;
+          }
       }
     }
   }
@@ -424,8 +453,9 @@
             <p class="cartListEdit" v-if="delshow" @click= "editProductdelshow()">完成</p>
           </div>
           <div class="store-pd" v-if="cartList">
-            <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
-             
+            <div v-for="(item,index) in cartList" :key="index">
+              <p class="delall-old-cart" v-if="item.item_status!=1&&cartListfilter.length==index"><span class="delall-old-cartleft">以下商品已失效</span><span class="delall-old-cartright" @click="clearOldcart">清除所有商品</span></p>
+            <div class="store-pd-item" :class="[item.item_status!=1? 'store-pd-itemnopadding':'',item.item_status==1&&cartListfilter.length==index+1?'store-pd-itemnoborder':'',cartList.length===index+1?'store-pd-itemnoborder':'']">
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
@@ -452,6 +482,7 @@
                 </div>
               </div>
 
+            </div>
             </div>
           </div>
         </div>
