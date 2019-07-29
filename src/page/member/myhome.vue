@@ -485,7 +485,7 @@
           </div>
         </div>
         <div class="my-store" @click= "()=>$router.push({path: '/withdrawalEntrance'})">
-          <p class="my-store-title"><span class="my-store-titleleft"><img src="~jd/images/money_icon.png" width="22">您已累计赚取{{todayPoit.total_amount/100.00|TwoNum}}元</span><span class="right-menu"></span></p>
+          <p class="my-store-title"><span class="my-store-titleleft"><img src="~jd/images/money_icon.png" width="22" v-if="todayPoit.total_amount">您已累计赚取{{todayPoit.total_amount/100.00|TwoNum}}元</span><span class="right-menu"></span></p>
           <div class="my-store-main">
             <p class="my-store-maintop">{{todayPoit.balance_amount/100.00|TwoNum}}</p>
             <p class="my-store-mainbottom" ><span>可提现余额(元)</span>
@@ -533,17 +533,17 @@
             <div class="order-item" @click="$router.push('/orderList/1')">
               <img src="~jd/images/order-itemicon1.png" alt="">
               <span>待付款</span>
-              <em>{{todayPoit.order_to_pay}}</em>
+              <em v-if="todayPoit.order_to_pay>0">{{todayPoit.order_to_pay}}</em>
             </div>
             <div class="order-item" @click="$router.push('/orderList/2')">
               <img src="~jd/images/order-itemicon2.png" alt="">
               <span>待发货</span>
-              <em>{{todayPoit.order_to_deliver}}</em>
+              <em v-if="todayPoit.order_to_deliver>0">{{todayPoit.order_to_deliver}}</em>
             </div>
             <div class="order-item" @click="$router.push('/orderList/3')">
               <img src="~jd/images/order-itemicon3.png" alt="">
               <span>待收货</span>
-              <em>{{todayPoit.order_to_receipt}}</em>
+              <em v-if="todayPoit.order_to_receipt>0">{{todayPoit.order_to_receipt}}</em>
             </div>
             <div class="order-item myorder" @click="$router.push('/orderList/0')">
               <img src="~jd/images/order-itemicon4.png" alt="">

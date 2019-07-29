@@ -53,9 +53,6 @@ import {
     components: {},
     methods: {
       async loginData() { //更新数据
-      // document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-      //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
-      // });
        if(isWeiXin('code')){
           let that=this;
           var retstr='';
@@ -108,20 +105,6 @@ import {
         
      },
      mounted: function () {
-
-     
-      // const script = document.createElement('script')  
-      // script.src = `http://s4.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167`  
-      // script.language = 'JavaScript'  
-      // document.body.appendChild(script)  
-      //  console.log('33')
-      // this.loginData();
-      // window.addEventListener('scroll',function(){
-      //          document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-      //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
-      // });
-      //         },true)
-     
     }
   
   }

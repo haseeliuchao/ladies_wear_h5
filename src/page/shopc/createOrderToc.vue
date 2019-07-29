@@ -819,7 +819,7 @@
         <div class="addNewAddressbtn" @click= "()=>visiblePopup.couponVisible=false">确定</div>
       </div>
     </mt-popup>
-    <BackRouter/>
+    <BackRouter :fixePosition='2'/>
   </div>
 </template>
 

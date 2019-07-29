@@ -363,13 +363,13 @@
       </load-more>
     </div>
   <BackHead/>
-  <FooterViewToB/>
+  <FooterView/>
 </div>
 </template>
 
 <script>
 
-import FooterViewToB from 'component/footer/footerViewToB';
+import FooterView from 'component/footer/footerView';
 import BackHead from 'common/backHead';
 import {searchshopGoods,getpageCount,clearOlditemDate} from '@/service/getData';
 import LoadMore from 'common/loadMore';
@@ -398,7 +398,7 @@ import {Toast} from 'mint-ui';
       }
     },
     components: {
-      FooterViewToB,
+      FooterView,
       BackHead,
       LoadMore
     },
@@ -424,11 +424,14 @@ import {Toast} from 'mint-ui';
         let res = await this.$store.dispatch('GetShopStastistics');
         if(res.code==10000){
             this.shopStastistics = res.data;
+            if(this.shopStastistics.distributorBO){
             this.distributor_id=this.shopStastistics.distributorBO.distributor_id;
             this.params.distributor_id=this.distributor_id;
-            this.onRefreshCallback();
             this.distributor_title=this.shopStastistics.distributorBO.title;
             this.member_id=this.shopStastistics.distributorBO.member_id;
+            }
+            
+            this.onRefreshCallback();
         }else{
             this.shopStastistics = null;
             

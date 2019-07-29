@@ -112,7 +112,7 @@
   <ul class="nav-bar fool">
     <li :class="['barIcon','home',$route.name==='index'?'active':'']" @click= "$router.push('/index')">首页</li>
     <li :class="['barIcon','category',$route.name==='category'?'active':'']" @click= "$router.push('/category')">分类</li>
-    <li :class="['barIcon','find',$route.name==='article'?'active':'']" @click="initData">店铺</li>
+    <li :class="['barIcon','find',$route.name==='myShop'?'active':'']" @click="initData">店铺</li>
     <li :class="['barIcon','cart',$route.name==='cart'?'active':'']" @click= "$router.push('/cart')">购物车</li>
     <li :class="['barIcon','myHome',$route.name==='myhome'?'active':'']" @click= "$router.push('/myhome')">我的</li>
   </ul>
@@ -138,11 +138,14 @@ import {
     methods: {
       async initData(){
         let ShopInfo = await getUserInfo({});
-         if(ShopInfo.data.distributorBO){
-           this.$router.push('/myShop')
-         }else{
-           this.$router.push('/shopApplicat')
-         }
+        if(ShopInfo.data){
+          if(ShopInfo.data.distributorBO){
+            this.$router.push('/myShop')
+          }else{
+            this.$router.push('/shopApplicat')
+          }
+        }
+         
         
       }
     },

@@ -520,7 +520,7 @@
   import footerViewToC from 'component/footer/footerViewToC';
   import SearchBar from 'page/shop/searchBar';
   import {
-    Toast
+    Toast,MessageBox
   } from 'mint-ui'
   import {
     setSessionStorage,
@@ -583,6 +583,37 @@
         this.computedTotalFee();
 
       },
+      async clearOldcart(){
+          MessageBox.confirm("", {
+          message: "确定删除所有已失效商品？",
+          title: "",
+          cancelButtonClass: "cancelButton",
+          confirmButtonClass: "confirmButton"
+      }).then(action => {
+          if (action == "confirm") {
+           this.$store.dispatch('ClearOldcartDate', {
+                distributor_id: this.$route.params.distributor_id
+              }).then(response => {
+                if(response.code!=10000){
+                  Toast({duration: 1000,
+                  message: response.msg
+                  })
+                }else{
+                  Toast({duration: 1000,
+                message: '清除成功'
+                })
+                 this.initData();
+                }
+              })
+          }
+        })
+        .catch(err => {
+          if (err == "cancel") {
+            //取消的回调
+          }
+        });
+       },
+
       editProductdel(){
          let SelectedList = [];
         let Selectedstr = '';
