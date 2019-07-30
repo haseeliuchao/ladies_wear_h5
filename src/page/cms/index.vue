@@ -346,17 +346,17 @@
           <mt-swipe :stopPropagation="true" :prevent="false" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index"  >
-              <img v-lazy="item.img_url"  @click="golink(item.http_url)">
+              <img v-lazy="item.img_url"  @click="golink(item.http_url);cnzzTrackEvent('首页轮播图','点击','跳转地址：'+item.http_url)">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->
           <!-- 产品说明 -->
           <div class="product-explain">
             <ul>
-              <li @click= "()=>$router.push({path: '/withdrawalSuccess'})"><img src="~jd/images/zhengpinicon.png">正品保障</li>
-              <li @click= "()=>$router.push({path: '/withdrawalInfo'})"><img src="~jd/images/tuihuanicon.png">五星售后</li>
-              <li @click= "()=>$router.push({path: '/withdrawalAccount'})"><img src="~jd/images/shipaiicon.png">商品实拍</li>
-              <li @click= "()=>$router.push({path: '/withdrawalEdit'})"><img src="~jd/images/kefuicon1.png">专属客服</li>
+              <li><img src="~jd/images/zhengpinicon.png">正品保障</li>
+              <li><img src="~jd/images/tuihuanicon.png">五星售后</li>
+              <li><img src="~jd/images/shipaiicon.png">商品实拍</li>
+              <li><img src="~jd/images/kefuicon1.png">专属客服</li>
               <!-- <li><a href="tel:13622178579">13622178579</a></li> -->
             </ul>
           </div>
@@ -374,14 +374,14 @@
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
                 <!-- <a :href="item.http_url"> -->
-                  <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                  <img v-lazy="item.img_url"  @click= "cnzzTrackEvent('配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
                 <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-                <img  v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                <img  v-lazy="item.img_url"  @click= "cnzzTrackEvent('配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
               </div>
             </div>
           </div>
@@ -558,6 +558,11 @@
       
     },
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
+
+
       async addGood(itemId){
          let Data = await addProduct({
          item_id: itemId

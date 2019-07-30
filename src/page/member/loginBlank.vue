@@ -3,7 +3,7 @@
   
 </style>
 <template>
-  <div id="cnzz_box" style="background:#fff;height:100%">
+  <div style="background:#fff;height:100%">
   </div>
 </template>
 <script>
@@ -11,8 +11,13 @@
 
 
 
+  import {
+    getSignature,
+} from '@/service/getData';
+import {
+    setSessionStorage,
+  } from '@/utils/mixin';
 
-import '@/utils/cnzz';
   export default {
     data() {
       return {
@@ -30,9 +35,6 @@ import '@/utils/cnzz';
     },
     mounted: function () {
         // this.loginData()
-        $("#cnzz_box").append($("#cnzz_stat_icon_1277859167"));
-        var _czc=window._czc||[];
-        _czc.push(["_setAutoPageview", false]);
     }
   }
 
