@@ -783,7 +783,10 @@
                             </span>
                             <span class="pd-info-sku-color">{{itemDetailSku.color}}:</span>
                             <span class="pd-info-sku-size" v-for="(itemsize,index3) in itemDetail.shopping_cart_item_b_o_list" :key="index3">
-                              <em v-if="itemsize.color==itemDetailSku.color">&nbsp;&nbsp;{{itemsize.size}}/{{itemsize.num}}件</em>
+                              <em v-if="itemsize.color==itemDetailSku.color">{{itemsize.size}}/{{itemsize.num}}件
+                                <i v-if="itemDetail.shopping_cart_item_b_o_list.length-1>index3">,</i>
+                                <i v-if="itemDetail.shopping_cart_item_b_o_list.length-1==index3">;</i>
+                                </em>
                             </span>
                           </p>
                           </div>
@@ -820,7 +823,10 @@
                             </span>
                             <span class="pd-info-sku-color">{{itemDetailSku.color}}:</span>
                             <span class="pd-info-sku-size" v-for="(itemsize,index3) in itemDetail.shopping_cart_item_b_o_list" :key="index3">
-                              <em v-if="itemsize.color==itemDetailSku.color">&nbsp;&nbsp;{{itemsize.size}}/{{itemsize.num}}件</em>
+                              <em v-if="itemsize.color==itemDetailSku.color">{{itemsize.size}}/{{itemsize.num}}件
+                                 <i v-if="itemDetail.shopping_cart_item_b_o_list.length-1>index3">,</i>
+                                <i v-if="itemDetail.shopping_cart_item_b_o_list.length-1==index3">;</i>
+                              </em>
                             </span>
                           </p>
                           </div>
