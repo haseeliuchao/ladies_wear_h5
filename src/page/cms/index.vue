@@ -135,18 +135,6 @@
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
-              // overflow: hidden;
-              // position: relative;
-              // &:after {
-              //       content: '...';
-              //       position: absolute;
-              //       font-weight: bold;
-              //       bottom: 0;
-              //       right: 0;
-              //       // padding: 0 20px 1px 45px;
-              //       padding-left:0.1rem;
-              //       background: #fff;
-              //     }
             }
 
             

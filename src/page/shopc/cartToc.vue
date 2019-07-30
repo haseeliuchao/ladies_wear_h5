@@ -81,7 +81,7 @@
               font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 0.9rem;
+              height: 0.88rem;
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
