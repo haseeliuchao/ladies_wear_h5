@@ -30,6 +30,10 @@
   }
   
   .my-order {
+    .bgfff{
+      background: #fff;
+      margin-top: 8px;
+    }
     .my-header {
       padding: $padding;
       background: #fff;
@@ -98,11 +102,9 @@
     }
     .order-container {
       height: auto;
-      ._v-container {
-        // background: #fff;
-      }
+     
       .order-nomore-tip {
-        margin-top: 40%;
+        padding-top: 40%;
         @include flexbox(space-between,
         center,
         column,
@@ -259,10 +261,10 @@
 
     <div class="my-order">
      
-    <div class="order-container">
+    <div class="order-container" :class="[orderList==''?'bgfff':'']">
       <!-- :topMethod="onRefreshCallback" -->
-      <load-more style="width:100%;" v-if="$route.name=='withdrawalRecord'"  @loadMore="infiniteCallback" :commad="commad" :param="params" 
-        :loadMoreIconVisible="false" ref="orderLoadmore">
+      <load-more style="width:100%;" v-if="$route.name=='withdrawalRecord'" :nolistTip="nolistTip"  @loadMore="infiniteCallback" :commad="commad" :param="params" 
+        :loadMoreIconVisible="false"  ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
         <!-- 全部订单 -->
@@ -347,7 +349,9 @@ import BackRouter from 'common/backRouter';
         totalNum:null,
         orderListDetail:[],
         orderListDetailin:[],
-        showChangeBoxBoo:false
+        showChangeBoxBoo:false,
+        nolistTip:"暂无提现记录"
+
       }
     },
     components:{

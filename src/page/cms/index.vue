@@ -374,14 +374,14 @@
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
                 <!-- <a :href="item.http_url"> -->
-                  <img v-lazy="item.img_url"  @click= "cnzzTrackEvent('配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                  <img v-lazy="item.img_url"  @click= "cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
                 <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-                <img  v-lazy="item.img_url"  @click= "cnzzTrackEvent('配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                <img  v-lazy="item.img_url"  @click= "cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
               </div>
             </div>
           </div>

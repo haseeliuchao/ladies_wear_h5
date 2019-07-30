@@ -309,7 +309,7 @@
   </div>
   <div class="order-container">
       <p class="order-container-title" v-if="goodList!=''"><span class="order-container-title-tip">以下商品已失效，请及时处理</span><span class="order-container-title-adit" @click="clearOlditem">清空失效商品</span></p>
-      <load-more style="width:100%;" v-if="$route.name=='myShop'" @loadMore="infiniteCallback" :commad="commad" :param="params"
+      <load-more style="width:100%;" v-if="$route.name=='myShop'" :nolistTip="nolistTip" @loadMore="infiniteCallback" :commad="commad" :param="params"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
@@ -345,7 +345,6 @@
         <!-- 没有订单 -->
         <div class="order-nomore-tip" v-if="goodList==''">
           <i></i>
-          <span>暂无失效商品</span>
         </div>
         <!-- 没有订单 -->
       </load-more>
@@ -385,7 +384,8 @@ import {Toast} from 'mint-ui';
           visiblePopup:{
             shareBoo:false
           },
-          goodList: []
+          goodList: [],
+          nolistTip:"暂无失效商品"
       }
     },
     components: {
@@ -463,7 +463,4 @@ import {Toast} from 'mint-ui';
 
 </script>
 <style lang="css">
-.AllLoaded{
-  display: none!important;
-}
 </style>

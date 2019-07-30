@@ -26,7 +26,7 @@
             <span>加载中...</span>
           </div>
           <div v-if="AllLoaded" class="loadmoreText AllLoaded">
-            <span>没有更多了</span>
+            <span>{{nolistTip}}</span>
           </div>
       </slot>
     </div>
@@ -116,6 +116,10 @@
   export default {
     name: 'mt-loadmore',
     props: {
+      nolistTip:{
+        type: String,
+        default: '没有更多了'
+      },
       maxDistance: {
         type: Number,
         default: 0
@@ -175,6 +179,7 @@
           }
         }
       },
+
       bottomLoadingText: {
         type: String,
         default: '加载中...'
