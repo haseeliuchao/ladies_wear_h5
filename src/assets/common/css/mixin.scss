@@ -43,10 +43,22 @@ $bg:#f2f2f2;
 
 // clamp
 @mixin textoverflow($clamp:1) {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $clamp;
-  overflow: hidden;
+  // display: -webkit-box;
+  // -webkit-box-orient: vertical;
+  // -webkit-line-clamp: $clamp;
+  // overflow: hidden;
+
+  word-break:break-all;
+
+  text-overflow:ellipsis;
+
+  display:-webkit-box;
+
+  -webkit-box-orient:vertical;
+
+  -webkit-line-clamp:$clamp;
+
+  overflow:hidden;
 }
 
 //渐变

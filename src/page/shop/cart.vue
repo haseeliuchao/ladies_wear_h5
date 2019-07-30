@@ -438,7 +438,7 @@
               margin-right: .106667rem;
             }
             span{
-              font-size: .426667rem;
+              font-size: .4rem;
               color: #333;
             }
           }
