@@ -145,11 +145,8 @@
                     bottom: 0;
                     right: 0;
                     // padding: 0 20px 1px 45px;
-                    padding-left:0.4rem;
-                     background: -webkit-linear-gradient(left, transparent, #fff 55%);
-                      background: -o-linear-gradient(right, transparent, #fff 55%);
-                      background: -moz-linear-gradient(right, transparent, #fff 55%);
-                      background: linear-gradient(to right, transparent, #fff 55%);
+                    padding-left:0.05rem;
+                    background: #fff;
                   }
               }
             }
