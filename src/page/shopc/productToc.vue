@@ -1312,6 +1312,7 @@ methods: {
         this.productInfo.propertyList =JSON.parse(this.productInfo.item_details_b_o.property_list);
         this.swipeIndex.total =JSON.parse(Data.data.img_list).length;
         this.colorarr = this.rmSome(this.productInfo.item_sku,'color')
+        this.colorcheckBtn(this.colorarr[0].color,0);
         this.sizearr = this.rmSome(this.productInfo.item_sku,'size')
         this.productInfo.freeShipping=Data.data.distributor_b_o.if_free_shipping;
       },
