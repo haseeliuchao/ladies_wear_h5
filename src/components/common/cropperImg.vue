@@ -8,7 +8,7 @@
       <button type="button" id="button" @click="crop">确定</button>
     </div>
     <div class="postSalesImgflex">
-      <img :src="postSalesImg" width="375">
+      <img :src="postSalesImg" style="width:10rem">
       <div class="postSalesImgflex-btn">
         <input type="file" id="change" accept="image" @change="change" />
         <label for="change"></label>
