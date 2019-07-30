@@ -924,14 +924,8 @@
                     <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
                     </div>
             </div>
-            <div class="checkSkuInfomain" v-for="(item,index) in colorarr" :key="index" v-show="checkcolorindex===null">
-              <img :src="productInfo.index_img_url+'_230x230.jpg'">
-                    <div class="checkSkuInfo-text">
-                    <p class="checkSkuInfo-texttitle">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
-                    <p class="checkSkuInfo-textprice">¥ {{item.sales_consumer_price/100|TwoNum}}</p>
-                    </div>
-            </div>
-           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=null;checksizeindex=null;checkId=null}"></span>
+          
+           <span class="closepop" @click= "()=>{title='';visiblePopup.checkSku=false;curcolorname=null;cursizename=null;checkcolorindex=0;checksizeindex=null;checkId=null}"></span>
       </div>
       
       <div class="checkSkuColortitleall">
@@ -1132,7 +1126,7 @@ import BackRouter from 'common/backRouter';
         },
         colorarr:[],
         sizearr:[],
-        checkcolorindex:null,
+        checkcolorindex:0,
         checksizeindex:null,
         curcolorname:null,
         cursizename:null,
@@ -1227,7 +1221,7 @@ methods: {
             this.shopnum=1;
             this.curcolorname=null;
             this.cursizename=null;
-            this.checkcolorindex=null;
+            this.checkcolorindex=0;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
             return Toast({duration: 1000,
@@ -1272,7 +1266,7 @@ methods: {
             this.shopnum=1;
             this.curcolorname=null;
             this.cursizename=null;
-            this.checkcolorindex=null;
+            this.checkcolorindex=0;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
           return Toast({duration: 1000,
@@ -1331,12 +1325,7 @@ methods: {
           this.checkId=null;
        },
        sizecheckBtn(size,index){
-         if(this.checkcolorindex==null){
-           Toast({duration: 1000,
-            message: '请先选择颜色'
-          })
-          return;
-         }
+         
           this.checksizeindex=index;
           this.cursizename=size;
           let checkIdarr=this.productInfo.item_sku.filter((item)=>{return item.size==size&&item.color==this.curcolorname});
