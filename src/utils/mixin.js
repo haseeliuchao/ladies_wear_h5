@@ -12,6 +12,7 @@ export const getLocalStorage = (key) => {
   return window.localStorage.getItem(key);
 }
 
+
 export const removeLocalStorage = (key) => {
   if (!key) return;
   window.localStorage.removeItem(key);
