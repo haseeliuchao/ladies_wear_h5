@@ -130,25 +130,23 @@
             .prod-title{
               font-size: 0.343rem;
               color: #333;
-              // @include textoverflow(2);
+              @include textoverflow(2);
               height: 0.88rem;
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
-              overflow: hidden;
-              position: relative;
-              &.ellipsis {
-              &:after {
-                    content: '...';
-                    position: absolute;
-                    font-weight: bold;
-                    bottom: 0;
-                    right: 0;
-                    // padding: 0 20px 1px 45px;
-                    padding-left:0.05rem;
-                    background: #fff;
-                  }
-              }
+              // overflow: hidden;
+              // position: relative;
+              // &:after {
+              //       content: '...';
+              //       position: absolute;
+              //       font-weight: bold;
+              //       bottom: 0;
+              //       right: 0;
+              //       // padding: 0 20px 1px 45px;
+              //       padding-left:0.1rem;
+              //       background: #fff;
+              //     }
             }
 
             
@@ -411,7 +409,7 @@
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" >
                   <img @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
                   <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
-                    <p :class="['prod-title',isEllipsis(item.title,135)?'ellipsis':'']">{{item.title}}</p>
+                    <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
                       <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
                       <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
@@ -437,7 +435,7 @@
   } from '@/utils/mixin';
   import {
     getLocalStorage,
-    setLocalStorage,
+    setLocalStorage
   } from '@/utils/mixin';
   import {
     addProduct,
@@ -560,18 +558,6 @@
       
     },
     methods: {
-      isEllipsis (content, contentWidth) {
-      let el = document.createElement('div')  // 创建一个临时div
-      el.innerHTML = content
-      el.style.whiteSpace = 'nowrap' // 不换行
-      el.style.position = 'absolute'
-      el.style.opacity = 0 // 完全透明
-      document.body.appendChild(el)
-      const elWidth = el.clientWidth  // 获取这个含有content内容的临时div的宽度
-      document.body.removeChild(el)
-      return elWidth >= contentWidth * 2   // 判断这个临时div的宽度是否大于原节点宽度的两倍
-    },
-
       async addGood(itemId){
          let Data = await addProduct({
          item_id: itemId
