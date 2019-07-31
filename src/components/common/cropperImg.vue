@@ -132,7 +132,7 @@ export default {
                             var ontime=new Date();
                             var datename=ontime.getFullYear()+"/"+ontime.getMonth()+"/"+ontime.getDay();
                             var save_key="/ICON/"+datename+"/{filename}"+new Date().getTime()+"{.suffix}";
-                            var url="http://v0.api.upyun.com/"+bucketname;
+                            var url="https://v0.api.upyun.com/"+bucketname;
                             var policy=btoa(JSON.stringify({"bucket": bucketname, "save-key": save_key, "expiration": parseInt(Date.parse(new Date())+3600),}));
                             var signature="UPYUN "+username+":"+b64hamcsha1(HexMD5.MD5(password).toString(HexMD5.enc.Hex), "POST&/"+bucketname+"&"+policy);
                             var index1 = newFile.name.lastIndexOf(".");
@@ -144,7 +144,7 @@ export default {
                             formData.append("policy",policy);
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
-                            that.postSalesImg="http://img.chaochujue.cn"+response.data.url;
+                            that.postSalesImg="https://img.chaochujue.cn"+response.data.url;
                             that.$emit('sent-postSalesImg',that.postSalesImg);
                             }).catch(function (error) {
                         　　alert(error);
