@@ -133,7 +133,32 @@
         color: $gray;
       }
     }
-    
+    .store-top{
+       width: 10rem;
+       height: 4.666667rem;
+       background: url('http://img.chaochujue.cn/ICON/2019/6/5/store-bg1563520399880.png') no-repeat center;
+       background-size: contain;
+       overflow: hidden;
+       .store-top-name{
+         color: #333;
+         text-align: center;
+         font-size: .56rem;
+         font-weight: bold;
+         margin-top: 1.226667rem;
+       }
+       .store-top-btn{
+         display: block;
+         margin: 1.12rem auto 0;
+         height: .666667rem;
+         line-height: .666667rem;
+         width: 2.826667rem;
+         text-align: center;
+         color: #fff;
+         background: $red;
+         font-size: .426667rem;
+         border-radius: 50px;
+       }
+    }
     .search-rusult-content {
       .search-rusult-goods {
         @include flexbox(flex-start,
@@ -263,7 +288,7 @@
                   width: 0;
                   height: 0;
                   border: 4px solid transparent;
-                  border-top-color: #ff2741;
+                  border-top-color: $red;
             }
             &:after{
               content: '';
@@ -296,7 +321,7 @@
               width: 0;
               height: 0;
               border: 4px solid transparent;
-              border-bottom-color: #ff2741;
+              border-bottom-color: $red;
             }
           }
           
@@ -442,16 +467,14 @@
             height: 4.58rem;
             // border-radius: 6px;
           }
-          .prod-info{
-            // margin-left: 10px;
+         .prod-info{
             padding: 0px 10px;
-            
             @include flexbox(space-between,flex-start,column,wrap);
             .prod-title{
               font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 0.9rem;
+              height: 0.88rem;
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
@@ -459,20 +482,17 @@
             .prod-price{
               color: $red;
               text-align:left;
-              line-height: 30px;
-              margin-bottom: 8px;
-              span{
-                font-size: 16px;
-                margin-right: 5px;
-                &:last-child{
-                  font-size: 14px;
-                  em{
-                    font-size:14px;
-                  }
-                }
+              line-height: .8rem;
+              .prod-nowprice{
+               font-weight:bold;
+               margin-right:1px;
+               font-size:.426667rem
               }
-              strong{
-                font-size: 19px;
+              .prod-oldprice{
+               margin-left:.213333rem;
+               text-decoration: line-through;
+               color:#999;
+               font-size:.373333rem;
               }
             }
             .prod-pro{
@@ -481,6 +501,18 @@
               color: $gray;
               font-size: $subtitle;
             }
+          }
+          .add-store{
+            @include flexbox(flex-end,center,row,wrap);
+             padding: 0 10px;
+             margin-bottom: 10px;
+             span{
+               font-size: .293333rem;
+               color: $red;
+               padding: 0 4px;
+               border: 1px solid $red;
+               border-radius: 3px;
+             }
           }
         }
       }
@@ -521,10 +553,18 @@
     </div>
     <!-- 搜索框 -->
     
+
+    <!-- 店铺一键铺店 -->
+      <div class="store-top" v-if="$route.query.store_id">
+         <p class="store-top-name">{{$route.query.store_name}}</p>
+         <p class="store-top-btn" @click="addGoodAll($route.query.store_id)">一键铺店</p>
+      </div>  
+
+
     <!-- 筛选 -->
     <div class="search-filter" v-if="imgsearchTrue">
       <ul class="search-filter-list">
-        <li :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
+        <li v-if="!$route.query.store_id" :class="['search-filter-item',active==0 ? 'active' : '']" @click= "sortType(3)">综合排序</li>
         <li :class="['search-filter-item',active==1 ? 'active' : '']" @click= "sortType(1)">上新时间</li>
         <li :class="['search-filter-item',active==2 ? 'active' : '']" @click= "sortType(2)">价格排序<span class="more-sort" :class="[sort_enum==null?'':sort_enumboo? 'more-sortAsc' : 'more-sortDesc']"></span></li>
         <li :class="['search-filter-item',sortotherTypeBoo ? 'active' : '']" @click= "sortotherType()">筛选<span class="more-sortImg"></span></li>
@@ -562,15 +602,16 @@
       <load-more style="width:100%;" v-if="$route.name=='searchRusult'" @loadMore="infiniteCallback" :commad="commad" :param="searchParams"
           ref="searchRusultloadMore">
         <ul class="product-list" >
-          <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-            <img  v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-            <div class="prod-info">
-              <p class="prod-title">{{item.title}}</p>
-              <p class="prod-price">
-                <span style="font-weight:bold;margin-right:1px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                <span style="margin-left:8px;text-decoration: line-through;color:#999"><em>&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
-                </p>
-            </div>
+          <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index">
+            <img  @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+            <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
+                    <p class="prod-title">{{item.title}}</p>
+                    <p class="prod-price">
+                      <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
+                      <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
+                    </p>
+                  </div>
+            <p class="add-store"><span @click="addGood(item.item_id)">铺店</span></p>
           </li>
         </ul>
       </load-more>
@@ -579,14 +620,16 @@
 
     <!-- 搜索内容 -->
   <BackHead/>
+  <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import BackHead from 'common/backHead';
   import LoadMore  from 'common/loadMore';
   import {
-    searchGoods
+    searchGoods,addProduct,addProductAll
   } from '@/service/getData'
   import {
     Toast
@@ -632,12 +675,68 @@
 
     components: {
       BackHead,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
 
     computed: {},
 
     methods: {
+      async addGood(itemId){
+         let Data = await addProduct({
+         item_id: itemId
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else if(Data.code==40003){
+             this.$router.push({path: '/shopApplicate'});
+          }else{
+             Toast({duration: 1000,
+             message: Data.msg
+             })
+             return
+          }
+        }else{
+          Toast({duration: 1000,
+             message: '铺店成功'
+             })
+        }
+       },
+      async addGoodAll(storeId){
+         let Data = await addProductAll({
+         store_id: storeId
+        });
+        // if(Data.code!=10000){
+        //   if(Data.code==20025){
+        //     return
+        //   }else if(Data.code==40003){
+        //      this.$router.push({path: '/shopApplicate'});
+        //   }else{
+        //      Toast({duration: 1000,
+        //      message: Data.msg
+        //      })
+        //      return
+        //   }
+        // }else{
+        //   Toast({duration: 1000,
+        //      message: '铺店成功'
+        //      })
+        // }
+        if(Data.code==20025){
+          return
+        }else if(Data.code==40003){
+             return this.$router.push({path: '/shopApplicate'});
+        }else if(Data.code==40004){
+             return Toast({duration: 1000,
+             message: '该店铺商品今日已铺店'
+             })
+        }else{
+          Toast({duration: 1000,
+             message: '正在铺店，你可以先浏览商品'
+             })
+        }
+       },
       sortTypeone(type){
           this.activeone=type; 
           switch (Number(type)) {
@@ -745,8 +844,10 @@
       async searchRusult() {
         this.searchParams.page_size = 10;
         this.searchParams.current_page = 1;
+        
         this.searchRusultData=[];
         this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)))
+        
         this.$refs.searchRusultloadMore.onTopLoaded(this.$refs.searchRusultloadMore.uuid);
         
       },
@@ -781,7 +882,9 @@
         }
     },
     mounted: function () {
-     
+      if(this.$route.query.advertising_id||this.$route.query.store_id){
+       this.$wxShare({title: '每天上新千款好货 快来开店赚钱',desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl:'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'})
+      }
     },
     created(){
      this.isFirstEnter=true;
@@ -811,14 +914,16 @@
           this.searchParams.sort_type = 1;
           this.searchParams.min_price=null;
           this.searchParams.max_price=null;
+          this.searchParams.store_id=null;
+          this.searchParams.store_name=null;
           this.minPrice=null;
           this.maxPrice=null;
           this.activeone=null;
           this.imgsearchNo=false;
-
           this.searchParams = JSON.parse(JSON.stringify(Object.assign(this.searchParams,this.$route.query)
           ));
           this.searchParams.img_url=null;
+          this.searchParams.store_name = null;
           this.$refs.searchRusultloadMore.onloadMoreScroll();
        }
 
@@ -827,13 +932,13 @@
     }
     ,
     beforeRouteEnter(to, from, next) {
-      if (from.name === 'product') {
+      
+      if (from.name === 'product'&&!to.query.store_id) {
         to.meta.isBack = true;
         next();
       } else {
         next();
       }
-      
     }
   }
 

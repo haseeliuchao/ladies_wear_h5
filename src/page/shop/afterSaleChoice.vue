@@ -215,10 +215,12 @@
              <p class="botp">已收到货，需要退换已收到的货</p>
          </div>
     </div>
+    <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getLocalStorage,
     setLocalStorage,
@@ -245,7 +247,7 @@ import {
     watch: {},
 
     components: {
-      // LoadMore
+      BackRouter
     },
 
     computed: {

@@ -242,23 +242,23 @@ body,
 
 .select-default-icon {
   // display: table;
-  width: 20px;
-  height: 20px;
+  width: .533333rem;
+  height: .533333rem;
   background: url('~jd/images/check2.png') no-repeat;
   background-size: 100% 100%;
 }
 
 .select-defaultnone-icon {
-  width: 20px;
-  height: 20px;
+  width: .533333rem;
+  height: .533333rem;
   background: url('~jd/images/check3.png') no-repeat;
   background-size: 100% 100%;
   pointer-events: none;
   cursor: default;
 }
 .select-defaultnone-cheicon{
-  width: 20px;
-  height: 20px;
+  width: .533333rem;
+  height: .533333rem;
   background: url('~jd/images/check3.png') no-repeat;
   background-size: 100% 100%;
   pointer-events: none;
@@ -387,8 +387,25 @@ body,
   color: $red
 }
 .mint-msgbox{
-  width: 60%;
+  width: 7rem
 }
+.mint-msgbox-content{
+  padding: .266667rem .533333rem .4rem;
+  min-height: .96rem;
+}
+.mint-msgbox-message{
+  font-size: .426667rem;
+  color: #333;
+}
+.mint-msgbox-btn{
+  font-size: .426667rem;
+  line-height: 1rem;
+}
+.mint-msgbox-cancel{
+  color: #333;
+}
+
+
 .disabled-btnspan{
   color: #999!important;
   pointer-events: none;

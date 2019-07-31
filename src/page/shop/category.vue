@@ -36,8 +36,8 @@
         }
         &.active {
           background: #F2F2F2;
-          color: #ff2741;
-          border-left:.14rem solid #ff2741;
+          color: $red;
+          border-left:.14rem solid $red;
           padding-left:.03rem;
 
         }

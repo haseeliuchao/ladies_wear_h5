@@ -192,6 +192,7 @@
           </mt-picker>
       </mt-popup>
     </div>
+    <BackRouter :fixePosition='2'/>
   </div>
 </template>
 <script>
@@ -206,6 +207,7 @@
     setLocalStorage,
     getSessionStorage
   } from '@/utils/mixin';
+  import BackRouter from 'common/backRouter';
   export default {
     data() {
       return {
@@ -264,8 +266,8 @@
     watch: {},
 
     components: {
-      // VDistpicker
-      'mt-picker': Picker
+      'mt-picker': Picker,
+      BackRouter
     },
 
     computed: {},

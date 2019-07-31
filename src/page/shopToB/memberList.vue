@@ -141,10 +141,12 @@
     </div>
   </div>
   <BackHead/>
+  <BackRouter/>
 </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
  import BackHead from 'common/backHead';
  import {
     getMemberList
@@ -163,7 +165,8 @@
     },
     watch: {},
     components:{
-      BackHead
+      BackHead,
+      BackRouter
     },
     computed:{},
     methods:{

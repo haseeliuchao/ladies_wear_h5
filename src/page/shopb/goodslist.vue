@@ -464,7 +464,7 @@
                       <p class="prod-name" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">{{item.item_title}}</p>
                       <p class="prod-price" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
                       <p class="prod-num">
-                        <span v-if="item.sales_volume>=0">销量：{{item.sales_volume}}</span>
+                        <span v-if="item.sales_volume>0">销量：{{item.sales_volume}}</span>
                         <span v-if="!item.sales_volume">销量：0</span>
                         <span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
@@ -500,10 +500,12 @@
         <!-- 没有订单 -->
       </load-more>
     </div>
+    <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import html2canvas from 'html2canvas';
   import {
     searchshopGoods,
@@ -577,7 +579,7 @@ Vue.component(Actionsheet.name, Actionsheet);
     },
 
     components: {
-      LoadMore
+      LoadMore,BackRouter
     },
 
     computed: {
@@ -746,12 +748,14 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       
       async infiniteCallback(response) { //加载更多订单
-        if (response.data.distributor_item.length > 0) {
+       if(response.data.distributor_item){
+            if (response.data.distributor_item.length > 0) {
           response.data.distributor_item.map(i => {
-            // i.orderInfo.total_fee = i.orderInfo.total_fee.toFixed(2)
             this.goodList.push(i)
           })
-        }
+         }
+       }
+        
       },
     },
     filters:{

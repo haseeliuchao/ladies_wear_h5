@@ -34,12 +34,25 @@ import {
         guideindex:null
       }
     },
+    watch: {  
+    '$route': {
+      handler(to, from) {
+        setTimeout(() => {
+          if (window._czc) {  
+            let location = window.location; 
+            let contentUrl = location.pathname + location.hash;  
+            let refererUrl = '/';  
+            window._czc.push(['_trackPageview', contentUrl, refererUrl])  
+          }
+        }, 300) 
+      },
+      immediate: true 
+    }  
+    
+  },
     components: {},
     methods: {
       async loginData() { //更新数据
-      // document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-      //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
-      // });
        if(isWeiXin('code')){
           let that=this;
           var retstr='';
@@ -92,14 +105,6 @@ import {
         
      },
      mounted: function () {
-      //  console.log('33')
-      // this.loginData();
-      // window.addEventListener('scroll',function(){
-      //          document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-      //           WeixinJSBridge.call('showToolbar');        // 显示底部状态栏
-      // });
-      //         },true)
-     
     }
   
   }

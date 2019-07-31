@@ -62,18 +62,18 @@
       }
     }
     .find {
-      position: relative;
-      top:-12px;
-      height:1.3rem;
+      // position: relative;
+      // top:-12px;
+      // height:1.3rem;
       // background-position: -11.5rem -66px;
       // &.active {
       //   background-position: -11.5rem -66px;
       // }
-      background:url('~jd/images/find.png') no-repeat center 0;
-      background-size:1.3rem;
+      background:url('~jd/images/home_shop.png') no-repeat center 7px;
+      background-size:28%;
       &.active {
-        background:url('~jd/images/find.png') no-repeat center 0;
-        background-size:1.3rem;
+        background:url('~jd/images/home_shopon.png') no-repeat center 7px;
+        background-size:28%;
         color: #ff2741;
       }
     }
@@ -112,13 +112,15 @@
   <ul class="nav-bar fool">
     <li :class="['barIcon','home',$route.name==='index'?'active':'']" @click= "$router.push('/index')">首页</li>
     <li :class="['barIcon','category',$route.name==='category'?'active':'']" @click= "$router.push('/category')">分类</li>
-    <li :class="['barIcon','find',$route.name==='article'?'active':'']" @click= "$router.push('/searchImg')"></li>
+    <li :class="['barIcon','find',$route.name==='myShop'?'active':'']" @click="initData">店铺</li>
     <li :class="['barIcon','cart',$route.name==='cart'?'active':'']" @click= "$router.push('/cart')">购物车</li>
     <li :class="['barIcon','myHome',$route.name==='myhome'?'active':'']" @click= "$router.push('/myhome')">我的</li>
   </ul>
 </template>
 <script>
-
+import {
+  getUserInfo
+} from '@/service/getData';
 
   export default {
     data() {
@@ -133,9 +135,24 @@
 
     computed: {},
 
-    methods: {},
+    methods: {
+      async initData(){
+        let ShopInfo = await getUserInfo({});
+        if(ShopInfo.data){
+          if(ShopInfo.data.distributorBO){
+            this.$router.push('/myShop')
+          }else{
+            this.$router.push('/shopApplicate')
+          }
+        }
+         
+        
+      }
+    },
 
-    mounted: function () {}
+    mounted: function () {
+     
+    }
   }
 
 </script>

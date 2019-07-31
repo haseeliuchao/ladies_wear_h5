@@ -390,10 +390,12 @@
           </div>
           <div class="selectedTrue" @click= "visiblePopup.selectedchoiceReasonVisible=false">选好了</div>
         </mt-popup>
+        <BackRouter/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     getOrderDetail
   } from '@/service/getData';
@@ -472,7 +474,8 @@
     watch: {},
 
     components: {
-      FileUpload: VueUploadComponent
+      FileUpload: VueUploadComponent,
+      BackRouter
     },
 
     computed: {

@@ -1,8 +1,12 @@
 <!-- storeCreate -->
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
+  .change-img-btn{
+    position: relative;
+  }
   .content{
-    min-height:100vh;
+    // min-height:100vh;
+    margin-top: -2px;
     background-color:#f2f2f2;
   }
   .store-con{
@@ -83,9 +87,15 @@
 </style>
 <template>
 <div>
+  <!-- <div class="change-img-btn">
+  <img src="~jd/images/storebg.png" style="width:10rem">
+  
+  </div> -->
+
+  <RopperImg v-if="flag" :defaltImg="shopForm.img_url" @sent-postSalesImg='getpostSalesImgData'/>
   <div class="content">
     <div class="storeCreate-con store-con">
-      <p>
+      <p style="border-top:none">
         <label for="name">店铺名称</label>
         <input type="text" name="name"  v-model="shopForm.title" placeholder="店铺为2-10个字符" id="name" v-validate.initial="'required'" @input="handleInput2($event)" @click="focuscodeoneclick" @blur="gotoView" v-focus="focuscodeoneState">
         <span v-show="shopForm.title.length>20">请输入合格店铺名称</span>
@@ -117,13 +127,16 @@
       :class="['cell-btn',errors.has('number')||(shopForm.title.length==0||shopForm.title.length>20)||shopForm.n_times.length==0||shopForm.n_times==0?'disabled-btn':'']" 
       @click= "saveShop">修改店铺</div>
   </div>
+  <BackRouter :fixePosition='2'/>
 </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     Toast
   }from 'mint-ui'
+  import RopperImg from 'component/common/cropperImg';
   export default{
     data(){
       return{
@@ -132,17 +145,27 @@
           title:'',
           category:'女装',
           n_times:1,
-          if_free_shipping:0
+          if_free_shipping:0,
+          img_url:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png'
         },
+        flag :false,
         focuscodeoneState : false,
         focuscodetwoState : false,
+        // postSalesImg:this.shopForm.img_url
       }
     },
     watch: {},
     components:{
+      RopperImg,BackRouter
     },
     computed:{},
+    created(){
+       this.initData();
+    },
     methods:{
+      getpostSalesImgData(url){
+       this.shopForm.img_url=url;
+      },
       async saveShop(){
         let distributor_id='';
         if(this.$route.params.distributor_id){
@@ -154,22 +177,16 @@
           distributor_id:this.shopForm.distributor_id,
           title:this.shopForm.title,
           n_times:this.shopForm.n_times,
-          if_free_shipping:this.shopForm.if_free_shipping
+          if_free_shipping:this.shopForm.if_free_shipping,
+          img_url:this.shopForm.img_url
         };
         //有传Id则是编辑模式 没传是新增   
           this.$store.dispatch('SaveShop',params).then(response=>{
             response.code != 10000?Toast({duration: 1000,message: '保存失败'}):Toast({duration: 1000,message: '保存成功'});
+            
+            setTimeout(() => {
             this.$router.push({path: '/myShop'})
-            // if(response.code != 10000){
-            //   Toast({duration: 1000,
-            //     message: '保存失败',
-            //   })
-            // }else {
-            //   Toast({duration: 1000,
-            //     message: '保存成功'
-            //   })
-            //   this.$router.push({path: '/myShop'})
-            // }
+            }, 1000);
           }).catch(error=>{
               Toast({duration: 1000,
                 message: '访问接口失败'
@@ -184,8 +201,10 @@
           }
           this.shopForm.distributor_id = res.data.distributor_id;
           this.shopForm.title = res.data.title;
+          this.shopForm.img_url = res.data.img_url?res.data.img_url:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png';
           this.shopForm.n_times = res.data.n_times;
           this.shopForm.if_free_shipping = res.data.if_free_shipping;
+          this.flag=true
         }
       },
       focuscodeoneclick () {
@@ -207,7 +226,7 @@
       }
     },  
     mounted: function () {
-      this.initData();
+      // this.initData();
     }
 
   }

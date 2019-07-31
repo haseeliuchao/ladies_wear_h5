@@ -64,10 +64,12 @@
         </div>
 
         <div class="fixed-btn" @click= "()=>$router.push({path: '/withdrawalEdit'})">修改提现账户</div>
+        <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getLocalStorage,
     setLocalStorage,
@@ -90,6 +92,7 @@ import {
 
     components: {
       // LoadMore
+      BackRouter
     },
 
     computed: {

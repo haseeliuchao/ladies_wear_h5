@@ -6,7 +6,7 @@
   .banner {
     height: 4.7rem;
     // height:175px;
-    margin-top:1.56rem;
+    // margin-top:1.56rem;
     img {
       min-width: 100%;
       max-width: 100%;
@@ -131,22 +131,39 @@
               font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 0.9rem;
+              height: 0.88rem;
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
+              // overflow: hidden;
+              // position: relative;
+              // &:after {
+              //       content: '...';
+              //       position: absolute;
+              //       font-weight: bold;
+              //       bottom: 0;
+              //       right: 0;
+              //       // padding: 0 20px 1px 45px;
+              //       padding-left:0.1rem;
+              //       background: #fff;
+              //     }
             }
+
+            
             .prod-price{
               color: $red;
               text-align:left;
-              line-height: 30px;
-              margin-bottom: 8px;
-              span{
-                font-size: 16px;
-                margin-right: 5px;
+              line-height: .8rem;
+              .prod-nowprice{
+               font-weight:bold;
+               margin-right:1px;
+               font-size:.426667rem
               }
-              strong{
-                font-size: 19px;
+              .prod-oldprice{
+               margin-left:.213333rem;
+               text-decoration: line-through;
+               color:#999;
+               font-size:.373333rem;
               }
             }
             .prod-pro{
@@ -155,6 +172,18 @@
               color: $gray;
               font-size: $subtitle;
             }
+          }
+          .add-store{
+            @include flexbox(flex-end,center,row,wrap);
+             padding: 0 10px;
+             margin-bottom: 10px;
+             span{
+               font-size: .293333rem;
+               color: $red;
+               padding: 0 4px;
+               border: 1px solid $red;
+               border-radius: 3px;
+             }
           }
         }
       }
@@ -195,8 +224,8 @@
         justify-content:center;
         padding-bottom:4px;
         &.active{
-          color:#ff2741;
-          border-bottom:2px solid #ff2741;
+          color:$red;
+          border-bottom:2px solid $red;
         }
       }
     }
@@ -222,7 +251,7 @@
           @include textoverflow(2);
         }
         .item-product-info {
-          color: #ff2741;
+          color: $red;
           padding: 15px .26rem;
           font-size: 15px;
           del{
@@ -317,17 +346,17 @@
           <mt-swipe :stopPropagation="true" :prevent="false" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index"  >
-              <img v-lazy="item.img_url"  @click="golink(item.http_url)">
+              <img v-lazy="item.img_url"  @click="golink(item.http_url);cnzzTrackEvent('首页轮播图','点击','跳转地址：'+item.http_url)">
             </mt-swipe-item>
           </mt-swipe>
           <!-- banner -->
           <!-- 产品说明 -->
           <div class="product-explain">
             <ul>
-              <li @click= "()=>$router.push({path: '/withdrawalSuccess'})"><img src="~jd/images/zhengpinicon.png">正品保障</li>
-              <li @click= "()=>$router.push({path: '/withdrawalInfo'})"><img src="~jd/images/tuihuanicon.png">五星售后</li>
-              <li @click= "()=>$router.push({path: '/withdrawalAccount'})"><img src="~jd/images/shipaiicon.png">商品实拍</li>
-              <li @click= "()=>$router.push({path: '/withdrawalEdit'})"><img src="~jd/images/kefuicon1.png">专属客服</li>
+              <li><img src="~jd/images/zhengpinicon.png">正品保障</li>
+              <li><img src="~jd/images/tuihuanicon.png">五星售后</li>
+              <li><img src="~jd/images/shipaiicon.png">商品实拍</li>
+              <li><img src="~jd/images/kefuicon1.png">专属客服</li>
               <!-- <li><a href="tel:13622178579">13622178579</a></li> -->
             </ul>
           </div>
@@ -345,14 +374,14 @@
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
                 <!-- <a :href="item.http_url"> -->
-                  <img v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                  <img v-lazy="item.img_url"  @click= "cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
                 <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-                <img  v-lazy="item.img_url"  @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                <img  v-lazy="item.img_url"  @click= "cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
               </div>
             </div>
           </div>
@@ -377,15 +406,16 @@
             <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
-                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" @click= "()=>$router.push('/product/'+item.item_id)">
-                  <img v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-                  <div class="prod-info">
+                <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" >
+                  <img @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+                  <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
-                      <span style="font-weight:bold;margin-right:1px;font-size:16px;">&yen;</span><span style="font-weight:bold"><em>{{item.sales_consumer_price/100.00|topriceafter}}</em>.{{item.sales_consumer_price/100.00|topricenext}}</span>
-                      <span style="margin-left:8px;text-decoration: line-through;color:#999;font-size:14px;"><em style="font-size:14px;">&yen;</em><em style="font-size:14px;">{{item.sales_price/100.00|topriceafter}}</em>.{{item.sales_price/100.00|topricenext}}</span>
-                      </p>
+                      <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
+                      <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
+                    </p>
                   </div>
+                  <p class="add-store"><span @click="addGood(item.item_id)">铺店</span></p>
                 </li>
               </ul>
             </load-more>
@@ -401,11 +431,14 @@
   import FooterView from 'component/footer/footerView';
   import BackHead from 'common/backHead';
   import {
+    showsearchBar
+  } from '@/utils/mixin';
+  import {
     getLocalStorage,
     setLocalStorage
   } from '@/utils/mixin';
   import {
-
+    addProduct,
     getArticle,
     getArticleList,
     getGoodsCategoryList,
@@ -459,7 +492,8 @@
           sort_type:1
         },
         active:0,
-        guideindex:null
+        guideindex:null,
+        ellipsis:false
       };
     },
     watch:{
@@ -524,6 +558,34 @@
       
     },
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
+
+
+      async addGood(itemId){
+         let Data = await addProduct({
+         item_id: itemId
+        });
+        if(Data.code!=10000){
+          if(Data.code==20025){
+            return
+          }else if(Data.code==40003){
+             this.$router.push({path: '/shopApplicate'});
+          }else{
+             Toast({duration: 1000,
+             message: Data.msg
+             })
+             return
+          }
+        }else{
+          Toast({duration: 1000,
+             message: '铺店成功'
+             })
+        }
+       },
+
+
       async golink(link){
         window.location.href = link
       },
@@ -611,9 +673,9 @@
       this.$refs.indexRusultloadMore.onloadMoreScroll();
       this.updatedData();
       // this.loginData();
-      // showBack(status => {
-      //   this.Status = status;
-      // })
+      showsearchBar(status => {
+          this.Status = status;
+      })
     }
   }
 

@@ -109,6 +109,9 @@
       }
   }
   .my-order {
+    .bgfff{
+      background: #fff;
+    }
     .my-header {
       padding: $padding;
       background: #fff;
@@ -177,11 +180,9 @@
     }
     .order-container {
       height: auto;
-      ._v-container {
-        // background: #fff;
-      }
+      
       .order-nomore-tip {
-        margin-top: 40%;
+        padding-top: 40%;
         @include flexbox(space-between,
         center,
         column,
@@ -451,7 +452,7 @@
 
     <div class="my-order">
      
-    <div class="order-container">
+    <div class="order-container" :class="[orderList==''?'bgfff':'']">
       <!-- :topMethod="onRefreshCallback" -->
       <load-more style="width:100%;" v-if="$route.name=='withdrawalAccountBook'"  @loadMore="infiniteCallback" :commad="commad" :param="params" 
         :loadMoreIconVisible="false" ref="orderLoadmore">
@@ -512,11 +513,12 @@
     </div>
     
   </div>
-  
+  <BackRouter/>
   <BackHead/>
 </div>
 </template>
 <script>
+import BackRouter from 'common/backRouter';
   import BackHead from 'common/backHead';
   import {
     settlementOrderB,
@@ -565,7 +567,8 @@
     },
     components:{
       BackHead,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
     methods: {
       closeMsg:function(event){

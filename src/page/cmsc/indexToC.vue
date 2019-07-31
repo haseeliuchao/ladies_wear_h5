@@ -37,7 +37,7 @@
               font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 0.9rem;
+              height: 0.88rem;
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
@@ -80,7 +80,7 @@
          
           <!-- <img v-lazy="item.img_url" alt="item.title"> -->
           <div class="banner">
-            <img src="~jd/images/storebg.png" alt="店铺图片">
+            <img :src="shopImgUrl" alt="店铺图片">
           </div>
 
           <!-- 店铺出售中的商品 -->
@@ -115,7 +115,8 @@
   import BackHead from 'common/backHead';
   import {
     getLocalStorage,
-    setLocalStorage
+    setLocalStorage,
+    getSessionStorage 
   } from '@/utils/mixin';
   import {
     // getGoodsCategoryList,
@@ -147,7 +148,8 @@
           current_page: 1
         },
         active:0,
-        guideindex:null
+        guideindex:null,
+        shopImgUrl:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png'
       };
     },
     watch:{      
@@ -176,15 +178,8 @@
       translateChange(y){ //监听下拉的阈值
         this.searchBarVisilbe = y>8 ? false : true;
       },
-      
-      // async getGoodsdata() {
-      //   this.indexParams.page_size = 10;
-      //   this.indexParams.current_page = 1;
-      //   this.indexRusultData=[];
-      //   this.$refs.indexRusultloadMore.onTopLoaded(this.$refs.indexRusultloadMore.uuid);
-      // },
       async infiniteCallback(response) { //下拉加载
-          if(response.data.distributor_item!=undefined&&response.data.distributor_item!=null){
+          if(response.data.distributor_item){
           if (response.data.distributor_item.length > 0) {
             response.data.distributor_item.map(i => {
               this.indexRusultData.push(i)
@@ -207,6 +202,9 @@
     beforeDestroy() {
     },
     mounted: function () {
+      if(getSessionStorage('shopImgUrl')){
+        this.shopImgUrl=getSessionStorage('shopImgUrl')
+      }
       this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     },

@@ -206,10 +206,13 @@
       <div class="btn-set" @click="setProfitshoe">批量设置利润</div>
       <div class="btn-save" @click="save">保存</div>
    </div>
+   <BackRouter :fixePosition='2'/>
   </div>
+
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getProduct,
     itemUpd
@@ -277,6 +280,7 @@ import shopVue from '../shop/shop.vue';
 
     components: {
       // LoadMore
+      BackRouter
     },
 
     computed: {

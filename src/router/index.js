@@ -12,6 +12,7 @@ const IndexToC= () => import ('page/cmsc/indexToC')
 const Pop = () => import ('page/member/pop')
 const Helpcenter = () => import ('page/member/helpcenter')
 const HelpcenterDetail = () => import ('page/member/helpcenterDetail')
+const CustomerSever = () => import ('page/member/customerSever')
 const Login = () => import ('page/member/login')
 const LoginBlank = () => import ('page/member/loginBlank')
 const BrowserLogin = () => import ('page/member/browserLogin')
@@ -61,6 +62,7 @@ const Goodedit = () =>  import ('page/shopb/goodedit')
 const MyShop = () => import ('page/shopToB/myShop')
 const ShopApplicate = () => import ('page/shopToB/shopApplicate')
 const ShopManage = () => import ('page/shopToB/shopManage')
+const ShopManageTransition = () => import ('page/shopToB/shopManageTransition')
 const MemberList = () => import ('page/shopToB/memberList')
 const MemberDetails = () => import ('page/shopToB/memberDetails')
 /* shopToB */
@@ -311,6 +313,13 @@ const appRouter = {
                     Title:'店铺管理'}
             },
             {
+                path: '/shopManageTransition',
+                name: 'shopManageTransition',
+                component: ShopManageTransition,
+                meta: { keepAlive: false ,
+                    Title:'店铺管理'}
+            },
+            {
                 path: '/memberList',
                 name: 'memberList',
                 component: MemberList,
@@ -423,6 +432,13 @@ const appRouter = {
             }
             ,
             {
+                path: '/customerSever',
+                name: 'customerSever',
+                component: CustomerSever,
+                meta: { keepAlive: false , Title:'客服服务'}
+            }
+            ,
+            {
                 path: '/withdrawalEntrance',
                 name: 'withdrawalEntrance',
                 component: WithdrawalEntrance,
@@ -480,13 +496,13 @@ const appRouter = {
         ],
        
             scrollBehavior(to, from, savedPosition) {
-                
+               
                 if(savedPosition) {
                     return savedPosition
                 } else {
                     return {
                         x: 0,
-                        y: 0
+                        y: 1
                     }
                 }
             }

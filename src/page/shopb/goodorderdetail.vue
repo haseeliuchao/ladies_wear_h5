@@ -489,10 +489,12 @@
                 <p class="order-product-detailtwo" style="justify-content:start"><span>订单编号：</span> <span>{{orderDetail.order_code}}</span></p>
                 <p class="order-product-detailtwo" style="justify-content:start"><span>下单时间：</span> <span>{{orderDetail.gmt_created | DateFormat('yyyy-MM-dd hh:mm')}}</span></p>
         </div>
+        <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
   import {
     getOrderDetail,payDirect
   } from '@/service/getData';
@@ -525,6 +527,7 @@
 
     components: {
       // LoadMore
+      BackRouter
     },
 
     computed: {},

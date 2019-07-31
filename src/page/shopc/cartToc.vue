@@ -81,7 +81,7 @@
               font-size: 0.343rem;
               color: #333;
               @include textoverflow(2);
-              height: 0.9rem;
+              height: 0.88rem;
               line-height: 0.45rem;
               margin-top: 4px;
               text-align: justify;
@@ -164,6 +164,27 @@
         width: 9.4rem;
         margin: 0 .3rem 110px;
         border-radius: 5px;
+        .delall-old-cart{
+            @include flexbox(space-between,
+                center,
+                row,
+                nowrap);
+                height: 1.333333rem;
+                padding: 0 15px;
+                border-top: 8px solid #f2f2f2;
+            .delall-old-cartleft{
+              color: #333;
+              font-size: .426667rem;
+              
+            }   
+            .delall-old-cartright{
+              font-size: .373333rem;
+          color: $red;
+          border: 1px solid $red;
+          padding: 2px 10px;
+          border-radius: 20px;
+            } 
+          }
         .store-pd-item {
           @include flexbox(flex-start, center, row, nowrap);
           padding: 10px;
@@ -222,7 +243,7 @@
               @include flexbox(space-between, center, row, nowrap);
               flex: initial;
               .left {
-                color: #ff2741;
+                color: $red;
                 font-weight:bold;
                 span {
                   font-size: 12px;
@@ -307,6 +328,14 @@
             }
           }
         }
+
+        .store-pd-itemnopadding{
+            border-bottom:none;
+            padding: 0 15px 15px;
+          }
+        .store-pd-itemnoborder{
+            border-bottom:none;
+          }
       }
     }
   }
@@ -354,12 +383,12 @@
         span{
           font-weight: bold;
           font-size: 12px;
-          color: #ff2741;
+          color: $red;
           
         }
         em{
           font-weight: bold;
-          color: #ff2741;
+          color: $red;
           &:first-child{
             margin-left:-3px;
           }
@@ -369,7 +398,7 @@
     .right {
       width: 34%;
       height: 100%;
-      background: #ff2741;
+      background: $red;
       color: #fff;
       @include flexbox(center, center, row, nowrap);
       strong {
@@ -424,8 +453,9 @@
             <p class="cartListEdit" v-if="delshow" @click= "editProductdelshow()">完成</p>
           </div>
           <div class="store-pd" v-if="cartList">
-            <div class="store-pd-item" v-for="(item,index) in cartList" :key="index">
-             
+            <div v-for="(item,index) in cartList" :key="index">
+              <p class="delall-old-cart" v-if="item.item_status!=1&&cartListfilter.length==index"><span class="delall-old-cartleft">以下商品已失效</span><span class="delall-old-cartright" @click="clearOldcart">清除所有商品</span></p>
+            <div class="store-pd-item" :class="[item.item_status!=1? 'store-pd-itemnopadding':'',item.item_status==1&&cartListfilter.length==index+1?'store-pd-itemnoborder':'',cartList.length===index+1?'store-pd-itemnoborder':'']">
               <i :class="['select-default-icon',item.checked ? 'select-icon' : '',item.item_status!=1&&!delshow ? 'select-defaultnone-icon' : '']" @click= "checked(item)"></i>
               <div class="pd-images">
                 <img v-lazy="item.item_url+'_190x190.jpg'" alt="">
@@ -444,7 +474,7 @@
                     <strong><em style="font-size:16px;">￥{{item.sales_consumer_price/100.00}}</em></strong>
                     
                   </div>
-                  <div class="right">
+                  <div class="right" v-if="item.item_status==1">
                     <div class="cut" @click= "editProductNum({item:item,increment:-1})"></div>
                     <input type="text" v-model="item.num" class="num-inp" @change="editProductNum({item:item,num:item.num})">
                     <div class="add" @click= "editProductNum({item:item,increment:1})"></div>
@@ -452,6 +482,7 @@
                 </div>
               </div>
 
+            </div>
             </div>
           </div>
         </div>
@@ -489,7 +520,7 @@
   import footerViewToC from 'component/footer/footerViewToC';
   import SearchBar from 'page/shop/searchBar';
   import {
-    Toast
+    Toast,MessageBox
   } from 'mint-ui'
   import {
     setSessionStorage,
@@ -513,6 +544,7 @@
         delshow:false,
         cartlength:0,
         indexRusultData:[],
+        shopImgUrl:''
       };
     },
 
@@ -552,6 +584,37 @@
         this.computedTotalFee();
 
       },
+      async clearOldcart(){
+          MessageBox.confirm("", {
+          message: "确定删除所有已失效商品？",
+          title: "",
+          cancelButtonClass: "cancelButton",
+          confirmButtonClass: "confirmButton"
+      }).then(action => {
+          if (action == "confirm") {
+           this.$store.dispatch('ClearOldcartDate', {
+                distributor_id: this.$route.params.distributor_id
+              }).then(response => {
+                if(response.code!=10000){
+                  Toast({duration: 1000,
+                  message: response.msg
+                  })
+                }else{
+                  Toast({duration: 1000,
+                message: '清除成功'
+                })
+                 this.initData();
+                }
+              })
+          }
+        })
+        .catch(err => {
+          if (err == "cancel") {
+            //取消的回调
+          }
+        });
+       },
+
       editProductdel(){
          let SelectedList = [];
         let Selectedstr = '';

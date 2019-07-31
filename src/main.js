@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 require('es6-promise').polyfill()       
 import Vue from 'vue'
-
+import uweb from 'vue-uweb'
 import App from './App'
 import router from './router'
 import 'babel-polyfill'
@@ -104,9 +104,7 @@ const config = {
    
 
  Vue.use(VeeValidate, config); 
-
-
-
+//  Vue.use(uweb,{siteId:'1277859167',debug:'true',src:'http://s11.cnzz.com/z_stat.php?id=1277859167&web_id=1277859167',autoPageview:false})
 var routerindex=0
 router.beforeEach((to,from,next)=>{
   if (to.meta.Title) {
@@ -148,6 +146,9 @@ router.beforeEach((to,from,next)=>{
       if(ShopInfo.code==10000){
         setSessionStorage('distributorId',distributorId)
         setSessionStorage('distributorTitle',ShopInfo.data.title)
+        if(ShopInfo.data.img_url){
+          setSessionStorage('shopImgUrl',ShopInfo.data.img_url)
+        }
         document.title=ShopInfo.data.title;
       }
     }
@@ -180,7 +181,6 @@ router.beforeEach((to,from,next)=>{
             })
             if(Datauser.code==10000||Datauser.code==20018){
               if(Datauser.code==10000){
-                console.log('1')
                 setSessionStorage('session_token',Datauser.data.session_token);
                 setSessionStorage('access_token',Datauser.data.access_token);
                 setSessionStorage('nickname',Datauser.data.nick);

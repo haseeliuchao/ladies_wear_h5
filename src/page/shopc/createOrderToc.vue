@@ -164,10 +164,10 @@
         span{
           font-weight:bold;
           font-size: 12px;
-          color: #ff2741; 
+          color: $red; 
         }
         em{
-          color: #ff2741;
+          color: $red;
         }
       }
       .payBtn {
@@ -766,7 +766,7 @@
 
     <div class="payOnline">
       <!-- &yen;{{totalFee}}  -->
-      <span>合计：<strong><em style="font-size:18px;" v-if="confirmSelectedProduct.pay_price>=0">￥{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
+      <span>合计：<strong><em style="font-size:16px;">￥{{confirmSelectedProduct.pay_price/100|TwoNum}}</em></strong></span>
       <div :class="['payBtn',wxPaystatus?'':'disabled-btn']" @click= "payByWallet">支付</div>
     </div>
     <div class="paymentLoading" v-if="visiblePopup.paymentLoadingVisible">
@@ -819,10 +819,12 @@
         <div class="addNewAddressbtn" @click= "()=>visiblePopup.couponVisible=false">确定</div>
       </div>
     </mt-popup>
+    <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
 <script>
+import BackRouter from 'common/backRouter';
 import {
     getLocalStorage,
     setLocalStorage
@@ -874,7 +876,7 @@ import {
             }
     },
 
-    components: {},
+    components: {BackRouter},
     computed: {
       ...mapGetters(["addressList"]),
       ...{

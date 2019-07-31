@@ -664,9 +664,11 @@
       </mt-popup>
     </mt-popup>
     <!-- 忘记密码 -->
+    <BackRouter/>
   </div>
 </template>
 <script>
+import BackRouter from 'common/backRouter';
   import {
     Field,
     Button,
@@ -741,7 +743,7 @@ import {
         }
       }
     },
-    components: {},
+    components: {BackRouter},
     methods: {
       closeOpen() {
         this.visiblePopup.login = false;
@@ -926,7 +928,7 @@ import {
     mounted: function () {
         pushHistory()
         window.onpopstate = (state) => {
-          console.log(state)
+          // console.log(state)
         this.$router.push('/index')  //输入要返回的上一级路由地址
         }
 
