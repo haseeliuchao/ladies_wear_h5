@@ -93,9 +93,9 @@
 
      <div class="default-qr">
          <div class="default-qrleft">
-             <p class="default-qrleft-top">开店小助手</p>
-             <p class="default-qrleft-mid">微信搜索并添加【惠眼识货】</p>
-             <p class="default-qrleft-bot">(ID：huiyanshihuo0001)</p>
+             <p class="default-qrleft-top">微信私人助理</p>
+             <p class="default-qrleft-mid">长按右侧二维码识别后添加</p>
+             <p class="default-qrleft-bot">或搜索(ID：huiyanshihuo0001)</p>
          </div>
          <div class="default-qrright">
              <img src="http://img.chaochujue.cn/ICON/2019/6/3/qr1563344451761.png" alt="" >
