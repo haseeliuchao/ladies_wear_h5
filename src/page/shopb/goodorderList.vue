@@ -17,72 +17,6 @@
     }
   }
 
-  .paymentContainer {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, .4);
-    @include flexbox(center,
-    center,
-    row,
-    nowrap);
-    .content {
-      width: 85%;
-      background: #fff;
-      border-radius: 10px;
-      >button {
-        width: 60%;
-        margin: 20px auto;
-        background: $red;
-      }
-      >a {
-        margin: 5px 0;
-        padding: 0 15px;
-      }
-      .title {
-        @include flexbox(center,
-        center,
-        row,
-        nowrap);
-        position: relative;
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-        strong {
-          font-size: 20px;
-        }
-        .closeIcon {
-          display: block;
-          background: url('~jd/images/product-detail-sprites-mjs.png') no-repeat;
-          width: 25px;
-          height: 25px;
-          background-position: -38px -19px;
-          background-size: 150px;
-          vertical-align: -8px;
-          position: absolute;
-          left: 10px;
-        }
-      }
-      .paymentInfo {
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-        @include flexbox(flex-start,
-        center,
-        column,
-        wrap);
-        font-size: 20px;
-        span {}
-        strong {
-          font-size: 40px;
-          font-weight: 400;
-          margin: 10px 0 0;
-        }
-      }
-    }
-  }
-
   .my-order {
     .my-header {
       padding: $padding;
@@ -102,7 +36,7 @@
         background-size: 100%;
       }
       strong {
-        font-size: 18px;
+        font-size: .48rem;
         font-weight: normal;
         color: #333;
       }
@@ -134,15 +68,15 @@
         width: calc((100%/8));
         background: $red;
         bottom: 0;
-        height: 2px;
+        height: .053333rem;
       }
       >span {
         // width: 33.33%;
-        padding: 12px 0 6px;
+        padding: .32rem 0 .16rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 14px;
+        font-size: .373333rem;
         color: #333;
       }
       .active {
@@ -151,9 +85,6 @@
     }
     .order-container {
       height: auto;
-      ._v-container {
-        // background: #fff;
-      }
       .order-nomore-tip {
         margin-top: 40%;
         @include flexbox(space-between,
@@ -162,15 +93,15 @@
         wrap);
         i {
           display: block;
-          width: 60px;
-          height: 60px;
+          width: 1.6rem;
+          height: 1.6rem;
           background: url('~jd/images/order.png') no-repeat;
           background-size: 100%;
         }
         span {
-          font-size: 17px;
+          font-size: .453333rem;
           font-weight: normal;
-          padding: 30px 0;
+          padding: .8rem 0;
           color: $gray;
         }
       }
@@ -178,7 +109,6 @@
         background: #f5f5f5;
       }
       .order-list {
-        // background: #fff;
         margin-top: $margin;
         .order-item {
           margin-top: 10px;
@@ -196,12 +126,12 @@
             .left {
               text-align: left;
               img {
-                width: 15px;
-                height: 15px;
+                width: .4rem;
+                height: .4rem;
                 vertical-align: bottom;
               }
               span {
-                font-size: 14px;
+                font-size: .373333rem;
                 color: #666;
                 // margin-left: 5px;
               }
@@ -209,7 +139,7 @@
             .right {
               .order-status {
                 color: $red;
-                font-size: 14px;
+                font-size: .373333rem;
               }
             }
           }
@@ -229,23 +159,22 @@
                 nowrap);
                 width: 100%;
                 img {
-                  max-width: 90px;
-                  max-height: 90px;
-                  // border: 1px solid #eee;
+                  max-width: 2.4rem;
+                  max-height: 2.4rem;
                   border-radius: 6px;
                 }
                 .product-info {
                   margin-left: $margin;
                   .prod-price {
-                    font-size: 14px;
+                    font-size: .373333rem;
                     >span{
                       color: #999;
                     }
                     strong {
-                      font-size: 14px;
+                      font-size: .373333rem;
                       span{
                         font-weight:bold;
-                        font-size: 12px;
+                        font-size: .32rem;
                         color: $red;
                         
                       }
@@ -261,14 +190,14 @@
                   }
                   p {
                     @include textoverflow(2);
-                    font-size: 13px;
-                    margin: 4px 0;
+                    font-size: .346667rem;
+                    margin: .106667rem 0;
                     color: #333;
-                    line-height: 20px;
+                    line-height: .533333rem;
                   }
                   .prodsku-info{
                     color: #666;
-                    font-size: 12px;
+                    font-size: .32rem;
                   }
 
                 }
@@ -277,23 +206,23 @@
           }
           .order-sku {
             background: #fff;
-            padding: 8px $padding;
+            padding: .213333rem $padding;
 
             font-size: $subtitle;
           
             span{
-              font-size: 15px;
+              font-size: .4rem;
               color: #333;
               em{
                 color: $red;
-                margin-left: 6px;
+                margin-left: .16rem;
               }
             }
             strong {
-                      font-size: 14px;
+                      font-size: .373333rem;
                       span{
                         font-weight:bold;
-                        font-size: 12px;
+                        font-size: .32rem;
                         color: $red;
                         
                       }
@@ -308,14 +237,14 @@
             center,
             row,
             nowrap);
-            padding: 5px $padding 16px;
+            padding: .133333rem .266667rem .426667rem;
             >span {
-              padding: 4px 10px;
+              padding: .106667rem .266667rem;
               color: $red;
-              font-size: 14px;
+              font-size: .373333rem;
               border: 1px solid $red;
               border-radius: 3px;
-              margin-left: 15px;
+              margin-left: .4rem;
             }
           }
         }
