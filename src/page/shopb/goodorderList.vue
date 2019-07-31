@@ -111,7 +111,7 @@
       .order-list {
         margin-top: $margin;
         .order-item {
-          margin-top: 10px;
+          margin-top: .213333rem;
           background: #fff;
           width: 9.4rem;
           margin-left: .3rem;
