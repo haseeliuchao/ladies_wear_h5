@@ -3,14 +3,11 @@
   @import '~assets/common/css/mixin.scss';
    /* banner */
   .banner {
-    // height: 4.88rem;
-    height:175px;
-    margin-bottom:10px;
+    height:4.666667rem;
+    margin-bottom:.213333rem;
     img {
-      min-width: 100%;
-      max-width: 100%;
-      max-height: 100%;
-      height:175px;
+      width: 10rem;
+      height:4.666667rem;
     }
   }
   /* 店铺出售中的商品 */
