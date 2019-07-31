@@ -463,9 +463,9 @@
         !withdrawalForm.bank_card_number||
         !withdrawalForm.bank_card_holder||
         !withdrawalForm.bank_card_branch_name||
-        !flog1||
-        !flog2||
-        !flog3||
+          !flog1||
+          !flog2||
+          !flog3||
         !withdrawalForm.sms_code?'disabled-btn':'']"
       @click="saveBankCard"
     >保存</div>
@@ -843,7 +843,16 @@ export default {
         let Data = await accountRevenueDetail();
         if(Data.code==10000){
             if(Data.data.member_bank_bo){
-                this.withdrawalForm=Data.data.member_bank_bo
+                this.withdrawalForm=Data.data.member_bank_bo;
+                if(this.withdrawalForm.bank_card_holder){
+                  this.flog1=true;
+                }
+                if(this.withdrawalForm.bank_card_number){
+                  this.flog2=true;
+                }
+                if(this.withdrawalForm.bank_card_branch_name){
+                  this.flog3=true;
+                }
                 if(this.withdrawalForm.bank_name.indexOf('招商')!=-1){
                     this.bankCheckicon=1
                 }

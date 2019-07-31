@@ -292,15 +292,15 @@
     .banner {
       .mint-swipe-indicators {
         transform: translate(-50%, -50%);
-        bottom: 0;
+        bottom: -5px;
         .mint-swipe-indicator {
-          width: 7px;
-          height:7px;
+          width: 5px;
+          height:5px;
           background: #ddd;
           opacity:1;
           &.is-active {
-            width: 15px;
-            height:6px;
+            width: 12px;
+            height:5px;
             background:#fff ;
             border-radius:4px;
           }
