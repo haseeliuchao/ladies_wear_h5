@@ -295,7 +295,7 @@
                       <p class="prod-name">{{itemdetail.item_title}}</p>
                       <p class="prodsku-info">颜色 {{itemdetail.color}}&nbsp;&nbsp;&nbsp;&nbsp;尺寸 {{itemdetail.size}}</p>
                       <p class="prod-price">
-                        <strong><em style="font-size:16px;">¥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
+                        <strong><em style="font-size:.426667rem;">¥{{itemdetail.item_distributor_b_o.distributor_item_sku_price/100|TwoNum}}</em></strong>
                         <span>x{{itemdetail.num}}</span>
                       </p>
                     </div>
@@ -303,13 +303,13 @@
                 </div>
               </div>
               <div class="order-sku" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})">
-                <span style="font-size:14px;">共{{item.item_sum}}件,</span>
-                <strong style="color:#333;font-size:15px;">合计：¥{{item.pay_price/100|TwoNum}}</strong>
-                <span style="color:#999;font-size:13px;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
+                <span style="font-size:.373333rem;">共{{item.item_sum}}件,</span>
+                <strong style="color:#333;font-size:.4rem;">合计：¥{{item.pay_price/100|TwoNum}}</strong>
+                <span style="color:#999;font-size:.346667rem;">(含运费：¥{{item.post_fee/100|TwoNum}})</span>
               </div>
 
-              <div class="order-sku" style="padding-top: 0px;padding-bottom: 16px;" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
-                <strong style="font-size:15px;"><em>利润：¥{{item.order_profit/100|TwoNum}}</em></strong>
+              <div class="order-sku" style="padding-top: 0px;padding-bottom: .426667rem;" @click= "()=>$router.push({path: '/goodorderdetail/'+item.order_code,query: {distributor_id:$route.query.distributor_id}})"> 
+                <strong style="font-size:.4rem;"><em>利润：¥{{item.order_profit/100|TwoNum}}</em></strong>
               </div>
 
 
