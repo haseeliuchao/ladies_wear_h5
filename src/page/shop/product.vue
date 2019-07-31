@@ -1528,10 +1528,10 @@ methods: {
             return;
           }
           if(value.indexOf("img1.vvic.com")!=-1){
-            return value.replace('https://img1.vvic.com','http://m.chaochujue.cn/vvic/img1');
+            return value.replace('https://img1.vvic.com','https://m.chaochujue.cn/vvic/img1');
           }
           if(value.indexOf("img.vvic.com")!=-1){
-            return value.replace('https://img.vvic.com','http://m.chaochujue.cn/vvic/img');
+            return value.replace('https://img.vvic.com','https://m.chaochujue.cn/vvic/img');
           }
           if(value.indexOf("alicdn.com")!=-1){
             return value;
