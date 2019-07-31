@@ -93,10 +93,17 @@
       row,
       nowrap);
       p{
-         width: 60%;font-size: 16px;
+         width: 60%;font-size: .426667rem;
          margin-left: .6rem;
          color: #fff;
-         line-height: 22px;
+         line-height: .586667rem;
+         .looklog-info{
+           font-size: .373333rem;
+           color: #fff;
+           padding: .026667rem .266667rem;
+           border: 1px solid #fff;
+           border-radius: 3px;
+         }
       }
       
     }
@@ -426,10 +433,16 @@
   <div class="my-order">
     <div class="ordertop-status">
          <p v-if="orderDetail.order_status===1">等待买家付款</p>
-         <p v-if="orderDetail.order_status===2">等待供应商发货</p>
-         <p v-if="orderDetail.order_status===3">等待买家收货</p>
-         <p v-if="orderDetail.order_status===4">交易已完成</p>
-         <p v-if="orderDetail.order_status===5">订单已失效</p>
+         <p v-if="orderDetail.order_status===2">等待供应商发货
+           <br>
+           <span class="looklog-info" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
+         </p>
+         <p v-if="orderDetail.order_status===3">等待买家收货<br>
+           <span class="looklog-info" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span></p>
+         <p v-if="orderDetail.order_status===4">交易已完成<br>
+           <span class="looklog-info" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span></p>
+         <p v-if="orderDetail.order_status===5">订单已失效<br>
+           <span class="looklog-info" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span></p>
          <img v-if="orderDetail.order_status===1" src="~jd/images/order_daifu.png" style="height:48px;">
          <img v-if="orderDetail.order_status===2" src="~jd/images/order_daifa.png" style="height:48px;">
          <img v-if="orderDetail.order_status===3" src="~jd/images/order_daishou.png" style="height:48px;">
