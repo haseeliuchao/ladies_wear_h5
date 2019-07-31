@@ -96,7 +96,7 @@
          width: 60%;font-size: .426667rem;
          margin-left: .6rem;
          color: #fff;
-         line-height: .586667rem;
+         line-height: .64rem;
          .looklog-info{
            font-size: .373333rem;
            color: #fff;
@@ -113,16 +113,16 @@
       margin-top: $margin;
       color: #333;
       .address-title{
-        font-size: 16px;
+        font-size: .426667rem;
         margin-bottom: $margin
       }
       .address-username{
-        font-size: 14px;
-        line-height: 25px;
+        font-size: .373333rem;
+        line-height: .666667rem;
       }
       .address-text{
-        font-size: 13px;
-        line-height: 18px;
+        font-size: .346667rem;
+        line-height: .48rem;
       }
     }
     .order-product-detail{
@@ -133,13 +133,13 @@
               center,
               row,
               nowrap);
-              font-size: 15px;
-             line-height: 26px;
+              font-size: .4rem;
+             line-height: .693333rem;
               strong{
-                      font-size: 14px;
+                      font-size: .373333rem;
                       span{
                         font-weight:bold;
-                        font-size: 12px;
+                        font-size: .32rem;
                         color: $red;
                         
                       }
@@ -177,10 +177,10 @@
             >span {
               padding: 4px 10px;
               color: $red;
-              font-size: 14px;
+              font-size: .373333rem;
               border: 1px solid $red;
               border-radius: 3px;
-              margin-left: 15px;
+              margin-left: .4rem;
             }
           }
           }
@@ -203,7 +203,7 @@
         background-size: 100%;
       }
       strong {
-        font-size: 18px;
+        font-size: .48rem;
         font-weight: normal;
         color: #333;
       }
@@ -243,7 +243,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 14px;
+        font-size: .373333rem;
         color: #333;
       }
       .active {
@@ -263,15 +263,15 @@
         wrap);
         i {
           display: block;
-          width: 60px;
-          height: 60px;
+          width: 1.6rem;
+          height: 1.6rem;
           background: url('~jd/images/order.png') no-repeat;
           background-size: 100%;
         }
         span {
-          font-size: 17px;
+          font-size: .453333rem;
           font-weight: normal;
-          padding: 30px 0;
+          padding: .8rem 0;
           color: $gray;
         }
       }
@@ -295,12 +295,12 @@
             .left {
               text-align: left;
               img {
-                width: 15px;
-                height: 15px;
+                width: .4rem;
+                height: .4rem;
                 vertical-align: bottom;
               }
               span {
-                font-size: 15px;
+                font-size: .4rem;
                 color: #666;
                 // margin-left: 5px;
               }
@@ -308,7 +308,7 @@
             .right {
               .order-status {
                 color: $red;
-                font-size: 15px;
+                font-size: .4rem;
               }
             }
           }
@@ -329,28 +329,28 @@
                 width: 100%;
                 padding: 0px;
                 img {
-                  max-width: 90px;
-                  max-height: 90px;
+                  max-width: 2.4rem;
+                  max-height: 2.4rem;
                   // border: 1px solid #eee;
                   border-radius: 6px;
                 }
                 .product-info {
                   margin-left: $margin;
                   .prod-price {
-                    font-size: 14px;
+                    font-size: .373333rem;
                     >span{
                       color: #999;
                     }
                     strong {
-                      font-size: 14px;
+                      font-size: .373333rem;
                       span{
                         font-weight:bold;
-                        font-size: 12px;
+                        font-size: .32rem;
                         color: $red;
                         
                       }
                       em{
-                        font-size:16px;
+                        font-size:.426667rem;
                         color: $red;
                         font-style: normal
                       }
@@ -362,14 +362,14 @@
                   }
                   p {
                     @include textoverflow(2);
-                    font-size: 13px;
+                    font-size: .346667rem;
                     margin: 4px 0;
                     color: #333;
-                    line-height: 20px;
+                    line-height: .533333rem;
                   }
                   .prodsku-info{
                     color: #666;
-                    font-size: 12px;
+                    font-size: .32rem;
                   }
 
                 }
@@ -385,7 +385,7 @@
             // border-bottom: 1px solid #eee;
             // color: #333;
             span{
-              font-size: 15px;
+              font-size: .4rem;
               color: #333;
               em{
                 color: $red;
@@ -393,10 +393,10 @@
               }
             }
             strong {
-                      font-size: 14px;
+                      font-size: .373333rem;
                       span{
                         font-weight:bold;
-                        font-size: 12px;
+                        font-size: .32rem;
                         color: $red;
                         
                       }
@@ -416,7 +416,7 @@
             >span {
               padding: 4px 10px;
               color: $red;
-              font-size: 13px;
+              font-size: .346667rem;
               border: 1px solid $red;
               border-radius: 3px;
               margin: 5px 0 5px 15px;
