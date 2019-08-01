@@ -36,10 +36,6 @@ export default function wxShare({ title, desc, link, imgUrl} = {}) {
         }else{
             wx.showOptionMenu()
         }
-        if(link){
-            _czc.push(["_trackEvent",location.href.split("#")[1]+'页面分享','分享','分享链接：'+link]);
-        }
-    
         wx.onMenuShareAppMessage({
             title: title, // 分享标题
             desc: desc, // 分享描述
