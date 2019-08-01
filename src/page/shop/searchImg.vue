@@ -357,6 +357,9 @@ import BackRouter from 'common/backRouter';
     computed: {},
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
        async addGood(itemId){
          let Data = await addProduct({
          item_id: itemId
@@ -420,6 +423,7 @@ import BackRouter from 'common/backRouter';
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
                             that.postSalesImg="https://img.chaochujue.cn"+response.data.url;
+                            that.cnzzTrackEvent('图片搜索','跳转搜索结果页','图片链接：'+that.postSalesImg);
                             that.$router.push({path: '/searchRusult',query: {item_url:that.postSalesImg}})
                             that.HistoryImgData = getLocalStorage('searchHistoryImgData')?getLocalStorage('searchHistoryImgData'):[];
                             if(that.HistoryImgData.length==0)return setLocalStorage('searchHistoryImgData',[{item_url:that.postSalesImg,Date:new Date()}]);

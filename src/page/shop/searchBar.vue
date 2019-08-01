@@ -459,6 +459,9 @@ export default {
   computed: {},
 
   methods: {
+    cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
     async searchRusult(keyWords) {
       this.searchRusultData = [];
       let { Data } = await searchGoods({
@@ -497,6 +500,7 @@ export default {
         Toast("请输入搜索词");
         return;
       }
+      this.cnzzTrackEvent('文字搜索','跳转搜索结果页','搜索内容：'+prod);
       this.$router.push({ path: "/searchRusult", query: { title: prod } });
       let HistoryData = getLocalStorage("searchHistoryData");
       if (!HistoryData)

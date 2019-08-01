@@ -95,11 +95,7 @@ import BackRouter from 'common/backRouter';
     computed: {},
 
     methods: {
-      async initData() {
-       
-      },
-      
-    
+
     },
     filters:{
         topriceafter(value){
@@ -110,8 +106,8 @@ import BackRouter from 'common/backRouter';
         }
     },
     mounted: function () {
-
-
+       
+      
       this.distributorId=getSessionStorage('distributorId')
       if(this.distributorId){
         document.title=getSessionStorage('distributorTitle');

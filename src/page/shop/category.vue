@@ -105,7 +105,7 @@
         <load-more  :loadMoreIconVisible="false" ref="loadMore" style="width: 100%;left:initial;right:0;">
           <div class="jd-categoryContent">
             <div class="categoryContentBox" v-if="categoryBody.categoryList.length>0">
-              <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click= "$router.push({path: '/searchRusult',query: {category_id:item.category_id}})">
+              <div class="categorytItem" v-for="(item,index) in categoryBody.categoryList" :key="index" @click= "cnzzTrackEvent('分类页面','跳转搜索结果页','分类ID：'+item.category_id);$router.push({path: '/searchRusult',query: {category_id:item.category_id}})">
                 <img :src="item.icon" alt="" />
                 <p>{{item.name}}</p>
               </div>
@@ -163,6 +163,9 @@
     },
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       ...mapMutations([
         'SET_CATEGORY_DATA'
       ]),

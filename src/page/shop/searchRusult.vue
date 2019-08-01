@@ -603,8 +603,8 @@
           ref="searchRusultloadMore">
         <ul class="product-list" >
           <li class="prod-item" v-for="(item,index) in searchRusultData" :key="index">
-            <img  @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-            <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
+            <img  @click= "cnzzTrackEvent('搜索结果页','跳转详情页','商品ID：'+item.item_id);$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+            <div class="prod-info" @click= "cnzzTrackEvent('搜索结果页','跳转详情页','商品ID：'+item.item_id);$router.push('/product/'+item.item_id)">
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
                       <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
@@ -682,6 +682,9 @@ import BackRouter from 'common/backRouter';
     computed: {},
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       async addGood(itemId){
          let Data = await addProduct({
          item_id: itemId
@@ -698,6 +701,7 @@ import BackRouter from 'common/backRouter';
              return
           }
         }else{
+          this.cnzzTrackEvent('搜索结果页','铺店','商品ID：'+itemId);
           Toast({duration: 1000,
              message: '铺店成功'
              })
@@ -707,22 +711,6 @@ import BackRouter from 'common/backRouter';
          let Data = await addProductAll({
          store_id: storeId
         });
-        // if(Data.code!=10000){
-        //   if(Data.code==20025){
-        //     return
-        //   }else if(Data.code==40003){
-        //      this.$router.push({path: '/shopApplicate'});
-        //   }else{
-        //      Toast({duration: 1000,
-        //      message: Data.msg
-        //      })
-        //      return
-        //   }
-        // }else{
-        //   Toast({duration: 1000,
-        //      message: '铺店成功'
-        //      })
-        // }
         if(Data.code==20025){
           return
         }else if(Data.code==40003){
@@ -732,6 +720,7 @@ import BackRouter from 'common/backRouter';
              message: '该店铺商品今日已铺店'
              })
         }else{
+          this.cnzzTrackEvent('搜索结果页','店铺一键铺店','店铺ID+店铺名称：'+storeId+':'+this.$route.query.store_name);
           Toast({duration: 1000,
              message: '正在铺店，你可以先浏览商品'
              })
@@ -741,36 +730,42 @@ import BackRouter from 'common/backRouter';
           this.activeone=type; 
           switch (Number(type)) {
           case 0:
+            this.cnzzTrackEvent('搜索结果页','价格筛选','20元以下');
             this.searchParams.min_price=0;
             this.searchParams.max_price=2000;
             this.minPrice=0;
             this.maxPrice=20;
             break;
           case 1:
+            this.cnzzTrackEvent('搜索结果页','价格筛选','20元-40元');
             this.searchParams.min_price=2000;
             this.searchParams.max_price=4000;
             this.minPrice=20;
             this.maxPrice=40;
             break;
           case 2:
+            this.cnzzTrackEvent('搜索结果页','价格筛选','40元-60元');
             this.searchParams.min_price=4000;
             this.searchParams.max_price=6000;
             this.minPrice=40;
             this.maxPrice=60;
             break;
           case 3:
+            this.cnzzTrackEvent('搜索结果页','价格筛选','60元-80元');
             this.searchParams.min_price=6000;
             this.searchParams.max_price=8000;
             this.minPrice=60;
             this.maxPrice=80;
             break;
           case 4:
+            this.cnzzTrackEvent('搜索结果页','价格筛选','100元-150元');
             this.searchParams.min_price=10000;
             this.searchParams.max_price=15000;
             this.minPrice=100;
             this.maxPrice=150;
             break;
           case 5:
+            this.cnzzTrackEvent('搜索结果页','价格筛选','150元以上');
             this.searchParams.min_price=15000;
             this.searchParams.max_price=null;
             this.minPrice=150;
@@ -808,6 +803,7 @@ import BackRouter from 'common/backRouter';
             this.activeone=null;
         },
       changeQuery(title){
+         this.cnzzTrackEvent('搜索结果页','头部文字搜索','搜索内容：'+title)
          this.$router.push({path:'/searchRusult',query:{title:title}})
          this.searchRusult()
       },
@@ -823,9 +819,11 @@ import BackRouter from 'common/backRouter';
         this.searchParams.min_price=null;
         this.searchParams.max_price=null;
          if(index==1){
+           this.cnzzTrackEvent('搜索结果页','搜索类型','每日上新')
            this.active=1;
-           this.sort_enum=null;
+           this.sort_enum=null;  
          }else if(index==2){
+           this.cnzzTrackEvent('搜索结果页','搜索类型','价格排序')
            this.active=2;
            this.sort_enum='ASC'
            if(this.sort_enumboo){
@@ -835,6 +833,7 @@ import BackRouter from 'common/backRouter';
            }
            this.sort_enumboo=!this.sort_enumboo;
          }else if(index==3){
+           this.cnzzTrackEvent('搜索结果页','搜索类型','综合排序')
            this.active=0;
            this.sort_enum=null
          }

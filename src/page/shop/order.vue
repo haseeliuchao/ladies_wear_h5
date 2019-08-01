@@ -564,7 +564,7 @@
         <div class="order-btn-group">
                 <span v-if="orderDetail.order_status===1" style="color:#999;border:1px solid #999" class="payment" @click= "cancelOrder(orderDetail)">取消订单</span>
                 <span v-if="orderDetail.order_status===1" class="payment" @click= "payment(orderDetail)">立即支付</span>
-                <span v-if="orderDetail.order_status===3||orderDetail.order_status===4" style="color:#999;border:1px solid #999" class="payment" @click= "$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
+                <span v-if="orderDetail.order_status===3||orderDetail.order_status===4" style="color:#999;border:1px solid #999" class="payment" @click= "cnzzTrackEvent('B端订单详情','查看物流','订单号：'+orderDetail.order_code);$router.push({path: '/logisticsInfo',query: {order_code:orderDetail.order_code}})">查看物流</span>
                 <span v-if="orderDetail.order_status===3" @click= "finishOrder(orderDetail)" class="payment">确认收货</span>
                 </div>
         </div>
@@ -618,6 +618,9 @@ import QiyuKefu from 'common/qiyuKefu';
     computed: {},
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       textCon(index){
           return "textCon" +index
       },
@@ -654,6 +657,7 @@ import QiyuKefu from 'common/qiyuKefu';
         // this.orderDetail.orderDetailList=Data.data
       },
       opendownload(index,value){
+        this.cnzzTrackEvent('B端订单详情','下载','下载链接');
         if(value==null||value==''){
           Toast({duration: 1000,
             message: '未获取到下载链接',
@@ -681,6 +685,7 @@ import QiyuKefu from 'common/qiyuKefu';
       },
       wxPay(data){
          let that = this
+         this.cnzzTrackEvent('B端订单详情','支付','订单号：'+data.order_code);
             WeixinJSBridge.invoke(
             //微信支付的一些认证  需要去网站设置好  然后在这调用
                 'getBrandWCPayRequest', {
@@ -693,6 +698,7 @@ import QiyuKefu from 'common/qiyuKefu';
                 },
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                            that.cnzzTrackEvent('B端订单详情','支付成功','订单号：'+data.order_code);
                             that.$router.push({
                                 path:'/orderRusult' 
                             })
@@ -718,6 +724,7 @@ import QiyuKefu from 'common/qiyuKefu';
                   message: response.msg
                   })
                 }else{
+                 this.cnzzTrackEvent('B端订单详情','确认收货','订单号：'+item.order_code);
                  this.initData()
                 }
               })
@@ -734,6 +741,7 @@ import QiyuKefu from 'common/qiyuKefu';
           Toast({duration: 1000,
             message: "订单已取消"
           })
+          this.cnzzTrackEvent('B端订单详情','取消订单','订单号：'+item.order_code);
           this.initData()
         })
       },

@@ -1241,11 +1241,12 @@ methods: {
             that.checkIdnums=[]
             that.colorCur=[];
             this.productInfo.shopping_cart_num+=1;
+            this.cnzzTrackEvent('B端详情页','加入购物车','商品ID+商品SKU数量：'+this.$route.params.id+':'+JSON.stringify(this.checkIdnums));
           return Toast({duration: 1000,
             message: '加入购物车成功',
             position: 'center'
           })
-          this.cnzzTrackEvent('B端详情页','加入购物车','商品ID+商品SKU数量：'+this.$route.params.id+':'+JSON.stringify(this.checkIdnums));
+         
           }else if(response.code==20025){
           }else{
             Toast({duration: 1000,
@@ -1285,11 +1286,12 @@ methods: {
             that.checkIdnums=[];
             that.colorCur=[];
             this.productInfo.shopping_cart_num+=1;
+            this.cnzzTrackEvent('B端详情页','加入购物车','商品ID+商品SKU数量：'+this.$route.params.id+':'+JSON.stringify(this.checkIdnums));
           return Toast({duration: 1000,
             message: '加入购物车成功',
             position: 'center'
           })
-            this.cnzzTrackEvent('B端详情页','加入购物车','商品ID+商品SKU数量：'+this.$route.params.id+':'+JSON.stringify(this.checkIdnums));
+            
           }else if(response.code==20025){
           }else{
             Toast({duration: 1000,

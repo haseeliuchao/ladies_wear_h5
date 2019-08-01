@@ -854,8 +854,8 @@
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index">
-                  <img  @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-                  <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
+                  <img  @click= "cnzzTrackEvent('B端购物车推荐商品','跳转详情页','商品ID：'+item.item_id);$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+                  <div class="prod-info" @click= "cnzzTrackEvent('B端购物车推荐商品','跳转详情页','商品ID：'+item.item_id);$router.push('/product/'+item.item_id)">
                           <p class="prod-title">{{item.title}}</p>
                           <p class="prod-price">
                             <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
@@ -1049,11 +1049,12 @@
             }
             that.checkIdnums=[]
             that.colorCur=[];
+             this.cnzzTrackEvent('B端购物车','购物车项编辑','商品ID+商品SKU数量：'+this.curItemId+':'+JSON.stringify(this.checkIdnums));
             return Toast({duration: 1000,
               message: '编辑成功',
               position: 'center'
             })
-            this.cnzzTrackEvent('B端购物车','购物车项编辑','商品ID+商品SKU数量：'+this.curItemId+':'+JSON.stringify(this.checkIdnums));
+           
           }else if(response.code==20025){
           }else{
             Toast({duration: 1000,
@@ -1141,6 +1142,7 @@
              return
           }
         }else{
+          this.cnzzTrackEvent('B端购物车推荐商品','铺店','商品ID：'+itemId)
           Toast({duration: 1000,
              message: '铺店成功'
              })
@@ -1165,6 +1167,7 @@
                   Toast({duration: 1000,
                 message: '清除成功'
                 })
+                this.cnzzTrackEvent('B端购物车','清除失效商品','店铺ID：0')
                 this.onRefreshCallback()
                 }
               })
@@ -1239,6 +1242,7 @@
         this.$store.dispatch('RemoveSelectedProduct', {
           shopping_cart_item_ids: Selectedstr
         }).then(response => {
+          this.cnzzTrackEvent('B端购物车','删除购物车','商品购物车id：'+Selectedstr)
           this.onRefreshCallback();
         })
       },
@@ -1259,7 +1263,7 @@
           message: '请选择商品',
           position: 'center'
         });
-
+        this.cnzzTrackEvent('B端购物车','结算商品','商品购物车id：'+Selectedstr)
         this.$router.push({path: '/createOrder',query: {Selectedstr:Selectedstr,checkout_type:1}});
       },
       computedTotalFee() {
