@@ -346,7 +346,7 @@
           <mt-swipe :stopPropagation="true" :prevent="false" :auto="5000" class="banner">
             <mt-swipe-item v-for="(item,index) in cmsDataTypeones" 
              :key="index"  >
-              <img v-lazy="item.img_url"  @click="golink(item.http_url)">
+              <img v-lazy="item.img_url"  @click="golink(item.http_url);cnzzTrackEvent('首页轮播图','点击','跳转地址：'+item.http_url)">
               <!-- ;cnzzTrackEvent('首页轮播图','点击','跳转地址：'+item.http_url) -->
             </mt-swipe-item>
           </mt-swipe>
@@ -374,16 +374,16 @@
             <div class="deploy-floor-l" >
               <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigsone" :key="index">
                 <!-- <img  :src="item.img_url" @click= "()=>$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url}})"> -->
-                <!-- <a :href="item.http_url">  cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);-->
-                  <img v-lazy="item.img_url"  @click= "$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+                <!-- <a :href="item.http_url">  -->
+                  <img v-lazy="item.img_url"  @click= "cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
                 <!-- </a> -->
               </div>
             </div>
             <!-- cmsData -->
             <div class="deploy-floor-r">
              <div class="deploy-item"  v-for="(item,index) in cmsDataTypeconfigstwo" :key="index">
-               <!-- cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id); -->
-                <img  v-lazy="item.img_url"  @click= "$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
+               <!--  -->
+                <img  v-lazy="item.img_url"  @click= "cnzzTrackEvent('首页配置图片','点击','配置ID：'+item.ad_advertising_id);$router.push({path: '/searchRusult',query: {advertising_id:item.ad_advertising_id,img_url:item.img_url1}})">
               </div>
             </div>
           </div>
@@ -399,7 +399,7 @@
 
               <ul>
                 <li @click= "getGoodsdata('',0)" :class="{'active':active===0}">精选</li>
-                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" :class="{'active':active===index+1}" @click= "getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
+                <li  v-for="(item,index) in cmsDataTyperecommends" :key="index" :class="{'active':active===index+1}" @click= "cnzzTrackEvent('首页滑动标签','点击','配置ID：'+item.ad_advertising_id);getGoodsdata(item.ad_advertising_id,index+1)">{{item.title}}</li>
               </ul>
             </div>
           </div>
@@ -409,15 +409,15 @@
                 ref="indexRusultloadMore">
               <ul class="product-list" >
                 <li class="prod-item" v-for="(item,index) in indexRusultData" :key="index" >
-                  <img @click= "()=>$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
-                  <div class="prod-info" @click= "()=>$router.push('/product/'+item.item_id)">
+                  <img @click= "cnzzTrackEvent('首页推荐商品','跳转详情页','商品ID：'+item.item_id);$router.push('/product/'+item.item_id)" v-lazy="item.index_img_url+'_230x230.jpg'" alt="">
+                  <div class="prod-info" @click= "cnzzTrackEvent('首页推荐商品','跳转详情页','商品ID：'+item.item_id);$router.push('/product/'+item.item_id)">
                     <p class="prod-title">{{item.title}}</p>
                     <p class="prod-price">
                       <span class="prod-nowprice">￥{{item.sales_consumer_price/100|TwoNum}}</span>
                       <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
                     </p>
                   </div>
-                  <p class="add-store"><span @click="addGood(item.item_id)">铺店</span></p>
+                  <p class="add-store"><span @click="cnzzTrackEvent('首页推荐商品','铺店','商品ID：'+item.item_id);addGood(item.item_id)">铺店</span></p>
                 </li>
               </ul>
             </load-more>

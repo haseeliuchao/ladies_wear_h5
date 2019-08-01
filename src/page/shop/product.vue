@@ -981,7 +981,7 @@
                   <span class="sku-info" >{{productInfo.store_b_o.address}}</span>
                 </div>
               </div>
-              <div class="product-shop-right" @click= "()=>$router.push({path: '/searchRusult',query: {store_id:productInfo.store_id,store_name:productInfo.store_b_o.name}})"><span class="product-shop-righttext">进入店铺</span><span class="right-menu"></span></div>
+              <div class="product-shop-right" @click= "cnzzTrackEvent('B端详情页','进入店铺','店铺ID+店铺名称：'+productInfo.store_id+':'+productInfo.store_b_o.name);$router.push({path: '/searchRusult',query: {store_id:productInfo.store_id,store_name:productInfo.store_b_o.name}})"><span class="product-shop-righttext">进入店铺</span><span class="right-menu"></span></div>
             </div>
 
             <!-- 为你推荐 -->
@@ -1012,7 +1012,7 @@
       <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
     </div>
     <div class="cart-shop-fixed" v-if="$route.query.distributor_id">
-        <div @click= "()=>$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
+        <div @click= "cnzzTrackEvent('B端详情页','编辑商品','商品ID+店铺ID：'+productInfo.item_id+':'+$route.query.distributor_id);$router.push({path:'/goodedit/'+productInfo.item_id,query: {shopId:$route.query.distributor_id}})">编辑</div>
         <div @click= "lowerShelf(productInfo.item_status)" v-if="productInfo.item_status==1">下架</div>
         <div @click= "upperShelf(productInfo.item_status)" v-if="productInfo.item_status!=1">上架</div>
         <div @click= "selfBuy" style="background: #ff5527;border:1px solid #ff5527;color:#fff">自己买</div>
@@ -1152,6 +1152,9 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
 methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
        async showactionsheet(){
         this.sheetVisible=true;
         this.screenImgsrc=this.productInfo.index_img_url;
@@ -1172,6 +1175,7 @@ methods: {
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         this.doScreeenShots();
         this.visiblePopup.shareImg=true;
+        this.cnzzTrackEvent('B端详情页','生成卡片分享','商品ID：'+this.$route.params.id);
       },
 
    doScreeenShots() {
@@ -1241,6 +1245,7 @@ methods: {
             message: '加入购物车成功',
             position: 'center'
           })
+          this.cnzzTrackEvent('B端详情页','加入购物车','商品ID+商品SKU数量：'+this.$route.params.id+':'+JSON.stringify(this.checkIdnums));
           }else if(response.code==20025){
           }else{
             Toast({duration: 1000,
@@ -1284,6 +1289,7 @@ methods: {
             message: '加入购物车成功',
             position: 'center'
           })
+            this.cnzzTrackEvent('B端详情页','加入购物车','商品ID+商品SKU数量：'+this.$route.params.id+':'+JSON.stringify(this.checkIdnums));
           }else if(response.code==20025){
           }else{
             Toast({duration: 1000,
@@ -1437,7 +1443,7 @@ methods: {
           }
         }
         this.profit=Data.data.kezuanshangxian;
-
+        this.cnzzTrackEvent('B端详情页','铺店','商品ID：'+this.$route.params.id);
         let ShopInfoData = await getShopInfo({
         });
         if(ShopInfoData.code!=10000){
@@ -1466,6 +1472,7 @@ methods: {
         Toast({duration: 1000,
              message: '下架成功'
         })
+        this.cnzzTrackEvent('B端详情页','下架商品','下架店铺商品ID：'+this.$route.query.distributor_item_id);
         this.productInfo.item_status=2;
        },
        async upperShelf(state){
@@ -1485,10 +1492,12 @@ methods: {
         Toast({duration: 1000,
              message: '上架成功'
         })
+        this.cnzzTrackEvent('B端详情页','上架商品','上架店铺商品ID：'+this.$route.query.distributor_item_id);
         this.productInfo.item_status=1;
        },
        selfBuy(){
          this.$router.push({path: '/product/'+this.productInfo.item_id});
+         this.cnzzTrackEvent('B端详情页','自己买','商品ID：'+this.productInfo.item_id);
          this.initData();
        },
        

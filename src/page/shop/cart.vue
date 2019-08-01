@@ -972,6 +972,9 @@
     },
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       closepopcheckSku(){
         this.visiblePopup.checkSku=false;
         for(var i=0;i<this.sizearrrmSome.length;i++){
@@ -1040,7 +1043,7 @@
                     }
                   }
               }
-
+            
             for(var i=0;i<that.sizearrrmSome.length;i++){
                  that.sizearrrmSome[i].number=0
             }
@@ -1050,6 +1053,7 @@
               message: '编辑成功',
               position: 'center'
             })
+            this.cnzzTrackEvent('B端购物车','购物车项编辑','商品ID+商品SKU数量：'+this.curItemId+':'+JSON.stringify(this.checkIdnums));
           }else if(response.code==20025){
           }else{
             Toast({duration: 1000,

@@ -35,19 +35,19 @@ import {
       }
     },
     watch: {  
-    // '$route': {
-    //   handler(to, from) {
-    //     setTimeout(() => {
-    //       if (window._czc) {  
-    //         let location = window.location; 
-    //         let contentUrl = location.pathname + location.hash;  
-    //         let refererUrl = '/';  
-    //         window._czc.push(['_trackPageview', contentUrl, refererUrl])  
-    //       }
-    //     }, 300) 
-    //   },
-    //   immediate: true 
-    // }  
+    '$route': {
+      handler(to, from) {
+        setTimeout(() => {
+          if (window._czc) {  
+            let location = window.location; 
+            let contentUrl = location.pathname + location.hash;  
+            let refererUrl = '/';  
+            window._czc.push(['_trackPageview', contentUrl, refererUrl])  
+          }
+        }, 300) 
+      },
+      immediate: true 
+    }  
     
   },
     components: {},
