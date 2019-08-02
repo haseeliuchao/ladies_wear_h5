@@ -536,7 +536,7 @@ import BackRouter from 'common/backRouter';
                             formData.append("policy",policy);
                             formData.append("authorization",signature);
                             axios.post(url, formData).then(function (response) {
-                                that.postSalesImgList.push("http://img.chaochujue.cn"+response.data.url);
+                                that.postSalesImgList.push("https://img.chaochujue.cn"+response.data.url);
                               that.postSalesImgstr=that.postSalesImgList.join(",");
             }).catch(function (error) {
                         　　alert(error);

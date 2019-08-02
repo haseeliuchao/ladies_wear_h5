@@ -102,7 +102,7 @@ const appRouter = {
                     title: '每天上新千款好货 快来开店赚钱', // 分享标题, 请自行替换
                     desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png',
+                    imgUrl: 'https://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png',
                 }
             }, 
             {
@@ -260,7 +260,7 @@ const appRouter = {
                     title: '每天上新千款好货 快来开店赚钱', // 分享标题, 请自行替换
                     desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    imgUrl: 'https://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/searchRenew',
@@ -277,7 +277,7 @@ const appRouter = {
                     title: '每天上新千款好货 快来开店赚钱', // 分享标题, 请自行替换
                     desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货', // 分享描述, 请自行替换
                     link: ''+process.env.API_ROOT+'/api/redirect?path=', // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
+                    imgUrl: 'https://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'}
             },
             {
                 path: '/shop',

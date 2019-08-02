@@ -98,7 +98,7 @@
              <p class="default-qrleft-bot">或搜索(ID：huiyanshihuo0001)</p>
          </div>
          <div class="default-qrright">
-             <img src="http://img.chaochujue.cn/ICON/2019/6/3/qr1563344451761.png" alt="" >
+             <img src="https://img.chaochujue.cn/ICON/2019/6/3/qr1563344451761.png" alt="" >
          </div>
      </div>
      <BackRouter/>

@@ -146,7 +146,7 @@ import BackRouter from 'common/backRouter';
           category:'女装',
           n_times:1,
           if_free_shipping:0,
-          img_url:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png'
+          img_url:'https://img.chaochujue.cn/ICON/2019/7/5/shopcbanner1564714754308.png'
         },
         flag :false,
         focuscodeoneState : false,
@@ -201,7 +201,7 @@ import BackRouter from 'common/backRouter';
           }
           this.shopForm.distributor_id = res.data.distributor_id;
           this.shopForm.title = res.data.title;
-          this.shopForm.img_url = res.data.img_url?res.data.img_url:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png';
+          this.shopForm.img_url = res.data.img_url?res.data.img_url:'https://img.chaochujue.cn/ICON/2019/7/5/shopcbanner1564714754308.png';
           this.shopForm.n_times = res.data.n_times;
           this.shopForm.if_free_shipping = res.data.if_free_shipping;
           this.flag=true

@@ -136,7 +136,7 @@
     .store-top{
        width: 10rem;
        height: 4.666667rem;
-       background: url('http://img.chaochujue.cn/ICON/2019/6/5/store-bg1563520399880.png') no-repeat center;
+       background: url('https://img.chaochujue.cn/ICON/2019/6/5/store-bg1563520399880.png') no-repeat center;
        background-size: contain;
        overflow: hidden;
        .store-top-name{
@@ -882,7 +882,7 @@ import BackRouter from 'common/backRouter';
     },
     mounted: function () {
       if(this.$route.query.advertising_id||this.$route.query.store_id){
-       this.$wxShare({title: '每天上新千款好货 快来开店赚钱',desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl:'http://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'})
+       this.$wxShare({title: '每天上新千款好货 快来开店赚钱',desc: '上万女装档口联合支持，专业客服提供五星级服务，卖女装速来惠眼识货',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder(location.href.split("#")[1])+'',imgUrl:'https://img.chaochujue.cn/ICON/2019/5/3/xiazai15591333517411559699219825.png'})
       }
     },
     created(){

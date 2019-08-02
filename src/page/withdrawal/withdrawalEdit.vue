@@ -499,137 +499,137 @@
       </div>
       <div class="addressList">
           <div class="address-container">
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png','招商银行',1)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png','招商银行',1)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png"></span><span>招商银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/2/zhaoshang1562034587881.png"></span><span>招商银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===1">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/gs1562313297126.png','中国工商银行',2)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/gs1562313297126.png','中国工商银行',2)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/gs1562313297126.png"></span><span>中国工商银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/gs1562313297126.png"></span><span>中国工商银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===2">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/js1562313378842.png','中国建设银行',3)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/js1562313378842.png','中国建设银行',3)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/js1562313378842.png"></span><span>中国建设银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/js1562313378842.png"></span><span>中国建设银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===3">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/zg1562313416515.png','中国银行',4)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/zg1562313416515.png','中国银行',4)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/zg1562313416515.png"></span><span>中国银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/zg1562313416515.png"></span><span>中国银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===4">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/jt1562313446765.png','交通银行',5)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/jt1562313446765.png','交通银行',5)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/jt1562313446765.png"></span><span>交通银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/jt1562313446765.png"></span><span>交通银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===5">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/ny1562313702587.png','中国农业银行',6)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/ny1562313702587.png','中国农业银行',6)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/ny1562313702587.png"></span><span>中国农业银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/ny1562313702587.png"></span><span>中国农业银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===6">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/yz1562313789572.png','中国邮政储蓄银行',7)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/yz1562313789572.png','中国邮政储蓄银行',7)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/yz1562313789572.png"></span><span>中国邮政储蓄银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/yz1562313789572.png"></span><span>中国邮政储蓄银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===7">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/gd1562313831804.png','光大银行',8)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/gd1562313831804.png','光大银行',8)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/gd1562313831804.png"></span><span>光大银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/gd1562313831804.png"></span><span>光大银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===8">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/ms1562313916803.png','民生银行',9)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/ms1562313916803.png','民生银行',9)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/ms1562313916803.png"></span><span>民生银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/ms1562313916803.png"></span><span>民生银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===9">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/pa1562313981526.png','平安银行',10)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/pa1562313981526.png','平安银行',10)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/pa1562313981526.png"></span><span>平安银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/pa1562313981526.png"></span><span>平安银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===10">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/pf1562314011160.png','浦发银行',11)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/pf1562314011160.png','浦发银行',11)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/pf1562314011160.png"></span><span>浦发银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/pf1562314011160.png"></span><span>浦发银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===11">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/zx1562314049242.png','中信银行',12)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/zx1562314049242.png','中信银行',12)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/zx1562314049242.png"></span><span>中信银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/zx1562314049242.png"></span><span>中信银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===12">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/xy1562314141040.png','兴业银行',13)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/xy1562314141040.png','兴业银行',13)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/xy1562314141040.png"></span><span>兴业银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/xy1562314141040.png"></span><span>兴业银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===13">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/hx1562314215836.png','华夏银行',14)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/hx1562314215836.png','华夏银行',14)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/hx1562314215836.png"></span><span>华夏银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/hx1562314215836.png"></span><span>华夏银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===14">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/gf1562314274257.png','广发银行',15)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/gf1562314274257.png','广发银行',15)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/gf1562314274257.png"></span><span>广发银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/gf1562314274257.png"></span><span>广发银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===15">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/hzyh1562314315275.png','杭州银行',16)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/hzyh1562314315275.png','杭州银行',16)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/hzyh1562314315275.png"></span><span>杭州银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/hzyh1562314315275.png"></span><span>杭州银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===16">
                 <img src="~jd/images/bank_check.png" width='20'/>
               </div>
             </div>
-            <div class="address-item" @click="bankCheck('http://img.chaochujue.cn/ICON/2019/6/5/rs1562314434015.png','农村商业银行',17)">
+            <div class="address-item" @click="bankCheck('https://img.chaochujue.cn/ICON/2019/6/5/rs1562314434015.png','农村商业银行',17)">
               <div class="address-itemleft">
-              <p class="name"><span><img height='28' src="http://img.chaochujue.cn/ICON/2019/6/5/rs1562314434015.png"></span><span>农村商业银行</span></p>
+              <p class="name"><span><img height='28' src="https://img.chaochujue.cn/ICON/2019/6/5/rs1562314434015.png"></span><span>农村商业银行</span></p>
               </div>
               <div class="address-itemright" v-if="bankCheckicon===17">
                 <img src="~jd/images/bank_check.png" width='20'/>

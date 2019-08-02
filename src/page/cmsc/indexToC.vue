@@ -146,7 +146,7 @@
         },
         active:0,
         guideindex:null,
-        shopImgUrl:'http://img.chaochujue.cn/ICON/2019/6/1/yyhx1563174990868.png'
+        shopImgUrl:'https://img.chaochujue.cn/ICON/2019/7/5/shopcbanner1564714754308.png'
       };
     },
     watch:{      
@@ -202,7 +202,7 @@
       if(getSessionStorage('shopImgUrl')){
         this.shopImgUrl=getSessionStorage('shopImgUrl')
       }
-      this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "http://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
+      this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "https://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
       this.$refs.indexRusultloadMore.onloadMoreScroll();
     },
     beforeRouteLeave(to, from, next){

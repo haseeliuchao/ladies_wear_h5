@@ -466,7 +466,7 @@ export default {
   position: absolute;
   right: 12px;
   top: 12px;
-  background: url('http://img.chaochujue.cn/ICON/2019/6/1/change1563175558664.png') no-repeat center;
+  background: url('https://img.chaochujue.cn/ICON/2019/6/1/change1563175558664.png') no-repeat center;
   background-size: 100%;
 }
 .postSalesImgflex-btn input{
