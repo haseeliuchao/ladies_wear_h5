@@ -568,6 +568,9 @@
     },
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       selectedAllGoods() {
         if(!this.delshow){
         this.cartList.map(item => {
@@ -603,6 +606,7 @@
                   Toast({duration: 1000,
                 message: '清除成功'
                 })
+                this.cnzzTrackEvent('C端购物车','清除失效商品','店铺ID：'+this.$route.params.distributor_id)
                  this.initData();
                 }
               })
@@ -633,6 +637,7 @@
           distributor_id:this.$route.params.distributor_id
         }).then(response => {
          if(response.code==10000){
+           this.cnzzTrackEvent('C端购物车','删除购物车','商品购物车id+店铺id：'+Selectedstr+':'+this.$route.params.distributor_id)
            this.initData();
         }else{
           Toast({duration: 1000,
@@ -657,7 +662,7 @@
           message: '请选择商品',
           position: 'center'
         });
-
+        this.cnzzTrackEvent('C端购物车','结算商品','商品购物车id+店铺id：'+Selectedstr+':'+this.$route.params.distributor_id)
         this.$router.push({path: '/createOrderToC',query: {Selectedstr:Selectedstr,checkout_type:1,distributor_id:this.$route.params.distributor_id}});
       },
       computedTotalFee() {

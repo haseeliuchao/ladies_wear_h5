@@ -886,6 +886,9 @@ import {
       }
     },
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       selectedAddress(item){
         this.visiblePopup.selectedAdressVisible = false;
         this.defaultAddress[0] = item;
@@ -998,6 +1001,7 @@ import {
         this.wxPay(payData.data)
       },
       wxPay(data){
+        this.cnzzTrackEvent('C端创建订单','支付','订单号：'+data.order_code);
          let that = this
             WeixinJSBridge.invoke(
             //微信支付的一些认证  需要去网站设置好  然后在这调用
@@ -1018,6 +1022,7 @@ import {
 
                             // alert(1)
                             // alert(res.err_msg)
+                            that.cnzzTrackEvent('C端创建订单','支付成功','订单号：'+data.order_code);
                             that.$router.push({
                                 path:'/orderRusult'
                                 

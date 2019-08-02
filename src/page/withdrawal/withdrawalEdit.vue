@@ -746,6 +746,9 @@ export default {
   },
 
   methods: {
+    cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+         },
       bankCheck(icon,name,iconid){
           this.withdrawalForm.bank_name=name;
           this.withdrawalForm.bank_icon=icon;
@@ -844,6 +847,7 @@ export default {
         if(Data.code==10000){
             if(Data.data.member_bank_bo){
                 this.withdrawalForm=Data.data.member_bank_bo;
+                this.cnzzTrackEvent('账户提现','修改提现账户','提现账户名称：'+this.withdrawalForm.bank_card_holder);
                 if(this.withdrawalForm.bank_card_holder){
                   this.flog1=true;
                 }
@@ -909,6 +913,8 @@ export default {
             if(Data.data.phone){
                 this.withdrawalForm.phone=Data.data.phone
             }
+        }else{
+          this.cnzzTrackEvent('账户提现','新增提现账户','新增账户');
         }
     },
     gotoView(type) {

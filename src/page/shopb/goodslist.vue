@@ -468,7 +468,7 @@
                         <span v-if="!item.sales_volume">销量：0</span>
                         <span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
-                          <div style="border-right: 1px solid #949494;" @click= "()=>$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
+                          <div style="border-right: 1px solid #949494;" @click= "cnzzTrackEvent('B端店铺商品列表','点击编辑','商品ID+店铺ID：'+item.item_id+':'+$route.params.distributor_id);$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
                             
                             <img src="~jd/images/edit-popedit.png" style="width:14px;">
                             <p>编辑</p>
@@ -592,6 +592,9 @@ Vue.component(Actionsheet.name, Actionsheet);
     },
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
        async getCount(){
          let Data = await getpageCount({
          distributor_id: this.$route.params.distributor_id
@@ -606,6 +609,7 @@ Vue.component(Actionsheet.name, Actionsheet);
 
        },
       showactionsheet(item){
+        this.cnzzTrackEvent('B端店铺商品列表','生成卡片分享','商品ID：'+item.item_id);
         this.sheetVisible=true;
         this.screenImgsrc=item.item_index_img_url;
         this.screenTitle=item.item_title;
@@ -621,6 +625,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
+        
         this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         this.opcityShow=true;

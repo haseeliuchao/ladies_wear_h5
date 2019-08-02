@@ -49,7 +49,7 @@
             <div class="withdrawal-listleft">可提现金额</div>
             <div class="withdrawal-listright"></div>
         </div>
-        <div class="withdrawal-list" style="height: 30px;" v-if="accountRevenue.balance_amount>0" @click= "()=>$router.push({path: '/withdrawalAccount'})">
+        <div class="withdrawal-list" style="height: 30px;" v-if="accountRevenue.balance_amount>0" @click= "cnzzTrackEvent('账户提现','发起提现','跳转提现页面');$router.push({path: '/withdrawalAccount'})">
             <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥{{accountRevenue.balance_amount/100|TwoNum}}</div>
             <div class="withdrawal-listright">提现<span class="right-menu"></span></div>
         </div>
@@ -57,11 +57,11 @@
             <div class="withdrawal-listleft" style="font-size:18px;font-weight: bold">￥{{accountRevenue.balance_amount/100|TwoNum}}</div>
             <div class="withdrawal-listright">提现<span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list"  v-if="accountRevenue.bank_card_number==-1" style="border-bottom:none;" @click= "()=>$router.push({path: '/withdrawalEdit'})">
+        <div class="withdrawal-list"  v-if="accountRevenue.bank_card_number==-1" style="border-bottom:none;" @click= "cnzzTrackEvent('账户提现','没有提现账户','跳转设置账户页面');$router.push({path: '/withdrawalEdit'})">
             <div class="withdrawal-listleft">提现账户</div>
             <div class="withdrawal-listright">请设置提现账户<span class="right-menu"></span></div>
         </div>
-        <div class="withdrawal-list"  v-if="accountRevenue.bank_card_number!=-1" style="border-bottom:none;" @click= "()=>$router.push({path: '/withdrawalInfo'})">
+        <div class="withdrawal-list"  v-if="accountRevenue.bank_card_number!=-1" style="border-bottom:none;" @click= "cnzzTrackEvent('账户提现','有提现账户','账户页面');$router.push({path: '/withdrawalInfo'})">
             <div class="withdrawal-listleft">提现账户</div>
             <div class="withdrawal-listright">{{accountRevenue.bank_card_number}}<span class="right-menu"></span></div>
         </div>
@@ -113,6 +113,9 @@ import {
     },
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+         },
         async initData() {
         let Data = await accountRevenue();
             if(Data.code=10000){

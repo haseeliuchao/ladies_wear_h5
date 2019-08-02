@@ -1190,6 +1190,9 @@ import BackRouter from 'common/backRouter';
         }
     },
 methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       tipSend(type){
         if(type==1){
           Toast({duration: 1000,
@@ -1230,6 +1233,7 @@ methods: {
             this.checkcolorindex=null;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
+            this.cnzzTrackEvent('C端详情页','加入购物车','商品ID+店铺ID+商品SKU数量：'+this.$route.params.id+':'+this.$route.query.distributor_id+':'+JSON.stringify(this.checkIdnums));
             return Toast({duration: 1000,
               message: '加入购物车成功',
               position: 'bottom'
@@ -1243,6 +1247,7 @@ methods: {
           }
           })
         }else if(this.addType==='directBuy'){
+          this.cnzzTrackEvent('C端详情页','立即购买','商品ID+店铺ID+商品SKU数量：'+this.$route.params.id+':'+this.$route.query.distributor_id+':'+this.checkId+','+this.shopnum);
           this.$router.push({path: '/createOrderToC',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
         }else{
@@ -1275,6 +1280,7 @@ methods: {
             this.checkcolorindex=null;
             this.checksizeindex=null;
             this.productInfo.shopping_cart_num+=1;
+            this.cnzzTrackEvent('C端详情页','加入购物车','商品ID+店铺ID+商品SKU数量：'+this.$route.params.id+':'+this.$route.query.distributor_id+':'+JSON.stringify(this.checkIdnums));
           return Toast({duration: 1000,
             message: '加入购物车成功'
           })
@@ -1287,6 +1293,7 @@ methods: {
           
         })
         }else{
+          this.cnzzTrackEvent('C端详情页','立即购买','商品ID+店铺ID+商品SKU数量：'+this.$route.params.id+':'+this.$route.query.distributor_id+':'+this.checkId+','+this.shopnum);
           this.$router.push({path: '/createOrderToC',query: {id:this.checkId,number:this.shopnum,checkout_type:2,distributor_id:this.$route.query.distributor_id}})
         }
        

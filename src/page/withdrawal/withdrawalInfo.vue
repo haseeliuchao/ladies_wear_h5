@@ -100,6 +100,7 @@ import {
     },
 
     methods: {
+      
       async initData() {
         let Data = await accountRevenueDetail();
         if(Data.code==10000)

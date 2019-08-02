@@ -146,7 +146,9 @@ import {
     },
 
     methods: {
-        // /apply/withdraw
+         cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+         },
          handleInput2(e) {
             // // 通过正则过滤小数点后两位
             e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
@@ -181,6 +183,7 @@ import {
         });
 
         if(Data.code=10000){
+          this.cnzzTrackEvent('账户提现','提现成功','提现id：'+Data.data.business_id);
           this.$router.push({path: '/withdrawalSuccess',query:{withdraw_code:Data.data.business_id}})
         }
         },

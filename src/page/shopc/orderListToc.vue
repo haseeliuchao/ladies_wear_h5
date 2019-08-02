@@ -448,6 +448,9 @@
     computed: {},
 
     methods: {
+      cnzzTrackEvent(category, action, label){
+           _czc.push(["_trackEvent",category,action,label]);
+      },
       async payment(item) {
         let payData = await payDirect({
           order_code:item.order_code,
@@ -462,6 +465,7 @@
         }
       },
       wxPay(data){
+        this.cnzzTrackEvent('C端订单列表','支付','订单号：'+data.order_code);
          let that = this
             WeixinJSBridge.invoke(
             //微信支付的一些认证  需要去网站设置好  然后在这调用
@@ -475,6 +479,7 @@
                 },
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                      that.cnzzTrackEvent('C端订单列表','支付成功','订单号：'+data.order_code);
                             that.$router.push({
                                 path:'/orderRusult' 
                             })
@@ -500,6 +505,7 @@
                   message: response.msg
                   })
                 }else{
+                  this.cnzzTrackEvent('C端订单列表','确认收货','订单号：'+item.order_code);
                 this.onRefreshCallback()
                 }
               })
@@ -519,6 +525,7 @@
           Toast({duration: 1000,
             message: "订单已取消"
           })
+          this.cnzzTrackEvent('C端订单列表','取消订单','订单号：'+item.order_code);
           this.onRefreshCallback()
         })
       },
