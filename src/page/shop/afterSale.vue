@@ -500,7 +500,7 @@ import BackRouter from 'common/backRouter';
         this.selectedGoodStateList.map(i => {
           i.checked=false;
         })
-        cnzzTrackEvent('售后编辑页','售后收到货/未收到货',item.name);
+        this.cnzzTrackEvent('售后编辑页','售后收到货/未收到货',item.name);
          item.checked = !item.checked;
          this.item_status=item.item_status;
          this.item_statustext=item.name;
@@ -509,7 +509,7 @@ import BackRouter from 'common/backRouter';
         this.selectedchoiceReasonList.map(i => {
           i.checked=false;
         })
-         cnzzTrackEvent('售后编辑页','售后原因',item.reason);
+         this.cnzzTrackEvent('售后编辑页','售后原因',item.reason);
          item.checked = !item.checked;
          this.reason=item.reason;
       },
