@@ -58,7 +58,7 @@
           input {
             width: 100%;
             color: #333;
-            font-size: $subtitle;
+            font-size: .346667rem;
             outline: none;
             border: none;
             box-shadow: none;
@@ -128,7 +128,7 @@
       }
       >span {
         text-align: center;
-        font-size: 15px;
+        font-size: .4rem;
         min-width: 1.5rem;
         color: $gray;
       }
@@ -214,24 +214,16 @@
         // padding: 0 1.5rem;
         @include flexbox(space-between,center,row,nowrap);
         .search-filter-item{
-          // width: 25%;
-          // @include flexbox(center,center,row,nowrap);
           color: #333;
-          font-size: 15px;
-          margin: 15px 0;
-          // padding-bottom:5px;
-          // @media all and(max-width:374px){
-          //    margin: 15px .6rem;
-          // }
-          // @media all and(min-width:376px){
-          //    margin: 15px .9rem;
-          // }
+          font-size: .4rem;
+          margin: .4rem 0;
+          
           &:last-child{
             margin-left:.4rem;
           }
           .more-sortImg{
-            width: 14px;
-            height: 14px;
+            width: .373333rem;
+            height: .373333rem;
             background: url('~jd/images/sorttypenocheck.png') no-repeat center;
             background-size: 100%;
             margin-left: 5px;
@@ -348,11 +340,11 @@
             line-height: 40px;
         }
         .price-otherinput{
-          font-size: 14px;
+          font-size: .373333rem;
           width: 7.8rem;
           @include flexbox(space-between,center,row,nowrap);
           input{
-            height: 28px;
+            height: .746667rem;
             width: 2.6rem;
             border-radius: 6px;
             background: #f2f2f2;
@@ -372,13 +364,13 @@
           
           li{
             width: 2.6rem;
-            height: 28px;
+            height: .746667rem;
             border-radius: 28px;
             text-align: center;
             background: #f2f2f2;
             color: #333;
-            line-height: 28px;
-            margin-top: 15px;
+            line-height: .746667rem;
+            margin-top: .4rem;
             text-align: center
           }
           .activeone{
@@ -389,13 +381,13 @@
         .sortother-btn{ 
           @include flexbox(flex-end,center,row,nowrap);
           span{
-            height: 34px;
-            line-height: 34px;
-            margin-left: 10px;
+            height: .906667rem;
+            line-height: .906667rem;
+            margin-left: .266667rem;
             width: 2.1rem;
             text-align: center;
-            font-size: 17px;
-            margin-top: 20px;
+            font-size: .453333rem;
+            margin-top: .533333rem;
             border-radius: 6px;
             border: 1px solid $red;
             color: #fff;
@@ -410,15 +402,15 @@
       width: 10rem;
       text-align: center;
       background: #fff;
-      padding-bottom: 20px;
+      padding-bottom: .533333rem;
       img{
         width: 30%;
-        margin-bottom: 8px;
+        margin-bottom: .213333rem;
       }
       .imgsearch-notext{
-        line-height: 42px;
+        line-height: 1.12rem;
         color: #999;
-        font-size: 15px;
+        font-size: .426667rem;
       }
       .imgsearch-text-link{
         // padding: 6px 20px;
@@ -426,22 +418,22 @@
         color: $red;
         width: 4rem;
         margin-left: 3rem;
-        font-size: 14px;
-        height: 25px;
-        line-height: 25px;
+        font-size: .373333rem;
+        height: .666667rem;
+        line-height: .666667rem;
         border-radius: 3px;
         // margin-bottom: 10px;
       }
 
     }
     .product-list-top{
-      padding: 15px 12px; 
+      padding: .4rem 12px; 
       @include flexbox(space-between,center,row,nowrap);
-      font-size: 15px;
+      font-size: .4rem;
       .product-list-topl{
         color: #333;
         border-left: 4px solid $red;
-        padding-left: 6px
+        padding-left: .16rem
       }
       .product-list-topr{
         color: #666;

@@ -123,7 +123,7 @@
       
       span {
         color: #999;
-        font-size: 14px;
+        font-size: .373333rem;
       }
     }
   }
@@ -132,7 +132,7 @@
     min-width: 1rem;
     @include flexbox(center, center, column, wrap);
     color: #fff;
-    font-size: 12px;
+    font-size: .32rem;
     visibility: hidden;
     span {
       padding-top: 2px;
@@ -196,7 +196,7 @@
           padding: 5px;
           @include flexbox(center, center, row, nowrap);
           color: #fff;
-          font-size: 15px;
+          font-size: .4rem;
           border-radius: 50%;
           background: rgba(0, 0, 0, 0.15);
         }
@@ -210,7 +210,7 @@
     }
     > span {
       text-align: center;
-      font-size: 15px;
+      font-size: .4rem;
       min-width: 1.5rem;
       color: $gray;
     }
@@ -295,8 +295,8 @@
       }
       i {
         display: block;
-        width: 17px;
-        height: 16px;
+        width: .453333rem;
+        height: .426667rem;
         background: url("~jd/images/store.png") no-repeat;
         background-size: 100%;
       }
