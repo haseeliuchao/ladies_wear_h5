@@ -885,6 +885,7 @@
       <span class="del" v-if="delshow" @click= "editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
+    <BackRouter :fixePosition='2'/>
     <FooterView/>
   </div>
 </template>
@@ -892,6 +893,7 @@
 <script>
   import FooterView from 'component/footer/footerView';
   import SearchBar from 'page/shop/searchBar';
+  import BackRouter from 'common/backRouter';
   import {
     Toast,MessageBox
   } from 'mint-ui'
@@ -956,7 +958,8 @@
     components: {
       FooterView,
       SearchBar,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
 
     computed: {

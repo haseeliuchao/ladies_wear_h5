@@ -6,12 +6,6 @@ import {
     getSignature,
   } from '@/service/getData';
 export default function wxShare({ title, desc, link, imgUrl} = {}) {
-    // let jsApiListArr=[];
-    // if(title!=undefined&&title!=''&&title!=null){
-    //     jsApiListArr=['hideOptionMenu','showOptionMenu','onMenuShareTimeline', 'onMenuShareAppMessage'];
-    // }else{
-    //     jsApiListArr=['hideOptionMenu'];
-    // }
     const foo= async () =>{
         let Data = await getSignature({
             url: BASE64.encoder(location.href.split("#")[0])

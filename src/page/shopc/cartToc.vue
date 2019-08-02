@@ -512,12 +512,14 @@
       <span class="del" v-if="delshow" @click= "editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
+    <BackRouter :fixePosition='2'/>
     <footerViewToC :distributorId='$route.params.distributor_id'/>
   </div>
 </template>
 
 <script>
   import footerViewToC from 'component/footer/footerViewToC';
+  import BackRouter from 'common/backRouter';
   import SearchBar from 'page/shop/searchBar';
   import {
     Toast,MessageBox
@@ -552,7 +554,8 @@
 
     components: {
       footerViewToC,
-      LoadMore
+      LoadMore,
+      BackRouter
     },
 
     computed: {
