@@ -509,7 +509,7 @@ import BackRouter from 'common/backRouter';
         this.selectedchoiceReasonList.map(i => {
           i.checked=false;
         })
-         cnzzTrackEvent('售后编辑页','售后原因',item.reason);
+         this.cnzzTrackEvent('售后编辑页','售后原因',item.reason);
          item.checked = !item.checked;
          this.reason=item.reason;
       },
