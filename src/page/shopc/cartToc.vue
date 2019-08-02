@@ -512,7 +512,7 @@
       <span class="del" v-if="delshow" @click= "editProductdel()">删除</span>
     </div>
     <!-- 底部价格计算 -->
-    <BackRouter :fixePosition='2'/>
+    <BackRouter :fixePosition='3'/>
     <footerViewToC :distributorId='$route.params.distributor_id'/>
   </div>
 </template>

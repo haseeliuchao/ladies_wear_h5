@@ -41,9 +41,12 @@
   .back-routerheight{
       bottom: 56px;
   }
+  .back-routerheighttwo{
+      bottom: 106px;
+  }
 </style>
 <template>
-   <div class="back-router" :class="[fixePosition==2?'back-routerheight':'']" @click="$router.go(-1)">
+   <div class="back-router" :class="[fixePosition==2?'back-routerheight':'',fixePosition==3?'back-routerheighttwo':'']" @click="$router.go(-1)">
       <div class="back-routermain">
           <div class="back-routerbg"></div>
           <div class="back-routermaindetail">
