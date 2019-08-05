@@ -901,7 +901,7 @@
         <p>朋友圈</p>
       </div>
     </div>
-      <div class="popupOk" @click= "()=>{visiblePopup.addSuccess=false}" style="margin-top:8px;">取消</div>
+      <div class="popupOk" @click= "()=>{visiblePopup.addSuccess=false}" style="margin-top:8px;">完成</div>
     </mt-popup>
 
 
