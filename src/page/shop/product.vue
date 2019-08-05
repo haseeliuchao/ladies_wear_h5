@@ -1007,8 +1007,8 @@
           <span>购物车</span>
         </div>
       </div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入进货车</div>
-      <div class="right" v-if="productInfo.item_status==1" @click= "addGood()">一键铺店</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addShopCart('cart')" style="background: #ff5527;">加入购物车</div>
+      <div class="right" v-if="productInfo.item_status==1" @click= "addGood()">上架赚钱</div>
       <div class="right" style="flex: 2;background: #b4b4b4;" v-if="productInfo.item_status==2" @click= "tipSend">商品已下架</div>
     </div>
     <div class="cart-shop-fixed" v-if="$route.query.distributor_id">
