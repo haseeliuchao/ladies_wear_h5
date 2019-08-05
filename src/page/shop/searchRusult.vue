@@ -549,7 +549,7 @@
     <!-- 店铺一键铺店 -->
       <div class="store-top" v-if="$route.query.store_id">
          <p class="store-top-name">{{$route.query.store_name}}</p>
-         <p class="store-top-btn" @click="addGoodAll($route.query.store_id)">一键铺店</p>
+         <p class="store-top-btn" @click="addGoodAll($route.query.store_id)">上架赚钱</p>
       </div>  
 
 
@@ -603,7 +603,7 @@
                       <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
                     </p>
                   </div>
-            <p class="add-store"><span @click="addGood(item.item_id)">铺店</span></p>
+            <p class="add-store"><span @click="addGood(item.item_id)">上架</span></p>
           </li>
         </ul>
       </load-more>
@@ -695,7 +695,7 @@ import BackRouter from 'common/backRouter';
         }else{
           this.cnzzTrackEvent('搜索结果页','铺店','商品ID：'+itemId);
           Toast({duration: 1000,
-             message: '铺店成功'
+             message: '上架成功'
              })
         }
        },
@@ -709,12 +709,12 @@ import BackRouter from 'common/backRouter';
              return this.$router.push({path: '/shopApplicate'});
         }else if(Data.code==40004){
              return Toast({duration: 1000,
-             message: '该店铺商品今日已铺店'
+             message: '该店铺商品今日已上架'
              })
         }else{
           this.cnzzTrackEvent('搜索结果页','店铺一键铺店','店铺ID+店铺名称：'+storeId+':'+this.$route.query.store_name);
           Toast({duration: 1000,
-             message: '正在铺店，你可以先浏览商品'
+             message: '正在上架，你可以先浏览商品'
              })
         }
        },

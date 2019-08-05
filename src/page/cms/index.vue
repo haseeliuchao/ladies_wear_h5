@@ -417,7 +417,7 @@
                       <span class="prod-oldprice">￥{{item.sales_price/100|TwoNum}}</span>
                     </p>
                   </div>
-                  <p class="add-store"><span @click="cnzzTrackEvent('首页推荐商品','铺店','商品ID：'+item.item_id);addGood(item.item_id)">铺店</span></p>
+                  <p class="add-store"><span @click="cnzzTrackEvent('首页推荐商品','铺店','商品ID：'+item.item_id);addGood(item.item_id)">上架</span></p>
                 </li>
               </ul>
             </load-more>
@@ -582,7 +582,7 @@
           }
         }else{
           Toast({duration: 1000,
-             message: '铺店成功'
+             message: '上架成功'
              })
         }
        },
