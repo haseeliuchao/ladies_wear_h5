@@ -358,6 +358,7 @@
                     color: #666;
                     font-size: .32rem;
                     
+                    
                   }
 
                 }
@@ -416,7 +417,7 @@
             <div class="rootListcontent-one" :class="selectedRootB === 0? 'active' : ''" ><p style="font-weight:bold">暂未分类</p></div>
             <div class="rootListcontent-one" v-for="(item,index) in categoryRootB" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
               <p @click="rootScrollTo(item,item.up_levl_list)">
-                <span class="category-name" style="font-weight:bold">{{item.name}}</span>
+                <span class="category-name" style="font-size:.4rem">{{item.name}}</span>
                 <span class="no-open" v-if="!item.change&&item.up_levl_list">+</span>
                 <span class="no-open" v-if="item.change&&item.up_levl_list">-</span>
               </p>
@@ -607,7 +608,7 @@ Vue.component(Actionsheet.name, Actionsheet);
           // this.rootScrollTo(res.data[0]);
         }else{
           // this.selectedRootB = this.categoryDataB.data[0].distributor_item_category_id;
-          this.categoryRootB = this.categoryDataB.data;
+          this.categoryRootB = this.categoryDataB;
         }
       },
       async rootScrollTo(item,type) {
