@@ -58,6 +58,8 @@ export const getMyShopFavorite = (params) => new Http().require({api: '/api/memb
 //shop
 export const getCategoryList = (params) => new Http().require({api: '/api/item/Category',param:params}); //获取分类列表
 
+export const getCategoryListB = (params) => new Http().require({api: '/api/distributor/item/category/list',param:params}); //获取B端店铺商品分类列表
+
 export const getSelectedProductList = (params) => new Http().require({api: '/api/member/shopping/cart/list',param:params}); //获取购物车列表
 
 export const searchGoods = (params) => new Http().require({api: '/api/items',param:params}); //获取购物车列表

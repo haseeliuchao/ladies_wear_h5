@@ -1,5 +1,6 @@
 import {
   getCategoryList,
+  getCategoryListB,
   getSelectedProductList,
   searchGoods,
   searchshopGoods,
@@ -36,11 +37,15 @@ import {
 const shop = {
   state: {
     categoryData: null, //商品分类数据
+    categoryDataB: null, //B端商品分类数据
     cartProductData: null, //加入的购物车数据
   },
   mutations: {
     SET_CATEGORY_DATA(state, categoryData) {
       state.categoryData = categoryData
+    },
+    SET_CATEGORY_DATA_B(state, categoryDataB) {
+      state.categoryDataB = categoryDataB
     },
     SET_CARTPRODUCT_DATA(state, cartProductData) {
       state.cartProductData = cartProductData
@@ -53,6 +58,18 @@ const shop = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         getCategoryList(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetCategoryListB({ //获取商品分类
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        getCategoryListB(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

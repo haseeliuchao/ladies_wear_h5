@@ -7,6 +7,7 @@ const getters = {
     
     // shop
     categoryData: state => state.shop.categoryData,
+    categoryDataB: state => state.shop.categoryDataB,
     cartProductData: state => state.shop.cartProductData,
 
     // user

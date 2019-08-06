@@ -2,90 +2,7 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   
-  .paymentLoading {
-    position: fixed;
-    @include flexbox(center,
-    center,
-    row,
-    nowrap);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    img {
-      background: rgba(0, 0, 0, .6);
-      width: 3rem;
-    }
-  }
-
-  .paymentContainer {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, .4);
-    @include flexbox(center,
-    center,
-    row,
-    nowrap);
-    .content {
-      width: 85%;
-      background: #fff;
-      border-radius: 10px;
-      >button {
-        width: 60%;
-        margin: 20px auto;
-        background: $red;
-      }
-      >a {
-        margin: 5px 0;
-        padding: 0 15px;
-      }
-      .title {
-        @include flexbox(center,
-        center,
-        row,
-        nowrap);
-        position: relative;
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-        strong {
-          font-size: 20px;
-        }
-        .closeIcon {
-          display: block;
-          background: url('~jd/images/product-detail-sprites-mjs.png') no-repeat;
-          width: 25px;
-          height: 25px;
-          background-position: -38px -19px;
-          background-size: 150px;
-          vertical-align: -8px;
-          position: absolute;
-          left: 10px;
-        }
-      }
-      .paymentInfo {
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-        @include flexbox(flex-start,
-        center,
-        column,
-        wrap);
-        font-size: 20px;
-        span {}
-        strong {
-          font-size: 40px;
-          font-weight: 400;
-          margin: 10px 0 0;
-        }
-      }
-    }
-  }
-
   .my-order {
-    background: #fff;
     .screen_subject{
       width: 8.8rem;
       padding: 12px 12px 4px;
@@ -180,9 +97,96 @@
         color: $red;
       }
     }
-    .order-container {
-      height: auto;
+
+
+     .rootList-container{
+
+     @include flexbox(space-between,
+        start,
+        row,
+        nowrap);
+    .rootListcontent {
+      // border-right: 1px solid #eee;
+      list-style: none;
+      height: 100vh;
+      overflow-y: scroll;
+  /* ios需要下面这个属性 */
+  -webkit-overflow-scrolling: touch;
+      background:#fff;
+      width: 2.55rem;
+      .rootListcontent-one {
+        padding: 0;
+        min-height: 1.146667rem;
+        // text-align: center;
+        color: #333;
+        
+        background: #fff;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+       
+        // line-height: 2;
+        
+        p{
+          font-size: .373333rem;
+        line-height: 1.146667rem;
+        // 
+        @include flexbox(space-between,
+        center,
+        row,
+        nowrap);
+        padding:0 .08rem 0 .48rem;
+        .category-name{
+          width: 1.6rem;
+          overflow: hidden;
+          display: inline-block;
+          @include textoverflow(1);
+        }
+        .no-open{
+          color: #bfbfbf;
+          font-size: .32rem;
+          border: 1px solid #bfbfbf;
+          border-radius:  50%;
+          height: .32rem;
+          width: .32rem;
+          line-height: .22rem;
+          text-align: center;
+        }
+        
+      }
+       
+      }
+      .changehiden{
+        max-height: 0;
+        overflow: hidden;
+        // transition: max-height linear 0.2s;
+        .active {
+          background: #F2F2F2;
+          color: $red;
+          border-left:.14rem solid $red;
+          p{
+             padding-left:.66rem!important;
+          }
+         
+        }
+      }
+      .changeshow{
+         max-height: 11.46667rem;
+         transition: max-height ease-out 1s;
+      }
+      .active {
+          background: #F2F2F2;
+          color: $red;
+          border-left:.14rem solid $red;
+          p{
+             padding-left:.34rem;
+          }
+         
+        }
       
+    }
+    .order-container {
+      background: #fff;
       .order-nomore-tip {
         margin-top: 40%;
         @include flexbox(space-between,
@@ -211,8 +215,8 @@
         .order-item {
           
           background: #fff;
-          width: 10rem;
-          padding: 15px 12px;
+          width: 100%;
+          padding: .32rem .32rem;
           border-bottom: 1px solid #e4e4e4;
           .order-top {
             padding: $padding;
@@ -280,23 +284,24 @@
               }
               >div {
                 @include flexbox(flex-start,
-                flex-start,
+                center,
                 row,
                 nowrap);
                 width: 100%;
               
                 >img {
-                  max-width: 2.5rem;
-                  max-height: 2.5rem;
+                  max-width: 1.733333rem;
+                  max-height: 1.733333rem;
                   // border: 1px solid #eee;
                   border-radius: 6px;
                 }
                 .product-info {
-                  margin-left: $margin;
+                  margin-left: .266667rem;
                   .prod-price {
-                    font-size: 14px;
+                    font-size: .346667rem;
                      color: #666;
-                     line-height: 28px;
+                     line-height: .453333rem;
+                     margin-top: .04rem;
                    
                   }
                   .prod-num {
@@ -304,10 +309,10 @@
                       flex-start,
                       row,
                       nowrap);
-                    font-size: 14px;
+                    font-size: .346667rem;
                      color: #666;
-                     height: 20px;
-                     line-height: 20px;
+                     
+                     line-height: .453333rem;
                      .edit-btn{
                        position: relative;
                         .edit-pop{
@@ -341,69 +346,27 @@
                   }
                   .prod-name{
                     @include textoverflow(2);
-                    font-size: 13px;
+                    font-size: .346667rem;
                     margin-top: 4px;
                     color: #333;
-                    line-height: 20px;
-                    width: 6.6rem;
+                    line-height: .453333rem;
+                    height: .88rem;
+                    width: 4.666667rem;
                   }
                   .prodsku-info{
                     color: #666;
-                    font-size: 12px;
+                    font-size: .32rem;
+                    
                   }
 
                 }
               }
             }
           }
-          .order-sku {
-            background: #fff;
-            padding: 8px $padding;
-            padding-bottom:13px;
-            text-align: right;
-            font-size: $subtitle;
-            // border-bottom: 1px solid #eee;
-            // color: #333;
-            span{
-              font-size: 15px;
-              color: #333;
-              em{
-                color: $red;
-                margin-left: 6px;
-              }
-            }
-            strong {
-                      font-size: 14px;
-                      span{
-                        font-weight:bold;
-                        font-size: 16px;
-                        color: $red;
-                        
-                      }
-                      em{
-                        color: $red;
-                        font-style: normal
-                      }
-                    }
-          }
-          .order-btn-group {
-            @include flexbox(flex-end,
-            center,
-            row,
-            nowrap);
-            padding: 0 $padding 15px;
-            >span {
-              padding: 4px 10px;
-              color: $red;
-              font-size: 14px;
-              border: 1px solid $red;
-              border-radius: 3px;
-              margin-left: 15px;
-            }
-          }
         }
       }
     }
+     }
   }
 
 </style>
@@ -446,7 +409,26 @@
       <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄({{pageCount.sell_out}})</span>
       <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span>
     </div>
-    <div class="order-container">
+     <div class="rootList-container">
+    <div class="rootList">
+          <div class="rootListcontent">
+            <div class="rootListcontent-one" :class="selectedRootB === 0? 'active' : ''" ><p style="font-weight:bold">暂未分类</p></div>
+            <div class="rootListcontent-one" v-for="(item,index) in categoryRootB" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
+              <p @click="rootScrollTo(item,item.up_levl_list)">
+                <span class="category-name" style="font-weight:bold">{{item.name}}</span>
+                <span class="no-open" v-if="!item.change&&item.up_levl_list">+</span>
+                <span class="no-open" v-if="item.change&&item.up_levl_list">-</span>
+              </p>
+              <div :class="['changehiden',item.change?'changeshow':'']" >
+              <div class="rootListcontent-two"  v-for="(itemDetial,index1) in item.up_levl_list" :class="selectedRootB === itemDetial.distributor_item_category_id ? 'active' : ''" :key="index1">
+                 <p @click="rootScrollTo(itemDetial,0)" style="padding-left:.8rem"><span class="category-name">{{itemDetial.name}}</span></p>
+              </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="order-container" style="width: 7.173333rem;height:100vh;overflow: auto;overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;">
       <load-more style="width:100%;" v-if="$route.name=='goodslist'" @loadMore="infiniteCallback" :commad="commad" :param="params"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
@@ -462,10 +444,10 @@
                     <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">
                     <div class="product-info">
                       <p class="prod-name" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">{{item.item_title}}</p>
-                      <p class="prod-price" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;成本：¥{{item.cost_price/100|TwoNum}} 起</p>
+                      <p class="prod-price" v-if="item.sales_volume>0" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;销量：{{item.sales_volume}}</p>
+                      <p class="prod-price" v-if="!item.sales_volume" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">售价：¥{{item.sales_price/100|TwoNum}}&nbsp;&nbsp;销量：0</p>
                       <p class="prod-num">
-                        <span v-if="item.sales_volume>0">销量：{{item.sales_volume}}</span>
-                        <span v-if="!item.sales_volume">销量：0</span>
+                        <span>成本：¥{{item.cost_price/100|TwoNum}} 起</span>
                         <span class="edit-btn" ref="editIndexbox">
                         <div class="edit-pop" v-show="editIndex==index">
                           <div style="border-right: 1px solid #949494;" @click= "cnzzTrackEvent('B端店铺商品列表','点击编辑','商品ID+店铺ID：'+item.item_id+':'+$route.params.distributor_id);$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
@@ -499,8 +481,15 @@
         </div>
         <!-- 没有订单 -->
       </load-more>
+     </div>
     </div>
+
+
+
     <BackRouter/>
+  
+  
+  
   </div>
 </template>
 
@@ -519,10 +508,16 @@ import html2canvas from 'html2canvas';
     Toast,MessageBox,Actionsheet
   } from 'mint-ui'
 import Vue from 'vue'
+import {
+    mapGetters,
+    mapMutations
+  } from 'vuex';
 Vue.component(Actionsheet.name, Actionsheet);
   export default {
     data() {
       return {
+        selectedRootB: 0,
+        categoryRootB: [],
         commad: searchshopGoods,
         pageCount:{},
         visiblePopup: {
@@ -536,6 +531,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         params: {
           distributor_id:this.$route.params.distributor_id,
           status:1,
+          category_id:0,
           load_qrcode:1,
           page_size: 10,
           current_page: 1
@@ -588,13 +584,41 @@ Vue.component(Actionsheet.name, Actionsheet);
         },
         addshareImgvisiblePopup(){
           return this.visiblePopup.shareImg;
-        }
+        },
+        ...mapGetters([
+        'categoryDataB'
+        ])
     },
 
     methods: {
       cnzzTrackEvent(category, action, label){
            _czc.push(["_trackEvent",category,action,label]);
       },
+      ...mapMutations([
+        'SET_CATEGORY_DATA_B'
+      ]),
+      async initData(){
+        if(!this.categoryDataB){
+          let res = await this.$store.dispatch('GetCategoryListB');
+          this.SET_CATEGORY_DATA_B(res.data)
+          // this.selectedRootB = res.data[0].distributor_item_category_id;
+          this.categoryRootB = res.data;
+          // this.rootScrollTo(res.data[0]);
+        }else{
+          // this.selectedRootB = this.categoryDataB.data[0].distributor_item_category_id;
+          this.categoryRootB = this.categoryDataB.data;
+        }
+      },
+      async rootScrollTo(item,type) {
+        if(type){
+            item.change=!item.change;
+            return
+        }
+        this.selectedRootB = item.distributor_item_category_id;
+        this.params.category_id=item.distributor_item_category_id;
+        this.onRefreshCallback();
+      },
+
        async getCount(){
          let Data = await getpageCount({
          distributor_id: this.$route.params.distributor_id
@@ -786,6 +810,7 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
     mounted: function () {
+      this.initData();
       this.getCount();
       this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "https://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
       if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))

@@ -195,13 +195,6 @@
     mounted: function () {
       this.initData();
     }
-    // ,
-    // beforeRouteLeave(to, from, next) {
-    //   if (to.path === '/searchRusult') {
-    //     to.meta.keepAlive = false;
-    //   }
-    //   next();
-    // }
   }
 
 </script>
