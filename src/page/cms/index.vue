@@ -404,7 +404,8 @@
             </div>
           </div>
 
-          <div class="content">
+          <div class="content" style="height:100vh;overflow: auto;overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;">
             <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
