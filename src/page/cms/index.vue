@@ -325,7 +325,8 @@
     
 </style>
 <template>
-  <div id="jd">
+  <div id="jd"  style="height:100vh;overflow: auto;overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;">
     <!-- 遮罩层 -->
       <!-- <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">
@@ -404,8 +405,7 @@
             </div>
           </div>
 
-          <div class="content" style="height:100vh;overflow: auto;overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;">
+          <div class="content">
             <load-more style="width:100%;" v-if="$route.path=='/index'" @loadMore="infiniteCallback" :commad="commad" :param="indexParams"
                 ref="indexRusultloadMore">
               <ul class="product-list" >
