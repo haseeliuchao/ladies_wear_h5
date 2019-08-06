@@ -141,6 +141,7 @@
           overflow: hidden;
           display: inline-block;
           @include textoverflow(1);
+          height: 1.146667rem;
         }
         .no-open{
           color: #bfbfbf;
