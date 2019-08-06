@@ -417,7 +417,7 @@
             <div class="rootListcontent-one" :class="selectedRootB === 0? 'active' : ''" ><p style="font-weight:bold">暂未分类</p></div>
             <div class="rootListcontent-one" v-for="(item,index) in categoryRootB" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
               <p @click="rootScrollTo(item,item.up_levl_list)">
-                <span class="category-name" style="font-size:.4rem">{{item.name}}</span>
+                <span class="category-name" style="font-size:.4rem;width: 1.8rem;">{{item.name}}</span>
                 <span class="no-open" v-if="!item.change&&item.up_levl_list">+</span>
                 <span class="no-open" v-if="item.change&&item.up_levl_list">-</span>
               </p>
