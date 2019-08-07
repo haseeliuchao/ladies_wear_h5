@@ -367,7 +367,7 @@
     }
      }
 
-     .cart-shop-fixed{
+    .cart-shop-fixed{
     position: fixed;
     bottom: -1px;
     left: 0;
@@ -511,7 +511,7 @@
        
         <div>添加商品</div>
         <div>管理分类</div>
-        <div>批量管理</div>
+        <div @click="$router.push({path:'/goodclassifyenter',query:{distributor_id:$route.params.distributor_id}})">批量管理</div>
     </div>
 
     <BackRouter :fixePosition='2'/>

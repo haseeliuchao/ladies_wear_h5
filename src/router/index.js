@@ -55,6 +55,7 @@ const Goodclassifyenter = () =>  import ('page/shopb/goodclassifyenter')
 const GoodorderList = () =>  import ('page/shopb/goodorderList')
 const Goodorderdetail = () =>  import ('page/shopb/goodorderdetail')
 const Goodedit = () =>  import ('page/shopb/goodedit')
+const Goodeditall = () =>  import ('page/shopb/goodeditall')
 /* shopb */
 
 
@@ -415,6 +416,13 @@ const appRouter = {
                 name: 'goodedit',
                 component: Goodedit,
                 meta: { keepAlive: false ,Title:'商品编辑'}
+            }
+            ,
+            {
+                path: '/goodeditall/:distributor_id',
+                name: 'goodeditall',
+                component: Goodeditall,
+                meta: { keepAlive: false ,Title:'商品分类'}
             }
             ,
             {

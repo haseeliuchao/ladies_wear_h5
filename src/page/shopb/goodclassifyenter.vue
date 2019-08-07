@@ -79,11 +79,6 @@
             </div>
 
         </div>
-
-        <!-- <div class="goodclassify-list">
-            <div class="goodclassify-listleft">提现记录</div>
-            <div class="goodclassify-listright">21<span class="right-menu"></span></div>
-        </div> -->
   <BackRouter/>
   </div>
 </template>
@@ -144,9 +139,9 @@ import BackRouter from 'common/backRouter';
             return
         }
         if(item){
-          
+          return this.$router.push({path:'/goodeditall/'+item.distributor_id,query: {category_name:item.name,category_id:item.distributor_item_category_id}})
         }else{
-          
+          return this.$router.push({path:'/goodeditall/'+this.$route.query.distributor_id,query: {category_name:'未分类',category_id:0}})
         }
       },
        

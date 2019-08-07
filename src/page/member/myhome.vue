@@ -284,11 +284,6 @@
       img {
         height: 0.61rem;
       }
-      // &:first-child{
-      //   img{
-      //     height:24px;
-      //   }
-      // }
       em{
         position: absolute;
         display: inline-block;
