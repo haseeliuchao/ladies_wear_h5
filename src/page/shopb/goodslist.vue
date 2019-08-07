@@ -75,26 +75,23 @@
     .topnav {
       display: flex;
       width: 10rem;
-      background: #f2f2f2;
+      background: #fcf5f5;
       flex: 1;
       justify-content: space-between;
       align-items: center;
       flex-direction: row;
       flex-wrap: nowrap;
-      padding: 6px 10px;
-      
-    
+      height: 1.2rem;
       >span {
-        // width: 33.33%;
-        padding: 12px 0 6px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 14px;
-        color: #333;
+        font-size: .373333rem;
+        color: #666;
+        width: 50%;
       }
       .active {
-        color: $red;
+        color: #ff5527;
       }
     }
 
@@ -369,6 +366,30 @@
       }
     }
      }
+
+     .cart-shop-fixed{
+    position: fixed;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: .186667rem .32rem;
+    background: #fcfcfc;
+   @include flexbox(space-between,
+    center,
+    row,
+    nowrap);
+        div{
+          width: 2.933333rem;
+          height: .906667rem;
+          line-height: .906667rem;
+          text-align: center;
+          font-size: .48rem;
+          color: $red;
+          border:1px solid $red;
+          border-radius: 6px;
+        }
+    }
   }
 
 </style>
@@ -408,14 +429,14 @@
     <div class="topnav" @click="editIndex=null">
       <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中({{pageCount.upper_shelf}})</span>
       <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架({{pageCount.lower_shelf}})</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄({{pageCount.sell_out}})</span>
-      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span>
+      <!-- <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄({{pageCount.sell_out}})</span>
+      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span> -->
     </div>
      <div class="rootList-container">
     <div class="rootList">
           <div class="rootListcontent">
-            <div class="rootListcontent-one" :class="selectedRootB === 0? 'active' : ''" ><p style="font-weight:bold">暂未分类</p></div>
-            <div class="rootListcontent-one" v-for="(item,index) in categoryRootB" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
+            <div class="rootListcontent-one" :class="selectedRootB === 0? 'active' : ''" ><p @click="rootScrollTo(null,0)">暂未分类</p></div>
+            <div class="rootListcontent-one" v-show="active===0" v-for="(item,index) in categoryRootB" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
               <p @click="rootScrollTo(item,item.up_levl_list)">
                 <span class="category-name" style="font-size:.4rem;width: 1.8rem;">{{item.name}}</span>
                 <span class="no-open" v-if="!item.change&&item.up_levl_list">+</span>
@@ -486,12 +507,14 @@
      </div>
     </div>
 
+    <div class="cart-shop-fixed">
+       
+        <div>添加商品</div>
+        <div>管理分类</div>
+        <div>批量管理</div>
+    </div>
 
-
-    <BackRouter/>
-  
-  
-  
+    <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
@@ -607,8 +630,11 @@ Vue.component(Actionsheet.name, Actionsheet);
           this.categoryRootB = res.data;
           // this.rootScrollTo(res.data[0]);
         }else{
-          // this.selectedRootB = this.categoryDataB.data[0].distributor_item_category_id;
+          
           this.categoryRootB = this.categoryDataB;
+          this.categoryRootB.map(i=>{
+             i.change=false;
+           })
         }
       },
       async rootScrollTo(item,type) {
@@ -616,8 +642,13 @@ Vue.component(Actionsheet.name, Actionsheet);
             item.change=!item.change;
             return
         }
-        this.selectedRootB = item.distributor_item_category_id;
-        this.params.category_id=item.distributor_item_category_id;
+        if(item){
+          this.selectedRootB = item.distributor_item_category_id;
+          this.params.category_id=item.distributor_item_category_id;
+        }else{
+          this.selectedRootB = 0;
+          this.params.category_id=0;
+        }
         this.onRefreshCallback();
       },
 
@@ -756,6 +787,9 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       switchTabs(Id) {
         this.editIndex=null;
+        this.categoryRootB.map(i=>{
+             i.change=false;
+           })
         if (this.active === Number(Id)) return;
         this.active = Id;
         switch (Number(this.active)) {
@@ -764,6 +798,8 @@ Vue.component(Actionsheet.name, Actionsheet);
             break;
           case 1: //待付款
             this.params.status = 2;
+            this.selectedRootB = 0;
+            this.params.category_id=0;
             break;
           case 2: //待发货
             this.params.status = 3;

@@ -325,8 +325,9 @@
     
 </style>
 <template>
-  <div id="jd"  style="height:100vh;overflow: auto;overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;">
+  <div id="jd">
+     <!-- style="height:100vh;overflow: auto;overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;" -->
     <!-- 遮罩层 -->
       <!-- <mt-popup  class="model-popup" v-model="popupVisible" :closeOnClickModal="true" model="true" position="right" style="top:2.25rem;right:.34rem;background:rgba(0,0,0,0)">
         <div class="overlayer">

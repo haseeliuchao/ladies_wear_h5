@@ -51,6 +51,7 @@ const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
 
 /* shopb */
 const Goodslist = () =>  import ('page/shopb/goodslist')
+const Goodclassifyenter = () =>  import ('page/shopb/goodclassifyenter')
 const GoodorderList = () =>  import ('page/shopb/goodorderList')
 const Goodorderdetail = () =>  import ('page/shopb/goodorderdetail')
 const Goodedit = () =>  import ('page/shopb/goodedit')
@@ -393,7 +394,13 @@ const appRouter = {
                 name: 'goodslist',
                 component: Goodslist,
                 meta: { keepAlive: false ,Title:'全部商品',}
-                
+            }
+            ,
+            {
+                path: '/goodclassifyenter',
+                name: 'goodclassifyenter',
+                component: Goodclassifyenter,
+                meta: { keepAlive: false ,Title:'批量管理',}
             }
             ,
             {
