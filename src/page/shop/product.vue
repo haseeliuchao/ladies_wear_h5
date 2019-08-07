@@ -306,8 +306,8 @@
     
   }
       .screen_subjectgoodimg{
-        width: 96%;
-        margin-left: 2%
+        height: 8.4rem;
+        margin: 0 auto;
       }
       .screen_subjecttext{
         @include flexbox(space-between,

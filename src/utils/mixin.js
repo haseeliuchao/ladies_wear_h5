@@ -104,7 +104,8 @@ export const showBack = callback => {
 
     //判断是否达到目标点
     const showBackFun = () => {
-        if (document.body.scrollTop | document.documentElement.scrollTop > 500) {
+      let scrollTopdata =document.body.scrollTop | document.documentElement.scrollTop
+        if ( scrollTopdata> 500) {
             callback(true);
         }else{
             callback(false);
