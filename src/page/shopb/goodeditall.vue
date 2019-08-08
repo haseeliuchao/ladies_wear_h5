@@ -85,7 +85,47 @@
   }
 
   .my-order {
+
+
     background: #fff;
+    margin-bottom:1.4rem;
+
+    .goodclassify{
+       width: 10rem;
+       border-top: .213333rem solid #f2f2f2;
+       min-height: 100vh;
+       padding-bottom: 1.6rem;
+       background: #fff;
+      .goodclassify-list{
+          width: 10rem;
+          padding: 0 .3rem;
+          height: 1.28rem;
+          background: #fff;
+          border-bottom: 1px solid #e4e4e4;
+          @include flexbox(space-between, center, row, nowrap);
+          .goodclassify-listleft{
+              font-size: .4rem;
+              color: #333;
+          }
+          .goodclassify-listright{
+              @include flexbox(flex-end, center, row, nowrap);
+              font-size: .4rem;
+              color: #666;  
+          }
+      }
+      .changehiden{
+        .goodclassify-list{
+         padding-left: 1.093333rem;
+        .goodclassify-listleft{
+              font-size: .373333rem;
+              color: #333;
+          }
+        }
+          
+      }
+      
+      
+   }
     .screen_subject{
       width: 8.8rem;
       padding: 12px 12px 4px;
@@ -184,7 +224,7 @@
       height: auto;
       
       .order-nomore-tip {
-        margin-top: 40%;
+        padding-top: 40%;
         @include flexbox(space-between,
         center,
         column,
@@ -207,12 +247,11 @@
       //   background: #fff;
       // }
       .order-list {
-
+         
         .order-item {
-          
           background: #fff;
           width: 10rem;
-          padding: 15px 12px;
+          padding: .346667rem .32rem;
           border-bottom: 1px solid #e4e4e4;
           .order-top {
             padding: $padding;
@@ -280,23 +319,23 @@
               }
               >div {
                 @include flexbox(flex-start,
-                flex-start,
+                center,
                 row,
                 nowrap);
                 width: 100%;
               
                 >img {
-                  max-width: 2.5rem;
-                  max-height: 2.5rem;
+                  max-width: 1.733333rem;
+                  max-height: 1.733333rem;
                   // border: 1px solid #eee;
+                  margin-left: .266667rem;
                   border-radius: 6px;
                 }
                 .product-info {
-                  margin-left: $margin;
                   .prod-price {
-                    font-size: 14px;
+                    font-size: .346667rem;
                      color: #666;
-                     line-height: 28px;
+                     line-height: .48rem;
                    
                   }
                   .prod-num {
@@ -304,48 +343,22 @@
                       flex-start,
                       row,
                       nowrap);
-                    font-size: 14px;
+                    font-size: .346667rem;
                      color: #666;
-                     height: 20px;
-                     line-height: 20px;
+                     height: .48rem;
+                     line-height: .48rem;
                      .edit-btn{
                        position: relative;
-                        .edit-pop{
-                         width: 2.1rem;
-                         height: 37px;
-                         background: #666;
-                         position: absolute;
-                         left: -2.4rem;
-                         top: -7px;
-                         border-radius: 6px;
-                         color: #fff;
-                         padding: 4px 0;
-                         @include flexbox(space-between,
-                          flex-start,
-                          row,
-                          nowrap);
-                       }
-                       div{
-                         width: 42px;
-                         text-align: center;
-                         font-size: 13px;
-                          p{
-                            line-height: 8px;
-                            -webkit-transform-origin-x: 1;   //X方向上缩放的中心点
-                            -webkit-transform: scale(0.8);   //缩放比例
-                            transform: scale(0.8);
-                          }
-                       }
                      }
-                     
                   }
                   .prod-name{
                     @include textoverflow(2);
-                    font-size: 13px;
+                    font-size: .346667rem;
                     margin-top: 4px;
                     color: #333;
-                    line-height: 20px;
-                    width: 6.6rem;
+                    line-height: .453333rem;
+                    height: .88rem;
+                    width: 6.56rem;
                   }
                   .prodsku-info{
                     color: #666;
@@ -404,50 +417,90 @@
         }
       }
     }
+
+    .cart-shop-fixed{
+    position: fixed;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1.306667rem;
+    padding-left: .32rem;
+    background: #fcfcfc;
+   @include flexbox(space-between,
+    center,
+    row,
+    nowrap);
+       .cart-shop-fixed-left{
+           @include flexbox(flex-start,
+          center,
+          row,
+          nowrap,4);
+          span{
+              font-size: .453333rem;
+              color: #333;
+              margin-left: .32rem;
+              
+          }
+       } 
+       .cart-shop-fixed-right{
+           @include flexbox(flex-end,
+          center,
+          row,
+          nowrap,4);
+          p{  
+              padding: 0 .4rem;
+              height: 1rem;
+              @include flexbox(space-between,
+                center,
+                column,
+                wrap);
+                img {
+                    height: .48rem;
+                   
+                }
+                span{
+                    font-size: .32rem;
+                    color: #666;
+                }
+                
+          }
+       } 
+    }
   }
 
 </style>
 
 <template>
-  <div class="my-order" @click="editIndex=null">
-    <!-- 分享选择弹窗 -->
-    <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-     <div class="screen_subject" id='newImg' :style="{opacity:(opcityShow==true?1:0)}">
-                <img :src="screenImgsrc|addImgSize" class="screen_subjectgoodimg">
-      <div class="screen_subjecttext">
-        <div>
-          <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
-          <p class="screen_subjectname">{{screenTitle}}</p>
+  <div class="my-order">
+       <mt-popup v-model="visiblePopup.classify" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
+         <div class="goodclassify">
+      <div class="goodclassify-list">
+                    <div class="goodclassify-listleft">未分类</div>
+                    <div class="goodclassify-listright"><span>350</span><span class="right-menu"></span></div>
+        </div> 
+        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB" :key="index">
+            <div class="goodclassify-list">
+                <div class="goodclassify-listleft">{{item.name}}</div>
+                <div class="goodclassify-listright" v-if="!item.up_levl_list">
+                    <span>350</span><span class="right-menu"></span>
+                </div>
+                <div class="goodclassify-listright" v-if="item.up_levl_list">
+                    <img v-if="!item.change" src="~jd/images/classifyopen.png" style="width: .48rem">
+                    <img v-if="item.change" src="~jd/images/classifyclose.png" style="width: .48rem">
+                </div>
+            </div>
+            <div :class="['changehiden']" >
+                <div class="goodclassify-list"  v-for="(itemDetial,index1) in item.up_levl_list" :key="index1" @click="rootScrollTo(itemDetial,0)">
+                    <div class="goodclassify-listleft">{{itemDetial.name}}</div>
+                    <div class="goodclassify-listright"><span>350</span><span class="right-menu"></span></div>
+                </div> 
+            </div>
         </div>
-        <img :src="'data:image/png;base64,'+screenQrcode">
       </div>
-     </div>
-    <!-- 分享引导popup -->
-    <mt-popup v-model="visiblePopup.shareImg" style="background:rgba(0,0,0,.6);height: 100%;
-    width: 100%;"  position="center" class="checkSkupop" >
-    <div style="height: 100%;
-    width: 100%;"  @click="visiblePopup.shareImg=false">
-    <div style="width:8.8rem;position: absolute;left: 50%;margin-left: -4.4rem;top: 50%;margin-top: -6rem;">
-      <img :src="screenUrl" alt="" style="width:8.8rem;" @click.stop="visiblePopup.shareImg=true">
-      <div style="height:30px;width:1px;background:#fff;margin: -3px auto 4px;"></div>
-      <p style="text-align:center;color:#fff;font-size:16px;">长按保存图片</p>
-      </div>
-     </div>
-    </mt-popup>
-
-    <mt-popup v-model="visiblePopup.shareBoo" style="background:none;" :closeOnClickModal='true'  position="top" class="checkSkupop">
-       <img src="~jd/images/shareicon.png" alt="" style="margin-left: 10%;
-    margin-top: 8px;width:130%;">
-    </mt-popup>
-
-    <div class="topnav" @click="editIndex=null">
-      <span @click.stop.prevent="switchTabs(0)" :class="{'active':active===0}">出售中({{pageCount.upper_shelf}})</span>
-      <span @click.stop.prevent="switchTabs(1)" :class="{'active':active===1}">已下架({{pageCount.lower_shelf}})</span>
-      <span @click.stop.prevent="switchTabs(2)" :class="{'active':active===2}">售罄({{pageCount.sell_out}})</span>
-      <span @click.stop.prevent="switchTabs(3)" :class="{'active':active===3}">全部商品</span>
-    </div>
+       </mt-popup>
     <div class="order-container">
-      <load-more style="width:100%;" v-if="$route.name=='goodslist'" @loadMore="infiniteCallback" :commad="commad" :param="params"
+      <load-more style="width:100%;" v-if="$route.name=='goodeditall'" @loadMore="infiniteCallback" :commad="commad" :param="params"
         :loadMoreIconVisible="false" ref="orderLoadmore">
         <span style="-webkit-transform: scale(.9)!important;transform: scale(.9)!important;position:  absolute;top: 45%;left: 45%;font-size:  12px;font-weight: normal;text-shadow:  none;box-shadow:  none;"
           slot="refresh-spinner">更新中...</span>
@@ -458,7 +511,8 @@
              
               <div class="order-product-list">
                <div class="order-product-item" >
-                  <div> 
+                  <div>
+                    <i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click= "checked(item)"></i> 
                     <img  v-lazy="item.item_index_img_url+'_230x230.jpg'" alt="" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">
                     <div class="product-info">
                       <p class="prod-name" @click= "()=>$router.push({path: '/product/'+item.item_id,query: {distributor_id:$route.params.distributor_id,distributor_item_id:item.distributor_item_id}})">{{item.item_title}}</p>
@@ -467,23 +521,7 @@
                         <span v-if="item.sales_volume>0">销量：{{item.sales_volume}}</span>
                         <span v-if="!item.sales_volume">销量：0</span>
                         <span class="edit-btn" ref="editIndexbox">
-                        <div class="edit-pop" v-show="editIndex==index">
-                          <div style="border-right: 1px solid #949494;" @click= "cnzzTrackEvent('B端店铺商品列表','点击编辑','商品ID+店铺ID：'+item.item_id+':'+$route.params.distributor_id);$router.push({path:'/goodedit/'+item.item_id,query: {shopId:$route.params.distributor_id}})">
-                            
-                            <img src="~jd/images/edit-popedit.png" style="width:14px;">
-                            <p>编辑</p>
-                          </div>
-                          <!-- <div style="border-right: 1px solid #949494;" @click="delGood(item.distributor_item_id)">
-                            <img src="~jd/images/edit-popdel.png" style="width:14px;">
-                            <p>删除</p>
-                          </div> -->
-                          <div @click="showactionsheet(item)">
-                            <!-- sheetVisible=true -->
-                            <img src="~jd/images/edit-popshare.png" style="width:14px;height:14px;">
-                            <p>分享</p>
-                          </div>
-                        </div>
-                        <img src="~jd/images/edit-icon.png"  @click.stop="editIndex=index" style="height:20px;"></span></p>
+                        <img src="~jd/images/edit-icon.png"  style="height:.533333rem;"></span></p>
                     </div>
                   </div>
                 </div>
@@ -500,7 +538,16 @@
         <!-- 没有订单 -->
       </load-more>
     </div>
-    <BackRouter/>
+
+    <div class="cart-shop-fixed">
+        <div class="cart-shop-fixed-left"><i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click= "selectedAllGoods"></i><span>全选</span></div>
+        <div class="cart-shop-fixed-right">
+            <p><img src="~jd/images/goodeditall-icon01.png" alt=""><span>编辑</span></p>
+            <p><img src="~jd/images/goodeditall-icon03.png" alt=""><span>删除</span></p>
+            <p @click="initData"><img src="~jd/images/goodeditall-icon02.png" alt=""><span>分类</span></p>
+        </div>
+    </div>
+    <BackRouter :fixePosition='2'/>
   </div>
 </template>
 
@@ -518,64 +565,39 @@ import html2canvas from 'html2canvas';
   import {
     Toast,MessageBox,Actionsheet
   } from 'mint-ui'
+   import {
+    mapGetters,
+    mapMutations
+  } from 'vuex';
 import Vue from 'vue'
 Vue.component(Actionsheet.name, Actionsheet);
   export default {
     data() {
       return {
         commad: searchshopGoods,
-        pageCount:{},
-        visiblePopup: {
-          paymentLoadingVisible: false,
-          paymentContainerVisible: false,
-          shareImg:false,
-          shareBoo:false
-        },
-        paymentPassword: null, //支付密码
-        currentOrder: {}, //当前订单
         params: {
           distributor_id:this.$route.params.distributor_id,
+          category_id:this.$route.query.category_id,
           status:1,
-          load_qrcode:1,
           page_size: 10,
           current_page: 1
         },
+        visiblePopup: {
+          classify:false
+        },
         goodList: [],
-        active: null,
+        categoryRootB:[],
+        selectedAll:false,
         totalNum:null,
         goodListDetail:[],
         goodListDetailin:[],
-        editIndex:null,
-        screenUrl: "https://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png",
-        screenImgsrc:null,
-        screenTitle:null,
-        screenPrice:null,
-        screenQrcode:null,
-        screenScrollTop:null,
-        opcityShow:false,
-        actions: [{
-              name: '发送好友',
-              method : this.getCamera	// 调用methods中的函数
-          }, {
-            name: '生成卡片保存分享', 
-            method : this.getLibrary	// 调用methods中的函数
-          }],
-          sheetVisible: false
-          };
+    
+       }
 
     },
 
     watch: {
-      addShareBoovisiblePopup:function(newvs,oldvs){
-             if(newvs==false){
-                this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "https://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
-             }
-            },
-            addshareImgvisiblePopup:function(newvs,oldvs){
-             if(newvs==false){
-               this.opcityShow=false;
-              }
-            }
+     
     },
 
     components: {
@@ -583,141 +605,56 @@ Vue.component(Actionsheet.name, Actionsheet);
     },
 
     computed: {
-        addShareBoovisiblePopup(){
-          return this.visiblePopup.shareBoo;
-        },
-        addshareImgvisiblePopup(){
-          return this.visiblePopup.shareImg;
-        }
+        ...mapGetters([
+        'categoryDataB'
+        ])
     },
 
     methods: {
       cnzzTrackEvent(category, action, label){
            _czc.push(["_trackEvent",category,action,label]);
       },
-       async getCount(){
-         let Data = await getpageCount({
-         distributor_id: this.$route.params.distributor_id
-        });
-        if(Data.code!=10000){
-             Toast({duration: 1000,
-             message: Data.msg
-             })
-             return
+
+      ...mapMutations([
+        'SET_CATEGORY_DATA_B'
+      ]),
+      async initData(){
+        if(!this.categoryDataB){
+          let res = await this.$store.dispatch('GetCategoryListB');
+          this.SET_CATEGORY_DATA_B(res.data)
+          this.categoryRootB = res.data;
+          this.visiblePopup.classify=true;
+        }else{
+          this.categoryRootB = this.categoryDataB;
+          
+          this.categoryRootB.map(i=>{
+             i.change=false;
+           })
+           this.visiblePopup.classify=true;
         }
-        this.pageCount=Data.data
-
-       },
-      showactionsheet(item){
-        this.cnzzTrackEvent('B端店铺商品列表','生成卡片分享','商品ID：'+item.item_id);
-        this.sheetVisible=true;
-        this.screenImgsrc=item.item_index_img_url;
-        this.screenTitle=item.item_title;
-        this.screenPrice=item.sales_price;
-        this.screenQrcode=item.qrcode;
-        this.screenUrl="https://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
-        this.$wxShare({title: '这款衣服我觉得非常适合你，快来看看吧',desc: item.item_title,link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/productToC/'+item.item_id+'?distributor_id='+item.distributor_id)+'',imgUrl: item.item_index_img_url})
       },
-      actionSheet: function(){
-      this.sheetVisible = true;
-      },
-      getCamera: function(){
-        this.visiblePopup.shareBoo=true;
-      },
-      getLibrary: function(){
-        
-        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        document.documentElement.scrollTop = document.body.scrollTop = 0;
-        this.opcityShow=true;
-        this.doScreeenShots();
-        this.visiblePopup.shareImg=true;
-      },
-
-   doScreeenShots() {
-          const _this = this
-          setTimeout(() => {
-               // 创建一个新的canvas
-              // const _canvas = _this.$refs.cutScreen.HTMLElement;
-              const _canvas = document.getElementById('newImg');;
-
-             // 此处用于解决截图不清晰问题，将生成的canvas放大，然后再填充到原有的容器中就会清晰
-              const width = _canvas.offsetWidth; 
-              const height = _canvas.offsetHeight; 
-              const canvas2 = document.createElement('canvas');
-              const scale = 2;
-              canvas2.width = width * scale;
-              canvas2.height = height * scale;
-              const context1 = canvas2.getContext('2d')
-              if(context1) {
-                context1.scale(scale, scale);
-              }
-              const opts = {
-                    scale,
-                    canvas: canvas2,
-                    // logging: true, //日志开关，便于查看html2canvas的内部执行流程
-                    width,
-                    height,
-                    // 【重要】开启跨域配置
-                    useCORS: true 
-                };
-              html2canvas(_canvas,opts).then((canvas) => {
-                  const context = canvas2.getContext('2d');
-                  if(context) {
-                      context.scale(2,2);
-                      context.mozImageSmoothingEnabled = false;
-                      context.webkitImageSmoothingEnabled = false;
-                      context.imageSmoothingEnabled = false;
-                  }
-                  // canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
-                  _this.screenUrl = canvas.toDataURL()
-                  document.documentElement.scrollTop = document.body.scrollTop = _this.screenScrollTop;
-              });
-          },1000)
-      },
-     
-      delGood(id) { //确认删除
-         MessageBox.confirm('', { 
-            message: '确认要删除该商品吗?', 
-            title: '',
-            cancelButtonClass:'cancelButton', 
-            confirmButtonClass:'confirmButton',
-          }).then(action => {
-            if (action == 'confirm') {     //确认的回调
-              this.$store.dispatch('DistributorItemDel', {
-                distributor_item_id: id
-              }).then(response => {
-                if(response.code!=10000){
-                  Toast({duration: 1000,
-                  message: response.msg
-                  })
-                }else{
-                this.onRefreshCallback()
-                }
-              })
-              console.log('确认删除')
-            }
-          }).catch(err => { 
-            if (err == 'cancel') {     //取消的回调
-            } 
-          });
-
-        
-      },
-      cancelOrder(item) { //取消订单
-        this.$store.dispatch('CancelOrder', {
-          order_code: item.order_code
-        }).then(response => {
-          Toast({duration: 1000,
-            message: "订单已取消"
-          })
-          this.onRefreshCallback()
+      selectedAllGoods() {
+        this.goodList.map(items => {
+            items.checked = !this.selectedAll
         })
+        
+        this.selectedAll = !this.selectedAll;
+        if(this.selectedAll){
+            Toast({duration: 1000,
+            message: '已选中'+this.goodList.length+'件商品'
+            });
+        }
       },
-      tipSend(){
-        Toast({duration: 1000,
-            message: "提醒卖家发货成功"
+      
+      async checked(item) {
+        item.checked = !item.checked;
+        let count = 0;
+          this.goodList.map(items => {
+            if (items.checked) return count++;
           })
+         if (count === this.goodList.length) return this.selectedAllGoods();
       },
+      
       // 提醒卖家发货成功
       async onRefreshCallback() { //下拉刷新
         this.params.page_size = 10;
@@ -725,38 +662,13 @@ Vue.component(Actionsheet.name, Actionsheet);
         this.goodList = [];
         this.$refs.orderLoadmore.onTopLoaded(this.$refs.orderLoadmore.uuid);
       },
-      showeditpop(index){
-       this.editIndex=index;
-      },
-      switchTabs(Id) {
-        this.editIndex=null;
-        if (this.active === Number(Id)) return;
-        this.active = Id;
-        switch (Number(this.active)) {
-          case 0: //全部订单
-            this.params.status = 1;
-            break;
-          case 1: //待付款
-            this.params.status = 2;
-            break;
-          case 2: //待发货
-            this.params.status = 3;
-            break;
-          case 3: //待收货
-            this.params.status = null;
-            break;
-          default: //其他
-            throw new Error('未知TabId')
-            break
-        }
-        this.onRefreshCallback();
-      },
-      
       async infiniteCallback(response) { //加载更多订单
        if(response.data.distributor_item){
             if (response.data.distributor_item.length > 0) {
+                this.selectedAll = false;
           response.data.distributor_item.map(i => {
             this.goodList.push(i)
+            
           })
          }
        }
@@ -786,11 +698,8 @@ Vue.component(Actionsheet.name, Actionsheet);
         }
     },
     mounted: function () {
-      this.getCount();
-      this.$wxShare({title: '快来看看我店里的好东西，总有一款打动你哦',desc: '精选好物等你来选',link:''+process.env.API_ROOT+'/api/redirect?path='+BASE64.encoder('/indexToC/'+this.$route.params.distributor_id)+'',imgUrl: "https://img.chaochujue.cn/ICON/2019/5/1/201906241553261561362823561.png"})
-      if (this.$route.params.tab != null) return this.switchTabs(Number(this.$route.params.tab))
-      this.switchTabs(0);
-      
+      document.title=this.$route.query.category_name;
+      this.onRefreshCallback();
     }
   }
 
