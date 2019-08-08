@@ -1591,11 +1591,17 @@ methods: {
           if(value==''||value==null){
             return;
           }
-          if(value.indexOf("img1.vvic.com")!=-1){
+           if(value.indexOf("http://img1.vvic.com")!=-1){
             return value.replace('http://img1.vvic.com','https://m.chaochujue.cn/vvic/img1');
           }
-          if(value.indexOf("img.vvic.com")!=-1){
+          if(value.indexOf("http://img.vvic.com")!=-1){
             return value.replace('http://img.vvic.com','https://m.chaochujue.cn/vvic/img');
+          }
+          if(value.indexOf("https://img1.vvic.com")!=-1){
+            return value.replace('https://img1.vvic.com','https://m.chaochujue.cn/vvic/img1');
+          }
+          if(value.indexOf("https://img.vvic.com")!=-1){
+            return value.replace('https://img.vvic.com','https://m.chaochujue.cn/vvic/img');
           }
           if(value.indexOf("alicdn.com")!=-1){
             return value;
