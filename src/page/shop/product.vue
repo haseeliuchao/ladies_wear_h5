@@ -315,6 +315,7 @@
       row,
       nowrap);
       padding: .266667rem .18rem;
+      text-align: left;
       .screen_subjectprice{
         font-size: .453333rem;
         color: #333;
