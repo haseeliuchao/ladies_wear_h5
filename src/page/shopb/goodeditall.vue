@@ -93,7 +93,10 @@
     .goodclassify{
        width: 10rem;
        border-top: .213333rem solid #f2f2f2;
-       min-height: 100vh;
+       height: 16rem;
+       overflow-y: scroll;
+        /* ios需要下面这个属性 */
+        -webkit-overflow-scrolling: touch;
        padding-bottom: 1.6rem;
        background: #fff;
       .goodclassify-list{
@@ -126,6 +129,29 @@
       
       
    }
+   .cartpop-shop-fixed{
+    position: fixed;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 7px 14px;
+    background: #fff;
+   @include flexbox(space-around,
+    center,
+    row,
+    nowrap);
+        div{
+          width: 3.466667rem;
+          height: .906667rem;
+          line-height: .906667rem;
+          text-align: center;
+          font-size: .48rem;
+          color: $red;
+          border:1px solid $red;
+          border-radius: 6px;
+        }
+  }
     .screen_subject{
       width: 8.8rem;
       padding: 12px 12px 4px;
@@ -474,29 +500,26 @@
 <template>
   <div class="my-order">
        <mt-popup v-model="visiblePopup.classify" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
-         <div class="goodclassify">
-      <div class="goodclassify-list">
-                    <div class="goodclassify-listleft">未分类</div>
-                    <div class="goodclassify-listright"><span>350</span><span class="right-menu"></span></div>
-        </div> 
-        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB" :key="index">
+        <div>
+        <div class="goodclassify">
+        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB.data" :key="index">
             <div class="goodclassify-list">
                 <div class="goodclassify-listleft">{{item.name}}</div>
-                <div class="goodclassify-listright" v-if="!item.up_levl_list">
+                <!-- <div class="goodclassify-listright" v-if="!item.up_levl_list">
                     <span>350</span><span class="right-menu"></span>
-                </div>
-                <div class="goodclassify-listright" v-if="item.up_levl_list">
-                    <img v-if="!item.change" src="~jd/images/classifyopen.png" style="width: .48rem">
-                    <img v-if="item.change" src="~jd/images/classifyclose.png" style="width: .48rem">
-                </div>
+                </div> -->
             </div>
             <div :class="['changehiden']" >
                 <div class="goodclassify-list"  v-for="(itemDetial,index1) in item.up_levl_list" :key="index1" @click="rootScrollTo(itemDetial,0)">
                     <div class="goodclassify-listleft">{{itemDetial.name}}</div>
-                    <div class="goodclassify-listright"><span>350</span><span class="right-menu"></span></div>
                 </div> 
             </div>
         </div>
+        </div>
+        <div class="cartpop-shop-fixed">
+        <div>取消</div>
+        <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">保存</div>
+         </div>
       </div>
        </mt-popup>
     <div class="order-container">
@@ -597,7 +620,18 @@ Vue.component(Actionsheet.name, Actionsheet);
     },
 
     watch: {
-     
+     wcvisiblePopup:function(newvs,oldvs){
+            if (newvs) {
+                document.getElementsByTagName('html')[0].className='htmlover';
+                document.body.className='htmlover';
+              } else {
+                document.getElementsByTagName('html')[0].className='htmlnoover';
+                document.body.className='htmlnoover';
+              }
+              // 下面需要这两行代码，兼容不同浏览器
+              document.body.scrollTop = this.pageScrollYoffset;
+              window.scroll(0, this.pageScrollYoffset);
+            }
     },
 
     components: {
@@ -607,7 +641,12 @@ Vue.component(Actionsheet.name, Actionsheet);
     computed: {
         ...mapGetters([
         'categoryDataB'
-        ])
+        ]),
+        ...{
+        wcvisiblePopup(){
+          return this.visiblePopup.classify;
+        }
+        }
     },
 
     methods: {
@@ -627,9 +666,11 @@ Vue.component(Actionsheet.name, Actionsheet);
         }else{
           this.categoryRootB = this.categoryDataB;
           
-          this.categoryRootB.map(i=>{
+          if(this.categoryRootB.data){
+           this.categoryRootB.data.map(i=>{
              i.change=false;
            })
+          }
            this.visiblePopup.classify=true;
         }
       },

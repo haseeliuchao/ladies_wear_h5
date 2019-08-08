@@ -58,13 +58,13 @@
   <div class="goodclassify">
       <div class="goodclassify-list" @click="rootScrollTo(null,0)">
                     <div class="goodclassify-listleft">未分类</div>
-                    <div class="goodclassify-listright"><span>350</span><span class="right-menu"></span></div>
+                    <div class="goodclassify-listright"><span>{{categoryRootB.parent}}</span><span class="right-menu"></span></div>
         </div> 
-        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB" :key="index">
+        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB.data" :key="index">
             <div class="goodclassify-list" @click="rootScrollTo(item,item.up_levl_list)">
                 <div class="goodclassify-listleft">{{item.name}}</div>
                 <div class="goodclassify-listright" v-if="!item.up_levl_list">
-                    <span>350</span><span class="right-menu"></span>
+                    <span>{{item.item_count}}</span><span class="right-menu"></span>
                 </div>
                 <div class="goodclassify-listright" v-if="item.up_levl_list">
                     <img v-if="!item.change" src="~jd/images/classifyopen.png" style="width: .48rem">
@@ -74,7 +74,7 @@
             <div :class="['changehiden',item.change?'changeshow':'']" >
                 <div class="goodclassify-list"  v-for="(itemDetial,index1) in item.up_levl_list" :key="index1" @click="rootScrollTo(itemDetial,0)">
                     <div class="goodclassify-listleft">{{itemDetial.name}}</div>
-                    <div class="goodclassify-listright"><span>350</span><span class="right-menu"></span></div>
+                    <div class="goodclassify-listright"><span>{{itemDetial.item_count}}</span><span class="right-menu"></span></div>
                 </div> 
             </div>
 
@@ -128,9 +128,12 @@ import BackRouter from 'common/backRouter';
           this.categoryRootB = res.data;
         }else{
           this.categoryRootB = this.categoryDataB;
-          this.categoryRootB.map(i=>{
+
+          if(this.categoryRootB.data){
+           this.categoryRootB.data.map(i=>{
              i.change=false;
            })
+          }
         }
       },
       async rootScrollTo(item,type) {

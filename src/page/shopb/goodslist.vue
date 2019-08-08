@@ -436,7 +436,7 @@
     <div class="rootList">
           <div class="rootListcontent">
             <div class="rootListcontent-one" :class="selectedRootB === 0? 'active' : ''" ><p @click="rootScrollTo(null,0)">暂未分类</p></div>
-            <div class="rootListcontent-one" v-show="active===0" v-for="(item,index) in categoryRootB" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
+            <div class="rootListcontent-one" v-show="active===0" v-for="(item,index) in categoryRootB.data" :key="index" :class="selectedRootB === item.distributor_item_category_id&&!item.up_levl_list ? 'active' : ''">
               <p @click="rootScrollTo(item,item.up_levl_list)">
                 <span class="category-name" style="font-size:.4rem;width: 1.8rem;">{{item.name}}</span>
                 <span class="no-open" v-if="!item.change&&item.up_levl_list">+</span>
@@ -632,8 +632,8 @@ Vue.component(Actionsheet.name, Actionsheet);
         }else{
           
           this.categoryRootB = this.categoryDataB;
-          if(this.categoryRootB){
-           this.categoryRootB.map(i=>{
+          if(this.categoryRootB.data){
+           this.categoryRootB.data.map(i=>{
              i.change=false;
            })
            }
@@ -789,8 +789,8 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       switchTabs(Id) {
         this.editIndex=null;
-        if(this.categoryRootB){
-           this.categoryRootB.map(i=>{
+        if(this.categoryRootB.data){
+           this.categoryRootB.data.map(i=>{
              i.change=false;
            })
         }
