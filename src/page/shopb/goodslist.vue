@@ -632,9 +632,11 @@ Vue.component(Actionsheet.name, Actionsheet);
         }else{
           
           this.categoryRootB = this.categoryDataB;
-          this.categoryRootB.map(i=>{
+          if(this.categoryRootB){
+           this.categoryRootB.map(i=>{
              i.change=false;
            })
+           }
         }
       },
       async rootScrollTo(item,type) {
@@ -787,9 +789,12 @@ Vue.component(Actionsheet.name, Actionsheet);
       },
       switchTabs(Id) {
         this.editIndex=null;
-        this.categoryRootB.map(i=>{
+        if(this.categoryRootB){
+           this.categoryRootB.map(i=>{
              i.change=false;
            })
+        }
+        
         if (this.active === Number(Id)) return;
         this.active = Id;
         switch (Number(this.active)) {
