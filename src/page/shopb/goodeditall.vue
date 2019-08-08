@@ -89,15 +89,84 @@
 
     background: #fff;
     margin-bottom:1.4rem;
+      .setProfitmain{
+      width: 8.2rem;
+      border-radius: 6px;
+      .setProfitcheck{
+        height: .906667rem;
+        line-height: .906667rem;
+        text-align: center;
+        font-size: .426667rem;
+        margin-bottom: 4px;
+        @include flexbox(space-between,
+        center,
+        row,
+        nowrap);
+        li{
+          width: 50%;
+          text-align: center;
+          color: #666;
+        }
+        .active {
+        color: $red;
+         }
+      }
+      .setProfitone{
+          .setProfitone-entry{
+            width: 7.2rem;
+            margin-left: .5rem;
+            height: .886667rem;
+            border:1px solid #e4e4e4;
+            border-radius: 6px;
+            @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            input{
+              height: .793333rem;
+              line-height: normal;
+              width: 6rem;
+              margin-left: 6px;
+            }
+            span{
+              color: #333;
+              font-size: .426667rem;
+              margin-right: .2rem
+            }
+          }
+          .setProfitone-text{
+            color: #999;
+            border-bottom:1px solid #e4e4e4;
+            padding: 0 .5rem;
+            font-size: .346667rem;
+            line-height: .746667rem;
+            height: .746667rem;
+          }
+          .setProfitone-choose{
+            @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            height: 1.4rem;
+            line-height: 1.4rem;
+            
+            span{
+              text-align: center;
+              width: 50%;font-size: .426667rem;
+              color: $red
+            }
+          }
+        }
+    }
+
 
     .goodclassify{
        width: 10rem;
        border-top: .213333rem solid #f2f2f2;
-       height: 16rem;
+       height: 92vh;
        overflow-y: scroll;
         /* ios需要下面这个属性 */
         -webkit-overflow-scrolling: touch;
-       padding-bottom: 1.6rem;
        background: #fff;
       .goodclassify-list{
           width: 10rem;
@@ -105,10 +174,21 @@
           height: 1.28rem;
           background: #fff;
           border-bottom: 1px solid #e4e4e4;
-          @include flexbox(space-between, center, row, nowrap);
+          @include flexbox(flex-start, center, row, nowrap);
           .goodclassify-listleft{
               font-size: .4rem;
               color: #333;
+              @include flexbox(flex-start,
+                center,
+                row,
+                nowrap);
+                width: 100%;
+                span{
+                  margin-left: .293333rem;
+                }
+                .leftpading{
+                  margin-left: .826666rem;
+                }
           }
           .goodclassify-listright{
               @include flexbox(flex-end, center, row, nowrap);
@@ -118,10 +198,17 @@
       }
       .changehiden{
         .goodclassify-list{
-         padding-left: 1.093333rem;
+         
         .goodclassify-listleft{
+                @include flexbox(flex-start,
+                center,
+                row,
+                nowrap);
+                span{
+                  margin-left: .826667rem;
+                }
               font-size: .373333rem;
-              color: #333;
+              color: #666;
           }
         }
           
@@ -135,8 +222,8 @@
     left: 0;
     right: 0;
     width: 100%;
-    padding: 7px 14px;
-    background: #fff;
+    height: 1.306667rem;
+    background: #fcfcfc;
    @include flexbox(space-around,
     center,
     row,
@@ -499,26 +586,44 @@
 
 <template>
   <div class="my-order">
+       <mt-popup v-model="visiblePopup.setProfit" style="border-radius: 6px;" position="center" class="checkSkupop" >
+          <div class="setProfitmain">
+            <ul class="setProfitcheck">
+              <li :class="{'active':activeIndex===0}" @click="activeIndexchange(0)">按进价倍数</li>
+              <li :class="{'active':activeIndex===1}" @click="activeIndexchange(1)">按利润值</li>
+            </ul>
+            <div class="setProfitone" v-if="activeIndex==0">
+            <p class="setProfitone-entry" @click= "$refs.salesMultipleInput.focus()"><input type="number"  v-model="salesMultiple" ref="salesMultipleInput"><span>倍</span></p>
+            <p class="setProfitone-text">售价=进价+进价*倍数</p>
+            <p class="setProfitone-choose"><span @click="setProfitClose" style="border-right:1px solid #e4e4e4;color:#333">取消</span><span @click="saveEditUp(1)">确定</span></p>
+            </div>
+
+            <div class="setProfitone" v-if="activeIndex==1">
+            <p class="setProfitone-entry" @click= "$refs.salesSetProfitInput.focus()"><input type="number" @keydown="handleInput2"  v-model="salesSetProfit" ref="salesSetProfitInput"><span>元</span></p>
+            <p class="setProfitone-text">售价=进价+利润值</p>
+            <p class="setProfitone-choose"><span style="border-right:1px solid #e4e4e4;color:#333" @click="setProfitClose">取消</span><span @click="saveEditUp(2)">确定</span></p>
+            </div>
+          </div>
+      </mt-popup>
+
+
        <mt-popup v-model="visiblePopup.classify" :closeOnClickModal="true" :modal="false" position="right" class="modal-popup">
         <div>
         <div class="goodclassify">
         <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB.data" :key="index">
             <div class="goodclassify-list">
-                <div class="goodclassify-listleft">{{item.name}}</div>
-                <!-- <div class="goodclassify-listright" v-if="!item.up_levl_list">
-                    <span>350</span><span class="right-menu"></span>
-                </div> -->
+                <div class="goodclassify-listleft"><i :class="['select-default-icon',item.checked ? 'select-icon' : '']" @click="rootScrollTo(item,1)" v-if="!item.up_levl_list"></i><span :class="item.up_levl_list?'leftpading':''">{{item.name}}</span></div>
             </div>
             <div :class="['changehiden']" >
-                <div class="goodclassify-list"  v-for="(itemDetial,index1) in item.up_levl_list" :key="index1" @click="rootScrollTo(itemDetial,0)">
-                    <div class="goodclassify-listleft">{{itemDetial.name}}</div>
+                <div class="goodclassify-list"  v-for="(itemDetial,index1) in item.up_levl_list" :key="index1" >
+                    <div class="goodclassify-listleft"><i :class="['select-default-icon',itemDetial.checked ? 'select-icon' : '']" @click="rootScrollTo(itemDetial,2)"></i><span>{{itemDetial.name}}</span></div>
                 </div> 
             </div>
         </div>
         </div>
         <div class="cartpop-shop-fixed">
-        <div>取消</div>
-        <div style="background: #ff2741;border:1px solid #ff2741;color:#fff">保存</div>
+        <div @click="closeclassifyPopup">取消</div>
+        <div @click="saveclassifyUp" style="background: #ff2741;border:1px solid #ff2741;color:#fff">保存</div>
          </div>
       </div>
        </mt-popup>
@@ -565,8 +670,8 @@
     <div class="cart-shop-fixed">
         <div class="cart-shop-fixed-left"><i :class="['select-default-icon',selectedAll ? 'select-icon' : '']" @click= "selectedAllGoods"></i><span>全选</span></div>
         <div class="cart-shop-fixed-right">
-            <p><img src="~jd/images/goodeditall-icon01.png" alt=""><span>编辑</span></p>
-            <p><img src="~jd/images/goodeditall-icon03.png" alt=""><span>删除</span></p>
+            <p @click="editgoodUp"><img src="~jd/images/goodeditall-icon01.png" alt=""><span>编辑</span></p>
+            <p @click="delgoodUp"><img src="~jd/images/goodeditall-icon03.png" alt=""><span>删除</span></p>
             <p @click="initData"><img src="~jd/images/goodeditall-icon02.png" alt=""><span>分类</span></p>
         </div>
     </div>
@@ -579,10 +684,14 @@ import BackRouter from 'common/backRouter';
 import html2canvas from 'html2canvas';
   import {
     searchshopGoods,
-    getpageCount
+    getpageCount,
+    saveclassifyUpDate,
+    delgoodUpDate,
+    saveEditUpDate
   } from '@/service/getData';
   import {
-    pushHistory
+    pushHistory,
+    setSessionStorage
   } from '@/utils/mixin';
   import LoadMore from 'common/loadMore';
   import {
@@ -606,7 +715,8 @@ Vue.component(Actionsheet.name, Actionsheet);
           current_page: 1
         },
         visiblePopup: {
-          classify:false
+          classify:false,
+          setProfit:false
         },
         goodList: [],
         categoryRootB:[],
@@ -614,8 +724,13 @@ Vue.component(Actionsheet.name, Actionsheet);
         totalNum:null,
         goodListDetail:[],
         goodListDetailin:[],
-    
+        distributorItemIdStr:null,
+        distributorItemIdArr:[],
+        salesMultiple:null,
+        salesSetProfit:null,
+        activeIndex: 0, 
        }
+
 
     },
 
@@ -653,22 +768,156 @@ Vue.component(Actionsheet.name, Actionsheet);
       cnzzTrackEvent(category, action, label){
            _czc.push(["_trackEvent",category,action,label]);
       },
-
+      handleInput2(e) {
+            // 通过正则过滤小数点后两位
+            e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || null
+        },
       ...mapMutations([
         'SET_CATEGORY_DATA_B'
       ]),
+      // 批量编辑
+
+      activeIndexchange(index){
+         this.activeIndex=index;
+         this.salesMultiple=null;
+         this.salesSetProfit=null;
+       },
+       setProfitClose(){
+         this.visiblePopup.setProfit=false
+         this.salesMultiple=null;
+         this.salesSetProfit=null;
+       },
+       editgoodUp(){
+          this.distributorItemIdArr=[];
+         this.distributorItemIdStr=null;
+         this.goodList.map(items => {
+            if (items.checked){
+              this.distributorItemIdArr.push(items.distributor_item_id)
+            };
+         })
+         if(this.distributorItemIdArr.length<1){
+          return Toast({duration: 1000,
+            message: '请先选择商品'
+          }) 
+         }
+         this.distributorItemIdStr=this.distributorItemIdArr.join(',')
+         this.visiblePopup.setProfit=true;
+       },
+       async saveEditUp(type){
+         let value=null
+         if(type==1){
+           if(!this.salesMultiple){
+             return Toast({duration: 1000,
+            message: '请设置加价倍数'
+            }) 
+           }
+           value=this.salesMultiple;
+         }else{
+           if(!this.salesSetProfit){
+             return Toast({duration: 1000,
+            message: '请设置利润值'
+            }) 
+           }
+           value=this.salesSetProfit*100;
+         }
+         
+         let saveEditData=await saveEditUpDate({
+           distributor_item_id_str:this.distributorItemIdStr,
+           type:type,
+           value:value
+        })
+        if(saveEditData.code!=10000){
+          return Toast({duration: 1000,
+            message: saveEditData.msg
+           }) 
+        }else{
+           this.goodList.map(items => {
+            if (items.checked){
+              if(type==1){
+                 items.sales_price=items.cost_price*value+items.cost_price;
+              }else{
+                 items.sales_price=items.cost_price+value;
+              }
+            };
+         })
+          this.goodList.map(items => {
+            items.checked=false;
+          })
+          this.selectedAll=false;
+          this.salesMultiple=null;
+          this.salesSetProfit=null;
+          this.visiblePopup.setProfit=false;
+        }
+       },
+      rootScrollTo(item,type){
+        if(type==1){
+             this.categoryRootB.data.map(i=>{
+             i.checked=false;
+             if(item.distributor_item_category_id==i.distributor_item_category_id){
+               i.checked=true
+             }
+             if(i.up_levl_list){
+               i.up_levl_list.map(j=>{
+                j.checked=false;
+               })
+             }
+          })
+        }else{
+           this.categoryRootB.data.map(i=>{
+             i.checked=false;
+             if(i.up_levl_list){
+                   i.up_levl_list.map(j=>{
+                    j.checked=false;
+                    if(item.distributor_item_category_id==j.distributor_item_category_id){
+                    j.checked=true;
+                  }
+                })
+             }
+          })
+        }
+      },
+      closeclassifyPopup(){
+          this.visiblePopup.classify=false;
+          this.categoryRootB.data.map(i=>{
+             i.checked=false;
+             if(i.up_levl_list){
+                   i.up_levl_list.map(j=>{
+                    j.checked=false;
+                })
+             }
+          })
+      },
       async initData(){
+         this.distributorItemIdArr=[];
+         this.distributorItemIdStr=null;
+         this.goodList.map(items => {
+            if (items.checked){
+              this.distributorItemIdArr.push(items.distributor_item_id)
+            };
+         })
+         if(this.distributorItemIdArr.length<1){
+          return Toast({duration: 1000,
+            message: '请先选择商品'
+          }) 
+         }
+         this.distributorItemIdStr=this.distributorItemIdArr.join(',')
+
         if(!this.categoryDataB){
           let res = await this.$store.dispatch('GetCategoryListB');
           this.SET_CATEGORY_DATA_B(res.data)
           this.categoryRootB = res.data;
+          if(this.categoryRootB.data){
+           this.categoryRootB.data.map(i=>{
+             i.checked=false;
+           })
+          }
           this.visiblePopup.classify=true;
         }else{
           this.categoryRootB = this.categoryDataB;
-          
           if(this.categoryRootB.data){
            this.categoryRootB.data.map(i=>{
              i.change=false;
+             i.checked=false;
            })
           }
            this.visiblePopup.classify=true;
@@ -686,7 +935,74 @@ Vue.component(Actionsheet.name, Actionsheet);
             });
         }
       },
-      
+      async saveclassifyUp(){
+        let categoryId=null;
+          this.categoryRootB.data.map(i=>{
+             if(i.checked==true){
+               categoryId=i.distributor_item_category_id;
+             }
+             if(i.up_levl_list){
+               i.up_levl_list.map(j=>{
+                if(j.checked==true){
+                  categoryId=j.distributor_item_category_id;
+                }
+               })
+             }
+          })
+          if(!categoryId){
+            return Toast({duration: 1000,
+            message: '请先选择要加入的类目'
+            }) 
+          }
+          let classifyData=await saveclassifyUpDate({
+           distributor_item_id_str:this.distributorItemIdStr,
+           category_id:categoryId
+        })
+        if(classifyData.code!=10000){
+          return Toast({duration: 1000,
+            message: classifyData.msg
+           }) 
+        }
+        this.onRefreshCallback();
+        this.closeclassifyPopup();
+        this.selectedAll=false;
+        Toast({duration: 1000,
+            message: '选中商品已加入该类目'
+        }) 
+      },
+      async delgoodUp(){
+         this.distributorItemIdArr=[];
+         this.distributorItemIdStr=null;
+         let delcount=0
+         this.goodList.map(items => {
+            if (items.checked){
+              delcount++
+              this.distributorItemIdArr.push(items.distributor_item_id)
+            };
+         })
+         if(this.distributorItemIdArr.length<1){
+          return Toast({duration: 1000,
+            message: '请先选择商品'
+          }) 
+         }
+         this.distributorItemIdStr=this.distributorItemIdArr.join(',')
+          let delgoodData=await delgoodUpDate({
+           distributor_item_id_str:this.distributorItemIdStr
+        })
+        if(delgoodData.code!=10000){
+          return Toast({duration: 1000,
+            message: delgoodData.msg
+           }) 
+        }
+        this.selectedAll=false;
+        this.onRefreshCallback();
+        Toast({duration: 1000,
+            message: '已删除'+delcount+'件商品'
+        }) 
+      },
+
+
+
       async checked(item) {
         item.checked = !item.checked;
         let count = 0;
@@ -709,12 +1025,12 @@ Vue.component(Actionsheet.name, Actionsheet);
                 this.selectedAll = false;
           response.data.distributor_item.map(i => {
             this.goodList.push(i)
-            
+            // setSessionStorage('defgoodeditalldata',this.goodList);
           })
          }
        }
         
-      },
+      }
     },
     filters:{
         topriceafter(value){

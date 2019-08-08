@@ -75,6 +75,13 @@ export const getProduct = (params) => new Http().require({api: '/api/item/detail
 
 export const getpageCount = (params) => new Http().require({api: '/api/distributor/item/count',param:params}); //获取购物车列表
 
+export const saveclassifyUpDate = (params) => new Http().require({api: '/api/distributor/item/upd/category',param:params}); //商品更新分类
+
+export const delgoodUpDate = (params) => new Http().require({api: '/api/distributor/item/del',param:params}); //店铺商品删除
+
+export const saveEditUpDate = (params) => new Http().require({api: '/api/distributor/item/upd/list',param:params}); //店铺商品批量编辑
+
+
 export const itemUpd = (params) => new Http().require({api: '/api/distributor/item/upd',param:params}); //获取购物车列表
 
 export const distributorItemDel = (params) => new Http().require({api: '/api/distributor/item/del',param:params}); //获取购物车列表
