@@ -278,6 +278,7 @@
       bottom: 0;
       z-index: -10;
       background: #fff;
+      text-align: center;
       .subject_title{
         height: .6rem;
         line-height: .6rem;
@@ -307,7 +308,6 @@
   }
       .screen_subjectgoodimg{
         height: 8.4rem;
-        margin: 0 auto;
       }
       .screen_subjecttext{
         @include flexbox(space-between,
