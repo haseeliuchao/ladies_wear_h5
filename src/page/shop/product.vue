@@ -1216,6 +1216,10 @@ methods: {
           this.screenQrcode=this.productInfo.item_details_b_o.qrcode;
         }
         this.screenUrl="https://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
+        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.doScreeenShots();
+
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -1224,9 +1228,7 @@ methods: {
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
-        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        document.documentElement.scrollTop = document.body.scrollTop = 0;
-        this.doScreeenShots();
+        
         this.visiblePopup.shareImg=true;
         this.cnzzTrackEvent('B端详情页','生成卡片分享','商品ID：'+this.$route.params.id);
       },
