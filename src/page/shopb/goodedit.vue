@@ -249,7 +249,8 @@ import shopVue from '../shop/shop.vue';
         sizearr:[],
         
         skuInfo:[],
-        focusprofitState:false
+        focusprofitState:false,
+        itemSkuBOList:[]
        
       };
     },
@@ -309,6 +310,7 @@ import shopVue from '../shop/shop.vue';
         this.goodeditdata.salesPrice = Data.data.sales_price;
         this.goodeditdata.title =Data.data.title;
         this.goodeditdata.index_img_url =Data.data.index_img_url+'_190x190.jpg';
+        this.itemSkuBOList = Data.data.item_sku_b_o_list;
         this.goodeditdata.item_sku = Data.data.item_sku_b_o_list;
         
         this.goodeditdata.item_skulength =this.goodeditdata.item_sku.length;
@@ -383,8 +385,12 @@ import shopVue from '../shop/shop.vue';
         // let checkIdnumsobj={ "item_sku_id":item.item_sku_id , "number":item.number}
         this.skuInfo=[];
         this.goodeditdata.item_sku.map(itemdetail=>{
-          let itemdetailstr=itemdetail.distributor_item_sku_id+':'+Math.ceil(itemdetail.sales_consumer_price*100)
-          this.skuInfo.push(itemdetailstr)
+          this.itemSkuBOList.map(itemdetailone=>{
+            if(itemdetail.color===itemdetailone.color){
+              let itemdetailstr=itemdetailone.distributor_item_sku_id+':'+Math.ceil(itemdetail.sales_consumer_price*100);
+              this.skuInfo.push(itemdetailstr)
+            }
+          })
         })
          let Data = await itemUpd({
          distributor_item_id:this.goodeditdata.distributor_item_id,
