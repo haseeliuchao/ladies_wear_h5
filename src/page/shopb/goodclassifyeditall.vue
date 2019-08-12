@@ -232,7 +232,7 @@
                 
                 <div class="goodclassify-listright" >
                     <div>
-                      <img src="~jd/images/changeedit.png" style="width: .48rem">
+                      <img @click="classifyeditonepop(item)" src="~jd/images/changeedit.png" style="width: .48rem">
                     </div>
                     <div class="handle">
                     <img src="~jd/images/changesort.png" style="width: .48rem">
@@ -244,10 +244,10 @@
                     <div class="goodclassify-listleft" style="color:#666"><i :class="['select-defaultdel-icon']" ></i><span>{{itemDetial.name}}</span></div>
                     <div class="goodclassify-listright" >
                       <div>
-                        <img src="~jd/images/changeedit.png" style="width: .48rem">
+                        <img @click="visiblePopup.classifyedittwo=true" src="~jd/images/changeedit.png" style="width: .48rem">
                       </div>
                       <div>
-                      <img src="~jd/images/changesort.png" style="width: .48rem">
+                      <span style="width: .48rem"></span>
                       </div>
                     </div>
                 </div> 
@@ -256,7 +256,7 @@
         </div>
         </draggable>
         <div class="cart-shop-fixed">
-                <div @click="visiblePopup.classifyedittwo=true">取消</div>
+                <div @click="$router.go(-1)">取消</div>
                 <div @click="visiblePopup.classifyeditone=true" style="background:#ff2741;color:#fff">完成</div>
         </div>
     <BackRouter :fixePosition='2'/>
@@ -321,6 +321,10 @@ import draggable from "vuedraggable";
               })
               }
               
+        },
+        async classifyeditonepop(item){
+           this.visiblePopup.classifyeditone=true;
+           this.classifyeditonevalue=item.name;
         },
       async initData(){
           let res = await getCategoryListB()
