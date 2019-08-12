@@ -52,6 +52,8 @@ const AfterSaleDetail = () =>    import ('page/shop/afterSaleDetail')
 /* shopb */
 const Goodslist = () =>  import ('page/shopb/goodslist')
 const Goodclassifyenter = () =>  import ('page/shopb/goodclassifyenter')
+const Goodclassifyedit = () =>  import ('page/shopb/goodclassifyedit')
+const Goodclassifyeditall = () =>  import ('page/shopb/goodclassifyeditall')
 const GoodorderList = () =>  import ('page/shopb/goodorderList')
 const Goodorderdetail = () =>  import ('page/shopb/goodorderdetail')
 const Goodedit = () =>  import ('page/shopb/goodedit')
@@ -402,6 +404,20 @@ const appRouter = {
                 name: 'goodclassifyenter',
                 component: Goodclassifyenter,
                 meta: { keepAlive: false ,Title:'批量管理',}
+            }
+            ,
+            {
+                path: '/goodclassifyedit',
+                name: 'goodclassifyedit',
+                component: Goodclassifyedit,
+                meta: { keepAlive: false ,Title:'管理分类',}
+            }
+            ,
+            {
+                path: '/goodclassifyeditall',
+                name: 'goodclassifyeditall',
+                component: Goodclassifyeditall,
+                meta: { keepAlive: false ,Title:'调整分类',}
             }
             ,
             {

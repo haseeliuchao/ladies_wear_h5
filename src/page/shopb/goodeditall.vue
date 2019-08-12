@@ -575,6 +575,7 @@
                 span{
                     font-size: .32rem;
                     color: #666;
+                    
                 }
                 
           }

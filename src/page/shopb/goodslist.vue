@@ -508,12 +508,10 @@
     </div>
 
     <div class="cart-shop-fixed">
-       
-        <div>添加商品</div>
-        <div>管理分类</div>
+        <div @click="$router.push({path:'/index'})">添加商品</div>
+        <div @click="$router.push({path:'/goodclassifyedit'})">管理分类</div>
         <div @click="$router.push({path:'/goodclassifyenter',query:{distributor_id:$route.params.distributor_id}})">批量管理</div>
     </div>
-
     <BackRouter :fixePosition='2'/>
   </div>
 </template>
