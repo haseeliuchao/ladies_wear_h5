@@ -18,36 +18,40 @@
        background: #fff;
       .goodclassify-list{
           width: 10rem;
-          padding: 0 .3rem;
+          padding-left:  .3rem;
           height: 1.28rem;
           background: #fff;
           border-bottom: 1px solid #e4e4e4;
           @include flexbox(space-between, center, row, nowrap);
           .goodclassify-listleft{
+            @include flexbox(flex-start,
+                center,
+                row,
+                nowrap,3);
+                span{
+                  margin-left: .266667rem;
+                }
               font-size: .4rem;
               color: #333;
           }
-          .goodclassify-listright{
-              @include flexbox(flex-end, center, row, nowrap);
-              font-size: .4rem;
-              color: #666;  
-          }
+          
       }
       .changehiden{
         // max-height: 0;
         overflow: hidden;
         .goodclassify-list{
-         padding-left: 1.093333rem;
+        //  padding-left: 1.093333rem;
         .goodclassify-listleft{
             @include flexbox(flex-start,
                 center,
                 row,
-                nowrap);
+                nowrap,3);
                 span{
                   margin-left: .826667rem;
+                  color: #666;
                 }
               font-size: .373333rem;
-              color: #333;
+              
           }
         }
           
@@ -57,6 +61,16 @@
          transition: max-height ease-out 1s;
       }
       
+      .goodclassify-listright{
+              @include flexbox(flex-end, center, row, nowrap,1);
+              font-size: .4rem;
+              color: #666;  
+              height: 100%;
+              div{
+                height: 100%;
+                @include flexbox(center, center, row, nowrap);
+              }
+      }
 
     .cart-shop-fixed{
     position: fixed;
@@ -162,6 +176,9 @@
 
 
    }
+   .sortable-drag{
+  opacity: .6!important;
+}
 
 </style>
 
@@ -208,23 +225,36 @@
                 </mt-popup>
             </div>
        </mt-popup>
-
+        <draggable tag="ul"  class="list-group" animation=200 handle=".handle">
         <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB.data" :key="index">
             <div class="goodclassify-list" @click="rootScrollTo(item)">
-                <div class="goodclassify-listleft"><i :class="['select-default-icon']" ></i><span>{{item.name}}</span></div>
+                <div class="goodclassify-listleft"><i :class="['select-defaultdel-icon']" ></i><span>{{item.name}}</span></div>
                 
-                <div class="goodclassify-listright" v-if="item.up_levl_list">
-                    <img v-if="!item.change" src="~jd/images/classifyopen.png" style="width: .48rem">
-                    <img v-if="item.change" src="~jd/images/classifyclose.png" style="width: .48rem">
+                <div class="goodclassify-listright" >
+                    <div>
+                      <img src="~jd/images/changeedit.png" style="width: .48rem">
+                    </div>
+                    <div class="handle">
+                    <img src="~jd/images/changesort.png" style="width: .48rem">
+                    </div>
                 </div>
             </div>
             <div :class="['changehiden']" >
                 <div class="goodclassify-list"  v-for="(itemDetial,index1) in item.up_levl_list" :key="index1" >
-                    <div class="goodclassify-listleft" style="color:#666">{{itemDetial.name}}</div>
+                    <div class="goodclassify-listleft" style="color:#666"><i :class="['select-defaultdel-icon']" ></i><span>{{itemDetial.name}}</span></div>
+                    <div class="goodclassify-listright" >
+                      <div>
+                        <img src="~jd/images/changeedit.png" style="width: .48rem">
+                      </div>
+                      <div>
+                      <img src="~jd/images/changesort.png" style="width: .48rem">
+                      </div>
+                    </div>
                 </div> 
             </div>
 
         </div>
+        </draggable>
         <div class="cart-shop-fixed">
                 <div @click="visiblePopup.classifyedittwo=true">取消</div>
                 <div @click="visiblePopup.classifyeditone=true" style="background:#ff2741;color:#fff">完成</div>
@@ -235,7 +265,7 @@
 
 <script>
 import BackRouter from 'common/backRouter';
-
+import draggable from "vuedraggable";
   import {
     getCategoryListB,
     saveClassifyeditOneData
@@ -266,7 +296,7 @@ import BackRouter from 'common/backRouter';
     watch: {},
 
     components: {
-      // LoadMore
+      draggable,
       BackRouter
     },
 
