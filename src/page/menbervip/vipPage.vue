@@ -21,103 +21,108 @@
   .content {
     padding-bottom: 1.35rem;
     min-height: 100vh;
-  }
+    background: #fff;
+    .vip-pageimg{
+        width: 9.36rem;
+        margin: .533333rem .32rem;
+        height: 11rem;
+    }
   // 头部样式
-  .my-header {
-    height: 3rem;
-    padding: .666667rem 0 .666667rem .33rem;
-    background: -webkit-linear-gradient(left, #ff5527, #ff2741);
-    background: linear-gradient( #ff5527, #ff2741);
-    box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
-    position: relative;
-    &:after {
-      content: '';
-      width: 100%;
-     left: 0;
-     top: 2.28rem;
-    height: 1.333333rem;
-    position: absolute;
-    background: -webkit-linear-gradient(left, #ff2741, #ff2741);
-    background: linear-gradient( #ff2741, #ff2741);
-    -webkit-border-radius: 50% / 50%;
-    -moz-border-radius: 50% / 50%;
-    border-radius: 50% / 50%;
-    }
-    @include flexbox(flex-start, space-between, column, wrap);
-    .my-settings {
-      width: 100%;
-      text-align: right;
-      >div {
-        @include flexbox(flex-end, center, row, nowrap);
-        height:1rem;
-        i {
-          width: .65rem;
-          height: .65rem;
+    .my-header {
+        height: 3rem;
+        padding: .666667rem 0 .666667rem .33rem;
+        background: -webkit-linear-gradient(left, #ff5527, #ff2741);
+        background: linear-gradient( #ff5527, #ff2741);
+        box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
+        position: relative;
+        &:after {
+        content: '';
+        width: 100%;
+        left: 0;
+        top: 2.28rem;
+        height: 1.333333rem;
+        position: absolute;
+        background: -webkit-linear-gradient(left, #ff2741, #ff2741);
+        background: linear-gradient( #ff2741, #ff2741);
+        -webkit-border-radius: 50% / 50%;
+        -moz-border-radius: 50% / 50%;
+        border-radius: 50% / 50%;
         }
-        .settings {
-          display: block;
-          // background: url('~jd/images/settings.png') no-repeat;
-          // background-size: 100%; // background-position: -2.6rem 0!important;
+        @include flexbox(flex-start, space-between, column, wrap);
+        .userinfo {
+        >div{
+            @include flexbox(flex-start,
+            flex-start,
+            row,
+            nowrap);
         }
-        .msg-icon {
-          display: block;
-          margin-left: 20px;
-          background: url('~jd/images/searchIcon.png') no-repeat;
-          background-size: 600% 100%;
-          background-position: -1.3rem 0 !important;
+        .avatar {
+            img {
+            border: 1px solid hsla(0, 0%, 100%, .4);
+            border-radius: 60px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+            width: 1.6rem;
+            height:1.6rem;
+            z-index: 1;
+            position: relative;
+            }
         }
-      }
-    }
-    .userinfo {
-      >div{
-        @include flexbox(flex-start,
-        flex-start,
-        row,
-        nowrap);
-      }
-      .avatar {
-        img {
-          border: 1px solid hsla(0, 0%, 100%, .4);
-          border-radius: 60px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
-          width: 1.6rem;
-          height:1.6rem;
-          z-index: 1;
-          position: relative;
-        }
-      }
-      .user{
-        @include flexbox(center,
-        flex-start,
-        column,
-        wrap);
-        height:64px;
-        margin-left:.4rem;
-        .viptip{
-              line-height: .64rem;
-          img{
-            width: .48rem;margin-right: .213333rem;
-          }
-          color: #ffe610;
-        }
+        .user{
+            @include flexbox(center,
+            flex-start,
+            column,
+            wrap);
+            height:64px;
+            margin-left:.4rem;
+            .viptip{
+                line-height: .64rem;
+            img{
+                width: .48rem;margin-right: .213333rem;
+            }
+            color: #ffe610;
+            }
 
-        .username,.userphone {
-          color:#fff;
-          font-size:.4rem;
+            .username,.userphone {
+            color:#fff;
+            font-size:.4rem;
+            }
+            .uservip{
+            margin-left: .266667rem;
+            padding: .04rem .2rem;
+            height: .426667rem;
+            text-align: center;
+            line-height: .426667rem;
+            font-size: .32rem;
+            background: #ff7200;
+            color: #fff;
+            border-radius: 4px;
+            }
         }
-        .uservip{
-          margin-left: .266667rem;
-          padding: .04rem .2rem;
-          height: .426667rem;
-          text-align: center;
-          line-height: .426667rem;
-          font-size: .32rem;
-          background: #ff7200;
-          color: #fff;
-          border-radius: 4px;
         }
-      }
     }
+    .header-tip{
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #fff;
+        top: -0.213333rem;
+        font-size: .4rem;
+    }
+    .vip-btn{
+        width: 9.36rem;
+        height: 1.2rem;
+        text-align: center;
+        line-height: 1.2rem;
+        margin-left: .32rem;
+        font-size: .48rem;
+        color: #fff;
+        background: -webkit-gradient(linear, 0 top, 0 bottom, from(#ff2741), to(#ff5527));
+        border-radius: 100px;
+        margin-top: .6rem;
+        box-shadow: 0 2px 4px rgba(255, 85, 39, 0.5);
+        -webkit-box-shadow: 0 2px 4px rgba(255, 85, 39, 0.5);
+    }
+
   }
 
   
@@ -147,9 +152,14 @@
                   <span class="uservip">普通用户</span>
                 </p>
               </div>
+              
             </div>
           </div>
+          
         </div>
+        <p class="header-tip">一件也是批发价，年省5000元！</p>
+        <img class="vip-pageimg" src="~jd/images/vip-page.png" >
+        <p class="vip-btn" @click= "()=>$router.push({path: '/vipPay'})">续费会员¥399</p>
     </div>
      <BackRouter/>
   </div>

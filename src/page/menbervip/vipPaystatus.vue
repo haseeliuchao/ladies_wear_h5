@@ -48,7 +48,7 @@
           <img src="~jd/images/payVipError.png" v-else height="50">
           <p class="status" v-if="$route.query.pay_status">支付成功</p>
           <p class="status" v-else>支付失败</p>
-          <p class="status-link" v-if="$route.query.pay_status" @click= "$router.push('/index')">会员中心</p>
+          <p class="status-link" v-if="$route.query.pay_status" @click= "()=>$router.push({path: '/vipPage'})">会员中心</p>
           <p class="status-link" v-else @click= "()=>$router.push({path: '/vipPay'})">继续支付</p>
           <p class="status-linka" @click= "$router.push('/myhome')">个人中心</p>
     <BackRouter/>
