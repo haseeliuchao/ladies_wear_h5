@@ -5,6 +5,7 @@ import {
   loginUsreInit,
   loginBind,
   getUserInfo,
+  accountRevenue,
   sendPhoneMessage,
   sendLoginMessage,
   registered,
@@ -37,6 +38,7 @@ const user = {
   state: {
     userInfo: null, //用户信息数据
     addressList: null, //用户地址数据
+    revenueData: null, //用户地址数据
   },
   mutations: {
     SET_USERINFO_DATA(state, userInfo) {
@@ -44,6 +46,9 @@ const user = {
     },
     SET_ADDRESSLIST_DATA(state, addressList) {
       state.addressList = addressList
+    },
+    SET_REVENUE_DATA(state, revenueData) {
+      state.revenueData = revenueData
     }
   },
   actions: {
@@ -248,6 +253,18 @@ const user = {
     }, parameterData) {
       return new Promise((resolve, reject) => {
         getUserInfo(parameterData).then(response => {
+          resolve(response)
+        }, err => {
+          reject(err)
+        })
+      })
+    },
+    GetaccountRevenue({ //获取用户信息
+      commit,
+      state
+    }, parameterData) {
+      return new Promise((resolve, reject) => {
+        accountRevenue(parameterData).then(response => {
           resolve(response)
         }, err => {
           reject(err)

@@ -655,6 +655,7 @@
     computed: {
       ...mapGetters([
         'userInfo',
+        'revenueData',
       ])
     },
 
@@ -663,7 +664,8 @@
       //      window.openSdk({user_id: 2,nickname: 'chaosiling'});
       // },
       ...mapMutations([
-        'SET_USERINFO_DATA'
+        'SET_USERINFO_DATA',
+        'SET_REVENUE_DATA'
       ]),
      
       async initData() {
@@ -678,11 +680,15 @@
         }else{
           this.userData=this.userInfo
         }
-
-          let Data = await accountRevenue();
+          if(!this.revenueData){
+          let Data = await this.$store.dispatch('GetaccountRevenue');
             if(Data.code=10000){
+            await this.SET_REVENUE_DATA(Data.data);  
             this.todayPoit=Data.data
             }
+          }else{
+            this.todayPoit=this.revenueData
+          }
       },
       async showToast(){
         Toast({duration: 1000,

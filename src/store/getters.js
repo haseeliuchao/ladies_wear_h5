@@ -12,6 +12,7 @@ const getters = {
 
     // user
     userInfo: state => state.user.userInfo,
+    revenueData: state => state.user.revenueData,
     addressList: state => state.user.addressList
 }
 export default getters
