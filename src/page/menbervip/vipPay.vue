@@ -12,6 +12,7 @@
   .vip-guide{
       width: 10rem;
       border-top: .213333rem solid #f2f2f2;
+      padding-bottom: 3rem;
       img{
           width: 100%;
           
