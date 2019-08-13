@@ -25,6 +25,8 @@ export const setPassword = (params) => new Http().require({api: '/api/register/p
 
 export const cardCoupon = (params) => new Http().require({api: '/api/member/Coupon/page',param: params}); //获取卡券
 
+export const vipinviteData = (params) => new Http().require({api: '/api/premium/open/redeemcode',param: params}); //会员兑换
+
 
 export const saveAddress = (params) => new Http().require({api: '/api/consignee/add',param: params}); //新建地址
 
@@ -41,6 +43,8 @@ export const removeAddress = (params) => new Http().require({api: '/api/consigne
 export const payByWallet = (params) => new Http().require({api: '/api/member/PayByWallet',param: params}); //余额支付
 
 export const payToken = (params) => new Http().require({api: '/api/order/generate/token',param: params}); //余额支付
+
+export const vipPayGetData = (params) => new Http().require({api: '/api/premium/open/wx',param: params}); //余额支付
 
 export const getSignature = (params) => new Http().require({api: '/api/jsapi/signature',param: params}); //分享
 

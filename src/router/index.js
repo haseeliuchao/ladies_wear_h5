@@ -64,6 +64,9 @@ const Goodeditall = () =>  import ('page/shopb/goodeditall')
 /* vip */
 const VipGuide = () =>  import ('page/menbervip/vipGuide')
 const VipPay = () =>  import ('page/menbervip/vipPay')
+const VipPage = () =>  import ('page/menbervip/vipPage')
+const VipInvite = () =>  import ('page/menbervip/vipInvite')
+const VipPaystatus = () =>  import ('page/menbervip/vipPaystatus')
 /* vip */
 
 /* shopToB */
@@ -428,7 +431,7 @@ const appRouter = {
                 path: '/vipGuide',
                 name: 'vipGuide',
                 component: VipGuide,
-                meta: { keepAlive: false ,Title:'开通会员',}
+                meta: { keepAlive: true ,Title:'开通会员',}
             }
             ,
             {
@@ -436,6 +439,27 @@ const appRouter = {
                 name: 'vipPay',
                 component: VipPay,
                 meta: { keepAlive: false ,Title:'开通会员',}
+            }
+            ,
+            {
+                path: '/vipPage',
+                name: 'vipPage',
+                component: VipPage,
+                meta: { keepAlive: true ,Title:'我的',}
+            }
+            ,
+            {
+                path: '/vipInvite',
+                name: 'vipInvite',
+                component: VipInvite,
+                meta: { keepAlive: false ,Title:'兑换会员',}
+            }
+            ,
+            {
+                path: '/vipPaystatus',
+                name: 'vipPaystatus',
+                component: VipPaystatus,
+                meta: { keepAlive: false ,Title:'支付结果',}
             }
             ,
             {

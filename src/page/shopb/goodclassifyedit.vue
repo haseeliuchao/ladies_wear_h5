@@ -162,7 +162,6 @@
   <div class="goodclassify">
         <mt-popup v-model="visiblePopup.classifyeditone" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
             <div class="classifyeditone">
-                
                 <div class="classifyeditone-input"  @click= "$refs.classifyeditoneInput.focus()"><input type="text" v-model="classifyeditonevalue" placeholder="请输入分类名称" ref="classifyeditoneInput"></div>
                 <div class="error-text">
                     <p v-if="errorStatus">输入1-10个字符，支持特殊字符；不支持表情符号</p>

@@ -83,8 +83,8 @@
           border: 1px solid hsla(0, 0%, 100%, .4);
           border-radius: 60px;
           box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
-          width: 60px;
-          height: 60px;
+          width: 1.6rem;
+          height: 1.6rem;
         }
       }
       .user{

@@ -7,6 +7,7 @@
       padding-bottom: 1.733333rem;
       img{
           width: 100%;
+          height: 44.866667rem;
       }
     .vip-btn{
         width: 9.36rem;
@@ -16,9 +17,11 @@
         margin-left: .32rem;
         font-size: .48rem;
         color: #fff;
-        @include gradient(#ff2740,#ff5428);
+        background: -webkit-gradient(linear, 0 top, 0 bottom, from(#ff2741), to(#ff5527));
         border-radius: 100px;
         margin-top: 1.066667rem;
+        box-shadow: 0 2px 4px rgba(255, 85, 39, 0.5);
+        -webkit-box-shadow: 0 2px 4px rgba(255, 85, 39, 0.5);
     }
   }
 </style>
