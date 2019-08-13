@@ -24,8 +24,8 @@
   }
   // 头部样式
   .my-header {
-    height: 136px;
-    padding: 25px .33rem;
+    height: 3.626667rem;
+    padding: .666667rem 0 .666667rem .33rem;
     background: -webkit-linear-gradient(left, #ff5527, #ff2741);
     background: linear-gradient( #ff5527, #ff2741);
     box-shadow: 0 2px 5px rgba(255, 98, 98, .4);
@@ -94,11 +94,37 @@
         wrap);
         height:64px;
         margin-left:.4rem;
-        .username,.userphone {
-          // margin-top: 10px;
-          color:#fff;
-          font-size:15px;
+        .viptip{
+              line-height: .64rem;
+          img{
+            width: .48rem;margin-right: .213333rem;
+          }
+          color: #ffe610;
         }
+
+        .username,.userphone {
+          color:#fff;
+          font-size:.4rem;
+        }
+        .uservip{
+          margin-left: .266667rem;
+          padding: .04rem .2rem;
+          height: .426667rem;
+          text-align: center;
+          line-height: .426667rem;
+          font-size: .32rem;
+          background: #ff7200;
+          color: #fff;
+          border-radius: 4px;
+        }
+      }
+      .cardcoupon{
+        color: $red;
+        background: #fff;
+        padding: .1rem .2rem;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        margin-top: .24rem
       }
       
       .info-box {
@@ -130,7 +156,7 @@
   // 我的小店样式
   .my-store{
      position:relative;
-     top:-26px;
+     top:-.7rem;
      width: 9.4rem;
      margin: 0 auto 8px;
      color:#333;
@@ -201,7 +227,7 @@
   }
   .my-todayProfit {
     position:relative;
-    top:-26px;
+    top:-.7rem;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
@@ -249,7 +275,7 @@
   // 我的订单样式
   .my-order {
     position:relative;
-    top:-26px;
+    top:-.7rem;
     clear: both;
     background: #fff;
     margin: 0 .33rem 8px;
@@ -309,7 +335,7 @@
   // 关于我们
   .my-about{
     position:relative;
-    top:-26px;
+    top:-.7rem;
     margin: 0 .33rem;
     border-radius:5px;
     background:#fff;
@@ -453,30 +479,23 @@
           slot="refresh-spinner">更新中...</span> -->
         <div class="my-header">
           <div class="userinfo">
-            <!-- @click.stop.prevent="$router.push(!userData.memberInfo ? `/login` : `/myhome`)" -->
             <div>
               <div class="avatar">
                 <img :src="!userData.memberInfo? 'https://static.hdslb.com/images/akari.jpg' : userData.memberInfo.head_img" alt="">
               </div>
-              <div class="user">
-                <span class="username" v-if="userData.memberInfo">{{userData.memberInfo.nick}}</span>
-                <!-- 假数据 -->
-                <!-- <span class="userphone" v-if="!userData.memberInfo">18867202256</span>  -->
+              <div class="user" @click= "()=>$router.push({path: '/vipGuide'})">
+                <p style="line-height: .64rem;">
+                  <span class="username" v-if="userData.memberInfo">{{userData.memberInfo.nick}}</span>
+                  <span class="uservip">普通用户</span>
+                </p>
+                <p class="viptip"><img src="~jd/images/vip-icon.png">升级VIP年省5000元</p>
+              </div>
+              <div class="cardcoupon" @click= "()=>$router.push({path: '/cardCoupon'})">
+                <span>
+                  优惠券15
+                </span>
               </div>
             </div>
-            <!-- <div class="info-box"> -->
-              <!-- 真数据 -->
-              <!-- <div class="my-validWalletAmount" v-if="userData.memberInfo">
-                <p class="card" @click= "$router.push('/cardCoupon')">
-                  <span>{{userData.userCouponsCount}}</span>
-                  <span>我的卡劵</span>
-                </p>
-                <p class="expiry-time">
-                  <span>{{userData.img_search_end_time|DateFormat('yyyy.MM.dd')}}</span>
-                  <span>图搜有效期</span>
-                </p>
-              </div>
-            </div> -->
           </div>
         </div>
         <div class="my-store" @click= "()=>$router.push({path: '/withdrawalEntrance'})">

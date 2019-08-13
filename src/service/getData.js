@@ -23,7 +23,7 @@ export const editUserInfo = (params) => new Http().require({api: '/api/member/Ed
 
 export const setPassword = (params) => new Http().require({api: '/api/register/password',param: params}); //设置密码
 
-export const cardCoupon = (params) => new Http().require({api: '/api/member/Coupon',param: params}); //获取卡券
+export const cardCoupon = (params) => new Http().require({api: '/api/member/Coupon/page',param: params}); //获取卡券
 
 
 export const saveAddress = (params) => new Http().require({api: '/api/consignee/add',param: params}); //新建地址

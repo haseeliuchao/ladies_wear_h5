@@ -2,20 +2,17 @@
 <style lang="scss" scoped>
   @import '~assets/common/css/mixin.scss';
   .cardCoupon{
-    @include wh(100%,100%);
     background:#fff;
-    .cardCoupon-container{
-      @include wh(100%,100%);
-      .cardCoupon-title{
+    .cardCoupon-title{
         padding:0 .3rem;
         background:#f2f2f2;
         ul{
           @include flexbox(center,center,row,nowrap);
           li{
             @include flexbox(center,center,row,nowrap);
-            font-size:15px;
+            font-size:.4rem;
             color:#333;
-            padding:14px 0;
+            padding:.373333rem 0;
             &:first-child{
               justify-content:flex-start;
             }
@@ -28,11 +25,13 @@
           }
         }
       }
+    .cardCoupon-container{
+      
       .cardCoupon-detail{
         padding:0 .3rem;
         background-color:#fff;
         .cardCoupon-item{
-          margin-top:22px;
+          margin-top:.133333rem;
           .cardCoupon-item-con{
             @include flexbox(space-between,center,row,nowrap);
             padding:10px 0 15px .4rem;
@@ -94,39 +93,43 @@
 </style>
 <template>
   <div class="cardCoupon">
-    <div class="cardCoupon-container" v-if="cardCoupon!= ''">
-      <div class="cardCoupon-title">
+     <div class="cardCoupon-title">
         <ul>
-          <li @click= "couponRecord(0)" :class="{'active':active===0}">未使用<span>({{cardCoupon.notUse}})</span></li>
-          <li @click= "couponRecord(1)" :class="{'active':active===1}">使用记录<span>({{cardCoupon.use}})</span></li>
-          <li @click= "couponRecord(2)" :class="{'active':active===2}">已过期<span>({{cardCoupon.expire}})</span></li>
+          <li @click= "couponRecord(0)" :class="{'active':active===0}">未使用<span>（{{notuse}}）</span></li>
+          <li @click= "couponRecord(1)" :class="{'active':active===1}">使用记录<span>（{{thisuse}}）</span></li>
+          <li @click= "couponRecord(2)" :class="{'active':active===2}">已过期<span>（{{overdue}}）</span></li>
         </ul>
       </div>
-      <ul class="cardCoupon-detail" v-for="(item,index) in cardCoupon.list" :key="index">
+      <load-more style="width:100%;" v-if="$route.name=='cardCoupon'"  @loadMore="infiniteCallback" :commad="commad" :param="params" 
+        :loadMoreIconVisible="false" ref="cardCouponLoadmore">
+    <div class="cardCoupon-container" v-if="cardCouponList!=''">
+      <ul class="cardCoupon-detail" v-for="(item,index) in cardCouponList" :key="index">
         <li class="cardCoupon-item">
           <div class="cardCoupon-item-con">
             <div class="item-left">
               <p class="item-price">￥{{item.discount_price/100}}</p>
-              <p class="item-useTip">{{item.title}} (不包含运费)</p>
-              <p class="item-expiryTime">有效期{{item.used_start|DateFormat('yyyy.MM.dd')}}-{{item.used_end|DateFormat('yyyy.MM.dd')}}</p>
+              <p class="item-useTip">{{item.coupon_title}} (不包含运费)</p>
+              <p class="item-expiryTime">有效期{{item.coupon_use_valid_start|DateFormat('yyyy.MM.dd')}}-{{item.coupon_use_valid_end|DateFormat('yyyy.MM.dd')}}</p>
             </div>
             <div class="item-right coupon-status">
-              <img  v-if="item.user_coupon_status==1" src="~jd/images/couponNotuse.png">
-              <img  v-if="item.user_coupon_status==2" src="~jd/images/couponUse.png">
-              <img  v-if="item.user_coupon_status==0" src="~jd/images/couponNotuse.png">
+              <img  v-if="item.user_coupon_status_integer==1" src="~jd/images/couponNouse.png">
+              <img  v-if="item.user_coupon_status_integer==2" src="~jd/images/couponUse.png">
+              <img  v-if="item.user_coupon_status_integer==3" src="~jd/images/couponOlduse.png">
             </div>
           </div>
           <p class="cardCoupon-item-useExplain">{{item.use_scope_type_str}}</p>
         </li>
-        <div class="cardCoupon-tip" v-if="cardCoupon.list">
+        <!-- <div class="cardCoupon-tip" v-if="cardCoupon.list">
           ——————&nbsp;&nbsp;&nbsp;以上是近期得优惠券&nbsp;&nbsp;&nbsp;——————
-        </div>
+        </div> -->
       </ul>
     </div>
-    <div class="cardCoupon-container" v-else>
-      <img src="~jd/images/couponUse.png">
-      暂无优惠券
-    </div>
+    <!-- 没有订单 -->
+        <div class="order-nomore-tip" v-if="cardCouponList==''">
+          <i></i>
+        </div>
+        <!-- 没有订单 -->
+      </load-more>
     <BackRouter/>
   </div>
 </template>
@@ -144,11 +147,17 @@
     data() {
       return {
         active:0,
-        cardCoupon: {},
-        params: {  
+        notuse:0,
+        overdue:0,
+        thisuse:0,
+        commad: cardCoupon,
+        params: {
+          page_size: 10,
+          current_page: 1,
+          user_coupon_status:1
         },
-        // commad: cardCoupon
-        user_coupon_status:1,
+         cardCouponList:[],
+        // user_coupon_status:1,
         status_url:''
       };
     },
@@ -177,22 +186,46 @@
           // setLocalStorage('cardCoupon',this.cardCoupon)
         }
       },
+
+       async onRefreshCallback() { //下拉刷新
+        this.params.page_size = 10;
+        this.params.current_page = 1;
+        this.cardCouponList = [];
+        this.$refs.cardCouponLoadmore.onTopLoaded(this.$refs.cardCouponLoadmore.uuid);
+      },
+      async infiniteCallback(response) { //加载更多订单
+      if(response.data){
+        this.notuse=response.data.not_use;
+        this.overdue=response.data.overdue;
+        this.thisuse=response.data.this_use;
+      }
+      if (response.data.page.data){
+        if (response.data.page.data.length > 0) {
+          response.data.page.data.map(i => {
+            this.cardCouponList.push(i)
+            // console.log(this.cardCouponList)
+
+          })
+        }
+      }
+      },
       async couponRecord(index){
         this.active = index;
         if(index===0){
-          this.user_coupon_status=1;
+          this.params.user_coupon_status=1;
         }
         if(index===1){
-          this.user_coupon_status=2;
+          this.params.user_coupon_status=2;
         }
         if(index===2){
-          this.user_coupon_status=0;
+          this.params.user_coupon_status=0;
         }
-        this.initData()
+        this.onRefreshCallback();
       }      
     },
     mounted: function () {
-          this.initData()
+          // this.initData()
+          this.couponRecord(0)
     }
   }
 </script>

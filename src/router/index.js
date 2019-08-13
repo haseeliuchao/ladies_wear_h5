@@ -61,6 +61,10 @@ const Goodeditall = () =>  import ('page/shopb/goodeditall')
 /* shopb */
 
 
+/* vip */
+const VipGuide = () =>  import ('page/menbervip/vipGuide')
+const VipPay = () =>  import ('page/menbervip/vipPay')
+/* vip */
 
 /* shopToB */
 const MyShop = () => import ('page/shopToB/myShop')
@@ -418,6 +422,20 @@ const appRouter = {
                 name: 'goodclassifyeditall',
                 component: Goodclassifyeditall,
                 meta: { keepAlive: false ,Title:'调整分类',}
+            }
+            ,
+            {
+                path: '/vipGuide',
+                name: 'vipGuide',
+                component: VipGuide,
+                meta: { keepAlive: false ,Title:'开通会员',}
+            }
+            ,
+            {
+                path: '/vipPay',
+                name: 'vipPay',
+                component: VipPay,
+                meta: { keepAlive: false ,Title:'开通会员',}
             }
             ,
             {

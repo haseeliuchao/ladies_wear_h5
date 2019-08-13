@@ -265,12 +265,22 @@
             this.LoadMoreLoading = false;
           });
           try {
-            if(response.data.length<=0 || response.data.total_count <= (this.param.current_page*this.param.page_size)){
+            
+            if(response.data.page){
+                if(response.data.page.length<=0 || response.data.page.total_count <= (this.param.current_page*this.param.page_size)){
                 this.AllLoaded = true;
                 this.$emit('loadMore',response);
                 return this.LoadMoreLoading = false;
-                
-            };
+                };
+            }else{
+                if(response.data.length<=0 || response.data.total_count <= (this.param.current_page*this.param.page_size)){
+                this.AllLoaded = true;
+                this.$emit('loadMore',response);
+                return this.LoadMoreLoading = false;
+                };
+            }
+           
+
           } catch (error) {
               this.AllLoaded = true;
               return this.LoadMoreLoading = false;
