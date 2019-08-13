@@ -109,16 +109,16 @@
         font-size: .4rem;
     }
     .vip-btn{
-        width: 9.36rem;
-        height: 1.2rem;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1.3rem;
         text-align: center;
-        line-height: 1.2rem;
-        margin-left: .32rem;
+        line-height: 1.3rem;
         font-size: .48rem;
         color: #fff;
         background: -webkit-gradient(linear, 0 top, 0 bottom, from(#ff2741), to(#ff5527));
-        border-radius: 100px;
-        margin-top: .6rem;
         box-shadow: 0 2px 4px rgba(255, 85, 39, 0.5);
         -webkit-box-shadow: 0 2px 4px rgba(255, 85, 39, 0.5);
     }
@@ -161,7 +161,7 @@
         <img class="vip-pageimg" src="~jd/images/vip-page.png" >
         <p class="vip-btn" @click= "()=>$router.push({path: '/vipPay'})">续费会员¥399</p>
     </div>
-     <BackRouter/>
+     <BackRouter :fixePosition='2'/>
   </div>
   
 </template>
