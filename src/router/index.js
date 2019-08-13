@@ -445,7 +445,7 @@ const appRouter = {
                 path: '/vipPage',
                 name: 'vipPage',
                 component: VipPage,
-                meta: { keepAlive: true ,Title:'我的',}
+                meta: { keepAlive: false ,Title:'我的',}
             }
             ,
             {

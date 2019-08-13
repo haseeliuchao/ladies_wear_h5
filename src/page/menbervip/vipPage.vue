@@ -209,13 +209,13 @@
           if(!this.userInfo){
               let res = await this.$store.dispatch('GetUserInfo');
                 if(res.code==10000){
-                    await this.SET_USERINFO_DATA(res.data.memberInfo);
+                    await this.SET_USERINFO_DATA(res.data);
                     this.memberInfo = res.data.memberInfo;
                 }else{
                     this.memberInfo = null;
                 }
           }else{
-              this.memberInfo=this.userInfo
+              this.memberInfo=this.userInfo.memberInfo
           }
           
       }

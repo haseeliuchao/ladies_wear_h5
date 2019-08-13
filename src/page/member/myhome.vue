@@ -654,7 +654,7 @@
 
     computed: {
       ...mapGetters([
-        'memberInfo',
+        'userInfo',
       ])
     },
 
@@ -667,14 +667,17 @@
       ]),
      
       async initData() {
+        if(!this.userInfo){
           let res = await this.$store.dispatch('GetUserInfo');
-          await this.SET_USERINFO_DATA(res.data);
           if(res.code==10000){
             await this.SET_USERINFO_DATA(res.data);
             this.userData = res.data;
           }else{
             this.userData.memberInfo = null;
           }
+        }else{
+          this.userData=this.userInfo
+        }
 
           let Data = await accountRevenue();
             if(Data.code=10000){
