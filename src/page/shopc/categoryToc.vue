@@ -70,7 +70,7 @@
       <div class="banner">
             <img :src="shopImgUrl" alt="店铺图片">
           </div>
-        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB.data" :key="index">
+        <div class="goodclassify-all-list" v-for="(item,index) in categoryRootB" :key="index">
             <div class="goodclassify-list">
                 <div class="goodclassify-listleft">{{item.name}}</div>
                 <div class="goodclassify-listright">
