@@ -28,6 +28,7 @@ const CardCoupon = () =>   import ('page/member/cardCoupon')
 /* shop */
 const Cart = () =>  import ('page/shop/cart')
 const CartToC = () =>  import ('page/shopc/cartToc')
+const CategoryToC = () =>  import ('page/shopc/categoryToc')
 const Category = () =>  import ('page/shop/category')
 const Order = () => import ('page/shop/order')
 const OrderToC = () => import ('page/shopc/orderToc')
@@ -67,6 +68,7 @@ const VipPay = () =>  import ('page/menbervip/vipPay')
 const VipPage = () =>  import ('page/menbervip/vipPage')
 const VipInvite = () =>  import ('page/menbervip/vipInvite')
 const VipPaystatus = () =>  import ('page/menbervip/vipPaystatus')
+const InviteSpecial = () =>  import ('page/menbervip/inviteSpecial')
 /* vip */
 
 /* shopToB */
@@ -303,6 +305,12 @@ const appRouter = {
                 meta: { keepAlive: false }
             },
             {
+                path: '/categoryToC/:distributor_id',
+                name: 'categoryToC',
+                component: CategoryToC,
+                meta: { keepAlive: true }
+            },
+            {
                 path: '/myShop',
                 name: 'myShop',
                 component: MyShop,
@@ -460,6 +468,13 @@ const appRouter = {
                 name: 'vipPaystatus',
                 component: VipPaystatus,
                 meta: { keepAlive: false ,Title:'支付结果',}
+            }
+            ,
+            {
+                path: '/inviteSpecial',
+                name: 'inviteSpecial',
+                component: InviteSpecial,
+                meta: { keepAlive: false ,Title:'慧眼识货',}
             }
             ,
             {

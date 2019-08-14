@@ -46,6 +46,10 @@ export const payToken = (params) => new Http().require({api: '/api/order/generat
 
 export const vipPayGetData = (params) => new Http().require({api: '/api/premium/open/wx',param: params}); //余额支付
 
+export const inviteSpecialData = (params) => new Http().require({api: '/api/member/invited/page',param: params}); //余额支付
+
+export const getcategoryRootB = (params) => new Http().require({api: '/api/C/distributor/item/category/list',param: params}); //余额支付
+
 export const getSignature = (params) => new Http().require({api: '/api/jsapi/signature',param: params}); //分享
 
 export const goshare = (params) => new Http().require({api: '/api/redirect',param: params}); //分享

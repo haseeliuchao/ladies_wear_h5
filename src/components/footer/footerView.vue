@@ -48,11 +48,6 @@
       }
     }
     .category {
-      // background-position: -3.5rem -40px;
-      // &.active {
-      //   background-position: -3.5rem -117px;
-      //    color: #ff2741;
-      // }
       background:url('~jd/images/category.png') no-repeat center 7px;
       background-size:30%;
       &.active {

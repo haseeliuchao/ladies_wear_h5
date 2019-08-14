@@ -42,6 +42,15 @@
         color: #ff2741;
       }
     }
+    .category {
+      background:url('~jd/images/category.png') no-repeat center 7px;
+      background-size:22px 22px;
+      &.active {
+        background:url('~jd/images/category_on.png') no-repeat center 7px;
+        background-size:22px 22px;
+        color: #ff2741;
+      }
+    }
     .cart {
       background:url('~jd/images/cart.png') no-repeat center 7px;
       background-size:24px 24px;
@@ -66,6 +75,7 @@
 <template>
   <ul class="nav-bar fool">
     <li :class="['barIcon','home',$route.name==='indexToC'?'active':'']" @click= "$router.push(`/indexToC/${distributorId}`)">首页</li>
+    <li :class="['barIcon','category',$route.name==='categoryToC'?'active':'']" @click= "$router.push(`/categoryToC/${distributorId}`)">分类</li>
     <li :class="['barIcon','cart',$route.name==='cartToC'?'active':'']" @click= "$router.push(`/cartToC/${distributorId}`)">购物车</li>
     <li :class="['barIcon','myOrder',$route.name==='orderListToC'?'active':'']" @click= "$router.push({path: '/orderListToC/0',query: {distributor_id:distributorId}})">订单</li>
   </ul>

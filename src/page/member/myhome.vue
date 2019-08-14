@@ -588,20 +588,12 @@
                 <img src="~jd/images/tools_icon5.png" alt="">
                 <span>客服中心</span>
               </div>
+              <div class="my-about-tools-item" @click= "$router.push('/inviteSpecial')" style="margin-bottom:0">
+                <img src="~jd/images/tools_icon6.png" alt="">
+                <span>邀请好友</span>
+              </div>
           </div>
           
-          <!-- <p class="about-item" @click= "$router.push('/addressList')">
-            <span><img src="~jd/images/addressicon.png">收货地址</span>
-            <span>快速管理 ></span>
-          </p>
-          <p class="about-item" @click= "()=>$router.push({path: '/helpcenter'})">
-            <span><img src="~jd/images/kefuicon.png">帮助中心</span>
-            <span>有问题找小惠 ></span>
-          </p>
-          <p class="about-item" style="border-bottom:none;" @click="showToast">
-            <span><img src="~jd/images/usicon.png">关于我们</span>
-            <span>图搜搜索品质生活 ></span>
-          </p> -->
         </div>
     </div>
     <FooterView/>
