@@ -3,6 +3,164 @@
   @import '~assets/common/css/mixin.scss';
   
   .my-order {
+          .goodmain{
+    padding-top: 8px;
+    padding-bottom: 60px;
+    .goodinfo{
+    padding: 15px 10px;
+    width: 9.4rem;
+    margin-left: .3rem;
+    background: #fff;
+    border-radius: 6px;
+    margin-bottom: 8px;
+      @include flexbox(space-between,
+      top,
+      row,
+      nowrap);
+      img{
+      height: 2.4rem;
+      width: 2.4rem;
+      border-radius: 6px;
+      }
+      .goodinfo-text-name{
+       @include textoverflow(2);
+        font-size: 13px;
+        color: #333;
+        line-height: 20px;
+        width: 6rem;
+        margin-top: 7px;
+      }
+      .goodinfo-text-fare{
+        color: #666;
+        font-size: 13px;
+        margin-top: 7px;
+      }
+    }
+    .goodskuedit{
+      padding: 15px 10px;
+    width: 9.4rem;
+    margin-left: .3rem;
+    background: #fff;
+    border-radius: 6px;
+    margin-top: 8px;
+    p{
+      @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      font-size: 15px;
+      color: #333;
+      line-height: 30px;
+      input{
+        height: 30px;
+        line-height: normal;
+        color: #666;
+      }
+    }
+    .profit{
+      border-top: 1px solid #e4e4e4;
+      padding-top: 12px;
+    }
+    }
+    .btn-save-fixed{
+      height: 48px;
+      position: fixed;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      @include flexbox(space-between,
+      center,
+      row,
+      nowrap);
+      div{
+        height: 100%;
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        line-height: 48px;
+        width: 50%  
+      }
+      .btn-set{
+        background: #ff5527;
+      }
+      .btn-save{
+        background: $red
+      }
+    }
+    .setProfitmain{
+      width: 8.2rem;
+      border-radius: 6px;
+      .setProfitcheck{
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 4px;
+        @include flexbox(space-between,
+        center,
+        row,
+        nowrap);
+        li{
+          width: 50%;
+          text-align: center;
+          color: #666;
+        }
+        .active {
+        color: $red;
+         }
+      }
+      .setProfitone{
+          .setProfitone-entry{
+            width: 7.2rem;
+            margin-left: .5rem;
+            height: 29px;
+            border:1px solid #e4e4e4;
+            border-radius: 6px;
+            @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            input{
+              height: 26px;
+              line-height: normal;
+              width: 6rem;
+              margin-left: 6px;
+            }
+            span{
+              color: #333;
+              font-size: 16px;
+              margin-right: .2rem
+            }
+          }
+          .setProfitone-text{
+            color: #999;
+            border-bottom:1px solid #e4e4e4;
+            padding: 0 .5rem;
+            font-size: 13px;
+            line-height: 28px;
+            height: 28px;
+          }
+          .setProfitone-choose{
+            @include flexbox(space-between,
+            center,
+            row,
+            nowrap);
+            height: 60px;
+            line-height: 60px;
+            
+            span{
+              text-align: center;
+              width: 50%;font-size: 16px;
+              color: $red
+            }
+          }
+        }
+    }
+  }
+
+
+
     .screen_subject{
       width: 8.8rem;
       padding: 12px 12px 4px;
@@ -314,11 +472,11 @@
                      .edit-btn{
                        position: relative;
                         .edit-pop{
-                         width: 2.1rem;
-                         height: 37px;
+                         width: 6rem;
+                         height: .986667rem;
                          background: #666;
                          position: absolute;
-                         left: -2.4rem;
+                         left: -6.16rem;
                          top: -7px;
                          border-radius: 6px;
                          color: #fff;
@@ -396,6 +554,58 @@
 
 <template>
   <div class="my-order" @click="editIndex=null">
+    <!-- 编辑弹窗 -->
+    <mt-popup v-model="visiblePopup.goodeditStatus" :closeOnClickModal="true" :modal="false" position="bottom" class="modal-popup">
+       <div class="goodmain">
+    <mt-popup v-model="visiblePopup.setProfit" style="border-radius: 6px;" position="center" class="checkSkupop" >
+    <div class="setProfitmain">
+      <ul class="setProfitcheck">
+        <li :class="{'active':activeIndex===0}" @click="activeIndexchange(0)">按进价倍数</li>
+        <li :class="{'active':activeIndex===1}" @click="activeIndexchange(1)">按利润值</li>
+      </ul>
+      <div class="setProfitone" v-if="activeIndex==0">
+      <p class="setProfitone-entry" @click= "$refs.salesMultipleInput.focus()"><input type="number" @blur="gotoView" v-model="salesMultiple" ref="salesMultipleInput"><span>倍</span></p>
+      <p class="setProfitone-text">售价=进价+进价*倍数</p>
+      <p class="setProfitone-choose"><span @click="setProfitClose" style="border-right:1px solid #e4e4e4;color:#333">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
+      </div>
+
+      <div class="setProfitone" v-if="activeIndex==1">
+      <p class="setProfitone-entry" @click= "$refs.salesSetProfitInput.focus()"><input type="number" @keydown="handleInput2" @blur="gotoView" v-model="salesSetProfit" ref="salesSetProfitInput"><span>元</span></p>
+      <p class="setProfitone-text">售价=进价+利润值</p>
+      <p class="setProfitone-choose"><span style="border-right:1px solid #e4e4e4;color:#333" @click="setProfitClose">取消</span><span @click="visiblePopup.setProfit=false">确定</span></p>
+      </div>
+
+    </div>
+    </mt-popup>
+
+
+   <div class="goodinfo">
+     <img v-lazy="goodeditdata.index_img_url">
+     <div class="goodinfo-text">
+       <p class="goodinfo-text-name">{{goodeditdata.title}}</p>
+       <p class="goodinfo-text-fare">运费：¥5.00</p>
+     </div>
+   </div>
+   
+   <div class="goodskuedit" v-for="(item,index) in goodeditdata.item_sku" :key="index">
+     <p class="color"><span>颜色</span><span style="color:#666">{{item.color}}</span></p>
+     <p class="size"><span>尺码</span>
+     <span style="color:#666;width: 80%;text-align: right;">
+         <em style="display:inline-block"  v-for="(itemsize,index1) in sizearr" :key="index1">
+         <i v-if="itemsize.color==item.color">&nbsp;&nbsp;{{itemsize.size}}</i>
+         </em>
+       </span></p>
+     <p class="setprice"><span>设置售价</span><input type="number" @keydown="handleInput2" @blur="gotoView" style="text-align:right;"  @keyup.prevent="changeSales(item,item.sales_consumer_price)" v-model="item.sales_consumer_price"></p>
+     <p class="profit"><span>利润</span><span style="color:#666">{{item.profit/100|TwoNum}}</span></p>
+   </div>
+   
+   <div class="btn-save-fixed">
+      <div class="btn-set" @click="setProfitshoe">批量设置利润</div>
+      <div class="btn-save" @click="save">保存</div>
+   </div>
+   <BackRouter :fixePosition='2'/>
+  </div>
+    </mt-popup>
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
      <div class="screen_subject" id='newImg' :style="{opacity:(opcityShow==true?1:0)}">
@@ -478,14 +688,24 @@
                             <img src="~jd/images/edit-popedit.png" style="width:14px;">
                             <p>编辑</p>
                           </div>
-                          <!-- <div style="border-right: 1px solid #949494;" @click="delGood(item.distributor_item_id)">
-                            <img src="~jd/images/edit-popdel.png" style="width:14px;">
-                            <p>删除</p>
-                          </div> -->
-                          <div @click="showactionsheet(item)">
+                          <div style="border-right: 1px solid #949494;">
+                            <img src="~jd/images/edit-popclssfiy.png" style="width:14px;">
+                            <p>分类</p>
+                          </div>
+                          
+                          <div style="border-right: 1px solid #949494;" @click="showactionsheet(item)">
                             <!-- sheetVisible=true -->
                             <img src="~jd/images/edit-popshare.png" style="width:14px;height:14px;">
                             <p>分享</p>
+                          </div>
+                          <div style="border-right: 1px solid #949494;">
+                            <!-- sheetVisible=true -->
+                            <img src="~jd/images/edit-popdown.png" style="width:14px;margin-bottom: 2px;">
+                            <p>下架</p>
+                          </div>
+                          <div  @click="delGood(item.distributor_item_id)">
+                            <img src="~jd/images/edit-popdel.png" style="width:14px;">
+                            <p>删除</p>
                           </div>
                         </div>
                         <img src="~jd/images/edit-icon.png"  @click.stop="editIndex=index" style="height:20px;"></span></p>
@@ -521,9 +741,15 @@ import BackRouter from 'common/backRouter';
 import html2canvas from 'html2canvas';
   import {
     searchshopGoods,
-    getpageCount
+    getpageCount,
+     getProduct,
+    itemUpd
   } from '@/service/getData';
   import {
+     getLocalStorage,
+    setLocalStorage,
+    getSessionStorage,
+    setSessionStorage,
     pushHistory
   } from '@/utils/mixin';
   import LoadMore from 'common/loadMore';
@@ -539,6 +765,25 @@ Vue.component(Actionsheet.name, Actionsheet);
   export default {
     data() {
       return {
+        salesMultiple:null,
+        salesSetProfit:null,
+        activeIndex: 0, 
+        countDownTime:null,
+        countDown:null,
+        goodeditdata:{
+          item_sku:[]
+        },
+        defgoodeditdata:{
+          item_sku:[]
+        },
+        colorarr:[],
+        sizearr:[],
+        
+        skuInfo:[],
+        focusprofitState:false,
+        itemSkuBOList:[],
+
+
         selectedRootB: 0,
         categoryRootB: [],
         commad: searchshopGoods,
@@ -547,7 +792,9 @@ Vue.component(Actionsheet.name, Actionsheet);
           paymentLoadingVisible: false,
           paymentContainerVisible: false,
           shareImg:false,
-          shareBoo:false
+          shareBoo:false,
+          goodeditStatus:false,
+          setProfit:false
         },
         paymentPassword: null, //支付密码
         currentOrder: {}, //当前订单
@@ -594,7 +841,28 @@ Vue.component(Actionsheet.name, Actionsheet);
              if(newvs==false){
                this.opcityShow=false;
               }
-            }
+            },
+            'salesMultiple': function(newVal,oldVal){
+              this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
+              if(newVal==null||newVal==''){
+                this.listMe(null,1,this.goodeditdata.item_sku)
+                this.listMeprofit(null,1,this.goodeditdata.item_sku)
+              }else{
+                 this.listMe('salesMultiple',newVal,this.goodeditdata.item_sku)
+                 this.listMeprofit('salesMultiple',newVal,this.goodeditdata.item_sku)
+              }
+
+          },
+          'salesSetProfit': function(newVal,oldVal){
+            this.goodeditdata.item_sku=JSON.parse(getSessionStorage('defgoodeditdata'))
+              if(newVal==null||newVal==''){
+                this.listMe(null,1,this.goodeditdata.item_sku)
+                this.listMeprofit(null,1,this.goodeditdata.item_sku)
+              }else{
+              this.listMe('salesSetProfit',newVal,this.goodeditdata.item_sku)
+              this.listMeprofit('salesSetProfit',newVal,this.goodeditdata.item_sku)
+              }
+          }
     },
 
     components: {

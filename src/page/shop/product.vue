@@ -272,21 +272,50 @@
   /* 分享图片生成 */
   .screen_subject{
       width: 8.8rem;
-      padding: .32rem .32rem .106667rem;
+      padding: .32rem .2rem .106667rem;
       border-radius: 6px;
       position: fixed;
       bottom: 0;
       z-index: -10;
       background: #fff;
+      text-align: center;
+      .subject_title{
+        height: .6rem;
+        line-height: .6rem;
+        text-align: center;
+        font-size: .48rem;
+        color: #333;
+      }
+      .product-explain{
+     padding: .2rem 0 .3rem;
+      ul{
+        @include flexbox(center, center, row, nowrap);
+        li{
+          color:#7a7a7a;
+          font-size:.346667rem;
+          display:flex;
+          flex:1;
+          justify-content:center;
+          img{
+            height:.4rem;
+            margin-right:.13rem;
+            margin-top:-1px;
+          }
+        }
+        
+      }
+    
+  }
       .screen_subjectgoodimg{
-        width: 100%;
+        height: 8.4rem;
       }
       .screen_subjecttext{
         @include flexbox(space-between,
       center,
       row,
       nowrap);
-      padding: .266667rem 0;
+      padding: .266667rem .18rem;
+      text-align: left;
       .screen_subjectprice{
         font-size: .453333rem;
         color: #333;
@@ -297,12 +326,21 @@
                     margin-top: .106667rem;
                     color: #333;
                     line-height: .533333rem;
-                    width: 5.6rem;
+                    width: 5rem;
       }
-      img{
-        height: 2.4rem;
-        width: 2.4rem;
+      .qrcode_main{
+          text-align: center;
+          img{
+            height: 2.4rem;
+            width: 2.4rem;
+          }
+          p{
+            font-size: .32rem;
+            margin-top: .08rem;
+             color: #333;
+          }
       }
+      
       }
     }
 
@@ -797,14 +835,25 @@
     <!-- 分享选择弹窗 -->
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
      <div class="screen_subject" id='newImg'>
+       <p class="subject_title" v-if="!$route.query.distributor_id">惠眼识货</p>
+       <div class="product-explain" v-if="!$route.query.distributor_id">
+            <ul>
+              <li><img src="~jd/images/zhengpinicon.png">正品保障</li>
+              <li><img src="~jd/images/tuihuanicon.png">五星售后</li>
+              <li><img src="~jd/images/shipaiicon.png">商品实拍</li>
+              <li><img src="~jd/images/kefuicon1.png">专属客服</li>
+            </ul>
+          </div>
                 <img :src="screenImgsrc|addImg" class="screen_subjectgoodimg">
       <div class="screen_subjecttext">
         <div>
           <p class="screen_subjectprice">¥{{screenPrice/100|TwoNum}}</p>
           <p class="screen_subjectname">{{screenTitle}}</p>
         </div>
+        <div class="qrcode_main">
         <img :src="'data:image/png;base64,'+screenQrcode">
-        <!-- 'data:image/png;base64,'+ -->
+        <p v-if="!$route.query.distributor_id">长按识别惠眼识货</p>
+        </div>
       </div>
      </div>
     <!-- 分享引导popup -->
@@ -812,7 +861,7 @@
     width: 100%;"  position="center" class="checkSkupop" >
     <div style="height: 100%;
     width: 100%;"  @click="visiblePopup.shareImg=false">
-    <div style="width:8.8rem;position: absolute;left: 50%;margin-left: -4.4rem;top: 50%;margin-top: -6rem;">
+    <div style="width:8.8rem;position: absolute;left: 50%;margin-left: -4.4rem;top: 50%;margin-top: -7.6rem;">
       <img :src="screenUrl" alt="" style="width:8.8rem;" @click.stop="visiblePopup.shareImg=true">
       <div style="height:30px;width:1px;background:#fff;margin: -3px auto 4px;"></div>
       <p style="text-align:center;color:#fff;font-size:16px;">长按保存图片</p>
@@ -937,7 +986,8 @@
               </div>
               <div class="product-title-textbottom">
               <p class="product-name-text">{{productInfo.item_number}}&nbsp;&nbsp;{{productInfo.title}}</p>
-              <p class="product-share" @click="visiblePopup.shareBoo=true">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+              <p class="product-share" @click="showactionsheet()">&nbsp;&nbsp;&nbsp;&nbsp;分享</p>
+               <!-- @click="visiblePopup.shareBoo=true" -->
               </div>
             </div>
             <!-- 商品信息 -->
@@ -1042,7 +1092,8 @@ import html2canvas from 'html2canvas';
     getCommentList,
     getShopInfo,
     lowerShelfgood,
-    upperShelfgood 
+    upperShelfgood,
+    qrcodeGet
   } from '@/service/getData'
   import BackHead from 'common/backHead';
   import BackRouter from 'common/backRouter';
@@ -1160,9 +1211,30 @@ methods: {
         this.screenImgsrc=this.productInfo.index_img_url;
         this.screenTitle=this.productInfo.title;
         this.screenPrice=this.productInfo.sales_consumer_price;
-        this.screenQrcode=this.productInfo.qrcode;
+        if(this.$route.query.distributor_id){
+           this.screenQrcode=this.productInfo.qrcode;
+        }else{
+          if(this.productInfo.item_details_b_o.qrcode){
+           this.screenQrcode=this.productInfo.item_details_b_o.qrcode;
+          }else{
+           let Data = await qrcodeGet({
+              item_id:this.$route.params.id
+           });
+           if(Data.code==10000){
+             this.screenQrcode=Data.data
+           }else{
+             return Toast({duration: 1000,
+              message: Data.msg,
+              position: 'center'
+            })
+           }
+          }
+        }
         this.screenUrl="https://img.chaochujue.cn/ICON/2019/5/5/share1561097371087.png";
-        
+        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.doScreeenShots();
+
       },
       actionSheet: function(){
       this.sheetVisible = true;
@@ -1171,9 +1243,7 @@ methods: {
         this.visiblePopup.shareBoo=true;
       },
       getLibrary: function(){
-        this.screenScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        document.documentElement.scrollTop = document.body.scrollTop = 0;
-        this.doScreeenShots();
+        
         this.visiblePopup.shareImg=true;
         this.cnzzTrackEvent('B端详情页','生成卡片分享','商品ID：'+this.$route.params.id);
       },
@@ -1538,10 +1608,16 @@ methods: {
           if(value==''||value==null){
             return;
           }
-          if(value.indexOf("img1.vvic.com")!=-1){
+           if(value.indexOf("http://img1.vvic.com")!=-1){
+            return value.replace('http://img1.vvic.com','https://m.chaochujue.cn/vvic/img1');
+          }
+          if(value.indexOf("http://img.vvic.com")!=-1){
+            return value.replace('http://img.vvic.com','https://m.chaochujue.cn/vvic/img');
+          }
+          if(value.indexOf("https://img1.vvic.com")!=-1){
             return value.replace('https://img1.vvic.com','https://m.chaochujue.cn/vvic/img1');
           }
-          if(value.indexOf("img.vvic.com")!=-1){
+          if(value.indexOf("https://img.vvic.com")!=-1){
             return value.replace('https://img.vvic.com','https://m.chaochujue.cn/vvic/img');
           }
           if(value.indexOf("alicdn.com")!=-1){

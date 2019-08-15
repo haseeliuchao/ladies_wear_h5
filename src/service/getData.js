@@ -110,6 +110,8 @@ export const lowerShelfgood = (params) => new Http().require({api: '/api/distrib
 
 export const upperShelfgood = (params) => new Http().require({api: '/api/distributor/item/upperShelf',param:params}); //商品上架
 
+export const qrcodeGet = (params) => new Http().require({api: '/api/item/qrcode/get',param:params}); //商品上架
+
 export const getProductList = (params) => new Http().require({api: '/api/shop/GetProductList',param: params}); //获取
 
 export const selectProduct = (params) => new Http().require({api: '/api/member/shopping/cart/add',param: params}); //获取
